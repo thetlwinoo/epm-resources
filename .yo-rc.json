@@ -1,0 +1,42 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "com.epmresources.server",
+      "nativeLanguage": "en"
+    },
+    "jhipsterVersion": "6.4.1",
+    "applicationType": "monolith",
+    "baseName": "epmresources",
+    "packageName": "com.epmresources.server",
+    "packageFolder": "com/epmresources/server",
+    "serverPort": "8080",
+    "authenticationType": "jwt",
+    "cacheProvider": "ehcache",
+    "enableHibernateCache": true,
+    "websocket": "spring-websocket",
+    "databaseType": "sql",
+    "devDatabaseType": "postgresql",
+    "prodDatabaseType": "postgresql",
+    "searchEngine": false,
+    "messageBroker": false,
+    "serviceDiscoveryType": false,
+    "buildTool": "maven",
+    "enableSwaggerCodegen": false,
+    "jwtSecretKey": "MWM0Zjg0YzVlMDc2ZTVhMDEwYjIzYzlkNGUxMDFjNDRmYmFmNmY0ODE5ZGM5ZjA4ODVkNWU4MDdlZjIwMzdkNzQ0OTkxMDU3OTFhNjA3YWZjNTM4NGNlNGIzMmM3NzQxZTNjYjRhMTBmNWRjOWFlMTA0NzlhZmU2Y2I4NDExODg=",
+    "embeddableLaunchScript": false,
+    "useSass": true,
+    "clientPackageManager": "npm",
+    "clientFramework": "angularX",
+    "clientTheme": "none",
+    "clientThemeVariant": "",
+    "testFrameworks": ["gatling", "cucumber", "protractor"],
+    "jhiPrefix": "jhi",
+    "entitySuffix": "",
+    "dtoSuffix": "DTO",
+    "otherModules": [],
+    "enableTranslation": true,
+    "nativeLanguage": "en",
+    "languages": ["en", "my"],
+    "blueprints": []
+  }
+}
