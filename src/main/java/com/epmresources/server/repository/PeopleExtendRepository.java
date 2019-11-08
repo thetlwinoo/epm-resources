@@ -1,4 +1,9 @@
 package com.epmresources.server.repository;
 
-public interface PeopleExtendRepository {
+import com.epmresources.server.domain.People;
+
+import java.util.Optional;
+
+public interface PeopleExtendRepository extends PeopleRepository {
+    Optional<People> findPeopleByEmailAddress(String email);
 }

@@ -1,4 +1,9 @@
 package com.epmresources.server.repository;
 
-public interface ReviewLinesExtendRepository {
+import com.epmresources.server.domain.ReviewLines;
+
+import java.util.List;
+
+public interface ReviewLinesExtendRepository extends ReviewLinesRepository {
+    List<ReviewLines> findAllByStockItemId(Long stockItemId);
 }

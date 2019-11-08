@@ -1,0 +1,11 @@
+id;product_rating;product_review;seller_rating;seller_review;delivery_rating;delivery_review;photo;photo_content_type;last_edited_by;last_edited_when
+1;65011;../fake-data/blob/hipster.txt;79008;../fake-data/blob/hipster.txt;74202;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.png;image/png;Books Rubber;2019-11-06T17:58:14
+2;30891;../fake-data/blob/hipster.txt;89902;../fake-data/blob/hipster.txt;36872;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.png;image/png;hack back-end;2019-11-06T23:33:21
+3;84418;../fake-data/blob/hipster.txt;94715;../fake-data/blob/hipster.txt;13930;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.png;image/png;Samoa Sleek Steel Salad;2019-11-06T17:01:41
+4;90776;../fake-data/blob/hipster.txt;68918;../fake-data/blob/hipster.txt;8741;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.png;image/png;Implementation transmitting;2019-11-06T14:10:23
+5;21710;../fake-data/blob/hipster.txt;20091;../fake-data/blob/hipster.txt;54202;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.png;image/png;Facilitator Plastic Usability;2019-11-07T04:46:30
+6;4986;../fake-data/blob/hipster.txt;56744;../fake-data/blob/hipster.txt;14990;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.png;image/png;Venezuela Indiana;2019-11-06T17:40:51
+7;39965;../fake-data/blob/hipster.txt;1696;../fake-data/blob/hipster.txt;98286;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.png;image/png;Armenia Avon Advanced;2019-11-06T16:19:54
+8;56685;../fake-data/blob/hipster.txt;1437;../fake-data/blob/hipster.txt;93226;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.png;image/png;payment;2019-11-06T13:25:15
+9;34167;../fake-data/blob/hipster.txt;1328;../fake-data/blob/hipster.txt;95331;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.png;image/png;Central sensor;2019-11-06T13:31:45
+10;7221;../fake-data/blob/hipster.txt;66733;../fake-data/blob/hipster.txt;68443;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.png;image/png;Buckinghamshire;2019-11-06T14:48:03

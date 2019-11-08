@@ -1,4 +1,9 @@
 package com.epmresources.server.repository;
 
-public interface ProductOptionExtendRepository {
+import com.epmresources.server.domain.ProductOption;
+
+import java.util.List;
+
+public interface ProductOptionExtendRepository extends ProductOptionRepository {
+    List<ProductOption> findAllByProductOptionSetIdAndSupplierId(Long attributeSetId, Long supplierId);
 }

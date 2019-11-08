@@ -1,0 +1,73 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <changeSet author="thet.lwin (generated)" id="1573185236009-14">
+        <addForeignKeyConstraint baseColumnNames="compare_user_id" baseTableName="compares" constraintName="FK3f0b8r4fuu2aj4nbrrc374i4y" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="people" validate="true"/>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1573185236009-15">
+        <addForeignKeyConstraint baseColumnNames="wishlist_user_id" baseTableName="wishlists" constraintName="FKp1p2u7ee7kf2w51dtbvqse3vv" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="people" validate="true"/>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1573185236009-16">
+        <addForeignKeyConstraint baseColumnNames="cart_user_id" baseTableName="shopping_carts" constraintName="FKqa00cb02gcpt0fyacrrjglaqh" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="people" validate="true"/>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1573185236009-17">
+        <dropForeignKeyConstraint baseTableName="compares" constraintName="fk_compares_compare_user_id"/>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1573185236009-18">
+        <dropForeignKeyConstraint baseTableName="shopping_carts" constraintName="fk_shopping_carts_cart_user_id"/>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1573185236009-19">
+        <dropForeignKeyConstraint baseTableName="wishlists" constraintName="fk_wishlists_wishlist_user_id"/>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1573185236009-1">
+        <dropUniqueConstraint constraintName="UC_COMPARESCOMPARE_USER_ID_COL" tableName="compares"/>
+        <addUniqueConstraint columnNames="compare_user_id" constraintName="UC_COMPARESCOMPARE_USER_ID_COL" tableName="compares"/>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1573185236009-2">
+        <dropUniqueConstraint constraintName="UC_CUSTOMERSUSER_ID_COL" tableName="customers"/>
+        <addUniqueConstraint columnNames="user_id" constraintName="UC_CUSTOMERSUSER_ID_COL" tableName="customers"/>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1573185236009-3">
+        <dropUniqueConstraint constraintName="UC_JHI_USEREMAIL_COL" tableName="jhi_user"/>
+        <addUniqueConstraint columnNames="email" constraintName="UC_JHI_USEREMAIL_COL" tableName="jhi_user"/>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1573185236009-4">
+        <dropUniqueConstraint constraintName="UC_JHI_USERLOGIN_COL" tableName="jhi_user"/>
+        <addUniqueConstraint columnNames="login" constraintName="UC_JHI_USERLOGIN_COL" tableName="jhi_user"/>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1573185236009-5">
+        <dropUniqueConstraint constraintName="UC_ORDERSORDER_ON_REVIEW_ID_COL" tableName="orders"/>
+        <addUniqueConstraint columnNames="order_on_review_id" constraintName="UC_ORDERSORDER_ON_REVIEW_ID_COL" tableName="orders"/>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1573185236009-6">
+        <dropUniqueConstraint constraintName="UC_PAYMENT_TRANSACTIONSPAYMENT_ON_ORDER_ID_COL" tableName="payment_transactions"/>
+        <addUniqueConstraint columnNames="payment_on_order_id" constraintName="UC_PAYMENT_TRANSACTIONSPAYMENT_ON_ORDER_ID_COL" tableName="payment_transactions"/>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1573185236009-7">
+        <dropUniqueConstraint constraintName="UC_PRODUCTSPRODUCT_DOCUMENT_ID_COL" tableName="products"/>
+        <addUniqueConstraint columnNames="product_document_id" constraintName="UC_PRODUCTSPRODUCT_DOCUMENT_ID_COL" tableName="products"/>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1573185236009-8">
+        <dropUniqueConstraint constraintName="UC_SHOPPING_CARTSCART_USER_ID_COL" tableName="shopping_carts"/>
+        <addUniqueConstraint columnNames="cart_user_id" constraintName="UC_SHOPPING_CARTSCART_USER_ID_COL" tableName="shopping_carts"/>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1573185236009-9">
+        <dropUniqueConstraint constraintName="UC_STOCK_ITEMSSTOCK_ITEM_ON_REVIEW_LINE_ID_COL" tableName="stock_items"/>
+        <addUniqueConstraint columnNames="stock_item_on_review_line_id" constraintName="UC_STOCK_ITEMSSTOCK_ITEM_ON_REVIEW_LINE_ID_COL" tableName="stock_items"/>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1573185236009-10">
+        <dropUniqueConstraint constraintName="UC_STOCK_ITEM_HOLDINGSSTOCK_ITEM_HOLDING_ON_STOCK_ITEM_ID_COL" tableName="stock_item_holdings"/>
+        <addUniqueConstraint columnNames="stock_item_holding_on_stock_item_id" constraintName="UC_STOCK_ITEM_HOLDINGSSTOCK_ITEM_HOLDING_ON_STOCK_ITEM_ID_COL" tableName="stock_item_holdings"/>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1573185236009-11">
+        <dropUniqueConstraint constraintName="UC_SUPPLIERSUSER_ID_COL" tableName="suppliers"/>
+        <addUniqueConstraint columnNames="user_id" constraintName="UC_SUPPLIERSUSER_ID_COL" tableName="suppliers"/>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1573185236009-12">
+        <dropUniqueConstraint constraintName="UC_WISHLISTSWISHLIST_USER_ID_COL" tableName="wishlists"/>
+        <addUniqueConstraint columnNames="wishlist_user_id" constraintName="UC_WISHLISTSWISHLIST_USER_ID_COL" tableName="wishlists"/>
+    </changeSet>
+    <changeSet author="thet.lwin (generated)" id="1573185236009-13">
+        <dropUniqueConstraint constraintName="UK_av66guy6x8qkjf1npcjm8de25" tableName="people"/>
+        <addUniqueConstraint columnNames="user_id" constraintName="UK_av66guy6x8qkjf1npcjm8de25" tableName="people"/>
+    </changeSet>
+</databaseChangeLog>

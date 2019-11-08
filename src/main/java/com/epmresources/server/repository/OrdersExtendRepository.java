@@ -1,4 +1,10 @@
 package com.epmresources.server.repository;
 
-public interface OrdersExtendRepository {
+import com.epmresources.server.domain.Orders;
+
+import java.util.List;
+
+public interface OrdersExtendRepository extends OrdersRepository {
+    List<Orders> findAllByCustomerIdOrderByLastEditedWhenDesc(Long id);
+    Integer countAllByCustomerId(Long id);
 }

@@ -1,0 +1,128 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="suppliers">
+            <h2><span jhiTranslate="epmresourcesApp.suppliers.detail.title">Suppliers</span> {{suppliers.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="epmresourcesApp.suppliers.supplierName">Supplier Name</span></dt>
+                <dd>
+                    <span>{{suppliers.supplierName}}</span>
+                </dd>
+                <dt><span jhiTranslate="epmresourcesApp.suppliers.supplierReference">Supplier Reference</span></dt>
+                <dd>
+                    <span>{{suppliers.supplierReference}}</span>
+                </dd>
+                <dt><span jhiTranslate="epmresourcesApp.suppliers.bankAccountName">Bank Account Name</span></dt>
+                <dd>
+                    <span>{{suppliers.bankAccountName}}</span>
+                </dd>
+                <dt><span jhiTranslate="epmresourcesApp.suppliers.bankAccountBranch">Bank Account Branch</span></dt>
+                <dd>
+                    <span>{{suppliers.bankAccountBranch}}</span>
+                </dd>
+                <dt><span jhiTranslate="epmresourcesApp.suppliers.bankAccountCode">Bank Account Code</span></dt>
+                <dd>
+                    <span>{{suppliers.bankAccountCode}}</span>
+                </dd>
+                <dt><span jhiTranslate="epmresourcesApp.suppliers.bankAccountNumber">Bank Account Number</span></dt>
+                <dd>
+                    <span>{{suppliers.bankAccountNumber}}</span>
+                </dd>
+                <dt><span jhiTranslate="epmresourcesApp.suppliers.bankInternationalCode">Bank International Code</span></dt>
+                <dd>
+                    <span>{{suppliers.bankInternationalCode}}</span>
+                </dd>
+                <dt><span jhiTranslate="epmresourcesApp.suppliers.paymentDays">Payment Days</span></dt>
+                <dd>
+                    <span>{{suppliers.paymentDays}}</span>
+                </dd>
+                <dt><span jhiTranslate="epmresourcesApp.suppliers.internalComments">Internal Comments</span></dt>
+                <dd>
+                    <span>{{suppliers.internalComments}}</span>
+                </dd>
+                <dt><span jhiTranslate="epmresourcesApp.suppliers.phoneNumber">Phone Number</span></dt>
+                <dd>
+                    <span>{{suppliers.phoneNumber}}</span>
+                </dd>
+                <dt><span jhiTranslate="epmresourcesApp.suppliers.faxNumber">Fax Number</span></dt>
+                <dd>
+                    <span>{{suppliers.faxNumber}}</span>
+                </dd>
+                <dt><span jhiTranslate="epmresourcesApp.suppliers.websiteURL">Website URL</span></dt>
+                <dd>
+                    <span>{{suppliers.websiteURL}}</span>
+                </dd>
+                <dt><span jhiTranslate="epmresourcesApp.suppliers.webServiceUrl">Web Service Url</span></dt>
+                <dd>
+                    <span>{{suppliers.webServiceUrl}}</span>
+                </dd>
+                <dt><span jhiTranslate="epmresourcesApp.suppliers.creditRating">Credit Rating</span></dt>
+                <dd>
+                    <span>{{suppliers.creditRating}}</span>
+                </dd>
+                <dt><span jhiTranslate="epmresourcesApp.suppliers.activeFlag">Active Flag</span></dt>
+                <dd>
+                    <span>{{suppliers.activeFlag}}</span>
+                </dd>
+                <dt><span jhiTranslate="epmresourcesApp.suppliers.avatar">Avatar</span></dt>
+                <dd>
+                    <div *ngIf="suppliers.avatar">
+                        <a (click)="openFile(suppliers.avatarContentType, suppliers.avatar)">
+                            <img [src]="'data:' + suppliers.avatarContentType + ';base64,' + suppliers.avatar" style="max-width: 100%;" alt="suppliers image"/>
+                        </a>
+                        {{suppliers.avatarContentType}}, {{byteSize(suppliers.avatar)}}
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="epmresourcesApp.suppliers.validFrom">Valid From</span></dt>
+                <dd>
+                    <span>{{suppliers.validFrom}}</span>
+                </dd>
+                <dt><span jhiTranslate="epmresourcesApp.suppliers.validTo">Valid To</span></dt>
+                <dd>
+                    <span>{{suppliers.validTo}}</span>
+                </dd>
+                <dt><span jhiTranslate="epmresourcesApp.suppliers.user">User</span></dt>
+                <dd>
+                    {{suppliers.userLogin}}
+                </dd>
+                <dt><span jhiTranslate="epmresourcesApp.suppliers.supplierCategory">Supplier Category</span></dt>
+                <dd>
+                    <div *ngIf="suppliers.supplierCategoryId">
+                        <a [routerLink]="['/supplier-categories', suppliers.supplierCategoryId, 'view']">{{suppliers.supplierCategorySupplierCategoryName}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="epmresourcesApp.suppliers.deliveryMethod">Delivery Method</span></dt>
+                <dd>
+                    <div *ngIf="suppliers.deliveryMethodId">
+                        <a [routerLink]="['/delivery-methods', suppliers.deliveryMethodId, 'view']">{{suppliers.deliveryMethodDeliveryMethodName}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="epmresourcesApp.suppliers.deliveryCity">Delivery City</span></dt>
+                <dd>
+                    <div *ngIf="suppliers.deliveryCityId">
+                        <a [routerLink]="['/cities', suppliers.deliveryCityId, 'view']">{{suppliers.deliveryCityCityName}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="epmresourcesApp.suppliers.postalCity">Postal City</span></dt>
+                <dd>
+                    <div *ngIf="suppliers.postalCityId">
+                        <a [routerLink]="['/cities', suppliers.postalCityId, 'view']">{{suppliers.postalCityCityName}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/suppliers', suppliers.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

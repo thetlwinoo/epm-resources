@@ -1,0 +1,11 @@
+id;quantity_on_hand;bin_location;last_stocktake_quantity;last_cost_price;reorder_level;targer_stock_level
+1;27944;haptic;88650;99213;39864;85753
+2;86292;next generation;53466;34557;85876;698
+3;32588;Integration Fresh;1827;33733;90413;82752
+4;6864;Specialist;95139;24116;13702;23356
+5;53758;Mouse;42815;55554;6142;29136
+6;22392;dynamic metrics;97749;90529;80786;49295
+7;73740;Bosnia and Herzegovina;83999;95340;33932;6022
+8;70889;Specialist;31462;32040;67401;16428
+9;84431;Direct alarm bandwidth-monitored;32628;7053;2075;90942
+10;76088;Licensed Fresh Towels;11866;7785;17187;95544

@@ -1,4 +1,7 @@
 package com.epmresources.server.repository;
 
-public interface CustomersExtendRepository {
+import com.epmresources.server.domain.Customers;
+
+public interface CustomersExtendRepository extends CustomersRepository {
+    Customers findCustomersByUserId(Long userId);
 }
