@@ -44,50 +44,64 @@ public class ProductsExtendServiceImpl implements ProductsExtendService {
 
     @Override
     @Cacheable(key = "{#pageable,#productCategoryId}")
-    public List<Products> findAllByProductCategory(Pageable pageable, Long productCategoryId) {
-        return productsExtendRepository.findAllByProductCategoryId(pageable, productCategoryId);
+    public List<ProductsDTO> findAllByProductCategory(Pageable pageable, Long productCategoryId) {
+        return productsExtendRepository.findAllByProductCategoryId(pageable, productCategoryId).stream()
+            .map(productsMapper::toDto)
+            .collect(Collectors.toCollection(LinkedList::new));
     }
 
     @Override
 //    @Cacheable(key = "#root.methodName")
-    public List<Products> findTop18ByOrderByLastEditedWhenDesc() {
-        return productsExtendRepository.findTop18ByOrderByLastEditedWhenDesc();
+    public List<ProductsDTO> findTop18ByOrderByLastEditedWhenDesc() {
+        return productsExtendRepository.findTop18ByOrderByLastEditedWhenDesc().stream()
+            .map(productsMapper::toDto)
+            .collect(Collectors.toCollection(LinkedList::new));
     }
 
     @Override
 //    @Cacheable(key = "#root.methodName")
-    public List<Products> findTop12ByOrderBySellCountDesc() {
-        return productsExtendRepository.findTop12ByOrderBySellCountDesc();
+    public List<ProductsDTO> findTop12ByOrderBySellCountDesc() {
+        return productsExtendRepository.findTop12ByOrderBySellCountDesc().stream()
+            .map(productsMapper::toDto)
+            .collect(Collectors.toCollection(LinkedList::new));
     }
 
     @Override
 //    @CachePut(key = "'findTop12ByOrderBySellCountDesc'")
-    public List<Products> findTop12ByOrderBySellCountDescCacheRefresh() {
-        return productsExtendRepository.findTop12ByOrderBySellCountDesc();
+    public List<ProductsDTO> findTop12ByOrderBySellCountDescCacheRefresh() {
+        return productsExtendRepository.findTop12ByOrderBySellCountDesc().stream()
+            .map(productsMapper::toDto)
+            .collect(Collectors.toCollection(LinkedList::new));
     }
 
     @Override
 //    @Cacheable(key = "#root.methodName")
-    public List<Products> getRelatedProducts(Long productCategoryId, Long id) {
+    public List<ProductsDTO> getRelatedProducts(Long productCategoryId, Long id) {
         List<Products> returnList = productsExtendRepository.findTop12ByProductCategoryIdAndIdIsNotOrderBySellCountDesc(productCategoryId, id);
         if (returnList.size() < 8) {
             returnList.addAll(productsExtendRepository.findAllByProductCategoryIdIsNotOrderBySellCountDesc(productCategoryId, PageRequest.of(0, 8 - returnList.size())));
         }
-        return returnList;
+        return returnList.stream()
+            .map(productsMapper::toDto)
+            .collect(Collectors.toCollection(LinkedList::new));
     }
 
     @Override
-    public List<Products> searchProducts(String keyword, Integer page, Integer size) {
+    public List<ProductsDTO> searchProducts(String keyword, Integer page, Integer size) {
         if (page == null || size == null) {
             throw new IllegalArgumentException("Page and size parameters are required");
         }
         PageRequest pageRequest = PageRequest.of(page, size);
-        return productsExtendRepository.findAllByProductNameContainingIgnoreCase(keyword, pageRequest);
+        return productsExtendRepository.findAllByProductNameContainingIgnoreCase(keyword, pageRequest).stream()
+            .map(productsMapper::toDto)
+            .collect(Collectors.toCollection(LinkedList::new));
     }
 
     @Override
-    public List<Products> searchProductsAll(String keyword) {
-        return productsExtendRepository.findAllByProductNameContainingIgnoreCase(keyword);
+    public List<ProductsDTO> searchProductsAll(String keyword) {
+        return productsExtendRepository.findAllByProductNameContainingIgnoreCase(keyword).stream()
+            .map(productsMapper::toDto)
+            .collect(Collectors.toCollection(LinkedList::new));
     }
 
     @Override

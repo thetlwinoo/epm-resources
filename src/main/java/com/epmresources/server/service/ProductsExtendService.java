@@ -8,19 +8,19 @@ import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 public interface ProductsExtendService {
-    List<Products> findAllByProductCategory(Pageable pageable, Long productSubCategoryId);
+    List<ProductsDTO> findAllByProductCategory(Pageable pageable, Long productSubCategoryId);
 
-    List<Products> findTop18ByOrderByLastEditedWhenDesc();
+    List<ProductsDTO> findTop18ByOrderByLastEditedWhenDesc();
 
-    List<Products> findTop12ByOrderBySellCountDesc();
+    List<ProductsDTO> findTop12ByOrderBySellCountDesc();
 
-    List<Products> findTop12ByOrderBySellCountDescCacheRefresh();
+    List<ProductsDTO> findTop12ByOrderBySellCountDescCacheRefresh();
 
-    List<Products> getRelatedProducts(Long productSubCategoryId, Long id);
+    List<ProductsDTO> getRelatedProducts(Long productSubCategoryId, Long id);
 
-    List<Products> searchProducts(String keyword, Integer page, Integer size);
+    List<ProductsDTO> searchProducts(String keyword, Integer page, Integer size);
 
-    List<Products> searchProductsAll(String keyword);
+    List<ProductsDTO> searchProductsAll(String keyword);
 
     List<Long> getSubCategoryList(Long categoryId);
 

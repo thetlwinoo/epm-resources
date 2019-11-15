@@ -23,6 +23,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.security.Principal;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -316,7 +317,8 @@ public class BatchUploadServiceImpl implements BatchUploadService {
                 ProductCategory productCategory = productCategoryExtendRepository.getOne(Long.parseLong(productObj[1].toString()));
                 products.setProductCategory(productCategory);
                 products.setSupplier(suppliers);
-
+                products.setLastEditedBy(principal.getName());
+                products.setLastEditedWhen(Instant.now());
                 products.setActiveInd(false);
                 List<StockItemTemp> stockItemTempList = batchUploadRepository.getStockItemTemp(productObj[0].toString());
 
@@ -340,6 +342,8 @@ public class BatchUploadServiceImpl implements BatchUploadService {
                     stockItems.setNoOfPieces(stockItemTemp.getNoOfPieces());
                     stockItems.setNoOfItems(stockItemTemp.getNoOfItems());
                     stockItems.setManufacture(stockItemTemp.getManufacture());
+                    stockItems.setLastEditedBy(principal.getName());
+                    stockItems.setLastEditedWhen(Instant.now());
                     stockItems.setActiveInd(false);
 
                     BarcodeTypes barcodeTypes = barcodeTypesRepository.getOne(stockItemTemp.getBarcodeTypeId());

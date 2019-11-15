@@ -14,6 +14,7 @@ import com.epmresources.server.service.dto.StockItemsDTO;
 import com.epmresources.server.web.rest.errors.BadRequestAlertException;
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.PaginationUtil;
+import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -113,7 +114,7 @@ public class ProductsExtendResource {
                         stockItems.setActiveInd(isActive);
                     }
 
-                    if(stockItems.isActiveInd() == null){
+                    if (stockItems.isActiveInd() == null) {
                         stockItems.setActiveInd(false);
                     }
 
@@ -136,16 +137,8 @@ public class ProductsExtendResource {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity getFullById(@PathVariable Long id) {
-//
-//        if (productsDTO == null) {
-//            return new ResponseEntity(HttpStatus.NOT_FOUND);
-//        }
-//        return ResponseUtil.wrapOrNotFound(productsDTO);
-        Products product = productsExtendRepository.findProductsById(id);
-        if (product == null) {
-            return new ResponseEntity(HttpStatus.NOT_FOUND);
-        }
-        return ResponseEntity.ok().body(product);
+        Optional<ProductsDTO> productsDTO = productsService.findOne(id);
+        return ResponseUtil.wrapOrNotFound(productsDTO);
     }
 
     @RequestMapping(value = "/related", method = RequestMethod.GET, params = "id")
