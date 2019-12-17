@@ -14,7 +14,7 @@ public interface PersonPhoneMapper extends EntityMapper<PersonPhoneDTO, PersonPh
     @Mapping(source = "person.id", target = "personId")
     @Mapping(source = "person.fullName", target = "personFullName")
     @Mapping(source = "phoneNumberType.id", target = "phoneNumberTypeId")
-    @Mapping(source = "phoneNumberType.phoneNumberTypeName", target = "phoneNumberTypePhoneNumberTypeName")
+    @Mapping(source = "phoneNumberType.name", target = "phoneNumberTypeName")
     PersonPhoneDTO toDto(PersonPhone personPhone);
 
     @Mapping(source = "personId", target = "person")

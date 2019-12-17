@@ -40,8 +40,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = EpmresourcesApp.class)
 public class DeliveryMethodsResourceIT {
 
-    private static final String DEFAULT_DELIVERY_METHOD_NAME = "AAAAAAAAAA";
-    private static final String UPDATED_DELIVERY_METHOD_NAME = "BBBBBBBBBB";
+    private static final String DEFAULT_NAME = "AAAAAAAAAA";
+    private static final String UPDATED_NAME = "BBBBBBBBBB";
 
     private static final Instant DEFAULT_VALID_FROM = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_VALID_FROM = Instant.now().truncatedTo(ChronoUnit.MILLIS);
@@ -100,7 +100,7 @@ public class DeliveryMethodsResourceIT {
      */
     public static DeliveryMethods createEntity(EntityManager em) {
         DeliveryMethods deliveryMethods = new DeliveryMethods()
-            .deliveryMethodName(DEFAULT_DELIVERY_METHOD_NAME)
+            .name(DEFAULT_NAME)
             .validFrom(DEFAULT_VALID_FROM)
             .validTo(DEFAULT_VALID_TO);
         return deliveryMethods;
@@ -113,7 +113,7 @@ public class DeliveryMethodsResourceIT {
      */
     public static DeliveryMethods createUpdatedEntity(EntityManager em) {
         DeliveryMethods deliveryMethods = new DeliveryMethods()
-            .deliveryMethodName(UPDATED_DELIVERY_METHOD_NAME)
+            .name(UPDATED_NAME)
             .validFrom(UPDATED_VALID_FROM)
             .validTo(UPDATED_VALID_TO);
         return deliveryMethods;
@@ -140,7 +140,7 @@ public class DeliveryMethodsResourceIT {
         List<DeliveryMethods> deliveryMethodsList = deliveryMethodsRepository.findAll();
         assertThat(deliveryMethodsList).hasSize(databaseSizeBeforeCreate + 1);
         DeliveryMethods testDeliveryMethods = deliveryMethodsList.get(deliveryMethodsList.size() - 1);
-        assertThat(testDeliveryMethods.getDeliveryMethodName()).isEqualTo(DEFAULT_DELIVERY_METHOD_NAME);
+        assertThat(testDeliveryMethods.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testDeliveryMethods.getValidFrom()).isEqualTo(DEFAULT_VALID_FROM);
         assertThat(testDeliveryMethods.getValidTo()).isEqualTo(DEFAULT_VALID_TO);
     }
@@ -168,10 +168,10 @@ public class DeliveryMethodsResourceIT {
 
     @Test
     @Transactional
-    public void checkDeliveryMethodNameIsRequired() throws Exception {
+    public void checkNameIsRequired() throws Exception {
         int databaseSizeBeforeTest = deliveryMethodsRepository.findAll().size();
         // set the field null
-        deliveryMethods.setDeliveryMethodName(null);
+        deliveryMethods.setName(null);
 
         // Create the DeliveryMethods, which fails.
         DeliveryMethodsDTO deliveryMethodsDTO = deliveryMethodsMapper.toDto(deliveryMethods);
@@ -234,7 +234,7 @@ public class DeliveryMethodsResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(deliveryMethods.getId().intValue())))
-            .andExpect(jsonPath("$.[*].deliveryMethodName").value(hasItem(DEFAULT_DELIVERY_METHOD_NAME)))
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].validFrom").value(hasItem(DEFAULT_VALID_FROM.toString())))
             .andExpect(jsonPath("$.[*].validTo").value(hasItem(DEFAULT_VALID_TO.toString())));
     }
@@ -250,86 +250,86 @@ public class DeliveryMethodsResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(deliveryMethods.getId().intValue()))
-            .andExpect(jsonPath("$.deliveryMethodName").value(DEFAULT_DELIVERY_METHOD_NAME))
+            .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
             .andExpect(jsonPath("$.validFrom").value(DEFAULT_VALID_FROM.toString()))
             .andExpect(jsonPath("$.validTo").value(DEFAULT_VALID_TO.toString()));
     }
 
     @Test
     @Transactional
-    public void getAllDeliveryMethodsByDeliveryMethodNameIsEqualToSomething() throws Exception {
+    public void getAllDeliveryMethodsByNameIsEqualToSomething() throws Exception {
         // Initialize the database
         deliveryMethodsRepository.saveAndFlush(deliveryMethods);
 
-        // Get all the deliveryMethodsList where deliveryMethodName equals to DEFAULT_DELIVERY_METHOD_NAME
-        defaultDeliveryMethodsShouldBeFound("deliveryMethodName.equals=" + DEFAULT_DELIVERY_METHOD_NAME);
+        // Get all the deliveryMethodsList where name equals to DEFAULT_NAME
+        defaultDeliveryMethodsShouldBeFound("name.equals=" + DEFAULT_NAME);
 
-        // Get all the deliveryMethodsList where deliveryMethodName equals to UPDATED_DELIVERY_METHOD_NAME
-        defaultDeliveryMethodsShouldNotBeFound("deliveryMethodName.equals=" + UPDATED_DELIVERY_METHOD_NAME);
+        // Get all the deliveryMethodsList where name equals to UPDATED_NAME
+        defaultDeliveryMethodsShouldNotBeFound("name.equals=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllDeliveryMethodsByDeliveryMethodNameIsNotEqualToSomething() throws Exception {
+    public void getAllDeliveryMethodsByNameIsNotEqualToSomething() throws Exception {
         // Initialize the database
         deliveryMethodsRepository.saveAndFlush(deliveryMethods);
 
-        // Get all the deliveryMethodsList where deliveryMethodName not equals to DEFAULT_DELIVERY_METHOD_NAME
-        defaultDeliveryMethodsShouldNotBeFound("deliveryMethodName.notEquals=" + DEFAULT_DELIVERY_METHOD_NAME);
+        // Get all the deliveryMethodsList where name not equals to DEFAULT_NAME
+        defaultDeliveryMethodsShouldNotBeFound("name.notEquals=" + DEFAULT_NAME);
 
-        // Get all the deliveryMethodsList where deliveryMethodName not equals to UPDATED_DELIVERY_METHOD_NAME
-        defaultDeliveryMethodsShouldBeFound("deliveryMethodName.notEquals=" + UPDATED_DELIVERY_METHOD_NAME);
+        // Get all the deliveryMethodsList where name not equals to UPDATED_NAME
+        defaultDeliveryMethodsShouldBeFound("name.notEquals=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllDeliveryMethodsByDeliveryMethodNameIsInShouldWork() throws Exception {
+    public void getAllDeliveryMethodsByNameIsInShouldWork() throws Exception {
         // Initialize the database
         deliveryMethodsRepository.saveAndFlush(deliveryMethods);
 
-        // Get all the deliveryMethodsList where deliveryMethodName in DEFAULT_DELIVERY_METHOD_NAME or UPDATED_DELIVERY_METHOD_NAME
-        defaultDeliveryMethodsShouldBeFound("deliveryMethodName.in=" + DEFAULT_DELIVERY_METHOD_NAME + "," + UPDATED_DELIVERY_METHOD_NAME);
+        // Get all the deliveryMethodsList where name in DEFAULT_NAME or UPDATED_NAME
+        defaultDeliveryMethodsShouldBeFound("name.in=" + DEFAULT_NAME + "," + UPDATED_NAME);
 
-        // Get all the deliveryMethodsList where deliveryMethodName equals to UPDATED_DELIVERY_METHOD_NAME
-        defaultDeliveryMethodsShouldNotBeFound("deliveryMethodName.in=" + UPDATED_DELIVERY_METHOD_NAME);
+        // Get all the deliveryMethodsList where name equals to UPDATED_NAME
+        defaultDeliveryMethodsShouldNotBeFound("name.in=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllDeliveryMethodsByDeliveryMethodNameIsNullOrNotNull() throws Exception {
+    public void getAllDeliveryMethodsByNameIsNullOrNotNull() throws Exception {
         // Initialize the database
         deliveryMethodsRepository.saveAndFlush(deliveryMethods);
 
-        // Get all the deliveryMethodsList where deliveryMethodName is not null
-        defaultDeliveryMethodsShouldBeFound("deliveryMethodName.specified=true");
+        // Get all the deliveryMethodsList where name is not null
+        defaultDeliveryMethodsShouldBeFound("name.specified=true");
 
-        // Get all the deliveryMethodsList where deliveryMethodName is null
-        defaultDeliveryMethodsShouldNotBeFound("deliveryMethodName.specified=false");
+        // Get all the deliveryMethodsList where name is null
+        defaultDeliveryMethodsShouldNotBeFound("name.specified=false");
     }
                 @Test
     @Transactional
-    public void getAllDeliveryMethodsByDeliveryMethodNameContainsSomething() throws Exception {
+    public void getAllDeliveryMethodsByNameContainsSomething() throws Exception {
         // Initialize the database
         deliveryMethodsRepository.saveAndFlush(deliveryMethods);
 
-        // Get all the deliveryMethodsList where deliveryMethodName contains DEFAULT_DELIVERY_METHOD_NAME
-        defaultDeliveryMethodsShouldBeFound("deliveryMethodName.contains=" + DEFAULT_DELIVERY_METHOD_NAME);
+        // Get all the deliveryMethodsList where name contains DEFAULT_NAME
+        defaultDeliveryMethodsShouldBeFound("name.contains=" + DEFAULT_NAME);
 
-        // Get all the deliveryMethodsList where deliveryMethodName contains UPDATED_DELIVERY_METHOD_NAME
-        defaultDeliveryMethodsShouldNotBeFound("deliveryMethodName.contains=" + UPDATED_DELIVERY_METHOD_NAME);
+        // Get all the deliveryMethodsList where name contains UPDATED_NAME
+        defaultDeliveryMethodsShouldNotBeFound("name.contains=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllDeliveryMethodsByDeliveryMethodNameNotContainsSomething() throws Exception {
+    public void getAllDeliveryMethodsByNameNotContainsSomething() throws Exception {
         // Initialize the database
         deliveryMethodsRepository.saveAndFlush(deliveryMethods);
 
-        // Get all the deliveryMethodsList where deliveryMethodName does not contain DEFAULT_DELIVERY_METHOD_NAME
-        defaultDeliveryMethodsShouldNotBeFound("deliveryMethodName.doesNotContain=" + DEFAULT_DELIVERY_METHOD_NAME);
+        // Get all the deliveryMethodsList where name does not contain DEFAULT_NAME
+        defaultDeliveryMethodsShouldNotBeFound("name.doesNotContain=" + DEFAULT_NAME);
 
-        // Get all the deliveryMethodsList where deliveryMethodName does not contain UPDATED_DELIVERY_METHOD_NAME
-        defaultDeliveryMethodsShouldBeFound("deliveryMethodName.doesNotContain=" + UPDATED_DELIVERY_METHOD_NAME);
+        // Get all the deliveryMethodsList where name does not contain UPDATED_NAME
+        defaultDeliveryMethodsShouldBeFound("name.doesNotContain=" + UPDATED_NAME);
     }
 
 
@@ -444,7 +444,7 @@ public class DeliveryMethodsResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(deliveryMethods.getId().intValue())))
-            .andExpect(jsonPath("$.[*].deliveryMethodName").value(hasItem(DEFAULT_DELIVERY_METHOD_NAME)))
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].validFrom").value(hasItem(DEFAULT_VALID_FROM.toString())))
             .andExpect(jsonPath("$.[*].validTo").value(hasItem(DEFAULT_VALID_TO.toString())));
 
@@ -494,7 +494,7 @@ public class DeliveryMethodsResourceIT {
         // Disconnect from session so that the updates on updatedDeliveryMethods are not directly saved in db
         em.detach(updatedDeliveryMethods);
         updatedDeliveryMethods
-            .deliveryMethodName(UPDATED_DELIVERY_METHOD_NAME)
+            .name(UPDATED_NAME)
             .validFrom(UPDATED_VALID_FROM)
             .validTo(UPDATED_VALID_TO);
         DeliveryMethodsDTO deliveryMethodsDTO = deliveryMethodsMapper.toDto(updatedDeliveryMethods);
@@ -508,7 +508,7 @@ public class DeliveryMethodsResourceIT {
         List<DeliveryMethods> deliveryMethodsList = deliveryMethodsRepository.findAll();
         assertThat(deliveryMethodsList).hasSize(databaseSizeBeforeUpdate);
         DeliveryMethods testDeliveryMethods = deliveryMethodsList.get(deliveryMethodsList.size() - 1);
-        assertThat(testDeliveryMethods.getDeliveryMethodName()).isEqualTo(UPDATED_DELIVERY_METHOD_NAME);
+        assertThat(testDeliveryMethods.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testDeliveryMethods.getValidFrom()).isEqualTo(UPDATED_VALID_FROM);
         assertThat(testDeliveryMethods.getValidTo()).isEqualTo(UPDATED_VALID_TO);
     }

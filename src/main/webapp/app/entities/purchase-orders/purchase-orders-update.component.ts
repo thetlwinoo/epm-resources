@@ -36,7 +36,7 @@ export class PurchaseOrdersUpdateComponent implements OnInit {
     orderDate: [null, [Validators.required]],
     expectedDeliveryDate: [],
     supplierReference: [],
-    isOrderFinalized: [],
+    isOrderFinalized: [null, [Validators.required]],
     comments: [],
     internalComments: [],
     lastEditedBy: [],

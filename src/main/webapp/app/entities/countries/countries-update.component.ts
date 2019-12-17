@@ -19,7 +19,7 @@ export class CountriesUpdateComponent implements OnInit {
 
   editForm = this.fb.group({
     id: [],
-    countryName: [null, [Validators.required]],
+    name: [null, [Validators.required]],
     formalName: [null, [Validators.required]],
     isoAplha3Code: [],
     isoNumericCode: [],
@@ -45,7 +45,7 @@ export class CountriesUpdateComponent implements OnInit {
   updateForm(countries: ICountries) {
     this.editForm.patchValue({
       id: countries.id,
-      countryName: countries.countryName,
+      name: countries.name,
       formalName: countries.formalName,
       isoAplha3Code: countries.isoAplha3Code,
       isoNumericCode: countries.isoNumericCode,
@@ -78,7 +78,7 @@ export class CountriesUpdateComponent implements OnInit {
     return {
       ...new Countries(),
       id: this.editForm.get(['id']).value,
-      countryName: this.editForm.get(['countryName']).value,
+      name: this.editForm.get(['name']).value,
       formalName: this.editForm.get(['formalName']).value,
       isoAplha3Code: this.editForm.get(['isoAplha3Code']).value,
       isoNumericCode: this.editForm.get(['isoNumericCode']).value,

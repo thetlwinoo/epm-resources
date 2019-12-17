@@ -17,7 +17,7 @@ export class PhoneNumberTypeUpdateComponent implements OnInit {
 
   editForm = this.fb.group({
     id: [],
-    phoneNumberTypeName: [null, [Validators.required]]
+    name: [null, [Validators.required]]
   });
 
   constructor(
@@ -36,7 +36,7 @@ export class PhoneNumberTypeUpdateComponent implements OnInit {
   updateForm(phoneNumberType: IPhoneNumberType) {
     this.editForm.patchValue({
       id: phoneNumberType.id,
-      phoneNumberTypeName: phoneNumberType.phoneNumberTypeName
+      name: phoneNumberType.name
     });
   }
 
@@ -58,7 +58,7 @@ export class PhoneNumberTypeUpdateComponent implements OnInit {
     return {
       ...new PhoneNumberType(),
       id: this.editForm.get(['id']).value,
-      phoneNumberTypeName: this.editForm.get(['phoneNumberTypeName']).value
+      name: this.editForm.get(['name']).value
     };
   }
 

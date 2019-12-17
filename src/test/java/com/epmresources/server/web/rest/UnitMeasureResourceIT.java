@@ -38,11 +38,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = EpmresourcesApp.class)
 public class UnitMeasureResourceIT {
 
-    private static final String DEFAULT_UNIT_MEASURE_CODE = "AAAAAAAAAA";
-    private static final String UPDATED_UNIT_MEASURE_CODE = "BBBBBBBBBB";
+    private static final String DEFAULT_CODE = "AAAAAAAAAA";
+    private static final String UPDATED_CODE = "BBBBBBBBBB";
 
-    private static final String DEFAULT_UNIT_MEASURE_NAME = "AAAAAAAAAA";
-    private static final String UPDATED_UNIT_MEASURE_NAME = "BBBBBBBBBB";
+    private static final String DEFAULT_NAME = "AAAAAAAAAA";
+    private static final String UPDATED_NAME = "BBBBBBBBBB";
 
     @Autowired
     private UnitMeasureRepository unitMeasureRepository;
@@ -95,8 +95,8 @@ public class UnitMeasureResourceIT {
      */
     public static UnitMeasure createEntity(EntityManager em) {
         UnitMeasure unitMeasure = new UnitMeasure()
-            .unitMeasureCode(DEFAULT_UNIT_MEASURE_CODE)
-            .unitMeasureName(DEFAULT_UNIT_MEASURE_NAME);
+            .code(DEFAULT_CODE)
+            .name(DEFAULT_NAME);
         return unitMeasure;
     }
     /**
@@ -107,8 +107,8 @@ public class UnitMeasureResourceIT {
      */
     public static UnitMeasure createUpdatedEntity(EntityManager em) {
         UnitMeasure unitMeasure = new UnitMeasure()
-            .unitMeasureCode(UPDATED_UNIT_MEASURE_CODE)
-            .unitMeasureName(UPDATED_UNIT_MEASURE_NAME);
+            .code(UPDATED_CODE)
+            .name(UPDATED_NAME);
         return unitMeasure;
     }
 
@@ -133,8 +133,8 @@ public class UnitMeasureResourceIT {
         List<UnitMeasure> unitMeasureList = unitMeasureRepository.findAll();
         assertThat(unitMeasureList).hasSize(databaseSizeBeforeCreate + 1);
         UnitMeasure testUnitMeasure = unitMeasureList.get(unitMeasureList.size() - 1);
-        assertThat(testUnitMeasure.getUnitMeasureCode()).isEqualTo(DEFAULT_UNIT_MEASURE_CODE);
-        assertThat(testUnitMeasure.getUnitMeasureName()).isEqualTo(DEFAULT_UNIT_MEASURE_NAME);
+        assertThat(testUnitMeasure.getCode()).isEqualTo(DEFAULT_CODE);
+        assertThat(testUnitMeasure.getName()).isEqualTo(DEFAULT_NAME);
     }
 
     @Test
@@ -160,10 +160,10 @@ public class UnitMeasureResourceIT {
 
     @Test
     @Transactional
-    public void checkUnitMeasureCodeIsRequired() throws Exception {
+    public void checkCodeIsRequired() throws Exception {
         int databaseSizeBeforeTest = unitMeasureRepository.findAll().size();
         // set the field null
-        unitMeasure.setUnitMeasureCode(null);
+        unitMeasure.setCode(null);
 
         // Create the UnitMeasure, which fails.
         UnitMeasureDTO unitMeasureDTO = unitMeasureMapper.toDto(unitMeasure);
@@ -179,10 +179,10 @@ public class UnitMeasureResourceIT {
 
     @Test
     @Transactional
-    public void checkUnitMeasureNameIsRequired() throws Exception {
+    public void checkNameIsRequired() throws Exception {
         int databaseSizeBeforeTest = unitMeasureRepository.findAll().size();
         // set the field null
-        unitMeasure.setUnitMeasureName(null);
+        unitMeasure.setName(null);
 
         // Create the UnitMeasure, which fails.
         UnitMeasureDTO unitMeasureDTO = unitMeasureMapper.toDto(unitMeasure);
@@ -207,8 +207,8 @@ public class UnitMeasureResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(unitMeasure.getId().intValue())))
-            .andExpect(jsonPath("$.[*].unitMeasureCode").value(hasItem(DEFAULT_UNIT_MEASURE_CODE)))
-            .andExpect(jsonPath("$.[*].unitMeasureName").value(hasItem(DEFAULT_UNIT_MEASURE_NAME)));
+            .andExpect(jsonPath("$.[*].code").value(hasItem(DEFAULT_CODE)))
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)));
     }
     
     @Test
@@ -222,163 +222,163 @@ public class UnitMeasureResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(unitMeasure.getId().intValue()))
-            .andExpect(jsonPath("$.unitMeasureCode").value(DEFAULT_UNIT_MEASURE_CODE))
-            .andExpect(jsonPath("$.unitMeasureName").value(DEFAULT_UNIT_MEASURE_NAME));
+            .andExpect(jsonPath("$.code").value(DEFAULT_CODE))
+            .andExpect(jsonPath("$.name").value(DEFAULT_NAME));
     }
 
     @Test
     @Transactional
-    public void getAllUnitMeasuresByUnitMeasureCodeIsEqualToSomething() throws Exception {
+    public void getAllUnitMeasuresByCodeIsEqualToSomething() throws Exception {
         // Initialize the database
         unitMeasureRepository.saveAndFlush(unitMeasure);
 
-        // Get all the unitMeasureList where unitMeasureCode equals to DEFAULT_UNIT_MEASURE_CODE
-        defaultUnitMeasureShouldBeFound("unitMeasureCode.equals=" + DEFAULT_UNIT_MEASURE_CODE);
+        // Get all the unitMeasureList where code equals to DEFAULT_CODE
+        defaultUnitMeasureShouldBeFound("code.equals=" + DEFAULT_CODE);
 
-        // Get all the unitMeasureList where unitMeasureCode equals to UPDATED_UNIT_MEASURE_CODE
-        defaultUnitMeasureShouldNotBeFound("unitMeasureCode.equals=" + UPDATED_UNIT_MEASURE_CODE);
+        // Get all the unitMeasureList where code equals to UPDATED_CODE
+        defaultUnitMeasureShouldNotBeFound("code.equals=" + UPDATED_CODE);
     }
 
     @Test
     @Transactional
-    public void getAllUnitMeasuresByUnitMeasureCodeIsNotEqualToSomething() throws Exception {
+    public void getAllUnitMeasuresByCodeIsNotEqualToSomething() throws Exception {
         // Initialize the database
         unitMeasureRepository.saveAndFlush(unitMeasure);
 
-        // Get all the unitMeasureList where unitMeasureCode not equals to DEFAULT_UNIT_MEASURE_CODE
-        defaultUnitMeasureShouldNotBeFound("unitMeasureCode.notEquals=" + DEFAULT_UNIT_MEASURE_CODE);
+        // Get all the unitMeasureList where code not equals to DEFAULT_CODE
+        defaultUnitMeasureShouldNotBeFound("code.notEquals=" + DEFAULT_CODE);
 
-        // Get all the unitMeasureList where unitMeasureCode not equals to UPDATED_UNIT_MEASURE_CODE
-        defaultUnitMeasureShouldBeFound("unitMeasureCode.notEquals=" + UPDATED_UNIT_MEASURE_CODE);
+        // Get all the unitMeasureList where code not equals to UPDATED_CODE
+        defaultUnitMeasureShouldBeFound("code.notEquals=" + UPDATED_CODE);
     }
 
     @Test
     @Transactional
-    public void getAllUnitMeasuresByUnitMeasureCodeIsInShouldWork() throws Exception {
+    public void getAllUnitMeasuresByCodeIsInShouldWork() throws Exception {
         // Initialize the database
         unitMeasureRepository.saveAndFlush(unitMeasure);
 
-        // Get all the unitMeasureList where unitMeasureCode in DEFAULT_UNIT_MEASURE_CODE or UPDATED_UNIT_MEASURE_CODE
-        defaultUnitMeasureShouldBeFound("unitMeasureCode.in=" + DEFAULT_UNIT_MEASURE_CODE + "," + UPDATED_UNIT_MEASURE_CODE);
+        // Get all the unitMeasureList where code in DEFAULT_CODE or UPDATED_CODE
+        defaultUnitMeasureShouldBeFound("code.in=" + DEFAULT_CODE + "," + UPDATED_CODE);
 
-        // Get all the unitMeasureList where unitMeasureCode equals to UPDATED_UNIT_MEASURE_CODE
-        defaultUnitMeasureShouldNotBeFound("unitMeasureCode.in=" + UPDATED_UNIT_MEASURE_CODE);
+        // Get all the unitMeasureList where code equals to UPDATED_CODE
+        defaultUnitMeasureShouldNotBeFound("code.in=" + UPDATED_CODE);
     }
 
     @Test
     @Transactional
-    public void getAllUnitMeasuresByUnitMeasureCodeIsNullOrNotNull() throws Exception {
+    public void getAllUnitMeasuresByCodeIsNullOrNotNull() throws Exception {
         // Initialize the database
         unitMeasureRepository.saveAndFlush(unitMeasure);
 
-        // Get all the unitMeasureList where unitMeasureCode is not null
-        defaultUnitMeasureShouldBeFound("unitMeasureCode.specified=true");
+        // Get all the unitMeasureList where code is not null
+        defaultUnitMeasureShouldBeFound("code.specified=true");
 
-        // Get all the unitMeasureList where unitMeasureCode is null
-        defaultUnitMeasureShouldNotBeFound("unitMeasureCode.specified=false");
+        // Get all the unitMeasureList where code is null
+        defaultUnitMeasureShouldNotBeFound("code.specified=false");
     }
                 @Test
     @Transactional
-    public void getAllUnitMeasuresByUnitMeasureCodeContainsSomething() throws Exception {
+    public void getAllUnitMeasuresByCodeContainsSomething() throws Exception {
         // Initialize the database
         unitMeasureRepository.saveAndFlush(unitMeasure);
 
-        // Get all the unitMeasureList where unitMeasureCode contains DEFAULT_UNIT_MEASURE_CODE
-        defaultUnitMeasureShouldBeFound("unitMeasureCode.contains=" + DEFAULT_UNIT_MEASURE_CODE);
+        // Get all the unitMeasureList where code contains DEFAULT_CODE
+        defaultUnitMeasureShouldBeFound("code.contains=" + DEFAULT_CODE);
 
-        // Get all the unitMeasureList where unitMeasureCode contains UPDATED_UNIT_MEASURE_CODE
-        defaultUnitMeasureShouldNotBeFound("unitMeasureCode.contains=" + UPDATED_UNIT_MEASURE_CODE);
+        // Get all the unitMeasureList where code contains UPDATED_CODE
+        defaultUnitMeasureShouldNotBeFound("code.contains=" + UPDATED_CODE);
     }
 
     @Test
     @Transactional
-    public void getAllUnitMeasuresByUnitMeasureCodeNotContainsSomething() throws Exception {
+    public void getAllUnitMeasuresByCodeNotContainsSomething() throws Exception {
         // Initialize the database
         unitMeasureRepository.saveAndFlush(unitMeasure);
 
-        // Get all the unitMeasureList where unitMeasureCode does not contain DEFAULT_UNIT_MEASURE_CODE
-        defaultUnitMeasureShouldNotBeFound("unitMeasureCode.doesNotContain=" + DEFAULT_UNIT_MEASURE_CODE);
+        // Get all the unitMeasureList where code does not contain DEFAULT_CODE
+        defaultUnitMeasureShouldNotBeFound("code.doesNotContain=" + DEFAULT_CODE);
 
-        // Get all the unitMeasureList where unitMeasureCode does not contain UPDATED_UNIT_MEASURE_CODE
-        defaultUnitMeasureShouldBeFound("unitMeasureCode.doesNotContain=" + UPDATED_UNIT_MEASURE_CODE);
+        // Get all the unitMeasureList where code does not contain UPDATED_CODE
+        defaultUnitMeasureShouldBeFound("code.doesNotContain=" + UPDATED_CODE);
     }
 
 
     @Test
     @Transactional
-    public void getAllUnitMeasuresByUnitMeasureNameIsEqualToSomething() throws Exception {
+    public void getAllUnitMeasuresByNameIsEqualToSomething() throws Exception {
         // Initialize the database
         unitMeasureRepository.saveAndFlush(unitMeasure);
 
-        // Get all the unitMeasureList where unitMeasureName equals to DEFAULT_UNIT_MEASURE_NAME
-        defaultUnitMeasureShouldBeFound("unitMeasureName.equals=" + DEFAULT_UNIT_MEASURE_NAME);
+        // Get all the unitMeasureList where name equals to DEFAULT_NAME
+        defaultUnitMeasureShouldBeFound("name.equals=" + DEFAULT_NAME);
 
-        // Get all the unitMeasureList where unitMeasureName equals to UPDATED_UNIT_MEASURE_NAME
-        defaultUnitMeasureShouldNotBeFound("unitMeasureName.equals=" + UPDATED_UNIT_MEASURE_NAME);
+        // Get all the unitMeasureList where name equals to UPDATED_NAME
+        defaultUnitMeasureShouldNotBeFound("name.equals=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllUnitMeasuresByUnitMeasureNameIsNotEqualToSomething() throws Exception {
+    public void getAllUnitMeasuresByNameIsNotEqualToSomething() throws Exception {
         // Initialize the database
         unitMeasureRepository.saveAndFlush(unitMeasure);
 
-        // Get all the unitMeasureList where unitMeasureName not equals to DEFAULT_UNIT_MEASURE_NAME
-        defaultUnitMeasureShouldNotBeFound("unitMeasureName.notEquals=" + DEFAULT_UNIT_MEASURE_NAME);
+        // Get all the unitMeasureList where name not equals to DEFAULT_NAME
+        defaultUnitMeasureShouldNotBeFound("name.notEquals=" + DEFAULT_NAME);
 
-        // Get all the unitMeasureList where unitMeasureName not equals to UPDATED_UNIT_MEASURE_NAME
-        defaultUnitMeasureShouldBeFound("unitMeasureName.notEquals=" + UPDATED_UNIT_MEASURE_NAME);
+        // Get all the unitMeasureList where name not equals to UPDATED_NAME
+        defaultUnitMeasureShouldBeFound("name.notEquals=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllUnitMeasuresByUnitMeasureNameIsInShouldWork() throws Exception {
+    public void getAllUnitMeasuresByNameIsInShouldWork() throws Exception {
         // Initialize the database
         unitMeasureRepository.saveAndFlush(unitMeasure);
 
-        // Get all the unitMeasureList where unitMeasureName in DEFAULT_UNIT_MEASURE_NAME or UPDATED_UNIT_MEASURE_NAME
-        defaultUnitMeasureShouldBeFound("unitMeasureName.in=" + DEFAULT_UNIT_MEASURE_NAME + "," + UPDATED_UNIT_MEASURE_NAME);
+        // Get all the unitMeasureList where name in DEFAULT_NAME or UPDATED_NAME
+        defaultUnitMeasureShouldBeFound("name.in=" + DEFAULT_NAME + "," + UPDATED_NAME);
 
-        // Get all the unitMeasureList where unitMeasureName equals to UPDATED_UNIT_MEASURE_NAME
-        defaultUnitMeasureShouldNotBeFound("unitMeasureName.in=" + UPDATED_UNIT_MEASURE_NAME);
+        // Get all the unitMeasureList where name equals to UPDATED_NAME
+        defaultUnitMeasureShouldNotBeFound("name.in=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllUnitMeasuresByUnitMeasureNameIsNullOrNotNull() throws Exception {
+    public void getAllUnitMeasuresByNameIsNullOrNotNull() throws Exception {
         // Initialize the database
         unitMeasureRepository.saveAndFlush(unitMeasure);
 
-        // Get all the unitMeasureList where unitMeasureName is not null
-        defaultUnitMeasureShouldBeFound("unitMeasureName.specified=true");
+        // Get all the unitMeasureList where name is not null
+        defaultUnitMeasureShouldBeFound("name.specified=true");
 
-        // Get all the unitMeasureList where unitMeasureName is null
-        defaultUnitMeasureShouldNotBeFound("unitMeasureName.specified=false");
+        // Get all the unitMeasureList where name is null
+        defaultUnitMeasureShouldNotBeFound("name.specified=false");
     }
                 @Test
     @Transactional
-    public void getAllUnitMeasuresByUnitMeasureNameContainsSomething() throws Exception {
+    public void getAllUnitMeasuresByNameContainsSomething() throws Exception {
         // Initialize the database
         unitMeasureRepository.saveAndFlush(unitMeasure);
 
-        // Get all the unitMeasureList where unitMeasureName contains DEFAULT_UNIT_MEASURE_NAME
-        defaultUnitMeasureShouldBeFound("unitMeasureName.contains=" + DEFAULT_UNIT_MEASURE_NAME);
+        // Get all the unitMeasureList where name contains DEFAULT_NAME
+        defaultUnitMeasureShouldBeFound("name.contains=" + DEFAULT_NAME);
 
-        // Get all the unitMeasureList where unitMeasureName contains UPDATED_UNIT_MEASURE_NAME
-        defaultUnitMeasureShouldNotBeFound("unitMeasureName.contains=" + UPDATED_UNIT_MEASURE_NAME);
+        // Get all the unitMeasureList where name contains UPDATED_NAME
+        defaultUnitMeasureShouldNotBeFound("name.contains=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllUnitMeasuresByUnitMeasureNameNotContainsSomething() throws Exception {
+    public void getAllUnitMeasuresByNameNotContainsSomething() throws Exception {
         // Initialize the database
         unitMeasureRepository.saveAndFlush(unitMeasure);
 
-        // Get all the unitMeasureList where unitMeasureName does not contain DEFAULT_UNIT_MEASURE_NAME
-        defaultUnitMeasureShouldNotBeFound("unitMeasureName.doesNotContain=" + DEFAULT_UNIT_MEASURE_NAME);
+        // Get all the unitMeasureList where name does not contain DEFAULT_NAME
+        defaultUnitMeasureShouldNotBeFound("name.doesNotContain=" + DEFAULT_NAME);
 
-        // Get all the unitMeasureList where unitMeasureName does not contain UPDATED_UNIT_MEASURE_NAME
-        defaultUnitMeasureShouldBeFound("unitMeasureName.doesNotContain=" + UPDATED_UNIT_MEASURE_NAME);
+        // Get all the unitMeasureList where name does not contain UPDATED_NAME
+        defaultUnitMeasureShouldBeFound("name.doesNotContain=" + UPDATED_NAME);
     }
 
     /**
@@ -389,8 +389,8 @@ public class UnitMeasureResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(unitMeasure.getId().intValue())))
-            .andExpect(jsonPath("$.[*].unitMeasureCode").value(hasItem(DEFAULT_UNIT_MEASURE_CODE)))
-            .andExpect(jsonPath("$.[*].unitMeasureName").value(hasItem(DEFAULT_UNIT_MEASURE_NAME)));
+            .andExpect(jsonPath("$.[*].code").value(hasItem(DEFAULT_CODE)))
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)));
 
         // Check, that the count call also returns 1
         restUnitMeasureMockMvc.perform(get("/api/unit-measures/count?sort=id,desc&" + filter))
@@ -438,8 +438,8 @@ public class UnitMeasureResourceIT {
         // Disconnect from session so that the updates on updatedUnitMeasure are not directly saved in db
         em.detach(updatedUnitMeasure);
         updatedUnitMeasure
-            .unitMeasureCode(UPDATED_UNIT_MEASURE_CODE)
-            .unitMeasureName(UPDATED_UNIT_MEASURE_NAME);
+            .code(UPDATED_CODE)
+            .name(UPDATED_NAME);
         UnitMeasureDTO unitMeasureDTO = unitMeasureMapper.toDto(updatedUnitMeasure);
 
         restUnitMeasureMockMvc.perform(put("/api/unit-measures")
@@ -451,8 +451,8 @@ public class UnitMeasureResourceIT {
         List<UnitMeasure> unitMeasureList = unitMeasureRepository.findAll();
         assertThat(unitMeasureList).hasSize(databaseSizeBeforeUpdate);
         UnitMeasure testUnitMeasure = unitMeasureList.get(unitMeasureList.size() - 1);
-        assertThat(testUnitMeasure.getUnitMeasureCode()).isEqualTo(UPDATED_UNIT_MEASURE_CODE);
-        assertThat(testUnitMeasure.getUnitMeasureName()).isEqualTo(UPDATED_UNIT_MEASURE_NAME);
+        assertThat(testUnitMeasure.getCode()).isEqualTo(UPDATED_CODE);
+        assertThat(testUnitMeasure.getName()).isEqualTo(UPDATED_NAME);
     }
 
     @Test

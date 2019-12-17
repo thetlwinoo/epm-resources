@@ -18,10 +18,10 @@
             <column name="currency_rate_date" type="datetime">
                 <constraints nullable="false" />
             </column>
-            <column name="from_currency_code" type="varchar(255)">
+            <column name="fromcode" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="to_currency_code" type="varchar(255)">
+            <column name="tocode" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <column name="average_rate" type="decimal(21,2)">
@@ -62,8 +62,8 @@
                   tableName="currency_rate">
             <column name="id" type="numeric"/>
             <column name="currency_rate_date" type="datetime"/>
-            <column name="from_currency_code" type="string"/>
-            <column name="to_currency_code" type="string"/>
+            <column name="fromcode" type="string"/>
+            <column name="tocode" type="string"/>
             <column name="average_rate" type="numeric"/>
             <column name="end_of_day_rate" type="numeric"/>
             <column name="last_edited_by" type="string"/>

@@ -15,9 +15,9 @@ export interface ISpecialDeals {
   lastEditedWhen?: Moment;
   cartDiscounts?: IShoppingCarts[];
   orderDiscounts?: IOrders[];
-  buyingGroupBuyingGroupName?: string;
+  buyingGroupName?: string;
   buyingGroupId?: number;
-  customerCategoryCustomerCategoryName?: string;
+  customerCategoryName?: string;
   customerCategoryId?: number;
   customerId?: number;
   productCategoryName?: string;
@@ -39,9 +39,9 @@ export class SpecialDeals implements ISpecialDeals {
     public lastEditedWhen?: Moment,
     public cartDiscounts?: IShoppingCarts[],
     public orderDiscounts?: IOrders[],
-    public buyingGroupBuyingGroupName?: string,
+    public buyingGroupName?: string,
     public buyingGroupId?: number,
-    public customerCategoryCustomerCategoryName?: string,
+    public customerCategoryName?: string,
     public customerCategoryId?: number,
     public customerId?: number,
     public productCategoryName?: string,

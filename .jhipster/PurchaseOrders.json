@@ -18,7 +18,10 @@
         },
         {
             "fieldName": "isOrderFinalized",
-            "fieldType": "Boolean"
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required"
+            ]
         },
         {
             "fieldName": "comments",
@@ -56,14 +59,14 @@
             "otherEntityName": "suppliers",
             "otherEntityRelationshipName": "purchaseOrders",
             "relationshipName": "supplier",
-            "otherEntityField": "supplierName"
+            "otherEntityField": "name"
         },
         {
             "relationshipType": "many-to-one",
             "otherEntityName": "deliveryMethods",
             "otherEntityRelationshipName": "purchaseOrders",
             "relationshipName": "deliveryMethod",
-            "otherEntityField": "deliveryMethodName"
+            "otherEntityField": "name"
         }
     ],
     "changelogDate": "20191106102826",

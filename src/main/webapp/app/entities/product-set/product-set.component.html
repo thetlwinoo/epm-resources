@@ -19,7 +19,7 @@
             <thead>
             <tr>
             <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
-            <th scope="col" ><span jhiTranslate="epmresourcesApp.productSet.productSetName">Product Set Name</span></th>
+            <th scope="col" ><span jhiTranslate="epmresourcesApp.productSet.name">Name</span></th>
             <th scope="col" ><span jhiTranslate="epmresourcesApp.productSet.noOfPerson">No Of Person</span></th>
             <th scope="col" ><span jhiTranslate="epmresourcesApp.productSet.isExclusive">Is Exclusive</span></th>
             <th scope="col"></th>
@@ -28,7 +28,7 @@
             <tbody>
             <tr *ngFor="let productSet of productSets ;trackBy: trackId">
                 <td><a [routerLink]="['/product-set', productSet.id, 'view' ]">{{productSet.id}}</a></td>
-                <td>{{productSet.productSetName}}</td>
+                <td>{{productSet.name}}</td>
                 <td>{{productSet.noOfPerson}}</td>
                 <td>{{productSet.isExclusive}}</td>
                 <td class="text-right">

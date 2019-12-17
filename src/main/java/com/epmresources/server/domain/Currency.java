@@ -23,11 +23,11 @@ public class Currency implements Serializable {
     private Long id;
 
     @NotNull
-    @Column(name = "currency_code", nullable = false)
-    private String currencyCode;
+    @Column(name = "code", nullable = false)
+    private String code;
 
-    @Column(name = "currency_name")
-    private String currencyName;
+    @Column(name = "name")
+    private String name;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -38,30 +38,30 @@ public class Currency implements Serializable {
         this.id = id;
     }
 
-    public String getCurrencyCode() {
-        return currencyCode;
+    public String getCode() {
+        return code;
     }
 
-    public Currency currencyCode(String currencyCode) {
-        this.currencyCode = currencyCode;
+    public Currency code(String code) {
+        this.code = code;
         return this;
     }
 
-    public void setCurrencyCode(String currencyCode) {
-        this.currencyCode = currencyCode;
+    public void setCode(String code) {
+        this.code = code;
     }
 
-    public String getCurrencyName() {
-        return currencyName;
+    public String getName() {
+        return name;
     }
 
-    public Currency currencyName(String currencyName) {
-        this.currencyName = currencyName;
+    public Currency name(String name) {
+        this.name = name;
         return this;
     }
 
-    public void setCurrencyName(String currencyName) {
-        this.currencyName = currencyName;
+    public void setName(String name) {
+        this.name = name;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -85,8 +85,8 @@ public class Currency implements Serializable {
     public String toString() {
         return "Currency{" +
             "id=" + getId() +
-            ", currencyCode='" + getCurrencyCode() + "'" +
-            ", currencyName='" + getCurrencyName() + "'" +
+            ", code='" + getCode() + "'" +
+            ", name='" + getName() + "'" +
             "}";
     }
 }

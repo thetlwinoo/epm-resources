@@ -128,6 +128,7 @@ public class CacheConfiguration {
             createCache(cm, com.epmresources.server.domain.ReviewLines.class.getName());
             createCache(cm, com.epmresources.server.domain.ProductTags.class.getName());
             createCache(cm, com.epmresources.server.domain.SupplierImportedDocument.class.getName());
+            createCache(cm, com.epmresources.server.domain.ProductCategory.class.getName() + ".photoLists");
             // jhipster-needle-ehcache-add-entry
         };
     }

@@ -73,8 +73,8 @@ class CurrencyRateGatlingTest extends Simulation {
             .body(StringBody("""{
                 "id":null
                 , "currencyRateDate":"2020-01-01T00:00:00.000Z"
-                , "fromCurrencyCode":"SAMPLE_TEXT"
-                , "toCurrencyCode":"SAMPLE_TEXT"
+                , "fromcode":"SAMPLE_TEXT"
+                , "tocode":"SAMPLE_TEXT"
                 , "averageRate":"0"
                 , "endOfDayRate":"0"
                 , "lastEditedBy":"SAMPLE_TEXT"

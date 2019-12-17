@@ -5,7 +5,7 @@ export interface IPersonPhone {
   activeInd?: boolean;
   personFullName?: string;
   personId?: number;
-  phoneNumberTypePhoneNumberTypeName?: string;
+  phoneNumberTypeName?: string;
   phoneNumberTypeId?: number;
 }
 
@@ -17,7 +17,7 @@ export class PersonPhone implements IPersonPhone {
     public activeInd?: boolean,
     public personFullName?: string,
     public personId?: number,
-    public phoneNumberTypePhoneNumberTypeName?: string,
+    public phoneNumberTypeName?: string,
     public phoneNumberTypeId?: number
   ) {
     this.defaultInd = this.defaultInd || false;

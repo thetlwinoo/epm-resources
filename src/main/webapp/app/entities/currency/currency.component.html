@@ -19,16 +19,16 @@
             <thead>
             <tr>
             <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
-            <th scope="col" ><span jhiTranslate="epmresourcesApp.currency.currencyCode">Currency Code</span></th>
-            <th scope="col" ><span jhiTranslate="epmresourcesApp.currency.currencyName">Currency Name</span></th>
+            <th scope="col" ><span jhiTranslate="epmresourcesApp.currency.code">Code</span></th>
+            <th scope="col" ><span jhiTranslate="epmresourcesApp.currency.name">Name</span></th>
             <th scope="col"></th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let currency of currencies ;trackBy: trackId">
                 <td><a [routerLink]="['/currency', currency.id, 'view' ]">{{currency.id}}</a></td>
-                <td>{{currency.currencyCode}}</td>
-                <td>{{currency.currencyName}}</td>
+                <td>{{currency.code}}</td>
+                <td>{{currency.name}}</td>
                 <td class="text-right">
                     <div class="btn-group">
                         <button type="submit"

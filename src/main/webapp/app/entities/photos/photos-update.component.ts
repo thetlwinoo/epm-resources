@@ -11,6 +11,8 @@ import { IPhotos, Photos } from 'app/shared/model/photos.model';
 import { PhotosService } from './photos.service';
 import { IStockItems } from 'app/shared/model/stock-items.model';
 import { StockItemsService } from 'app/entities/stock-items/stock-items.service';
+import { IProductCategory } from 'app/shared/model/product-category.model';
+import { ProductCategoryService } from 'app/entities/product-category/product-category.service';
 
 @Component({
   selector: 'jhi-photos-update',
@@ -20,6 +22,8 @@ export class PhotosUpdateComponent implements OnInit {
   isSaving: boolean;
 
   stockitems: IStockItems[];
+
+  productcategories: IProductCategory[];
 
   editForm = this.fb.group({
     id: [],
@@ -49,8 +53,8 @@ export class PhotosUpdateComponent implements OnInit {
     watermarkPhotoBlobContentType: [],
     priority: [],
     defaultInd: [],
-    deleteToken: [null, [Validators.minLength(1), Validators.maxLength(1024)]],
-    stockItemId: []
+    stockItemId: [],
+    productCategoryId: []
   });
 
   constructor(
@@ -58,6 +62,7 @@ export class PhotosUpdateComponent implements OnInit {
     protected jhiAlertService: JhiAlertService,
     protected photosService: PhotosService,
     protected stockItemsService: StockItemsService,
+    protected productCategoryService: ProductCategoryService,
     protected elementRef: ElementRef,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
@@ -75,6 +80,13 @@ export class PhotosUpdateComponent implements OnInit {
         map((response: HttpResponse<IStockItems[]>) => response.body)
       )
       .subscribe((res: IStockItems[]) => (this.stockitems = res), (res: HttpErrorResponse) => this.onError(res.message));
+    this.productCategoryService
+      .query()
+      .pipe(
+        filter((mayBeOk: HttpResponse<IProductCategory[]>) => mayBeOk.ok),
+        map((response: HttpResponse<IProductCategory[]>) => response.body)
+      )
+      .subscribe((res: IProductCategory[]) => (this.productcategories = res), (res: HttpErrorResponse) => this.onError(res.message));
   }
 
   updateForm(photos: IPhotos) {
@@ -106,8 +118,8 @@ export class PhotosUpdateComponent implements OnInit {
       watermarkPhotoBlobContentType: photos.watermarkPhotoBlobContentType,
       priority: photos.priority,
       defaultInd: photos.defaultInd,
-      deleteToken: photos.deleteToken,
-      stockItemId: photos.stockItemId
+      stockItemId: photos.stockItemId,
+      productCategoryId: photos.productCategoryId
     });
   }
 
@@ -198,8 +210,8 @@ export class PhotosUpdateComponent implements OnInit {
       watermarkPhotoBlob: this.editForm.get(['watermarkPhotoBlob']).value,
       priority: this.editForm.get(['priority']).value,
       defaultInd: this.editForm.get(['defaultInd']).value,
-      deleteToken: this.editForm.get(['deleteToken']).value,
-      stockItemId: this.editForm.get(['stockItemId']).value
+      stockItemId: this.editForm.get(['stockItemId']).value,
+      productCategoryId: this.editForm.get(['productCategoryId']).value
     };
   }
 
@@ -220,6 +232,10 @@ export class PhotosUpdateComponent implements OnInit {
   }
 
   trackStockItemsById(index: number, item: IStockItems) {
+    return item.id;
+  }
+
+  trackProductCategoryById(index: number, item: IProductCategory) {
     return item.id;
   }
 }

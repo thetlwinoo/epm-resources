@@ -14,13 +14,13 @@ public interface SuppliersMapper extends EntityMapper<SuppliersDTO, Suppliers> {
     @Mapping(source = "user.id", target = "userId")
     @Mapping(source = "user.login", target = "userLogin")
     @Mapping(source = "supplierCategory.id", target = "supplierCategoryId")
-    @Mapping(source = "supplierCategory.supplierCategoryName", target = "supplierCategorySupplierCategoryName")
+    @Mapping(source = "supplierCategory.name", target = "supplierCategoryName")
     @Mapping(source = "deliveryMethod.id", target = "deliveryMethodId")
-    @Mapping(source = "deliveryMethod.deliveryMethodName", target = "deliveryMethodDeliveryMethodName")
+    @Mapping(source = "deliveryMethod.name", target = "deliveryMethodName")
     @Mapping(source = "deliveryCity.id", target = "deliveryCityId")
-    @Mapping(source = "deliveryCity.cityName", target = "deliveryCityCityName")
+    @Mapping(source = "deliveryCity.name", target = "deliveryCityName")
     @Mapping(source = "postalCity.id", target = "postalCityId")
-    @Mapping(source = "postalCity.cityName", target = "postalCityCityName")
+    @Mapping(source = "postalCity.name", target = "postalCityName")
     SuppliersDTO toDto(Suppliers suppliers);
 
     @Mapping(source = "userId", target = "user")

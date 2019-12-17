@@ -48,12 +48,12 @@
                 <td>{{invoiceLines.lastEditedWhen | date:'medium'}}</td>
                 <td>
                     <div *ngIf="invoiceLines.packageTypeId">
-                        <a [routerLink]="['/package-types', invoiceLines.packageTypeId , 'view' ]" >{{invoiceLines.packageTypePackageTypeName}}</a>
+                        <a [routerLink]="['/package-types', invoiceLines.packageTypeId , 'view' ]" >{{invoiceLines.packageTypeName}}</a>
                     </div>
                 </td>
                 <td>
                     <div *ngIf="invoiceLines.stockItemId">
-                        <a [routerLink]="['/stock-items', invoiceLines.stockItemId , 'view' ]" >{{invoiceLines.stockItemStockItemName}}</a>
+                        <a [routerLink]="['/stock-items', invoiceLines.stockItemId , 'view' ]" >{{invoiceLines.stockItemName}}</a>
                     </div>
                 </td>
                 <td>

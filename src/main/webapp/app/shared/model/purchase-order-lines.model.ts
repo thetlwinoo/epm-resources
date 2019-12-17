@@ -2,7 +2,7 @@ import { Moment } from 'moment';
 
 export interface IPurchaseOrderLines {
   id?: number;
-  ordersOuters?: number;
+  orderedOuters?: number;
   description?: string;
   receivedOuters?: number;
   expectedUnitPricePerOuter?: number;
@@ -10,9 +10,9 @@ export interface IPurchaseOrderLines {
   isOrderLineFinalized?: boolean;
   lastEditedBy?: string;
   lastEditedWhen?: Moment;
-  packageTypePackageTypeName?: string;
+  packageTypeName?: string;
   packageTypeId?: number;
-  stockItemStockItemName?: string;
+  stockItemName?: string;
   stockItemId?: number;
   purchaseOrderId?: number;
 }
@@ -20,7 +20,7 @@ export interface IPurchaseOrderLines {
 export class PurchaseOrderLines implements IPurchaseOrderLines {
   constructor(
     public id?: number,
-    public ordersOuters?: number,
+    public orderedOuters?: number,
     public description?: string,
     public receivedOuters?: number,
     public expectedUnitPricePerOuter?: number,
@@ -28,9 +28,9 @@ export class PurchaseOrderLines implements IPurchaseOrderLines {
     public isOrderLineFinalized?: boolean,
     public lastEditedBy?: string,
     public lastEditedWhen?: Moment,
-    public packageTypePackageTypeName?: string,
+    public packageTypeName?: string,
     public packageTypeId?: number,
-    public stockItemStockItemName?: string,
+    public stockItemName?: string,
     public stockItemId?: number,
     public purchaseOrderId?: number
   ) {

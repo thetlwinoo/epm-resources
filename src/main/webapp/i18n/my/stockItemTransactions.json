@@ -16,7 +16,7 @@
       "detail": {
         "title": "Stock Item Transactions"
       },
-      "transactionOccurredWhen": "Transaction Occurred When",
+      "transactionOccuredWhen": "Transaction Occured When",
       "quantity": "Quantity",
       "lastEditedBy": "Last Edited By",
       "lastEditedWhen": "Last Edited When",

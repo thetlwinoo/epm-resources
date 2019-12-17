@@ -12,9 +12,9 @@ import org.mapstruct.*;
 public interface SupplierTransactionsMapper extends EntityMapper<SupplierTransactionsDTO, SupplierTransactions> {
 
     @Mapping(source = "supplier.id", target = "supplierId")
-    @Mapping(source = "supplier.supplierName", target = "supplierSupplierName")
+    @Mapping(source = "supplier.name", target = "supplierName")
     @Mapping(source = "transactionType.id", target = "transactionTypeId")
-    @Mapping(source = "transactionType.transactionTypeName", target = "transactionTypeTransactionTypeName")
+    @Mapping(source = "transactionType.name", target = "transactionTypeName")
     @Mapping(source = "purchaseOrder.id", target = "purchaseOrderId")
     SupplierTransactionsDTO toDto(SupplierTransactions supplierTransactions);
 

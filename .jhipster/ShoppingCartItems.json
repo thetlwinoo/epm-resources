@@ -20,7 +20,7 @@
             "otherEntityName": "stockItems",
             "otherEntityRelationshipName": "shoppingCartItems",
             "relationshipName": "stockItem",
-            "otherEntityField": "stockItemName"
+            "otherEntityField": "name"
         },
         {
             "relationshipType": "many-to-one",

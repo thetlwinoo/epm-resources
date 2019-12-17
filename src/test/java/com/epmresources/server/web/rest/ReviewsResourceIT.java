@@ -43,8 +43,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = EpmresourcesApp.class)
 public class ReviewsResourceIT {
 
-    private static final String DEFAULT_REVIEWER_NAME = "AAAAAAAAAA";
-    private static final String UPDATED_REVIEWER_NAME = "BBBBBBBBBB";
+    private static final String DEFAULT_NAME = "AAAAAAAAAA";
+    private static final String UPDATED_NAME = "BBBBBBBBBB";
 
     private static final String DEFAULT_EMAIL_ADDRESS = "S@Um..";
     private static final String UPDATED_EMAIL_ADDRESS = "%@q.X";
@@ -129,7 +129,7 @@ public class ReviewsResourceIT {
      */
     public static Reviews createEntity(EntityManager em) {
         Reviews reviews = new Reviews()
-            .reviewerName(DEFAULT_REVIEWER_NAME)
+            .name(DEFAULT_NAME)
             .emailAddress(DEFAULT_EMAIL_ADDRESS)
             .reviewDate(DEFAULT_REVIEW_DATE)
             .overAllSellerRating(DEFAULT_OVER_ALL_SELLER_RATING)
@@ -150,7 +150,7 @@ public class ReviewsResourceIT {
      */
     public static Reviews createUpdatedEntity(EntityManager em) {
         Reviews reviews = new Reviews()
-            .reviewerName(UPDATED_REVIEWER_NAME)
+            .name(UPDATED_NAME)
             .emailAddress(UPDATED_EMAIL_ADDRESS)
             .reviewDate(UPDATED_REVIEW_DATE)
             .overAllSellerRating(UPDATED_OVER_ALL_SELLER_RATING)
@@ -185,7 +185,7 @@ public class ReviewsResourceIT {
         List<Reviews> reviewsList = reviewsRepository.findAll();
         assertThat(reviewsList).hasSize(databaseSizeBeforeCreate + 1);
         Reviews testReviews = reviewsList.get(reviewsList.size() - 1);
-        assertThat(testReviews.getReviewerName()).isEqualTo(DEFAULT_REVIEWER_NAME);
+        assertThat(testReviews.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testReviews.getEmailAddress()).isEqualTo(DEFAULT_EMAIL_ADDRESS);
         assertThat(testReviews.getReviewDate()).isEqualTo(DEFAULT_REVIEW_DATE);
         assertThat(testReviews.getOverAllSellerRating()).isEqualTo(DEFAULT_OVER_ALL_SELLER_RATING);
@@ -230,7 +230,7 @@ public class ReviewsResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(reviews.getId().intValue())))
-            .andExpect(jsonPath("$.[*].reviewerName").value(hasItem(DEFAULT_REVIEWER_NAME)))
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].emailAddress").value(hasItem(DEFAULT_EMAIL_ADDRESS)))
             .andExpect(jsonPath("$.[*].reviewDate").value(hasItem(DEFAULT_REVIEW_DATE.toString())))
             .andExpect(jsonPath("$.[*].overAllSellerRating").value(hasItem(DEFAULT_OVER_ALL_SELLER_RATING)))
@@ -254,7 +254,7 @@ public class ReviewsResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(reviews.getId().intValue()))
-            .andExpect(jsonPath("$.reviewerName").value(DEFAULT_REVIEWER_NAME))
+            .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
             .andExpect(jsonPath("$.emailAddress").value(DEFAULT_EMAIL_ADDRESS))
             .andExpect(jsonPath("$.reviewDate").value(DEFAULT_REVIEW_DATE.toString()))
             .andExpect(jsonPath("$.overAllSellerRating").value(DEFAULT_OVER_ALL_SELLER_RATING))
@@ -269,79 +269,79 @@ public class ReviewsResourceIT {
 
     @Test
     @Transactional
-    public void getAllReviewsByReviewerNameIsEqualToSomething() throws Exception {
+    public void getAllReviewsByNameIsEqualToSomething() throws Exception {
         // Initialize the database
         reviewsRepository.saveAndFlush(reviews);
 
-        // Get all the reviewsList where reviewerName equals to DEFAULT_REVIEWER_NAME
-        defaultReviewsShouldBeFound("reviewerName.equals=" + DEFAULT_REVIEWER_NAME);
+        // Get all the reviewsList where name equals to DEFAULT_NAME
+        defaultReviewsShouldBeFound("name.equals=" + DEFAULT_NAME);
 
-        // Get all the reviewsList where reviewerName equals to UPDATED_REVIEWER_NAME
-        defaultReviewsShouldNotBeFound("reviewerName.equals=" + UPDATED_REVIEWER_NAME);
+        // Get all the reviewsList where name equals to UPDATED_NAME
+        defaultReviewsShouldNotBeFound("name.equals=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllReviewsByReviewerNameIsNotEqualToSomething() throws Exception {
+    public void getAllReviewsByNameIsNotEqualToSomething() throws Exception {
         // Initialize the database
         reviewsRepository.saveAndFlush(reviews);
 
-        // Get all the reviewsList where reviewerName not equals to DEFAULT_REVIEWER_NAME
-        defaultReviewsShouldNotBeFound("reviewerName.notEquals=" + DEFAULT_REVIEWER_NAME);
+        // Get all the reviewsList where name not equals to DEFAULT_NAME
+        defaultReviewsShouldNotBeFound("name.notEquals=" + DEFAULT_NAME);
 
-        // Get all the reviewsList where reviewerName not equals to UPDATED_REVIEWER_NAME
-        defaultReviewsShouldBeFound("reviewerName.notEquals=" + UPDATED_REVIEWER_NAME);
+        // Get all the reviewsList where name not equals to UPDATED_NAME
+        defaultReviewsShouldBeFound("name.notEquals=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllReviewsByReviewerNameIsInShouldWork() throws Exception {
+    public void getAllReviewsByNameIsInShouldWork() throws Exception {
         // Initialize the database
         reviewsRepository.saveAndFlush(reviews);
 
-        // Get all the reviewsList where reviewerName in DEFAULT_REVIEWER_NAME or UPDATED_REVIEWER_NAME
-        defaultReviewsShouldBeFound("reviewerName.in=" + DEFAULT_REVIEWER_NAME + "," + UPDATED_REVIEWER_NAME);
+        // Get all the reviewsList where name in DEFAULT_NAME or UPDATED_NAME
+        defaultReviewsShouldBeFound("name.in=" + DEFAULT_NAME + "," + UPDATED_NAME);
 
-        // Get all the reviewsList where reviewerName equals to UPDATED_REVIEWER_NAME
-        defaultReviewsShouldNotBeFound("reviewerName.in=" + UPDATED_REVIEWER_NAME);
+        // Get all the reviewsList where name equals to UPDATED_NAME
+        defaultReviewsShouldNotBeFound("name.in=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllReviewsByReviewerNameIsNullOrNotNull() throws Exception {
+    public void getAllReviewsByNameIsNullOrNotNull() throws Exception {
         // Initialize the database
         reviewsRepository.saveAndFlush(reviews);
 
-        // Get all the reviewsList where reviewerName is not null
-        defaultReviewsShouldBeFound("reviewerName.specified=true");
+        // Get all the reviewsList where name is not null
+        defaultReviewsShouldBeFound("name.specified=true");
 
-        // Get all the reviewsList where reviewerName is null
-        defaultReviewsShouldNotBeFound("reviewerName.specified=false");
+        // Get all the reviewsList where name is null
+        defaultReviewsShouldNotBeFound("name.specified=false");
     }
                 @Test
     @Transactional
-    public void getAllReviewsByReviewerNameContainsSomething() throws Exception {
+    public void getAllReviewsByNameContainsSomething() throws Exception {
         // Initialize the database
         reviewsRepository.saveAndFlush(reviews);
 
-        // Get all the reviewsList where reviewerName contains DEFAULT_REVIEWER_NAME
-        defaultReviewsShouldBeFound("reviewerName.contains=" + DEFAULT_REVIEWER_NAME);
+        // Get all the reviewsList where name contains DEFAULT_NAME
+        defaultReviewsShouldBeFound("name.contains=" + DEFAULT_NAME);
 
-        // Get all the reviewsList where reviewerName contains UPDATED_REVIEWER_NAME
-        defaultReviewsShouldNotBeFound("reviewerName.contains=" + UPDATED_REVIEWER_NAME);
+        // Get all the reviewsList where name contains UPDATED_NAME
+        defaultReviewsShouldNotBeFound("name.contains=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllReviewsByReviewerNameNotContainsSomething() throws Exception {
+    public void getAllReviewsByNameNotContainsSomething() throws Exception {
         // Initialize the database
         reviewsRepository.saveAndFlush(reviews);
 
-        // Get all the reviewsList where reviewerName does not contain DEFAULT_REVIEWER_NAME
-        defaultReviewsShouldNotBeFound("reviewerName.doesNotContain=" + DEFAULT_REVIEWER_NAME);
+        // Get all the reviewsList where name does not contain DEFAULT_NAME
+        defaultReviewsShouldNotBeFound("name.doesNotContain=" + DEFAULT_NAME);
 
-        // Get all the reviewsList where reviewerName does not contain UPDATED_REVIEWER_NAME
-        defaultReviewsShouldBeFound("reviewerName.doesNotContain=" + UPDATED_REVIEWER_NAME);
+        // Get all the reviewsList where name does not contain UPDATED_NAME
+        defaultReviewsShouldBeFound("name.doesNotContain=" + UPDATED_NAME);
     }
 
 
@@ -967,7 +967,7 @@ public class ReviewsResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(reviews.getId().intValue())))
-            .andExpect(jsonPath("$.[*].reviewerName").value(hasItem(DEFAULT_REVIEWER_NAME)))
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].emailAddress").value(hasItem(DEFAULT_EMAIL_ADDRESS)))
             .andExpect(jsonPath("$.[*].reviewDate").value(hasItem(DEFAULT_REVIEW_DATE.toString())))
             .andExpect(jsonPath("$.[*].overAllSellerRating").value(hasItem(DEFAULT_OVER_ALL_SELLER_RATING)))
@@ -1025,7 +1025,7 @@ public class ReviewsResourceIT {
         // Disconnect from session so that the updates on updatedReviews are not directly saved in db
         em.detach(updatedReviews);
         updatedReviews
-            .reviewerName(UPDATED_REVIEWER_NAME)
+            .name(UPDATED_NAME)
             .emailAddress(UPDATED_EMAIL_ADDRESS)
             .reviewDate(UPDATED_REVIEW_DATE)
             .overAllSellerRating(UPDATED_OVER_ALL_SELLER_RATING)
@@ -1047,7 +1047,7 @@ public class ReviewsResourceIT {
         List<Reviews> reviewsList = reviewsRepository.findAll();
         assertThat(reviewsList).hasSize(databaseSizeBeforeUpdate);
         Reviews testReviews = reviewsList.get(reviewsList.size() - 1);
-        assertThat(testReviews.getReviewerName()).isEqualTo(UPDATED_REVIEWER_NAME);
+        assertThat(testReviews.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testReviews.getEmailAddress()).isEqualTo(UPDATED_EMAIL_ADDRESS);
         assertThat(testReviews.getReviewDate()).isEqualTo(UPDATED_REVIEW_DATE);
         assertThat(testReviews.getOverAllSellerRating()).isEqualTo(UPDATED_OVER_ALL_SELLER_RATING);

@@ -10,12 +10,12 @@
                         readonly />
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="epmresourcesApp.stockItems.stockItemName" for="field_stockItemName">Stock Item Name</label>
-                    <input type="text" class="form-control" name="stockItemName" id="field_stockItemName"
-                           formControlName="stockItemName"/>
-                    <div *ngIf="editForm.get('stockItemName').invalid && (editForm.get('stockItemName').dirty || editForm.get('stockItemName').touched)">
+                    <label class="form-control-label" jhiTranslate="epmresourcesApp.stockItems.name" for="field_name">Name</label>
+                    <input type="text" class="form-control" name="name" id="field_name"
+                           formControlName="name"/>
+                    <div *ngIf="editForm.get('name').invalid && (editForm.get('name').dirty || editForm.get('name').touched)">
                         <small class="form-text text-danger"
-                               *ngIf="editForm.get('stockItemName').errors.required" jhiTranslate="entity.validation.required">
+                               *ngIf="editForm.get('name').errors.required" jhiTranslate="entity.validation.required">
                         This field is required.
                         </small>
                     </div>
@@ -195,84 +195,84 @@
                     <label class="form-control-label" jhiTranslate="epmresourcesApp.stockItems.itemLengthUnit" for="field_itemLengthUnit">Item Length Unit</label>
                     <select class="form-control" id="field_itemLengthUnit" name="itemLengthUnit" formControlName="itemLengthUnitId">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="unitMeasureOption.id" *ngFor="let unitMeasureOption of unitmeasures; trackBy: trackUnitMeasureById">{{unitMeasureOption.unitMeasureCode}}</option>
+                        <option [ngValue]="unitMeasureOption.id" *ngFor="let unitMeasureOption of unitmeasures; trackBy: trackUnitMeasureById">{{unitMeasureOption.code}}</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="epmresourcesApp.stockItems.itemWidthUnit" for="field_itemWidthUnit">Item Width Unit</label>
                     <select class="form-control" id="field_itemWidthUnit" name="itemWidthUnit" formControlName="itemWidthUnitId">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="unitMeasureOption.id" *ngFor="let unitMeasureOption of unitmeasures; trackBy: trackUnitMeasureById">{{unitMeasureOption.unitMeasureCode}}</option>
+                        <option [ngValue]="unitMeasureOption.id" *ngFor="let unitMeasureOption of unitmeasures; trackBy: trackUnitMeasureById">{{unitMeasureOption.code}}</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="epmresourcesApp.stockItems.itemHeightUnit" for="field_itemHeightUnit">Item Height Unit</label>
                     <select class="form-control" id="field_itemHeightUnit" name="itemHeightUnit" formControlName="itemHeightUnitId">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="unitMeasureOption.id" *ngFor="let unitMeasureOption of unitmeasures; trackBy: trackUnitMeasureById">{{unitMeasureOption.unitMeasureCode}}</option>
+                        <option [ngValue]="unitMeasureOption.id" *ngFor="let unitMeasureOption of unitmeasures; trackBy: trackUnitMeasureById">{{unitMeasureOption.code}}</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="epmresourcesApp.stockItems.packageLengthUnit" for="field_packageLengthUnit">Package Length Unit</label>
                     <select class="form-control" id="field_packageLengthUnit" name="packageLengthUnit" formControlName="packageLengthUnitId">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="unitMeasureOption.id" *ngFor="let unitMeasureOption of unitmeasures; trackBy: trackUnitMeasureById">{{unitMeasureOption.unitMeasureCode}}</option>
+                        <option [ngValue]="unitMeasureOption.id" *ngFor="let unitMeasureOption of unitmeasures; trackBy: trackUnitMeasureById">{{unitMeasureOption.code}}</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="epmresourcesApp.stockItems.packageWidthUnit" for="field_packageWidthUnit">Package Width Unit</label>
                     <select class="form-control" id="field_packageWidthUnit" name="packageWidthUnit" formControlName="packageWidthUnitId">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="unitMeasureOption.id" *ngFor="let unitMeasureOption of unitmeasures; trackBy: trackUnitMeasureById">{{unitMeasureOption.unitMeasureCode}}</option>
+                        <option [ngValue]="unitMeasureOption.id" *ngFor="let unitMeasureOption of unitmeasures; trackBy: trackUnitMeasureById">{{unitMeasureOption.code}}</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="epmresourcesApp.stockItems.packageHeightUnit" for="field_packageHeightUnit">Package Height Unit</label>
                     <select class="form-control" id="field_packageHeightUnit" name="packageHeightUnit" formControlName="packageHeightUnitId">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="unitMeasureOption.id" *ngFor="let unitMeasureOption of unitmeasures; trackBy: trackUnitMeasureById">{{unitMeasureOption.unitMeasureCode}}</option>
+                        <option [ngValue]="unitMeasureOption.id" *ngFor="let unitMeasureOption of unitmeasures; trackBy: trackUnitMeasureById">{{unitMeasureOption.code}}</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="epmresourcesApp.stockItems.itemPackageWeightUnit" for="field_itemPackageWeightUnit">Item Package Weight Unit</label>
                     <select class="form-control" id="field_itemPackageWeightUnit" name="itemPackageWeightUnit" formControlName="itemPackageWeightUnitId">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="unitMeasureOption.id" *ngFor="let unitMeasureOption of unitmeasures; trackBy: trackUnitMeasureById">{{unitMeasureOption.unitMeasureCode}}</option>
+                        <option [ngValue]="unitMeasureOption.id" *ngFor="let unitMeasureOption of unitmeasures; trackBy: trackUnitMeasureById">{{unitMeasureOption.code}}</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="epmresourcesApp.stockItems.productAttribute" for="field_productAttribute">Product Attribute</label>
                     <select class="form-control" id="field_productAttribute" name="productAttribute" formControlName="productAttributeId">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="productAttributeOption.id" *ngFor="let productAttributeOption of productattributes; trackBy: trackProductAttributeById">{{productAttributeOption.productAttributeValue}}</option>
+                        <option [ngValue]="productAttributeOption.id" *ngFor="let productAttributeOption of productattributes; trackBy: trackProductAttributeById">{{productAttributeOption.value}}</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="epmresourcesApp.stockItems.productOption" for="field_productOption">Product Option</label>
                     <select class="form-control" id="field_productOption" name="productOption" formControlName="productOptionId">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="productOptionOption.id" *ngFor="let productOptionOption of productoptions; trackBy: trackProductOptionById">{{productOptionOption.productOptionValue}}</option>
+                        <option [ngValue]="productOptionOption.id" *ngFor="let productOptionOption of productoptions; trackBy: trackProductOptionById">{{productOptionOption.value}}</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="epmresourcesApp.stockItems.material" for="field_material">Material</label>
                     <select class="form-control" id="field_material" name="material" formControlName="materialId">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="materialsOption.id" *ngFor="let materialsOption of materials; trackBy: trackMaterialsById">{{materialsOption.materialName}}</option>
+                        <option [ngValue]="materialsOption.id" *ngFor="let materialsOption of materials; trackBy: trackMaterialsById">{{materialsOption.name}}</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="epmresourcesApp.stockItems.currency" for="field_currency">Currency</label>
                     <select class="form-control" id="field_currency" name="currency" formControlName="currencyId">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="currencyOption.id" *ngFor="let currencyOption of currencies; trackBy: trackCurrencyById">{{currencyOption.currencyCode}}</option>
+                        <option [ngValue]="currencyOption.id" *ngFor="let currencyOption of currencies; trackBy: trackCurrencyById">{{currencyOption.code}}</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="epmresourcesApp.stockItems.barcodeType" for="field_barcodeType">Barcode Type</label>
                     <select class="form-control" id="field_barcodeType" name="barcodeType" formControlName="barcodeTypeId">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="barcodeTypesOption.id" *ngFor="let barcodeTypesOption of barcodetypes; trackBy: trackBarcodeTypesById">{{barcodeTypesOption.barcodeTypeName}}</option>
+                        <option [ngValue]="barcodeTypesOption.id" *ngFor="let barcodeTypesOption of barcodetypes; trackBy: trackBarcodeTypesById">{{barcodeTypesOption.name}}</option>
                     </select>
                 </div>
                 <div class="form-group">

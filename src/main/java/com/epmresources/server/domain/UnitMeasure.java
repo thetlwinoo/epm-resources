@@ -23,12 +23,12 @@ public class UnitMeasure implements Serializable {
     private Long id;
 
     @NotNull
-    @Column(name = "unit_measure_code", nullable = false)
-    private String unitMeasureCode;
+    @Column(name = "code", nullable = false)
+    private String code;
 
     @NotNull
-    @Column(name = "unit_measure_name", nullable = false)
-    private String unitMeasureName;
+    @Column(name = "name", nullable = false)
+    private String name;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -39,30 +39,30 @@ public class UnitMeasure implements Serializable {
         this.id = id;
     }
 
-    public String getUnitMeasureCode() {
-        return unitMeasureCode;
+    public String getCode() {
+        return code;
     }
 
-    public UnitMeasure unitMeasureCode(String unitMeasureCode) {
-        this.unitMeasureCode = unitMeasureCode;
+    public UnitMeasure code(String code) {
+        this.code = code;
         return this;
     }
 
-    public void setUnitMeasureCode(String unitMeasureCode) {
-        this.unitMeasureCode = unitMeasureCode;
+    public void setCode(String code) {
+        this.code = code;
     }
 
-    public String getUnitMeasureName() {
-        return unitMeasureName;
+    public String getName() {
+        return name;
     }
 
-    public UnitMeasure unitMeasureName(String unitMeasureName) {
-        this.unitMeasureName = unitMeasureName;
+    public UnitMeasure name(String name) {
+        this.name = name;
         return this;
     }
 
-    public void setUnitMeasureName(String unitMeasureName) {
-        this.unitMeasureName = unitMeasureName;
+    public void setName(String name) {
+        this.name = name;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -86,8 +86,8 @@ public class UnitMeasure implements Serializable {
     public String toString() {
         return "UnitMeasure{" +
             "id=" + getId() +
-            ", unitMeasureCode='" + getUnitMeasureCode() + "'" +
-            ", unitMeasureName='" + getUnitMeasureName() + "'" +
+            ", code='" + getCode() + "'" +
+            ", name='" + getName() + "'" +
             "}";
     }
 }

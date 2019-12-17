@@ -12,9 +12,9 @@ import org.mapstruct.*;
 public interface InvoiceLinesMapper extends EntityMapper<InvoiceLinesDTO, InvoiceLines> {
 
     @Mapping(source = "packageType.id", target = "packageTypeId")
-    @Mapping(source = "packageType.packageTypeName", target = "packageTypePackageTypeName")
+    @Mapping(source = "packageType.name", target = "packageTypeName")
     @Mapping(source = "stockItem.id", target = "stockItemId")
-    @Mapping(source = "stockItem.stockItemName", target = "stockItemStockItemName")
+    @Mapping(source = "stockItem.name", target = "stockItemName")
     @Mapping(source = "invoice.id", target = "invoiceId")
     InvoiceLinesDTO toDto(InvoiceLines invoiceLines);
 

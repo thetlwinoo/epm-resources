@@ -21,7 +21,7 @@
                     <label class="form-control-label" jhiTranslate="epmresourcesApp.businessEntityContact.contactType" for="field_contactType">Contact Type</label>
                     <select class="form-control" id="field_contactType" name="contactType" formControlName="contactTypeId">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="contactTypeOption.id" *ngFor="let contactTypeOption of contacttypes; trackBy: trackContactTypeById">{{contactTypeOption.contactTypeName}}</option>
+                        <option [ngValue]="contactTypeOption.id" *ngFor="let contactTypeOption of contacttypes; trackBy: trackContactTypeById">{{contactTypeOption.name}}</option>
                     </select>
                 </div>
             </div>

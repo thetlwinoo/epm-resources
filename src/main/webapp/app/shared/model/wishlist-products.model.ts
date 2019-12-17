@@ -1,10 +1,10 @@
 export interface IWishlistProducts {
   id?: number;
-  productProductName?: string;
+  productName?: string;
   productId?: number;
   wishlistId?: number;
 }
 
 export class WishlistProducts implements IWishlistProducts {
-  constructor(public id?: number, public productProductName?: string, public productId?: number, public wishlistId?: number) {}
+  constructor(public id?: number, public productName?: string, public productId?: number, public wishlistId?: number) {}
 }

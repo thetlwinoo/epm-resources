@@ -91,8 +91,8 @@ public class PurchaseOrderLinesQueryService extends QueryService<PurchaseOrderLi
             if (criteria.getId() != null) {
                 specification = specification.and(buildSpecification(criteria.getId(), PurchaseOrderLines_.id));
             }
-            if (criteria.getOrdersOuters() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getOrdersOuters(), PurchaseOrderLines_.ordersOuters));
+            if (criteria.getOrderedOuters() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getOrderedOuters(), PurchaseOrderLines_.orderedOuters));
             }
             if (criteria.getDescription() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getDescription(), PurchaseOrderLines_.description));

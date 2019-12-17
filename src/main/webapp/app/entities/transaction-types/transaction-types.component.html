@@ -19,7 +19,7 @@
             <thead>
             <tr>
             <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
-            <th scope="col" ><span jhiTranslate="epmresourcesApp.transactionTypes.transactionTypeName">Transaction Type Name</span></th>
+            <th scope="col" ><span jhiTranslate="epmresourcesApp.transactionTypes.name">Name</span></th>
             <th scope="col" ><span jhiTranslate="epmresourcesApp.transactionTypes.validFrom">Valid From</span></th>
             <th scope="col" ><span jhiTranslate="epmresourcesApp.transactionTypes.validTo">Valid To</span></th>
             <th scope="col"></th>
@@ -28,7 +28,7 @@
             <tbody>
             <tr *ngFor="let transactionTypes of transactionTypes ;trackBy: trackId">
                 <td><a [routerLink]="['/transaction-types', transactionTypes.id, 'view' ]">{{transactionTypes.id}}</a></td>
-                <td>{{transactionTypes.transactionTypeName}}</td>
+                <td>{{transactionTypes.name}}</td>
                 <td>{{transactionTypes.validFrom | date:'medium'}}</td>
                 <td>{{transactionTypes.validTo | date:'medium'}}</td>
                 <td class="text-right">

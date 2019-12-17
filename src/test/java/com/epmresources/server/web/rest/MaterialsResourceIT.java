@@ -38,8 +38,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = EpmresourcesApp.class)
 public class MaterialsResourceIT {
 
-    private static final String DEFAULT_MATERIAL_NAME = "AAAAAAAAAA";
-    private static final String UPDATED_MATERIAL_NAME = "BBBBBBBBBB";
+    private static final String DEFAULT_NAME = "AAAAAAAAAA";
+    private static final String UPDATED_NAME = "BBBBBBBBBB";
 
     @Autowired
     private MaterialsRepository materialsRepository;
@@ -92,7 +92,7 @@ public class MaterialsResourceIT {
      */
     public static Materials createEntity(EntityManager em) {
         Materials materials = new Materials()
-            .materialName(DEFAULT_MATERIAL_NAME);
+            .name(DEFAULT_NAME);
         return materials;
     }
     /**
@@ -103,7 +103,7 @@ public class MaterialsResourceIT {
      */
     public static Materials createUpdatedEntity(EntityManager em) {
         Materials materials = new Materials()
-            .materialName(UPDATED_MATERIAL_NAME);
+            .name(UPDATED_NAME);
         return materials;
     }
 
@@ -128,7 +128,7 @@ public class MaterialsResourceIT {
         List<Materials> materialsList = materialsRepository.findAll();
         assertThat(materialsList).hasSize(databaseSizeBeforeCreate + 1);
         Materials testMaterials = materialsList.get(materialsList.size() - 1);
-        assertThat(testMaterials.getMaterialName()).isEqualTo(DEFAULT_MATERIAL_NAME);
+        assertThat(testMaterials.getName()).isEqualTo(DEFAULT_NAME);
     }
 
     @Test
@@ -154,10 +154,10 @@ public class MaterialsResourceIT {
 
     @Test
     @Transactional
-    public void checkMaterialNameIsRequired() throws Exception {
+    public void checkNameIsRequired() throws Exception {
         int databaseSizeBeforeTest = materialsRepository.findAll().size();
         // set the field null
-        materials.setMaterialName(null);
+        materials.setName(null);
 
         // Create the Materials, which fails.
         MaterialsDTO materialsDTO = materialsMapper.toDto(materials);
@@ -182,7 +182,7 @@ public class MaterialsResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(materials.getId().intValue())))
-            .andExpect(jsonPath("$.[*].materialName").value(hasItem(DEFAULT_MATERIAL_NAME)));
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)));
     }
     
     @Test
@@ -196,84 +196,84 @@ public class MaterialsResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(materials.getId().intValue()))
-            .andExpect(jsonPath("$.materialName").value(DEFAULT_MATERIAL_NAME));
+            .andExpect(jsonPath("$.name").value(DEFAULT_NAME));
     }
 
     @Test
     @Transactional
-    public void getAllMaterialsByMaterialNameIsEqualToSomething() throws Exception {
+    public void getAllMaterialsByNameIsEqualToSomething() throws Exception {
         // Initialize the database
         materialsRepository.saveAndFlush(materials);
 
-        // Get all the materialsList where materialName equals to DEFAULT_MATERIAL_NAME
-        defaultMaterialsShouldBeFound("materialName.equals=" + DEFAULT_MATERIAL_NAME);
+        // Get all the materialsList where name equals to DEFAULT_NAME
+        defaultMaterialsShouldBeFound("name.equals=" + DEFAULT_NAME);
 
-        // Get all the materialsList where materialName equals to UPDATED_MATERIAL_NAME
-        defaultMaterialsShouldNotBeFound("materialName.equals=" + UPDATED_MATERIAL_NAME);
+        // Get all the materialsList where name equals to UPDATED_NAME
+        defaultMaterialsShouldNotBeFound("name.equals=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllMaterialsByMaterialNameIsNotEqualToSomething() throws Exception {
+    public void getAllMaterialsByNameIsNotEqualToSomething() throws Exception {
         // Initialize the database
         materialsRepository.saveAndFlush(materials);
 
-        // Get all the materialsList where materialName not equals to DEFAULT_MATERIAL_NAME
-        defaultMaterialsShouldNotBeFound("materialName.notEquals=" + DEFAULT_MATERIAL_NAME);
+        // Get all the materialsList where name not equals to DEFAULT_NAME
+        defaultMaterialsShouldNotBeFound("name.notEquals=" + DEFAULT_NAME);
 
-        // Get all the materialsList where materialName not equals to UPDATED_MATERIAL_NAME
-        defaultMaterialsShouldBeFound("materialName.notEquals=" + UPDATED_MATERIAL_NAME);
+        // Get all the materialsList where name not equals to UPDATED_NAME
+        defaultMaterialsShouldBeFound("name.notEquals=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllMaterialsByMaterialNameIsInShouldWork() throws Exception {
+    public void getAllMaterialsByNameIsInShouldWork() throws Exception {
         // Initialize the database
         materialsRepository.saveAndFlush(materials);
 
-        // Get all the materialsList where materialName in DEFAULT_MATERIAL_NAME or UPDATED_MATERIAL_NAME
-        defaultMaterialsShouldBeFound("materialName.in=" + DEFAULT_MATERIAL_NAME + "," + UPDATED_MATERIAL_NAME);
+        // Get all the materialsList where name in DEFAULT_NAME or UPDATED_NAME
+        defaultMaterialsShouldBeFound("name.in=" + DEFAULT_NAME + "," + UPDATED_NAME);
 
-        // Get all the materialsList where materialName equals to UPDATED_MATERIAL_NAME
-        defaultMaterialsShouldNotBeFound("materialName.in=" + UPDATED_MATERIAL_NAME);
+        // Get all the materialsList where name equals to UPDATED_NAME
+        defaultMaterialsShouldNotBeFound("name.in=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllMaterialsByMaterialNameIsNullOrNotNull() throws Exception {
+    public void getAllMaterialsByNameIsNullOrNotNull() throws Exception {
         // Initialize the database
         materialsRepository.saveAndFlush(materials);
 
-        // Get all the materialsList where materialName is not null
-        defaultMaterialsShouldBeFound("materialName.specified=true");
+        // Get all the materialsList where name is not null
+        defaultMaterialsShouldBeFound("name.specified=true");
 
-        // Get all the materialsList where materialName is null
-        defaultMaterialsShouldNotBeFound("materialName.specified=false");
+        // Get all the materialsList where name is null
+        defaultMaterialsShouldNotBeFound("name.specified=false");
     }
                 @Test
     @Transactional
-    public void getAllMaterialsByMaterialNameContainsSomething() throws Exception {
+    public void getAllMaterialsByNameContainsSomething() throws Exception {
         // Initialize the database
         materialsRepository.saveAndFlush(materials);
 
-        // Get all the materialsList where materialName contains DEFAULT_MATERIAL_NAME
-        defaultMaterialsShouldBeFound("materialName.contains=" + DEFAULT_MATERIAL_NAME);
+        // Get all the materialsList where name contains DEFAULT_NAME
+        defaultMaterialsShouldBeFound("name.contains=" + DEFAULT_NAME);
 
-        // Get all the materialsList where materialName contains UPDATED_MATERIAL_NAME
-        defaultMaterialsShouldNotBeFound("materialName.contains=" + UPDATED_MATERIAL_NAME);
+        // Get all the materialsList where name contains UPDATED_NAME
+        defaultMaterialsShouldNotBeFound("name.contains=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllMaterialsByMaterialNameNotContainsSomething() throws Exception {
+    public void getAllMaterialsByNameNotContainsSomething() throws Exception {
         // Initialize the database
         materialsRepository.saveAndFlush(materials);
 
-        // Get all the materialsList where materialName does not contain DEFAULT_MATERIAL_NAME
-        defaultMaterialsShouldNotBeFound("materialName.doesNotContain=" + DEFAULT_MATERIAL_NAME);
+        // Get all the materialsList where name does not contain DEFAULT_NAME
+        defaultMaterialsShouldNotBeFound("name.doesNotContain=" + DEFAULT_NAME);
 
-        // Get all the materialsList where materialName does not contain UPDATED_MATERIAL_NAME
-        defaultMaterialsShouldBeFound("materialName.doesNotContain=" + UPDATED_MATERIAL_NAME);
+        // Get all the materialsList where name does not contain UPDATED_NAME
+        defaultMaterialsShouldBeFound("name.doesNotContain=" + UPDATED_NAME);
     }
 
     /**
@@ -284,7 +284,7 @@ public class MaterialsResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(materials.getId().intValue())))
-            .andExpect(jsonPath("$.[*].materialName").value(hasItem(DEFAULT_MATERIAL_NAME)));
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)));
 
         // Check, that the count call also returns 1
         restMaterialsMockMvc.perform(get("/api/materials/count?sort=id,desc&" + filter))
@@ -332,7 +332,7 @@ public class MaterialsResourceIT {
         // Disconnect from session so that the updates on updatedMaterials are not directly saved in db
         em.detach(updatedMaterials);
         updatedMaterials
-            .materialName(UPDATED_MATERIAL_NAME);
+            .name(UPDATED_NAME);
         MaterialsDTO materialsDTO = materialsMapper.toDto(updatedMaterials);
 
         restMaterialsMockMvc.perform(put("/api/materials")
@@ -344,7 +344,7 @@ public class MaterialsResourceIT {
         List<Materials> materialsList = materialsRepository.findAll();
         assertThat(materialsList).hasSize(databaseSizeBeforeUpdate);
         Materials testMaterials = materialsList.get(materialsList.size() - 1);
-        assertThat(testMaterials.getMaterialName()).isEqualTo(UPDATED_MATERIAL_NAME);
+        assertThat(testMaterials.getName()).isEqualTo(UPDATED_NAME);
     }
 
     @Test

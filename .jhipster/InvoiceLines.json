@@ -62,14 +62,14 @@
             "otherEntityName": "packageTypes",
             "otherEntityRelationshipName": "invoiceLines",
             "relationshipName": "packageType",
-            "otherEntityField": "packageTypeName"
+            "otherEntityField": "name"
         },
         {
             "relationshipType": "many-to-one",
             "otherEntityName": "stockItems",
             "otherEntityRelationshipName": "invoiceLines",
             "relationshipName": "stockItem",
-            "otherEntityField": "stockItemName"
+            "otherEntityField": "name"
         },
         {
             "relationshipType": "many-to-one",

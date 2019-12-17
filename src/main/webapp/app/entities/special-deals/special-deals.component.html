@@ -50,12 +50,12 @@
                 <td>{{specialDeals.lastEditedWhen | date:'medium'}}</td>
                 <td>
                     <div *ngIf="specialDeals.buyingGroupId">
-                        <a [routerLink]="['/buying-groups', specialDeals.buyingGroupId , 'view' ]" >{{specialDeals.buyingGroupBuyingGroupName}}</a>
+                        <a [routerLink]="['/buying-groups', specialDeals.buyingGroupId , 'view' ]" >{{specialDeals.buyingGroupName}}</a>
                     </div>
                 </td>
                 <td>
                     <div *ngIf="specialDeals.customerCategoryId">
-                        <a [routerLink]="['/customer-categories', specialDeals.customerCategoryId , 'view' ]" >{{specialDeals.customerCategoryCustomerCategoryName}}</a>
+                        <a [routerLink]="['/customer-categories', specialDeals.customerCategoryId , 'view' ]" >{{specialDeals.customerCategoryName}}</a>
                     </div>
                 </td>
                 <td>

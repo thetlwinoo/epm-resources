@@ -16,7 +16,7 @@
       "detail": {
         "title": "Warranty Types"
       },
-      "warrantyTypeName": "Warranty Type Name"
+      "name": "Name"
     }
   }
 }

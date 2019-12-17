@@ -25,8 +25,8 @@ public class Suppliers implements Serializable {
     private Long id;
 
     @NotNull
-    @Column(name = "supplier_name", nullable = false)
-    private String supplierName;
+    @Column(name = "name", nullable = false)
+    private String name;
 
     @Column(name = "supplier_reference")
     private String supplierReference;
@@ -72,12 +72,8 @@ public class Suppliers implements Serializable {
     @Column(name = "active_flag")
     private Boolean activeFlag;
 
-    @Lob
-    @Column(name = "avatar")
-    private byte[] avatar;
-
-    @Column(name = "avatar_content_type")
-    private String avatarContentType;
+    @Column(name = "thumbnail_url")
+    private String thumbnailUrl;
 
     @NotNull
     @Column(name = "valid_from", nullable = false)
@@ -116,17 +112,17 @@ public class Suppliers implements Serializable {
         this.id = id;
     }
 
-    public String getSupplierName() {
-        return supplierName;
+    public String getName() {
+        return name;
     }
 
-    public Suppliers supplierName(String supplierName) {
-        this.supplierName = supplierName;
+    public Suppliers name(String name) {
+        this.name = name;
         return this;
     }
 
-    public void setSupplierName(String supplierName) {
-        this.supplierName = supplierName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getSupplierReference() {
@@ -311,30 +307,17 @@ public class Suppliers implements Serializable {
         this.activeFlag = activeFlag;
     }
 
-    public byte[] getAvatar() {
-        return avatar;
+    public String getThumbnailUrl() {
+        return thumbnailUrl;
     }
 
-    public Suppliers avatar(byte[] avatar) {
-        this.avatar = avatar;
+    public Suppliers thumbnailUrl(String thumbnailUrl) {
+        this.thumbnailUrl = thumbnailUrl;
         return this;
     }
 
-    public void setAvatar(byte[] avatar) {
-        this.avatar = avatar;
-    }
-
-    public String getAvatarContentType() {
-        return avatarContentType;
-    }
-
-    public Suppliers avatarContentType(String avatarContentType) {
-        this.avatarContentType = avatarContentType;
-        return this;
-    }
-
-    public void setAvatarContentType(String avatarContentType) {
-        this.avatarContentType = avatarContentType;
+    public void setThumbnailUrl(String thumbnailUrl) {
+        this.thumbnailUrl = thumbnailUrl;
     }
 
     public Instant getValidFrom() {
@@ -449,7 +432,7 @@ public class Suppliers implements Serializable {
     public String toString() {
         return "Suppliers{" +
             "id=" + getId() +
-            ", supplierName='" + getSupplierName() + "'" +
+            ", name='" + getName() + "'" +
             ", supplierReference='" + getSupplierReference() + "'" +
             ", bankAccountName='" + getBankAccountName() + "'" +
             ", bankAccountBranch='" + getBankAccountBranch() + "'" +
@@ -464,8 +447,7 @@ public class Suppliers implements Serializable {
             ", webServiceUrl='" + getWebServiceUrl() + "'" +
             ", creditRating=" + getCreditRating() +
             ", activeFlag='" + isActiveFlag() + "'" +
-            ", avatar='" + getAvatar() + "'" +
-            ", avatarContentType='" + getAvatarContentType() + "'" +
+            ", thumbnailUrl='" + getThumbnailUrl() + "'" +
             ", validFrom='" + getValidFrom() + "'" +
             ", validTo='" + getValidTo() + "'" +
             "}";

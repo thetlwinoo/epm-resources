@@ -2,7 +2,7 @@
     "name": "PackageTypes",
     "fields": [
         {
-            "fieldName": "packageTypeName",
+            "fieldName": "name",
             "fieldType": "String",
             "fieldValidateRules": [
                 "required"

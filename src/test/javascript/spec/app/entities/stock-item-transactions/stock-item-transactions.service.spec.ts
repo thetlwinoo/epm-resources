@@ -31,7 +31,7 @@ describe('Service Tests', () => {
       it('should find an element', () => {
         const returnedFromService = Object.assign(
           {
-            transactionOccurredWhen: currentDate.format(DATE_TIME_FORMAT),
+            transactionOccuredWhen: currentDate.format(DATE_TIME_FORMAT),
             lastEditedWhen: currentDate.format(DATE_TIME_FORMAT)
           },
           elemDefault
@@ -50,14 +50,14 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             id: 0,
-            transactionOccurredWhen: currentDate.format(DATE_TIME_FORMAT),
+            transactionOccuredWhen: currentDate.format(DATE_TIME_FORMAT),
             lastEditedWhen: currentDate.format(DATE_TIME_FORMAT)
           },
           elemDefault
         );
         const expected = Object.assign(
           {
-            transactionOccurredWhen: currentDate,
+            transactionOccuredWhen: currentDate,
             lastEditedWhen: currentDate
           },
           returnedFromService
@@ -74,7 +74,7 @@ describe('Service Tests', () => {
       it('should update a StockItemTransactions', () => {
         const returnedFromService = Object.assign(
           {
-            transactionOccurredWhen: currentDate.format(DATE_TIME_FORMAT),
+            transactionOccuredWhen: currentDate.format(DATE_TIME_FORMAT),
             quantity: 1,
             lastEditedBy: 'BBBBBB',
             lastEditedWhen: currentDate.format(DATE_TIME_FORMAT)
@@ -84,7 +84,7 @@ describe('Service Tests', () => {
 
         const expected = Object.assign(
           {
-            transactionOccurredWhen: currentDate,
+            transactionOccuredWhen: currentDate,
             lastEditedWhen: currentDate
           },
           returnedFromService
@@ -101,7 +101,7 @@ describe('Service Tests', () => {
       it('should return a list of StockItemTransactions', () => {
         const returnedFromService = Object.assign(
           {
-            transactionOccurredWhen: currentDate.format(DATE_TIME_FORMAT),
+            transactionOccuredWhen: currentDate.format(DATE_TIME_FORMAT),
             quantity: 1,
             lastEditedBy: 'BBBBBB',
             lastEditedWhen: currentDate.format(DATE_TIME_FORMAT)
@@ -110,7 +110,7 @@ describe('Service Tests', () => {
         );
         const expected = Object.assign(
           {
-            transactionOccurredWhen: currentDate,
+            transactionOccuredWhen: currentDate,
             lastEditedWhen: currentDate
           },
           returnedFromService

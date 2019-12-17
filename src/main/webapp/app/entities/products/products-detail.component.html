@@ -5,9 +5,9 @@
             <hr>
             <jhi-alert-error></jhi-alert-error>
             <dl class="row-md jh-entity-details">
-                <dt><span jhiTranslate="epmresourcesApp.products.productName">Product Name</span></dt>
+                <dt><span jhiTranslate="epmresourcesApp.products.name">Name</span></dt>
                 <dd>
-                    <span>{{products.productName}}</span>
+                    <span>{{products.name}}</span>
                 </dd>
                 <dt><span jhiTranslate="epmresourcesApp.products.handle">Handle</span></dt>
                 <dd>
@@ -24,6 +24,10 @@
                 <dt><span jhiTranslate="epmresourcesApp.products.sellCount">Sell Count</span></dt>
                 <dd>
                     <span>{{products.sellCount}}</span>
+                </dd>
+                <dt><span jhiTranslate="epmresourcesApp.products.thumbnailList">Thumbnail List</span></dt>
+                <dd>
+                    <span>{{products.thumbnailList}}</span>
                 </dd>
                 <dt><span jhiTranslate="epmresourcesApp.products.activeInd">Active Ind</span></dt>
                 <dd>
@@ -46,7 +50,7 @@
                 <dt><span jhiTranslate="epmresourcesApp.products.supplier">Supplier</span></dt>
                 <dd>
                     <div *ngIf="products.supplierId">
-                        <a [routerLink]="['/suppliers', products.supplierId, 'view']">{{products.supplierSupplierName}}</a>
+                        <a [routerLink]="['/suppliers', products.supplierId, 'view']">{{products.supplierName}}</a>
                     </div>
                 </dd>
                 <dt><span jhiTranslate="epmresourcesApp.products.productCategory">Product Category</span></dt>
@@ -58,7 +62,7 @@
                 <dt><span jhiTranslate="epmresourcesApp.products.productBrand">Product Brand</span></dt>
                 <dd>
                     <div *ngIf="products.productBrandId">
-                        <a [routerLink]="['/product-brand', products.productBrandId, 'view']">{{products.productBrandProductBrandName}}</a>
+                        <a [routerLink]="['/product-brand', products.productBrandId, 'view']">{{products.productBrandName}}</a>
                     </div>
                 </dd>
             </dl>

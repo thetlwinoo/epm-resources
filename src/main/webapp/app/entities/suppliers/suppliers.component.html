@@ -19,7 +19,7 @@
             <thead>
             <tr>
             <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
-            <th scope="col" ><span jhiTranslate="epmresourcesApp.suppliers.supplierName">Supplier Name</span></th>
+            <th scope="col" ><span jhiTranslate="epmresourcesApp.suppliers.name">Name</span></th>
             <th scope="col" ><span jhiTranslate="epmresourcesApp.suppliers.supplierReference">Supplier Reference</span></th>
             <th scope="col" ><span jhiTranslate="epmresourcesApp.suppliers.bankAccountName">Bank Account Name</span></th>
             <th scope="col" ><span jhiTranslate="epmresourcesApp.suppliers.bankAccountBranch">Bank Account Branch</span></th>
@@ -34,7 +34,7 @@
             <th scope="col" ><span jhiTranslate="epmresourcesApp.suppliers.webServiceUrl">Web Service Url</span></th>
             <th scope="col" ><span jhiTranslate="epmresourcesApp.suppliers.creditRating">Credit Rating</span></th>
             <th scope="col" ><span jhiTranslate="epmresourcesApp.suppliers.activeFlag">Active Flag</span></th>
-            <th scope="col" ><span jhiTranslate="epmresourcesApp.suppliers.avatar">Avatar</span></th>
+            <th scope="col" ><span jhiTranslate="epmresourcesApp.suppliers.thumbnailUrl">Thumbnail Url</span></th>
             <th scope="col" ><span jhiTranslate="epmresourcesApp.suppliers.validFrom">Valid From</span></th>
             <th scope="col" ><span jhiTranslate="epmresourcesApp.suppliers.validTo">Valid To</span></th>
             <th scope="col" ><span jhiTranslate="epmresourcesApp.suppliers.user">User</span></th>
@@ -48,7 +48,7 @@
             <tbody>
             <tr *ngFor="let suppliers of suppliers ;trackBy: trackId">
                 <td><a [routerLink]="['/suppliers', suppliers.id, 'view' ]">{{suppliers.id}}</a></td>
-                <td>{{suppliers.supplierName}}</td>
+                <td>{{suppliers.name}}</td>
                 <td>{{suppliers.supplierReference}}</td>
                 <td>{{suppliers.bankAccountName}}</td>
                 <td>{{suppliers.bankAccountBranch}}</td>
@@ -63,12 +63,7 @@
                 <td>{{suppliers.webServiceUrl}}</td>
                 <td>{{suppliers.creditRating}}</td>
                 <td>{{suppliers.activeFlag}}</td>
-                <td>
-                    <a *ngIf="suppliers.avatar" (click)="openFile(suppliers.avatarContentType, suppliers.avatar)">
-                        <img [src]="'data:' + suppliers.avatarContentType + ';base64,' + suppliers.avatar" style="max-height: 30px;" alt="suppliers image"/>
-                    </a>
-                    <span *ngIf="suppliers.avatar">{{suppliers.avatarContentType}}, {{byteSize(suppliers.avatar)}}</span>
-                </td>
+                <td>{{suppliers.thumbnailUrl}}</td>
                 <td>{{suppliers.validFrom | date:'medium'}}</td>
                 <td>{{suppliers.validTo | date:'medium'}}</td>
                 <td>
@@ -76,22 +71,22 @@
                 </td>
                 <td>
                     <div *ngIf="suppliers.supplierCategoryId">
-                        <a [routerLink]="['/supplier-categories', suppliers.supplierCategoryId , 'view' ]" >{{suppliers.supplierCategorySupplierCategoryName}}</a>
+                        <a [routerLink]="['/supplier-categories', suppliers.supplierCategoryId , 'view' ]" >{{suppliers.supplierCategoryName}}</a>
                     </div>
                 </td>
                 <td>
                     <div *ngIf="suppliers.deliveryMethodId">
-                        <a [routerLink]="['/delivery-methods', suppliers.deliveryMethodId , 'view' ]" >{{suppliers.deliveryMethodDeliveryMethodName}}</a>
+                        <a [routerLink]="['/delivery-methods', suppliers.deliveryMethodId , 'view' ]" >{{suppliers.deliveryMethodName}}</a>
                     </div>
                 </td>
                 <td>
                     <div *ngIf="suppliers.deliveryCityId">
-                        <a [routerLink]="['/cities', suppliers.deliveryCityId , 'view' ]" >{{suppliers.deliveryCityCityName}}</a>
+                        <a [routerLink]="['/cities', suppliers.deliveryCityId , 'view' ]" >{{suppliers.deliveryCityName}}</a>
                     </div>
                 </td>
                 <td>
                     <div *ngIf="suppliers.postalCityId">
-                        <a [routerLink]="['/cities', suppliers.postalCityId , 'view' ]" >{{suppliers.postalCityCityName}}</a>
+                        <a [routerLink]="['/cities', suppliers.postalCityId , 'view' ]" >{{suppliers.postalCityName}}</a>
                     </div>
                 </td>
                 <td class="text-right">

@@ -26,27 +26,27 @@ export class CurrencyUpdatePage {
   pageTitle = element(by.id('jhi-currency-heading'));
   saveButton = element(by.id('save-entity'));
   cancelButton = element(by.id('cancel-save'));
-  currencyCodeInput = element(by.id('field_currencyCode'));
-  currencyNameInput = element(by.id('field_currencyName'));
+  codeInput = element(by.id('field_code'));
+  nameInput = element(by.id('field_name'));
 
   async getPageTitle() {
     return this.pageTitle.getAttribute('jhiTranslate');
   }
 
-  async setCurrencyCodeInput(currencyCode) {
-    await this.currencyCodeInput.sendKeys(currencyCode);
+  async setCodeInput(code) {
+    await this.codeInput.sendKeys(code);
   }
 
-  async getCurrencyCodeInput() {
-    return await this.currencyCodeInput.getAttribute('value');
+  async getCodeInput() {
+    return await this.codeInput.getAttribute('value');
   }
 
-  async setCurrencyNameInput(currencyName) {
-    await this.currencyNameInput.sendKeys(currencyName);
+  async setNameInput(name) {
+    await this.nameInput.sendKeys(name);
   }
 
-  async getCurrencyNameInput() {
-    return await this.currencyNameInput.getAttribute('value');
+  async getNameInput() {
+    return await this.nameInput.getAttribute('value');
   }
 
   async save(timeout?: number) {

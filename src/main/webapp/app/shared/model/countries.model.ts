@@ -2,7 +2,7 @@ import { Moment } from 'moment';
 
 export interface ICountries {
   id?: number;
-  countryName?: string;
+  name?: string;
   formalName?: string;
   isoAplha3Code?: string;
   isoNumericCode?: number;
@@ -19,7 +19,7 @@ export interface ICountries {
 export class Countries implements ICountries {
   constructor(
     public id?: number,
-    public countryName?: string,
+    public name?: string,
     public formalName?: string,
     public isoAplha3Code?: string,
     public isoNumericCode?: number,

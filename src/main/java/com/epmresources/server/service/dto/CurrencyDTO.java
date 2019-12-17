@@ -11,9 +11,9 @@ public class CurrencyDTO implements Serializable {
     private Long id;
 
     @NotNull
-    private String currencyCode;
+    private String code;
 
-    private String currencyName;
+    private String name;
 
 
     public Long getId() {
@@ -24,20 +24,20 @@ public class CurrencyDTO implements Serializable {
         this.id = id;
     }
 
-    public String getCurrencyCode() {
-        return currencyCode;
+    public String getCode() {
+        return code;
     }
 
-    public void setCurrencyCode(String currencyCode) {
-        this.currencyCode = currencyCode;
+    public void setCode(String code) {
+        this.code = code;
     }
 
-    public String getCurrencyName() {
-        return currencyName;
+    public String getName() {
+        return name;
     }
 
-    public void setCurrencyName(String currencyName) {
-        this.currencyName = currencyName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
@@ -65,8 +65,8 @@ public class CurrencyDTO implements Serializable {
     public String toString() {
         return "CurrencyDTO{" +
             "id=" + getId() +
-            ", currencyCode='" + getCurrencyCode() + "'" +
-            ", currencyName='" + getCurrencyName() + "'" +
+            ", code='" + getCode() + "'" +
+            ", name='" + getName() + "'" +
             "}";
     }
 }

@@ -33,12 +33,12 @@ export class PurchaseOrderLinesUpdateComponent implements OnInit {
 
   editForm = this.fb.group({
     id: [],
-    ordersOuters: [null, [Validators.required]],
-    description: [],
-    receivedOuters: [],
+    orderedOuters: [null, [Validators.required]],
+    description: [null, [Validators.required]],
+    receivedOuters: [null, [Validators.required]],
     expectedUnitPricePerOuter: [],
     lastReceiptDate: [],
-    isOrderLineFinalized: [],
+    isOrderLineFinalized: [null, [Validators.required]],
     lastEditedBy: [],
     lastEditedWhen: [],
     packageTypeId: [],
@@ -87,7 +87,7 @@ export class PurchaseOrderLinesUpdateComponent implements OnInit {
   updateForm(purchaseOrderLines: IPurchaseOrderLines) {
     this.editForm.patchValue({
       id: purchaseOrderLines.id,
-      ordersOuters: purchaseOrderLines.ordersOuters,
+      orderedOuters: purchaseOrderLines.orderedOuters,
       description: purchaseOrderLines.description,
       receivedOuters: purchaseOrderLines.receivedOuters,
       expectedUnitPricePerOuter: purchaseOrderLines.expectedUnitPricePerOuter,
@@ -119,7 +119,7 @@ export class PurchaseOrderLinesUpdateComponent implements OnInit {
     return {
       ...new PurchaseOrderLines(),
       id: this.editForm.get(['id']).value,
-      ordersOuters: this.editForm.get(['ordersOuters']).value,
+      orderedOuters: this.editForm.get(['orderedOuters']).value,
       description: this.editForm.get(['description']).value,
       receivedOuters: this.editForm.get(['receivedOuters']).value,
       expectedUnitPricePerOuter: this.editForm.get(['expectedUnitPricePerOuter']).value,

@@ -22,14 +22,14 @@
             "otherEntityName": "productAttributeSet",
             "otherEntityRelationshipName": "productChoice",
             "relationshipName": "productAttributeSet",
-            "otherEntityField": "productAttributeSetName"
+            "otherEntityField": "name"
         },
         {
             "relationshipType": "many-to-one",
             "otherEntityName": "productOptionSet",
             "otherEntityRelationshipName": "productChoice",
             "relationshipName": "productOptionSet",
-            "otherEntityField": "productOptionSetValue"
+            "otherEntityField": "value"
         }
     ],
     "changelogDate": "20191106102853",

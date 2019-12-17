@@ -1,5 +1,4 @@
 package com.epmresources.server.service.dto;
-import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.Lob;
@@ -63,11 +62,10 @@ public class PhotosDTO implements Serializable {
 
     private Boolean defaultInd;
 
-    @Size(min = 1, max = 1024)
-    private String deleteToken;
-
 
     private Long stockItemId;
+
+    private Long productCategoryId;
 
     public Long getId() {
         return id;
@@ -285,20 +283,20 @@ public class PhotosDTO implements Serializable {
         this.defaultInd = defaultInd;
     }
 
-    public String getDeleteToken() {
-        return deleteToken;
-    }
-
-    public void setDeleteToken(String deleteToken) {
-        this.deleteToken = deleteToken;
-    }
-
     public Long getStockItemId() {
         return stockItemId;
     }
 
     public void setStockItemId(Long stockItemsId) {
         this.stockItemId = stockItemsId;
+    }
+
+    public Long getProductCategoryId() {
+        return productCategoryId;
+    }
+
+    public void setProductCategoryId(Long productCategoryId) {
+        this.productCategoryId = productCategoryId;
     }
 
     @Override
@@ -344,8 +342,8 @@ public class PhotosDTO implements Serializable {
             ", watermarkPhotoBlob='" + getWatermarkPhotoBlob() + "'" +
             ", priority=" + getPriority() +
             ", defaultInd='" + isDefaultInd() + "'" +
-            ", deleteToken='" + getDeleteToken() + "'" +
             ", stockItem=" + getStockItemId() +
+            ", productCategory=" + getProductCategoryId() +
             "}";
     }
 }

@@ -26,27 +26,27 @@ export class CultureUpdatePage {
   pageTitle = element(by.id('jhi-culture-heading'));
   saveButton = element(by.id('save-entity'));
   cancelButton = element(by.id('cancel-save'));
-  cultureCodeInput = element(by.id('field_cultureCode'));
-  cultureNameInput = element(by.id('field_cultureName'));
+  codeInput = element(by.id('field_code'));
+  nameInput = element(by.id('field_name'));
 
   async getPageTitle() {
     return this.pageTitle.getAttribute('jhiTranslate');
   }
 
-  async setCultureCodeInput(cultureCode) {
-    await this.cultureCodeInput.sendKeys(cultureCode);
+  async setCodeInput(code) {
+    await this.codeInput.sendKeys(code);
   }
 
-  async getCultureCodeInput() {
-    return await this.cultureCodeInput.getAttribute('value');
+  async getCodeInput() {
+    return await this.codeInput.getAttribute('value');
   }
 
-  async setCultureNameInput(cultureName) {
-    await this.cultureNameInput.sendKeys(cultureName);
+  async setNameInput(name) {
+    await this.nameInput.sendKeys(name);
   }
 
-  async getCultureNameInput() {
-    return await this.cultureNameInput.getAttribute('value');
+  async getNameInput() {
+    return await this.nameInput.getAttribute('value');
   }
 
   async save(timeout?: number) {

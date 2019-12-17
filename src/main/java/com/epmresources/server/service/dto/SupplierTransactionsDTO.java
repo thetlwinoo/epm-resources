@@ -40,11 +40,11 @@ public class SupplierTransactionsDTO implements Serializable {
 
     private Long supplierId;
 
-    private String supplierSupplierName;
+    private String supplierName;
 
     private Long transactionTypeId;
 
-    private String transactionTypeTransactionTypeName;
+    private String transactionTypeName;
 
     private Long purchaseOrderId;
 
@@ -144,12 +144,12 @@ public class SupplierTransactionsDTO implements Serializable {
         this.supplierId = suppliersId;
     }
 
-    public String getSupplierSupplierName() {
-        return supplierSupplierName;
+    public String getSupplierName() {
+        return supplierName;
     }
 
-    public void setSupplierSupplierName(String suppliersSupplierName) {
-        this.supplierSupplierName = suppliersSupplierName;
+    public void setSupplierName(String suppliersName) {
+        this.supplierName = suppliersName;
     }
 
     public Long getTransactionTypeId() {
@@ -160,12 +160,12 @@ public class SupplierTransactionsDTO implements Serializable {
         this.transactionTypeId = transactionTypesId;
     }
 
-    public String getTransactionTypeTransactionTypeName() {
-        return transactionTypeTransactionTypeName;
+    public String getTransactionTypeName() {
+        return transactionTypeName;
     }
 
-    public void setTransactionTypeTransactionTypeName(String transactionTypesTransactionTypeName) {
-        this.transactionTypeTransactionTypeName = transactionTypesTransactionTypeName;
+    public void setTransactionTypeName(String transactionTypesName) {
+        this.transactionTypeName = transactionTypesName;
     }
 
     public Long getPurchaseOrderId() {
@@ -212,9 +212,9 @@ public class SupplierTransactionsDTO implements Serializable {
             ", lastEditedBy='" + getLastEditedBy() + "'" +
             ", lastEditedWhen='" + getLastEditedWhen() + "'" +
             ", supplier=" + getSupplierId() +
-            ", supplier='" + getSupplierSupplierName() + "'" +
+            ", supplier='" + getSupplierName() + "'" +
             ", transactionType=" + getTransactionTypeId() +
-            ", transactionType='" + getTransactionTypeTransactionTypeName() + "'" +
+            ", transactionType='" + getTransactionTypeName() + "'" +
             ", purchaseOrder=" + getPurchaseOrderId() +
             "}";
     }

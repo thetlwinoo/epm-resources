@@ -2,14 +2,14 @@
     "name": "Culture",
     "fields": [
         {
-            "fieldName": "cultureCode",
+            "fieldName": "code",
             "fieldType": "String",
             "fieldValidateRules": [
                 "required"
             ]
         },
         {
-            "fieldName": "cultureName",
+            "fieldName": "name",
             "fieldType": "String",
             "fieldValidateRules": [
                 "required"

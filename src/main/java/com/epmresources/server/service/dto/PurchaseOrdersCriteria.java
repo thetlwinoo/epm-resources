@@ -33,7 +33,7 @@ public class PurchaseOrdersCriteria implements Serializable, Criteria {
 
     private StringFilter supplierReference;
 
-    private BooleanFilter isOrderFinalized;
+    private IntegerFilter isOrderFinalized;
 
     private StringFilter comments;
 
@@ -107,11 +107,11 @@ public class PurchaseOrdersCriteria implements Serializable, Criteria {
         this.supplierReference = supplierReference;
     }
 
-    public BooleanFilter getIsOrderFinalized() {
+    public IntegerFilter getIsOrderFinalized() {
         return isOrderFinalized;
     }
 
-    public void setIsOrderFinalized(BooleanFilter isOrderFinalized) {
+    public void setIsOrderFinalized(IntegerFilter isOrderFinalized) {
         this.isOrderFinalized = isOrderFinalized;
     }
 

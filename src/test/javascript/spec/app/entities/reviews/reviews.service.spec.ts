@@ -74,7 +74,7 @@ describe('Service Tests', () => {
       it('should update a Reviews', () => {
         const returnedFromService = Object.assign(
           {
-            reviewerName: 'BBBBBB',
+            name: 'BBBBBB',
             emailAddress: 'BBBBBB',
             reviewDate: currentDate.format(DATE_TIME_FORMAT),
             overAllSellerRating: 1,
@@ -108,7 +108,7 @@ describe('Service Tests', () => {
       it('should return a list of Reviews', () => {
         const returnedFromService = Object.assign(
           {
-            reviewerName: 'BBBBBB',
+            name: 'BBBBBB',
             emailAddress: 'BBBBBB',
             reviewDate: currentDate.format(DATE_TIME_FORMAT),
             overAllSellerRating: 1,

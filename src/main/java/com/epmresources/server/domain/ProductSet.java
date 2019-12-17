@@ -23,8 +23,8 @@ public class ProductSet implements Serializable {
     private Long id;
 
     @NotNull
-    @Column(name = "product_set_name", nullable = false)
-    private String productSetName;
+    @Column(name = "name", nullable = false)
+    private String name;
 
     @NotNull
     @Column(name = "no_of_person", nullable = false)
@@ -42,17 +42,17 @@ public class ProductSet implements Serializable {
         this.id = id;
     }
 
-    public String getProductSetName() {
-        return productSetName;
+    public String getName() {
+        return name;
     }
 
-    public ProductSet productSetName(String productSetName) {
-        this.productSetName = productSetName;
+    public ProductSet name(String name) {
+        this.name = name;
         return this;
     }
 
-    public void setProductSetName(String productSetName) {
-        this.productSetName = productSetName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Integer getNoOfPerson() {
@@ -102,7 +102,7 @@ public class ProductSet implements Serializable {
     public String toString() {
         return "ProductSet{" +
             "id=" + getId() +
-            ", productSetName='" + getProductSetName() + "'" +
+            ", name='" + getName() + "'" +
             ", noOfPerson=" + getNoOfPerson() +
             ", isExclusive='" + isIsExclusive() + "'" +
             "}";

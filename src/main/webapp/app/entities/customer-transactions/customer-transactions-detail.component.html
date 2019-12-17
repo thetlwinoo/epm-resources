@@ -56,7 +56,7 @@
                 <dt><span jhiTranslate="epmresourcesApp.customerTransactions.transactionType">Transaction Type</span></dt>
                 <dd>
                     <div *ngIf="customerTransactions.transactionTypeId">
-                        <a [routerLink]="['/transaction-types', customerTransactions.transactionTypeId, 'view']">{{customerTransactions.transactionTypeId}}</a>
+                        <a [routerLink]="['/transaction-types', customerTransactions.transactionTypeId, 'view']">{{customerTransactions.transactionTypeName}}</a>
                     </div>
                 </dd>
                 <dt><span jhiTranslate="epmresourcesApp.customerTransactions.invoice">Invoice</span></dt>

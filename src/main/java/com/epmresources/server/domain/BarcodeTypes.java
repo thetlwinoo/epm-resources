@@ -23,8 +23,8 @@ public class BarcodeTypes implements Serializable {
     private Long id;
 
     @NotNull
-    @Column(name = "barcode_type_name", nullable = false)
-    private String barcodeTypeName;
+    @Column(name = "name", nullable = false)
+    private String name;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -35,17 +35,17 @@ public class BarcodeTypes implements Serializable {
         this.id = id;
     }
 
-    public String getBarcodeTypeName() {
-        return barcodeTypeName;
+    public String getName() {
+        return name;
     }
 
-    public BarcodeTypes barcodeTypeName(String barcodeTypeName) {
-        this.barcodeTypeName = barcodeTypeName;
+    public BarcodeTypes name(String name) {
+        this.name = name;
         return this;
     }
 
-    public void setBarcodeTypeName(String barcodeTypeName) {
-        this.barcodeTypeName = barcodeTypeName;
+    public void setName(String name) {
+        this.name = name;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -69,7 +69,7 @@ public class BarcodeTypes implements Serializable {
     public String toString() {
         return "BarcodeTypes{" +
             "id=" + getId() +
-            ", barcodeTypeName='" + getBarcodeTypeName() + "'" +
+            ", name='" + getName() + "'" +
             "}";
     }
 }

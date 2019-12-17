@@ -91,8 +91,8 @@ public class CountriesQueryService extends QueryService<Countries> {
             if (criteria.getId() != null) {
                 specification = specification.and(buildSpecification(criteria.getId(), Countries_.id));
             }
-            if (criteria.getCountryName() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getCountryName(), Countries_.countryName));
+            if (criteria.getName() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getName(), Countries_.name));
             }
             if (criteria.getFormalName() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getFormalName(), Countries_.formalName));

@@ -44,6 +44,7 @@ describe('PurchaseOrders e2e test', () => {
       purchaseOrdersUpdatePage.setOrderDateInput('01/01/2001' + protractor.Key.TAB + '02:30AM'),
       purchaseOrdersUpdatePage.setExpectedDeliveryDateInput('01/01/2001' + protractor.Key.TAB + '02:30AM'),
       purchaseOrdersUpdatePage.setSupplierReferenceInput('supplierReference'),
+      purchaseOrdersUpdatePage.setIsOrderFinalizedInput('5'),
       purchaseOrdersUpdatePage.setCommentsInput('comments'),
       purchaseOrdersUpdatePage.setInternalCommentsInput('internalComments'),
       purchaseOrdersUpdatePage.setLastEditedByInput('lastEditedBy'),
@@ -64,15 +65,7 @@ describe('PurchaseOrders e2e test', () => {
       'supplierReference',
       'Expected SupplierReference value to be equals to supplierReference'
     );
-    const selectedIsOrderFinalized = purchaseOrdersUpdatePage.getIsOrderFinalizedInput();
-    if (await selectedIsOrderFinalized.isSelected()) {
-      await purchaseOrdersUpdatePage.getIsOrderFinalizedInput().click();
-      expect(await purchaseOrdersUpdatePage.getIsOrderFinalizedInput().isSelected(), 'Expected isOrderFinalized not to be selected').to.be
-        .false;
-    } else {
-      await purchaseOrdersUpdatePage.getIsOrderFinalizedInput().click();
-      expect(await purchaseOrdersUpdatePage.getIsOrderFinalizedInput().isSelected(), 'Expected isOrderFinalized to be selected').to.be.true;
-    }
+    expect(await purchaseOrdersUpdatePage.getIsOrderFinalizedInput()).to.eq('5', 'Expected isOrderFinalized value to be equals to 5');
     expect(await purchaseOrdersUpdatePage.getCommentsInput()).to.eq('comments', 'Expected Comments value to be equals to comments');
     expect(await purchaseOrdersUpdatePage.getInternalCommentsInput()).to.eq(
       'internalComments',

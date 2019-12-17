@@ -40,11 +40,8 @@ describe('Materials e2e test', () => {
     const nbButtonsBeforeCreate = await materialsComponentsPage.countDeleteButtons();
 
     await materialsComponentsPage.clickOnCreateButton();
-    await promise.all([materialsUpdatePage.setMaterialNameInput('materialName')]);
-    expect(await materialsUpdatePage.getMaterialNameInput()).to.eq(
-      'materialName',
-      'Expected MaterialName value to be equals to materialName'
-    );
+    await promise.all([materialsUpdatePage.setNameInput('name')]);
+    expect(await materialsUpdatePage.getNameInput()).to.eq('name', 'Expected Name value to be equals to name');
     await materialsUpdatePage.save();
     expect(await materialsUpdatePage.getSaveButton().isPresent(), 'Expected save button disappear').to.be.false;
 

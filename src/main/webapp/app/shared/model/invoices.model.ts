@@ -34,7 +34,7 @@ export interface IInvoices {
   accountsPersonId?: number;
   customerId?: number;
   billToCustomerId?: number;
-  deliveryMethodDeliveryMethodName?: string;
+  deliveryMethodName?: string;
   deliveryMethodId?: number;
   orderId?: number;
 }
@@ -71,7 +71,7 @@ export class Invoices implements IInvoices {
     public accountsPersonId?: number,
     public customerId?: number,
     public billToCustomerId?: number,
-    public deliveryMethodDeliveryMethodName?: string,
+    public deliveryMethodName?: string,
     public deliveryMethodId?: number,
     public orderId?: number
   ) {

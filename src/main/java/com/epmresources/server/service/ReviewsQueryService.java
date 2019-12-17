@@ -91,8 +91,8 @@ public class ReviewsQueryService extends QueryService<Reviews> {
             if (criteria.getId() != null) {
                 specification = specification.and(buildSpecification(criteria.getId(), Reviews_.id));
             }
-            if (criteria.getReviewerName() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getReviewerName(), Reviews_.reviewerName));
+            if (criteria.getName() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getName(), Reviews_.name));
             }
             if (criteria.getEmailAddress() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getEmailAddress(), Reviews_.emailAddress));

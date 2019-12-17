@@ -26,7 +26,7 @@ export class CountriesUpdatePage {
   pageTitle = element(by.id('jhi-countries-heading'));
   saveButton = element(by.id('save-entity'));
   cancelButton = element(by.id('cancel-save'));
-  countryNameInput = element(by.id('field_countryName'));
+  nameInput = element(by.id('field_name'));
   formalNameInput = element(by.id('field_formalName'));
   isoAplha3CodeInput = element(by.id('field_isoAplha3Code'));
   isoNumericCodeInput = element(by.id('field_isoNumericCode'));
@@ -43,12 +43,12 @@ export class CountriesUpdatePage {
     return this.pageTitle.getAttribute('jhiTranslate');
   }
 
-  async setCountryNameInput(countryName) {
-    await this.countryNameInput.sendKeys(countryName);
+  async setNameInput(name) {
+    await this.nameInput.sendKeys(name);
   }
 
-  async getCountryNameInput() {
-    return await this.countryNameInput.getAttribute('value');
+  async getNameInput() {
+    return await this.nameInput.getAttribute('value');
   }
 
   async setFormalNameInput(formalName) {

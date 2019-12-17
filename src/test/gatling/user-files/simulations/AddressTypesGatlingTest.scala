@@ -72,7 +72,7 @@ class AddressTypesGatlingTest extends Simulation {
             .headers(headers_http_authenticated)
             .body(StringBody("""{
                 "id":null
-                , "addressTypeName":"SAMPLE_TEXT"
+                , "name":"SAMPLE_TEXT"
                 , "refer":"SAMPLE_TEXT"
                 }""")).asJson
             .check(status.is(201))

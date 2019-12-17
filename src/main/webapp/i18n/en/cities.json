@@ -16,7 +16,7 @@
       "detail": {
         "title": "Cities"
       },
-      "cityName": "City Name",
+      "name": "Name",
       "location": "Location",
       "latestRecordedPopulation": "Latest Recorded Population",
       "validFrom": "Valid From",

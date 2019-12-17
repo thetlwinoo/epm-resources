@@ -80,13 +80,13 @@
                 <dt><span jhiTranslate="epmresourcesApp.productDocument.warrantyType">Warranty Type</span></dt>
                 <dd>
                     <div *ngIf="productDocument.warrantyTypeId">
-                        <a [routerLink]="['/warranty-types', productDocument.warrantyTypeId, 'view']">{{productDocument.warrantyTypeWarrantyTypeName}}</a>
+                        <a [routerLink]="['/warranty-types', productDocument.warrantyTypeId, 'view']">{{productDocument.warrantyTypeName}}</a>
                     </div>
                 </dd>
                 <dt><span jhiTranslate="epmresourcesApp.productDocument.culture">Culture</span></dt>
                 <dd>
                     <div *ngIf="productDocument.cultureId">
-                        <a [routerLink]="['/culture', productDocument.cultureId, 'view']">{{productDocument.cultureCultureName}}</a>
+                        <a [routerLink]="['/culture', productDocument.cultureId, 'view']">{{productDocument.cultureName}}</a>
                     </div>
                 </dd>
             </dl>

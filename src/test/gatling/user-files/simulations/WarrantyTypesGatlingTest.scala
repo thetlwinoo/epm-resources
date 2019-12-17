@@ -72,7 +72,7 @@ class WarrantyTypesGatlingTest extends Simulation {
             .headers(headers_http_authenticated)
             .body(StringBody("""{
                 "id":null
-                , "warrantyTypeName":"SAMPLE_TEXT"
+                , "name":"SAMPLE_TEXT"
                 }""")).asJson
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_warrantyTypes_url"))).exitHereIfFailed

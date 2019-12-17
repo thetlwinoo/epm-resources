@@ -2,6 +2,7 @@ package com.epmresources.server.web.rest;
 
 import com.epmresources.server.EpmresourcesApp;
 import com.epmresources.server.domain.ProductCategory;
+import com.epmresources.server.domain.Photos;
 import com.epmresources.server.domain.ProductCategory;
 import com.epmresources.server.repository.ProductCategoryRepository;
 import com.epmresources.server.service.ProductCategoryService;
@@ -22,7 +23,6 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.Base64Utils;
 import org.springframework.validation.Validator;
 
 import javax.persistence.EntityManager;
@@ -46,10 +46,8 @@ public class ProductCategoryResourceIT {
     private static final String DEFAULT_SHORT_LABEL = "AAAAAAAAAA";
     private static final String UPDATED_SHORT_LABEL = "BBBBBBBBBB";
 
-    private static final byte[] DEFAULT_PHOTO = TestUtil.createByteArray(1, "0");
-    private static final byte[] UPDATED_PHOTO = TestUtil.createByteArray(1, "1");
-    private static final String DEFAULT_PHOTO_CONTENT_TYPE = "image/jpg";
-    private static final String UPDATED_PHOTO_CONTENT_TYPE = "image/png";
+    private static final String DEFAULT_THUMBNAIL_URL = "AAAAAAAAAA";
+    private static final String UPDATED_THUMBNAIL_URL = "BBBBBBBBBB";
 
     @Autowired
     private ProductCategoryRepository productCategoryRepository;
@@ -104,8 +102,7 @@ public class ProductCategoryResourceIT {
         ProductCategory productCategory = new ProductCategory()
             .name(DEFAULT_NAME)
             .shortLabel(DEFAULT_SHORT_LABEL)
-            .photo(DEFAULT_PHOTO)
-            .photoContentType(DEFAULT_PHOTO_CONTENT_TYPE);
+            .thumbnailUrl(DEFAULT_THUMBNAIL_URL);
         return productCategory;
     }
     /**
@@ -118,8 +115,7 @@ public class ProductCategoryResourceIT {
         ProductCategory productCategory = new ProductCategory()
             .name(UPDATED_NAME)
             .shortLabel(UPDATED_SHORT_LABEL)
-            .photo(UPDATED_PHOTO)
-            .photoContentType(UPDATED_PHOTO_CONTENT_TYPE);
+            .thumbnailUrl(UPDATED_THUMBNAIL_URL);
         return productCategory;
     }
 
@@ -146,8 +142,7 @@ public class ProductCategoryResourceIT {
         ProductCategory testProductCategory = productCategoryList.get(productCategoryList.size() - 1);
         assertThat(testProductCategory.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testProductCategory.getShortLabel()).isEqualTo(DEFAULT_SHORT_LABEL);
-        assertThat(testProductCategory.getPhoto()).isEqualTo(DEFAULT_PHOTO);
-        assertThat(testProductCategory.getPhotoContentType()).isEqualTo(DEFAULT_PHOTO_CONTENT_TYPE);
+        assertThat(testProductCategory.getThumbnailUrl()).isEqualTo(DEFAULT_THUMBNAIL_URL);
     }
 
     @Test
@@ -203,8 +198,7 @@ public class ProductCategoryResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(productCategory.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].shortLabel").value(hasItem(DEFAULT_SHORT_LABEL)))
-            .andExpect(jsonPath("$.[*].photoContentType").value(hasItem(DEFAULT_PHOTO_CONTENT_TYPE)))
-            .andExpect(jsonPath("$.[*].photo").value(hasItem(Base64Utils.encodeToString(DEFAULT_PHOTO))));
+            .andExpect(jsonPath("$.[*].thumbnailUrl").value(hasItem(DEFAULT_THUMBNAIL_URL)));
     }
     
     @Test
@@ -220,8 +214,7 @@ public class ProductCategoryResourceIT {
             .andExpect(jsonPath("$.id").value(productCategory.getId().intValue()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
             .andExpect(jsonPath("$.shortLabel").value(DEFAULT_SHORT_LABEL))
-            .andExpect(jsonPath("$.photoContentType").value(DEFAULT_PHOTO_CONTENT_TYPE))
-            .andExpect(jsonPath("$.photo").value(Base64Utils.encodeToString(DEFAULT_PHOTO)));
+            .andExpect(jsonPath("$.thumbnailUrl").value(DEFAULT_THUMBNAIL_URL));
     }
 
     @Test
@@ -382,6 +375,104 @@ public class ProductCategoryResourceIT {
 
     @Test
     @Transactional
+    public void getAllProductCategoriesByThumbnailUrlIsEqualToSomething() throws Exception {
+        // Initialize the database
+        productCategoryRepository.saveAndFlush(productCategory);
+
+        // Get all the productCategoryList where thumbnailUrl equals to DEFAULT_THUMBNAIL_URL
+        defaultProductCategoryShouldBeFound("thumbnailUrl.equals=" + DEFAULT_THUMBNAIL_URL);
+
+        // Get all the productCategoryList where thumbnailUrl equals to UPDATED_THUMBNAIL_URL
+        defaultProductCategoryShouldNotBeFound("thumbnailUrl.equals=" + UPDATED_THUMBNAIL_URL);
+    }
+
+    @Test
+    @Transactional
+    public void getAllProductCategoriesByThumbnailUrlIsNotEqualToSomething() throws Exception {
+        // Initialize the database
+        productCategoryRepository.saveAndFlush(productCategory);
+
+        // Get all the productCategoryList where thumbnailUrl not equals to DEFAULT_THUMBNAIL_URL
+        defaultProductCategoryShouldNotBeFound("thumbnailUrl.notEquals=" + DEFAULT_THUMBNAIL_URL);
+
+        // Get all the productCategoryList where thumbnailUrl not equals to UPDATED_THUMBNAIL_URL
+        defaultProductCategoryShouldBeFound("thumbnailUrl.notEquals=" + UPDATED_THUMBNAIL_URL);
+    }
+
+    @Test
+    @Transactional
+    public void getAllProductCategoriesByThumbnailUrlIsInShouldWork() throws Exception {
+        // Initialize the database
+        productCategoryRepository.saveAndFlush(productCategory);
+
+        // Get all the productCategoryList where thumbnailUrl in DEFAULT_THUMBNAIL_URL or UPDATED_THUMBNAIL_URL
+        defaultProductCategoryShouldBeFound("thumbnailUrl.in=" + DEFAULT_THUMBNAIL_URL + "," + UPDATED_THUMBNAIL_URL);
+
+        // Get all the productCategoryList where thumbnailUrl equals to UPDATED_THUMBNAIL_URL
+        defaultProductCategoryShouldNotBeFound("thumbnailUrl.in=" + UPDATED_THUMBNAIL_URL);
+    }
+
+    @Test
+    @Transactional
+    public void getAllProductCategoriesByThumbnailUrlIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        productCategoryRepository.saveAndFlush(productCategory);
+
+        // Get all the productCategoryList where thumbnailUrl is not null
+        defaultProductCategoryShouldBeFound("thumbnailUrl.specified=true");
+
+        // Get all the productCategoryList where thumbnailUrl is null
+        defaultProductCategoryShouldNotBeFound("thumbnailUrl.specified=false");
+    }
+                @Test
+    @Transactional
+    public void getAllProductCategoriesByThumbnailUrlContainsSomething() throws Exception {
+        // Initialize the database
+        productCategoryRepository.saveAndFlush(productCategory);
+
+        // Get all the productCategoryList where thumbnailUrl contains DEFAULT_THUMBNAIL_URL
+        defaultProductCategoryShouldBeFound("thumbnailUrl.contains=" + DEFAULT_THUMBNAIL_URL);
+
+        // Get all the productCategoryList where thumbnailUrl contains UPDATED_THUMBNAIL_URL
+        defaultProductCategoryShouldNotBeFound("thumbnailUrl.contains=" + UPDATED_THUMBNAIL_URL);
+    }
+
+    @Test
+    @Transactional
+    public void getAllProductCategoriesByThumbnailUrlNotContainsSomething() throws Exception {
+        // Initialize the database
+        productCategoryRepository.saveAndFlush(productCategory);
+
+        // Get all the productCategoryList where thumbnailUrl does not contain DEFAULT_THUMBNAIL_URL
+        defaultProductCategoryShouldNotBeFound("thumbnailUrl.doesNotContain=" + DEFAULT_THUMBNAIL_URL);
+
+        // Get all the productCategoryList where thumbnailUrl does not contain UPDATED_THUMBNAIL_URL
+        defaultProductCategoryShouldBeFound("thumbnailUrl.doesNotContain=" + UPDATED_THUMBNAIL_URL);
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllProductCategoriesByPhotoListIsEqualToSomething() throws Exception {
+        // Initialize the database
+        productCategoryRepository.saveAndFlush(productCategory);
+        Photos photoList = PhotosResourceIT.createEntity(em);
+        em.persist(photoList);
+        em.flush();
+        productCategory.addPhotoList(photoList);
+        productCategoryRepository.saveAndFlush(productCategory);
+        Long photoListId = photoList.getId();
+
+        // Get all the productCategoryList where photoList equals to photoListId
+        defaultProductCategoryShouldBeFound("photoListId.equals=" + photoListId);
+
+        // Get all the productCategoryList where photoList equals to photoListId + 1
+        defaultProductCategoryShouldNotBeFound("photoListId.equals=" + (photoListId + 1));
+    }
+
+
+    @Test
+    @Transactional
     public void getAllProductCategoriesByParentIsEqualToSomething() throws Exception {
         // Initialize the database
         productCategoryRepository.saveAndFlush(productCategory);
@@ -409,8 +500,7 @@ public class ProductCategoryResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(productCategory.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].shortLabel").value(hasItem(DEFAULT_SHORT_LABEL)))
-            .andExpect(jsonPath("$.[*].photoContentType").value(hasItem(DEFAULT_PHOTO_CONTENT_TYPE)))
-            .andExpect(jsonPath("$.[*].photo").value(hasItem(Base64Utils.encodeToString(DEFAULT_PHOTO))));
+            .andExpect(jsonPath("$.[*].thumbnailUrl").value(hasItem(DEFAULT_THUMBNAIL_URL)));
 
         // Check, that the count call also returns 1
         restProductCategoryMockMvc.perform(get("/api/product-categories/count?sort=id,desc&" + filter))
@@ -460,8 +550,7 @@ public class ProductCategoryResourceIT {
         updatedProductCategory
             .name(UPDATED_NAME)
             .shortLabel(UPDATED_SHORT_LABEL)
-            .photo(UPDATED_PHOTO)
-            .photoContentType(UPDATED_PHOTO_CONTENT_TYPE);
+            .thumbnailUrl(UPDATED_THUMBNAIL_URL);
         ProductCategoryDTO productCategoryDTO = productCategoryMapper.toDto(updatedProductCategory);
 
         restProductCategoryMockMvc.perform(put("/api/product-categories")
@@ -475,8 +564,7 @@ public class ProductCategoryResourceIT {
         ProductCategory testProductCategory = productCategoryList.get(productCategoryList.size() - 1);
         assertThat(testProductCategory.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testProductCategory.getShortLabel()).isEqualTo(UPDATED_SHORT_LABEL);
-        assertThat(testProductCategory.getPhoto()).isEqualTo(UPDATED_PHOTO);
-        assertThat(testProductCategory.getPhotoContentType()).isEqualTo(UPDATED_PHOTO_CONTENT_TYPE);
+        assertThat(testProductCategory.getThumbnailUrl()).isEqualTo(UPDATED_THUMBNAIL_URL);
     }
 
     @Test

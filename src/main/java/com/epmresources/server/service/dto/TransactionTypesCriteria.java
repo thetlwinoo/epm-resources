@@ -27,7 +27,7 @@ public class TransactionTypesCriteria implements Serializable, Criteria {
 
     private LongFilter id;
 
-    private StringFilter transactionTypeName;
+    private StringFilter name;
 
     private InstantFilter validFrom;
 
@@ -38,7 +38,7 @@ public class TransactionTypesCriteria implements Serializable, Criteria {
 
     public TransactionTypesCriteria(TransactionTypesCriteria other){
         this.id = other.id == null ? null : other.id.copy();
-        this.transactionTypeName = other.transactionTypeName == null ? null : other.transactionTypeName.copy();
+        this.name = other.name == null ? null : other.name.copy();
         this.validFrom = other.validFrom == null ? null : other.validFrom.copy();
         this.validTo = other.validTo == null ? null : other.validTo.copy();
     }
@@ -56,12 +56,12 @@ public class TransactionTypesCriteria implements Serializable, Criteria {
         this.id = id;
     }
 
-    public StringFilter getTransactionTypeName() {
-        return transactionTypeName;
+    public StringFilter getName() {
+        return name;
     }
 
-    public void setTransactionTypeName(StringFilter transactionTypeName) {
-        this.transactionTypeName = transactionTypeName;
+    public void setName(StringFilter name) {
+        this.name = name;
     }
 
     public InstantFilter getValidFrom() {
@@ -92,7 +92,7 @@ public class TransactionTypesCriteria implements Serializable, Criteria {
         final TransactionTypesCriteria that = (TransactionTypesCriteria) o;
         return
             Objects.equals(id, that.id) &&
-            Objects.equals(transactionTypeName, that.transactionTypeName) &&
+            Objects.equals(name, that.name) &&
             Objects.equals(validFrom, that.validFrom) &&
             Objects.equals(validTo, that.validTo);
     }
@@ -101,7 +101,7 @@ public class TransactionTypesCriteria implements Serializable, Criteria {
     public int hashCode() {
         return Objects.hash(
         id,
-        transactionTypeName,
+        name,
         validFrom,
         validTo
         );
@@ -111,7 +111,7 @@ public class TransactionTypesCriteria implements Serializable, Criteria {
     public String toString() {
         return "TransactionTypesCriteria{" +
                 (id != null ? "id=" + id + ", " : "") +
-                (transactionTypeName != null ? "transactionTypeName=" + transactionTypeName + ", " : "") +
+                (name != null ? "name=" + name + ", " : "") +
                 (validFrom != null ? "validFrom=" + validFrom + ", " : "") +
                 (validTo != null ? "validTo=" + validTo + ", " : "") +
             "}";

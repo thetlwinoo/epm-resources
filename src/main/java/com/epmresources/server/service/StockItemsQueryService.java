@@ -91,8 +91,8 @@ public class StockItemsQueryService extends QueryService<StockItems> {
             if (criteria.getId() != null) {
                 specification = specification.and(buildSpecification(criteria.getId(), StockItems_.id));
             }
-            if (criteria.getStockItemName() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getStockItemName(), StockItems_.stockItemName));
+            if (criteria.getName() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getName(), StockItems_.name));
             }
             if (criteria.getVendorCode() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getVendorCode(), StockItems_.vendorCode));

@@ -3,6 +3,7 @@ package com.epmresources.server.web.rest;
 import com.epmresources.server.EpmresourcesApp;
 import com.epmresources.server.domain.Photos;
 import com.epmresources.server.domain.StockItems;
+import com.epmresources.server.domain.ProductCategory;
 import com.epmresources.server.repository.PhotosRepository;
 import com.epmresources.server.service.PhotosService;
 import com.epmresources.server.service.dto.PhotosDTO;
@@ -111,9 +112,6 @@ public class PhotosResourceIT {
     private static final Boolean DEFAULT_DEFAULT_IND = false;
     private static final Boolean UPDATED_DEFAULT_IND = true;
 
-    private static final String DEFAULT_DELETE_TOKEN = "AAAAAAAAAA";
-    private static final String UPDATED_DELETE_TOKEN = "BBBBBBBBBB";
-
     @Autowired
     private PhotosRepository photosRepository;
 
@@ -190,8 +188,7 @@ public class PhotosResourceIT {
             .watermarkPhotoBlob(DEFAULT_WATERMARK_PHOTO_BLOB)
             .watermarkPhotoBlobContentType(DEFAULT_WATERMARK_PHOTO_BLOB_CONTENT_TYPE)
             .priority(DEFAULT_PRIORITY)
-            .defaultInd(DEFAULT_DEFAULT_IND)
-            .deleteToken(DEFAULT_DELETE_TOKEN);
+            .defaultInd(DEFAULT_DEFAULT_IND);
         return photos;
     }
     /**
@@ -227,8 +224,7 @@ public class PhotosResourceIT {
             .watermarkPhotoBlob(UPDATED_WATERMARK_PHOTO_BLOB)
             .watermarkPhotoBlobContentType(UPDATED_WATERMARK_PHOTO_BLOB_CONTENT_TYPE)
             .priority(UPDATED_PRIORITY)
-            .defaultInd(UPDATED_DEFAULT_IND)
-            .deleteToken(UPDATED_DELETE_TOKEN);
+            .defaultInd(UPDATED_DEFAULT_IND);
         return photos;
     }
 
@@ -279,7 +275,6 @@ public class PhotosResourceIT {
         assertThat(testPhotos.getWatermarkPhotoBlobContentType()).isEqualTo(DEFAULT_WATERMARK_PHOTO_BLOB_CONTENT_TYPE);
         assertThat(testPhotos.getPriority()).isEqualTo(DEFAULT_PRIORITY);
         assertThat(testPhotos.isDefaultInd()).isEqualTo(DEFAULT_DEFAULT_IND);
-        assertThat(testPhotos.getDeleteToken()).isEqualTo(DEFAULT_DELETE_TOKEN);
     }
 
     @Test
@@ -339,8 +334,7 @@ public class PhotosResourceIT {
             .andExpect(jsonPath("$.[*].watermarkPhotoBlobContentType").value(hasItem(DEFAULT_WATERMARK_PHOTO_BLOB_CONTENT_TYPE)))
             .andExpect(jsonPath("$.[*].watermarkPhotoBlob").value(hasItem(Base64Utils.encodeToString(DEFAULT_WATERMARK_PHOTO_BLOB))))
             .andExpect(jsonPath("$.[*].priority").value(hasItem(DEFAULT_PRIORITY)))
-            .andExpect(jsonPath("$.[*].defaultInd").value(hasItem(DEFAULT_DEFAULT_IND.booleanValue())))
-            .andExpect(jsonPath("$.[*].deleteToken").value(hasItem(DEFAULT_DELETE_TOKEN)));
+            .andExpect(jsonPath("$.[*].defaultInd").value(hasItem(DEFAULT_DEFAULT_IND.booleanValue())));
     }
     
     @Test
@@ -379,8 +373,7 @@ public class PhotosResourceIT {
             .andExpect(jsonPath("$.watermarkPhotoBlobContentType").value(DEFAULT_WATERMARK_PHOTO_BLOB_CONTENT_TYPE))
             .andExpect(jsonPath("$.watermarkPhotoBlob").value(Base64Utils.encodeToString(DEFAULT_WATERMARK_PHOTO_BLOB)))
             .andExpect(jsonPath("$.priority").value(DEFAULT_PRIORITY))
-            .andExpect(jsonPath("$.defaultInd").value(DEFAULT_DEFAULT_IND.booleanValue()))
-            .andExpect(jsonPath("$.deleteToken").value(DEFAULT_DELETE_TOKEN));
+            .andExpect(jsonPath("$.defaultInd").value(DEFAULT_DEFAULT_IND.booleanValue()));
     }
 
     @Test
@@ -1166,84 +1159,6 @@ public class PhotosResourceIT {
 
     @Test
     @Transactional
-    public void getAllPhotosByDeleteTokenIsEqualToSomething() throws Exception {
-        // Initialize the database
-        photosRepository.saveAndFlush(photos);
-
-        // Get all the photosList where deleteToken equals to DEFAULT_DELETE_TOKEN
-        defaultPhotosShouldBeFound("deleteToken.equals=" + DEFAULT_DELETE_TOKEN);
-
-        // Get all the photosList where deleteToken equals to UPDATED_DELETE_TOKEN
-        defaultPhotosShouldNotBeFound("deleteToken.equals=" + UPDATED_DELETE_TOKEN);
-    }
-
-    @Test
-    @Transactional
-    public void getAllPhotosByDeleteTokenIsNotEqualToSomething() throws Exception {
-        // Initialize the database
-        photosRepository.saveAndFlush(photos);
-
-        // Get all the photosList where deleteToken not equals to DEFAULT_DELETE_TOKEN
-        defaultPhotosShouldNotBeFound("deleteToken.notEquals=" + DEFAULT_DELETE_TOKEN);
-
-        // Get all the photosList where deleteToken not equals to UPDATED_DELETE_TOKEN
-        defaultPhotosShouldBeFound("deleteToken.notEquals=" + UPDATED_DELETE_TOKEN);
-    }
-
-    @Test
-    @Transactional
-    public void getAllPhotosByDeleteTokenIsInShouldWork() throws Exception {
-        // Initialize the database
-        photosRepository.saveAndFlush(photos);
-
-        // Get all the photosList where deleteToken in DEFAULT_DELETE_TOKEN or UPDATED_DELETE_TOKEN
-        defaultPhotosShouldBeFound("deleteToken.in=" + DEFAULT_DELETE_TOKEN + "," + UPDATED_DELETE_TOKEN);
-
-        // Get all the photosList where deleteToken equals to UPDATED_DELETE_TOKEN
-        defaultPhotosShouldNotBeFound("deleteToken.in=" + UPDATED_DELETE_TOKEN);
-    }
-
-    @Test
-    @Transactional
-    public void getAllPhotosByDeleteTokenIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        photosRepository.saveAndFlush(photos);
-
-        // Get all the photosList where deleteToken is not null
-        defaultPhotosShouldBeFound("deleteToken.specified=true");
-
-        // Get all the photosList where deleteToken is null
-        defaultPhotosShouldNotBeFound("deleteToken.specified=false");
-    }
-                @Test
-    @Transactional
-    public void getAllPhotosByDeleteTokenContainsSomething() throws Exception {
-        // Initialize the database
-        photosRepository.saveAndFlush(photos);
-
-        // Get all the photosList where deleteToken contains DEFAULT_DELETE_TOKEN
-        defaultPhotosShouldBeFound("deleteToken.contains=" + DEFAULT_DELETE_TOKEN);
-
-        // Get all the photosList where deleteToken contains UPDATED_DELETE_TOKEN
-        defaultPhotosShouldNotBeFound("deleteToken.contains=" + UPDATED_DELETE_TOKEN);
-    }
-
-    @Test
-    @Transactional
-    public void getAllPhotosByDeleteTokenNotContainsSomething() throws Exception {
-        // Initialize the database
-        photosRepository.saveAndFlush(photos);
-
-        // Get all the photosList where deleteToken does not contain DEFAULT_DELETE_TOKEN
-        defaultPhotosShouldNotBeFound("deleteToken.doesNotContain=" + DEFAULT_DELETE_TOKEN);
-
-        // Get all the photosList where deleteToken does not contain UPDATED_DELETE_TOKEN
-        defaultPhotosShouldBeFound("deleteToken.doesNotContain=" + UPDATED_DELETE_TOKEN);
-    }
-
-
-    @Test
-    @Transactional
     public void getAllPhotosByStockItemIsEqualToSomething() throws Exception {
         // Initialize the database
         photosRepository.saveAndFlush(photos);
@@ -1259,6 +1174,26 @@ public class PhotosResourceIT {
 
         // Get all the photosList where stockItem equals to stockItemId + 1
         defaultPhotosShouldNotBeFound("stockItemId.equals=" + (stockItemId + 1));
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllPhotosByProductCategoryIsEqualToSomething() throws Exception {
+        // Initialize the database
+        photosRepository.saveAndFlush(photos);
+        ProductCategory productCategory = ProductCategoryResourceIT.createEntity(em);
+        em.persist(productCategory);
+        em.flush();
+        photos.setProductCategory(productCategory);
+        photosRepository.saveAndFlush(photos);
+        Long productCategoryId = productCategory.getId();
+
+        // Get all the photosList where productCategory equals to productCategoryId
+        defaultPhotosShouldBeFound("productCategoryId.equals=" + productCategoryId);
+
+        // Get all the photosList where productCategory equals to productCategoryId + 1
+        defaultPhotosShouldNotBeFound("productCategoryId.equals=" + (productCategoryId + 1));
     }
 
     /**
@@ -1294,8 +1229,7 @@ public class PhotosResourceIT {
             .andExpect(jsonPath("$.[*].watermarkPhotoBlobContentType").value(hasItem(DEFAULT_WATERMARK_PHOTO_BLOB_CONTENT_TYPE)))
             .andExpect(jsonPath("$.[*].watermarkPhotoBlob").value(hasItem(Base64Utils.encodeToString(DEFAULT_WATERMARK_PHOTO_BLOB))))
             .andExpect(jsonPath("$.[*].priority").value(hasItem(DEFAULT_PRIORITY)))
-            .andExpect(jsonPath("$.[*].defaultInd").value(hasItem(DEFAULT_DEFAULT_IND.booleanValue())))
-            .andExpect(jsonPath("$.[*].deleteToken").value(hasItem(DEFAULT_DELETE_TOKEN)));
+            .andExpect(jsonPath("$.[*].defaultInd").value(hasItem(DEFAULT_DEFAULT_IND.booleanValue())));
 
         // Check, that the count call also returns 1
         restPhotosMockMvc.perform(get("/api/photos/count?sort=id,desc&" + filter))
@@ -1368,8 +1302,7 @@ public class PhotosResourceIT {
             .watermarkPhotoBlob(UPDATED_WATERMARK_PHOTO_BLOB)
             .watermarkPhotoBlobContentType(UPDATED_WATERMARK_PHOTO_BLOB_CONTENT_TYPE)
             .priority(UPDATED_PRIORITY)
-            .defaultInd(UPDATED_DEFAULT_IND)
-            .deleteToken(UPDATED_DELETE_TOKEN);
+            .defaultInd(UPDATED_DEFAULT_IND);
         PhotosDTO photosDTO = photosMapper.toDto(updatedPhotos);
 
         restPhotosMockMvc.perform(put("/api/photos")
@@ -1407,7 +1340,6 @@ public class PhotosResourceIT {
         assertThat(testPhotos.getWatermarkPhotoBlobContentType()).isEqualTo(UPDATED_WATERMARK_PHOTO_BLOB_CONTENT_TYPE);
         assertThat(testPhotos.getPriority()).isEqualTo(UPDATED_PRIORITY);
         assertThat(testPhotos.isDefaultInd()).isEqualTo(UPDATED_DEFAULT_IND);
-        assertThat(testPhotos.getDeleteToken()).isEqualTo(UPDATED_DELETE_TOKEN);
     }
 
     @Test

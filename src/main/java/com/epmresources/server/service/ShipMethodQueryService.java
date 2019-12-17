@@ -91,8 +91,8 @@ public class ShipMethodQueryService extends QueryService<ShipMethod> {
             if (criteria.getId() != null) {
                 specification = specification.and(buildSpecification(criteria.getId(), ShipMethod_.id));
             }
-            if (criteria.getShipMethodName() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getShipMethodName(), ShipMethod_.shipMethodName));
+            if (criteria.getName() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getName(), ShipMethod_.name));
             }
         }
         return specification;

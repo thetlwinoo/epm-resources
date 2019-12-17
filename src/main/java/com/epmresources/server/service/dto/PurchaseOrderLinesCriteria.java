@@ -28,7 +28,7 @@ public class PurchaseOrderLinesCriteria implements Serializable, Criteria {
 
     private LongFilter id;
 
-    private IntegerFilter ordersOuters;
+    private IntegerFilter orderedOuters;
 
     private StringFilter description;
 
@@ -55,7 +55,7 @@ public class PurchaseOrderLinesCriteria implements Serializable, Criteria {
 
     public PurchaseOrderLinesCriteria(PurchaseOrderLinesCriteria other){
         this.id = other.id == null ? null : other.id.copy();
-        this.ordersOuters = other.ordersOuters == null ? null : other.ordersOuters.copy();
+        this.orderedOuters = other.orderedOuters == null ? null : other.orderedOuters.copy();
         this.description = other.description == null ? null : other.description.copy();
         this.receivedOuters = other.receivedOuters == null ? null : other.receivedOuters.copy();
         this.expectedUnitPricePerOuter = other.expectedUnitPricePerOuter == null ? null : other.expectedUnitPricePerOuter.copy();
@@ -81,12 +81,12 @@ public class PurchaseOrderLinesCriteria implements Serializable, Criteria {
         this.id = id;
     }
 
-    public IntegerFilter getOrdersOuters() {
-        return ordersOuters;
+    public IntegerFilter getOrderedOuters() {
+        return orderedOuters;
     }
 
-    public void setOrdersOuters(IntegerFilter ordersOuters) {
-        this.ordersOuters = ordersOuters;
+    public void setOrderedOuters(IntegerFilter orderedOuters) {
+        this.orderedOuters = orderedOuters;
     }
 
     public StringFilter getDescription() {
@@ -181,7 +181,7 @@ public class PurchaseOrderLinesCriteria implements Serializable, Criteria {
         final PurchaseOrderLinesCriteria that = (PurchaseOrderLinesCriteria) o;
         return
             Objects.equals(id, that.id) &&
-            Objects.equals(ordersOuters, that.ordersOuters) &&
+            Objects.equals(orderedOuters, that.orderedOuters) &&
             Objects.equals(description, that.description) &&
             Objects.equals(receivedOuters, that.receivedOuters) &&
             Objects.equals(expectedUnitPricePerOuter, that.expectedUnitPricePerOuter) &&
@@ -198,7 +198,7 @@ public class PurchaseOrderLinesCriteria implements Serializable, Criteria {
     public int hashCode() {
         return Objects.hash(
         id,
-        ordersOuters,
+        orderedOuters,
         description,
         receivedOuters,
         expectedUnitPricePerOuter,
@@ -216,7 +216,7 @@ public class PurchaseOrderLinesCriteria implements Serializable, Criteria {
     public String toString() {
         return "PurchaseOrderLinesCriteria{" +
                 (id != null ? "id=" + id + ", " : "") +
-                (ordersOuters != null ? "ordersOuters=" + ordersOuters + ", " : "") +
+                (orderedOuters != null ? "orderedOuters=" + orderedOuters + ", " : "") +
                 (description != null ? "description=" + description + ", " : "") +
                 (receivedOuters != null ? "receivedOuters=" + receivedOuters + ", " : "") +
                 (expectedUnitPricePerOuter != null ? "expectedUnitPricePerOuter=" + expectedUnitPricePerOuter + ", " : "") +

@@ -48,13 +48,13 @@
                 <dt><span jhiTranslate="epmresourcesApp.supplierTransactions.supplier">Supplier</span></dt>
                 <dd>
                     <div *ngIf="supplierTransactions.supplierId">
-                        <a [routerLink]="['/suppliers', supplierTransactions.supplierId, 'view']">{{supplierTransactions.supplierSupplierName}}</a>
+                        <a [routerLink]="['/suppliers', supplierTransactions.supplierId, 'view']">{{supplierTransactions.supplierName}}</a>
                     </div>
                 </dd>
                 <dt><span jhiTranslate="epmresourcesApp.supplierTransactions.transactionType">Transaction Type</span></dt>
                 <dd>
                     <div *ngIf="supplierTransactions.transactionTypeId">
-                        <a [routerLink]="['/transaction-types', supplierTransactions.transactionTypeId, 'view']">{{supplierTransactions.transactionTypeTransactionTypeName}}</a>
+                        <a [routerLink]="['/transaction-types', supplierTransactions.transactionTypeId, 'view']">{{supplierTransactions.transactionTypeName}}</a>
                     </div>
                 </dd>
                 <dt><span jhiTranslate="epmresourcesApp.supplierTransactions.purchaseOrder">Purchase Order</span></dt>

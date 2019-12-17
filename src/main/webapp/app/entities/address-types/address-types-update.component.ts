@@ -17,7 +17,7 @@ export class AddressTypesUpdateComponent implements OnInit {
 
   editForm = this.fb.group({
     id: [],
-    addressTypeName: [null, [Validators.required]],
+    name: [null, [Validators.required]],
     refer: []
   });
 
@@ -33,7 +33,7 @@ export class AddressTypesUpdateComponent implements OnInit {
   updateForm(addressTypes: IAddressTypes) {
     this.editForm.patchValue({
       id: addressTypes.id,
-      addressTypeName: addressTypes.addressTypeName,
+      name: addressTypes.name,
       refer: addressTypes.refer
     });
   }
@@ -56,7 +56,7 @@ export class AddressTypesUpdateComponent implements OnInit {
     return {
       ...new AddressTypes(),
       id: this.editForm.get(['id']).value,
-      addressTypeName: this.editForm.get(['addressTypeName']).value,
+      name: this.editForm.get(['name']).value,
       refer: this.editForm.get(['refer']).value
     };
   }

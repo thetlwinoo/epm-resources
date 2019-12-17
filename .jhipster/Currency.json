@@ -2,14 +2,14 @@
     "name": "Currency",
     "fields": [
         {
-            "fieldName": "currencyCode",
+            "fieldName": "code",
             "fieldType": "String",
             "fieldValidateRules": [
                 "required"
             ]
         },
         {
-            "fieldName": "currencyName",
+            "fieldName": "name",
             "fieldType": "String"
         }
     ],

@@ -13,14 +13,9 @@
                 <dd>
                     <span>{{productCategory.shortLabel}}</span>
                 </dd>
-                <dt><span jhiTranslate="epmresourcesApp.productCategory.photo">Photo</span></dt>
+                <dt><span jhiTranslate="epmresourcesApp.productCategory.thumbnailUrl">Thumbnail Url</span></dt>
                 <dd>
-                    <div *ngIf="productCategory.photo">
-                        <a (click)="openFile(productCategory.photoContentType, productCategory.photo)">
-                            <img [src]="'data:' + productCategory.photoContentType + ';base64,' + productCategory.photo" style="max-width: 100%;" alt="productCategory image"/>
-                        </a>
-                        {{productCategory.photoContentType}}, {{byteSize(productCategory.photo)}}
-                    </div>
+                    <span>{{productCategory.thumbnailUrl}}</span>
                 </dd>
                 <dt><span jhiTranslate="epmresourcesApp.productCategory.parent">Parent</span></dt>
                 <dd>

@@ -91,8 +91,8 @@ public class ProductSetQueryService extends QueryService<ProductSet> {
             if (criteria.getId() != null) {
                 specification = specification.and(buildSpecification(criteria.getId(), ProductSet_.id));
             }
-            if (criteria.getProductSetName() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getProductSetName(), ProductSet_.productSetName));
+            if (criteria.getName() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getName(), ProductSet_.name));
             }
             if (criteria.getNoOfPerson() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getNoOfPerson(), ProductSet_.noOfPerson));

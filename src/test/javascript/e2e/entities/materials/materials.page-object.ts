@@ -26,18 +26,18 @@ export class MaterialsUpdatePage {
   pageTitle = element(by.id('jhi-materials-heading'));
   saveButton = element(by.id('save-entity'));
   cancelButton = element(by.id('cancel-save'));
-  materialNameInput = element(by.id('field_materialName'));
+  nameInput = element(by.id('field_name'));
 
   async getPageTitle() {
     return this.pageTitle.getAttribute('jhiTranslate');
   }
 
-  async setMaterialNameInput(materialName) {
-    await this.materialNameInput.sendKeys(materialName);
+  async setNameInput(name) {
+    await this.nameInput.sendKeys(name);
   }
 
-  async getMaterialNameInput() {
-    return await this.materialNameInput.getAttribute('value');
+  async getNameInput() {
+    return await this.nameInput.getAttribute('value');
   }
 
   async save(timeout?: number) {

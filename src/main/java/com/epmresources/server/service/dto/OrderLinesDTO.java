@@ -40,9 +40,11 @@ public class OrderLinesDTO implements Serializable {
 
     private Long stockItemId;
 
-    private String stockItemStockItemName;
+    private String stockItemName;
 
     private Long packageTypeId;
+
+    private String packageTypeName;
 
     private Long orderId;
 
@@ -150,12 +152,12 @@ public class OrderLinesDTO implements Serializable {
         this.stockItemId = stockItemsId;
     }
 
-    public String getStockItemStockItemName() {
-        return stockItemStockItemName;
+    public String getStockItemName() {
+        return stockItemName;
     }
 
-    public void setStockItemStockItemName(String stockItemsStockItemName) {
-        this.stockItemStockItemName = stockItemsStockItemName;
+    public void setStockItemName(String stockItemsName) {
+        this.stockItemName = stockItemsName;
     }
 
     public Long getPackageTypeId() {
@@ -164,6 +166,14 @@ public class OrderLinesDTO implements Serializable {
 
     public void setPackageTypeId(Long packageTypesId) {
         this.packageTypeId = packageTypesId;
+    }
+
+    public String getPackageTypeName() {
+        return packageTypeName;
+    }
+
+    public void setPackageTypeName(String packageTypesName) {
+        this.packageTypeName = packageTypesName;
     }
 
     public Long getOrderId() {
@@ -211,8 +221,9 @@ public class OrderLinesDTO implements Serializable {
             ", lastEditedBy='" + getLastEditedBy() + "'" +
             ", lastEditedWhen='" + getLastEditedWhen() + "'" +
             ", stockItem=" + getStockItemId() +
-            ", stockItem='" + getStockItemStockItemName() + "'" +
+            ", stockItem='" + getStockItemName() + "'" +
             ", packageType=" + getPackageTypeId() +
+            ", packageType='" + getPackageTypeName() + "'" +
             ", order=" + getOrderId() +
             "}";
     }

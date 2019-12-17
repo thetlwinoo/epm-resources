@@ -12,7 +12,7 @@ public class TransactionTypesDTO implements Serializable {
     private Long id;
 
     @NotNull
-    private String transactionTypeName;
+    private String name;
 
     @NotNull
     private Instant validFrom;
@@ -29,12 +29,12 @@ public class TransactionTypesDTO implements Serializable {
         this.id = id;
     }
 
-    public String getTransactionTypeName() {
-        return transactionTypeName;
+    public String getName() {
+        return name;
     }
 
-    public void setTransactionTypeName(String transactionTypeName) {
-        this.transactionTypeName = transactionTypeName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Instant getValidFrom() {
@@ -78,7 +78,7 @@ public class TransactionTypesDTO implements Serializable {
     public String toString() {
         return "TransactionTypesDTO{" +
             "id=" + getId() +
-            ", transactionTypeName='" + getTransactionTypeName() + "'" +
+            ", name='" + getName() + "'" +
             ", validFrom='" + getValidFrom() + "'" +
             ", validTo='" + getValidTo() + "'" +
             "}";

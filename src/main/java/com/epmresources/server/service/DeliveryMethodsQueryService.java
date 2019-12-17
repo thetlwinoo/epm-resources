@@ -91,8 +91,8 @@ public class DeliveryMethodsQueryService extends QueryService<DeliveryMethods> {
             if (criteria.getId() != null) {
                 specification = specification.and(buildSpecification(criteria.getId(), DeliveryMethods_.id));
             }
-            if (criteria.getDeliveryMethodName() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getDeliveryMethodName(), DeliveryMethods_.deliveryMethodName));
+            if (criteria.getName() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getName(), DeliveryMethods_.name));
             }
             if (criteria.getValidFrom() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getValidFrom(), DeliveryMethods_.validFrom));

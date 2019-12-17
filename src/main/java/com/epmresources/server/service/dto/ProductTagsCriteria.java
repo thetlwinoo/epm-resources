@@ -26,7 +26,7 @@ public class ProductTagsCriteria implements Serializable, Criteria {
 
     private LongFilter id;
 
-    private StringFilter tagName;
+    private StringFilter name;
 
     private LongFilter productId;
 
@@ -35,7 +35,7 @@ public class ProductTagsCriteria implements Serializable, Criteria {
 
     public ProductTagsCriteria(ProductTagsCriteria other){
         this.id = other.id == null ? null : other.id.copy();
-        this.tagName = other.tagName == null ? null : other.tagName.copy();
+        this.name = other.name == null ? null : other.name.copy();
         this.productId = other.productId == null ? null : other.productId.copy();
     }
 
@@ -52,12 +52,12 @@ public class ProductTagsCriteria implements Serializable, Criteria {
         this.id = id;
     }
 
-    public StringFilter getTagName() {
-        return tagName;
+    public StringFilter getName() {
+        return name;
     }
 
-    public void setTagName(StringFilter tagName) {
-        this.tagName = tagName;
+    public void setName(StringFilter name) {
+        this.name = name;
     }
 
     public LongFilter getProductId() {
@@ -80,7 +80,7 @@ public class ProductTagsCriteria implements Serializable, Criteria {
         final ProductTagsCriteria that = (ProductTagsCriteria) o;
         return
             Objects.equals(id, that.id) &&
-            Objects.equals(tagName, that.tagName) &&
+            Objects.equals(name, that.name) &&
             Objects.equals(productId, that.productId);
     }
 
@@ -88,7 +88,7 @@ public class ProductTagsCriteria implements Serializable, Criteria {
     public int hashCode() {
         return Objects.hash(
         id,
-        tagName,
+        name,
         productId
         );
     }
@@ -97,7 +97,7 @@ public class ProductTagsCriteria implements Serializable, Criteria {
     public String toString() {
         return "ProductTagsCriteria{" +
                 (id != null ? "id=" + id + ", " : "") +
-                (tagName != null ? "tagName=" + tagName + ", " : "") +
+                (name != null ? "name=" + name + ", " : "") +
                 (productId != null ? "productId=" + productId + ", " : "") +
             "}";
     }

@@ -16,8 +16,8 @@
       "detail": {
         "title": "Culture"
       },
-      "cultureCode": "Culture Code",
-      "cultureName": "Culture Name"
+      "code": "Code",
+      "name": "Name"
     }
   }
 }

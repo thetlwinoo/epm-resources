@@ -91,8 +91,8 @@ public class ProductOptionQueryService extends QueryService<ProductOption> {
             if (criteria.getId() != null) {
                 specification = specification.and(buildSpecification(criteria.getId(), ProductOption_.id));
             }
-            if (criteria.getProductOptionValue() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getProductOptionValue(), ProductOption_.productOptionValue));
+            if (criteria.getValue() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getValue(), ProductOption_.value));
             }
             if (criteria.getProductOptionSetId() != null) {
                 specification = specification.and(buildSpecification(criteria.getProductOptionSetId(),

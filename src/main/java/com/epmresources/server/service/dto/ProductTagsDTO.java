@@ -11,12 +11,12 @@ public class ProductTagsDTO implements Serializable {
     private Long id;
 
     @NotNull
-    private String tagName;
+    private String name;
 
 
     private Long productId;
 
-    private String productProductName;
+    private String productName;
 
     public Long getId() {
         return id;
@@ -26,12 +26,12 @@ public class ProductTagsDTO implements Serializable {
         this.id = id;
     }
 
-    public String getTagName() {
-        return tagName;
+    public String getName() {
+        return name;
     }
 
-    public void setTagName(String tagName) {
-        this.tagName = tagName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Long getProductId() {
@@ -42,12 +42,12 @@ public class ProductTagsDTO implements Serializable {
         this.productId = productsId;
     }
 
-    public String getProductProductName() {
-        return productProductName;
+    public String getProductName() {
+        return productName;
     }
 
-    public void setProductProductName(String productsProductName) {
-        this.productProductName = productsProductName;
+    public void setProductName(String productsName) {
+        this.productName = productsName;
     }
 
     @Override
@@ -75,9 +75,9 @@ public class ProductTagsDTO implements Serializable {
     public String toString() {
         return "ProductTagsDTO{" +
             "id=" + getId() +
-            ", tagName='" + getTagName() + "'" +
+            ", name='" + getName() + "'" +
             ", product=" + getProductId() +
-            ", product='" + getProductProductName() + "'" +
+            ", product='" + getProductName() + "'" +
             "}";
     }
 }

@@ -26,7 +26,7 @@ export interface IOrders {
   customerId?: number;
   shipToAddressId?: number;
   billToAddressId?: number;
-  shipMethodShipMethodName?: string;
+  shipMethodName?: string;
   shipMethodId?: number;
   currencyRateId?: number;
   paymentTransactionId?: number;
@@ -58,7 +58,7 @@ export class Orders implements IOrders {
     public customerId?: number,
     public shipToAddressId?: number,
     public billToAddressId?: number,
-    public shipMethodShipMethodName?: string,
+    public shipMethodName?: string,
     public shipMethodId?: number,
     public currencyRateId?: number,
     public paymentTransactionId?: number,

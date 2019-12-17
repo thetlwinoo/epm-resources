@@ -91,8 +91,8 @@ public class StockItemTransactionsQueryService extends QueryService<StockItemTra
             if (criteria.getId() != null) {
                 specification = specification.and(buildSpecification(criteria.getId(), StockItemTransactions_.id));
             }
-            if (criteria.getTransactionOccurredWhen() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getTransactionOccurredWhen(), StockItemTransactions_.transactionOccurredWhen));
+            if (criteria.getTransactionOccuredWhen() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getTransactionOccuredWhen(), StockItemTransactions_.transactionOccuredWhen));
             }
             if (criteria.getQuantity() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getQuantity(), StockItemTransactions_.quantity));

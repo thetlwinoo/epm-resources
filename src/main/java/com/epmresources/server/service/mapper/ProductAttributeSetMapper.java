@@ -12,7 +12,7 @@ import org.mapstruct.*;
 public interface ProductAttributeSetMapper extends EntityMapper<ProductAttributeSetDTO, ProductAttributeSet> {
 
     @Mapping(source = "productOptionSet.id", target = "productOptionSetId")
-    @Mapping(source = "productOptionSet.productOptionSetValue", target = "productOptionSetProductOptionSetValue")
+    @Mapping(source = "productOptionSet.value", target = "productOptionSetValue")
     ProductAttributeSetDTO toDto(ProductAttributeSet productAttributeSet);
 
     @Mapping(source = "productOptionSetId", target = "productOptionSet")

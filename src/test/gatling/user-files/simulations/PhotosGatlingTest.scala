@@ -90,7 +90,6 @@ class PhotosGatlingTest extends Simulation {
                 , "watermarkPhotoBlob":null
                 , "priority":"0"
                 , "defaultInd":null
-                , "deleteToken":"SAMPLE_TEXT"
                 }""")).asJson
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_photos_url"))).exitHereIfFailed

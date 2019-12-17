@@ -100,7 +100,7 @@
                 <dt><span jhiTranslate="epmresourcesApp.orders.shipMethod">Ship Method</span></dt>
                 <dd>
                     <div *ngIf="orders.shipMethodId">
-                        <a [routerLink]="['/ship-method', orders.shipMethodId, 'view']">{{orders.shipMethodShipMethodName}}</a>
+                        <a [routerLink]="['/ship-method', orders.shipMethodId, 'view']">{{orders.shipMethodName}}</a>
                     </div>
                 </dd>
                 <dt><span jhiTranslate="epmresourcesApp.orders.currencyRate">Currency Rate</span></dt>

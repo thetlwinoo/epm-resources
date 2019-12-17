@@ -41,7 +41,7 @@ describe('Reviews e2e test', () => {
 
     await reviewsComponentsPage.clickOnCreateButton();
     await promise.all([
-      reviewsUpdatePage.setReviewerNameInput('reviewerName'),
+      reviewsUpdatePage.setNameInput('name'),
       reviewsUpdatePage.setEmailAddressInput('emailAddress'),
       reviewsUpdatePage.setReviewDateInput('01/01/2001' + protractor.Key.TAB + '02:30AM'),
       reviewsUpdatePage.setOverAllSellerRatingInput('5'),
@@ -51,10 +51,7 @@ describe('Reviews e2e test', () => {
       reviewsUpdatePage.setLastEditedByInput('lastEditedBy'),
       reviewsUpdatePage.setLastEditedWhenInput('01/01/2001' + protractor.Key.TAB + '02:30AM')
     ]);
-    expect(await reviewsUpdatePage.getReviewerNameInput()).to.eq(
-      'reviewerName',
-      'Expected ReviewerName value to be equals to reviewerName'
-    );
+    expect(await reviewsUpdatePage.getNameInput()).to.eq('name', 'Expected Name value to be equals to name');
     expect(await reviewsUpdatePage.getEmailAddressInput()).to.eq(
       'emailAddress',
       'Expected EmailAddress value to be equals to emailAddress'

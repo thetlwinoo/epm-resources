@@ -12,7 +12,7 @@ import org.mapstruct.*;
 public interface StateProvincesMapper extends EntityMapper<StateProvincesDTO, StateProvinces> {
 
     @Mapping(source = "country.id", target = "countryId")
-    @Mapping(source = "country.countryName", target = "countryCountryName")
+    @Mapping(source = "country.name", target = "countryName")
     StateProvincesDTO toDto(StateProvinces stateProvinces);
 
     @Mapping(source = "countryId", target = "country")

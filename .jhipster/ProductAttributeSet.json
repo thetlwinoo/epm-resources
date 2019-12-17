@@ -2,7 +2,7 @@
     "name": "ProductAttributeSet",
     "fields": [
         {
-            "fieldName": "productAttributeSetName",
+            "fieldName": "name",
             "fieldType": "String",
             "fieldValidateRules": [
                 "required"
@@ -15,7 +15,7 @@
             "otherEntityName": "productOptionSet",
             "otherEntityRelationshipName": "productAttributeSet",
             "relationshipName": "productOptionSet",
-            "otherEntityField": "productOptionSetValue"
+            "otherEntityField": "value"
         }
     ],
     "changelogDate": "20191106102850",

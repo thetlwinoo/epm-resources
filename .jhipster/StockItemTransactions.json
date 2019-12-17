@@ -2,7 +2,7 @@
     "name": "StockItemTransactions",
     "fields": [
         {
-            "fieldName": "transactionOccurredWhen",
+            "fieldName": "transactionOccuredWhen",
             "fieldType": "Instant",
             "fieldValidateRules": [
                 "required"
@@ -10,10 +10,7 @@
         },
         {
             "fieldName": "quantity",
-            "fieldType": "BigDecimal",
-            "fieldValidateRules": [
-                "required"
-            ]
+            "fieldType": "BigDecimal"
         },
         {
             "fieldName": "lastEditedBy",
@@ -30,7 +27,7 @@
             "otherEntityName": "stockItems",
             "otherEntityRelationshipName": "stockItemTransactions",
             "relationshipName": "stockItem",
-            "otherEntityField": "stockItemName"
+            "otherEntityField": "name"
         },
         {
             "relationshipType": "many-to-one",
@@ -51,14 +48,14 @@
             "otherEntityName": "suppliers",
             "otherEntityRelationshipName": "stockItemTransactions",
             "relationshipName": "supplier",
-            "otherEntityField": "supplierName"
+            "otherEntityField": "name"
         },
         {
             "relationshipType": "many-to-one",
             "otherEntityName": "transactionTypes",
             "otherEntityRelationshipName": "stockItemTransactions",
             "relationshipName": "transactionType",
-            "otherEntityField": "id"
+            "otherEntityField": "name"
         },
         {
             "relationshipType": "many-to-one",

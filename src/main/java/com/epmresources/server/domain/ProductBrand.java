@@ -23,15 +23,11 @@ public class ProductBrand implements Serializable {
     private Long id;
 
     @NotNull
-    @Column(name = "product_brand_name", nullable = false)
-    private String productBrandName;
+    @Column(name = "name", nullable = false)
+    private String name;
 
-    @Lob
-    @Column(name = "photo")
-    private byte[] photo;
-
-    @Column(name = "photo_content_type")
-    private String photoContentType;
+    @Column(name = "thumbnail_url")
+    private String thumbnailUrl;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -42,43 +38,30 @@ public class ProductBrand implements Serializable {
         this.id = id;
     }
 
-    public String getProductBrandName() {
-        return productBrandName;
+    public String getName() {
+        return name;
     }
 
-    public ProductBrand productBrandName(String productBrandName) {
-        this.productBrandName = productBrandName;
+    public ProductBrand name(String name) {
+        this.name = name;
         return this;
     }
 
-    public void setProductBrandName(String productBrandName) {
-        this.productBrandName = productBrandName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public byte[] getPhoto() {
-        return photo;
+    public String getThumbnailUrl() {
+        return thumbnailUrl;
     }
 
-    public ProductBrand photo(byte[] photo) {
-        this.photo = photo;
+    public ProductBrand thumbnailUrl(String thumbnailUrl) {
+        this.thumbnailUrl = thumbnailUrl;
         return this;
     }
 
-    public void setPhoto(byte[] photo) {
-        this.photo = photo;
-    }
-
-    public String getPhotoContentType() {
-        return photoContentType;
-    }
-
-    public ProductBrand photoContentType(String photoContentType) {
-        this.photoContentType = photoContentType;
-        return this;
-    }
-
-    public void setPhotoContentType(String photoContentType) {
-        this.photoContentType = photoContentType;
+    public void setThumbnailUrl(String thumbnailUrl) {
+        this.thumbnailUrl = thumbnailUrl;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -102,9 +85,8 @@ public class ProductBrand implements Serializable {
     public String toString() {
         return "ProductBrand{" +
             "id=" + getId() +
-            ", productBrandName='" + getProductBrandName() + "'" +
-            ", photo='" + getPhoto() + "'" +
-            ", photoContentType='" + getPhotoContentType() + "'" +
+            ", name='" + getName() + "'" +
+            ", thumbnailUrl='" + getThumbnailUrl() + "'" +
             "}";
     }
 }

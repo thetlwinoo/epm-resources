@@ -23,8 +23,8 @@ public class AddressTypes implements Serializable {
     private Long id;
 
     @NotNull
-    @Column(name = "address_type_name", nullable = false)
-    private String addressTypeName;
+    @Column(name = "name", nullable = false)
+    private String name;
 
     @Column(name = "refer")
     private String refer;
@@ -38,17 +38,17 @@ public class AddressTypes implements Serializable {
         this.id = id;
     }
 
-    public String getAddressTypeName() {
-        return addressTypeName;
+    public String getName() {
+        return name;
     }
 
-    public AddressTypes addressTypeName(String addressTypeName) {
-        this.addressTypeName = addressTypeName;
+    public AddressTypes name(String name) {
+        this.name = name;
         return this;
     }
 
-    public void setAddressTypeName(String addressTypeName) {
-        this.addressTypeName = addressTypeName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getRefer() {
@@ -85,7 +85,7 @@ public class AddressTypes implements Serializable {
     public String toString() {
         return "AddressTypes{" +
             "id=" + getId() +
-            ", addressTypeName='" + getAddressTypeName() + "'" +
+            ", name='" + getName() + "'" +
             ", refer='" + getRefer() + "'" +
             "}";
     }

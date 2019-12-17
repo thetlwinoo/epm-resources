@@ -27,7 +27,7 @@ public class DeliveryMethodsCriteria implements Serializable, Criteria {
 
     private LongFilter id;
 
-    private StringFilter deliveryMethodName;
+    private StringFilter name;
 
     private InstantFilter validFrom;
 
@@ -38,7 +38,7 @@ public class DeliveryMethodsCriteria implements Serializable, Criteria {
 
     public DeliveryMethodsCriteria(DeliveryMethodsCriteria other){
         this.id = other.id == null ? null : other.id.copy();
-        this.deliveryMethodName = other.deliveryMethodName == null ? null : other.deliveryMethodName.copy();
+        this.name = other.name == null ? null : other.name.copy();
         this.validFrom = other.validFrom == null ? null : other.validFrom.copy();
         this.validTo = other.validTo == null ? null : other.validTo.copy();
     }
@@ -56,12 +56,12 @@ public class DeliveryMethodsCriteria implements Serializable, Criteria {
         this.id = id;
     }
 
-    public StringFilter getDeliveryMethodName() {
-        return deliveryMethodName;
+    public StringFilter getName() {
+        return name;
     }
 
-    public void setDeliveryMethodName(StringFilter deliveryMethodName) {
-        this.deliveryMethodName = deliveryMethodName;
+    public void setName(StringFilter name) {
+        this.name = name;
     }
 
     public InstantFilter getValidFrom() {
@@ -92,7 +92,7 @@ public class DeliveryMethodsCriteria implements Serializable, Criteria {
         final DeliveryMethodsCriteria that = (DeliveryMethodsCriteria) o;
         return
             Objects.equals(id, that.id) &&
-            Objects.equals(deliveryMethodName, that.deliveryMethodName) &&
+            Objects.equals(name, that.name) &&
             Objects.equals(validFrom, that.validFrom) &&
             Objects.equals(validTo, that.validTo);
     }
@@ -101,7 +101,7 @@ public class DeliveryMethodsCriteria implements Serializable, Criteria {
     public int hashCode() {
         return Objects.hash(
         id,
-        deliveryMethodName,
+        name,
         validFrom,
         validTo
         );
@@ -111,7 +111,7 @@ public class DeliveryMethodsCriteria implements Serializable, Criteria {
     public String toString() {
         return "DeliveryMethodsCriteria{" +
                 (id != null ? "id=" + id + ", " : "") +
-                (deliveryMethodName != null ? "deliveryMethodName=" + deliveryMethodName + ", " : "") +
+                (name != null ? "name=" + name + ", " : "") +
                 (validFrom != null ? "validFrom=" + validFrom + ", " : "") +
                 (validTo != null ? "validTo=" + validTo + ", " : "") +
             "}";

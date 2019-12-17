@@ -72,7 +72,7 @@ class BarcodeTypesGatlingTest extends Simulation {
             .headers(headers_http_authenticated)
             .body(StringBody("""{
                 "id":null
-                , "barcodeTypeName":"SAMPLE_TEXT"
+                , "name":"SAMPLE_TEXT"
                 }""")).asJson
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_barcodeTypes_url"))).exitHereIfFailed

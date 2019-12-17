@@ -45,8 +45,8 @@ export class StockItemTransactionsUpdateComponent implements OnInit {
 
   editForm = this.fb.group({
     id: [],
-    transactionOccurredWhen: [null, [Validators.required]],
-    quantity: [null, [Validators.required]],
+    transactionOccuredWhen: [null, [Validators.required]],
+    quantity: [],
     lastEditedBy: [],
     lastEditedWhen: [],
     stockItemId: [],
@@ -122,10 +122,8 @@ export class StockItemTransactionsUpdateComponent implements OnInit {
   updateForm(stockItemTransactions: IStockItemTransactions) {
     this.editForm.patchValue({
       id: stockItemTransactions.id,
-      transactionOccurredWhen:
-        stockItemTransactions.transactionOccurredWhen != null
-          ? stockItemTransactions.transactionOccurredWhen.format(DATE_TIME_FORMAT)
-          : null,
+      transactionOccuredWhen:
+        stockItemTransactions.transactionOccuredWhen != null ? stockItemTransactions.transactionOccuredWhen.format(DATE_TIME_FORMAT) : null,
       quantity: stockItemTransactions.quantity,
       lastEditedBy: stockItemTransactions.lastEditedBy,
       lastEditedWhen: stockItemTransactions.lastEditedWhen != null ? stockItemTransactions.lastEditedWhen.format(DATE_TIME_FORMAT) : null,
@@ -156,9 +154,9 @@ export class StockItemTransactionsUpdateComponent implements OnInit {
     return {
       ...new StockItemTransactions(),
       id: this.editForm.get(['id']).value,
-      transactionOccurredWhen:
-        this.editForm.get(['transactionOccurredWhen']).value != null
-          ? moment(this.editForm.get(['transactionOccurredWhen']).value, DATE_TIME_FORMAT)
+      transactionOccuredWhen:
+        this.editForm.get(['transactionOccuredWhen']).value != null
+          ? moment(this.editForm.get(['transactionOccuredWhen']).value, DATE_TIME_FORMAT)
           : undefined,
       quantity: this.editForm.get(['quantity']).value,
       lastEditedBy: this.editForm.get(['lastEditedBy']).value,

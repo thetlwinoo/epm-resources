@@ -5,7 +5,7 @@ export interface IShoppingCartItems {
   quantity?: number;
   lastEditedBy?: string;
   lastEditedWhen?: Moment;
-  stockItemStockItemName?: string;
+  stockItemName?: string;
   stockItemId?: number;
   cartId?: number;
 }
@@ -16,7 +16,7 @@ export class ShoppingCartItems implements IShoppingCartItems {
     public quantity?: number,
     public lastEditedBy?: string,
     public lastEditedWhen?: Moment,
-    public stockItemStockItemName?: string,
+    public stockItemName?: string,
     public stockItemId?: number,
     public cartId?: number
   ) {}

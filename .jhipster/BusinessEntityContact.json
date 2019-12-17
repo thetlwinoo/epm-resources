@@ -14,7 +14,7 @@
             "otherEntityName": "contactType",
             "otherEntityRelationshipName": "businessEntityContact",
             "relationshipName": "contactType",
-            "otherEntityField": "contactTypeName"
+            "otherEntityField": "name"
         }
     ],
     "changelogDate": "20191106102814",

@@ -26,14 +26,14 @@ public class MaterialsCriteria implements Serializable, Criteria {
 
     private LongFilter id;
 
-    private StringFilter materialName;
+    private StringFilter name;
 
     public MaterialsCriteria(){
     }
 
     public MaterialsCriteria(MaterialsCriteria other){
         this.id = other.id == null ? null : other.id.copy();
-        this.materialName = other.materialName == null ? null : other.materialName.copy();
+        this.name = other.name == null ? null : other.name.copy();
     }
 
     @Override
@@ -49,12 +49,12 @@ public class MaterialsCriteria implements Serializable, Criteria {
         this.id = id;
     }
 
-    public StringFilter getMaterialName() {
-        return materialName;
+    public StringFilter getName() {
+        return name;
     }
 
-    public void setMaterialName(StringFilter materialName) {
-        this.materialName = materialName;
+    public void setName(StringFilter name) {
+        this.name = name;
     }
 
 
@@ -69,14 +69,14 @@ public class MaterialsCriteria implements Serializable, Criteria {
         final MaterialsCriteria that = (MaterialsCriteria) o;
         return
             Objects.equals(id, that.id) &&
-            Objects.equals(materialName, that.materialName);
+            Objects.equals(name, that.name);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(
         id,
-        materialName
+        name
         );
     }
 
@@ -84,7 +84,7 @@ public class MaterialsCriteria implements Serializable, Criteria {
     public String toString() {
         return "MaterialsCriteria{" +
                 (id != null ? "id=" + id + ", " : "") +
-                (materialName != null ? "materialName=" + materialName + ", " : "") +
+                (name != null ? "name=" + name + ", " : "") +
             "}";
     }
 

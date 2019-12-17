@@ -26,7 +26,7 @@ public class ProductSetCriteria implements Serializable, Criteria {
 
     private LongFilter id;
 
-    private StringFilter productSetName;
+    private StringFilter name;
 
     private IntegerFilter noOfPerson;
 
@@ -37,7 +37,7 @@ public class ProductSetCriteria implements Serializable, Criteria {
 
     public ProductSetCriteria(ProductSetCriteria other){
         this.id = other.id == null ? null : other.id.copy();
-        this.productSetName = other.productSetName == null ? null : other.productSetName.copy();
+        this.name = other.name == null ? null : other.name.copy();
         this.noOfPerson = other.noOfPerson == null ? null : other.noOfPerson.copy();
         this.isExclusive = other.isExclusive == null ? null : other.isExclusive.copy();
     }
@@ -55,12 +55,12 @@ public class ProductSetCriteria implements Serializable, Criteria {
         this.id = id;
     }
 
-    public StringFilter getProductSetName() {
-        return productSetName;
+    public StringFilter getName() {
+        return name;
     }
 
-    public void setProductSetName(StringFilter productSetName) {
-        this.productSetName = productSetName;
+    public void setName(StringFilter name) {
+        this.name = name;
     }
 
     public IntegerFilter getNoOfPerson() {
@@ -91,7 +91,7 @@ public class ProductSetCriteria implements Serializable, Criteria {
         final ProductSetCriteria that = (ProductSetCriteria) o;
         return
             Objects.equals(id, that.id) &&
-            Objects.equals(productSetName, that.productSetName) &&
+            Objects.equals(name, that.name) &&
             Objects.equals(noOfPerson, that.noOfPerson) &&
             Objects.equals(isExclusive, that.isExclusive);
     }
@@ -100,7 +100,7 @@ public class ProductSetCriteria implements Serializable, Criteria {
     public int hashCode() {
         return Objects.hash(
         id,
-        productSetName,
+        name,
         noOfPerson,
         isExclusive
         );
@@ -110,7 +110,7 @@ public class ProductSetCriteria implements Serializable, Criteria {
     public String toString() {
         return "ProductSetCriteria{" +
                 (id != null ? "id=" + id + ", " : "") +
-                (productSetName != null ? "productSetName=" + productSetName + ", " : "") +
+                (name != null ? "name=" + name + ", " : "") +
                 (noOfPerson != null ? "noOfPerson=" + noOfPerson + ", " : "") +
                 (isExclusive != null ? "isExclusive=" + isExclusive + ", " : "") +
             "}";

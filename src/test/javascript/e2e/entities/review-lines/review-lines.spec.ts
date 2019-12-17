@@ -4,7 +4,6 @@ import { NavBarPage, SignInPage } from '../../page-objects/jhi-page-objects';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { ReviewLinesComponentsPage, ReviewLinesDeleteDialog, ReviewLinesUpdatePage } from './review-lines.page-object';
-import * as path from 'path';
 
 const expect = chai.expect;
 
@@ -14,9 +13,6 @@ describe('ReviewLines e2e test', () => {
   let reviewLinesComponentsPage: ReviewLinesComponentsPage;
   let reviewLinesUpdatePage: ReviewLinesUpdatePage;
   let reviewLinesDeleteDialog: ReviewLinesDeleteDialog;
-  const fileNameToUpload = 'logo-jhipster.png';
-  const fileToUpload = '../../../../../../src/main/webapp/content/images/' + fileNameToUpload;
-  const absolutePath = path.resolve(__dirname, fileToUpload);
 
   before(async () => {
     await browser.get('/');
@@ -51,7 +47,7 @@ describe('ReviewLines e2e test', () => {
       reviewLinesUpdatePage.setSellerReviewInput('sellerReview'),
       reviewLinesUpdatePage.setDeliveryRatingInput('5'),
       reviewLinesUpdatePage.setDeliveryReviewInput('deliveryReview'),
-      reviewLinesUpdatePage.setPhotoInput(absolutePath),
+      reviewLinesUpdatePage.setThumbnailUrlInput('thumbnailUrl'),
       reviewLinesUpdatePage.setLastEditedByInput('lastEditedBy'),
       reviewLinesUpdatePage.setLastEditedWhenInput('01/01/2001' + protractor.Key.TAB + '02:30AM'),
       reviewLinesUpdatePage.reviewSelectLastOption()
@@ -71,9 +67,9 @@ describe('ReviewLines e2e test', () => {
       'deliveryReview',
       'Expected DeliveryReview value to be equals to deliveryReview'
     );
-    expect(await reviewLinesUpdatePage.getPhotoInput()).to.endsWith(
-      fileNameToUpload,
-      'Expected Photo value to be end with ' + fileNameToUpload
+    expect(await reviewLinesUpdatePage.getThumbnailUrlInput()).to.eq(
+      'thumbnailUrl',
+      'Expected ThumbnailUrl value to be equals to thumbnailUrl'
     );
     expect(await reviewLinesUpdatePage.getLastEditedByInput()).to.eq(
       'lastEditedBy',

@@ -24,7 +24,7 @@ public class PersonPhoneDTO implements Serializable {
 
     private Long phoneNumberTypeId;
 
-    private String phoneNumberTypePhoneNumberTypeName;
+    private String phoneNumberTypeName;
 
     public Long getId() {
         return id;
@@ -82,12 +82,12 @@ public class PersonPhoneDTO implements Serializable {
         this.phoneNumberTypeId = phoneNumberTypeId;
     }
 
-    public String getPhoneNumberTypePhoneNumberTypeName() {
-        return phoneNumberTypePhoneNumberTypeName;
+    public String getPhoneNumberTypeName() {
+        return phoneNumberTypeName;
     }
 
-    public void setPhoneNumberTypePhoneNumberTypeName(String phoneNumberTypePhoneNumberTypeName) {
-        this.phoneNumberTypePhoneNumberTypeName = phoneNumberTypePhoneNumberTypeName;
+    public void setPhoneNumberTypeName(String phoneNumberTypeName) {
+        this.phoneNumberTypeName = phoneNumberTypeName;
     }
 
     @Override
@@ -121,7 +121,7 @@ public class PersonPhoneDTO implements Serializable {
             ", person=" + getPersonId() +
             ", person='" + getPersonFullName() + "'" +
             ", phoneNumberType=" + getPhoneNumberTypeId() +
-            ", phoneNumberType='" + getPhoneNumberTypePhoneNumberTypeName() + "'" +
+            ", phoneNumberType='" + getPhoneNumberTypeName() + "'" +
             "}";
     }
 }

@@ -14,9 +14,9 @@ public interface PurchaseOrdersMapper extends EntityMapper<PurchaseOrdersDTO, Pu
     @Mapping(source = "contactPerson.id", target = "contactPersonId")
     @Mapping(source = "contactPerson.fullName", target = "contactPersonFullName")
     @Mapping(source = "supplier.id", target = "supplierId")
-    @Mapping(source = "supplier.supplierName", target = "supplierSupplierName")
+    @Mapping(source = "supplier.name", target = "supplierName")
     @Mapping(source = "deliveryMethod.id", target = "deliveryMethodId")
-    @Mapping(source = "deliveryMethod.deliveryMethodName", target = "deliveryMethodDeliveryMethodName")
+    @Mapping(source = "deliveryMethod.name", target = "deliveryMethodName")
     PurchaseOrdersDTO toDto(PurchaseOrders purchaseOrders);
 
     @Mapping(target = "purchaseOrderLineLists", ignore = true)

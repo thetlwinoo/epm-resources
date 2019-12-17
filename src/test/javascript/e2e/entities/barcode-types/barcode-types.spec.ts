@@ -40,11 +40,8 @@ describe('BarcodeTypes e2e test', () => {
     const nbButtonsBeforeCreate = await barcodeTypesComponentsPage.countDeleteButtons();
 
     await barcodeTypesComponentsPage.clickOnCreateButton();
-    await promise.all([barcodeTypesUpdatePage.setBarcodeTypeNameInput('barcodeTypeName')]);
-    expect(await barcodeTypesUpdatePage.getBarcodeTypeNameInput()).to.eq(
-      'barcodeTypeName',
-      'Expected BarcodeTypeName value to be equals to barcodeTypeName'
-    );
+    await promise.all([barcodeTypesUpdatePage.setNameInput('name')]);
+    expect(await barcodeTypesUpdatePage.getNameInput()).to.eq('name', 'Expected Name value to be equals to name');
     await barcodeTypesUpdatePage.save();
     expect(await barcodeTypesUpdatePage.getSaveButton().isPresent(), 'Expected save button disappear').to.be.false;
 

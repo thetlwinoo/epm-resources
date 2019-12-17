@@ -41,8 +41,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = EpmresourcesApp.class)
 public class CitiesResourceIT {
 
-    private static final String DEFAULT_CITY_NAME = "AAAAAAAAAA";
-    private static final String UPDATED_CITY_NAME = "BBBBBBBBBB";
+    private static final String DEFAULT_NAME = "AAAAAAAAAA";
+    private static final String UPDATED_NAME = "BBBBBBBBBB";
 
     private static final String DEFAULT_LOCATION = "AAAAAAAAAA";
     private static final String UPDATED_LOCATION = "BBBBBBBBBB";
@@ -108,7 +108,7 @@ public class CitiesResourceIT {
      */
     public static Cities createEntity(EntityManager em) {
         Cities cities = new Cities()
-            .cityName(DEFAULT_CITY_NAME)
+            .name(DEFAULT_NAME)
             .location(DEFAULT_LOCATION)
             .latestRecordedPopulation(DEFAULT_LATEST_RECORDED_POPULATION)
             .validFrom(DEFAULT_VALID_FROM)
@@ -123,7 +123,7 @@ public class CitiesResourceIT {
      */
     public static Cities createUpdatedEntity(EntityManager em) {
         Cities cities = new Cities()
-            .cityName(UPDATED_CITY_NAME)
+            .name(UPDATED_NAME)
             .location(UPDATED_LOCATION)
             .latestRecordedPopulation(UPDATED_LATEST_RECORDED_POPULATION)
             .validFrom(UPDATED_VALID_FROM)
@@ -152,7 +152,7 @@ public class CitiesResourceIT {
         List<Cities> citiesList = citiesRepository.findAll();
         assertThat(citiesList).hasSize(databaseSizeBeforeCreate + 1);
         Cities testCities = citiesList.get(citiesList.size() - 1);
-        assertThat(testCities.getCityName()).isEqualTo(DEFAULT_CITY_NAME);
+        assertThat(testCities.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testCities.getLocation()).isEqualTo(DEFAULT_LOCATION);
         assertThat(testCities.getLatestRecordedPopulation()).isEqualTo(DEFAULT_LATEST_RECORDED_POPULATION);
         assertThat(testCities.getValidFrom()).isEqualTo(DEFAULT_VALID_FROM);
@@ -182,10 +182,10 @@ public class CitiesResourceIT {
 
     @Test
     @Transactional
-    public void checkCityNameIsRequired() throws Exception {
+    public void checkNameIsRequired() throws Exception {
         int databaseSizeBeforeTest = citiesRepository.findAll().size();
         // set the field null
-        cities.setCityName(null);
+        cities.setName(null);
 
         // Create the Cities, which fails.
         CitiesDTO citiesDTO = citiesMapper.toDto(cities);
@@ -248,7 +248,7 @@ public class CitiesResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(cities.getId().intValue())))
-            .andExpect(jsonPath("$.[*].cityName").value(hasItem(DEFAULT_CITY_NAME)))
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].location").value(hasItem(DEFAULT_LOCATION)))
             .andExpect(jsonPath("$.[*].latestRecordedPopulation").value(hasItem(DEFAULT_LATEST_RECORDED_POPULATION.intValue())))
             .andExpect(jsonPath("$.[*].validFrom").value(hasItem(DEFAULT_VALID_FROM.toString())))
@@ -266,7 +266,7 @@ public class CitiesResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(cities.getId().intValue()))
-            .andExpect(jsonPath("$.cityName").value(DEFAULT_CITY_NAME))
+            .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
             .andExpect(jsonPath("$.location").value(DEFAULT_LOCATION))
             .andExpect(jsonPath("$.latestRecordedPopulation").value(DEFAULT_LATEST_RECORDED_POPULATION.intValue()))
             .andExpect(jsonPath("$.validFrom").value(DEFAULT_VALID_FROM.toString()))
@@ -275,79 +275,79 @@ public class CitiesResourceIT {
 
     @Test
     @Transactional
-    public void getAllCitiesByCityNameIsEqualToSomething() throws Exception {
+    public void getAllCitiesByNameIsEqualToSomething() throws Exception {
         // Initialize the database
         citiesRepository.saveAndFlush(cities);
 
-        // Get all the citiesList where cityName equals to DEFAULT_CITY_NAME
-        defaultCitiesShouldBeFound("cityName.equals=" + DEFAULT_CITY_NAME);
+        // Get all the citiesList where name equals to DEFAULT_NAME
+        defaultCitiesShouldBeFound("name.equals=" + DEFAULT_NAME);
 
-        // Get all the citiesList where cityName equals to UPDATED_CITY_NAME
-        defaultCitiesShouldNotBeFound("cityName.equals=" + UPDATED_CITY_NAME);
+        // Get all the citiesList where name equals to UPDATED_NAME
+        defaultCitiesShouldNotBeFound("name.equals=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllCitiesByCityNameIsNotEqualToSomething() throws Exception {
+    public void getAllCitiesByNameIsNotEqualToSomething() throws Exception {
         // Initialize the database
         citiesRepository.saveAndFlush(cities);
 
-        // Get all the citiesList where cityName not equals to DEFAULT_CITY_NAME
-        defaultCitiesShouldNotBeFound("cityName.notEquals=" + DEFAULT_CITY_NAME);
+        // Get all the citiesList where name not equals to DEFAULT_NAME
+        defaultCitiesShouldNotBeFound("name.notEquals=" + DEFAULT_NAME);
 
-        // Get all the citiesList where cityName not equals to UPDATED_CITY_NAME
-        defaultCitiesShouldBeFound("cityName.notEquals=" + UPDATED_CITY_NAME);
+        // Get all the citiesList where name not equals to UPDATED_NAME
+        defaultCitiesShouldBeFound("name.notEquals=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllCitiesByCityNameIsInShouldWork() throws Exception {
+    public void getAllCitiesByNameIsInShouldWork() throws Exception {
         // Initialize the database
         citiesRepository.saveAndFlush(cities);
 
-        // Get all the citiesList where cityName in DEFAULT_CITY_NAME or UPDATED_CITY_NAME
-        defaultCitiesShouldBeFound("cityName.in=" + DEFAULT_CITY_NAME + "," + UPDATED_CITY_NAME);
+        // Get all the citiesList where name in DEFAULT_NAME or UPDATED_NAME
+        defaultCitiesShouldBeFound("name.in=" + DEFAULT_NAME + "," + UPDATED_NAME);
 
-        // Get all the citiesList where cityName equals to UPDATED_CITY_NAME
-        defaultCitiesShouldNotBeFound("cityName.in=" + UPDATED_CITY_NAME);
+        // Get all the citiesList where name equals to UPDATED_NAME
+        defaultCitiesShouldNotBeFound("name.in=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllCitiesByCityNameIsNullOrNotNull() throws Exception {
+    public void getAllCitiesByNameIsNullOrNotNull() throws Exception {
         // Initialize the database
         citiesRepository.saveAndFlush(cities);
 
-        // Get all the citiesList where cityName is not null
-        defaultCitiesShouldBeFound("cityName.specified=true");
+        // Get all the citiesList where name is not null
+        defaultCitiesShouldBeFound("name.specified=true");
 
-        // Get all the citiesList where cityName is null
-        defaultCitiesShouldNotBeFound("cityName.specified=false");
+        // Get all the citiesList where name is null
+        defaultCitiesShouldNotBeFound("name.specified=false");
     }
                 @Test
     @Transactional
-    public void getAllCitiesByCityNameContainsSomething() throws Exception {
+    public void getAllCitiesByNameContainsSomething() throws Exception {
         // Initialize the database
         citiesRepository.saveAndFlush(cities);
 
-        // Get all the citiesList where cityName contains DEFAULT_CITY_NAME
-        defaultCitiesShouldBeFound("cityName.contains=" + DEFAULT_CITY_NAME);
+        // Get all the citiesList where name contains DEFAULT_NAME
+        defaultCitiesShouldBeFound("name.contains=" + DEFAULT_NAME);
 
-        // Get all the citiesList where cityName contains UPDATED_CITY_NAME
-        defaultCitiesShouldNotBeFound("cityName.contains=" + UPDATED_CITY_NAME);
+        // Get all the citiesList where name contains UPDATED_NAME
+        defaultCitiesShouldNotBeFound("name.contains=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllCitiesByCityNameNotContainsSomething() throws Exception {
+    public void getAllCitiesByNameNotContainsSomething() throws Exception {
         // Initialize the database
         citiesRepository.saveAndFlush(cities);
 
-        // Get all the citiesList where cityName does not contain DEFAULT_CITY_NAME
-        defaultCitiesShouldNotBeFound("cityName.doesNotContain=" + DEFAULT_CITY_NAME);
+        // Get all the citiesList where name does not contain DEFAULT_NAME
+        defaultCitiesShouldNotBeFound("name.doesNotContain=" + DEFAULT_NAME);
 
-        // Get all the citiesList where cityName does not contain UPDATED_CITY_NAME
-        defaultCitiesShouldBeFound("cityName.doesNotContain=" + UPDATED_CITY_NAME);
+        // Get all the citiesList where name does not contain UPDATED_NAME
+        defaultCitiesShouldBeFound("name.doesNotContain=" + UPDATED_NAME);
     }
 
 
@@ -665,7 +665,7 @@ public class CitiesResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(cities.getId().intValue())))
-            .andExpect(jsonPath("$.[*].cityName").value(hasItem(DEFAULT_CITY_NAME)))
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].location").value(hasItem(DEFAULT_LOCATION)))
             .andExpect(jsonPath("$.[*].latestRecordedPopulation").value(hasItem(DEFAULT_LATEST_RECORDED_POPULATION.intValue())))
             .andExpect(jsonPath("$.[*].validFrom").value(hasItem(DEFAULT_VALID_FROM.toString())))
@@ -717,7 +717,7 @@ public class CitiesResourceIT {
         // Disconnect from session so that the updates on updatedCities are not directly saved in db
         em.detach(updatedCities);
         updatedCities
-            .cityName(UPDATED_CITY_NAME)
+            .name(UPDATED_NAME)
             .location(UPDATED_LOCATION)
             .latestRecordedPopulation(UPDATED_LATEST_RECORDED_POPULATION)
             .validFrom(UPDATED_VALID_FROM)
@@ -733,7 +733,7 @@ public class CitiesResourceIT {
         List<Cities> citiesList = citiesRepository.findAll();
         assertThat(citiesList).hasSize(databaseSizeBeforeUpdate);
         Cities testCities = citiesList.get(citiesList.size() - 1);
-        assertThat(testCities.getCityName()).isEqualTo(UPDATED_CITY_NAME);
+        assertThat(testCities.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testCities.getLocation()).isEqualTo(UPDATED_LOCATION);
         assertThat(testCities.getLatestRecordedPopulation()).isEqualTo(UPDATED_LATEST_RECORDED_POPULATION);
         assertThat(testCities.getValidFrom()).isEqualTo(UPDATED_VALID_FROM);

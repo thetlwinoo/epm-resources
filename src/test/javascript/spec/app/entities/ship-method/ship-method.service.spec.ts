@@ -56,7 +56,7 @@ describe('Service Tests', () => {
       it('should update a ShipMethod', () => {
         const returnedFromService = Object.assign(
           {
-            shipMethodName: 'BBBBBB'
+            name: 'BBBBBB'
           },
           elemDefault
         );
@@ -74,7 +74,7 @@ describe('Service Tests', () => {
       it('should return a list of ShipMethod', () => {
         const returnedFromService = Object.assign(
           {
-            shipMethodName: 'BBBBBB'
+            name: 'BBBBBB'
           },
           elemDefault
         );

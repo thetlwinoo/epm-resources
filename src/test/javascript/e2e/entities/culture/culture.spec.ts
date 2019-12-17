@@ -40,9 +40,9 @@ describe('Culture e2e test', () => {
     const nbButtonsBeforeCreate = await cultureComponentsPage.countDeleteButtons();
 
     await cultureComponentsPage.clickOnCreateButton();
-    await promise.all([cultureUpdatePage.setCultureCodeInput('cultureCode'), cultureUpdatePage.setCultureNameInput('cultureName')]);
-    expect(await cultureUpdatePage.getCultureCodeInput()).to.eq('cultureCode', 'Expected CultureCode value to be equals to cultureCode');
-    expect(await cultureUpdatePage.getCultureNameInput()).to.eq('cultureName', 'Expected CultureName value to be equals to cultureName');
+    await promise.all([cultureUpdatePage.setCodeInput('code'), cultureUpdatePage.setNameInput('name')]);
+    expect(await cultureUpdatePage.getCodeInput()).to.eq('code', 'Expected Code value to be equals to code');
+    expect(await cultureUpdatePage.getNameInput()).to.eq('name', 'Expected Name value to be equals to name');
     await cultureUpdatePage.save();
     expect(await cultureUpdatePage.getSaveButton().isPresent(), 'Expected save button disappear').to.be.false;
 

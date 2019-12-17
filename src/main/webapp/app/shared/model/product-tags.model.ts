@@ -1,10 +1,10 @@
 export interface IProductTags {
   id?: number;
-  tagName?: string;
-  productProductName?: string;
+  name?: string;
+  productName?: string;
   productId?: number;
 }
 
 export class ProductTags implements IProductTags {
-  constructor(public id?: number, public tagName?: string, public productProductName?: string, public productId?: number) {}
+  constructor(public id?: number, public name?: string, public productName?: string, public productId?: number) {}
 }

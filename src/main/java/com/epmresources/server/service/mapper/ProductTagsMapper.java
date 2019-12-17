@@ -12,7 +12,7 @@ import org.mapstruct.*;
 public interface ProductTagsMapper extends EntityMapper<ProductTagsDTO, ProductTags> {
 
     @Mapping(source = "product.id", target = "productId")
-    @Mapping(source = "product.productName", target = "productProductName")
+    @Mapping(source = "product.name", target = "productName")
     ProductTagsDTO toDto(ProductTags productTags);
 
     @Mapping(source = "productId", target = "product")

@@ -10,12 +10,12 @@
                         readonly />
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="epmresourcesApp.products.productName" for="field_productName">Product Name</label>
-                    <input type="text" class="form-control" name="productName" id="field_productName"
-                           formControlName="productName"/>
-                    <div *ngIf="editForm.get('productName').invalid && (editForm.get('productName').dirty || editForm.get('productName').touched)">
+                    <label class="form-control-label" jhiTranslate="epmresourcesApp.products.name" for="field_name">Name</label>
+                    <input type="text" class="form-control" name="name" id="field_name"
+                           formControlName="name"/>
+                    <div *ngIf="editForm.get('name').invalid && (editForm.get('name').dirty || editForm.get('name').touched)">
                         <small class="form-text text-danger"
-                               *ngIf="editForm.get('productName').errors.required" jhiTranslate="entity.validation.required">
+                               *ngIf="editForm.get('name').errors.required" jhiTranslate="entity.validation.required">
                         This field is required.
                         </small>
                     </div>
@@ -39,6 +39,11 @@
                     <label class="form-control-label" jhiTranslate="epmresourcesApp.products.sellCount" for="field_sellCount">Sell Count</label>
                     <input type="number" class="form-control" name="sellCount" id="field_sellCount"
                            formControlName="sellCount"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="epmresourcesApp.products.thumbnailList" for="field_thumbnailList">Thumbnail List</label>
+                    <input type="text" class="form-control" name="thumbnailList" id="field_thumbnailList"
+                           formControlName="thumbnailList"/>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="epmresourcesApp.products.activeInd" for="field_activeInd">Active Ind</label>
@@ -68,7 +73,7 @@
                     <label class="form-control-label" jhiTranslate="epmresourcesApp.products.supplier" for="field_supplier">Supplier</label>
                     <select class="form-control" id="field_supplier" name="supplier" formControlName="supplierId">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="suppliersOption.id" *ngFor="let suppliersOption of suppliers; trackBy: trackSuppliersById">{{suppliersOption.supplierName}}</option>
+                        <option [ngValue]="suppliersOption.id" *ngFor="let suppliersOption of suppliers; trackBy: trackSuppliersById">{{suppliersOption.name}}</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -82,7 +87,7 @@
                     <label class="form-control-label" jhiTranslate="epmresourcesApp.products.productBrand" for="field_productBrand">Product Brand</label>
                     <select class="form-control" id="field_productBrand" name="productBrand" formControlName="productBrandId">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="productBrandOption.id" *ngFor="let productBrandOption of productbrands; trackBy: trackProductBrandById">{{productBrandOption.productBrandName}}</option>
+                        <option [ngValue]="productBrandOption.id" *ngFor="let productBrandOption of productbrands; trackBy: trackProductBrandById">{{productBrandOption.name}}</option>
                     </select>
                 </div>
             </div>

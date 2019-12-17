@@ -19,7 +19,7 @@
             <thead>
             <tr>
             <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
-            <th scope="col" ><span jhiTranslate="epmresourcesApp.productTags.tagName">Tag Name</span></th>
+            <th scope="col" ><span jhiTranslate="epmresourcesApp.productTags.name">Name</span></th>
             <th scope="col" ><span jhiTranslate="epmresourcesApp.productTags.product">Product</span></th>
             <th scope="col"></th>
             </tr>
@@ -27,10 +27,10 @@
             <tbody>
             <tr *ngFor="let productTags of productTags ;trackBy: trackId">
                 <td><a [routerLink]="['/product-tags', productTags.id, 'view' ]">{{productTags.id}}</a></td>
-                <td>{{productTags.tagName}}</td>
+                <td>{{productTags.name}}</td>
                 <td>
                     <div *ngIf="productTags.productId">
-                        <a [routerLink]="['/products', productTags.productId , 'view' ]" >{{productTags.productProductName}}</a>
+                        <a [routerLink]="['/products', productTags.productId , 'view' ]" >{{productTags.productName}}</a>
                     </div>
                 </td>
                 <td class="text-right">

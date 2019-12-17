@@ -11,12 +11,12 @@ public class ProductAttributeSetDTO implements Serializable {
     private Long id;
 
     @NotNull
-    private String productAttributeSetName;
+    private String name;
 
 
     private Long productOptionSetId;
 
-    private String productOptionSetProductOptionSetValue;
+    private String productOptionSetValue;
 
     public Long getId() {
         return id;
@@ -26,12 +26,12 @@ public class ProductAttributeSetDTO implements Serializable {
         this.id = id;
     }
 
-    public String getProductAttributeSetName() {
-        return productAttributeSetName;
+    public String getName() {
+        return name;
     }
 
-    public void setProductAttributeSetName(String productAttributeSetName) {
-        this.productAttributeSetName = productAttributeSetName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Long getProductOptionSetId() {
@@ -42,12 +42,12 @@ public class ProductAttributeSetDTO implements Serializable {
         this.productOptionSetId = productOptionSetId;
     }
 
-    public String getProductOptionSetProductOptionSetValue() {
-        return productOptionSetProductOptionSetValue;
+    public String getProductOptionSetValue() {
+        return productOptionSetValue;
     }
 
-    public void setProductOptionSetProductOptionSetValue(String productOptionSetProductOptionSetValue) {
-        this.productOptionSetProductOptionSetValue = productOptionSetProductOptionSetValue;
+    public void setProductOptionSetValue(String productOptionSetValue) {
+        this.productOptionSetValue = productOptionSetValue;
     }
 
     @Override
@@ -75,9 +75,9 @@ public class ProductAttributeSetDTO implements Serializable {
     public String toString() {
         return "ProductAttributeSetDTO{" +
             "id=" + getId() +
-            ", productAttributeSetName='" + getProductAttributeSetName() + "'" +
+            ", name='" + getName() + "'" +
             ", productOptionSet=" + getProductOptionSetId() +
-            ", productOptionSet='" + getProductOptionSetProductOptionSetValue() + "'" +
+            ", productOptionSet='" + getProductOptionSetValue() + "'" +
             "}";
     }
 }

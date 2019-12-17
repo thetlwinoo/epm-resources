@@ -19,8 +19,8 @@
             <thead>
             <tr>
             <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
-            <th scope="col" ><span jhiTranslate="epmresourcesApp.stateProvinces.stateProvinceCode">State Province Code</span></th>
-            <th scope="col" ><span jhiTranslate="epmresourcesApp.stateProvinces.stateProvinceName">State Province Name</span></th>
+            <th scope="col" ><span jhiTranslate="epmresourcesApp.stateProvinces.code">Code</span></th>
+            <th scope="col" ><span jhiTranslate="epmresourcesApp.stateProvinces.name">Name</span></th>
             <th scope="col" ><span jhiTranslate="epmresourcesApp.stateProvinces.salesTerritory">Sales Territory</span></th>
             <th scope="col" ><span jhiTranslate="epmresourcesApp.stateProvinces.border">Border</span></th>
             <th scope="col" ><span jhiTranslate="epmresourcesApp.stateProvinces.latestRecordedPopulation">Latest Recorded Population</span></th>
@@ -33,8 +33,8 @@
             <tbody>
             <tr *ngFor="let stateProvinces of stateProvinces ;trackBy: trackId">
                 <td><a [routerLink]="['/state-provinces', stateProvinces.id, 'view' ]">{{stateProvinces.id}}</a></td>
-                <td>{{stateProvinces.stateProvinceCode}}</td>
-                <td>{{stateProvinces.stateProvinceName}}</td>
+                <td>{{stateProvinces.code}}</td>
+                <td>{{stateProvinces.name}}</td>
                 <td>{{stateProvinces.salesTerritory}}</td>
                 <td>{{stateProvinces.border}}</td>
                 <td>{{stateProvinces.latestRecordedPopulation}}</td>
@@ -42,7 +42,7 @@
                 <td>{{stateProvinces.validTo | date:'medium'}}</td>
                 <td>
                     <div *ngIf="stateProvinces.countryId">
-                        <a [routerLink]="['/countries', stateProvinces.countryId , 'view' ]" >{{stateProvinces.countryCountryName}}</a>
+                        <a [routerLink]="['/countries', stateProvinces.countryId , 'view' ]" >{{stateProvinces.countryName}}</a>
                     </div>
                 </td>
                 <td class="text-right">

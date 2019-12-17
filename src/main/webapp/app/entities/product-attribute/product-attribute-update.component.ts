@@ -27,7 +27,7 @@ export class ProductAttributeUpdateComponent implements OnInit {
 
   editForm = this.fb.group({
     id: [],
-    productAttributeValue: [null, [Validators.required]],
+    value: [null, [Validators.required]],
     productAttributeSetId: [],
     supplierId: []
   });
@@ -65,7 +65,7 @@ export class ProductAttributeUpdateComponent implements OnInit {
   updateForm(productAttribute: IProductAttribute) {
     this.editForm.patchValue({
       id: productAttribute.id,
-      productAttributeValue: productAttribute.productAttributeValue,
+      value: productAttribute.value,
       productAttributeSetId: productAttribute.productAttributeSetId,
       supplierId: productAttribute.supplierId
     });
@@ -89,7 +89,7 @@ export class ProductAttributeUpdateComponent implements OnInit {
     return {
       ...new ProductAttribute(),
       id: this.editForm.get(['id']).value,
-      productAttributeValue: this.editForm.get(['productAttributeValue']).value,
+      value: this.editForm.get(['value']).value,
       productAttributeSetId: this.editForm.get(['productAttributeSetId']).value,
       supplierId: this.editForm.get(['supplierId']).value
     };

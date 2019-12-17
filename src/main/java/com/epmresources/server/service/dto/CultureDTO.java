@@ -11,10 +11,10 @@ public class CultureDTO implements Serializable {
     private Long id;
 
     @NotNull
-    private String cultureCode;
+    private String code;
 
     @NotNull
-    private String cultureName;
+    private String name;
 
 
     public Long getId() {
@@ -25,20 +25,20 @@ public class CultureDTO implements Serializable {
         this.id = id;
     }
 
-    public String getCultureCode() {
-        return cultureCode;
+    public String getCode() {
+        return code;
     }
 
-    public void setCultureCode(String cultureCode) {
-        this.cultureCode = cultureCode;
+    public void setCode(String code) {
+        this.code = code;
     }
 
-    public String getCultureName() {
-        return cultureName;
+    public String getName() {
+        return name;
     }
 
-    public void setCultureName(String cultureName) {
-        this.cultureName = cultureName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
@@ -66,8 +66,8 @@ public class CultureDTO implements Serializable {
     public String toString() {
         return "CultureDTO{" +
             "id=" + getId() +
-            ", cultureCode='" + getCultureCode() + "'" +
-            ", cultureName='" + getCultureName() + "'" +
+            ", code='" + getCode() + "'" +
+            ", name='" + getName() + "'" +
             "}";
     }
 }

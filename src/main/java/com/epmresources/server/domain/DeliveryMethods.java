@@ -24,8 +24,8 @@ public class DeliveryMethods implements Serializable {
     private Long id;
 
     @NotNull
-    @Column(name = "delivery_method_name", nullable = false)
-    private String deliveryMethodName;
+    @Column(name = "name", nullable = false)
+    private String name;
 
     @NotNull
     @Column(name = "valid_from", nullable = false)
@@ -44,17 +44,17 @@ public class DeliveryMethods implements Serializable {
         this.id = id;
     }
 
-    public String getDeliveryMethodName() {
-        return deliveryMethodName;
+    public String getName() {
+        return name;
     }
 
-    public DeliveryMethods deliveryMethodName(String deliveryMethodName) {
-        this.deliveryMethodName = deliveryMethodName;
+    public DeliveryMethods name(String name) {
+        this.name = name;
         return this;
     }
 
-    public void setDeliveryMethodName(String deliveryMethodName) {
-        this.deliveryMethodName = deliveryMethodName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Instant getValidFrom() {
@@ -104,7 +104,7 @@ public class DeliveryMethods implements Serializable {
     public String toString() {
         return "DeliveryMethods{" +
             "id=" + getId() +
-            ", deliveryMethodName='" + getDeliveryMethodName() + "'" +
+            ", name='" + getName() + "'" +
             ", validFrom='" + getValidFrom() + "'" +
             ", validTo='" + getValidTo() + "'" +
             "}";

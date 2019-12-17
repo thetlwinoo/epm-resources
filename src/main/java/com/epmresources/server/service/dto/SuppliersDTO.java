@@ -3,7 +3,6 @@ import java.time.Instant;
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.Objects;
-import javax.persistence.Lob;
 
 /**
  * A DTO for the {@link com.epmresources.server.domain.Suppliers} entity.
@@ -13,7 +12,7 @@ public class SuppliersDTO implements Serializable {
     private Long id;
 
     @NotNull
-    private String supplierName;
+    private String name;
 
     private String supplierReference;
 
@@ -45,10 +44,8 @@ public class SuppliersDTO implements Serializable {
 
     private Boolean activeFlag;
 
-    @Lob
-    private byte[] avatar;
+    private String thumbnailUrl;
 
-    private String avatarContentType;
     @NotNull
     private Instant validFrom;
 
@@ -62,19 +59,19 @@ public class SuppliersDTO implements Serializable {
 
     private Long supplierCategoryId;
 
-    private String supplierCategorySupplierCategoryName;
+    private String supplierCategoryName;
 
     private Long deliveryMethodId;
 
-    private String deliveryMethodDeliveryMethodName;
+    private String deliveryMethodName;
 
     private Long deliveryCityId;
 
-    private String deliveryCityCityName;
+    private String deliveryCityName;
 
     private Long postalCityId;
 
-    private String postalCityCityName;
+    private String postalCityName;
 
     public Long getId() {
         return id;
@@ -84,12 +81,12 @@ public class SuppliersDTO implements Serializable {
         this.id = id;
     }
 
-    public String getSupplierName() {
-        return supplierName;
+    public String getName() {
+        return name;
     }
 
-    public void setSupplierName(String supplierName) {
-        this.supplierName = supplierName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getSupplierReference() {
@@ -204,20 +201,12 @@ public class SuppliersDTO implements Serializable {
         this.activeFlag = activeFlag;
     }
 
-    public byte[] getAvatar() {
-        return avatar;
+    public String getThumbnailUrl() {
+        return thumbnailUrl;
     }
 
-    public void setAvatar(byte[] avatar) {
-        this.avatar = avatar;
-    }
-
-    public String getAvatarContentType() {
-        return avatarContentType;
-    }
-
-    public void setAvatarContentType(String avatarContentType) {
-        this.avatarContentType = avatarContentType;
+    public void setThumbnailUrl(String thumbnailUrl) {
+        this.thumbnailUrl = thumbnailUrl;
     }
 
     public Instant getValidFrom() {
@@ -260,12 +249,12 @@ public class SuppliersDTO implements Serializable {
         this.supplierCategoryId = supplierCategoriesId;
     }
 
-    public String getSupplierCategorySupplierCategoryName() {
-        return supplierCategorySupplierCategoryName;
+    public String getSupplierCategoryName() {
+        return supplierCategoryName;
     }
 
-    public void setSupplierCategorySupplierCategoryName(String supplierCategoriesSupplierCategoryName) {
-        this.supplierCategorySupplierCategoryName = supplierCategoriesSupplierCategoryName;
+    public void setSupplierCategoryName(String supplierCategoriesName) {
+        this.supplierCategoryName = supplierCategoriesName;
     }
 
     public Long getDeliveryMethodId() {
@@ -276,12 +265,12 @@ public class SuppliersDTO implements Serializable {
         this.deliveryMethodId = deliveryMethodsId;
     }
 
-    public String getDeliveryMethodDeliveryMethodName() {
-        return deliveryMethodDeliveryMethodName;
+    public String getDeliveryMethodName() {
+        return deliveryMethodName;
     }
 
-    public void setDeliveryMethodDeliveryMethodName(String deliveryMethodsDeliveryMethodName) {
-        this.deliveryMethodDeliveryMethodName = deliveryMethodsDeliveryMethodName;
+    public void setDeliveryMethodName(String deliveryMethodsName) {
+        this.deliveryMethodName = deliveryMethodsName;
     }
 
     public Long getDeliveryCityId() {
@@ -292,12 +281,12 @@ public class SuppliersDTO implements Serializable {
         this.deliveryCityId = citiesId;
     }
 
-    public String getDeliveryCityCityName() {
-        return deliveryCityCityName;
+    public String getDeliveryCityName() {
+        return deliveryCityName;
     }
 
-    public void setDeliveryCityCityName(String citiesCityName) {
-        this.deliveryCityCityName = citiesCityName;
+    public void setDeliveryCityName(String citiesName) {
+        this.deliveryCityName = citiesName;
     }
 
     public Long getPostalCityId() {
@@ -308,12 +297,12 @@ public class SuppliersDTO implements Serializable {
         this.postalCityId = citiesId;
     }
 
-    public String getPostalCityCityName() {
-        return postalCityCityName;
+    public String getPostalCityName() {
+        return postalCityName;
     }
 
-    public void setPostalCityCityName(String citiesCityName) {
-        this.postalCityCityName = citiesCityName;
+    public void setPostalCityName(String citiesName) {
+        this.postalCityName = citiesName;
     }
 
     @Override
@@ -341,7 +330,7 @@ public class SuppliersDTO implements Serializable {
     public String toString() {
         return "SuppliersDTO{" +
             "id=" + getId() +
-            ", supplierName='" + getSupplierName() + "'" +
+            ", name='" + getName() + "'" +
             ", supplierReference='" + getSupplierReference() + "'" +
             ", bankAccountName='" + getBankAccountName() + "'" +
             ", bankAccountBranch='" + getBankAccountBranch() + "'" +
@@ -356,19 +345,19 @@ public class SuppliersDTO implements Serializable {
             ", webServiceUrl='" + getWebServiceUrl() + "'" +
             ", creditRating=" + getCreditRating() +
             ", activeFlag='" + isActiveFlag() + "'" +
-            ", avatar='" + getAvatar() + "'" +
+            ", thumbnailUrl='" + getThumbnailUrl() + "'" +
             ", validFrom='" + getValidFrom() + "'" +
             ", validTo='" + getValidTo() + "'" +
             ", user=" + getUserId() +
             ", user='" + getUserLogin() + "'" +
             ", supplierCategory=" + getSupplierCategoryId() +
-            ", supplierCategory='" + getSupplierCategorySupplierCategoryName() + "'" +
+            ", supplierCategory='" + getSupplierCategoryName() + "'" +
             ", deliveryMethod=" + getDeliveryMethodId() +
-            ", deliveryMethod='" + getDeliveryMethodDeliveryMethodName() + "'" +
+            ", deliveryMethod='" + getDeliveryMethodName() + "'" +
             ", deliveryCity=" + getDeliveryCityId() +
-            ", deliveryCity='" + getDeliveryCityCityName() + "'" +
+            ", deliveryCity='" + getDeliveryCityName() + "'" +
             ", postalCity=" + getPostalCityId() +
-            ", postalCity='" + getPostalCityCityName() + "'" +
+            ", postalCity='" + getPostalCityName() + "'" +
             "}";
     }
 }

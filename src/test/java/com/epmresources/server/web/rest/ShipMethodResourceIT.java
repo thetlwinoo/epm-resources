@@ -38,8 +38,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = EpmresourcesApp.class)
 public class ShipMethodResourceIT {
 
-    private static final String DEFAULT_SHIP_METHOD_NAME = "AAAAAAAAAA";
-    private static final String UPDATED_SHIP_METHOD_NAME = "BBBBBBBBBB";
+    private static final String DEFAULT_NAME = "AAAAAAAAAA";
+    private static final String UPDATED_NAME = "BBBBBBBBBB";
 
     @Autowired
     private ShipMethodRepository shipMethodRepository;
@@ -92,7 +92,7 @@ public class ShipMethodResourceIT {
      */
     public static ShipMethod createEntity(EntityManager em) {
         ShipMethod shipMethod = new ShipMethod()
-            .shipMethodName(DEFAULT_SHIP_METHOD_NAME);
+            .name(DEFAULT_NAME);
         return shipMethod;
     }
     /**
@@ -103,7 +103,7 @@ public class ShipMethodResourceIT {
      */
     public static ShipMethod createUpdatedEntity(EntityManager em) {
         ShipMethod shipMethod = new ShipMethod()
-            .shipMethodName(UPDATED_SHIP_METHOD_NAME);
+            .name(UPDATED_NAME);
         return shipMethod;
     }
 
@@ -128,7 +128,7 @@ public class ShipMethodResourceIT {
         List<ShipMethod> shipMethodList = shipMethodRepository.findAll();
         assertThat(shipMethodList).hasSize(databaseSizeBeforeCreate + 1);
         ShipMethod testShipMethod = shipMethodList.get(shipMethodList.size() - 1);
-        assertThat(testShipMethod.getShipMethodName()).isEqualTo(DEFAULT_SHIP_METHOD_NAME);
+        assertThat(testShipMethod.getName()).isEqualTo(DEFAULT_NAME);
     }
 
     @Test
@@ -163,7 +163,7 @@ public class ShipMethodResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(shipMethod.getId().intValue())))
-            .andExpect(jsonPath("$.[*].shipMethodName").value(hasItem(DEFAULT_SHIP_METHOD_NAME)));
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)));
     }
     
     @Test
@@ -177,84 +177,84 @@ public class ShipMethodResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(shipMethod.getId().intValue()))
-            .andExpect(jsonPath("$.shipMethodName").value(DEFAULT_SHIP_METHOD_NAME));
+            .andExpect(jsonPath("$.name").value(DEFAULT_NAME));
     }
 
     @Test
     @Transactional
-    public void getAllShipMethodsByShipMethodNameIsEqualToSomething() throws Exception {
+    public void getAllShipMethodsByNameIsEqualToSomething() throws Exception {
         // Initialize the database
         shipMethodRepository.saveAndFlush(shipMethod);
 
-        // Get all the shipMethodList where shipMethodName equals to DEFAULT_SHIP_METHOD_NAME
-        defaultShipMethodShouldBeFound("shipMethodName.equals=" + DEFAULT_SHIP_METHOD_NAME);
+        // Get all the shipMethodList where name equals to DEFAULT_NAME
+        defaultShipMethodShouldBeFound("name.equals=" + DEFAULT_NAME);
 
-        // Get all the shipMethodList where shipMethodName equals to UPDATED_SHIP_METHOD_NAME
-        defaultShipMethodShouldNotBeFound("shipMethodName.equals=" + UPDATED_SHIP_METHOD_NAME);
+        // Get all the shipMethodList where name equals to UPDATED_NAME
+        defaultShipMethodShouldNotBeFound("name.equals=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllShipMethodsByShipMethodNameIsNotEqualToSomething() throws Exception {
+    public void getAllShipMethodsByNameIsNotEqualToSomething() throws Exception {
         // Initialize the database
         shipMethodRepository.saveAndFlush(shipMethod);
 
-        // Get all the shipMethodList where shipMethodName not equals to DEFAULT_SHIP_METHOD_NAME
-        defaultShipMethodShouldNotBeFound("shipMethodName.notEquals=" + DEFAULT_SHIP_METHOD_NAME);
+        // Get all the shipMethodList where name not equals to DEFAULT_NAME
+        defaultShipMethodShouldNotBeFound("name.notEquals=" + DEFAULT_NAME);
 
-        // Get all the shipMethodList where shipMethodName not equals to UPDATED_SHIP_METHOD_NAME
-        defaultShipMethodShouldBeFound("shipMethodName.notEquals=" + UPDATED_SHIP_METHOD_NAME);
+        // Get all the shipMethodList where name not equals to UPDATED_NAME
+        defaultShipMethodShouldBeFound("name.notEquals=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllShipMethodsByShipMethodNameIsInShouldWork() throws Exception {
+    public void getAllShipMethodsByNameIsInShouldWork() throws Exception {
         // Initialize the database
         shipMethodRepository.saveAndFlush(shipMethod);
 
-        // Get all the shipMethodList where shipMethodName in DEFAULT_SHIP_METHOD_NAME or UPDATED_SHIP_METHOD_NAME
-        defaultShipMethodShouldBeFound("shipMethodName.in=" + DEFAULT_SHIP_METHOD_NAME + "," + UPDATED_SHIP_METHOD_NAME);
+        // Get all the shipMethodList where name in DEFAULT_NAME or UPDATED_NAME
+        defaultShipMethodShouldBeFound("name.in=" + DEFAULT_NAME + "," + UPDATED_NAME);
 
-        // Get all the shipMethodList where shipMethodName equals to UPDATED_SHIP_METHOD_NAME
-        defaultShipMethodShouldNotBeFound("shipMethodName.in=" + UPDATED_SHIP_METHOD_NAME);
+        // Get all the shipMethodList where name equals to UPDATED_NAME
+        defaultShipMethodShouldNotBeFound("name.in=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllShipMethodsByShipMethodNameIsNullOrNotNull() throws Exception {
+    public void getAllShipMethodsByNameIsNullOrNotNull() throws Exception {
         // Initialize the database
         shipMethodRepository.saveAndFlush(shipMethod);
 
-        // Get all the shipMethodList where shipMethodName is not null
-        defaultShipMethodShouldBeFound("shipMethodName.specified=true");
+        // Get all the shipMethodList where name is not null
+        defaultShipMethodShouldBeFound("name.specified=true");
 
-        // Get all the shipMethodList where shipMethodName is null
-        defaultShipMethodShouldNotBeFound("shipMethodName.specified=false");
+        // Get all the shipMethodList where name is null
+        defaultShipMethodShouldNotBeFound("name.specified=false");
     }
                 @Test
     @Transactional
-    public void getAllShipMethodsByShipMethodNameContainsSomething() throws Exception {
+    public void getAllShipMethodsByNameContainsSomething() throws Exception {
         // Initialize the database
         shipMethodRepository.saveAndFlush(shipMethod);
 
-        // Get all the shipMethodList where shipMethodName contains DEFAULT_SHIP_METHOD_NAME
-        defaultShipMethodShouldBeFound("shipMethodName.contains=" + DEFAULT_SHIP_METHOD_NAME);
+        // Get all the shipMethodList where name contains DEFAULT_NAME
+        defaultShipMethodShouldBeFound("name.contains=" + DEFAULT_NAME);
 
-        // Get all the shipMethodList where shipMethodName contains UPDATED_SHIP_METHOD_NAME
-        defaultShipMethodShouldNotBeFound("shipMethodName.contains=" + UPDATED_SHIP_METHOD_NAME);
+        // Get all the shipMethodList where name contains UPDATED_NAME
+        defaultShipMethodShouldNotBeFound("name.contains=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllShipMethodsByShipMethodNameNotContainsSomething() throws Exception {
+    public void getAllShipMethodsByNameNotContainsSomething() throws Exception {
         // Initialize the database
         shipMethodRepository.saveAndFlush(shipMethod);
 
-        // Get all the shipMethodList where shipMethodName does not contain DEFAULT_SHIP_METHOD_NAME
-        defaultShipMethodShouldNotBeFound("shipMethodName.doesNotContain=" + DEFAULT_SHIP_METHOD_NAME);
+        // Get all the shipMethodList where name does not contain DEFAULT_NAME
+        defaultShipMethodShouldNotBeFound("name.doesNotContain=" + DEFAULT_NAME);
 
-        // Get all the shipMethodList where shipMethodName does not contain UPDATED_SHIP_METHOD_NAME
-        defaultShipMethodShouldBeFound("shipMethodName.doesNotContain=" + UPDATED_SHIP_METHOD_NAME);
+        // Get all the shipMethodList where name does not contain UPDATED_NAME
+        defaultShipMethodShouldBeFound("name.doesNotContain=" + UPDATED_NAME);
     }
 
     /**
@@ -265,7 +265,7 @@ public class ShipMethodResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(shipMethod.getId().intValue())))
-            .andExpect(jsonPath("$.[*].shipMethodName").value(hasItem(DEFAULT_SHIP_METHOD_NAME)));
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)));
 
         // Check, that the count call also returns 1
         restShipMethodMockMvc.perform(get("/api/ship-methods/count?sort=id,desc&" + filter))
@@ -313,7 +313,7 @@ public class ShipMethodResourceIT {
         // Disconnect from session so that the updates on updatedShipMethod are not directly saved in db
         em.detach(updatedShipMethod);
         updatedShipMethod
-            .shipMethodName(UPDATED_SHIP_METHOD_NAME);
+            .name(UPDATED_NAME);
         ShipMethodDTO shipMethodDTO = shipMethodMapper.toDto(updatedShipMethod);
 
         restShipMethodMockMvc.perform(put("/api/ship-methods")
@@ -325,7 +325,7 @@ public class ShipMethodResourceIT {
         List<ShipMethod> shipMethodList = shipMethodRepository.findAll();
         assertThat(shipMethodList).hasSize(databaseSizeBeforeUpdate);
         ShipMethod testShipMethod = shipMethodList.get(shipMethodList.size() - 1);
-        assertThat(testShipMethod.getShipMethodName()).isEqualTo(UPDATED_SHIP_METHOD_NAME);
+        assertThat(testShipMethod.getName()).isEqualTo(UPDATED_NAME);
     }
 
     @Test

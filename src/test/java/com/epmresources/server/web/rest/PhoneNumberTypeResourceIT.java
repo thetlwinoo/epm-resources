@@ -38,8 +38,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = EpmresourcesApp.class)
 public class PhoneNumberTypeResourceIT {
 
-    private static final String DEFAULT_PHONE_NUMBER_TYPE_NAME = "AAAAAAAAAA";
-    private static final String UPDATED_PHONE_NUMBER_TYPE_NAME = "BBBBBBBBBB";
+    private static final String DEFAULT_NAME = "AAAAAAAAAA";
+    private static final String UPDATED_NAME = "BBBBBBBBBB";
 
     @Autowired
     private PhoneNumberTypeRepository phoneNumberTypeRepository;
@@ -92,7 +92,7 @@ public class PhoneNumberTypeResourceIT {
      */
     public static PhoneNumberType createEntity(EntityManager em) {
         PhoneNumberType phoneNumberType = new PhoneNumberType()
-            .phoneNumberTypeName(DEFAULT_PHONE_NUMBER_TYPE_NAME);
+            .name(DEFAULT_NAME);
         return phoneNumberType;
     }
     /**
@@ -103,7 +103,7 @@ public class PhoneNumberTypeResourceIT {
      */
     public static PhoneNumberType createUpdatedEntity(EntityManager em) {
         PhoneNumberType phoneNumberType = new PhoneNumberType()
-            .phoneNumberTypeName(UPDATED_PHONE_NUMBER_TYPE_NAME);
+            .name(UPDATED_NAME);
         return phoneNumberType;
     }
 
@@ -128,7 +128,7 @@ public class PhoneNumberTypeResourceIT {
         List<PhoneNumberType> phoneNumberTypeList = phoneNumberTypeRepository.findAll();
         assertThat(phoneNumberTypeList).hasSize(databaseSizeBeforeCreate + 1);
         PhoneNumberType testPhoneNumberType = phoneNumberTypeList.get(phoneNumberTypeList.size() - 1);
-        assertThat(testPhoneNumberType.getPhoneNumberTypeName()).isEqualTo(DEFAULT_PHONE_NUMBER_TYPE_NAME);
+        assertThat(testPhoneNumberType.getName()).isEqualTo(DEFAULT_NAME);
     }
 
     @Test
@@ -154,10 +154,10 @@ public class PhoneNumberTypeResourceIT {
 
     @Test
     @Transactional
-    public void checkPhoneNumberTypeNameIsRequired() throws Exception {
+    public void checkNameIsRequired() throws Exception {
         int databaseSizeBeforeTest = phoneNumberTypeRepository.findAll().size();
         // set the field null
-        phoneNumberType.setPhoneNumberTypeName(null);
+        phoneNumberType.setName(null);
 
         // Create the PhoneNumberType, which fails.
         PhoneNumberTypeDTO phoneNumberTypeDTO = phoneNumberTypeMapper.toDto(phoneNumberType);
@@ -182,7 +182,7 @@ public class PhoneNumberTypeResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(phoneNumberType.getId().intValue())))
-            .andExpect(jsonPath("$.[*].phoneNumberTypeName").value(hasItem(DEFAULT_PHONE_NUMBER_TYPE_NAME)));
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)));
     }
     
     @Test
@@ -196,84 +196,84 @@ public class PhoneNumberTypeResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(phoneNumberType.getId().intValue()))
-            .andExpect(jsonPath("$.phoneNumberTypeName").value(DEFAULT_PHONE_NUMBER_TYPE_NAME));
+            .andExpect(jsonPath("$.name").value(DEFAULT_NAME));
     }
 
     @Test
     @Transactional
-    public void getAllPhoneNumberTypesByPhoneNumberTypeNameIsEqualToSomething() throws Exception {
+    public void getAllPhoneNumberTypesByNameIsEqualToSomething() throws Exception {
         // Initialize the database
         phoneNumberTypeRepository.saveAndFlush(phoneNumberType);
 
-        // Get all the phoneNumberTypeList where phoneNumberTypeName equals to DEFAULT_PHONE_NUMBER_TYPE_NAME
-        defaultPhoneNumberTypeShouldBeFound("phoneNumberTypeName.equals=" + DEFAULT_PHONE_NUMBER_TYPE_NAME);
+        // Get all the phoneNumberTypeList where name equals to DEFAULT_NAME
+        defaultPhoneNumberTypeShouldBeFound("name.equals=" + DEFAULT_NAME);
 
-        // Get all the phoneNumberTypeList where phoneNumberTypeName equals to UPDATED_PHONE_NUMBER_TYPE_NAME
-        defaultPhoneNumberTypeShouldNotBeFound("phoneNumberTypeName.equals=" + UPDATED_PHONE_NUMBER_TYPE_NAME);
+        // Get all the phoneNumberTypeList where name equals to UPDATED_NAME
+        defaultPhoneNumberTypeShouldNotBeFound("name.equals=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllPhoneNumberTypesByPhoneNumberTypeNameIsNotEqualToSomething() throws Exception {
+    public void getAllPhoneNumberTypesByNameIsNotEqualToSomething() throws Exception {
         // Initialize the database
         phoneNumberTypeRepository.saveAndFlush(phoneNumberType);
 
-        // Get all the phoneNumberTypeList where phoneNumberTypeName not equals to DEFAULT_PHONE_NUMBER_TYPE_NAME
-        defaultPhoneNumberTypeShouldNotBeFound("phoneNumberTypeName.notEquals=" + DEFAULT_PHONE_NUMBER_TYPE_NAME);
+        // Get all the phoneNumberTypeList where name not equals to DEFAULT_NAME
+        defaultPhoneNumberTypeShouldNotBeFound("name.notEquals=" + DEFAULT_NAME);
 
-        // Get all the phoneNumberTypeList where phoneNumberTypeName not equals to UPDATED_PHONE_NUMBER_TYPE_NAME
-        defaultPhoneNumberTypeShouldBeFound("phoneNumberTypeName.notEquals=" + UPDATED_PHONE_NUMBER_TYPE_NAME);
+        // Get all the phoneNumberTypeList where name not equals to UPDATED_NAME
+        defaultPhoneNumberTypeShouldBeFound("name.notEquals=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllPhoneNumberTypesByPhoneNumberTypeNameIsInShouldWork() throws Exception {
+    public void getAllPhoneNumberTypesByNameIsInShouldWork() throws Exception {
         // Initialize the database
         phoneNumberTypeRepository.saveAndFlush(phoneNumberType);
 
-        // Get all the phoneNumberTypeList where phoneNumberTypeName in DEFAULT_PHONE_NUMBER_TYPE_NAME or UPDATED_PHONE_NUMBER_TYPE_NAME
-        defaultPhoneNumberTypeShouldBeFound("phoneNumberTypeName.in=" + DEFAULT_PHONE_NUMBER_TYPE_NAME + "," + UPDATED_PHONE_NUMBER_TYPE_NAME);
+        // Get all the phoneNumberTypeList where name in DEFAULT_NAME or UPDATED_NAME
+        defaultPhoneNumberTypeShouldBeFound("name.in=" + DEFAULT_NAME + "," + UPDATED_NAME);
 
-        // Get all the phoneNumberTypeList where phoneNumberTypeName equals to UPDATED_PHONE_NUMBER_TYPE_NAME
-        defaultPhoneNumberTypeShouldNotBeFound("phoneNumberTypeName.in=" + UPDATED_PHONE_NUMBER_TYPE_NAME);
+        // Get all the phoneNumberTypeList where name equals to UPDATED_NAME
+        defaultPhoneNumberTypeShouldNotBeFound("name.in=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllPhoneNumberTypesByPhoneNumberTypeNameIsNullOrNotNull() throws Exception {
+    public void getAllPhoneNumberTypesByNameIsNullOrNotNull() throws Exception {
         // Initialize the database
         phoneNumberTypeRepository.saveAndFlush(phoneNumberType);
 
-        // Get all the phoneNumberTypeList where phoneNumberTypeName is not null
-        defaultPhoneNumberTypeShouldBeFound("phoneNumberTypeName.specified=true");
+        // Get all the phoneNumberTypeList where name is not null
+        defaultPhoneNumberTypeShouldBeFound("name.specified=true");
 
-        // Get all the phoneNumberTypeList where phoneNumberTypeName is null
-        defaultPhoneNumberTypeShouldNotBeFound("phoneNumberTypeName.specified=false");
+        // Get all the phoneNumberTypeList where name is null
+        defaultPhoneNumberTypeShouldNotBeFound("name.specified=false");
     }
                 @Test
     @Transactional
-    public void getAllPhoneNumberTypesByPhoneNumberTypeNameContainsSomething() throws Exception {
+    public void getAllPhoneNumberTypesByNameContainsSomething() throws Exception {
         // Initialize the database
         phoneNumberTypeRepository.saveAndFlush(phoneNumberType);
 
-        // Get all the phoneNumberTypeList where phoneNumberTypeName contains DEFAULT_PHONE_NUMBER_TYPE_NAME
-        defaultPhoneNumberTypeShouldBeFound("phoneNumberTypeName.contains=" + DEFAULT_PHONE_NUMBER_TYPE_NAME);
+        // Get all the phoneNumberTypeList where name contains DEFAULT_NAME
+        defaultPhoneNumberTypeShouldBeFound("name.contains=" + DEFAULT_NAME);
 
-        // Get all the phoneNumberTypeList where phoneNumberTypeName contains UPDATED_PHONE_NUMBER_TYPE_NAME
-        defaultPhoneNumberTypeShouldNotBeFound("phoneNumberTypeName.contains=" + UPDATED_PHONE_NUMBER_TYPE_NAME);
+        // Get all the phoneNumberTypeList where name contains UPDATED_NAME
+        defaultPhoneNumberTypeShouldNotBeFound("name.contains=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllPhoneNumberTypesByPhoneNumberTypeNameNotContainsSomething() throws Exception {
+    public void getAllPhoneNumberTypesByNameNotContainsSomething() throws Exception {
         // Initialize the database
         phoneNumberTypeRepository.saveAndFlush(phoneNumberType);
 
-        // Get all the phoneNumberTypeList where phoneNumberTypeName does not contain DEFAULT_PHONE_NUMBER_TYPE_NAME
-        defaultPhoneNumberTypeShouldNotBeFound("phoneNumberTypeName.doesNotContain=" + DEFAULT_PHONE_NUMBER_TYPE_NAME);
+        // Get all the phoneNumberTypeList where name does not contain DEFAULT_NAME
+        defaultPhoneNumberTypeShouldNotBeFound("name.doesNotContain=" + DEFAULT_NAME);
 
-        // Get all the phoneNumberTypeList where phoneNumberTypeName does not contain UPDATED_PHONE_NUMBER_TYPE_NAME
-        defaultPhoneNumberTypeShouldBeFound("phoneNumberTypeName.doesNotContain=" + UPDATED_PHONE_NUMBER_TYPE_NAME);
+        // Get all the phoneNumberTypeList where name does not contain UPDATED_NAME
+        defaultPhoneNumberTypeShouldBeFound("name.doesNotContain=" + UPDATED_NAME);
     }
 
     /**
@@ -284,7 +284,7 @@ public class PhoneNumberTypeResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(phoneNumberType.getId().intValue())))
-            .andExpect(jsonPath("$.[*].phoneNumberTypeName").value(hasItem(DEFAULT_PHONE_NUMBER_TYPE_NAME)));
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)));
 
         // Check, that the count call also returns 1
         restPhoneNumberTypeMockMvc.perform(get("/api/phone-number-types/count?sort=id,desc&" + filter))
@@ -332,7 +332,7 @@ public class PhoneNumberTypeResourceIT {
         // Disconnect from session so that the updates on updatedPhoneNumberType are not directly saved in db
         em.detach(updatedPhoneNumberType);
         updatedPhoneNumberType
-            .phoneNumberTypeName(UPDATED_PHONE_NUMBER_TYPE_NAME);
+            .name(UPDATED_NAME);
         PhoneNumberTypeDTO phoneNumberTypeDTO = phoneNumberTypeMapper.toDto(updatedPhoneNumberType);
 
         restPhoneNumberTypeMockMvc.perform(put("/api/phone-number-types")
@@ -344,7 +344,7 @@ public class PhoneNumberTypeResourceIT {
         List<PhoneNumberType> phoneNumberTypeList = phoneNumberTypeRepository.findAll();
         assertThat(phoneNumberTypeList).hasSize(databaseSizeBeforeUpdate);
         PhoneNumberType testPhoneNumberType = phoneNumberTypeList.get(phoneNumberTypeList.size() - 1);
-        assertThat(testPhoneNumberType.getPhoneNumberTypeName()).isEqualTo(UPDATED_PHONE_NUMBER_TYPE_NAME);
+        assertThat(testPhoneNumberType.getName()).isEqualTo(UPDATED_NAME);
     }
 
     @Test

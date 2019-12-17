@@ -88,14 +88,14 @@
             "otherEntityName": "warrantyTypes",
             "otherEntityRelationshipName": "productDocument",
             "relationshipName": "warrantyType",
-            "otherEntityField": "warrantyTypeName"
+            "otherEntityField": "name"
         },
         {
             "relationshipType": "many-to-one",
             "otherEntityName": "culture",
             "otherEntityRelationshipName": "productDocument",
             "relationshipName": "culture",
-            "otherEntityField": "cultureName"
+            "otherEntityField": "name"
         }
     ],
     "changelogDate": "20191106102856",

@@ -17,8 +17,8 @@ export class CultureUpdateComponent implements OnInit {
 
   editForm = this.fb.group({
     id: [],
-    cultureCode: [null, [Validators.required]],
-    cultureName: [null, [Validators.required]]
+    code: [null, [Validators.required]],
+    name: [null, [Validators.required]]
   });
 
   constructor(protected cultureService: CultureService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
@@ -33,8 +33,8 @@ export class CultureUpdateComponent implements OnInit {
   updateForm(culture: ICulture) {
     this.editForm.patchValue({
       id: culture.id,
-      cultureCode: culture.cultureCode,
-      cultureName: culture.cultureName
+      code: culture.code,
+      name: culture.name
     });
   }
 
@@ -56,8 +56,8 @@ export class CultureUpdateComponent implements OnInit {
     return {
       ...new Culture(),
       id: this.editForm.get(['id']).value,
-      cultureCode: this.editForm.get(['cultureCode']).value,
-      cultureName: this.editForm.get(['cultureName']).value
+      code: this.editForm.get(['code']).value,
+      name: this.editForm.get(['name']).value
     };
   }
 

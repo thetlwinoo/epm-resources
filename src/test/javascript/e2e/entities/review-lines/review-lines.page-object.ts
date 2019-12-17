@@ -32,7 +32,7 @@ export class ReviewLinesUpdatePage {
   sellerReviewInput = element(by.id('field_sellerReview'));
   deliveryRatingInput = element(by.id('field_deliveryRating'));
   deliveryReviewInput = element(by.id('field_deliveryReview'));
-  photoInput = element(by.id('file_photo'));
+  thumbnailUrlInput = element(by.id('field_thumbnailUrl'));
   lastEditedByInput = element(by.id('field_lastEditedBy'));
   lastEditedWhenInput = element(by.id('field_lastEditedWhen'));
   reviewSelect = element(by.id('field_review'));
@@ -89,12 +89,12 @@ export class ReviewLinesUpdatePage {
     return await this.deliveryReviewInput.getAttribute('value');
   }
 
-  async setPhotoInput(photo) {
-    await this.photoInput.sendKeys(photo);
+  async setThumbnailUrlInput(thumbnailUrl) {
+    await this.thumbnailUrlInput.sendKeys(thumbnailUrl);
   }
 
-  async getPhotoInput() {
-    return await this.photoInput.getAttribute('value');
+  async getThumbnailUrlInput() {
+    return await this.thumbnailUrlInput.getAttribute('value');
   }
 
   async setLastEditedByInput(lastEditedBy) {

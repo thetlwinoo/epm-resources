@@ -23,8 +23,8 @@ public class ProductOptionSet implements Serializable {
     private Long id;
 
     @NotNull
-    @Column(name = "product_option_set_value", nullable = false)
-    private String productOptionSetValue;
+    @Column(name = "value", nullable = false)
+    private String value;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -35,17 +35,17 @@ public class ProductOptionSet implements Serializable {
         this.id = id;
     }
 
-    public String getProductOptionSetValue() {
-        return productOptionSetValue;
+    public String getValue() {
+        return value;
     }
 
-    public ProductOptionSet productOptionSetValue(String productOptionSetValue) {
-        this.productOptionSetValue = productOptionSetValue;
+    public ProductOptionSet value(String value) {
+        this.value = value;
         return this;
     }
 
-    public void setProductOptionSetValue(String productOptionSetValue) {
-        this.productOptionSetValue = productOptionSetValue;
+    public void setValue(String value) {
+        this.value = value;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -69,7 +69,7 @@ public class ProductOptionSet implements Serializable {
     public String toString() {
         return "ProductOptionSet{" +
             "id=" + getId() +
-            ", productOptionSetValue='" + getProductOptionSetValue() + "'" +
+            ", value='" + getValue() + "'" +
             "}";
     }
 }

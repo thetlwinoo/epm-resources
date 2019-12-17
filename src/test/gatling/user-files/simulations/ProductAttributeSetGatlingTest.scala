@@ -72,7 +72,7 @@ class ProductAttributeSetGatlingTest extends Simulation {
             .headers(headers_http_authenticated)
             .body(StringBody("""{
                 "id":null
-                , "productAttributeSetName":"SAMPLE_TEXT"
+                , "name":"SAMPLE_TEXT"
                 }""")).asJson
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_productAttributeSet_url"))).exitHereIfFailed

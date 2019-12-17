@@ -5,18 +5,13 @@
             <hr>
             <jhi-alert-error></jhi-alert-error>
             <dl class="row-md jh-entity-details">
-                <dt><span jhiTranslate="epmresourcesApp.productBrand.productBrandName">Product Brand Name</span></dt>
+                <dt><span jhiTranslate="epmresourcesApp.productBrand.name">Name</span></dt>
                 <dd>
-                    <span>{{productBrand.productBrandName}}</span>
+                    <span>{{productBrand.name}}</span>
                 </dd>
-                <dt><span jhiTranslate="epmresourcesApp.productBrand.photo">Photo</span></dt>
+                <dt><span jhiTranslate="epmresourcesApp.productBrand.thumbnailUrl">Thumbnail Url</span></dt>
                 <dd>
-                    <div *ngIf="productBrand.photo">
-                        <a (click)="openFile(productBrand.photoContentType, productBrand.photo)">
-                            <img [src]="'data:' + productBrand.photoContentType + ';base64,' + productBrand.photo" style="max-width: 100%;" alt="productBrand image"/>
-                        </a>
-                        {{productBrand.photoContentType}}, {{byteSize(productBrand.photo)}}
-                    </div>
+                    <span>{{productBrand.thumbnailUrl}}</span>
                 </dd>
             </dl>
 

@@ -74,7 +74,7 @@ describe('Service Tests', () => {
       it('should update a PurchaseOrderLines', () => {
         const returnedFromService = Object.assign(
           {
-            ordersOuters: 1,
+            orderedOuters: 1,
             description: 'BBBBBB',
             receivedOuters: 1,
             expectedUnitPricePerOuter: 1,
@@ -105,7 +105,7 @@ describe('Service Tests', () => {
       it('should return a list of PurchaseOrderLines', () => {
         const returnedFromService = Object.assign(
           {
-            ordersOuters: 1,
+            orderedOuters: 1,
             description: 'BBBBBB',
             receivedOuters: 1,
             expectedUnitPricePerOuter: 1,

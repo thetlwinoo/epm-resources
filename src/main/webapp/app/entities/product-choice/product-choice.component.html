@@ -37,12 +37,12 @@
                 </td>
                 <td>
                     <div *ngIf="productChoice.productAttributeSetId">
-                        <a [routerLink]="['/product-attribute-set', productChoice.productAttributeSetId , 'view' ]" >{{productChoice.productAttributeSetProductAttributeSetName}}</a>
+                        <a [routerLink]="['/product-attribute-set', productChoice.productAttributeSetId , 'view' ]" >{{productChoice.productAttributeSetName}}</a>
                     </div>
                 </td>
                 <td>
                     <div *ngIf="productChoice.productOptionSetId">
-                        <a [routerLink]="['/product-option-set', productChoice.productOptionSetId , 'view' ]" >{{productChoice.productOptionSetProductOptionSetValue}}</a>
+                        <a [routerLink]="['/product-option-set', productChoice.productOptionSetId , 'view' ]" >{{productChoice.productOptionSetValue}}</a>
                     </div>
                 </td>
                 <td class="text-right">

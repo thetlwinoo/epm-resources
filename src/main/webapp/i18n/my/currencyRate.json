@@ -17,8 +17,8 @@
         "title": "Currency Rate"
       },
       "currencyRateDate": "Currency Rate Date",
-      "fromCurrencyCode": "From Currency Code",
-      "toCurrencyCode": "To Currency Code",
+      "fromcode": "Fromcode",
+      "tocode": "Tocode",
       "averageRate": "Average Rate",
       "endOfDayRate": "End Of Day Rate",
       "lastEditedBy": "Last Edited By",

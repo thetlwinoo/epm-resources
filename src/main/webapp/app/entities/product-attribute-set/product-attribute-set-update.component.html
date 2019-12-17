@@ -10,12 +10,12 @@
                         readonly />
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="epmresourcesApp.productAttributeSet.productAttributeSetName" for="field_productAttributeSetName">Product Attribute Set Name</label>
-                    <input type="text" class="form-control" name="productAttributeSetName" id="field_productAttributeSetName"
-                           formControlName="productAttributeSetName"/>
-                    <div *ngIf="editForm.get('productAttributeSetName').invalid && (editForm.get('productAttributeSetName').dirty || editForm.get('productAttributeSetName').touched)">
+                    <label class="form-control-label" jhiTranslate="epmresourcesApp.productAttributeSet.name" for="field_name">Name</label>
+                    <input type="text" class="form-control" name="name" id="field_name"
+                           formControlName="name"/>
+                    <div *ngIf="editForm.get('name').invalid && (editForm.get('name').dirty || editForm.get('name').touched)">
                         <small class="form-text text-danger"
-                               *ngIf="editForm.get('productAttributeSetName').errors.required" jhiTranslate="entity.validation.required">
+                               *ngIf="editForm.get('name').errors.required" jhiTranslate="entity.validation.required">
                         This field is required.
                         </small>
                     </div>
@@ -25,7 +25,7 @@
                     <label class="form-control-label" jhiTranslate="epmresourcesApp.productAttributeSet.productOptionSet" for="field_productOptionSet">Product Option Set</label>
                     <select class="form-control" id="field_productOptionSet" name="productOptionSet" formControlName="productOptionSetId">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="productOptionSetOption.id" *ngFor="let productOptionSetOption of productoptionsets; trackBy: trackProductOptionSetById">{{productOptionSetOption.productOptionSetValue}}</option>
+                        <option [ngValue]="productOptionSetOption.id" *ngFor="let productOptionSetOption of productoptionsets; trackBy: trackProductOptionSetById">{{productOptionSetOption.value}}</option>
                     </select>
                 </div>
             </div>

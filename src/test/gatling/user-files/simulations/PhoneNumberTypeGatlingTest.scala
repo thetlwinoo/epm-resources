@@ -72,7 +72,7 @@ class PhoneNumberTypeGatlingTest extends Simulation {
             .headers(headers_http_authenticated)
             .body(StringBody("""{
                 "id":null
-                , "phoneNumberTypeName":"SAMPLE_TEXT"
+                , "name":"SAMPLE_TEXT"
                 }""")).asJson
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_phoneNumberType_url"))).exitHereIfFailed

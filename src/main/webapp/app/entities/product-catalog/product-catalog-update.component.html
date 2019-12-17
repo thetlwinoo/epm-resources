@@ -21,7 +21,7 @@
                     <label class="form-control-label" jhiTranslate="epmresourcesApp.productCatalog.product" for="field_product">Product</label>
                     <select class="form-control" id="field_product" name="product" formControlName="productId">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="productsOption.id" *ngFor="let productsOption of products; trackBy: trackProductsById">{{productsOption.productName}}</option>
+                        <option [ngValue]="productsOption.id" *ngFor="let productsOption of products; trackBy: trackProductsById">{{productsOption.name}}</option>
                     </select>
                 </div>
             </div>

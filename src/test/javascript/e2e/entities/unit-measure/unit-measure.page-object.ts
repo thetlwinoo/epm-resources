@@ -26,27 +26,27 @@ export class UnitMeasureUpdatePage {
   pageTitle = element(by.id('jhi-unit-measure-heading'));
   saveButton = element(by.id('save-entity'));
   cancelButton = element(by.id('cancel-save'));
-  unitMeasureCodeInput = element(by.id('field_unitMeasureCode'));
-  unitMeasureNameInput = element(by.id('field_unitMeasureName'));
+  codeInput = element(by.id('field_code'));
+  nameInput = element(by.id('field_name'));
 
   async getPageTitle() {
     return this.pageTitle.getAttribute('jhiTranslate');
   }
 
-  async setUnitMeasureCodeInput(unitMeasureCode) {
-    await this.unitMeasureCodeInput.sendKeys(unitMeasureCode);
+  async setCodeInput(code) {
+    await this.codeInput.sendKeys(code);
   }
 
-  async getUnitMeasureCodeInput() {
-    return await this.unitMeasureCodeInput.getAttribute('value');
+  async getCodeInput() {
+    return await this.codeInput.getAttribute('value');
   }
 
-  async setUnitMeasureNameInput(unitMeasureName) {
-    await this.unitMeasureNameInput.sendKeys(unitMeasureName);
+  async setNameInput(name) {
+    await this.nameInput.sendKeys(name);
   }
 
-  async getUnitMeasureNameInput() {
-    return await this.unitMeasureNameInput.getAttribute('value');
+  async getNameInput() {
+    return await this.nameInput.getAttribute('value');
   }
 
   async save(timeout?: number) {

@@ -78,7 +78,7 @@ class ReviewLinesGatlingTest extends Simulation {
                 , "sellerReview":null
                 , "deliveryRating":"0"
                 , "deliveryReview":null
-                , "photo":null
+                , "thumbnailUrl":"SAMPLE_TEXT"
                 , "lastEditedBy":"SAMPLE_TEXT"
                 , "lastEditedWhen":"2020-01-01T00:00:00.000Z"
                 }""")).asJson

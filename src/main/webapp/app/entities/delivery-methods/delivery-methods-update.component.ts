@@ -19,7 +19,7 @@ export class DeliveryMethodsUpdateComponent implements OnInit {
 
   editForm = this.fb.group({
     id: [],
-    deliveryMethodName: [null, [Validators.required]],
+    name: [null, [Validators.required]],
     validFrom: [null, [Validators.required]],
     validTo: [null, [Validators.required]]
   });
@@ -40,7 +40,7 @@ export class DeliveryMethodsUpdateComponent implements OnInit {
   updateForm(deliveryMethods: IDeliveryMethods) {
     this.editForm.patchValue({
       id: deliveryMethods.id,
-      deliveryMethodName: deliveryMethods.deliveryMethodName,
+      name: deliveryMethods.name,
       validFrom: deliveryMethods.validFrom != null ? deliveryMethods.validFrom.format(DATE_TIME_FORMAT) : null,
       validTo: deliveryMethods.validTo != null ? deliveryMethods.validTo.format(DATE_TIME_FORMAT) : null
     });
@@ -64,7 +64,7 @@ export class DeliveryMethodsUpdateComponent implements OnInit {
     return {
       ...new DeliveryMethods(),
       id: this.editForm.get(['id']).value,
-      deliveryMethodName: this.editForm.get(['deliveryMethodName']).value,
+      name: this.editForm.get(['name']).value,
       validFrom:
         this.editForm.get(['validFrom']).value != null ? moment(this.editForm.get(['validFrom']).value, DATE_TIME_FORMAT) : undefined,
       validTo: this.editForm.get(['validTo']).value != null ? moment(this.editForm.get(['validTo']).value, DATE_TIME_FORMAT) : undefined

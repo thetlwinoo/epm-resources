@@ -2,7 +2,7 @@
     "name": "Products",
     "fields": [
         {
-            "fieldName": "productName",
+            "fieldName": "name",
             "fieldType": "String",
             "fieldValidateRules": [
                 "required"
@@ -24,6 +24,10 @@
         {
             "fieldName": "sellCount",
             "fieldType": "Integer"
+        },
+        {
+            "fieldName": "thumbnailList",
+            "fieldType": "String"
         },
         {
             "fieldName": "activeInd",
@@ -58,7 +62,7 @@
             "otherEntityName": "suppliers",
             "otherEntityRelationshipName": "products",
             "relationshipName": "supplier",
-            "otherEntityField": "supplierName"
+            "otherEntityField": "name"
         },
         {
             "relationshipType": "many-to-one",
@@ -72,7 +76,7 @@
             "otherEntityName": "productBrand",
             "otherEntityRelationshipName": "products",
             "relationshipName": "productBrand",
-            "otherEntityField": "productBrandName"
+            "otherEntityField": "name"
         }
     ],
     "changelogDate": "20191106102840",

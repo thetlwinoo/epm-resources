@@ -34,8 +34,8 @@
       "watermarkPhotoBlob": "Watermark Photo Blob",
       "priority": "Priority",
       "defaultInd": "Default Ind",
-      "deleteToken": "Delete Token",
-      "stockItem": "Stock Item"
+      "stockItem": "Stock Item",
+      "productCategory": "Product Category"
     }
   }
 }

@@ -5,13 +5,13 @@
             <hr>
             <jhi-alert-error></jhi-alert-error>
             <dl class="row-md jh-entity-details">
-                <dt><span jhiTranslate="epmresourcesApp.stateProvinces.stateProvinceCode">State Province Code</span></dt>
+                <dt><span jhiTranslate="epmresourcesApp.stateProvinces.code">Code</span></dt>
                 <dd>
-                    <span>{{stateProvinces.stateProvinceCode}}</span>
+                    <span>{{stateProvinces.code}}</span>
                 </dd>
-                <dt><span jhiTranslate="epmresourcesApp.stateProvinces.stateProvinceName">State Province Name</span></dt>
+                <dt><span jhiTranslate="epmresourcesApp.stateProvinces.name">Name</span></dt>
                 <dd>
-                    <span>{{stateProvinces.stateProvinceName}}</span>
+                    <span>{{stateProvinces.name}}</span>
                 </dd>
                 <dt><span jhiTranslate="epmresourcesApp.stateProvinces.salesTerritory">Sales Territory</span></dt>
                 <dd>
@@ -36,7 +36,7 @@
                 <dt><span jhiTranslate="epmresourcesApp.stateProvinces.country">Country</span></dt>
                 <dd>
                     <div *ngIf="stateProvinces.countryId">
-                        <a [routerLink]="['/countries', stateProvinces.countryId, 'view']">{{stateProvinces.countryCountryName}}</a>
+                        <a [routerLink]="['/countries', stateProvinces.countryId, 'view']">{{stateProvinces.countryName}}</a>
                     </div>
                 </dd>
             </dl>

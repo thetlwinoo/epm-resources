@@ -26,18 +26,18 @@ export class WarrantyTypesUpdatePage {
   pageTitle = element(by.id('jhi-warranty-types-heading'));
   saveButton = element(by.id('save-entity'));
   cancelButton = element(by.id('cancel-save'));
-  warrantyTypeNameInput = element(by.id('field_warrantyTypeName'));
+  nameInput = element(by.id('field_name'));
 
   async getPageTitle() {
     return this.pageTitle.getAttribute('jhiTranslate');
   }
 
-  async setWarrantyTypeNameInput(warrantyTypeName) {
-    await this.warrantyTypeNameInput.sendKeys(warrantyTypeName);
+  async setNameInput(name) {
+    await this.nameInput.sendKeys(name);
   }
 
-  async getWarrantyTypeNameInput() {
-    return await this.warrantyTypeNameInput.getAttribute('value');
+  async getNameInput() {
+    return await this.nameInput.getAttribute('value');
   }
 
   async save(timeout?: number) {

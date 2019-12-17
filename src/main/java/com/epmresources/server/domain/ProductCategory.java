@@ -7,6 +7,8 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * A ProductCategory.
@@ -30,12 +32,12 @@ public class ProductCategory implements Serializable {
     @Column(name = "short_label")
     private String shortLabel;
 
-    @Lob
-    @Column(name = "photo")
-    private byte[] photo;
+    @Column(name = "thumbnail_url")
+    private String thumbnailUrl;
 
-    @Column(name = "photo_content_type")
-    private String photoContentType;
+    @OneToMany(mappedBy = "productCategory")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<Photos> photoLists = new HashSet<>();
 
     @ManyToOne
     @JsonIgnoreProperties("productCategories")
@@ -76,30 +78,42 @@ public class ProductCategory implements Serializable {
         this.shortLabel = shortLabel;
     }
 
-    public byte[] getPhoto() {
-        return photo;
+    public String getThumbnailUrl() {
+        return thumbnailUrl;
     }
 
-    public ProductCategory photo(byte[] photo) {
-        this.photo = photo;
+    public ProductCategory thumbnailUrl(String thumbnailUrl) {
+        this.thumbnailUrl = thumbnailUrl;
         return this;
     }
 
-    public void setPhoto(byte[] photo) {
-        this.photo = photo;
+    public void setThumbnailUrl(String thumbnailUrl) {
+        this.thumbnailUrl = thumbnailUrl;
     }
 
-    public String getPhotoContentType() {
-        return photoContentType;
+    public Set<Photos> getPhotoLists() {
+        return photoLists;
     }
 
-    public ProductCategory photoContentType(String photoContentType) {
-        this.photoContentType = photoContentType;
+    public ProductCategory photoLists(Set<Photos> photos) {
+        this.photoLists = photos;
         return this;
     }
 
-    public void setPhotoContentType(String photoContentType) {
-        this.photoContentType = photoContentType;
+    public ProductCategory addPhotoList(Photos photos) {
+        this.photoLists.add(photos);
+        photos.setProductCategory(this);
+        return this;
+    }
+
+    public ProductCategory removePhotoList(Photos photos) {
+        this.photoLists.remove(photos);
+        photos.setProductCategory(null);
+        return this;
+    }
+
+    public void setPhotoLists(Set<Photos> photos) {
+        this.photoLists = photos;
     }
 
     public ProductCategory getParent() {
@@ -138,8 +152,7 @@ public class ProductCategory implements Serializable {
             "id=" + getId() +
             ", name='" + getName() + "'" +
             ", shortLabel='" + getShortLabel() + "'" +
-            ", photo='" + getPhoto() + "'" +
-            ", photoContentType='" + getPhotoContentType() + "'" +
+            ", thumbnailUrl='" + getThumbnailUrl() + "'" +
             "}";
     }
 }

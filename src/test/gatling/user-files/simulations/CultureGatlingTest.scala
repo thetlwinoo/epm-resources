@@ -72,8 +72,8 @@ class CultureGatlingTest extends Simulation {
             .headers(headers_http_authenticated)
             .body(StringBody("""{
                 "id":null
-                , "cultureCode":"SAMPLE_TEXT"
-                , "cultureName":"SAMPLE_TEXT"
+                , "code":"SAMPLE_TEXT"
+                , "name":"SAMPLE_TEXT"
                 }""")).asJson
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_culture_url"))).exitHereIfFailed

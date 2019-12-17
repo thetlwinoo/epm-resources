@@ -101,7 +101,7 @@ public class PurchaseOrdersQueryService extends QueryService<PurchaseOrders> {
                 specification = specification.and(buildStringSpecification(criteria.getSupplierReference(), PurchaseOrders_.supplierReference));
             }
             if (criteria.getIsOrderFinalized() != null) {
-                specification = specification.and(buildSpecification(criteria.getIsOrderFinalized(), PurchaseOrders_.isOrderFinalized));
+                specification = specification.and(buildRangeSpecification(criteria.getIsOrderFinalized(), PurchaseOrders_.isOrderFinalized));
             }
             if (criteria.getComments() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getComments(), PurchaseOrders_.comments));

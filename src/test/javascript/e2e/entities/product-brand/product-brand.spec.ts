@@ -4,7 +4,6 @@ import { NavBarPage, SignInPage } from '../../page-objects/jhi-page-objects';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { ProductBrandComponentsPage, ProductBrandDeleteDialog, ProductBrandUpdatePage } from './product-brand.page-object';
-import * as path from 'path';
 
 const expect = chai.expect;
 
@@ -14,9 +13,6 @@ describe('ProductBrand e2e test', () => {
   let productBrandComponentsPage: ProductBrandComponentsPage;
   let productBrandUpdatePage: ProductBrandUpdatePage;
   let productBrandDeleteDialog: ProductBrandDeleteDialog;
-  const fileNameToUpload = 'logo-jhipster.png';
-  const fileToUpload = '../../../../../../src/main/webapp/content/images/' + fileNameToUpload;
-  const absolutePath = path.resolve(__dirname, fileToUpload);
 
   before(async () => {
     await browser.get('/');
@@ -44,17 +40,11 @@ describe('ProductBrand e2e test', () => {
     const nbButtonsBeforeCreate = await productBrandComponentsPage.countDeleteButtons();
 
     await productBrandComponentsPage.clickOnCreateButton();
-    await promise.all([
-      productBrandUpdatePage.setProductBrandNameInput('productBrandName'),
-      productBrandUpdatePage.setPhotoInput(absolutePath)
-    ]);
-    expect(await productBrandUpdatePage.getProductBrandNameInput()).to.eq(
-      'productBrandName',
-      'Expected ProductBrandName value to be equals to productBrandName'
-    );
-    expect(await productBrandUpdatePage.getPhotoInput()).to.endsWith(
-      fileNameToUpload,
-      'Expected Photo value to be end with ' + fileNameToUpload
+    await promise.all([productBrandUpdatePage.setNameInput('name'), productBrandUpdatePage.setThumbnailUrlInput('thumbnailUrl')]);
+    expect(await productBrandUpdatePage.getNameInput()).to.eq('name', 'Expected Name value to be equals to name');
+    expect(await productBrandUpdatePage.getThumbnailUrlInput()).to.eq(
+      'thumbnailUrl',
+      'Expected ThumbnailUrl value to be equals to thumbnailUrl'
     );
     await productBrandUpdatePage.save();
     expect(await productBrandUpdatePage.getSaveButton().isPresent(), 'Expected save button disappear').to.be.false;

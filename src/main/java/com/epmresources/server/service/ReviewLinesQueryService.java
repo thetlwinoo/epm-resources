@@ -100,6 +100,9 @@ public class ReviewLinesQueryService extends QueryService<ReviewLines> {
             if (criteria.getDeliveryRating() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getDeliveryRating(), ReviewLines_.deliveryRating));
             }
+            if (criteria.getThumbnailUrl() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getThumbnailUrl(), ReviewLines_.thumbnailUrl));
+            }
             if (criteria.getLastEditedBy() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getLastEditedBy(), ReviewLines_.lastEditedBy));
             }

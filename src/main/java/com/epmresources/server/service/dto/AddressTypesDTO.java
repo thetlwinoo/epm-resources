@@ -11,7 +11,7 @@ public class AddressTypesDTO implements Serializable {
     private Long id;
 
     @NotNull
-    private String addressTypeName;
+    private String name;
 
     private String refer;
 
@@ -24,12 +24,12 @@ public class AddressTypesDTO implements Serializable {
         this.id = id;
     }
 
-    public String getAddressTypeName() {
-        return addressTypeName;
+    public String getName() {
+        return name;
     }
 
-    public void setAddressTypeName(String addressTypeName) {
-        this.addressTypeName = addressTypeName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getRefer() {
@@ -65,7 +65,7 @@ public class AddressTypesDTO implements Serializable {
     public String toString() {
         return "AddressTypesDTO{" +
             "id=" + getId() +
-            ", addressTypeName='" + getAddressTypeName() + "'" +
+            ", name='" + getName() + "'" +
             ", refer='" + getRefer() + "'" +
             "}";
     }

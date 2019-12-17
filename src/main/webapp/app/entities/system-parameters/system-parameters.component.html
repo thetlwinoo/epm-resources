@@ -31,12 +31,12 @@
                 <td>{{systemParameters.applicationSettings}}</td>
                 <td>
                     <div *ngIf="systemParameters.deliveryCityId">
-                        <a [routerLink]="['/cities', systemParameters.deliveryCityId , 'view' ]" >{{systemParameters.deliveryCityCityName}}</a>
+                        <a [routerLink]="['/cities', systemParameters.deliveryCityId , 'view' ]" >{{systemParameters.deliveryCityName}}</a>
                     </div>
                 </td>
                 <td>
                     <div *ngIf="systemParameters.postalCityId">
-                        <a [routerLink]="['/cities', systemParameters.postalCityId , 'view' ]" >{{systemParameters.postalCityCityName}}</a>
+                        <a [routerLink]="['/cities', systemParameters.postalCityId , 'view' ]" >{{systemParameters.postalCityName}}</a>
                     </div>
                 </td>
                 <td class="text-right">

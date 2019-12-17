@@ -29,8 +29,8 @@ public class StockItems implements Serializable {
     private Long id;
 
     @NotNull
-    @Column(name = "stock_item_name", nullable = false)
-    private String stockItemName;
+    @Column(name = "name", nullable = false)
+    private String name;
 
     @Column(name = "vendor_code")
     private String vendorCode;
@@ -186,7 +186,7 @@ public class StockItems implements Serializable {
     @JsonIgnore
     private StockItemHoldings stockItemHolding;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
     @JsonIgnoreProperties("stockItemLists")
     private Products product;
 
@@ -199,17 +199,17 @@ public class StockItems implements Serializable {
         this.id = id;
     }
 
-    public String getStockItemName() {
-        return stockItemName;
+    public String getName() {
+        return name;
     }
 
-    public StockItems stockItemName(String stockItemName) {
-        this.stockItemName = stockItemName;
+    public StockItems name(String name) {
+        this.name = name;
         return this;
     }
 
-    public void setStockItemName(String stockItemName) {
-        this.stockItemName = stockItemName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getVendorCode() {
@@ -867,7 +867,7 @@ public class StockItems implements Serializable {
     public String toString() {
         return "StockItems{" +
             "id=" + getId() +
-            ", stockItemName='" + getStockItemName() + "'" +
+            ", name='" + getName() + "'" +
             ", vendorCode='" + getVendorCode() + "'" +
             ", vendorSKU='" + getVendorSKU() + "'" +
             ", generatedSKU='" + getGeneratedSKU() + "'" +

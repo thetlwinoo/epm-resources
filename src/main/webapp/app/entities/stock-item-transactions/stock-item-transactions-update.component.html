@@ -10,17 +10,17 @@
                         readonly />
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="epmresourcesApp.stockItemTransactions.transactionOccurredWhen" for="field_transactionOccurredWhen">Transaction Occurred When</label>
+                    <label class="form-control-label" jhiTranslate="epmresourcesApp.stockItemTransactions.transactionOccuredWhen" for="field_transactionOccuredWhen">Transaction Occured When</label>
                     <div class="d-flex">
-                        <input id="field_transactionOccurredWhen" type="datetime-local" class="form-control" name="transactionOccurredWhen" formControlName="transactionOccurredWhen" placeholder="YYYY-MM-DD HH:mm"/>
+                        <input id="field_transactionOccuredWhen" type="datetime-local" class="form-control" name="transactionOccuredWhen" formControlName="transactionOccuredWhen" placeholder="YYYY-MM-DD HH:mm"/>
                     </div>
-                    <div *ngIf="editForm.get('transactionOccurredWhen').invalid && (editForm.get('transactionOccurredWhen').dirty || editForm.get('transactionOccurredWhen').touched)">
+                    <div *ngIf="editForm.get('transactionOccuredWhen').invalid && (editForm.get('transactionOccuredWhen').dirty || editForm.get('transactionOccuredWhen').touched)">
                         <small class="form-text text-danger"
-                               *ngIf="editForm.get('transactionOccurredWhen').errors.required" jhiTranslate="entity.validation.required">
+                               *ngIf="editForm.get('transactionOccuredWhen').errors.required" jhiTranslate="entity.validation.required">
                         This field is required.
                         </small>
                         <small class="form-text text-danger"
-                            [hidden]="!editForm.get('transactionOccurredWhen').errors?.ZonedDateTimelocal" jhiTranslate="entity.validation.ZonedDateTimelocal">
+                            [hidden]="!editForm.get('transactionOccuredWhen').errors?.ZonedDateTimelocal" jhiTranslate="entity.validation.ZonedDateTimelocal">
                             This field should be a date and time.
                         </small>
                     </div>
@@ -29,16 +29,6 @@
                     <label class="form-control-label" jhiTranslate="epmresourcesApp.stockItemTransactions.quantity" for="field_quantity">Quantity</label>
                     <input type="number" class="form-control" name="quantity" id="field_quantity"
                            formControlName="quantity"/>
-                    <div *ngIf="editForm.get('quantity').invalid && (editForm.get('quantity').dirty || editForm.get('quantity').touched)">
-                        <small class="form-text text-danger"
-                               *ngIf="editForm.get('quantity').errors.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                        </small>
-                        <small class="form-text text-danger"
-                            [hidden]="!editForm.get('quantity')?.errors?.number" jhiTranslate="entity.validation.number">
-                            This field should be a number.
-                        </small>
-                    </div>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="epmresourcesApp.stockItemTransactions.lastEditedBy" for="field_lastEditedBy">Last Edited By</label>
@@ -56,7 +46,7 @@
                     <label class="form-control-label" jhiTranslate="epmresourcesApp.stockItemTransactions.stockItem" for="field_stockItem">Stock Item</label>
                     <select class="form-control" id="field_stockItem" name="stockItem" formControlName="stockItemId">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="stockItemsOption.id" *ngFor="let stockItemsOption of stockitems; trackBy: trackStockItemsById">{{stockItemsOption.stockItemName}}</option>
+                        <option [ngValue]="stockItemsOption.id" *ngFor="let stockItemsOption of stockitems; trackBy: trackStockItemsById">{{stockItemsOption.name}}</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -77,14 +67,14 @@
                     <label class="form-control-label" jhiTranslate="epmresourcesApp.stockItemTransactions.supplier" for="field_supplier">Supplier</label>
                     <select class="form-control" id="field_supplier" name="supplier" formControlName="supplierId">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="suppliersOption.id" *ngFor="let suppliersOption of suppliers; trackBy: trackSuppliersById">{{suppliersOption.supplierName}}</option>
+                        <option [ngValue]="suppliersOption.id" *ngFor="let suppliersOption of suppliers; trackBy: trackSuppliersById">{{suppliersOption.name}}</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="epmresourcesApp.stockItemTransactions.transactionType" for="field_transactionType">Transaction Type</label>
                     <select class="form-control" id="field_transactionType" name="transactionType" formControlName="transactionTypeId">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="transactionTypesOption.id" *ngFor="let transactionTypesOption of transactiontypes; trackBy: trackTransactionTypesById">{{transactionTypesOption.id}}</option>
+                        <option [ngValue]="transactionTypesOption.id" *ngFor="let transactionTypesOption of transactiontypes; trackBy: trackTransactionTypesById">{{transactionTypesOption.name}}</option>
                     </select>
                 </div>
                 <div class="form-group">

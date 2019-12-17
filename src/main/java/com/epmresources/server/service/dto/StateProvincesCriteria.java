@@ -27,9 +27,9 @@ public class StateProvincesCriteria implements Serializable, Criteria {
 
     private LongFilter id;
 
-    private StringFilter stateProvinceCode;
+    private StringFilter code;
 
-    private StringFilter stateProvinceName;
+    private StringFilter name;
 
     private StringFilter salesTerritory;
 
@@ -48,8 +48,8 @@ public class StateProvincesCriteria implements Serializable, Criteria {
 
     public StateProvincesCriteria(StateProvincesCriteria other){
         this.id = other.id == null ? null : other.id.copy();
-        this.stateProvinceCode = other.stateProvinceCode == null ? null : other.stateProvinceCode.copy();
-        this.stateProvinceName = other.stateProvinceName == null ? null : other.stateProvinceName.copy();
+        this.code = other.code == null ? null : other.code.copy();
+        this.name = other.name == null ? null : other.name.copy();
         this.salesTerritory = other.salesTerritory == null ? null : other.salesTerritory.copy();
         this.border = other.border == null ? null : other.border.copy();
         this.latestRecordedPopulation = other.latestRecordedPopulation == null ? null : other.latestRecordedPopulation.copy();
@@ -71,20 +71,20 @@ public class StateProvincesCriteria implements Serializable, Criteria {
         this.id = id;
     }
 
-    public StringFilter getStateProvinceCode() {
-        return stateProvinceCode;
+    public StringFilter getCode() {
+        return code;
     }
 
-    public void setStateProvinceCode(StringFilter stateProvinceCode) {
-        this.stateProvinceCode = stateProvinceCode;
+    public void setCode(StringFilter code) {
+        this.code = code;
     }
 
-    public StringFilter getStateProvinceName() {
-        return stateProvinceName;
+    public StringFilter getName() {
+        return name;
     }
 
-    public void setStateProvinceName(StringFilter stateProvinceName) {
-        this.stateProvinceName = stateProvinceName;
+    public void setName(StringFilter name) {
+        this.name = name;
     }
 
     public StringFilter getSalesTerritory() {
@@ -147,8 +147,8 @@ public class StateProvincesCriteria implements Serializable, Criteria {
         final StateProvincesCriteria that = (StateProvincesCriteria) o;
         return
             Objects.equals(id, that.id) &&
-            Objects.equals(stateProvinceCode, that.stateProvinceCode) &&
-            Objects.equals(stateProvinceName, that.stateProvinceName) &&
+            Objects.equals(code, that.code) &&
+            Objects.equals(name, that.name) &&
             Objects.equals(salesTerritory, that.salesTerritory) &&
             Objects.equals(border, that.border) &&
             Objects.equals(latestRecordedPopulation, that.latestRecordedPopulation) &&
@@ -161,8 +161,8 @@ public class StateProvincesCriteria implements Serializable, Criteria {
     public int hashCode() {
         return Objects.hash(
         id,
-        stateProvinceCode,
-        stateProvinceName,
+        code,
+        name,
         salesTerritory,
         border,
         latestRecordedPopulation,
@@ -176,8 +176,8 @@ public class StateProvincesCriteria implements Serializable, Criteria {
     public String toString() {
         return "StateProvincesCriteria{" +
                 (id != null ? "id=" + id + ", " : "") +
-                (stateProvinceCode != null ? "stateProvinceCode=" + stateProvinceCode + ", " : "") +
-                (stateProvinceName != null ? "stateProvinceName=" + stateProvinceName + ", " : "") +
+                (code != null ? "code=" + code + ", " : "") +
+                (name != null ? "name=" + name + ", " : "") +
                 (salesTerritory != null ? "salesTerritory=" + salesTerritory + ", " : "") +
                 (border != null ? "border=" + border + ", " : "") +
                 (latestRecordedPopulation != null ? "latestRecordedPopulation=" + latestRecordedPopulation + ", " : "") +

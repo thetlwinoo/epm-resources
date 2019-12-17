@@ -2,7 +2,7 @@
     "name": "AddressTypes",
     "fields": [
         {
-            "fieldName": "addressTypeName",
+            "fieldName": "name",
             "fieldType": "String",
             "fieldValidateRules": [
                 "required"

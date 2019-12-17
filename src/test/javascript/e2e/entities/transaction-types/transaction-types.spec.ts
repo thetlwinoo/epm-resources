@@ -41,14 +41,11 @@ describe('TransactionTypes e2e test', () => {
 
     await transactionTypesComponentsPage.clickOnCreateButton();
     await promise.all([
-      transactionTypesUpdatePage.setTransactionTypeNameInput('transactionTypeName'),
+      transactionTypesUpdatePage.setNameInput('name'),
       transactionTypesUpdatePage.setValidFromInput('01/01/2001' + protractor.Key.TAB + '02:30AM'),
       transactionTypesUpdatePage.setValidToInput('01/01/2001' + protractor.Key.TAB + '02:30AM')
     ]);
-    expect(await transactionTypesUpdatePage.getTransactionTypeNameInput()).to.eq(
-      'transactionTypeName',
-      'Expected TransactionTypeName value to be equals to transactionTypeName'
-    );
+    expect(await transactionTypesUpdatePage.getNameInput()).to.eq('name', 'Expected Name value to be equals to name');
     expect(await transactionTypesUpdatePage.getValidFromInput()).to.contain(
       '2001-01-01T02:30',
       'Expected validFrom value to be equals to 2000-12-31'

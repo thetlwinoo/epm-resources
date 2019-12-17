@@ -40,11 +40,8 @@ describe('ShipMethod e2e test', () => {
     const nbButtonsBeforeCreate = await shipMethodComponentsPage.countDeleteButtons();
 
     await shipMethodComponentsPage.clickOnCreateButton();
-    await promise.all([shipMethodUpdatePage.setShipMethodNameInput('shipMethodName')]);
-    expect(await shipMethodUpdatePage.getShipMethodNameInput()).to.eq(
-      'shipMethodName',
-      'Expected ShipMethodName value to be equals to shipMethodName'
-    );
+    await promise.all([shipMethodUpdatePage.setNameInput('name')]);
+    expect(await shipMethodUpdatePage.getNameInput()).to.eq('name', 'Expected Name value to be equals to name');
     await shipMethodUpdatePage.save();
     expect(await shipMethodUpdatePage.getSaveButton().isPresent(), 'Expected save button disappear').to.be.false;
 

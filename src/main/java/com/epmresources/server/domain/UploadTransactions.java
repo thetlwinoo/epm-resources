@@ -43,11 +43,11 @@ public class UploadTransactions implements Serializable {
     @Column(name = "last_edited_when")
     private Instant lastEditedWhen;
 
-    @OneToMany(mappedBy = "uploadTransaction",cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    @OneToMany(mappedBy = "uploadTransaction")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<SupplierImportedDocument> importDocumentLists = new HashSet<>();
 
-    @OneToMany(mappedBy = "uploadTransaction",cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    @OneToMany(mappedBy = "uploadTransaction")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<StockItemTemp> stockItemTempLists = new HashSet<>();
 

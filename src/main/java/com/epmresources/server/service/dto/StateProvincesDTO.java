@@ -12,10 +12,10 @@ public class StateProvincesDTO implements Serializable {
     private Long id;
 
     @NotNull
-    private String stateProvinceCode;
+    private String code;
 
     @NotNull
-    private String stateProvinceName;
+    private String name;
 
     @NotNull
     private String salesTerritory;
@@ -33,7 +33,7 @@ public class StateProvincesDTO implements Serializable {
 
     private Long countryId;
 
-    private String countryCountryName;
+    private String countryName;
 
     public Long getId() {
         return id;
@@ -43,20 +43,20 @@ public class StateProvincesDTO implements Serializable {
         this.id = id;
     }
 
-    public String getStateProvinceCode() {
-        return stateProvinceCode;
+    public String getCode() {
+        return code;
     }
 
-    public void setStateProvinceCode(String stateProvinceCode) {
-        this.stateProvinceCode = stateProvinceCode;
+    public void setCode(String code) {
+        this.code = code;
     }
 
-    public String getStateProvinceName() {
-        return stateProvinceName;
+    public String getName() {
+        return name;
     }
 
-    public void setStateProvinceName(String stateProvinceName) {
-        this.stateProvinceName = stateProvinceName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getSalesTerritory() {
@@ -107,12 +107,12 @@ public class StateProvincesDTO implements Serializable {
         this.countryId = countriesId;
     }
 
-    public String getCountryCountryName() {
-        return countryCountryName;
+    public String getCountryName() {
+        return countryName;
     }
 
-    public void setCountryCountryName(String countriesCountryName) {
-        this.countryCountryName = countriesCountryName;
+    public void setCountryName(String countriesName) {
+        this.countryName = countriesName;
     }
 
     @Override
@@ -140,15 +140,15 @@ public class StateProvincesDTO implements Serializable {
     public String toString() {
         return "StateProvincesDTO{" +
             "id=" + getId() +
-            ", stateProvinceCode='" + getStateProvinceCode() + "'" +
-            ", stateProvinceName='" + getStateProvinceName() + "'" +
+            ", code='" + getCode() + "'" +
+            ", name='" + getName() + "'" +
             ", salesTerritory='" + getSalesTerritory() + "'" +
             ", border='" + getBorder() + "'" +
             ", latestRecordedPopulation=" + getLatestRecordedPopulation() +
             ", validFrom='" + getValidFrom() + "'" +
             ", validTo='" + getValidTo() + "'" +
             ", country=" + getCountryId() +
-            ", country='" + getCountryCountryName() + "'" +
+            ", country='" + getCountryName() + "'" +
             "}";
     }
 }

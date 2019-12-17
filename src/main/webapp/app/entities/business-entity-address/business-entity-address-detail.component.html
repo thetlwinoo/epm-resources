@@ -20,7 +20,7 @@
                 <dt><span jhiTranslate="epmresourcesApp.businessEntityAddress.addressType">Address Type</span></dt>
                 <dd>
                     <div *ngIf="businessEntityAddress.addressTypeId">
-                        <a [routerLink]="['/address-types', businessEntityAddress.addressTypeId, 'view']">{{businessEntityAddress.addressTypeAddressTypeName}}</a>
+                        <a [routerLink]="['/address-types', businessEntityAddress.addressTypeId, 'view']">{{businessEntityAddress.addressTypeName}}</a>
                     </div>
                 </dd>
             </dl>

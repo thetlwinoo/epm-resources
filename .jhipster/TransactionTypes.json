@@ -2,7 +2,7 @@
     "name": "TransactionTypes",
     "fields": [
         {
-            "fieldName": "transactionTypeName",
+            "fieldName": "name",
             "fieldType": "String",
             "fieldValidateRules": [
                 "required"

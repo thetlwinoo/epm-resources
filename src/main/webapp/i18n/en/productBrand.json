@@ -16,8 +16,8 @@
       "detail": {
         "title": "Product Brand"
       },
-      "productBrandName": "Product Brand Name",
-      "photo": "Photo"
+      "name": "Name",
+      "thumbnailUrl": "Thumbnail Url"
     }
   }
 }

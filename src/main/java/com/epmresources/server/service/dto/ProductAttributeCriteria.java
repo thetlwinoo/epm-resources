@@ -26,7 +26,7 @@ public class ProductAttributeCriteria implements Serializable, Criteria {
 
     private LongFilter id;
 
-    private StringFilter productAttributeValue;
+    private StringFilter value;
 
     private LongFilter productAttributeSetId;
 
@@ -37,7 +37,7 @@ public class ProductAttributeCriteria implements Serializable, Criteria {
 
     public ProductAttributeCriteria(ProductAttributeCriteria other){
         this.id = other.id == null ? null : other.id.copy();
-        this.productAttributeValue = other.productAttributeValue == null ? null : other.productAttributeValue.copy();
+        this.value = other.value == null ? null : other.value.copy();
         this.productAttributeSetId = other.productAttributeSetId == null ? null : other.productAttributeSetId.copy();
         this.supplierId = other.supplierId == null ? null : other.supplierId.copy();
     }
@@ -55,12 +55,12 @@ public class ProductAttributeCriteria implements Serializable, Criteria {
         this.id = id;
     }
 
-    public StringFilter getProductAttributeValue() {
-        return productAttributeValue;
+    public StringFilter getValue() {
+        return value;
     }
 
-    public void setProductAttributeValue(StringFilter productAttributeValue) {
-        this.productAttributeValue = productAttributeValue;
+    public void setValue(StringFilter value) {
+        this.value = value;
     }
 
     public LongFilter getProductAttributeSetId() {
@@ -91,7 +91,7 @@ public class ProductAttributeCriteria implements Serializable, Criteria {
         final ProductAttributeCriteria that = (ProductAttributeCriteria) o;
         return
             Objects.equals(id, that.id) &&
-            Objects.equals(productAttributeValue, that.productAttributeValue) &&
+            Objects.equals(value, that.value) &&
             Objects.equals(productAttributeSetId, that.productAttributeSetId) &&
             Objects.equals(supplierId, that.supplierId);
     }
@@ -100,7 +100,7 @@ public class ProductAttributeCriteria implements Serializable, Criteria {
     public int hashCode() {
         return Objects.hash(
         id,
-        productAttributeValue,
+        value,
         productAttributeSetId,
         supplierId
         );
@@ -110,7 +110,7 @@ public class ProductAttributeCriteria implements Serializable, Criteria {
     public String toString() {
         return "ProductAttributeCriteria{" +
                 (id != null ? "id=" + id + ", " : "") +
-                (productAttributeValue != null ? "productAttributeValue=" + productAttributeValue + ", " : "") +
+                (value != null ? "value=" + value + ", " : "") +
                 (productAttributeSetId != null ? "productAttributeSetId=" + productAttributeSetId + ", " : "") +
                 (supplierId != null ? "supplierId=" + supplierId + ", " : "") +
             "}";

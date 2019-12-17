@@ -11,7 +11,7 @@ public class BuyingGroupsDTO implements Serializable {
 
     private Long id;
 
-    private String buyingGroupName;
+    private String name;
 
     @NotNull
     private Instant validFrom;
@@ -28,12 +28,12 @@ public class BuyingGroupsDTO implements Serializable {
         this.id = id;
     }
 
-    public String getBuyingGroupName() {
-        return buyingGroupName;
+    public String getName() {
+        return name;
     }
 
-    public void setBuyingGroupName(String buyingGroupName) {
-        this.buyingGroupName = buyingGroupName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Instant getValidFrom() {
@@ -77,7 +77,7 @@ public class BuyingGroupsDTO implements Serializable {
     public String toString() {
         return "BuyingGroupsDTO{" +
             "id=" + getId() +
-            ", buyingGroupName='" + getBuyingGroupName() + "'" +
+            ", name='" + getName() + "'" +
             ", validFrom='" + getValidFrom() + "'" +
             ", validTo='" + getValidTo() + "'" +
             "}";

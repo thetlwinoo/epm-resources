@@ -2,7 +2,7 @@
     "name": "SupplierCategories",
     "fields": [
         {
-            "fieldName": "supplierCategoryName",
+            "fieldName": "name",
             "fieldType": "String",
             "fieldValidateRules": [
                 "required"

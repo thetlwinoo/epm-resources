@@ -5,7 +5,7 @@ import { ISpecialDeals } from 'app/shared/model/special-deals.model';
 
 export interface IStockItems {
   id?: number;
-  stockItemName?: string;
+  name?: string;
   vendorCode?: string;
   vendorSKU?: string;
   generatedSKU?: string;
@@ -38,29 +38,29 @@ export interface IStockItems {
   photoLists?: IPhotos[];
   dangerousGoodLists?: IDangerousGoods[];
   specialDiscounts?: ISpecialDeals[];
-  itemLengthUnitUnitMeasureCode?: string;
+  itemLengthUnitCode?: string;
   itemLengthUnitId?: number;
-  itemWidthUnitUnitMeasureCode?: string;
+  itemWidthUnitCode?: string;
   itemWidthUnitId?: number;
-  itemHeightUnitUnitMeasureCode?: string;
+  itemHeightUnitCode?: string;
   itemHeightUnitId?: number;
-  packageLengthUnitUnitMeasureCode?: string;
+  packageLengthUnitCode?: string;
   packageLengthUnitId?: number;
-  packageWidthUnitUnitMeasureCode?: string;
+  packageWidthUnitCode?: string;
   packageWidthUnitId?: number;
-  packageHeightUnitUnitMeasureCode?: string;
+  packageHeightUnitCode?: string;
   packageHeightUnitId?: number;
-  itemPackageWeightUnitUnitMeasureCode?: string;
+  itemPackageWeightUnitCode?: string;
   itemPackageWeightUnitId?: number;
-  productAttributeProductAttributeValue?: string;
+  productAttributeValue?: string;
   productAttributeId?: number;
-  productOptionProductOptionValue?: string;
+  productOptionValue?: string;
   productOptionId?: number;
-  materialMaterialName?: string;
+  materialName?: string;
   materialId?: number;
-  currencyCurrencyCode?: string;
+  currencyCode?: string;
   currencyId?: number;
-  barcodeTypeBarcodeTypeName?: string;
+  barcodeTypeName?: string;
   barcodeTypeId?: number;
   stockItemHoldingId?: number;
   productId?: number;
@@ -69,7 +69,7 @@ export interface IStockItems {
 export class StockItems implements IStockItems {
   constructor(
     public id?: number,
-    public stockItemName?: string,
+    public name?: string,
     public vendorCode?: string,
     public vendorSKU?: string,
     public generatedSKU?: string,
@@ -102,29 +102,29 @@ export class StockItems implements IStockItems {
     public photoLists?: IPhotos[],
     public dangerousGoodLists?: IDangerousGoods[],
     public specialDiscounts?: ISpecialDeals[],
-    public itemLengthUnitUnitMeasureCode?: string,
+    public itemLengthUnitCode?: string,
     public itemLengthUnitId?: number,
-    public itemWidthUnitUnitMeasureCode?: string,
+    public itemWidthUnitCode?: string,
     public itemWidthUnitId?: number,
-    public itemHeightUnitUnitMeasureCode?: string,
+    public itemHeightUnitCode?: string,
     public itemHeightUnitId?: number,
-    public packageLengthUnitUnitMeasureCode?: string,
+    public packageLengthUnitCode?: string,
     public packageLengthUnitId?: number,
-    public packageWidthUnitUnitMeasureCode?: string,
+    public packageWidthUnitCode?: string,
     public packageWidthUnitId?: number,
-    public packageHeightUnitUnitMeasureCode?: string,
+    public packageHeightUnitCode?: string,
     public packageHeightUnitId?: number,
-    public itemPackageWeightUnitUnitMeasureCode?: string,
+    public itemPackageWeightUnitCode?: string,
     public itemPackageWeightUnitId?: number,
-    public productAttributeProductAttributeValue?: string,
+    public productAttributeValue?: string,
     public productAttributeId?: number,
-    public productOptionProductOptionValue?: string,
+    public productOptionValue?: string,
     public productOptionId?: number,
-    public materialMaterialName?: string,
+    public materialName?: string,
     public materialId?: number,
-    public currencyCurrencyCode?: string,
+    public currencyCode?: string,
     public currencyId?: number,
-    public barcodeTypeBarcodeTypeName?: string,
+    public barcodeTypeName?: string,
     public barcodeTypeId?: number,
     public stockItemHoldingId?: number,
     public productId?: number

@@ -19,7 +19,7 @@
             <thead>
             <tr>
             <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
-            <th scope="col" ><span jhiTranslate="epmresourcesApp.customerCategories.customerCategoryName">Customer Category Name</span></th>
+            <th scope="col" ><span jhiTranslate="epmresourcesApp.customerCategories.name">Name</span></th>
             <th scope="col" ><span jhiTranslate="epmresourcesApp.customerCategories.validFrom">Valid From</span></th>
             <th scope="col" ><span jhiTranslate="epmresourcesApp.customerCategories.validTo">Valid To</span></th>
             <th scope="col"></th>
@@ -28,7 +28,7 @@
             <tbody>
             <tr *ngFor="let customerCategories of customerCategories ;trackBy: trackId">
                 <td><a [routerLink]="['/customer-categories', customerCategories.id, 'view' ]">{{customerCategories.id}}</a></td>
-                <td>{{customerCategories.customerCategoryName}}</td>
+                <td>{{customerCategories.name}}</td>
                 <td>{{customerCategories.validFrom | date:'medium'}}</td>
                 <td>{{customerCategories.validTo | date:'medium'}}</td>
                 <td class="text-right">

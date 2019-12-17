@@ -2,11 +2,11 @@ import { Moment } from 'moment';
 
 export interface IDeliveryMethods {
   id?: number;
-  deliveryMethodName?: string;
+  name?: string;
   validFrom?: Moment;
   validTo?: Moment;
 }
 
 export class DeliveryMethods implements IDeliveryMethods {
-  constructor(public id?: number, public deliveryMethodName?: string, public validFrom?: Moment, public validTo?: Moment) {}
+  constructor(public id?: number, public name?: string, public validFrom?: Moment, public validTo?: Moment) {}
 }

@@ -104,14 +104,14 @@
                     <label class="form-control-label" jhiTranslate="epmresourcesApp.productDocument.warrantyType" for="field_warrantyType">Warranty Type</label>
                     <select class="form-control" id="field_warrantyType" name="warrantyType" formControlName="warrantyTypeId">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="warrantyTypesOption.id" *ngFor="let warrantyTypesOption of warrantytypes; trackBy: trackWarrantyTypesById">{{warrantyTypesOption.warrantyTypeName}}</option>
+                        <option [ngValue]="warrantyTypesOption.id" *ngFor="let warrantyTypesOption of warrantytypes; trackBy: trackWarrantyTypesById">{{warrantyTypesOption.name}}</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="epmresourcesApp.productDocument.culture" for="field_culture">Culture</label>
                     <select class="form-control" id="field_culture" name="culture" formControlName="cultureId">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="cultureOption.id" *ngFor="let cultureOption of cultures; trackBy: trackCultureById">{{cultureOption.cultureName}}</option>
+                        <option [ngValue]="cultureOption.id" *ngFor="let cultureOption of cultures; trackBy: trackCultureById">{{cultureOption.name}}</option>
                     </select>
                 </div>
             </div>

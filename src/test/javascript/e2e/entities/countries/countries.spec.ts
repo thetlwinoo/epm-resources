@@ -41,7 +41,7 @@ describe('Countries e2e test', () => {
 
     await countriesComponentsPage.clickOnCreateButton();
     await promise.all([
-      countriesUpdatePage.setCountryNameInput('countryName'),
+      countriesUpdatePage.setNameInput('name'),
       countriesUpdatePage.setFormalNameInput('formalName'),
       countriesUpdatePage.setIsoAplha3CodeInput('isoAplha3Code'),
       countriesUpdatePage.setIsoNumericCodeInput('5'),
@@ -54,7 +54,7 @@ describe('Countries e2e test', () => {
       countriesUpdatePage.setValidFromInput('01/01/2001' + protractor.Key.TAB + '02:30AM'),
       countriesUpdatePage.setValidToInput('01/01/2001' + protractor.Key.TAB + '02:30AM')
     ]);
-    expect(await countriesUpdatePage.getCountryNameInput()).to.eq('countryName', 'Expected CountryName value to be equals to countryName');
+    expect(await countriesUpdatePage.getNameInput()).to.eq('name', 'Expected Name value to be equals to name');
     expect(await countriesUpdatePage.getFormalNameInput()).to.eq('formalName', 'Expected FormalName value to be equals to formalName');
     expect(await countriesUpdatePage.getIsoAplha3CodeInput()).to.eq(
       'isoAplha3Code',

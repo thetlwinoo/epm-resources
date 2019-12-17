@@ -56,7 +56,7 @@ describe('Service Tests', () => {
       it('should update a ProductAttribute', () => {
         const returnedFromService = Object.assign(
           {
-            productAttributeValue: 'BBBBBB'
+            value: 'BBBBBB'
           },
           elemDefault
         );
@@ -74,7 +74,7 @@ describe('Service Tests', () => {
       it('should return a list of ProductAttribute', () => {
         const returnedFromService = Object.assign(
           {
-            productAttributeValue: 'BBBBBB'
+            value: 'BBBBBB'
           },
           elemDefault
         );

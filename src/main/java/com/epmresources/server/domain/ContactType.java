@@ -23,8 +23,8 @@ public class ContactType implements Serializable {
     private Long id;
 
     @NotNull
-    @Column(name = "contact_type_name", nullable = false)
-    private String contactTypeName;
+    @Column(name = "name", nullable = false)
+    private String name;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -35,17 +35,17 @@ public class ContactType implements Serializable {
         this.id = id;
     }
 
-    public String getContactTypeName() {
-        return contactTypeName;
+    public String getName() {
+        return name;
     }
 
-    public ContactType contactTypeName(String contactTypeName) {
-        this.contactTypeName = contactTypeName;
+    public ContactType name(String name) {
+        this.name = name;
         return this;
     }
 
-    public void setContactTypeName(String contactTypeName) {
-        this.contactTypeName = contactTypeName;
+    public void setName(String name) {
+        this.name = name;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -69,7 +69,7 @@ public class ContactType implements Serializable {
     public String toString() {
         return "ContactType{" +
             "id=" + getId() +
-            ", contactTypeName='" + getContactTypeName() + "'" +
+            ", name='" + getName() + "'" +
             "}";
     }
 }

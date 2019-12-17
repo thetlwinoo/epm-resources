@@ -19,14 +19,14 @@
             <thead>
             <tr>
             <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
-            <th scope="col" ><span jhiTranslate="epmresourcesApp.barcodeTypes.barcodeTypeName">Barcode Type Name</span></th>
+            <th scope="col" ><span jhiTranslate="epmresourcesApp.barcodeTypes.name">Name</span></th>
             <th scope="col"></th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let barcodeTypes of barcodeTypes ;trackBy: trackId">
                 <td><a [routerLink]="['/barcode-types', barcodeTypes.id, 'view' ]">{{barcodeTypes.id}}</a></td>
-                <td>{{barcodeTypes.barcodeTypeName}}</td>
+                <td>{{barcodeTypes.name}}</td>
                 <td class="text-right">
                     <div class="btn-group">
                         <button type="submit"

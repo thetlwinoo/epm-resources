@@ -12,9 +12,9 @@ import org.mapstruct.*;
 public interface ProductDocumentMapper extends EntityMapper<ProductDocumentDTO, ProductDocument> {
 
     @Mapping(source = "warrantyType.id", target = "warrantyTypeId")
-    @Mapping(source = "warrantyType.warrantyTypeName", target = "warrantyTypeWarrantyTypeName")
+    @Mapping(source = "warrantyType.name", target = "warrantyTypeName")
     @Mapping(source = "culture.id", target = "cultureId")
-    @Mapping(source = "culture.cultureName", target = "cultureCultureName")
+    @Mapping(source = "culture.name", target = "cultureName")
     ProductDocumentDTO toDto(ProductDocument productDocument);
 
     @Mapping(source = "warrantyTypeId", target = "warrantyType")

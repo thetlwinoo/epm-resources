@@ -2,7 +2,7 @@
     "name": "DeliveryMethods",
     "fields": [
         {
-            "fieldName": "deliveryMethodName",
+            "fieldName": "name",
             "fieldType": "String",
             "fieldValidateRules": [
                 "required"

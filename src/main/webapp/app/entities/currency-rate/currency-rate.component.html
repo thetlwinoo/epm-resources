@@ -20,8 +20,8 @@
             <tr>
             <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
             <th scope="col" ><span jhiTranslate="epmresourcesApp.currencyRate.currencyRateDate">Currency Rate Date</span></th>
-            <th scope="col" ><span jhiTranslate="epmresourcesApp.currencyRate.fromCurrencyCode">From Currency Code</span></th>
-            <th scope="col" ><span jhiTranslate="epmresourcesApp.currencyRate.toCurrencyCode">To Currency Code</span></th>
+            <th scope="col" ><span jhiTranslate="epmresourcesApp.currencyRate.fromcode">Fromcode</span></th>
+            <th scope="col" ><span jhiTranslate="epmresourcesApp.currencyRate.tocode">Tocode</span></th>
             <th scope="col" ><span jhiTranslate="epmresourcesApp.currencyRate.averageRate">Average Rate</span></th>
             <th scope="col" ><span jhiTranslate="epmresourcesApp.currencyRate.endOfDayRate">End Of Day Rate</span></th>
             <th scope="col" ><span jhiTranslate="epmresourcesApp.currencyRate.lastEditedBy">Last Edited By</span></th>
@@ -33,8 +33,8 @@
             <tr *ngFor="let currencyRate of currencyRates ;trackBy: trackId">
                 <td><a [routerLink]="['/currency-rate', currencyRate.id, 'view' ]">{{currencyRate.id}}</a></td>
                 <td>{{currencyRate.currencyRateDate | date:'medium'}}</td>
-                <td>{{currencyRate.fromCurrencyCode}}</td>
-                <td>{{currencyRate.toCurrencyCode}}</td>
+                <td>{{currencyRate.fromcode}}</td>
+                <td>{{currencyRate.tocode}}</td>
                 <td>{{currencyRate.averageRate}}</td>
                 <td>{{currencyRate.endOfDayRate}}</td>
                 <td>{{currencyRate.lastEditedBy}}</td>

@@ -13,7 +13,7 @@ public interface BusinessEntityContactMapper extends EntityMapper<BusinessEntity
 
     @Mapping(source = "person.id", target = "personId")
     @Mapping(source = "contactType.id", target = "contactTypeId")
-    @Mapping(source = "contactType.contactTypeName", target = "contactTypeContactTypeName")
+    @Mapping(source = "contactType.name", target = "contactTypeName")
     BusinessEntityContactDTO toDto(BusinessEntityContact businessEntityContact);
 
     @Mapping(source = "personId", target = "person")

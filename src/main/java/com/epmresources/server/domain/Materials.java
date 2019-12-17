@@ -23,8 +23,8 @@ public class Materials implements Serializable {
     private Long id;
 
     @NotNull
-    @Column(name = "material_name", nullable = false)
-    private String materialName;
+    @Column(name = "name", nullable = false)
+    private String name;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -35,17 +35,17 @@ public class Materials implements Serializable {
         this.id = id;
     }
 
-    public String getMaterialName() {
-        return materialName;
+    public String getName() {
+        return name;
     }
 
-    public Materials materialName(String materialName) {
-        this.materialName = materialName;
+    public Materials name(String name) {
+        this.name = name;
         return this;
     }
 
-    public void setMaterialName(String materialName) {
-        this.materialName = materialName;
+    public void setName(String name) {
+        this.name = name;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -69,7 +69,7 @@ public class Materials implements Serializable {
     public String toString() {
         return "Materials{" +
             "id=" + getId() +
-            ", materialName='" + getMaterialName() + "'" +
+            ", name='" + getName() + "'" +
             "}";
     }
 }

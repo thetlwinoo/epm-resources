@@ -2,7 +2,7 @@
     "name": "BuyingGroups",
     "fields": [
         {
-            "fieldName": "buyingGroupName",
+            "fieldName": "name",
             "fieldType": "String"
         },
         {

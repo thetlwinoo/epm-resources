@@ -29,14 +29,9 @@
                 <dd>
                     <span>{{reviewLines.deliveryReview}}</span>
                 </dd>
-                <dt><span jhiTranslate="epmresourcesApp.reviewLines.photo">Photo</span></dt>
+                <dt><span jhiTranslate="epmresourcesApp.reviewLines.thumbnailUrl">Thumbnail Url</span></dt>
                 <dd>
-                    <div *ngIf="reviewLines.photo">
-                        <a (click)="openFile(reviewLines.photoContentType, reviewLines.photo)">
-                            <img [src]="'data:' + reviewLines.photoContentType + ';base64,' + reviewLines.photo" style="max-width: 100%;" alt="reviewLines image"/>
-                        </a>
-                        {{reviewLines.photoContentType}}, {{byteSize(reviewLines.photo)}}
-                    </div>
+                    <span>{{reviewLines.thumbnailUrl}}</span>
                 </dd>
                 <dt><span jhiTranslate="epmresourcesApp.reviewLines.lastEditedBy">Last Edited By</span></dt>
                 <dd>

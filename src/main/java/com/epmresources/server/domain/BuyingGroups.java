@@ -23,8 +23,8 @@ public class BuyingGroups implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    @Column(name = "buying_group_name")
-    private String buyingGroupName;
+    @Column(name = "name")
+    private String name;
 
     @NotNull
     @Column(name = "valid_from", nullable = false)
@@ -43,17 +43,17 @@ public class BuyingGroups implements Serializable {
         this.id = id;
     }
 
-    public String getBuyingGroupName() {
-        return buyingGroupName;
+    public String getName() {
+        return name;
     }
 
-    public BuyingGroups buyingGroupName(String buyingGroupName) {
-        this.buyingGroupName = buyingGroupName;
+    public BuyingGroups name(String name) {
+        this.name = name;
         return this;
     }
 
-    public void setBuyingGroupName(String buyingGroupName) {
-        this.buyingGroupName = buyingGroupName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Instant getValidFrom() {
@@ -103,7 +103,7 @@ public class BuyingGroups implements Serializable {
     public String toString() {
         return "BuyingGroups{" +
             "id=" + getId() +
-            ", buyingGroupName='" + getBuyingGroupName() + "'" +
+            ", name='" + getName() + "'" +
             ", validFrom='" + getValidFrom() + "'" +
             ", validTo='" + getValidTo() + "'" +
             "}";

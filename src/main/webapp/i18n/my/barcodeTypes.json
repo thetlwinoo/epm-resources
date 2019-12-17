@@ -16,7 +16,7 @@
       "detail": {
         "title": "Barcode Types"
       },
-      "barcodeTypeName": "Barcode Type Name"
+      "name": "Name"
     }
   }
 }

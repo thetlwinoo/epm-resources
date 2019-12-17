@@ -72,7 +72,7 @@ class CitiesGatlingTest extends Simulation {
             .headers(headers_http_authenticated)
             .body(StringBody("""{
                 "id":null
-                , "cityName":"SAMPLE_TEXT"
+                , "name":"SAMPLE_TEXT"
                 , "location":"SAMPLE_TEXT"
                 , "latestRecordedPopulation":null
                 , "validFrom":"2020-01-01T00:00:00.000Z"

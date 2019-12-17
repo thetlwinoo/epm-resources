@@ -27,7 +27,7 @@ public class PackageTypesCriteria implements Serializable, Criteria {
 
     private LongFilter id;
 
-    private StringFilter packageTypeName;
+    private StringFilter name;
 
     private InstantFilter validFrom;
 
@@ -38,7 +38,7 @@ public class PackageTypesCriteria implements Serializable, Criteria {
 
     public PackageTypesCriteria(PackageTypesCriteria other){
         this.id = other.id == null ? null : other.id.copy();
-        this.packageTypeName = other.packageTypeName == null ? null : other.packageTypeName.copy();
+        this.name = other.name == null ? null : other.name.copy();
         this.validFrom = other.validFrom == null ? null : other.validFrom.copy();
         this.validTo = other.validTo == null ? null : other.validTo.copy();
     }
@@ -56,12 +56,12 @@ public class PackageTypesCriteria implements Serializable, Criteria {
         this.id = id;
     }
 
-    public StringFilter getPackageTypeName() {
-        return packageTypeName;
+    public StringFilter getName() {
+        return name;
     }
 
-    public void setPackageTypeName(StringFilter packageTypeName) {
-        this.packageTypeName = packageTypeName;
+    public void setName(StringFilter name) {
+        this.name = name;
     }
 
     public InstantFilter getValidFrom() {
@@ -92,7 +92,7 @@ public class PackageTypesCriteria implements Serializable, Criteria {
         final PackageTypesCriteria that = (PackageTypesCriteria) o;
         return
             Objects.equals(id, that.id) &&
-            Objects.equals(packageTypeName, that.packageTypeName) &&
+            Objects.equals(name, that.name) &&
             Objects.equals(validFrom, that.validFrom) &&
             Objects.equals(validTo, that.validTo);
     }
@@ -101,7 +101,7 @@ public class PackageTypesCriteria implements Serializable, Criteria {
     public int hashCode() {
         return Objects.hash(
         id,
-        packageTypeName,
+        name,
         validFrom,
         validTo
         );
@@ -111,7 +111,7 @@ public class PackageTypesCriteria implements Serializable, Criteria {
     public String toString() {
         return "PackageTypesCriteria{" +
                 (id != null ? "id=" + id + ", " : "") +
-                (packageTypeName != null ? "packageTypeName=" + packageTypeName + ", " : "") +
+                (name != null ? "name=" + name + ", " : "") +
                 (validFrom != null ? "validFrom=" + validFrom + ", " : "") +
                 (validTo != null ? "validTo=" + validTo + ", " : "") +
             "}";

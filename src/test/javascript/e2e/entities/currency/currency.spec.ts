@@ -40,15 +40,9 @@ describe('Currency e2e test', () => {
     const nbButtonsBeforeCreate = await currencyComponentsPage.countDeleteButtons();
 
     await currencyComponentsPage.clickOnCreateButton();
-    await promise.all([currencyUpdatePage.setCurrencyCodeInput('currencyCode'), currencyUpdatePage.setCurrencyNameInput('currencyName')]);
-    expect(await currencyUpdatePage.getCurrencyCodeInput()).to.eq(
-      'currencyCode',
-      'Expected CurrencyCode value to be equals to currencyCode'
-    );
-    expect(await currencyUpdatePage.getCurrencyNameInput()).to.eq(
-      'currencyName',
-      'Expected CurrencyName value to be equals to currencyName'
-    );
+    await promise.all([currencyUpdatePage.setCodeInput('code'), currencyUpdatePage.setNameInput('name')]);
+    expect(await currencyUpdatePage.getCodeInput()).to.eq('code', 'Expected Code value to be equals to code');
+    expect(await currencyUpdatePage.getNameInput()).to.eq('name', 'Expected Name value to be equals to name');
     await currencyUpdatePage.save();
     expect(await currencyUpdatePage.getSaveButton().isPresent(), 'Expected save button disappear').to.be.false;
 

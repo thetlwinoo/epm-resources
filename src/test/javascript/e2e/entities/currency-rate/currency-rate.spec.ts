@@ -42,8 +42,8 @@ describe('CurrencyRate e2e test', () => {
     await currencyRateComponentsPage.clickOnCreateButton();
     await promise.all([
       currencyRateUpdatePage.setCurrencyRateDateInput('01/01/2001' + protractor.Key.TAB + '02:30AM'),
-      currencyRateUpdatePage.setFromCurrencyCodeInput('fromCurrencyCode'),
-      currencyRateUpdatePage.setToCurrencyCodeInput('toCurrencyCode'),
+      currencyRateUpdatePage.setFromcodeInput('fromcode'),
+      currencyRateUpdatePage.setTocodeInput('tocode'),
       currencyRateUpdatePage.setAverageRateInput('5'),
       currencyRateUpdatePage.setEndOfDayRateInput('5'),
       currencyRateUpdatePage.setLastEditedByInput('lastEditedBy'),
@@ -53,14 +53,8 @@ describe('CurrencyRate e2e test', () => {
       '2001-01-01T02:30',
       'Expected currencyRateDate value to be equals to 2000-12-31'
     );
-    expect(await currencyRateUpdatePage.getFromCurrencyCodeInput()).to.eq(
-      'fromCurrencyCode',
-      'Expected FromCurrencyCode value to be equals to fromCurrencyCode'
-    );
-    expect(await currencyRateUpdatePage.getToCurrencyCodeInput()).to.eq(
-      'toCurrencyCode',
-      'Expected ToCurrencyCode value to be equals to toCurrencyCode'
-    );
+    expect(await currencyRateUpdatePage.getFromcodeInput()).to.eq('fromcode', 'Expected Fromcode value to be equals to fromcode');
+    expect(await currencyRateUpdatePage.getTocodeInput()).to.eq('tocode', 'Expected Tocode value to be equals to tocode');
     expect(await currencyRateUpdatePage.getAverageRateInput()).to.eq('5', 'Expected averageRate value to be equals to 5');
     expect(await currencyRateUpdatePage.getEndOfDayRateInput()).to.eq('5', 'Expected endOfDayRate value to be equals to 5');
     expect(await currencyRateUpdatePage.getLastEditedByInput()).to.eq(

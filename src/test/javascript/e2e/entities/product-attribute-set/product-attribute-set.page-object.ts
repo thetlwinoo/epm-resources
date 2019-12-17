@@ -26,19 +26,19 @@ export class ProductAttributeSetUpdatePage {
   pageTitle = element(by.id('jhi-product-attribute-set-heading'));
   saveButton = element(by.id('save-entity'));
   cancelButton = element(by.id('cancel-save'));
-  productAttributeSetNameInput = element(by.id('field_productAttributeSetName'));
+  nameInput = element(by.id('field_name'));
   productOptionSetSelect = element(by.id('field_productOptionSet'));
 
   async getPageTitle() {
     return this.pageTitle.getAttribute('jhiTranslate');
   }
 
-  async setProductAttributeSetNameInput(productAttributeSetName) {
-    await this.productAttributeSetNameInput.sendKeys(productAttributeSetName);
+  async setNameInput(name) {
+    await this.nameInput.sendKeys(name);
   }
 
-  async getProductAttributeSetNameInput() {
-    return await this.productAttributeSetNameInput.getAttribute('value');
+  async getNameInput() {
+    return await this.nameInput.getAttribute('value');
   }
 
   async productOptionSetSelectLastOption(timeout?: number) {

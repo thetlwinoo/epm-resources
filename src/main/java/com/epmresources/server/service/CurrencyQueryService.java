@@ -91,11 +91,11 @@ public class CurrencyQueryService extends QueryService<Currency> {
             if (criteria.getId() != null) {
                 specification = specification.and(buildSpecification(criteria.getId(), Currency_.id));
             }
-            if (criteria.getCurrencyCode() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getCurrencyCode(), Currency_.currencyCode));
+            if (criteria.getCode() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getCode(), Currency_.code));
             }
-            if (criteria.getCurrencyName() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getCurrencyName(), Currency_.currencyName));
+            if (criteria.getName() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getName(), Currency_.name));
             }
         }
         return specification;

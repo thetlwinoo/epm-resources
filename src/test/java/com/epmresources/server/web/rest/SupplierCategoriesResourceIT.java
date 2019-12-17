@@ -40,8 +40,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = EpmresourcesApp.class)
 public class SupplierCategoriesResourceIT {
 
-    private static final String DEFAULT_SUPPLIER_CATEGORY_NAME = "AAAAAAAAAA";
-    private static final String UPDATED_SUPPLIER_CATEGORY_NAME = "BBBBBBBBBB";
+    private static final String DEFAULT_NAME = "AAAAAAAAAA";
+    private static final String UPDATED_NAME = "BBBBBBBBBB";
 
     private static final Instant DEFAULT_VALID_FROM = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_VALID_FROM = Instant.now().truncatedTo(ChronoUnit.MILLIS);
@@ -100,7 +100,7 @@ public class SupplierCategoriesResourceIT {
      */
     public static SupplierCategories createEntity(EntityManager em) {
         SupplierCategories supplierCategories = new SupplierCategories()
-            .supplierCategoryName(DEFAULT_SUPPLIER_CATEGORY_NAME)
+            .name(DEFAULT_NAME)
             .validFrom(DEFAULT_VALID_FROM)
             .validTo(DEFAULT_VALID_TO);
         return supplierCategories;
@@ -113,7 +113,7 @@ public class SupplierCategoriesResourceIT {
      */
     public static SupplierCategories createUpdatedEntity(EntityManager em) {
         SupplierCategories supplierCategories = new SupplierCategories()
-            .supplierCategoryName(UPDATED_SUPPLIER_CATEGORY_NAME)
+            .name(UPDATED_NAME)
             .validFrom(UPDATED_VALID_FROM)
             .validTo(UPDATED_VALID_TO);
         return supplierCategories;
@@ -140,7 +140,7 @@ public class SupplierCategoriesResourceIT {
         List<SupplierCategories> supplierCategoriesList = supplierCategoriesRepository.findAll();
         assertThat(supplierCategoriesList).hasSize(databaseSizeBeforeCreate + 1);
         SupplierCategories testSupplierCategories = supplierCategoriesList.get(supplierCategoriesList.size() - 1);
-        assertThat(testSupplierCategories.getSupplierCategoryName()).isEqualTo(DEFAULT_SUPPLIER_CATEGORY_NAME);
+        assertThat(testSupplierCategories.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testSupplierCategories.getValidFrom()).isEqualTo(DEFAULT_VALID_FROM);
         assertThat(testSupplierCategories.getValidTo()).isEqualTo(DEFAULT_VALID_TO);
     }
@@ -168,10 +168,10 @@ public class SupplierCategoriesResourceIT {
 
     @Test
     @Transactional
-    public void checkSupplierCategoryNameIsRequired() throws Exception {
+    public void checkNameIsRequired() throws Exception {
         int databaseSizeBeforeTest = supplierCategoriesRepository.findAll().size();
         // set the field null
-        supplierCategories.setSupplierCategoryName(null);
+        supplierCategories.setName(null);
 
         // Create the SupplierCategories, which fails.
         SupplierCategoriesDTO supplierCategoriesDTO = supplierCategoriesMapper.toDto(supplierCategories);
@@ -234,7 +234,7 @@ public class SupplierCategoriesResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(supplierCategories.getId().intValue())))
-            .andExpect(jsonPath("$.[*].supplierCategoryName").value(hasItem(DEFAULT_SUPPLIER_CATEGORY_NAME)))
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].validFrom").value(hasItem(DEFAULT_VALID_FROM.toString())))
             .andExpect(jsonPath("$.[*].validTo").value(hasItem(DEFAULT_VALID_TO.toString())));
     }
@@ -250,86 +250,86 @@ public class SupplierCategoriesResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(supplierCategories.getId().intValue()))
-            .andExpect(jsonPath("$.supplierCategoryName").value(DEFAULT_SUPPLIER_CATEGORY_NAME))
+            .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
             .andExpect(jsonPath("$.validFrom").value(DEFAULT_VALID_FROM.toString()))
             .andExpect(jsonPath("$.validTo").value(DEFAULT_VALID_TO.toString()));
     }
 
     @Test
     @Transactional
-    public void getAllSupplierCategoriesBySupplierCategoryNameIsEqualToSomething() throws Exception {
+    public void getAllSupplierCategoriesByNameIsEqualToSomething() throws Exception {
         // Initialize the database
         supplierCategoriesRepository.saveAndFlush(supplierCategories);
 
-        // Get all the supplierCategoriesList where supplierCategoryName equals to DEFAULT_SUPPLIER_CATEGORY_NAME
-        defaultSupplierCategoriesShouldBeFound("supplierCategoryName.equals=" + DEFAULT_SUPPLIER_CATEGORY_NAME);
+        // Get all the supplierCategoriesList where name equals to DEFAULT_NAME
+        defaultSupplierCategoriesShouldBeFound("name.equals=" + DEFAULT_NAME);
 
-        // Get all the supplierCategoriesList where supplierCategoryName equals to UPDATED_SUPPLIER_CATEGORY_NAME
-        defaultSupplierCategoriesShouldNotBeFound("supplierCategoryName.equals=" + UPDATED_SUPPLIER_CATEGORY_NAME);
+        // Get all the supplierCategoriesList where name equals to UPDATED_NAME
+        defaultSupplierCategoriesShouldNotBeFound("name.equals=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllSupplierCategoriesBySupplierCategoryNameIsNotEqualToSomething() throws Exception {
+    public void getAllSupplierCategoriesByNameIsNotEqualToSomething() throws Exception {
         // Initialize the database
         supplierCategoriesRepository.saveAndFlush(supplierCategories);
 
-        // Get all the supplierCategoriesList where supplierCategoryName not equals to DEFAULT_SUPPLIER_CATEGORY_NAME
-        defaultSupplierCategoriesShouldNotBeFound("supplierCategoryName.notEquals=" + DEFAULT_SUPPLIER_CATEGORY_NAME);
+        // Get all the supplierCategoriesList where name not equals to DEFAULT_NAME
+        defaultSupplierCategoriesShouldNotBeFound("name.notEquals=" + DEFAULT_NAME);
 
-        // Get all the supplierCategoriesList where supplierCategoryName not equals to UPDATED_SUPPLIER_CATEGORY_NAME
-        defaultSupplierCategoriesShouldBeFound("supplierCategoryName.notEquals=" + UPDATED_SUPPLIER_CATEGORY_NAME);
+        // Get all the supplierCategoriesList where name not equals to UPDATED_NAME
+        defaultSupplierCategoriesShouldBeFound("name.notEquals=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllSupplierCategoriesBySupplierCategoryNameIsInShouldWork() throws Exception {
+    public void getAllSupplierCategoriesByNameIsInShouldWork() throws Exception {
         // Initialize the database
         supplierCategoriesRepository.saveAndFlush(supplierCategories);
 
-        // Get all the supplierCategoriesList where supplierCategoryName in DEFAULT_SUPPLIER_CATEGORY_NAME or UPDATED_SUPPLIER_CATEGORY_NAME
-        defaultSupplierCategoriesShouldBeFound("supplierCategoryName.in=" + DEFAULT_SUPPLIER_CATEGORY_NAME + "," + UPDATED_SUPPLIER_CATEGORY_NAME);
+        // Get all the supplierCategoriesList where name in DEFAULT_NAME or UPDATED_NAME
+        defaultSupplierCategoriesShouldBeFound("name.in=" + DEFAULT_NAME + "," + UPDATED_NAME);
 
-        // Get all the supplierCategoriesList where supplierCategoryName equals to UPDATED_SUPPLIER_CATEGORY_NAME
-        defaultSupplierCategoriesShouldNotBeFound("supplierCategoryName.in=" + UPDATED_SUPPLIER_CATEGORY_NAME);
+        // Get all the supplierCategoriesList where name equals to UPDATED_NAME
+        defaultSupplierCategoriesShouldNotBeFound("name.in=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllSupplierCategoriesBySupplierCategoryNameIsNullOrNotNull() throws Exception {
+    public void getAllSupplierCategoriesByNameIsNullOrNotNull() throws Exception {
         // Initialize the database
         supplierCategoriesRepository.saveAndFlush(supplierCategories);
 
-        // Get all the supplierCategoriesList where supplierCategoryName is not null
-        defaultSupplierCategoriesShouldBeFound("supplierCategoryName.specified=true");
+        // Get all the supplierCategoriesList where name is not null
+        defaultSupplierCategoriesShouldBeFound("name.specified=true");
 
-        // Get all the supplierCategoriesList where supplierCategoryName is null
-        defaultSupplierCategoriesShouldNotBeFound("supplierCategoryName.specified=false");
+        // Get all the supplierCategoriesList where name is null
+        defaultSupplierCategoriesShouldNotBeFound("name.specified=false");
     }
                 @Test
     @Transactional
-    public void getAllSupplierCategoriesBySupplierCategoryNameContainsSomething() throws Exception {
+    public void getAllSupplierCategoriesByNameContainsSomething() throws Exception {
         // Initialize the database
         supplierCategoriesRepository.saveAndFlush(supplierCategories);
 
-        // Get all the supplierCategoriesList where supplierCategoryName contains DEFAULT_SUPPLIER_CATEGORY_NAME
-        defaultSupplierCategoriesShouldBeFound("supplierCategoryName.contains=" + DEFAULT_SUPPLIER_CATEGORY_NAME);
+        // Get all the supplierCategoriesList where name contains DEFAULT_NAME
+        defaultSupplierCategoriesShouldBeFound("name.contains=" + DEFAULT_NAME);
 
-        // Get all the supplierCategoriesList where supplierCategoryName contains UPDATED_SUPPLIER_CATEGORY_NAME
-        defaultSupplierCategoriesShouldNotBeFound("supplierCategoryName.contains=" + UPDATED_SUPPLIER_CATEGORY_NAME);
+        // Get all the supplierCategoriesList where name contains UPDATED_NAME
+        defaultSupplierCategoriesShouldNotBeFound("name.contains=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllSupplierCategoriesBySupplierCategoryNameNotContainsSomething() throws Exception {
+    public void getAllSupplierCategoriesByNameNotContainsSomething() throws Exception {
         // Initialize the database
         supplierCategoriesRepository.saveAndFlush(supplierCategories);
 
-        // Get all the supplierCategoriesList where supplierCategoryName does not contain DEFAULT_SUPPLIER_CATEGORY_NAME
-        defaultSupplierCategoriesShouldNotBeFound("supplierCategoryName.doesNotContain=" + DEFAULT_SUPPLIER_CATEGORY_NAME);
+        // Get all the supplierCategoriesList where name does not contain DEFAULT_NAME
+        defaultSupplierCategoriesShouldNotBeFound("name.doesNotContain=" + DEFAULT_NAME);
 
-        // Get all the supplierCategoriesList where supplierCategoryName does not contain UPDATED_SUPPLIER_CATEGORY_NAME
-        defaultSupplierCategoriesShouldBeFound("supplierCategoryName.doesNotContain=" + UPDATED_SUPPLIER_CATEGORY_NAME);
+        // Get all the supplierCategoriesList where name does not contain UPDATED_NAME
+        defaultSupplierCategoriesShouldBeFound("name.doesNotContain=" + UPDATED_NAME);
     }
 
 
@@ -444,7 +444,7 @@ public class SupplierCategoriesResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(supplierCategories.getId().intValue())))
-            .andExpect(jsonPath("$.[*].supplierCategoryName").value(hasItem(DEFAULT_SUPPLIER_CATEGORY_NAME)))
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].validFrom").value(hasItem(DEFAULT_VALID_FROM.toString())))
             .andExpect(jsonPath("$.[*].validTo").value(hasItem(DEFAULT_VALID_TO.toString())));
 
@@ -494,7 +494,7 @@ public class SupplierCategoriesResourceIT {
         // Disconnect from session so that the updates on updatedSupplierCategories are not directly saved in db
         em.detach(updatedSupplierCategories);
         updatedSupplierCategories
-            .supplierCategoryName(UPDATED_SUPPLIER_CATEGORY_NAME)
+            .name(UPDATED_NAME)
             .validFrom(UPDATED_VALID_FROM)
             .validTo(UPDATED_VALID_TO);
         SupplierCategoriesDTO supplierCategoriesDTO = supplierCategoriesMapper.toDto(updatedSupplierCategories);
@@ -508,7 +508,7 @@ public class SupplierCategoriesResourceIT {
         List<SupplierCategories> supplierCategoriesList = supplierCategoriesRepository.findAll();
         assertThat(supplierCategoriesList).hasSize(databaseSizeBeforeUpdate);
         SupplierCategories testSupplierCategories = supplierCategoriesList.get(supplierCategoriesList.size() - 1);
-        assertThat(testSupplierCategories.getSupplierCategoryName()).isEqualTo(UPDATED_SUPPLIER_CATEGORY_NAME);
+        assertThat(testSupplierCategories.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testSupplierCategories.getValidFrom()).isEqualTo(UPDATED_VALID_FROM);
         assertThat(testSupplierCategories.getValidTo()).isEqualTo(UPDATED_VALID_TO);
     }

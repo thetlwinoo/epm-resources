@@ -2,7 +2,7 @@ export interface IProductCatalog {
   id?: number;
   productCategoryName?: string;
   productCategoryId?: number;
-  productProductName?: string;
+  productName?: string;
   productId?: number;
 }
 
@@ -11,7 +11,7 @@ export class ProductCatalog implements IProductCatalog {
     public id?: number,
     public productCategoryName?: string,
     public productCategoryId?: number,
-    public productProductName?: string,
+    public productName?: string,
     public productId?: number
   ) {}
 }

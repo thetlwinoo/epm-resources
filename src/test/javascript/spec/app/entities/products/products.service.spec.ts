@@ -24,7 +24,7 @@ describe('Service Tests', () => {
       httpMock = injector.get(HttpTestingController);
       currentDate = moment();
 
-      elemDefault = new Products(0, 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 0, false, 'AAAAAAA', currentDate);
+      elemDefault = new Products(0, 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 0, 'AAAAAAA', false, 'AAAAAAA', currentDate);
     });
 
     describe('Service methods', () => {
@@ -71,11 +71,12 @@ describe('Service Tests', () => {
       it('should update a Products', () => {
         const returnedFromService = Object.assign(
           {
-            productName: 'BBBBBB',
+            name: 'BBBBBB',
             handle: 'BBBBBB',
             productNumber: 'BBBBBB',
             searchDetails: 'BBBBBB',
             sellCount: 1,
+            thumbnailList: 'BBBBBB',
             activeInd: true,
             lastEditedBy: 'BBBBBB',
             lastEditedWhen: currentDate.format(DATE_TIME_FORMAT)
@@ -101,11 +102,12 @@ describe('Service Tests', () => {
       it('should return a list of Products', () => {
         const returnedFromService = Object.assign(
           {
-            productName: 'BBBBBB',
+            name: 'BBBBBB',
             handle: 'BBBBBB',
             productNumber: 'BBBBBB',
             searchDetails: 'BBBBBB',
             sellCount: 1,
+            thumbnailList: 'BBBBBB',
             activeInd: true,
             lastEditedBy: 'BBBBBB',
             lastEditedWhen: currentDate.format(DATE_TIME_FORMAT)

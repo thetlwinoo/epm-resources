@@ -59,14 +59,14 @@
             "otherEntityName": "stockItems",
             "otherEntityRelationshipName": "orderLines",
             "relationshipName": "stockItem",
-            "otherEntityField": "stockItemName"
+            "otherEntityField": "name"
         },
         {
             "relationshipType": "many-to-one",
             "otherEntityName": "packageTypes",
             "otherEntityRelationshipName": "orderLines",
             "relationshipName": "packageType",
-            "otherEntityField": "id"
+            "otherEntityField": "name"
         },
         {
             "relationshipType": "many-to-one",

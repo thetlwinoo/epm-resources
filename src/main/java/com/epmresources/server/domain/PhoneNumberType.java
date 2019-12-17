@@ -23,8 +23,8 @@ public class PhoneNumberType implements Serializable {
     private Long id;
 
     @NotNull
-    @Column(name = "phone_number_type_name", nullable = false)
-    private String phoneNumberTypeName;
+    @Column(name = "name", nullable = false)
+    private String name;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -35,17 +35,17 @@ public class PhoneNumberType implements Serializable {
         this.id = id;
     }
 
-    public String getPhoneNumberTypeName() {
-        return phoneNumberTypeName;
+    public String getName() {
+        return name;
     }
 
-    public PhoneNumberType phoneNumberTypeName(String phoneNumberTypeName) {
-        this.phoneNumberTypeName = phoneNumberTypeName;
+    public PhoneNumberType name(String name) {
+        this.name = name;
         return this;
     }
 
-    public void setPhoneNumberTypeName(String phoneNumberTypeName) {
-        this.phoneNumberTypeName = phoneNumberTypeName;
+    public void setName(String name) {
+        this.name = name;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -69,7 +69,7 @@ public class PhoneNumberType implements Serializable {
     public String toString() {
         return "PhoneNumberType{" +
             "id=" + getId() +
-            ", phoneNumberTypeName='" + getPhoneNumberTypeName() + "'" +
+            ", name='" + getName() + "'" +
             "}";
     }
 }

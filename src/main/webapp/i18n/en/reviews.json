@@ -16,7 +16,7 @@
       "detail": {
         "title": "Reviews"
       },
-      "reviewerName": "Reviewer Name",
+      "name": "Name",
       "emailAddress": "Email Address",
       "reviewDate": "Review Date",
       "overAllSellerRating": "Over All Seller Rating",

@@ -26,14 +26,14 @@ public class WarrantyTypesCriteria implements Serializable, Criteria {
 
     private LongFilter id;
 
-    private StringFilter warrantyTypeName;
+    private StringFilter name;
 
     public WarrantyTypesCriteria(){
     }
 
     public WarrantyTypesCriteria(WarrantyTypesCriteria other){
         this.id = other.id == null ? null : other.id.copy();
-        this.warrantyTypeName = other.warrantyTypeName == null ? null : other.warrantyTypeName.copy();
+        this.name = other.name == null ? null : other.name.copy();
     }
 
     @Override
@@ -49,12 +49,12 @@ public class WarrantyTypesCriteria implements Serializable, Criteria {
         this.id = id;
     }
 
-    public StringFilter getWarrantyTypeName() {
-        return warrantyTypeName;
+    public StringFilter getName() {
+        return name;
     }
 
-    public void setWarrantyTypeName(StringFilter warrantyTypeName) {
-        this.warrantyTypeName = warrantyTypeName;
+    public void setName(StringFilter name) {
+        this.name = name;
     }
 
 
@@ -69,14 +69,14 @@ public class WarrantyTypesCriteria implements Serializable, Criteria {
         final WarrantyTypesCriteria that = (WarrantyTypesCriteria) o;
         return
             Objects.equals(id, that.id) &&
-            Objects.equals(warrantyTypeName, that.warrantyTypeName);
+            Objects.equals(name, that.name);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(
         id,
-        warrantyTypeName
+        name
         );
     }
 
@@ -84,7 +84,7 @@ public class WarrantyTypesCriteria implements Serializable, Criteria {
     public String toString() {
         return "WarrantyTypesCriteria{" +
                 (id != null ? "id=" + id + ", " : "") +
-                (warrantyTypeName != null ? "warrantyTypeName=" + warrantyTypeName + ", " : "") +
+                (name != null ? "name=" + name + ", " : "") +
             "}";
     }
 

@@ -27,8 +27,8 @@ export class CurrencyRateUpdatePage {
   saveButton = element(by.id('save-entity'));
   cancelButton = element(by.id('cancel-save'));
   currencyRateDateInput = element(by.id('field_currencyRateDate'));
-  fromCurrencyCodeInput = element(by.id('field_fromCurrencyCode'));
-  toCurrencyCodeInput = element(by.id('field_toCurrencyCode'));
+  fromcodeInput = element(by.id('field_fromcode'));
+  tocodeInput = element(by.id('field_tocode'));
   averageRateInput = element(by.id('field_averageRate'));
   endOfDayRateInput = element(by.id('field_endOfDayRate'));
   lastEditedByInput = element(by.id('field_lastEditedBy'));
@@ -46,20 +46,20 @@ export class CurrencyRateUpdatePage {
     return await this.currencyRateDateInput.getAttribute('value');
   }
 
-  async setFromCurrencyCodeInput(fromCurrencyCode) {
-    await this.fromCurrencyCodeInput.sendKeys(fromCurrencyCode);
+  async setFromcodeInput(fromcode) {
+    await this.fromcodeInput.sendKeys(fromcode);
   }
 
-  async getFromCurrencyCodeInput() {
-    return await this.fromCurrencyCodeInput.getAttribute('value');
+  async getFromcodeInput() {
+    return await this.fromcodeInput.getAttribute('value');
   }
 
-  async setToCurrencyCodeInput(toCurrencyCode) {
-    await this.toCurrencyCodeInput.sendKeys(toCurrencyCode);
+  async setTocodeInput(tocode) {
+    await this.tocodeInput.sendKeys(tocode);
   }
 
-  async getToCurrencyCodeInput() {
-    return await this.toCurrencyCodeInput.getAttribute('value');
+  async getTocodeInput() {
+    return await this.tocodeInput.getAttribute('value');
   }
 
   async setAverageRateInput(averageRate) {

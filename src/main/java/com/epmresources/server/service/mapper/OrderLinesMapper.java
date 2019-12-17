@@ -12,8 +12,9 @@ import org.mapstruct.*;
 public interface OrderLinesMapper extends EntityMapper<OrderLinesDTO, OrderLines> {
 
     @Mapping(source = "stockItem.id", target = "stockItemId")
-    @Mapping(source = "stockItem.stockItemName", target = "stockItemStockItemName")
+    @Mapping(source = "stockItem.name", target = "stockItemName")
     @Mapping(source = "packageType.id", target = "packageTypeId")
+    @Mapping(source = "packageType.name", target = "packageTypeName")
     @Mapping(source = "order.id", target = "orderId")
     OrderLinesDTO toDto(OrderLines orderLines);
 

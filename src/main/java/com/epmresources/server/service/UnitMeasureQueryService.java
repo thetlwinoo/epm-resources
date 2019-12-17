@@ -91,11 +91,11 @@ public class UnitMeasureQueryService extends QueryService<UnitMeasure> {
             if (criteria.getId() != null) {
                 specification = specification.and(buildSpecification(criteria.getId(), UnitMeasure_.id));
             }
-            if (criteria.getUnitMeasureCode() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getUnitMeasureCode(), UnitMeasure_.unitMeasureCode));
+            if (criteria.getCode() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getCode(), UnitMeasure_.code));
             }
-            if (criteria.getUnitMeasureName() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getUnitMeasureName(), UnitMeasure_.unitMeasureName));
+            if (criteria.getName() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getName(), UnitMeasure_.name));
             }
         }
         return specification;

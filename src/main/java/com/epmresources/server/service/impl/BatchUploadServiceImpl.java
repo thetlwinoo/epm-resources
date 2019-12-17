@@ -290,7 +290,7 @@ public class BatchUploadServiceImpl implements BatchUploadService {
             BarcodeTypesCriteria barcodeTypesCriteria = new BarcodeTypesCriteria();
             StringFilter stringFilter = new StringFilter();
             stringFilter.setContains(filter.trim());
-            barcodeTypesCriteria.setBarcodeTypeName(stringFilter);
+            barcodeTypesCriteria.setName(stringFilter);
             return barcodeTypesQueryService.findByCriteria(barcodeTypesCriteria).get(0);
         } catch (Exception ex) {
             return null;
@@ -310,7 +310,7 @@ public class BatchUploadServiceImpl implements BatchUploadService {
 
             for (Object[] productObj : productsList) {
                 Products products = new Products();
-                products.setProductName(productObj[0].toString());
+                products.setName(productObj[0].toString());
                 ProductBrand productBrand = productBrandRepository.getOne(Long.parseLong(productObj[2].toString()));
                 products.setProductBrand(productBrand);
                 products.setHandle(CommonUtil.handleize(productObj[0].toString()));
@@ -324,7 +324,7 @@ public class BatchUploadServiceImpl implements BatchUploadService {
 
                 for (StockItemTemp stockItemTemp : stockItemTempList) {
                     StockItems stockItems = new StockItems();
-                    stockItems.setStockItemName(stockItemTemp.getStockItemName());
+                    stockItems.setName(stockItemTemp.getStockItemName());
                     stockItems.setVendorCode(stockItemTemp.getVendorCode());
                     stockItems.setVendorSKU(stockItemTemp.getVendorSKU());
                     stockItems.setBarcode(stockItemTemp.getBarcode());
@@ -363,7 +363,7 @@ public class BatchUploadServiceImpl implements BatchUploadService {
                 }
 
                 products = productsRepository.save(products);
-                String _productnumber = products.getProductName().replaceAll("[^a-zA-Z0-9]", "").toUpperCase();
+                String _productnumber = products.getName().replaceAll("[^a-zA-Z0-9]", "").toUpperCase();
                 _productnumber = _productnumber.length() > 8 ? _productnumber.substring(0, 8) : _productnumber;
                 _productnumber = _productnumber + "-" + products.getId();
                 products.setProductNumber(_productnumber);
@@ -384,7 +384,7 @@ public class BatchUploadServiceImpl implements BatchUploadService {
             ProductAttributeCriteria productAttributeCriteria = new ProductAttributeCriteria();
             StringFilter stringFilter = new StringFilter();
             stringFilter.setContains(filter.trim());
-            productAttributeCriteria.setProductAttributeValue(stringFilter);
+            productAttributeCriteria.setValue(stringFilter);
             return productAttributeQueryService.findByCriteria(productAttributeCriteria).get(0);
         } catch (Exception ex) {
             return null;
@@ -396,7 +396,7 @@ public class BatchUploadServiceImpl implements BatchUploadService {
             ProductOptionCriteria productOptionCriteria = new ProductOptionCriteria();
             StringFilter stringFilter = new StringFilter();
             stringFilter.setContains(filter.trim());
-            productOptionCriteria.setProductOptionValue(stringFilter);
+            productOptionCriteria.setValue(stringFilter);
             return productOptionQueryService.findByCriteria(productOptionCriteria).get(0);
         } catch (Exception ex) {
             return null;
@@ -408,7 +408,7 @@ public class BatchUploadServiceImpl implements BatchUploadService {
             MaterialsCriteria materialsCriteria = new MaterialsCriteria();
             StringFilter stringFilter = new StringFilter();
             stringFilter.setContains(filter.trim());
-            materialsCriteria.setMaterialName(stringFilter);
+            materialsCriteria.setName(stringFilter);
             return materialsQueryService.findByCriteria(materialsCriteria).get(0);
         } catch (Exception ex) {
             return null;
@@ -420,7 +420,7 @@ public class BatchUploadServiceImpl implements BatchUploadService {
             ProductBrandCriteria productBrandCriteria = new ProductBrandCriteria();
             StringFilter stringFilter = new StringFilter();
             stringFilter.setContains(filter.trim());
-            productBrandCriteria.setProductBrandName(stringFilter);
+            productBrandCriteria.setName(stringFilter);
             return productBrandQueryService.findByCriteria(productBrandCriteria).get(0);
         } catch (Exception ex) {
             return null;
@@ -432,7 +432,7 @@ public class BatchUploadServiceImpl implements BatchUploadService {
             WarrantyTypesCriteria warrantyTypesCriteria = new WarrantyTypesCriteria();
             StringFilter stringFilter = new StringFilter();
             stringFilter.setContains(filter.trim());
-            warrantyTypesCriteria.setWarrantyTypeName(stringFilter);
+            warrantyTypesCriteria.setName(stringFilter);
             return warrantyTypesQueryService.findByCriteria(warrantyTypesCriteria).get(0);
         } catch (Exception ex) {
             return null;

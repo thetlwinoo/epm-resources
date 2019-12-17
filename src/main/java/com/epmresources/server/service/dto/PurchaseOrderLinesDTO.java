@@ -13,16 +13,19 @@ public class PurchaseOrderLinesDTO implements Serializable {
     private Long id;
 
     @NotNull
-    private Integer ordersOuters;
+    private Integer orderedOuters;
 
+    @NotNull
     private String description;
 
+    @NotNull
     private Integer receivedOuters;
 
     private BigDecimal expectedUnitPricePerOuter;
 
     private Instant lastReceiptDate;
 
+    @NotNull
     private Boolean isOrderLineFinalized;
 
     private String lastEditedBy;
@@ -32,11 +35,11 @@ public class PurchaseOrderLinesDTO implements Serializable {
 
     private Long packageTypeId;
 
-    private String packageTypePackageTypeName;
+    private String packageTypeName;
 
     private Long stockItemId;
 
-    private String stockItemStockItemName;
+    private String stockItemName;
 
     private Long purchaseOrderId;
 
@@ -48,12 +51,12 @@ public class PurchaseOrderLinesDTO implements Serializable {
         this.id = id;
     }
 
-    public Integer getOrdersOuters() {
-        return ordersOuters;
+    public Integer getOrderedOuters() {
+        return orderedOuters;
     }
 
-    public void setOrdersOuters(Integer ordersOuters) {
-        this.ordersOuters = ordersOuters;
+    public void setOrderedOuters(Integer orderedOuters) {
+        this.orderedOuters = orderedOuters;
     }
 
     public String getDescription() {
@@ -120,12 +123,12 @@ public class PurchaseOrderLinesDTO implements Serializable {
         this.packageTypeId = packageTypesId;
     }
 
-    public String getPackageTypePackageTypeName() {
-        return packageTypePackageTypeName;
+    public String getPackageTypeName() {
+        return packageTypeName;
     }
 
-    public void setPackageTypePackageTypeName(String packageTypesPackageTypeName) {
-        this.packageTypePackageTypeName = packageTypesPackageTypeName;
+    public void setPackageTypeName(String packageTypesName) {
+        this.packageTypeName = packageTypesName;
     }
 
     public Long getStockItemId() {
@@ -136,12 +139,12 @@ public class PurchaseOrderLinesDTO implements Serializable {
         this.stockItemId = stockItemsId;
     }
 
-    public String getStockItemStockItemName() {
-        return stockItemStockItemName;
+    public String getStockItemName() {
+        return stockItemName;
     }
 
-    public void setStockItemStockItemName(String stockItemsStockItemName) {
-        this.stockItemStockItemName = stockItemsStockItemName;
+    public void setStockItemName(String stockItemsName) {
+        this.stockItemName = stockItemsName;
     }
 
     public Long getPurchaseOrderId() {
@@ -177,7 +180,7 @@ public class PurchaseOrderLinesDTO implements Serializable {
     public String toString() {
         return "PurchaseOrderLinesDTO{" +
             "id=" + getId() +
-            ", ordersOuters=" + getOrdersOuters() +
+            ", orderedOuters=" + getOrderedOuters() +
             ", description='" + getDescription() + "'" +
             ", receivedOuters=" + getReceivedOuters() +
             ", expectedUnitPricePerOuter=" + getExpectedUnitPricePerOuter() +
@@ -186,9 +189,9 @@ public class PurchaseOrderLinesDTO implements Serializable {
             ", lastEditedBy='" + getLastEditedBy() + "'" +
             ", lastEditedWhen='" + getLastEditedWhen() + "'" +
             ", packageType=" + getPackageTypeId() +
-            ", packageType='" + getPackageTypePackageTypeName() + "'" +
+            ", packageType='" + getPackageTypeName() + "'" +
             ", stockItem=" + getStockItemId() +
-            ", stockItem='" + getStockItemStockItemName() + "'" +
+            ", stockItem='" + getStockItemName() + "'" +
             ", purchaseOrder=" + getPurchaseOrderId() +
             "}";
     }

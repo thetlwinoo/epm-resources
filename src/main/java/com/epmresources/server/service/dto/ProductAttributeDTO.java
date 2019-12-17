@@ -11,14 +11,16 @@ public class ProductAttributeDTO implements Serializable {
     private Long id;
 
     @NotNull
-    private String productAttributeValue;
+    private String value;
 
 
     private Long productAttributeSetId;
 
-    private String productAttributeSetProductAttributeSetName;
+    private String productAttributeSetName;
 
     private Long supplierId;
+
+    private String supplierName;
 
     public Long getId() {
         return id;
@@ -28,12 +30,12 @@ public class ProductAttributeDTO implements Serializable {
         this.id = id;
     }
 
-    public String getProductAttributeValue() {
-        return productAttributeValue;
+    public String getValue() {
+        return value;
     }
 
-    public void setProductAttributeValue(String productAttributeValue) {
-        this.productAttributeValue = productAttributeValue;
+    public void setValue(String value) {
+        this.value = value;
     }
 
     public Long getProductAttributeSetId() {
@@ -44,12 +46,12 @@ public class ProductAttributeDTO implements Serializable {
         this.productAttributeSetId = productAttributeSetId;
     }
 
-    public String getProductAttributeSetProductAttributeSetName() {
-        return productAttributeSetProductAttributeSetName;
+    public String getProductAttributeSetName() {
+        return productAttributeSetName;
     }
 
-    public void setProductAttributeSetProductAttributeSetName(String productAttributeSetProductAttributeSetName) {
-        this.productAttributeSetProductAttributeSetName = productAttributeSetProductAttributeSetName;
+    public void setProductAttributeSetName(String productAttributeSetName) {
+        this.productAttributeSetName = productAttributeSetName;
     }
 
     public Long getSupplierId() {
@@ -58,6 +60,14 @@ public class ProductAttributeDTO implements Serializable {
 
     public void setSupplierId(Long suppliersId) {
         this.supplierId = suppliersId;
+    }
+
+    public String getSupplierName() {
+        return supplierName;
+    }
+
+    public void setSupplierName(String suppliersName) {
+        this.supplierName = suppliersName;
     }
 
     @Override
@@ -85,10 +95,11 @@ public class ProductAttributeDTO implements Serializable {
     public String toString() {
         return "ProductAttributeDTO{" +
             "id=" + getId() +
-            ", productAttributeValue='" + getProductAttributeValue() + "'" +
+            ", value='" + getValue() + "'" +
             ", productAttributeSet=" + getProductAttributeSetId() +
-            ", productAttributeSet='" + getProductAttributeSetProductAttributeSetName() + "'" +
+            ", productAttributeSet='" + getProductAttributeSetName() + "'" +
             ", supplier=" + getSupplierId() +
+            ", supplier='" + getSupplierName() + "'" +
             "}";
     }
 }

@@ -38,8 +38,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = EpmresourcesApp.class)
 public class UploadActionTypesResourceIT {
 
-    private static final String DEFAULT_ACTION_TYPE_NAME = "AAAAAAAAAA";
-    private static final String UPDATED_ACTION_TYPE_NAME = "BBBBBBBBBB";
+    private static final String DEFAULT_NAME = "AAAAAAAAAA";
+    private static final String UPDATED_NAME = "BBBBBBBBBB";
 
     @Autowired
     private UploadActionTypesRepository uploadActionTypesRepository;
@@ -92,7 +92,7 @@ public class UploadActionTypesResourceIT {
      */
     public static UploadActionTypes createEntity(EntityManager em) {
         UploadActionTypes uploadActionTypes = new UploadActionTypes()
-            .actionTypeName(DEFAULT_ACTION_TYPE_NAME);
+            .name(DEFAULT_NAME);
         return uploadActionTypes;
     }
     /**
@@ -103,7 +103,7 @@ public class UploadActionTypesResourceIT {
      */
     public static UploadActionTypes createUpdatedEntity(EntityManager em) {
         UploadActionTypes uploadActionTypes = new UploadActionTypes()
-            .actionTypeName(UPDATED_ACTION_TYPE_NAME);
+            .name(UPDATED_NAME);
         return uploadActionTypes;
     }
 
@@ -128,7 +128,7 @@ public class UploadActionTypesResourceIT {
         List<UploadActionTypes> uploadActionTypesList = uploadActionTypesRepository.findAll();
         assertThat(uploadActionTypesList).hasSize(databaseSizeBeforeCreate + 1);
         UploadActionTypes testUploadActionTypes = uploadActionTypesList.get(uploadActionTypesList.size() - 1);
-        assertThat(testUploadActionTypes.getActionTypeName()).isEqualTo(DEFAULT_ACTION_TYPE_NAME);
+        assertThat(testUploadActionTypes.getName()).isEqualTo(DEFAULT_NAME);
     }
 
     @Test
@@ -163,7 +163,7 @@ public class UploadActionTypesResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(uploadActionTypes.getId().intValue())))
-            .andExpect(jsonPath("$.[*].actionTypeName").value(hasItem(DEFAULT_ACTION_TYPE_NAME)));
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)));
     }
     
     @Test
@@ -177,84 +177,84 @@ public class UploadActionTypesResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(uploadActionTypes.getId().intValue()))
-            .andExpect(jsonPath("$.actionTypeName").value(DEFAULT_ACTION_TYPE_NAME));
+            .andExpect(jsonPath("$.name").value(DEFAULT_NAME));
     }
 
     @Test
     @Transactional
-    public void getAllUploadActionTypesByActionTypeNameIsEqualToSomething() throws Exception {
+    public void getAllUploadActionTypesByNameIsEqualToSomething() throws Exception {
         // Initialize the database
         uploadActionTypesRepository.saveAndFlush(uploadActionTypes);
 
-        // Get all the uploadActionTypesList where actionTypeName equals to DEFAULT_ACTION_TYPE_NAME
-        defaultUploadActionTypesShouldBeFound("actionTypeName.equals=" + DEFAULT_ACTION_TYPE_NAME);
+        // Get all the uploadActionTypesList where name equals to DEFAULT_NAME
+        defaultUploadActionTypesShouldBeFound("name.equals=" + DEFAULT_NAME);
 
-        // Get all the uploadActionTypesList where actionTypeName equals to UPDATED_ACTION_TYPE_NAME
-        defaultUploadActionTypesShouldNotBeFound("actionTypeName.equals=" + UPDATED_ACTION_TYPE_NAME);
+        // Get all the uploadActionTypesList where name equals to UPDATED_NAME
+        defaultUploadActionTypesShouldNotBeFound("name.equals=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllUploadActionTypesByActionTypeNameIsNotEqualToSomething() throws Exception {
+    public void getAllUploadActionTypesByNameIsNotEqualToSomething() throws Exception {
         // Initialize the database
         uploadActionTypesRepository.saveAndFlush(uploadActionTypes);
 
-        // Get all the uploadActionTypesList where actionTypeName not equals to DEFAULT_ACTION_TYPE_NAME
-        defaultUploadActionTypesShouldNotBeFound("actionTypeName.notEquals=" + DEFAULT_ACTION_TYPE_NAME);
+        // Get all the uploadActionTypesList where name not equals to DEFAULT_NAME
+        defaultUploadActionTypesShouldNotBeFound("name.notEquals=" + DEFAULT_NAME);
 
-        // Get all the uploadActionTypesList where actionTypeName not equals to UPDATED_ACTION_TYPE_NAME
-        defaultUploadActionTypesShouldBeFound("actionTypeName.notEquals=" + UPDATED_ACTION_TYPE_NAME);
+        // Get all the uploadActionTypesList where name not equals to UPDATED_NAME
+        defaultUploadActionTypesShouldBeFound("name.notEquals=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllUploadActionTypesByActionTypeNameIsInShouldWork() throws Exception {
+    public void getAllUploadActionTypesByNameIsInShouldWork() throws Exception {
         // Initialize the database
         uploadActionTypesRepository.saveAndFlush(uploadActionTypes);
 
-        // Get all the uploadActionTypesList where actionTypeName in DEFAULT_ACTION_TYPE_NAME or UPDATED_ACTION_TYPE_NAME
-        defaultUploadActionTypesShouldBeFound("actionTypeName.in=" + DEFAULT_ACTION_TYPE_NAME + "," + UPDATED_ACTION_TYPE_NAME);
+        // Get all the uploadActionTypesList where name in DEFAULT_NAME or UPDATED_NAME
+        defaultUploadActionTypesShouldBeFound("name.in=" + DEFAULT_NAME + "," + UPDATED_NAME);
 
-        // Get all the uploadActionTypesList where actionTypeName equals to UPDATED_ACTION_TYPE_NAME
-        defaultUploadActionTypesShouldNotBeFound("actionTypeName.in=" + UPDATED_ACTION_TYPE_NAME);
+        // Get all the uploadActionTypesList where name equals to UPDATED_NAME
+        defaultUploadActionTypesShouldNotBeFound("name.in=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllUploadActionTypesByActionTypeNameIsNullOrNotNull() throws Exception {
+    public void getAllUploadActionTypesByNameIsNullOrNotNull() throws Exception {
         // Initialize the database
         uploadActionTypesRepository.saveAndFlush(uploadActionTypes);
 
-        // Get all the uploadActionTypesList where actionTypeName is not null
-        defaultUploadActionTypesShouldBeFound("actionTypeName.specified=true");
+        // Get all the uploadActionTypesList where name is not null
+        defaultUploadActionTypesShouldBeFound("name.specified=true");
 
-        // Get all the uploadActionTypesList where actionTypeName is null
-        defaultUploadActionTypesShouldNotBeFound("actionTypeName.specified=false");
+        // Get all the uploadActionTypesList where name is null
+        defaultUploadActionTypesShouldNotBeFound("name.specified=false");
     }
                 @Test
     @Transactional
-    public void getAllUploadActionTypesByActionTypeNameContainsSomething() throws Exception {
+    public void getAllUploadActionTypesByNameContainsSomething() throws Exception {
         // Initialize the database
         uploadActionTypesRepository.saveAndFlush(uploadActionTypes);
 
-        // Get all the uploadActionTypesList where actionTypeName contains DEFAULT_ACTION_TYPE_NAME
-        defaultUploadActionTypesShouldBeFound("actionTypeName.contains=" + DEFAULT_ACTION_TYPE_NAME);
+        // Get all the uploadActionTypesList where name contains DEFAULT_NAME
+        defaultUploadActionTypesShouldBeFound("name.contains=" + DEFAULT_NAME);
 
-        // Get all the uploadActionTypesList where actionTypeName contains UPDATED_ACTION_TYPE_NAME
-        defaultUploadActionTypesShouldNotBeFound("actionTypeName.contains=" + UPDATED_ACTION_TYPE_NAME);
+        // Get all the uploadActionTypesList where name contains UPDATED_NAME
+        defaultUploadActionTypesShouldNotBeFound("name.contains=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllUploadActionTypesByActionTypeNameNotContainsSomething() throws Exception {
+    public void getAllUploadActionTypesByNameNotContainsSomething() throws Exception {
         // Initialize the database
         uploadActionTypesRepository.saveAndFlush(uploadActionTypes);
 
-        // Get all the uploadActionTypesList where actionTypeName does not contain DEFAULT_ACTION_TYPE_NAME
-        defaultUploadActionTypesShouldNotBeFound("actionTypeName.doesNotContain=" + DEFAULT_ACTION_TYPE_NAME);
+        // Get all the uploadActionTypesList where name does not contain DEFAULT_NAME
+        defaultUploadActionTypesShouldNotBeFound("name.doesNotContain=" + DEFAULT_NAME);
 
-        // Get all the uploadActionTypesList where actionTypeName does not contain UPDATED_ACTION_TYPE_NAME
-        defaultUploadActionTypesShouldBeFound("actionTypeName.doesNotContain=" + UPDATED_ACTION_TYPE_NAME);
+        // Get all the uploadActionTypesList where name does not contain UPDATED_NAME
+        defaultUploadActionTypesShouldBeFound("name.doesNotContain=" + UPDATED_NAME);
     }
 
     /**
@@ -265,7 +265,7 @@ public class UploadActionTypesResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(uploadActionTypes.getId().intValue())))
-            .andExpect(jsonPath("$.[*].actionTypeName").value(hasItem(DEFAULT_ACTION_TYPE_NAME)));
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)));
 
         // Check, that the count call also returns 1
         restUploadActionTypesMockMvc.perform(get("/api/upload-action-types/count?sort=id,desc&" + filter))
@@ -313,7 +313,7 @@ public class UploadActionTypesResourceIT {
         // Disconnect from session so that the updates on updatedUploadActionTypes are not directly saved in db
         em.detach(updatedUploadActionTypes);
         updatedUploadActionTypes
-            .actionTypeName(UPDATED_ACTION_TYPE_NAME);
+            .name(UPDATED_NAME);
         UploadActionTypesDTO uploadActionTypesDTO = uploadActionTypesMapper.toDto(updatedUploadActionTypes);
 
         restUploadActionTypesMockMvc.perform(put("/api/upload-action-types")
@@ -325,7 +325,7 @@ public class UploadActionTypesResourceIT {
         List<UploadActionTypes> uploadActionTypesList = uploadActionTypesRepository.findAll();
         assertThat(uploadActionTypesList).hasSize(databaseSizeBeforeUpdate);
         UploadActionTypes testUploadActionTypes = uploadActionTypesList.get(uploadActionTypesList.size() - 1);
-        assertThat(testUploadActionTypes.getActionTypeName()).isEqualTo(UPDATED_ACTION_TYPE_NAME);
+        assertThat(testUploadActionTypes.getName()).isEqualTo(UPDATED_NAME);
     }
 
     @Test

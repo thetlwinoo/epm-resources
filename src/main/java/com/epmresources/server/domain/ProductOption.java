@@ -24,8 +24,8 @@ public class ProductOption implements Serializable {
     private Long id;
 
     @NotNull
-    @Column(name = "product_option_value", nullable = false)
-    private String productOptionValue;
+    @Column(name = "value", nullable = false)
+    private String value;
 
     @ManyToOne
     @JsonIgnoreProperties("productOptions")
@@ -44,17 +44,17 @@ public class ProductOption implements Serializable {
         this.id = id;
     }
 
-    public String getProductOptionValue() {
-        return productOptionValue;
+    public String getValue() {
+        return value;
     }
 
-    public ProductOption productOptionValue(String productOptionValue) {
-        this.productOptionValue = productOptionValue;
+    public ProductOption value(String value) {
+        this.value = value;
         return this;
     }
 
-    public void setProductOptionValue(String productOptionValue) {
-        this.productOptionValue = productOptionValue;
+    public void setValue(String value) {
+        this.value = value;
     }
 
     public ProductOptionSet getProductOptionSet() {
@@ -104,7 +104,7 @@ public class ProductOption implements Serializable {
     public String toString() {
         return "ProductOption{" +
             "id=" + getId() +
-            ", productOptionValue='" + getProductOptionValue() + "'" +
+            ", value='" + getValue() + "'" +
             "}";
     }
 }

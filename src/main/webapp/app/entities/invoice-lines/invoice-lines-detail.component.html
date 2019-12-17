@@ -44,13 +44,13 @@
                 <dt><span jhiTranslate="epmresourcesApp.invoiceLines.packageType">Package Type</span></dt>
                 <dd>
                     <div *ngIf="invoiceLines.packageTypeId">
-                        <a [routerLink]="['/package-types', invoiceLines.packageTypeId, 'view']">{{invoiceLines.packageTypePackageTypeName}}</a>
+                        <a [routerLink]="['/package-types', invoiceLines.packageTypeId, 'view']">{{invoiceLines.packageTypeName}}</a>
                     </div>
                 </dd>
                 <dt><span jhiTranslate="epmresourcesApp.invoiceLines.stockItem">Stock Item</span></dt>
                 <dd>
                     <div *ngIf="invoiceLines.stockItemId">
-                        <a [routerLink]="['/stock-items', invoiceLines.stockItemId, 'view']">{{invoiceLines.stockItemStockItemName}}</a>
+                        <a [routerLink]="['/stock-items', invoiceLines.stockItemId, 'view']">{{invoiceLines.stockItemName}}</a>
                     </div>
                 </dd>
                 <dt><span jhiTranslate="epmresourcesApp.invoiceLines.invoice">Invoice</span></dt>

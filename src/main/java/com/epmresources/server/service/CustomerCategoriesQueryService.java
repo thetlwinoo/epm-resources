@@ -91,8 +91,8 @@ public class CustomerCategoriesQueryService extends QueryService<CustomerCategor
             if (criteria.getId() != null) {
                 specification = specification.and(buildSpecification(criteria.getId(), CustomerCategories_.id));
             }
-            if (criteria.getCustomerCategoryName() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getCustomerCategoryName(), CustomerCategories_.customerCategoryName));
+            if (criteria.getName() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getName(), CustomerCategories_.name));
             }
             if (criteria.getValidFrom() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getValidFrom(), CustomerCategories_.validFrom));

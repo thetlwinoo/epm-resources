@@ -56,7 +56,7 @@ describe('Service Tests', () => {
       it('should update a UploadActionTypes', () => {
         const returnedFromService = Object.assign(
           {
-            actionTypeName: 'BBBBBB'
+            name: 'BBBBBB'
           },
           elemDefault
         );
@@ -74,7 +74,7 @@ describe('Service Tests', () => {
       it('should return a list of UploadActionTypes', () => {
         const returnedFromService = Object.assign(
           {
-            actionTypeName: 'BBBBBB'
+            name: 'BBBBBB'
           },
           elemDefault
         );

@@ -26,18 +26,18 @@ export class PhoneNumberTypeUpdatePage {
   pageTitle = element(by.id('jhi-phone-number-type-heading'));
   saveButton = element(by.id('save-entity'));
   cancelButton = element(by.id('cancel-save'));
-  phoneNumberTypeNameInput = element(by.id('field_phoneNumberTypeName'));
+  nameInput = element(by.id('field_name'));
 
   async getPageTitle() {
     return this.pageTitle.getAttribute('jhiTranslate');
   }
 
-  async setPhoneNumberTypeNameInput(phoneNumberTypeName) {
-    await this.phoneNumberTypeNameInput.sendKeys(phoneNumberTypeName);
+  async setNameInput(name) {
+    await this.nameInput.sendKeys(name);
   }
 
-  async getPhoneNumberTypeNameInput() {
-    return await this.phoneNumberTypeNameInput.getAttribute('value');
+  async getNameInput() {
+    return await this.nameInput.getAttribute('value');
   }
 
   async save(timeout?: number) {

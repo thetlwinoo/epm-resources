@@ -26,7 +26,7 @@ export class SupplierCategoriesUpdatePage {
   pageTitle = element(by.id('jhi-supplier-categories-heading'));
   saveButton = element(by.id('save-entity'));
   cancelButton = element(by.id('cancel-save'));
-  supplierCategoryNameInput = element(by.id('field_supplierCategoryName'));
+  nameInput = element(by.id('field_name'));
   validFromInput = element(by.id('field_validFrom'));
   validToInput = element(by.id('field_validTo'));
 
@@ -34,12 +34,12 @@ export class SupplierCategoriesUpdatePage {
     return this.pageTitle.getAttribute('jhiTranslate');
   }
 
-  async setSupplierCategoryNameInput(supplierCategoryName) {
-    await this.supplierCategoryNameInput.sendKeys(supplierCategoryName);
+  async setNameInput(name) {
+    await this.nameInput.sendKeys(name);
   }
 
-  async getSupplierCategoryNameInput() {
-    return await this.supplierCategoryNameInput.getAttribute('value');
+  async getNameInput() {
+    return await this.nameInput.getAttribute('value');
   }
 
   async setValidFromInput(validFrom) {

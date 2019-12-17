@@ -35,11 +35,11 @@ public class AddressesDTO implements Serializable {
 
     private Long stateProvinceId;
 
-    private String stateProvinceStateProvinceName;
+    private String stateProvinceName;
 
     private Long addressTypeId;
 
-    private String addressTypeAddressTypeName;
+    private String addressTypeName;
 
     private Long personId;
 
@@ -131,12 +131,12 @@ public class AddressesDTO implements Serializable {
         this.stateProvinceId = stateProvincesId;
     }
 
-    public String getStateProvinceStateProvinceName() {
-        return stateProvinceStateProvinceName;
+    public String getStateProvinceName() {
+        return stateProvinceName;
     }
 
-    public void setStateProvinceStateProvinceName(String stateProvincesStateProvinceName) {
-        this.stateProvinceStateProvinceName = stateProvincesStateProvinceName;
+    public void setStateProvinceName(String stateProvincesName) {
+        this.stateProvinceName = stateProvincesName;
     }
 
     public Long getAddressTypeId() {
@@ -147,12 +147,12 @@ public class AddressesDTO implements Serializable {
         this.addressTypeId = addressTypesId;
     }
 
-    public String getAddressTypeAddressTypeName() {
-        return addressTypeAddressTypeName;
+    public String getAddressTypeName() {
+        return addressTypeName;
     }
 
-    public void setAddressTypeAddressTypeName(String addressTypesAddressTypeName) {
-        this.addressTypeAddressTypeName = addressTypesAddressTypeName;
+    public void setAddressTypeName(String addressTypesName) {
+        this.addressTypeName = addressTypesName;
     }
 
     public Long getPersonId() {
@@ -198,9 +198,9 @@ public class AddressesDTO implements Serializable {
             ", defaultInd='" + isDefaultInd() + "'" +
             ", activeInd='" + isActiveInd() + "'" +
             ", stateProvince=" + getStateProvinceId() +
-            ", stateProvince='" + getStateProvinceStateProvinceName() + "'" +
+            ", stateProvince='" + getStateProvinceName() + "'" +
             ", addressType=" + getAddressTypeId() +
-            ", addressType='" + getAddressTypeAddressTypeName() + "'" +
+            ", addressType='" + getAddressTypeName() + "'" +
             ", person=" + getPersonId() +
             "}";
     }

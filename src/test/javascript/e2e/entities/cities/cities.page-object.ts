@@ -26,7 +26,7 @@ export class CitiesUpdatePage {
   pageTitle = element(by.id('jhi-cities-heading'));
   saveButton = element(by.id('save-entity'));
   cancelButton = element(by.id('cancel-save'));
-  cityNameInput = element(by.id('field_cityName'));
+  nameInput = element(by.id('field_name'));
   locationInput = element(by.id('field_location'));
   latestRecordedPopulationInput = element(by.id('field_latestRecordedPopulation'));
   validFromInput = element(by.id('field_validFrom'));
@@ -37,12 +37,12 @@ export class CitiesUpdatePage {
     return this.pageTitle.getAttribute('jhiTranslate');
   }
 
-  async setCityNameInput(cityName) {
-    await this.cityNameInput.sendKeys(cityName);
+  async setNameInput(name) {
+    await this.nameInput.sendKeys(name);
   }
 
-  async getCityNameInput() {
-    return await this.cityNameInput.getAttribute('value');
+  async getNameInput() {
+    return await this.nameInput.getAttribute('value');
   }
 
   async setLocationInput(location) {

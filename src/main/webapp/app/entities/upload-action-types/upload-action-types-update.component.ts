@@ -17,7 +17,7 @@ export class UploadActionTypesUpdateComponent implements OnInit {
 
   editForm = this.fb.group({
     id: [],
-    actionTypeName: []
+    name: []
   });
 
   constructor(
@@ -36,7 +36,7 @@ export class UploadActionTypesUpdateComponent implements OnInit {
   updateForm(uploadActionTypes: IUploadActionTypes) {
     this.editForm.patchValue({
       id: uploadActionTypes.id,
-      actionTypeName: uploadActionTypes.actionTypeName
+      name: uploadActionTypes.name
     });
   }
 
@@ -58,7 +58,7 @@ export class UploadActionTypesUpdateComponent implements OnInit {
     return {
       ...new UploadActionTypes(),
       id: this.editForm.get(['id']).value,
-      actionTypeName: this.editForm.get(['actionTypeName']).value
+      name: this.editForm.get(['name']).value
     };
   }
 

@@ -41,11 +41,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = EpmresourcesApp.class)
 public class StateProvincesResourceIT {
 
-    private static final String DEFAULT_STATE_PROVINCE_CODE = "AAAAAAAAAA";
-    private static final String UPDATED_STATE_PROVINCE_CODE = "BBBBBBBBBB";
+    private static final String DEFAULT_CODE = "AAAAAAAAAA";
+    private static final String UPDATED_CODE = "BBBBBBBBBB";
 
-    private static final String DEFAULT_STATE_PROVINCE_NAME = "AAAAAAAAAA";
-    private static final String UPDATED_STATE_PROVINCE_NAME = "BBBBBBBBBB";
+    private static final String DEFAULT_NAME = "AAAAAAAAAA";
+    private static final String UPDATED_NAME = "BBBBBBBBBB";
 
     private static final String DEFAULT_SALES_TERRITORY = "AAAAAAAAAA";
     private static final String UPDATED_SALES_TERRITORY = "BBBBBBBBBB";
@@ -114,8 +114,8 @@ public class StateProvincesResourceIT {
      */
     public static StateProvinces createEntity(EntityManager em) {
         StateProvinces stateProvinces = new StateProvinces()
-            .stateProvinceCode(DEFAULT_STATE_PROVINCE_CODE)
-            .stateProvinceName(DEFAULT_STATE_PROVINCE_NAME)
+            .code(DEFAULT_CODE)
+            .name(DEFAULT_NAME)
             .salesTerritory(DEFAULT_SALES_TERRITORY)
             .border(DEFAULT_BORDER)
             .latestRecordedPopulation(DEFAULT_LATEST_RECORDED_POPULATION)
@@ -131,8 +131,8 @@ public class StateProvincesResourceIT {
      */
     public static StateProvinces createUpdatedEntity(EntityManager em) {
         StateProvinces stateProvinces = new StateProvinces()
-            .stateProvinceCode(UPDATED_STATE_PROVINCE_CODE)
-            .stateProvinceName(UPDATED_STATE_PROVINCE_NAME)
+            .code(UPDATED_CODE)
+            .name(UPDATED_NAME)
             .salesTerritory(UPDATED_SALES_TERRITORY)
             .border(UPDATED_BORDER)
             .latestRecordedPopulation(UPDATED_LATEST_RECORDED_POPULATION)
@@ -162,8 +162,8 @@ public class StateProvincesResourceIT {
         List<StateProvinces> stateProvincesList = stateProvincesRepository.findAll();
         assertThat(stateProvincesList).hasSize(databaseSizeBeforeCreate + 1);
         StateProvinces testStateProvinces = stateProvincesList.get(stateProvincesList.size() - 1);
-        assertThat(testStateProvinces.getStateProvinceCode()).isEqualTo(DEFAULT_STATE_PROVINCE_CODE);
-        assertThat(testStateProvinces.getStateProvinceName()).isEqualTo(DEFAULT_STATE_PROVINCE_NAME);
+        assertThat(testStateProvinces.getCode()).isEqualTo(DEFAULT_CODE);
+        assertThat(testStateProvinces.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testStateProvinces.getSalesTerritory()).isEqualTo(DEFAULT_SALES_TERRITORY);
         assertThat(testStateProvinces.getBorder()).isEqualTo(DEFAULT_BORDER);
         assertThat(testStateProvinces.getLatestRecordedPopulation()).isEqualTo(DEFAULT_LATEST_RECORDED_POPULATION);
@@ -194,10 +194,10 @@ public class StateProvincesResourceIT {
 
     @Test
     @Transactional
-    public void checkStateProvinceCodeIsRequired() throws Exception {
+    public void checkCodeIsRequired() throws Exception {
         int databaseSizeBeforeTest = stateProvincesRepository.findAll().size();
         // set the field null
-        stateProvinces.setStateProvinceCode(null);
+        stateProvinces.setCode(null);
 
         // Create the StateProvinces, which fails.
         StateProvincesDTO stateProvincesDTO = stateProvincesMapper.toDto(stateProvinces);
@@ -213,10 +213,10 @@ public class StateProvincesResourceIT {
 
     @Test
     @Transactional
-    public void checkStateProvinceNameIsRequired() throws Exception {
+    public void checkNameIsRequired() throws Exception {
         int databaseSizeBeforeTest = stateProvincesRepository.findAll().size();
         // set the field null
-        stateProvinces.setStateProvinceName(null);
+        stateProvinces.setName(null);
 
         // Create the StateProvinces, which fails.
         StateProvincesDTO stateProvincesDTO = stateProvincesMapper.toDto(stateProvinces);
@@ -298,8 +298,8 @@ public class StateProvincesResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(stateProvinces.getId().intValue())))
-            .andExpect(jsonPath("$.[*].stateProvinceCode").value(hasItem(DEFAULT_STATE_PROVINCE_CODE)))
-            .andExpect(jsonPath("$.[*].stateProvinceName").value(hasItem(DEFAULT_STATE_PROVINCE_NAME)))
+            .andExpect(jsonPath("$.[*].code").value(hasItem(DEFAULT_CODE)))
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].salesTerritory").value(hasItem(DEFAULT_SALES_TERRITORY)))
             .andExpect(jsonPath("$.[*].border").value(hasItem(DEFAULT_BORDER)))
             .andExpect(jsonPath("$.[*].latestRecordedPopulation").value(hasItem(DEFAULT_LATEST_RECORDED_POPULATION.intValue())))
@@ -318,8 +318,8 @@ public class StateProvincesResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(stateProvinces.getId().intValue()))
-            .andExpect(jsonPath("$.stateProvinceCode").value(DEFAULT_STATE_PROVINCE_CODE))
-            .andExpect(jsonPath("$.stateProvinceName").value(DEFAULT_STATE_PROVINCE_NAME))
+            .andExpect(jsonPath("$.code").value(DEFAULT_CODE))
+            .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
             .andExpect(jsonPath("$.salesTerritory").value(DEFAULT_SALES_TERRITORY))
             .andExpect(jsonPath("$.border").value(DEFAULT_BORDER))
             .andExpect(jsonPath("$.latestRecordedPopulation").value(DEFAULT_LATEST_RECORDED_POPULATION.intValue()))
@@ -329,157 +329,157 @@ public class StateProvincesResourceIT {
 
     @Test
     @Transactional
-    public void getAllStateProvincesByStateProvinceCodeIsEqualToSomething() throws Exception {
+    public void getAllStateProvincesByCodeIsEqualToSomething() throws Exception {
         // Initialize the database
         stateProvincesRepository.saveAndFlush(stateProvinces);
 
-        // Get all the stateProvincesList where stateProvinceCode equals to DEFAULT_STATE_PROVINCE_CODE
-        defaultStateProvincesShouldBeFound("stateProvinceCode.equals=" + DEFAULT_STATE_PROVINCE_CODE);
+        // Get all the stateProvincesList where code equals to DEFAULT_CODE
+        defaultStateProvincesShouldBeFound("code.equals=" + DEFAULT_CODE);
 
-        // Get all the stateProvincesList where stateProvinceCode equals to UPDATED_STATE_PROVINCE_CODE
-        defaultStateProvincesShouldNotBeFound("stateProvinceCode.equals=" + UPDATED_STATE_PROVINCE_CODE);
+        // Get all the stateProvincesList where code equals to UPDATED_CODE
+        defaultStateProvincesShouldNotBeFound("code.equals=" + UPDATED_CODE);
     }
 
     @Test
     @Transactional
-    public void getAllStateProvincesByStateProvinceCodeIsNotEqualToSomething() throws Exception {
+    public void getAllStateProvincesByCodeIsNotEqualToSomething() throws Exception {
         // Initialize the database
         stateProvincesRepository.saveAndFlush(stateProvinces);
 
-        // Get all the stateProvincesList where stateProvinceCode not equals to DEFAULT_STATE_PROVINCE_CODE
-        defaultStateProvincesShouldNotBeFound("stateProvinceCode.notEquals=" + DEFAULT_STATE_PROVINCE_CODE);
+        // Get all the stateProvincesList where code not equals to DEFAULT_CODE
+        defaultStateProvincesShouldNotBeFound("code.notEquals=" + DEFAULT_CODE);
 
-        // Get all the stateProvincesList where stateProvinceCode not equals to UPDATED_STATE_PROVINCE_CODE
-        defaultStateProvincesShouldBeFound("stateProvinceCode.notEquals=" + UPDATED_STATE_PROVINCE_CODE);
+        // Get all the stateProvincesList where code not equals to UPDATED_CODE
+        defaultStateProvincesShouldBeFound("code.notEquals=" + UPDATED_CODE);
     }
 
     @Test
     @Transactional
-    public void getAllStateProvincesByStateProvinceCodeIsInShouldWork() throws Exception {
+    public void getAllStateProvincesByCodeIsInShouldWork() throws Exception {
         // Initialize the database
         stateProvincesRepository.saveAndFlush(stateProvinces);
 
-        // Get all the stateProvincesList where stateProvinceCode in DEFAULT_STATE_PROVINCE_CODE or UPDATED_STATE_PROVINCE_CODE
-        defaultStateProvincesShouldBeFound("stateProvinceCode.in=" + DEFAULT_STATE_PROVINCE_CODE + "," + UPDATED_STATE_PROVINCE_CODE);
+        // Get all the stateProvincesList where code in DEFAULT_CODE or UPDATED_CODE
+        defaultStateProvincesShouldBeFound("code.in=" + DEFAULT_CODE + "," + UPDATED_CODE);
 
-        // Get all the stateProvincesList where stateProvinceCode equals to UPDATED_STATE_PROVINCE_CODE
-        defaultStateProvincesShouldNotBeFound("stateProvinceCode.in=" + UPDATED_STATE_PROVINCE_CODE);
+        // Get all the stateProvincesList where code equals to UPDATED_CODE
+        defaultStateProvincesShouldNotBeFound("code.in=" + UPDATED_CODE);
     }
 
     @Test
     @Transactional
-    public void getAllStateProvincesByStateProvinceCodeIsNullOrNotNull() throws Exception {
+    public void getAllStateProvincesByCodeIsNullOrNotNull() throws Exception {
         // Initialize the database
         stateProvincesRepository.saveAndFlush(stateProvinces);
 
-        // Get all the stateProvincesList where stateProvinceCode is not null
-        defaultStateProvincesShouldBeFound("stateProvinceCode.specified=true");
+        // Get all the stateProvincesList where code is not null
+        defaultStateProvincesShouldBeFound("code.specified=true");
 
-        // Get all the stateProvincesList where stateProvinceCode is null
-        defaultStateProvincesShouldNotBeFound("stateProvinceCode.specified=false");
+        // Get all the stateProvincesList where code is null
+        defaultStateProvincesShouldNotBeFound("code.specified=false");
     }
                 @Test
     @Transactional
-    public void getAllStateProvincesByStateProvinceCodeContainsSomething() throws Exception {
+    public void getAllStateProvincesByCodeContainsSomething() throws Exception {
         // Initialize the database
         stateProvincesRepository.saveAndFlush(stateProvinces);
 
-        // Get all the stateProvincesList where stateProvinceCode contains DEFAULT_STATE_PROVINCE_CODE
-        defaultStateProvincesShouldBeFound("stateProvinceCode.contains=" + DEFAULT_STATE_PROVINCE_CODE);
+        // Get all the stateProvincesList where code contains DEFAULT_CODE
+        defaultStateProvincesShouldBeFound("code.contains=" + DEFAULT_CODE);
 
-        // Get all the stateProvincesList where stateProvinceCode contains UPDATED_STATE_PROVINCE_CODE
-        defaultStateProvincesShouldNotBeFound("stateProvinceCode.contains=" + UPDATED_STATE_PROVINCE_CODE);
+        // Get all the stateProvincesList where code contains UPDATED_CODE
+        defaultStateProvincesShouldNotBeFound("code.contains=" + UPDATED_CODE);
     }
 
     @Test
     @Transactional
-    public void getAllStateProvincesByStateProvinceCodeNotContainsSomething() throws Exception {
+    public void getAllStateProvincesByCodeNotContainsSomething() throws Exception {
         // Initialize the database
         stateProvincesRepository.saveAndFlush(stateProvinces);
 
-        // Get all the stateProvincesList where stateProvinceCode does not contain DEFAULT_STATE_PROVINCE_CODE
-        defaultStateProvincesShouldNotBeFound("stateProvinceCode.doesNotContain=" + DEFAULT_STATE_PROVINCE_CODE);
+        // Get all the stateProvincesList where code does not contain DEFAULT_CODE
+        defaultStateProvincesShouldNotBeFound("code.doesNotContain=" + DEFAULT_CODE);
 
-        // Get all the stateProvincesList where stateProvinceCode does not contain UPDATED_STATE_PROVINCE_CODE
-        defaultStateProvincesShouldBeFound("stateProvinceCode.doesNotContain=" + UPDATED_STATE_PROVINCE_CODE);
+        // Get all the stateProvincesList where code does not contain UPDATED_CODE
+        defaultStateProvincesShouldBeFound("code.doesNotContain=" + UPDATED_CODE);
     }
 
 
     @Test
     @Transactional
-    public void getAllStateProvincesByStateProvinceNameIsEqualToSomething() throws Exception {
+    public void getAllStateProvincesByNameIsEqualToSomething() throws Exception {
         // Initialize the database
         stateProvincesRepository.saveAndFlush(stateProvinces);
 
-        // Get all the stateProvincesList where stateProvinceName equals to DEFAULT_STATE_PROVINCE_NAME
-        defaultStateProvincesShouldBeFound("stateProvinceName.equals=" + DEFAULT_STATE_PROVINCE_NAME);
+        // Get all the stateProvincesList where name equals to DEFAULT_NAME
+        defaultStateProvincesShouldBeFound("name.equals=" + DEFAULT_NAME);
 
-        // Get all the stateProvincesList where stateProvinceName equals to UPDATED_STATE_PROVINCE_NAME
-        defaultStateProvincesShouldNotBeFound("stateProvinceName.equals=" + UPDATED_STATE_PROVINCE_NAME);
+        // Get all the stateProvincesList where name equals to UPDATED_NAME
+        defaultStateProvincesShouldNotBeFound("name.equals=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllStateProvincesByStateProvinceNameIsNotEqualToSomething() throws Exception {
+    public void getAllStateProvincesByNameIsNotEqualToSomething() throws Exception {
         // Initialize the database
         stateProvincesRepository.saveAndFlush(stateProvinces);
 
-        // Get all the stateProvincesList where stateProvinceName not equals to DEFAULT_STATE_PROVINCE_NAME
-        defaultStateProvincesShouldNotBeFound("stateProvinceName.notEquals=" + DEFAULT_STATE_PROVINCE_NAME);
+        // Get all the stateProvincesList where name not equals to DEFAULT_NAME
+        defaultStateProvincesShouldNotBeFound("name.notEquals=" + DEFAULT_NAME);
 
-        // Get all the stateProvincesList where stateProvinceName not equals to UPDATED_STATE_PROVINCE_NAME
-        defaultStateProvincesShouldBeFound("stateProvinceName.notEquals=" + UPDATED_STATE_PROVINCE_NAME);
+        // Get all the stateProvincesList where name not equals to UPDATED_NAME
+        defaultStateProvincesShouldBeFound("name.notEquals=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllStateProvincesByStateProvinceNameIsInShouldWork() throws Exception {
+    public void getAllStateProvincesByNameIsInShouldWork() throws Exception {
         // Initialize the database
         stateProvincesRepository.saveAndFlush(stateProvinces);
 
-        // Get all the stateProvincesList where stateProvinceName in DEFAULT_STATE_PROVINCE_NAME or UPDATED_STATE_PROVINCE_NAME
-        defaultStateProvincesShouldBeFound("stateProvinceName.in=" + DEFAULT_STATE_PROVINCE_NAME + "," + UPDATED_STATE_PROVINCE_NAME);
+        // Get all the stateProvincesList where name in DEFAULT_NAME or UPDATED_NAME
+        defaultStateProvincesShouldBeFound("name.in=" + DEFAULT_NAME + "," + UPDATED_NAME);
 
-        // Get all the stateProvincesList where stateProvinceName equals to UPDATED_STATE_PROVINCE_NAME
-        defaultStateProvincesShouldNotBeFound("stateProvinceName.in=" + UPDATED_STATE_PROVINCE_NAME);
+        // Get all the stateProvincesList where name equals to UPDATED_NAME
+        defaultStateProvincesShouldNotBeFound("name.in=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllStateProvincesByStateProvinceNameIsNullOrNotNull() throws Exception {
+    public void getAllStateProvincesByNameIsNullOrNotNull() throws Exception {
         // Initialize the database
         stateProvincesRepository.saveAndFlush(stateProvinces);
 
-        // Get all the stateProvincesList where stateProvinceName is not null
-        defaultStateProvincesShouldBeFound("stateProvinceName.specified=true");
+        // Get all the stateProvincesList where name is not null
+        defaultStateProvincesShouldBeFound("name.specified=true");
 
-        // Get all the stateProvincesList where stateProvinceName is null
-        defaultStateProvincesShouldNotBeFound("stateProvinceName.specified=false");
+        // Get all the stateProvincesList where name is null
+        defaultStateProvincesShouldNotBeFound("name.specified=false");
     }
                 @Test
     @Transactional
-    public void getAllStateProvincesByStateProvinceNameContainsSomething() throws Exception {
+    public void getAllStateProvincesByNameContainsSomething() throws Exception {
         // Initialize the database
         stateProvincesRepository.saveAndFlush(stateProvinces);
 
-        // Get all the stateProvincesList where stateProvinceName contains DEFAULT_STATE_PROVINCE_NAME
-        defaultStateProvincesShouldBeFound("stateProvinceName.contains=" + DEFAULT_STATE_PROVINCE_NAME);
+        // Get all the stateProvincesList where name contains DEFAULT_NAME
+        defaultStateProvincesShouldBeFound("name.contains=" + DEFAULT_NAME);
 
-        // Get all the stateProvincesList where stateProvinceName contains UPDATED_STATE_PROVINCE_NAME
-        defaultStateProvincesShouldNotBeFound("stateProvinceName.contains=" + UPDATED_STATE_PROVINCE_NAME);
+        // Get all the stateProvincesList where name contains UPDATED_NAME
+        defaultStateProvincesShouldNotBeFound("name.contains=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllStateProvincesByStateProvinceNameNotContainsSomething() throws Exception {
+    public void getAllStateProvincesByNameNotContainsSomething() throws Exception {
         // Initialize the database
         stateProvincesRepository.saveAndFlush(stateProvinces);
 
-        // Get all the stateProvincesList where stateProvinceName does not contain DEFAULT_STATE_PROVINCE_NAME
-        defaultStateProvincesShouldNotBeFound("stateProvinceName.doesNotContain=" + DEFAULT_STATE_PROVINCE_NAME);
+        // Get all the stateProvincesList where name does not contain DEFAULT_NAME
+        defaultStateProvincesShouldNotBeFound("name.doesNotContain=" + DEFAULT_NAME);
 
-        // Get all the stateProvincesList where stateProvinceName does not contain UPDATED_STATE_PROVINCE_NAME
-        defaultStateProvincesShouldBeFound("stateProvinceName.doesNotContain=" + UPDATED_STATE_PROVINCE_NAME);
+        // Get all the stateProvincesList where name does not contain UPDATED_NAME
+        defaultStateProvincesShouldBeFound("name.doesNotContain=" + UPDATED_NAME);
     }
 
 
@@ -875,8 +875,8 @@ public class StateProvincesResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(stateProvinces.getId().intValue())))
-            .andExpect(jsonPath("$.[*].stateProvinceCode").value(hasItem(DEFAULT_STATE_PROVINCE_CODE)))
-            .andExpect(jsonPath("$.[*].stateProvinceName").value(hasItem(DEFAULT_STATE_PROVINCE_NAME)))
+            .andExpect(jsonPath("$.[*].code").value(hasItem(DEFAULT_CODE)))
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].salesTerritory").value(hasItem(DEFAULT_SALES_TERRITORY)))
             .andExpect(jsonPath("$.[*].border").value(hasItem(DEFAULT_BORDER)))
             .andExpect(jsonPath("$.[*].latestRecordedPopulation").value(hasItem(DEFAULT_LATEST_RECORDED_POPULATION.intValue())))
@@ -929,8 +929,8 @@ public class StateProvincesResourceIT {
         // Disconnect from session so that the updates on updatedStateProvinces are not directly saved in db
         em.detach(updatedStateProvinces);
         updatedStateProvinces
-            .stateProvinceCode(UPDATED_STATE_PROVINCE_CODE)
-            .stateProvinceName(UPDATED_STATE_PROVINCE_NAME)
+            .code(UPDATED_CODE)
+            .name(UPDATED_NAME)
             .salesTerritory(UPDATED_SALES_TERRITORY)
             .border(UPDATED_BORDER)
             .latestRecordedPopulation(UPDATED_LATEST_RECORDED_POPULATION)
@@ -947,8 +947,8 @@ public class StateProvincesResourceIT {
         List<StateProvinces> stateProvincesList = stateProvincesRepository.findAll();
         assertThat(stateProvincesList).hasSize(databaseSizeBeforeUpdate);
         StateProvinces testStateProvinces = stateProvincesList.get(stateProvincesList.size() - 1);
-        assertThat(testStateProvinces.getStateProvinceCode()).isEqualTo(UPDATED_STATE_PROVINCE_CODE);
-        assertThat(testStateProvinces.getStateProvinceName()).isEqualTo(UPDATED_STATE_PROVINCE_NAME);
+        assertThat(testStateProvinces.getCode()).isEqualTo(UPDATED_CODE);
+        assertThat(testStateProvinces.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testStateProvinces.getSalesTerritory()).isEqualTo(UPDATED_SALES_TERRITORY);
         assertThat(testStateProvinces.getBorder()).isEqualTo(UPDATED_BORDER);
         assertThat(testStateProvinces.getLatestRecordedPopulation()).isEqualTo(UPDATED_LATEST_RECORDED_POPULATION);

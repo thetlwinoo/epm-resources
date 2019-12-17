@@ -26,17 +26,17 @@ public class CurrencyCriteria implements Serializable, Criteria {
 
     private LongFilter id;
 
-    private StringFilter currencyCode;
+    private StringFilter code;
 
-    private StringFilter currencyName;
+    private StringFilter name;
 
     public CurrencyCriteria(){
     }
 
     public CurrencyCriteria(CurrencyCriteria other){
         this.id = other.id == null ? null : other.id.copy();
-        this.currencyCode = other.currencyCode == null ? null : other.currencyCode.copy();
-        this.currencyName = other.currencyName == null ? null : other.currencyName.copy();
+        this.code = other.code == null ? null : other.code.copy();
+        this.name = other.name == null ? null : other.name.copy();
     }
 
     @Override
@@ -52,20 +52,20 @@ public class CurrencyCriteria implements Serializable, Criteria {
         this.id = id;
     }
 
-    public StringFilter getCurrencyCode() {
-        return currencyCode;
+    public StringFilter getCode() {
+        return code;
     }
 
-    public void setCurrencyCode(StringFilter currencyCode) {
-        this.currencyCode = currencyCode;
+    public void setCode(StringFilter code) {
+        this.code = code;
     }
 
-    public StringFilter getCurrencyName() {
-        return currencyName;
+    public StringFilter getName() {
+        return name;
     }
 
-    public void setCurrencyName(StringFilter currencyName) {
-        this.currencyName = currencyName;
+    public void setName(StringFilter name) {
+        this.name = name;
     }
 
 
@@ -80,16 +80,16 @@ public class CurrencyCriteria implements Serializable, Criteria {
         final CurrencyCriteria that = (CurrencyCriteria) o;
         return
             Objects.equals(id, that.id) &&
-            Objects.equals(currencyCode, that.currencyCode) &&
-            Objects.equals(currencyName, that.currencyName);
+            Objects.equals(code, that.code) &&
+            Objects.equals(name, that.name);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(
         id,
-        currencyCode,
-        currencyName
+        code,
+        name
         );
     }
 
@@ -97,8 +97,8 @@ public class CurrencyCriteria implements Serializable, Criteria {
     public String toString() {
         return "CurrencyCriteria{" +
                 (id != null ? "id=" + id + ", " : "") +
-                (currencyCode != null ? "currencyCode=" + currencyCode + ", " : "") +
-                (currencyName != null ? "currencyName=" + currencyName + ", " : "") +
+                (code != null ? "code=" + code + ", " : "") +
+                (name != null ? "name=" + name + ", " : "") +
             "}";
     }
 

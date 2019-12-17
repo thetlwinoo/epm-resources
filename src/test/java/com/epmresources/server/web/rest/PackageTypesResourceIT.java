@@ -40,8 +40,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = EpmresourcesApp.class)
 public class PackageTypesResourceIT {
 
-    private static final String DEFAULT_PACKAGE_TYPE_NAME = "AAAAAAAAAA";
-    private static final String UPDATED_PACKAGE_TYPE_NAME = "BBBBBBBBBB";
+    private static final String DEFAULT_NAME = "AAAAAAAAAA";
+    private static final String UPDATED_NAME = "BBBBBBBBBB";
 
     private static final Instant DEFAULT_VALID_FROM = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_VALID_FROM = Instant.now().truncatedTo(ChronoUnit.MILLIS);
@@ -100,7 +100,7 @@ public class PackageTypesResourceIT {
      */
     public static PackageTypes createEntity(EntityManager em) {
         PackageTypes packageTypes = new PackageTypes()
-            .packageTypeName(DEFAULT_PACKAGE_TYPE_NAME)
+            .name(DEFAULT_NAME)
             .validFrom(DEFAULT_VALID_FROM)
             .validTo(DEFAULT_VALID_TO);
         return packageTypes;
@@ -113,7 +113,7 @@ public class PackageTypesResourceIT {
      */
     public static PackageTypes createUpdatedEntity(EntityManager em) {
         PackageTypes packageTypes = new PackageTypes()
-            .packageTypeName(UPDATED_PACKAGE_TYPE_NAME)
+            .name(UPDATED_NAME)
             .validFrom(UPDATED_VALID_FROM)
             .validTo(UPDATED_VALID_TO);
         return packageTypes;
@@ -140,7 +140,7 @@ public class PackageTypesResourceIT {
         List<PackageTypes> packageTypesList = packageTypesRepository.findAll();
         assertThat(packageTypesList).hasSize(databaseSizeBeforeCreate + 1);
         PackageTypes testPackageTypes = packageTypesList.get(packageTypesList.size() - 1);
-        assertThat(testPackageTypes.getPackageTypeName()).isEqualTo(DEFAULT_PACKAGE_TYPE_NAME);
+        assertThat(testPackageTypes.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testPackageTypes.getValidFrom()).isEqualTo(DEFAULT_VALID_FROM);
         assertThat(testPackageTypes.getValidTo()).isEqualTo(DEFAULT_VALID_TO);
     }
@@ -168,10 +168,10 @@ public class PackageTypesResourceIT {
 
     @Test
     @Transactional
-    public void checkPackageTypeNameIsRequired() throws Exception {
+    public void checkNameIsRequired() throws Exception {
         int databaseSizeBeforeTest = packageTypesRepository.findAll().size();
         // set the field null
-        packageTypes.setPackageTypeName(null);
+        packageTypes.setName(null);
 
         // Create the PackageTypes, which fails.
         PackageTypesDTO packageTypesDTO = packageTypesMapper.toDto(packageTypes);
@@ -234,7 +234,7 @@ public class PackageTypesResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(packageTypes.getId().intValue())))
-            .andExpect(jsonPath("$.[*].packageTypeName").value(hasItem(DEFAULT_PACKAGE_TYPE_NAME)))
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].validFrom").value(hasItem(DEFAULT_VALID_FROM.toString())))
             .andExpect(jsonPath("$.[*].validTo").value(hasItem(DEFAULT_VALID_TO.toString())));
     }
@@ -250,86 +250,86 @@ public class PackageTypesResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(packageTypes.getId().intValue()))
-            .andExpect(jsonPath("$.packageTypeName").value(DEFAULT_PACKAGE_TYPE_NAME))
+            .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
             .andExpect(jsonPath("$.validFrom").value(DEFAULT_VALID_FROM.toString()))
             .andExpect(jsonPath("$.validTo").value(DEFAULT_VALID_TO.toString()));
     }
 
     @Test
     @Transactional
-    public void getAllPackageTypesByPackageTypeNameIsEqualToSomething() throws Exception {
+    public void getAllPackageTypesByNameIsEqualToSomething() throws Exception {
         // Initialize the database
         packageTypesRepository.saveAndFlush(packageTypes);
 
-        // Get all the packageTypesList where packageTypeName equals to DEFAULT_PACKAGE_TYPE_NAME
-        defaultPackageTypesShouldBeFound("packageTypeName.equals=" + DEFAULT_PACKAGE_TYPE_NAME);
+        // Get all the packageTypesList where name equals to DEFAULT_NAME
+        defaultPackageTypesShouldBeFound("name.equals=" + DEFAULT_NAME);
 
-        // Get all the packageTypesList where packageTypeName equals to UPDATED_PACKAGE_TYPE_NAME
-        defaultPackageTypesShouldNotBeFound("packageTypeName.equals=" + UPDATED_PACKAGE_TYPE_NAME);
+        // Get all the packageTypesList where name equals to UPDATED_NAME
+        defaultPackageTypesShouldNotBeFound("name.equals=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllPackageTypesByPackageTypeNameIsNotEqualToSomething() throws Exception {
+    public void getAllPackageTypesByNameIsNotEqualToSomething() throws Exception {
         // Initialize the database
         packageTypesRepository.saveAndFlush(packageTypes);
 
-        // Get all the packageTypesList where packageTypeName not equals to DEFAULT_PACKAGE_TYPE_NAME
-        defaultPackageTypesShouldNotBeFound("packageTypeName.notEquals=" + DEFAULT_PACKAGE_TYPE_NAME);
+        // Get all the packageTypesList where name not equals to DEFAULT_NAME
+        defaultPackageTypesShouldNotBeFound("name.notEquals=" + DEFAULT_NAME);
 
-        // Get all the packageTypesList where packageTypeName not equals to UPDATED_PACKAGE_TYPE_NAME
-        defaultPackageTypesShouldBeFound("packageTypeName.notEquals=" + UPDATED_PACKAGE_TYPE_NAME);
+        // Get all the packageTypesList where name not equals to UPDATED_NAME
+        defaultPackageTypesShouldBeFound("name.notEquals=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllPackageTypesByPackageTypeNameIsInShouldWork() throws Exception {
+    public void getAllPackageTypesByNameIsInShouldWork() throws Exception {
         // Initialize the database
         packageTypesRepository.saveAndFlush(packageTypes);
 
-        // Get all the packageTypesList where packageTypeName in DEFAULT_PACKAGE_TYPE_NAME or UPDATED_PACKAGE_TYPE_NAME
-        defaultPackageTypesShouldBeFound("packageTypeName.in=" + DEFAULT_PACKAGE_TYPE_NAME + "," + UPDATED_PACKAGE_TYPE_NAME);
+        // Get all the packageTypesList where name in DEFAULT_NAME or UPDATED_NAME
+        defaultPackageTypesShouldBeFound("name.in=" + DEFAULT_NAME + "," + UPDATED_NAME);
 
-        // Get all the packageTypesList where packageTypeName equals to UPDATED_PACKAGE_TYPE_NAME
-        defaultPackageTypesShouldNotBeFound("packageTypeName.in=" + UPDATED_PACKAGE_TYPE_NAME);
+        // Get all the packageTypesList where name equals to UPDATED_NAME
+        defaultPackageTypesShouldNotBeFound("name.in=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllPackageTypesByPackageTypeNameIsNullOrNotNull() throws Exception {
+    public void getAllPackageTypesByNameIsNullOrNotNull() throws Exception {
         // Initialize the database
         packageTypesRepository.saveAndFlush(packageTypes);
 
-        // Get all the packageTypesList where packageTypeName is not null
-        defaultPackageTypesShouldBeFound("packageTypeName.specified=true");
+        // Get all the packageTypesList where name is not null
+        defaultPackageTypesShouldBeFound("name.specified=true");
 
-        // Get all the packageTypesList where packageTypeName is null
-        defaultPackageTypesShouldNotBeFound("packageTypeName.specified=false");
+        // Get all the packageTypesList where name is null
+        defaultPackageTypesShouldNotBeFound("name.specified=false");
     }
                 @Test
     @Transactional
-    public void getAllPackageTypesByPackageTypeNameContainsSomething() throws Exception {
+    public void getAllPackageTypesByNameContainsSomething() throws Exception {
         // Initialize the database
         packageTypesRepository.saveAndFlush(packageTypes);
 
-        // Get all the packageTypesList where packageTypeName contains DEFAULT_PACKAGE_TYPE_NAME
-        defaultPackageTypesShouldBeFound("packageTypeName.contains=" + DEFAULT_PACKAGE_TYPE_NAME);
+        // Get all the packageTypesList where name contains DEFAULT_NAME
+        defaultPackageTypesShouldBeFound("name.contains=" + DEFAULT_NAME);
 
-        // Get all the packageTypesList where packageTypeName contains UPDATED_PACKAGE_TYPE_NAME
-        defaultPackageTypesShouldNotBeFound("packageTypeName.contains=" + UPDATED_PACKAGE_TYPE_NAME);
+        // Get all the packageTypesList where name contains UPDATED_NAME
+        defaultPackageTypesShouldNotBeFound("name.contains=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllPackageTypesByPackageTypeNameNotContainsSomething() throws Exception {
+    public void getAllPackageTypesByNameNotContainsSomething() throws Exception {
         // Initialize the database
         packageTypesRepository.saveAndFlush(packageTypes);
 
-        // Get all the packageTypesList where packageTypeName does not contain DEFAULT_PACKAGE_TYPE_NAME
-        defaultPackageTypesShouldNotBeFound("packageTypeName.doesNotContain=" + DEFAULT_PACKAGE_TYPE_NAME);
+        // Get all the packageTypesList where name does not contain DEFAULT_NAME
+        defaultPackageTypesShouldNotBeFound("name.doesNotContain=" + DEFAULT_NAME);
 
-        // Get all the packageTypesList where packageTypeName does not contain UPDATED_PACKAGE_TYPE_NAME
-        defaultPackageTypesShouldBeFound("packageTypeName.doesNotContain=" + UPDATED_PACKAGE_TYPE_NAME);
+        // Get all the packageTypesList where name does not contain UPDATED_NAME
+        defaultPackageTypesShouldBeFound("name.doesNotContain=" + UPDATED_NAME);
     }
 
 
@@ -444,7 +444,7 @@ public class PackageTypesResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(packageTypes.getId().intValue())))
-            .andExpect(jsonPath("$.[*].packageTypeName").value(hasItem(DEFAULT_PACKAGE_TYPE_NAME)))
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].validFrom").value(hasItem(DEFAULT_VALID_FROM.toString())))
             .andExpect(jsonPath("$.[*].validTo").value(hasItem(DEFAULT_VALID_TO.toString())));
 
@@ -494,7 +494,7 @@ public class PackageTypesResourceIT {
         // Disconnect from session so that the updates on updatedPackageTypes are not directly saved in db
         em.detach(updatedPackageTypes);
         updatedPackageTypes
-            .packageTypeName(UPDATED_PACKAGE_TYPE_NAME)
+            .name(UPDATED_NAME)
             .validFrom(UPDATED_VALID_FROM)
             .validTo(UPDATED_VALID_TO);
         PackageTypesDTO packageTypesDTO = packageTypesMapper.toDto(updatedPackageTypes);
@@ -508,7 +508,7 @@ public class PackageTypesResourceIT {
         List<PackageTypes> packageTypesList = packageTypesRepository.findAll();
         assertThat(packageTypesList).hasSize(databaseSizeBeforeUpdate);
         PackageTypes testPackageTypes = packageTypesList.get(packageTypesList.size() - 1);
-        assertThat(testPackageTypes.getPackageTypeName()).isEqualTo(UPDATED_PACKAGE_TYPE_NAME);
+        assertThat(testPackageTypes.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testPackageTypes.getValidFrom()).isEqualTo(UPDATED_VALID_FROM);
         assertThat(testPackageTypes.getValidTo()).isEqualTo(UPDATED_VALID_TO);
     }

@@ -14,7 +14,7 @@ public class BusinessEntityContactDTO implements Serializable {
 
     private Long contactTypeId;
 
-    private String contactTypeContactTypeName;
+    private String contactTypeName;
 
     public Long getId() {
         return id;
@@ -40,12 +40,12 @@ public class BusinessEntityContactDTO implements Serializable {
         this.contactTypeId = contactTypeId;
     }
 
-    public String getContactTypeContactTypeName() {
-        return contactTypeContactTypeName;
+    public String getContactTypeName() {
+        return contactTypeName;
     }
 
-    public void setContactTypeContactTypeName(String contactTypeContactTypeName) {
-        this.contactTypeContactTypeName = contactTypeContactTypeName;
+    public void setContactTypeName(String contactTypeName) {
+        this.contactTypeName = contactTypeName;
     }
 
     @Override
@@ -75,7 +75,7 @@ public class BusinessEntityContactDTO implements Serializable {
             "id=" + getId() +
             ", person=" + getPersonId() +
             ", contactType=" + getContactTypeId() +
-            ", contactType='" + getContactTypeContactTypeName() + "'" +
+            ", contactType='" + getContactTypeName() + "'" +
             "}";
     }
 }

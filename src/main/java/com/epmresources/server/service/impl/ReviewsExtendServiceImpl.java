@@ -49,7 +49,7 @@ public class ReviewsExtendServiceImpl implements ReviewsExtendService {
     @Override
     public ReviewsDTO save(Principal principal, ReviewsDTO reviewsDTO, Long orderId) {
         People people = getUserFromPrinciple(principal);
-        reviewsDTO.setReviewerName(people.getFullName());
+        reviewsDTO.setName(people.getFullName());
         reviewsDTO.setEmailAddress(people.getEmailAddress());
         reviewsDTO.setReviewDate(Instant.now());
         Reviews reviews = reviewsMapper.toEntity(reviewsDTO);

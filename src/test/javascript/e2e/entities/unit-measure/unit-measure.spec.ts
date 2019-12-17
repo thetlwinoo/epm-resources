@@ -40,18 +40,9 @@ describe('UnitMeasure e2e test', () => {
     const nbButtonsBeforeCreate = await unitMeasureComponentsPage.countDeleteButtons();
 
     await unitMeasureComponentsPage.clickOnCreateButton();
-    await promise.all([
-      unitMeasureUpdatePage.setUnitMeasureCodeInput('unitMeasureCode'),
-      unitMeasureUpdatePage.setUnitMeasureNameInput('unitMeasureName')
-    ]);
-    expect(await unitMeasureUpdatePage.getUnitMeasureCodeInput()).to.eq(
-      'unitMeasureCode',
-      'Expected UnitMeasureCode value to be equals to unitMeasureCode'
-    );
-    expect(await unitMeasureUpdatePage.getUnitMeasureNameInput()).to.eq(
-      'unitMeasureName',
-      'Expected UnitMeasureName value to be equals to unitMeasureName'
-    );
+    await promise.all([unitMeasureUpdatePage.setCodeInput('code'), unitMeasureUpdatePage.setNameInput('name')]);
+    expect(await unitMeasureUpdatePage.getCodeInput()).to.eq('code', 'Expected Code value to be equals to code');
+    expect(await unitMeasureUpdatePage.getNameInput()).to.eq('name', 'Expected Name value to be equals to name');
     await unitMeasureUpdatePage.save();
     expect(await unitMeasureUpdatePage.getSaveButton().isPresent(), 'Expected save button disappear').to.be.false;
 

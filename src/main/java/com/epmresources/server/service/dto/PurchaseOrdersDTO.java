@@ -18,7 +18,8 @@ public class PurchaseOrdersDTO implements Serializable {
 
     private String supplierReference;
 
-    private Boolean isOrderFinalized;
+    @NotNull
+    private Integer isOrderFinalized;
 
     private String comments;
 
@@ -35,11 +36,11 @@ public class PurchaseOrdersDTO implements Serializable {
 
     private Long supplierId;
 
-    private String supplierSupplierName;
+    private String supplierName;
 
     private Long deliveryMethodId;
 
-    private String deliveryMethodDeliveryMethodName;
+    private String deliveryMethodName;
 
     public Long getId() {
         return id;
@@ -73,11 +74,11 @@ public class PurchaseOrdersDTO implements Serializable {
         this.supplierReference = supplierReference;
     }
 
-    public Boolean isIsOrderFinalized() {
+    public Integer getIsOrderFinalized() {
         return isOrderFinalized;
     }
 
-    public void setIsOrderFinalized(Boolean isOrderFinalized) {
+    public void setIsOrderFinalized(Integer isOrderFinalized) {
         this.isOrderFinalized = isOrderFinalized;
     }
 
@@ -137,12 +138,12 @@ public class PurchaseOrdersDTO implements Serializable {
         this.supplierId = suppliersId;
     }
 
-    public String getSupplierSupplierName() {
-        return supplierSupplierName;
+    public String getSupplierName() {
+        return supplierName;
     }
 
-    public void setSupplierSupplierName(String suppliersSupplierName) {
-        this.supplierSupplierName = suppliersSupplierName;
+    public void setSupplierName(String suppliersName) {
+        this.supplierName = suppliersName;
     }
 
     public Long getDeliveryMethodId() {
@@ -153,12 +154,12 @@ public class PurchaseOrdersDTO implements Serializable {
         this.deliveryMethodId = deliveryMethodsId;
     }
 
-    public String getDeliveryMethodDeliveryMethodName() {
-        return deliveryMethodDeliveryMethodName;
+    public String getDeliveryMethodName() {
+        return deliveryMethodName;
     }
 
-    public void setDeliveryMethodDeliveryMethodName(String deliveryMethodsDeliveryMethodName) {
-        this.deliveryMethodDeliveryMethodName = deliveryMethodsDeliveryMethodName;
+    public void setDeliveryMethodName(String deliveryMethodsName) {
+        this.deliveryMethodName = deliveryMethodsName;
     }
 
     @Override
@@ -189,7 +190,7 @@ public class PurchaseOrdersDTO implements Serializable {
             ", orderDate='" + getOrderDate() + "'" +
             ", expectedDeliveryDate='" + getExpectedDeliveryDate() + "'" +
             ", supplierReference='" + getSupplierReference() + "'" +
-            ", isOrderFinalized='" + isIsOrderFinalized() + "'" +
+            ", isOrderFinalized=" + getIsOrderFinalized() +
             ", comments='" + getComments() + "'" +
             ", internalComments='" + getInternalComments() + "'" +
             ", lastEditedBy='" + getLastEditedBy() + "'" +
@@ -197,9 +198,9 @@ public class PurchaseOrdersDTO implements Serializable {
             ", contactPerson=" + getContactPersonId() +
             ", contactPerson='" + getContactPersonFullName() + "'" +
             ", supplier=" + getSupplierId() +
-            ", supplier='" + getSupplierSupplierName() + "'" +
+            ", supplier='" + getSupplierName() + "'" +
             ", deliveryMethod=" + getDeliveryMethodId() +
-            ", deliveryMethod='" + getDeliveryMethodDeliveryMethodName() + "'" +
+            ", deliveryMethod='" + getDeliveryMethodName() + "'" +
             "}";
     }
 }

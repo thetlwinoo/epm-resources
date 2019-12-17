@@ -45,14 +45,14 @@
                     <label class="form-control-label" jhiTranslate="epmresourcesApp.uploadTransactions.supplier" for="field_supplier">Supplier</label>
                     <select class="form-control" id="field_supplier" name="supplier" formControlName="supplierId">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="suppliersOption.id" *ngFor="let suppliersOption of suppliers; trackBy: trackSuppliersById">{{suppliersOption.supplierName}}</option>
+                        <option [ngValue]="suppliersOption.id" *ngFor="let suppliersOption of suppliers; trackBy: trackSuppliersById">{{suppliersOption.name}}</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="epmresourcesApp.uploadTransactions.actionType" for="field_actionType">Action Type</label>
                     <select class="form-control" id="field_actionType" name="actionType" formControlName="actionTypeId">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="uploadActionTypesOption.id" *ngFor="let uploadActionTypesOption of uploadactiontypes; trackBy: trackUploadActionTypesById">{{uploadActionTypesOption.actionTypeName}}</option>
+                        <option [ngValue]="uploadActionTypesOption.id" *ngFor="let uploadActionTypesOption of uploadactiontypes; trackBy: trackUploadActionTypesById">{{uploadActionTypesOption.name}}</option>
                     </select>
                 </div>
             </div>

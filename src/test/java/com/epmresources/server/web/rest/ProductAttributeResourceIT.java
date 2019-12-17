@@ -40,8 +40,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = EpmresourcesApp.class)
 public class ProductAttributeResourceIT {
 
-    private static final String DEFAULT_PRODUCT_ATTRIBUTE_VALUE = "AAAAAAAAAA";
-    private static final String UPDATED_PRODUCT_ATTRIBUTE_VALUE = "BBBBBBBBBB";
+    private static final String DEFAULT_VALUE = "AAAAAAAAAA";
+    private static final String UPDATED_VALUE = "BBBBBBBBBB";
 
     @Autowired
     private ProductAttributeRepository productAttributeRepository;
@@ -94,7 +94,7 @@ public class ProductAttributeResourceIT {
      */
     public static ProductAttribute createEntity(EntityManager em) {
         ProductAttribute productAttribute = new ProductAttribute()
-            .productAttributeValue(DEFAULT_PRODUCT_ATTRIBUTE_VALUE);
+            .value(DEFAULT_VALUE);
         return productAttribute;
     }
     /**
@@ -105,7 +105,7 @@ public class ProductAttributeResourceIT {
      */
     public static ProductAttribute createUpdatedEntity(EntityManager em) {
         ProductAttribute productAttribute = new ProductAttribute()
-            .productAttributeValue(UPDATED_PRODUCT_ATTRIBUTE_VALUE);
+            .value(UPDATED_VALUE);
         return productAttribute;
     }
 
@@ -130,7 +130,7 @@ public class ProductAttributeResourceIT {
         List<ProductAttribute> productAttributeList = productAttributeRepository.findAll();
         assertThat(productAttributeList).hasSize(databaseSizeBeforeCreate + 1);
         ProductAttribute testProductAttribute = productAttributeList.get(productAttributeList.size() - 1);
-        assertThat(testProductAttribute.getProductAttributeValue()).isEqualTo(DEFAULT_PRODUCT_ATTRIBUTE_VALUE);
+        assertThat(testProductAttribute.getValue()).isEqualTo(DEFAULT_VALUE);
     }
 
     @Test
@@ -156,10 +156,10 @@ public class ProductAttributeResourceIT {
 
     @Test
     @Transactional
-    public void checkProductAttributeValueIsRequired() throws Exception {
+    public void checkValueIsRequired() throws Exception {
         int databaseSizeBeforeTest = productAttributeRepository.findAll().size();
         // set the field null
-        productAttribute.setProductAttributeValue(null);
+        productAttribute.setValue(null);
 
         // Create the ProductAttribute, which fails.
         ProductAttributeDTO productAttributeDTO = productAttributeMapper.toDto(productAttribute);
@@ -184,7 +184,7 @@ public class ProductAttributeResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(productAttribute.getId().intValue())))
-            .andExpect(jsonPath("$.[*].productAttributeValue").value(hasItem(DEFAULT_PRODUCT_ATTRIBUTE_VALUE)));
+            .andExpect(jsonPath("$.[*].value").value(hasItem(DEFAULT_VALUE)));
     }
     
     @Test
@@ -198,84 +198,84 @@ public class ProductAttributeResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(productAttribute.getId().intValue()))
-            .andExpect(jsonPath("$.productAttributeValue").value(DEFAULT_PRODUCT_ATTRIBUTE_VALUE));
+            .andExpect(jsonPath("$.value").value(DEFAULT_VALUE));
     }
 
     @Test
     @Transactional
-    public void getAllProductAttributesByProductAttributeValueIsEqualToSomething() throws Exception {
+    public void getAllProductAttributesByValueIsEqualToSomething() throws Exception {
         // Initialize the database
         productAttributeRepository.saveAndFlush(productAttribute);
 
-        // Get all the productAttributeList where productAttributeValue equals to DEFAULT_PRODUCT_ATTRIBUTE_VALUE
-        defaultProductAttributeShouldBeFound("productAttributeValue.equals=" + DEFAULT_PRODUCT_ATTRIBUTE_VALUE);
+        // Get all the productAttributeList where value equals to DEFAULT_VALUE
+        defaultProductAttributeShouldBeFound("value.equals=" + DEFAULT_VALUE);
 
-        // Get all the productAttributeList where productAttributeValue equals to UPDATED_PRODUCT_ATTRIBUTE_VALUE
-        defaultProductAttributeShouldNotBeFound("productAttributeValue.equals=" + UPDATED_PRODUCT_ATTRIBUTE_VALUE);
+        // Get all the productAttributeList where value equals to UPDATED_VALUE
+        defaultProductAttributeShouldNotBeFound("value.equals=" + UPDATED_VALUE);
     }
 
     @Test
     @Transactional
-    public void getAllProductAttributesByProductAttributeValueIsNotEqualToSomething() throws Exception {
+    public void getAllProductAttributesByValueIsNotEqualToSomething() throws Exception {
         // Initialize the database
         productAttributeRepository.saveAndFlush(productAttribute);
 
-        // Get all the productAttributeList where productAttributeValue not equals to DEFAULT_PRODUCT_ATTRIBUTE_VALUE
-        defaultProductAttributeShouldNotBeFound("productAttributeValue.notEquals=" + DEFAULT_PRODUCT_ATTRIBUTE_VALUE);
+        // Get all the productAttributeList where value not equals to DEFAULT_VALUE
+        defaultProductAttributeShouldNotBeFound("value.notEquals=" + DEFAULT_VALUE);
 
-        // Get all the productAttributeList where productAttributeValue not equals to UPDATED_PRODUCT_ATTRIBUTE_VALUE
-        defaultProductAttributeShouldBeFound("productAttributeValue.notEquals=" + UPDATED_PRODUCT_ATTRIBUTE_VALUE);
+        // Get all the productAttributeList where value not equals to UPDATED_VALUE
+        defaultProductAttributeShouldBeFound("value.notEquals=" + UPDATED_VALUE);
     }
 
     @Test
     @Transactional
-    public void getAllProductAttributesByProductAttributeValueIsInShouldWork() throws Exception {
+    public void getAllProductAttributesByValueIsInShouldWork() throws Exception {
         // Initialize the database
         productAttributeRepository.saveAndFlush(productAttribute);
 
-        // Get all the productAttributeList where productAttributeValue in DEFAULT_PRODUCT_ATTRIBUTE_VALUE or UPDATED_PRODUCT_ATTRIBUTE_VALUE
-        defaultProductAttributeShouldBeFound("productAttributeValue.in=" + DEFAULT_PRODUCT_ATTRIBUTE_VALUE + "," + UPDATED_PRODUCT_ATTRIBUTE_VALUE);
+        // Get all the productAttributeList where value in DEFAULT_VALUE or UPDATED_VALUE
+        defaultProductAttributeShouldBeFound("value.in=" + DEFAULT_VALUE + "," + UPDATED_VALUE);
 
-        // Get all the productAttributeList where productAttributeValue equals to UPDATED_PRODUCT_ATTRIBUTE_VALUE
-        defaultProductAttributeShouldNotBeFound("productAttributeValue.in=" + UPDATED_PRODUCT_ATTRIBUTE_VALUE);
+        // Get all the productAttributeList where value equals to UPDATED_VALUE
+        defaultProductAttributeShouldNotBeFound("value.in=" + UPDATED_VALUE);
     }
 
     @Test
     @Transactional
-    public void getAllProductAttributesByProductAttributeValueIsNullOrNotNull() throws Exception {
+    public void getAllProductAttributesByValueIsNullOrNotNull() throws Exception {
         // Initialize the database
         productAttributeRepository.saveAndFlush(productAttribute);
 
-        // Get all the productAttributeList where productAttributeValue is not null
-        defaultProductAttributeShouldBeFound("productAttributeValue.specified=true");
+        // Get all the productAttributeList where value is not null
+        defaultProductAttributeShouldBeFound("value.specified=true");
 
-        // Get all the productAttributeList where productAttributeValue is null
-        defaultProductAttributeShouldNotBeFound("productAttributeValue.specified=false");
+        // Get all the productAttributeList where value is null
+        defaultProductAttributeShouldNotBeFound("value.specified=false");
     }
                 @Test
     @Transactional
-    public void getAllProductAttributesByProductAttributeValueContainsSomething() throws Exception {
+    public void getAllProductAttributesByValueContainsSomething() throws Exception {
         // Initialize the database
         productAttributeRepository.saveAndFlush(productAttribute);
 
-        // Get all the productAttributeList where productAttributeValue contains DEFAULT_PRODUCT_ATTRIBUTE_VALUE
-        defaultProductAttributeShouldBeFound("productAttributeValue.contains=" + DEFAULT_PRODUCT_ATTRIBUTE_VALUE);
+        // Get all the productAttributeList where value contains DEFAULT_VALUE
+        defaultProductAttributeShouldBeFound("value.contains=" + DEFAULT_VALUE);
 
-        // Get all the productAttributeList where productAttributeValue contains UPDATED_PRODUCT_ATTRIBUTE_VALUE
-        defaultProductAttributeShouldNotBeFound("productAttributeValue.contains=" + UPDATED_PRODUCT_ATTRIBUTE_VALUE);
+        // Get all the productAttributeList where value contains UPDATED_VALUE
+        defaultProductAttributeShouldNotBeFound("value.contains=" + UPDATED_VALUE);
     }
 
     @Test
     @Transactional
-    public void getAllProductAttributesByProductAttributeValueNotContainsSomething() throws Exception {
+    public void getAllProductAttributesByValueNotContainsSomething() throws Exception {
         // Initialize the database
         productAttributeRepository.saveAndFlush(productAttribute);
 
-        // Get all the productAttributeList where productAttributeValue does not contain DEFAULT_PRODUCT_ATTRIBUTE_VALUE
-        defaultProductAttributeShouldNotBeFound("productAttributeValue.doesNotContain=" + DEFAULT_PRODUCT_ATTRIBUTE_VALUE);
+        // Get all the productAttributeList where value does not contain DEFAULT_VALUE
+        defaultProductAttributeShouldNotBeFound("value.doesNotContain=" + DEFAULT_VALUE);
 
-        // Get all the productAttributeList where productAttributeValue does not contain UPDATED_PRODUCT_ATTRIBUTE_VALUE
-        defaultProductAttributeShouldBeFound("productAttributeValue.doesNotContain=" + UPDATED_PRODUCT_ATTRIBUTE_VALUE);
+        // Get all the productAttributeList where value does not contain UPDATED_VALUE
+        defaultProductAttributeShouldBeFound("value.doesNotContain=" + UPDATED_VALUE);
     }
 
 
@@ -326,7 +326,7 @@ public class ProductAttributeResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(productAttribute.getId().intValue())))
-            .andExpect(jsonPath("$.[*].productAttributeValue").value(hasItem(DEFAULT_PRODUCT_ATTRIBUTE_VALUE)));
+            .andExpect(jsonPath("$.[*].value").value(hasItem(DEFAULT_VALUE)));
 
         // Check, that the count call also returns 1
         restProductAttributeMockMvc.perform(get("/api/product-attributes/count?sort=id,desc&" + filter))
@@ -374,7 +374,7 @@ public class ProductAttributeResourceIT {
         // Disconnect from session so that the updates on updatedProductAttribute are not directly saved in db
         em.detach(updatedProductAttribute);
         updatedProductAttribute
-            .productAttributeValue(UPDATED_PRODUCT_ATTRIBUTE_VALUE);
+            .value(UPDATED_VALUE);
         ProductAttributeDTO productAttributeDTO = productAttributeMapper.toDto(updatedProductAttribute);
 
         restProductAttributeMockMvc.perform(put("/api/product-attributes")
@@ -386,7 +386,7 @@ public class ProductAttributeResourceIT {
         List<ProductAttribute> productAttributeList = productAttributeRepository.findAll();
         assertThat(productAttributeList).hasSize(databaseSizeBeforeUpdate);
         ProductAttribute testProductAttribute = productAttributeList.get(productAttributeList.size() - 1);
-        assertThat(testProductAttribute.getProductAttributeValue()).isEqualTo(UPDATED_PRODUCT_ATTRIBUTE_VALUE);
+        assertThat(testProductAttribute.getValue()).isEqualTo(UPDATED_VALUE);
     }
 
     @Test

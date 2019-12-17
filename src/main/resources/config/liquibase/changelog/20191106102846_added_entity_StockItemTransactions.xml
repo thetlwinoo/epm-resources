@@ -15,11 +15,11 @@
             <column name="id" type="bigint" autoIncrement="${autoIncrement}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="transaction_occurred_when" type="datetime">
+            <column name="transaction_occured_when" type="datetime">
                 <constraints nullable="false" />
             </column>
             <column name="quantity" type="decimal(21,2)">
-                <constraints nullable="false" />
+                <constraints nullable="true" />
             </column>
             <column name="last_edited_by" type="varchar(255)">
                 <constraints nullable="true" />
@@ -47,7 +47,7 @@
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
-        <dropDefaultValue tableName="stock_item_transactions" columnName="transaction_occurred_when" columnDataType="datetime"/>
+        <dropDefaultValue tableName="stock_item_transactions" columnName="transaction_occured_when" columnDataType="datetime"/>
         <dropDefaultValue tableName="stock_item_transactions" columnName="last_edited_when" columnDataType="datetime"/>
     </changeSet>
 
@@ -70,7 +70,7 @@
                   separator=";"
                   tableName="stock_item_transactions">
             <column name="id" type="numeric"/>
-            <column name="transaction_occurred_when" type="datetime"/>
+            <column name="transaction_occured_when" type="datetime"/>
             <column name="quantity" type="numeric"/>
             <column name="last_edited_by" type="string"/>
             <column name="last_edited_when" type="datetime"/>

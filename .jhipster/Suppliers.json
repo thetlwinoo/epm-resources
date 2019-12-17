@@ -2,7 +2,7 @@
     "name": "Suppliers",
     "fields": [
         {
-            "fieldName": "supplierName",
+            "fieldName": "name",
             "fieldType": "String",
             "fieldValidateRules": [
                 "required"
@@ -71,9 +71,8 @@
             "fieldType": "Boolean"
         },
         {
-            "fieldName": "avatar",
-            "fieldType": "byte[]",
-            "fieldTypeBlobContent": "image"
+            "fieldName": "thumbnailUrl",
+            "fieldType": "String"
         },
         {
             "fieldName": "validFrom",
@@ -104,28 +103,28 @@
             "otherEntityName": "supplierCategories",
             "otherEntityRelationshipName": "suppliers",
             "relationshipName": "supplierCategory",
-            "otherEntityField": "supplierCategoryName"
+            "otherEntityField": "name"
         },
         {
             "relationshipType": "many-to-one",
             "otherEntityName": "deliveryMethods",
             "otherEntityRelationshipName": "suppliers",
             "relationshipName": "deliveryMethod",
-            "otherEntityField": "deliveryMethodName"
+            "otherEntityField": "name"
         },
         {
             "relationshipType": "many-to-one",
             "otherEntityName": "cities",
             "otherEntityRelationshipName": "suppliers",
             "relationshipName": "deliveryCity",
-            "otherEntityField": "cityName"
+            "otherEntityField": "name"
         },
         {
             "relationshipType": "many-to-one",
             "otherEntityName": "cities",
             "otherEntityRelationshipName": "suppliers",
             "relationshipName": "postalCity",
-            "otherEntityField": "cityName"
+            "otherEntityField": "name"
         }
     ],
     "changelogDate": "20191106102823",

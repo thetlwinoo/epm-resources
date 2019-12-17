@@ -38,11 +38,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = EpmresourcesApp.class)
 public class CurrencyResourceIT {
 
-    private static final String DEFAULT_CURRENCY_CODE = "AAAAAAAAAA";
-    private static final String UPDATED_CURRENCY_CODE = "BBBBBBBBBB";
+    private static final String DEFAULT_CODE = "AAAAAAAAAA";
+    private static final String UPDATED_CODE = "BBBBBBBBBB";
 
-    private static final String DEFAULT_CURRENCY_NAME = "AAAAAAAAAA";
-    private static final String UPDATED_CURRENCY_NAME = "BBBBBBBBBB";
+    private static final String DEFAULT_NAME = "AAAAAAAAAA";
+    private static final String UPDATED_NAME = "BBBBBBBBBB";
 
     @Autowired
     private CurrencyRepository currencyRepository;
@@ -95,8 +95,8 @@ public class CurrencyResourceIT {
      */
     public static Currency createEntity(EntityManager em) {
         Currency currency = new Currency()
-            .currencyCode(DEFAULT_CURRENCY_CODE)
-            .currencyName(DEFAULT_CURRENCY_NAME);
+            .code(DEFAULT_CODE)
+            .name(DEFAULT_NAME);
         return currency;
     }
     /**
@@ -107,8 +107,8 @@ public class CurrencyResourceIT {
      */
     public static Currency createUpdatedEntity(EntityManager em) {
         Currency currency = new Currency()
-            .currencyCode(UPDATED_CURRENCY_CODE)
-            .currencyName(UPDATED_CURRENCY_NAME);
+            .code(UPDATED_CODE)
+            .name(UPDATED_NAME);
         return currency;
     }
 
@@ -133,8 +133,8 @@ public class CurrencyResourceIT {
         List<Currency> currencyList = currencyRepository.findAll();
         assertThat(currencyList).hasSize(databaseSizeBeforeCreate + 1);
         Currency testCurrency = currencyList.get(currencyList.size() - 1);
-        assertThat(testCurrency.getCurrencyCode()).isEqualTo(DEFAULT_CURRENCY_CODE);
-        assertThat(testCurrency.getCurrencyName()).isEqualTo(DEFAULT_CURRENCY_NAME);
+        assertThat(testCurrency.getCode()).isEqualTo(DEFAULT_CODE);
+        assertThat(testCurrency.getName()).isEqualTo(DEFAULT_NAME);
     }
 
     @Test
@@ -160,10 +160,10 @@ public class CurrencyResourceIT {
 
     @Test
     @Transactional
-    public void checkCurrencyCodeIsRequired() throws Exception {
+    public void checkCodeIsRequired() throws Exception {
         int databaseSizeBeforeTest = currencyRepository.findAll().size();
         // set the field null
-        currency.setCurrencyCode(null);
+        currency.setCode(null);
 
         // Create the Currency, which fails.
         CurrencyDTO currencyDTO = currencyMapper.toDto(currency);
@@ -188,8 +188,8 @@ public class CurrencyResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(currency.getId().intValue())))
-            .andExpect(jsonPath("$.[*].currencyCode").value(hasItem(DEFAULT_CURRENCY_CODE)))
-            .andExpect(jsonPath("$.[*].currencyName").value(hasItem(DEFAULT_CURRENCY_NAME)));
+            .andExpect(jsonPath("$.[*].code").value(hasItem(DEFAULT_CODE)))
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)));
     }
     
     @Test
@@ -203,163 +203,163 @@ public class CurrencyResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(currency.getId().intValue()))
-            .andExpect(jsonPath("$.currencyCode").value(DEFAULT_CURRENCY_CODE))
-            .andExpect(jsonPath("$.currencyName").value(DEFAULT_CURRENCY_NAME));
+            .andExpect(jsonPath("$.code").value(DEFAULT_CODE))
+            .andExpect(jsonPath("$.name").value(DEFAULT_NAME));
     }
 
     @Test
     @Transactional
-    public void getAllCurrenciesByCurrencyCodeIsEqualToSomething() throws Exception {
+    public void getAllCurrenciesByCodeIsEqualToSomething() throws Exception {
         // Initialize the database
         currencyRepository.saveAndFlush(currency);
 
-        // Get all the currencyList where currencyCode equals to DEFAULT_CURRENCY_CODE
-        defaultCurrencyShouldBeFound("currencyCode.equals=" + DEFAULT_CURRENCY_CODE);
+        // Get all the currencyList where code equals to DEFAULT_CODE
+        defaultCurrencyShouldBeFound("code.equals=" + DEFAULT_CODE);
 
-        // Get all the currencyList where currencyCode equals to UPDATED_CURRENCY_CODE
-        defaultCurrencyShouldNotBeFound("currencyCode.equals=" + UPDATED_CURRENCY_CODE);
+        // Get all the currencyList where code equals to UPDATED_CODE
+        defaultCurrencyShouldNotBeFound("code.equals=" + UPDATED_CODE);
     }
 
     @Test
     @Transactional
-    public void getAllCurrenciesByCurrencyCodeIsNotEqualToSomething() throws Exception {
+    public void getAllCurrenciesByCodeIsNotEqualToSomething() throws Exception {
         // Initialize the database
         currencyRepository.saveAndFlush(currency);
 
-        // Get all the currencyList where currencyCode not equals to DEFAULT_CURRENCY_CODE
-        defaultCurrencyShouldNotBeFound("currencyCode.notEquals=" + DEFAULT_CURRENCY_CODE);
+        // Get all the currencyList where code not equals to DEFAULT_CODE
+        defaultCurrencyShouldNotBeFound("code.notEquals=" + DEFAULT_CODE);
 
-        // Get all the currencyList where currencyCode not equals to UPDATED_CURRENCY_CODE
-        defaultCurrencyShouldBeFound("currencyCode.notEquals=" + UPDATED_CURRENCY_CODE);
+        // Get all the currencyList where code not equals to UPDATED_CODE
+        defaultCurrencyShouldBeFound("code.notEquals=" + UPDATED_CODE);
     }
 
     @Test
     @Transactional
-    public void getAllCurrenciesByCurrencyCodeIsInShouldWork() throws Exception {
+    public void getAllCurrenciesByCodeIsInShouldWork() throws Exception {
         // Initialize the database
         currencyRepository.saveAndFlush(currency);
 
-        // Get all the currencyList where currencyCode in DEFAULT_CURRENCY_CODE or UPDATED_CURRENCY_CODE
-        defaultCurrencyShouldBeFound("currencyCode.in=" + DEFAULT_CURRENCY_CODE + "," + UPDATED_CURRENCY_CODE);
+        // Get all the currencyList where code in DEFAULT_CODE or UPDATED_CODE
+        defaultCurrencyShouldBeFound("code.in=" + DEFAULT_CODE + "," + UPDATED_CODE);
 
-        // Get all the currencyList where currencyCode equals to UPDATED_CURRENCY_CODE
-        defaultCurrencyShouldNotBeFound("currencyCode.in=" + UPDATED_CURRENCY_CODE);
+        // Get all the currencyList where code equals to UPDATED_CODE
+        defaultCurrencyShouldNotBeFound("code.in=" + UPDATED_CODE);
     }
 
     @Test
     @Transactional
-    public void getAllCurrenciesByCurrencyCodeIsNullOrNotNull() throws Exception {
+    public void getAllCurrenciesByCodeIsNullOrNotNull() throws Exception {
         // Initialize the database
         currencyRepository.saveAndFlush(currency);
 
-        // Get all the currencyList where currencyCode is not null
-        defaultCurrencyShouldBeFound("currencyCode.specified=true");
+        // Get all the currencyList where code is not null
+        defaultCurrencyShouldBeFound("code.specified=true");
 
-        // Get all the currencyList where currencyCode is null
-        defaultCurrencyShouldNotBeFound("currencyCode.specified=false");
+        // Get all the currencyList where code is null
+        defaultCurrencyShouldNotBeFound("code.specified=false");
     }
                 @Test
     @Transactional
-    public void getAllCurrenciesByCurrencyCodeContainsSomething() throws Exception {
+    public void getAllCurrenciesByCodeContainsSomething() throws Exception {
         // Initialize the database
         currencyRepository.saveAndFlush(currency);
 
-        // Get all the currencyList where currencyCode contains DEFAULT_CURRENCY_CODE
-        defaultCurrencyShouldBeFound("currencyCode.contains=" + DEFAULT_CURRENCY_CODE);
+        // Get all the currencyList where code contains DEFAULT_CODE
+        defaultCurrencyShouldBeFound("code.contains=" + DEFAULT_CODE);
 
-        // Get all the currencyList where currencyCode contains UPDATED_CURRENCY_CODE
-        defaultCurrencyShouldNotBeFound("currencyCode.contains=" + UPDATED_CURRENCY_CODE);
+        // Get all the currencyList where code contains UPDATED_CODE
+        defaultCurrencyShouldNotBeFound("code.contains=" + UPDATED_CODE);
     }
 
     @Test
     @Transactional
-    public void getAllCurrenciesByCurrencyCodeNotContainsSomething() throws Exception {
+    public void getAllCurrenciesByCodeNotContainsSomething() throws Exception {
         // Initialize the database
         currencyRepository.saveAndFlush(currency);
 
-        // Get all the currencyList where currencyCode does not contain DEFAULT_CURRENCY_CODE
-        defaultCurrencyShouldNotBeFound("currencyCode.doesNotContain=" + DEFAULT_CURRENCY_CODE);
+        // Get all the currencyList where code does not contain DEFAULT_CODE
+        defaultCurrencyShouldNotBeFound("code.doesNotContain=" + DEFAULT_CODE);
 
-        // Get all the currencyList where currencyCode does not contain UPDATED_CURRENCY_CODE
-        defaultCurrencyShouldBeFound("currencyCode.doesNotContain=" + UPDATED_CURRENCY_CODE);
+        // Get all the currencyList where code does not contain UPDATED_CODE
+        defaultCurrencyShouldBeFound("code.doesNotContain=" + UPDATED_CODE);
     }
 
 
     @Test
     @Transactional
-    public void getAllCurrenciesByCurrencyNameIsEqualToSomething() throws Exception {
+    public void getAllCurrenciesByNameIsEqualToSomething() throws Exception {
         // Initialize the database
         currencyRepository.saveAndFlush(currency);
 
-        // Get all the currencyList where currencyName equals to DEFAULT_CURRENCY_NAME
-        defaultCurrencyShouldBeFound("currencyName.equals=" + DEFAULT_CURRENCY_NAME);
+        // Get all the currencyList where name equals to DEFAULT_NAME
+        defaultCurrencyShouldBeFound("name.equals=" + DEFAULT_NAME);
 
-        // Get all the currencyList where currencyName equals to UPDATED_CURRENCY_NAME
-        defaultCurrencyShouldNotBeFound("currencyName.equals=" + UPDATED_CURRENCY_NAME);
+        // Get all the currencyList where name equals to UPDATED_NAME
+        defaultCurrencyShouldNotBeFound("name.equals=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllCurrenciesByCurrencyNameIsNotEqualToSomething() throws Exception {
+    public void getAllCurrenciesByNameIsNotEqualToSomething() throws Exception {
         // Initialize the database
         currencyRepository.saveAndFlush(currency);
 
-        // Get all the currencyList where currencyName not equals to DEFAULT_CURRENCY_NAME
-        defaultCurrencyShouldNotBeFound("currencyName.notEquals=" + DEFAULT_CURRENCY_NAME);
+        // Get all the currencyList where name not equals to DEFAULT_NAME
+        defaultCurrencyShouldNotBeFound("name.notEquals=" + DEFAULT_NAME);
 
-        // Get all the currencyList where currencyName not equals to UPDATED_CURRENCY_NAME
-        defaultCurrencyShouldBeFound("currencyName.notEquals=" + UPDATED_CURRENCY_NAME);
+        // Get all the currencyList where name not equals to UPDATED_NAME
+        defaultCurrencyShouldBeFound("name.notEquals=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllCurrenciesByCurrencyNameIsInShouldWork() throws Exception {
+    public void getAllCurrenciesByNameIsInShouldWork() throws Exception {
         // Initialize the database
         currencyRepository.saveAndFlush(currency);
 
-        // Get all the currencyList where currencyName in DEFAULT_CURRENCY_NAME or UPDATED_CURRENCY_NAME
-        defaultCurrencyShouldBeFound("currencyName.in=" + DEFAULT_CURRENCY_NAME + "," + UPDATED_CURRENCY_NAME);
+        // Get all the currencyList where name in DEFAULT_NAME or UPDATED_NAME
+        defaultCurrencyShouldBeFound("name.in=" + DEFAULT_NAME + "," + UPDATED_NAME);
 
-        // Get all the currencyList where currencyName equals to UPDATED_CURRENCY_NAME
-        defaultCurrencyShouldNotBeFound("currencyName.in=" + UPDATED_CURRENCY_NAME);
+        // Get all the currencyList where name equals to UPDATED_NAME
+        defaultCurrencyShouldNotBeFound("name.in=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllCurrenciesByCurrencyNameIsNullOrNotNull() throws Exception {
+    public void getAllCurrenciesByNameIsNullOrNotNull() throws Exception {
         // Initialize the database
         currencyRepository.saveAndFlush(currency);
 
-        // Get all the currencyList where currencyName is not null
-        defaultCurrencyShouldBeFound("currencyName.specified=true");
+        // Get all the currencyList where name is not null
+        defaultCurrencyShouldBeFound("name.specified=true");
 
-        // Get all the currencyList where currencyName is null
-        defaultCurrencyShouldNotBeFound("currencyName.specified=false");
+        // Get all the currencyList where name is null
+        defaultCurrencyShouldNotBeFound("name.specified=false");
     }
                 @Test
     @Transactional
-    public void getAllCurrenciesByCurrencyNameContainsSomething() throws Exception {
+    public void getAllCurrenciesByNameContainsSomething() throws Exception {
         // Initialize the database
         currencyRepository.saveAndFlush(currency);
 
-        // Get all the currencyList where currencyName contains DEFAULT_CURRENCY_NAME
-        defaultCurrencyShouldBeFound("currencyName.contains=" + DEFAULT_CURRENCY_NAME);
+        // Get all the currencyList where name contains DEFAULT_NAME
+        defaultCurrencyShouldBeFound("name.contains=" + DEFAULT_NAME);
 
-        // Get all the currencyList where currencyName contains UPDATED_CURRENCY_NAME
-        defaultCurrencyShouldNotBeFound("currencyName.contains=" + UPDATED_CURRENCY_NAME);
+        // Get all the currencyList where name contains UPDATED_NAME
+        defaultCurrencyShouldNotBeFound("name.contains=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllCurrenciesByCurrencyNameNotContainsSomething() throws Exception {
+    public void getAllCurrenciesByNameNotContainsSomething() throws Exception {
         // Initialize the database
         currencyRepository.saveAndFlush(currency);
 
-        // Get all the currencyList where currencyName does not contain DEFAULT_CURRENCY_NAME
-        defaultCurrencyShouldNotBeFound("currencyName.doesNotContain=" + DEFAULT_CURRENCY_NAME);
+        // Get all the currencyList where name does not contain DEFAULT_NAME
+        defaultCurrencyShouldNotBeFound("name.doesNotContain=" + DEFAULT_NAME);
 
-        // Get all the currencyList where currencyName does not contain UPDATED_CURRENCY_NAME
-        defaultCurrencyShouldBeFound("currencyName.doesNotContain=" + UPDATED_CURRENCY_NAME);
+        // Get all the currencyList where name does not contain UPDATED_NAME
+        defaultCurrencyShouldBeFound("name.doesNotContain=" + UPDATED_NAME);
     }
 
     /**
@@ -370,8 +370,8 @@ public class CurrencyResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(currency.getId().intValue())))
-            .andExpect(jsonPath("$.[*].currencyCode").value(hasItem(DEFAULT_CURRENCY_CODE)))
-            .andExpect(jsonPath("$.[*].currencyName").value(hasItem(DEFAULT_CURRENCY_NAME)));
+            .andExpect(jsonPath("$.[*].code").value(hasItem(DEFAULT_CODE)))
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)));
 
         // Check, that the count call also returns 1
         restCurrencyMockMvc.perform(get("/api/currencies/count?sort=id,desc&" + filter))
@@ -419,8 +419,8 @@ public class CurrencyResourceIT {
         // Disconnect from session so that the updates on updatedCurrency are not directly saved in db
         em.detach(updatedCurrency);
         updatedCurrency
-            .currencyCode(UPDATED_CURRENCY_CODE)
-            .currencyName(UPDATED_CURRENCY_NAME);
+            .code(UPDATED_CODE)
+            .name(UPDATED_NAME);
         CurrencyDTO currencyDTO = currencyMapper.toDto(updatedCurrency);
 
         restCurrencyMockMvc.perform(put("/api/currencies")
@@ -432,8 +432,8 @@ public class CurrencyResourceIT {
         List<Currency> currencyList = currencyRepository.findAll();
         assertThat(currencyList).hasSize(databaseSizeBeforeUpdate);
         Currency testCurrency = currencyList.get(currencyList.size() - 1);
-        assertThat(testCurrency.getCurrencyCode()).isEqualTo(UPDATED_CURRENCY_CODE);
-        assertThat(testCurrency.getCurrencyName()).isEqualTo(UPDATED_CURRENCY_NAME);
+        assertThat(testCurrency.getCode()).isEqualTo(UPDATED_CODE);
+        assertThat(testCurrency.getName()).isEqualTo(UPDATED_NAME);
     }
 
     @Test

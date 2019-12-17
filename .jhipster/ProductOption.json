@@ -2,7 +2,7 @@
     "name": "ProductOption",
     "fields": [
         {
-            "fieldName": "productOptionValue",
+            "fieldName": "value",
             "fieldType": "String",
             "fieldValidateRules": [
                 "required"
@@ -15,14 +15,14 @@
             "otherEntityName": "productOptionSet",
             "otherEntityRelationshipName": "productOption",
             "relationshipName": "productOptionSet",
-            "otherEntityField": "productOptionSetValue"
+            "otherEntityField": "value"
         },
         {
             "relationshipType": "many-to-one",
             "otherEntityName": "suppliers",
             "otherEntityRelationshipName": "productOption",
             "relationshipName": "supplier",
-            "otherEntityField": "id"
+            "otherEntityField": "name"
         }
     ],
     "changelogDate": "20191106102851",

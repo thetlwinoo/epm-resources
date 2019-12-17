@@ -56,8 +56,8 @@ describe('Service Tests', () => {
       it('should update a Culture', () => {
         const returnedFromService = Object.assign(
           {
-            cultureCode: 'BBBBBB',
-            cultureName: 'BBBBBB'
+            code: 'BBBBBB',
+            name: 'BBBBBB'
           },
           elemDefault
         );
@@ -75,8 +75,8 @@ describe('Service Tests', () => {
       it('should return a list of Culture', () => {
         const returnedFromService = Object.assign(
           {
-            cultureCode: 'BBBBBB',
-            cultureName: 'BBBBBB'
+            code: 'BBBBBB',
+            name: 'BBBBBB'
           },
           elemDefault
         );

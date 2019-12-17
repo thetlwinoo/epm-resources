@@ -16,7 +16,7 @@
       "detail": {
         "title": "Countries"
       },
-      "countryName": "Country Name",
+      "name": "Name",
       "formalName": "Formal Name",
       "isoAplha3Code": "Iso Aplha 3 Code",
       "isoNumericCode": "Iso Numeric Code",

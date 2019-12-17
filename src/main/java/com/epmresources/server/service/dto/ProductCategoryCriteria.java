@@ -30,6 +30,10 @@ public class ProductCategoryCriteria implements Serializable, Criteria {
 
     private StringFilter shortLabel;
 
+    private StringFilter thumbnailUrl;
+
+    private LongFilter photoListId;
+
     private LongFilter parentId;
 
     public ProductCategoryCriteria(){
@@ -39,6 +43,8 @@ public class ProductCategoryCriteria implements Serializable, Criteria {
         this.id = other.id == null ? null : other.id.copy();
         this.name = other.name == null ? null : other.name.copy();
         this.shortLabel = other.shortLabel == null ? null : other.shortLabel.copy();
+        this.thumbnailUrl = other.thumbnailUrl == null ? null : other.thumbnailUrl.copy();
+        this.photoListId = other.photoListId == null ? null : other.photoListId.copy();
         this.parentId = other.parentId == null ? null : other.parentId.copy();
     }
 
@@ -71,6 +77,22 @@ public class ProductCategoryCriteria implements Serializable, Criteria {
         this.shortLabel = shortLabel;
     }
 
+    public StringFilter getThumbnailUrl() {
+        return thumbnailUrl;
+    }
+
+    public void setThumbnailUrl(StringFilter thumbnailUrl) {
+        this.thumbnailUrl = thumbnailUrl;
+    }
+
+    public LongFilter getPhotoListId() {
+        return photoListId;
+    }
+
+    public void setPhotoListId(LongFilter photoListId) {
+        this.photoListId = photoListId;
+    }
+
     public LongFilter getParentId() {
         return parentId;
     }
@@ -93,6 +115,8 @@ public class ProductCategoryCriteria implements Serializable, Criteria {
             Objects.equals(id, that.id) &&
             Objects.equals(name, that.name) &&
             Objects.equals(shortLabel, that.shortLabel) &&
+            Objects.equals(thumbnailUrl, that.thumbnailUrl) &&
+            Objects.equals(photoListId, that.photoListId) &&
             Objects.equals(parentId, that.parentId);
     }
 
@@ -102,6 +126,8 @@ public class ProductCategoryCriteria implements Serializable, Criteria {
         id,
         name,
         shortLabel,
+        thumbnailUrl,
+        photoListId,
         parentId
         );
     }
@@ -112,6 +138,8 @@ public class ProductCategoryCriteria implements Serializable, Criteria {
                 (id != null ? "id=" + id + ", " : "") +
                 (name != null ? "name=" + name + ", " : "") +
                 (shortLabel != null ? "shortLabel=" + shortLabel + ", " : "") +
+                (thumbnailUrl != null ? "thumbnailUrl=" + thumbnailUrl + ", " : "") +
+                (photoListId != null ? "photoListId=" + photoListId + ", " : "") +
                 (parentId != null ? "parentId=" + parentId + ", " : "") +
             "}";
     }

@@ -19,14 +19,14 @@
             <thead>
             <tr>
             <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
-            <th scope="col" ><span jhiTranslate="epmresourcesApp.uploadActionTypes.actionTypeName">Action Type Name</span></th>
+            <th scope="col" ><span jhiTranslate="epmresourcesApp.uploadActionTypes.name">Name</span></th>
             <th scope="col"></th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let uploadActionTypes of uploadActionTypes ;trackBy: trackId">
                 <td><a [routerLink]="['/upload-action-types', uploadActionTypes.id, 'view' ]">{{uploadActionTypes.id}}</a></td>
-                <td>{{uploadActionTypes.actionTypeName}}</td>
+                <td>{{uploadActionTypes.name}}</td>
                 <td class="text-right">
                     <div class="btn-group">
                         <button type="submit"

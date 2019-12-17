@@ -41,7 +41,6 @@ describe('Service Tests', () => {
         'AAAAAAA',
         0,
         false,
-        'image/png',
         'AAAAAAA',
         currentDate,
         currentDate
@@ -95,7 +94,7 @@ describe('Service Tests', () => {
       it('should update a Suppliers', () => {
         const returnedFromService = Object.assign(
           {
-            supplierName: 'BBBBBB',
+            name: 'BBBBBB',
             supplierReference: 'BBBBBB',
             bankAccountName: 'BBBBBB',
             bankAccountBranch: 'BBBBBB',
@@ -110,7 +109,7 @@ describe('Service Tests', () => {
             webServiceUrl: 'BBBBBB',
             creditRating: 1,
             activeFlag: true,
-            avatar: 'BBBBBB',
+            thumbnailUrl: 'BBBBBB',
             validFrom: currentDate.format(DATE_TIME_FORMAT),
             validTo: currentDate.format(DATE_TIME_FORMAT)
           },
@@ -136,7 +135,7 @@ describe('Service Tests', () => {
       it('should return a list of Suppliers', () => {
         const returnedFromService = Object.assign(
           {
-            supplierName: 'BBBBBB',
+            name: 'BBBBBB',
             supplierReference: 'BBBBBB',
             bankAccountName: 'BBBBBB',
             bankAccountBranch: 'BBBBBB',
@@ -151,7 +150,7 @@ describe('Service Tests', () => {
             webServiceUrl: 'BBBBBB',
             creditRating: 1,
             activeFlag: true,
-            avatar: 'BBBBBB',
+            thumbnailUrl: 'BBBBBB',
             validFrom: currentDate.format(DATE_TIME_FORMAT),
             validTo: currentDate.format(DATE_TIME_FORMAT)
           },

@@ -19,7 +19,7 @@
             <thead>
             <tr>
             <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
-            <th scope="col" ><span jhiTranslate="epmresourcesApp.addressTypes.addressTypeName">Address Type Name</span></th>
+            <th scope="col" ><span jhiTranslate="epmresourcesApp.addressTypes.name">Name</span></th>
             <th scope="col" ><span jhiTranslate="epmresourcesApp.addressTypes.refer">Refer</span></th>
             <th scope="col"></th>
             </tr>
@@ -27,7 +27,7 @@
             <tbody>
             <tr *ngFor="let addressTypes of addressTypes ;trackBy: trackId">
                 <td><a [routerLink]="['/address-types', addressTypes.id, 'view' ]">{{addressTypes.id}}</a></td>
-                <td>{{addressTypes.addressTypeName}}</td>
+                <td>{{addressTypes.name}}</td>
                 <td>{{addressTypes.refer}}</td>
                 <td class="text-right">
                     <div class="btn-group">

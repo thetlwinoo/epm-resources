@@ -4,7 +4,6 @@ import { NavBarPage, SignInPage } from '../../page-objects/jhi-page-objects';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { ProductCategoryComponentsPage, ProductCategoryDeleteDialog, ProductCategoryUpdatePage } from './product-category.page-object';
-import * as path from 'path';
 
 const expect = chai.expect;
 
@@ -14,9 +13,6 @@ describe('ProductCategory e2e test', () => {
   let productCategoryComponentsPage: ProductCategoryComponentsPage;
   let productCategoryUpdatePage: ProductCategoryUpdatePage;
   let productCategoryDeleteDialog: ProductCategoryDeleteDialog;
-  const fileNameToUpload = 'logo-jhipster.png';
-  const fileToUpload = '../../../../../../src/main/webapp/content/images/' + fileNameToUpload;
-  const absolutePath = path.resolve(__dirname, fileToUpload);
 
   before(async () => {
     await browser.get('/');
@@ -47,7 +43,7 @@ describe('ProductCategory e2e test', () => {
     await promise.all([
       productCategoryUpdatePage.setNameInput('name'),
       productCategoryUpdatePage.setShortLabelInput('shortLabel'),
-      productCategoryUpdatePage.setPhotoInput(absolutePath),
+      productCategoryUpdatePage.setThumbnailUrlInput('thumbnailUrl'),
       productCategoryUpdatePage.parentSelectLastOption()
     ]);
     expect(await productCategoryUpdatePage.getNameInput()).to.eq('name', 'Expected Name value to be equals to name');
@@ -55,9 +51,9 @@ describe('ProductCategory e2e test', () => {
       'shortLabel',
       'Expected ShortLabel value to be equals to shortLabel'
     );
-    expect(await productCategoryUpdatePage.getPhotoInput()).to.endsWith(
-      fileNameToUpload,
-      'Expected Photo value to be end with ' + fileNameToUpload
+    expect(await productCategoryUpdatePage.getThumbnailUrlInput()).to.eq(
+      'thumbnailUrl',
+      'Expected ThumbnailUrl value to be equals to thumbnailUrl'
     );
     await productCategoryUpdatePage.save();
     expect(await productCategoryUpdatePage.getSaveButton().isPresent(), 'Expected save button disappear').to.be.false;

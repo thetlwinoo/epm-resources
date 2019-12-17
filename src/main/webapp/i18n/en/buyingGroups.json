@@ -16,7 +16,7 @@
       "detail": {
         "title": "Buying Groups"
       },
-      "buyingGroupName": "Buying Group Name",
+      "name": "Name",
       "validFrom": "Valid From",
       "validTo": "Valid To"
     }

@@ -12,9 +12,9 @@ import org.mapstruct.*;
 public interface SpecialDealsMapper extends EntityMapper<SpecialDealsDTO, SpecialDeals> {
 
     @Mapping(source = "buyingGroup.id", target = "buyingGroupId")
-    @Mapping(source = "buyingGroup.buyingGroupName", target = "buyingGroupBuyingGroupName")
+    @Mapping(source = "buyingGroup.name", target = "buyingGroupName")
     @Mapping(source = "customerCategory.id", target = "customerCategoryId")
-    @Mapping(source = "customerCategory.customerCategoryName", target = "customerCategoryCustomerCategoryName")
+    @Mapping(source = "customerCategory.name", target = "customerCategoryName")
     @Mapping(source = "customer.id", target = "customerId")
     @Mapping(source = "productCategory.id", target = "productCategoryId")
     @Mapping(source = "productCategory.name", target = "productCategoryName")

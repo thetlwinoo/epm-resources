@@ -39,8 +39,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = EpmresourcesApp.class)
 public class ProductTagsResourceIT {
 
-    private static final String DEFAULT_TAG_NAME = "AAAAAAAAAA";
-    private static final String UPDATED_TAG_NAME = "BBBBBBBBBB";
+    private static final String DEFAULT_NAME = "AAAAAAAAAA";
+    private static final String UPDATED_NAME = "BBBBBBBBBB";
 
     @Autowired
     private ProductTagsRepository productTagsRepository;
@@ -93,7 +93,7 @@ public class ProductTagsResourceIT {
      */
     public static ProductTags createEntity(EntityManager em) {
         ProductTags productTags = new ProductTags()
-            .tagName(DEFAULT_TAG_NAME);
+            .name(DEFAULT_NAME);
         return productTags;
     }
     /**
@@ -104,7 +104,7 @@ public class ProductTagsResourceIT {
      */
     public static ProductTags createUpdatedEntity(EntityManager em) {
         ProductTags productTags = new ProductTags()
-            .tagName(UPDATED_TAG_NAME);
+            .name(UPDATED_NAME);
         return productTags;
     }
 
@@ -129,7 +129,7 @@ public class ProductTagsResourceIT {
         List<ProductTags> productTagsList = productTagsRepository.findAll();
         assertThat(productTagsList).hasSize(databaseSizeBeforeCreate + 1);
         ProductTags testProductTags = productTagsList.get(productTagsList.size() - 1);
-        assertThat(testProductTags.getTagName()).isEqualTo(DEFAULT_TAG_NAME);
+        assertThat(testProductTags.getName()).isEqualTo(DEFAULT_NAME);
     }
 
     @Test
@@ -155,10 +155,10 @@ public class ProductTagsResourceIT {
 
     @Test
     @Transactional
-    public void checkTagNameIsRequired() throws Exception {
+    public void checkNameIsRequired() throws Exception {
         int databaseSizeBeforeTest = productTagsRepository.findAll().size();
         // set the field null
-        productTags.setTagName(null);
+        productTags.setName(null);
 
         // Create the ProductTags, which fails.
         ProductTagsDTO productTagsDTO = productTagsMapper.toDto(productTags);
@@ -183,7 +183,7 @@ public class ProductTagsResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(productTags.getId().intValue())))
-            .andExpect(jsonPath("$.[*].tagName").value(hasItem(DEFAULT_TAG_NAME)));
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)));
     }
     
     @Test
@@ -197,84 +197,84 @@ public class ProductTagsResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(productTags.getId().intValue()))
-            .andExpect(jsonPath("$.tagName").value(DEFAULT_TAG_NAME));
+            .andExpect(jsonPath("$.name").value(DEFAULT_NAME));
     }
 
     @Test
     @Transactional
-    public void getAllProductTagsByTagNameIsEqualToSomething() throws Exception {
+    public void getAllProductTagsByNameIsEqualToSomething() throws Exception {
         // Initialize the database
         productTagsRepository.saveAndFlush(productTags);
 
-        // Get all the productTagsList where tagName equals to DEFAULT_TAG_NAME
-        defaultProductTagsShouldBeFound("tagName.equals=" + DEFAULT_TAG_NAME);
+        // Get all the productTagsList where name equals to DEFAULT_NAME
+        defaultProductTagsShouldBeFound("name.equals=" + DEFAULT_NAME);
 
-        // Get all the productTagsList where tagName equals to UPDATED_TAG_NAME
-        defaultProductTagsShouldNotBeFound("tagName.equals=" + UPDATED_TAG_NAME);
+        // Get all the productTagsList where name equals to UPDATED_NAME
+        defaultProductTagsShouldNotBeFound("name.equals=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllProductTagsByTagNameIsNotEqualToSomething() throws Exception {
+    public void getAllProductTagsByNameIsNotEqualToSomething() throws Exception {
         // Initialize the database
         productTagsRepository.saveAndFlush(productTags);
 
-        // Get all the productTagsList where tagName not equals to DEFAULT_TAG_NAME
-        defaultProductTagsShouldNotBeFound("tagName.notEquals=" + DEFAULT_TAG_NAME);
+        // Get all the productTagsList where name not equals to DEFAULT_NAME
+        defaultProductTagsShouldNotBeFound("name.notEquals=" + DEFAULT_NAME);
 
-        // Get all the productTagsList where tagName not equals to UPDATED_TAG_NAME
-        defaultProductTagsShouldBeFound("tagName.notEquals=" + UPDATED_TAG_NAME);
+        // Get all the productTagsList where name not equals to UPDATED_NAME
+        defaultProductTagsShouldBeFound("name.notEquals=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllProductTagsByTagNameIsInShouldWork() throws Exception {
+    public void getAllProductTagsByNameIsInShouldWork() throws Exception {
         // Initialize the database
         productTagsRepository.saveAndFlush(productTags);
 
-        // Get all the productTagsList where tagName in DEFAULT_TAG_NAME or UPDATED_TAG_NAME
-        defaultProductTagsShouldBeFound("tagName.in=" + DEFAULT_TAG_NAME + "," + UPDATED_TAG_NAME);
+        // Get all the productTagsList where name in DEFAULT_NAME or UPDATED_NAME
+        defaultProductTagsShouldBeFound("name.in=" + DEFAULT_NAME + "," + UPDATED_NAME);
 
-        // Get all the productTagsList where tagName equals to UPDATED_TAG_NAME
-        defaultProductTagsShouldNotBeFound("tagName.in=" + UPDATED_TAG_NAME);
+        // Get all the productTagsList where name equals to UPDATED_NAME
+        defaultProductTagsShouldNotBeFound("name.in=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllProductTagsByTagNameIsNullOrNotNull() throws Exception {
+    public void getAllProductTagsByNameIsNullOrNotNull() throws Exception {
         // Initialize the database
         productTagsRepository.saveAndFlush(productTags);
 
-        // Get all the productTagsList where tagName is not null
-        defaultProductTagsShouldBeFound("tagName.specified=true");
+        // Get all the productTagsList where name is not null
+        defaultProductTagsShouldBeFound("name.specified=true");
 
-        // Get all the productTagsList where tagName is null
-        defaultProductTagsShouldNotBeFound("tagName.specified=false");
+        // Get all the productTagsList where name is null
+        defaultProductTagsShouldNotBeFound("name.specified=false");
     }
                 @Test
     @Transactional
-    public void getAllProductTagsByTagNameContainsSomething() throws Exception {
+    public void getAllProductTagsByNameContainsSomething() throws Exception {
         // Initialize the database
         productTagsRepository.saveAndFlush(productTags);
 
-        // Get all the productTagsList where tagName contains DEFAULT_TAG_NAME
-        defaultProductTagsShouldBeFound("tagName.contains=" + DEFAULT_TAG_NAME);
+        // Get all the productTagsList where name contains DEFAULT_NAME
+        defaultProductTagsShouldBeFound("name.contains=" + DEFAULT_NAME);
 
-        // Get all the productTagsList where tagName contains UPDATED_TAG_NAME
-        defaultProductTagsShouldNotBeFound("tagName.contains=" + UPDATED_TAG_NAME);
+        // Get all the productTagsList where name contains UPDATED_NAME
+        defaultProductTagsShouldNotBeFound("name.contains=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllProductTagsByTagNameNotContainsSomething() throws Exception {
+    public void getAllProductTagsByNameNotContainsSomething() throws Exception {
         // Initialize the database
         productTagsRepository.saveAndFlush(productTags);
 
-        // Get all the productTagsList where tagName does not contain DEFAULT_TAG_NAME
-        defaultProductTagsShouldNotBeFound("tagName.doesNotContain=" + DEFAULT_TAG_NAME);
+        // Get all the productTagsList where name does not contain DEFAULT_NAME
+        defaultProductTagsShouldNotBeFound("name.doesNotContain=" + DEFAULT_NAME);
 
-        // Get all the productTagsList where tagName does not contain UPDATED_TAG_NAME
-        defaultProductTagsShouldBeFound("tagName.doesNotContain=" + UPDATED_TAG_NAME);
+        // Get all the productTagsList where name does not contain UPDATED_NAME
+        defaultProductTagsShouldBeFound("name.doesNotContain=" + UPDATED_NAME);
     }
 
 
@@ -305,7 +305,7 @@ public class ProductTagsResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(productTags.getId().intValue())))
-            .andExpect(jsonPath("$.[*].tagName").value(hasItem(DEFAULT_TAG_NAME)));
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)));
 
         // Check, that the count call also returns 1
         restProductTagsMockMvc.perform(get("/api/product-tags/count?sort=id,desc&" + filter))
@@ -353,7 +353,7 @@ public class ProductTagsResourceIT {
         // Disconnect from session so that the updates on updatedProductTags are not directly saved in db
         em.detach(updatedProductTags);
         updatedProductTags
-            .tagName(UPDATED_TAG_NAME);
+            .name(UPDATED_NAME);
         ProductTagsDTO productTagsDTO = productTagsMapper.toDto(updatedProductTags);
 
         restProductTagsMockMvc.perform(put("/api/product-tags")
@@ -365,7 +365,7 @@ public class ProductTagsResourceIT {
         List<ProductTags> productTagsList = productTagsRepository.findAll();
         assertThat(productTagsList).hasSize(databaseSizeBeforeUpdate);
         ProductTags testProductTags = productTagsList.get(productTagsList.size() - 1);
-        assertThat(testProductTags.getTagName()).isEqualTo(UPDATED_TAG_NAME);
+        assertThat(testProductTags.getName()).isEqualTo(UPDATED_NAME);
     }
 
     @Test

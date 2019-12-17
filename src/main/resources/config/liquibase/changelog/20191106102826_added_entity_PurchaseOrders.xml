@@ -24,8 +24,8 @@
             <column name="supplier_reference" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="is_order_finalized" type="boolean">
-                <constraints nullable="true" />
+            <column name="is_order_finalized" type="integer">
+                <constraints nullable="false" />
             </column>
             <column name="comments" type="varchar(255)">
                 <constraints nullable="true" />
@@ -77,7 +77,7 @@
             <column name="order_date" type="datetime"/>
             <column name="expected_delivery_date" type="datetime"/>
             <column name="supplier_reference" type="string"/>
-            <column name="is_order_finalized" type="boolean"/>
+            <column name="is_order_finalized" type="numeric"/>
             <column name="comments" type="string"/>
             <column name="internal_comments" type="string"/>
             <column name="last_edited_by" type="string"/>

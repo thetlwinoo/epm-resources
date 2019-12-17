@@ -15,10 +15,10 @@
             <column name="id" type="bigint" autoIncrement="${autoIncrement}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="currency_code" type="varchar(255)">
+            <column name="code" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
-            <column name="currency_name" type="varchar(255)">
+            <column name="name" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
@@ -44,8 +44,8 @@
                   separator=";"
                   tableName="currency">
             <column name="id" type="numeric"/>
-            <column name="currency_code" type="string"/>
-            <column name="currency_name" type="string"/>
+            <column name="code" type="string"/>
+            <column name="name" type="string"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here, do not remove-->
         </loadData>
     </changeSet>

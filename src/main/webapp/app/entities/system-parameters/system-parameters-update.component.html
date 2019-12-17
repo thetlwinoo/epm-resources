@@ -25,14 +25,14 @@
                     <label class="form-control-label" jhiTranslate="epmresourcesApp.systemParameters.deliveryCity" for="field_deliveryCity">Delivery City</label>
                     <select class="form-control" id="field_deliveryCity" name="deliveryCity" formControlName="deliveryCityId">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="citiesOption.id" *ngFor="let citiesOption of cities; trackBy: trackCitiesById">{{citiesOption.cityName}}</option>
+                        <option [ngValue]="citiesOption.id" *ngFor="let citiesOption of cities; trackBy: trackCitiesById">{{citiesOption.name}}</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="epmresourcesApp.systemParameters.postalCity" for="field_postalCity">Postal City</label>
                     <select class="form-control" id="field_postalCity" name="postalCity" formControlName="postalCityId">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="citiesOption.id" *ngFor="let citiesOption of cities; trackBy: trackCitiesById">{{citiesOption.cityName}}</option>
+                        <option [ngValue]="citiesOption.id" *ngFor="let citiesOption of cities; trackBy: trackCitiesById">{{citiesOption.name}}</option>
                     </select>
                 </div>
             </div>

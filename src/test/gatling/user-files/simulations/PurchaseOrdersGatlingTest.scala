@@ -75,7 +75,7 @@ class PurchaseOrdersGatlingTest extends Simulation {
                 , "orderDate":"2020-01-01T00:00:00.000Z"
                 , "expectedDeliveryDate":"2020-01-01T00:00:00.000Z"
                 , "supplierReference":"SAMPLE_TEXT"
-                , "isOrderFinalized":null
+                , "isOrderFinalized":"0"
                 , "comments":"SAMPLE_TEXT"
                 , "internalComments":"SAMPLE_TEXT"
                 , "lastEditedBy":"SAMPLE_TEXT"

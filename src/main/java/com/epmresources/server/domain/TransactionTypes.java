@@ -24,8 +24,8 @@ public class TransactionTypes implements Serializable {
     private Long id;
 
     @NotNull
-    @Column(name = "transaction_type_name", nullable = false)
-    private String transactionTypeName;
+    @Column(name = "name", nullable = false)
+    private String name;
 
     @NotNull
     @Column(name = "valid_from", nullable = false)
@@ -44,17 +44,17 @@ public class TransactionTypes implements Serializable {
         this.id = id;
     }
 
-    public String getTransactionTypeName() {
-        return transactionTypeName;
+    public String getName() {
+        return name;
     }
 
-    public TransactionTypes transactionTypeName(String transactionTypeName) {
-        this.transactionTypeName = transactionTypeName;
+    public TransactionTypes name(String name) {
+        this.name = name;
         return this;
     }
 
-    public void setTransactionTypeName(String transactionTypeName) {
-        this.transactionTypeName = transactionTypeName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Instant getValidFrom() {
@@ -104,7 +104,7 @@ public class TransactionTypes implements Serializable {
     public String toString() {
         return "TransactionTypes{" +
             "id=" + getId() +
-            ", transactionTypeName='" + getTransactionTypeName() + "'" +
+            ", name='" + getName() + "'" +
             ", validFrom='" + getValidFrom() + "'" +
             ", validTo='" + getValidTo() + "'" +
             "}";

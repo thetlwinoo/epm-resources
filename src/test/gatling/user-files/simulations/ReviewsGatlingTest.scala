@@ -72,7 +72,7 @@ class ReviewsGatlingTest extends Simulation {
             .headers(headers_http_authenticated)
             .body(StringBody("""{
                 "id":null
-                , "reviewerName":"SAMPLE_TEXT"
+                , "name":"SAMPLE_TEXT"
                 , "emailAddress":"SAMPLE_TEXT"
                 , "reviewDate":"2020-01-01T00:00:00.000Z"
                 , "overAllSellerRating":"0"

@@ -1,8 +1,8 @@
 export interface IShipMethod {
   id?: number;
-  shipMethodName?: string;
+  name?: string;
 }
 
 export class ShipMethod implements IShipMethod {
-  constructor(public id?: number, public shipMethodName?: string) {}
+  constructor(public id?: number, public name?: string) {}
 }

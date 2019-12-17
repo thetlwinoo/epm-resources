@@ -49,12 +49,8 @@ public class ReviewLines implements Serializable {
     @Column(name = "delivery_review")
     private String deliveryReview;
 
-    @Lob
-    @Column(name = "photo")
-    private byte[] photo;
-
-    @Column(name = "photo_content_type")
-    private String photoContentType;
+    @Column(name = "thumbnail_url")
+    private String thumbnailUrl;
 
     @Column(name = "last_edited_by")
     private String lastEditedBy;
@@ -66,7 +62,7 @@ public class ReviewLines implements Serializable {
     @JsonIgnore
     private StockItems stockItem;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
     @JsonIgnoreProperties("reviewLineLists")
     private Reviews review;
 
@@ -157,30 +153,17 @@ public class ReviewLines implements Serializable {
         this.deliveryReview = deliveryReview;
     }
 
-    public byte[] getPhoto() {
-        return photo;
+    public String getThumbnailUrl() {
+        return thumbnailUrl;
     }
 
-    public ReviewLines photo(byte[] photo) {
-        this.photo = photo;
+    public ReviewLines thumbnailUrl(String thumbnailUrl) {
+        this.thumbnailUrl = thumbnailUrl;
         return this;
     }
 
-    public void setPhoto(byte[] photo) {
-        this.photo = photo;
-    }
-
-    public String getPhotoContentType() {
-        return photoContentType;
-    }
-
-    public ReviewLines photoContentType(String photoContentType) {
-        this.photoContentType = photoContentType;
-        return this;
-    }
-
-    public void setPhotoContentType(String photoContentType) {
-        this.photoContentType = photoContentType;
+    public void setThumbnailUrl(String thumbnailUrl) {
+        this.thumbnailUrl = thumbnailUrl;
     }
 
     public String getLastEditedBy() {
@@ -262,8 +245,7 @@ public class ReviewLines implements Serializable {
             ", sellerReview='" + getSellerReview() + "'" +
             ", deliveryRating=" + getDeliveryRating() +
             ", deliveryReview='" + getDeliveryReview() + "'" +
-            ", photo='" + getPhoto() + "'" +
-            ", photoContentType='" + getPhotoContentType() + "'" +
+            ", thumbnailUrl='" + getThumbnailUrl() + "'" +
             ", lastEditedBy='" + getLastEditedBy() + "'" +
             ", lastEditedWhen='" + getLastEditedWhen() + "'" +
             "}";

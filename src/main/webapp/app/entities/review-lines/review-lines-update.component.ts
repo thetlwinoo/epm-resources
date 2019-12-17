@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -35,8 +35,7 @@ export class ReviewLinesUpdateComponent implements OnInit {
     sellerReview: [],
     deliveryRating: [],
     deliveryReview: [],
-    photo: [],
-    photoContentType: [],
+    thumbnailUrl: [],
     lastEditedBy: [],
     lastEditedWhen: [],
     reviewId: []
@@ -48,7 +47,6 @@ export class ReviewLinesUpdateComponent implements OnInit {
     protected reviewLinesService: ReviewLinesService,
     protected stockItemsService: StockItemsService,
     protected reviewsService: ReviewsService,
-    protected elementRef: ElementRef,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
   ) {}
@@ -83,8 +81,7 @@ export class ReviewLinesUpdateComponent implements OnInit {
       sellerReview: reviewLines.sellerReview,
       deliveryRating: reviewLines.deliveryRating,
       deliveryReview: reviewLines.deliveryReview,
-      photo: reviewLines.photo,
-      photoContentType: reviewLines.photoContentType,
+      thumbnailUrl: reviewLines.thumbnailUrl,
       lastEditedBy: reviewLines.lastEditedBy,
       lastEditedWhen: reviewLines.lastEditedWhen != null ? reviewLines.lastEditedWhen.format(DATE_TIME_FORMAT) : null,
       reviewId: reviewLines.reviewId
@@ -124,16 +121,6 @@ export class ReviewLinesUpdateComponent implements OnInit {
     );
   }
 
-  clearInputImage(field: string, fieldContentType: string, idInput: string) {
-    this.editForm.patchValue({
-      [field]: null,
-      [fieldContentType]: null
-    });
-    if (this.elementRef && idInput && this.elementRef.nativeElement.querySelector('#' + idInput)) {
-      this.elementRef.nativeElement.querySelector('#' + idInput).value = null;
-    }
-  }
-
   previousState() {
     window.history.back();
   }
@@ -158,8 +145,7 @@ export class ReviewLinesUpdateComponent implements OnInit {
       sellerReview: this.editForm.get(['sellerReview']).value,
       deliveryRating: this.editForm.get(['deliveryRating']).value,
       deliveryReview: this.editForm.get(['deliveryReview']).value,
-      photoContentType: this.editForm.get(['photoContentType']).value,
-      photo: this.editForm.get(['photo']).value,
+      thumbnailUrl: this.editForm.get(['thumbnailUrl']).value,
       lastEditedBy: this.editForm.get(['lastEditedBy']).value,
       lastEditedWhen:
         this.editForm.get(['lastEditedWhen']).value != null

@@ -44,8 +44,8 @@ export class PhotosUpdatePage {
   watermarkPhotoBlobInput = element(by.id('file_watermarkPhotoBlob'));
   priorityInput = element(by.id('field_priority'));
   defaultIndInput = element(by.id('field_defaultInd'));
-  deleteTokenInput = element(by.id('field_deleteToken'));
   stockItemSelect = element(by.id('field_stockItem'));
+  productCategorySelect = element(by.id('field_productCategory'));
 
   async getPageTitle() {
     return this.pageTitle.getAttribute('jhiTranslate');
@@ -190,13 +190,6 @@ export class PhotosUpdatePage {
   getDefaultIndInput(timeout?: number) {
     return this.defaultIndInput;
   }
-  async setDeleteTokenInput(deleteToken) {
-    await this.deleteTokenInput.sendKeys(deleteToken);
-  }
-
-  async getDeleteTokenInput() {
-    return await this.deleteTokenInput.getAttribute('value');
-  }
 
   async stockItemSelectLastOption(timeout?: number) {
     await this.stockItemSelect
@@ -215,6 +208,25 @@ export class PhotosUpdatePage {
 
   async getStockItemSelectedOption() {
     return await this.stockItemSelect.element(by.css('option:checked')).getText();
+  }
+
+  async productCategorySelectLastOption(timeout?: number) {
+    await this.productCategorySelect
+      .all(by.tagName('option'))
+      .last()
+      .click();
+  }
+
+  async productCategorySelectOption(option) {
+    await this.productCategorySelect.sendKeys(option);
+  }
+
+  getProductCategorySelect(): ElementFinder {
+    return this.productCategorySelect;
+  }
+
+  async getProductCategorySelectedOption() {
+    return await this.productCategorySelect.element(by.css('option:checked')).getText();
   }
 
   async save(timeout?: number) {

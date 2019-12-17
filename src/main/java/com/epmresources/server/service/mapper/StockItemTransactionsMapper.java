@@ -12,12 +12,13 @@ import org.mapstruct.*;
 public interface StockItemTransactionsMapper extends EntityMapper<StockItemTransactionsDTO, StockItemTransactions> {
 
     @Mapping(source = "stockItem.id", target = "stockItemId")
-    @Mapping(source = "stockItem.stockItemName", target = "stockItemStockItemName")
+    @Mapping(source = "stockItem.name", target = "stockItemName")
     @Mapping(source = "customer.id", target = "customerId")
     @Mapping(source = "invoice.id", target = "invoiceId")
     @Mapping(source = "supplier.id", target = "supplierId")
-    @Mapping(source = "supplier.supplierName", target = "supplierSupplierName")
+    @Mapping(source = "supplier.name", target = "supplierName")
     @Mapping(source = "transactionType.id", target = "transactionTypeId")
+    @Mapping(source = "transactionType.name", target = "transactionTypeName")
     @Mapping(source = "purchaseOrder.id", target = "purchaseOrderId")
     StockItemTransactionsDTO toDto(StockItemTransactions stockItemTransactions);
 

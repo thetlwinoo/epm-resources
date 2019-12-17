@@ -19,14 +19,14 @@
             <thead>
             <tr>
             <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
-            <th scope="col" ><span jhiTranslate="epmresourcesApp.warrantyTypes.warrantyTypeName">Warranty Type Name</span></th>
+            <th scope="col" ><span jhiTranslate="epmresourcesApp.warrantyTypes.name">Name</span></th>
             <th scope="col"></th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let warrantyTypes of warrantyTypes ;trackBy: trackId">
                 <td><a [routerLink]="['/warranty-types', warrantyTypes.id, 'view' ]">{{warrantyTypes.id}}</a></td>
-                <td>{{warrantyTypes.warrantyTypeName}}</td>
+                <td>{{warrantyTypes.name}}</td>
                 <td class="text-right">
                     <div class="btn-group">
                         <button type="submit"

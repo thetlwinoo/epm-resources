@@ -11,14 +11,16 @@ public class ProductOptionDTO implements Serializable {
     private Long id;
 
     @NotNull
-    private String productOptionValue;
+    private String value;
 
 
     private Long productOptionSetId;
 
-    private String productOptionSetProductOptionSetValue;
+    private String productOptionSetValue;
 
     private Long supplierId;
+
+    private String supplierName;
 
     public Long getId() {
         return id;
@@ -28,12 +30,12 @@ public class ProductOptionDTO implements Serializable {
         this.id = id;
     }
 
-    public String getProductOptionValue() {
-        return productOptionValue;
+    public String getValue() {
+        return value;
     }
 
-    public void setProductOptionValue(String productOptionValue) {
-        this.productOptionValue = productOptionValue;
+    public void setValue(String value) {
+        this.value = value;
     }
 
     public Long getProductOptionSetId() {
@@ -44,12 +46,12 @@ public class ProductOptionDTO implements Serializable {
         this.productOptionSetId = productOptionSetId;
     }
 
-    public String getProductOptionSetProductOptionSetValue() {
-        return productOptionSetProductOptionSetValue;
+    public String getProductOptionSetValue() {
+        return productOptionSetValue;
     }
 
-    public void setProductOptionSetProductOptionSetValue(String productOptionSetProductOptionSetValue) {
-        this.productOptionSetProductOptionSetValue = productOptionSetProductOptionSetValue;
+    public void setProductOptionSetValue(String productOptionSetValue) {
+        this.productOptionSetValue = productOptionSetValue;
     }
 
     public Long getSupplierId() {
@@ -58,6 +60,14 @@ public class ProductOptionDTO implements Serializable {
 
     public void setSupplierId(Long suppliersId) {
         this.supplierId = suppliersId;
+    }
+
+    public String getSupplierName() {
+        return supplierName;
+    }
+
+    public void setSupplierName(String suppliersName) {
+        this.supplierName = suppliersName;
     }
 
     @Override
@@ -85,10 +95,11 @@ public class ProductOptionDTO implements Serializable {
     public String toString() {
         return "ProductOptionDTO{" +
             "id=" + getId() +
-            ", productOptionValue='" + getProductOptionValue() + "'" +
+            ", value='" + getValue() + "'" +
             ", productOptionSet=" + getProductOptionSetId() +
-            ", productOptionSet='" + getProductOptionSetProductOptionSetValue() + "'" +
+            ", productOptionSet='" + getProductOptionSetValue() + "'" +
             ", supplier=" + getSupplierId() +
+            ", supplier='" + getSupplierName() + "'" +
             "}";
     }
 }

@@ -21,7 +21,7 @@
             <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
             <th scope="col" ><span jhiTranslate="epmresourcesApp.productCategory.name">Name</span></th>
             <th scope="col" ><span jhiTranslate="epmresourcesApp.productCategory.shortLabel">Short Label</span></th>
-            <th scope="col" ><span jhiTranslate="epmresourcesApp.productCategory.photo">Photo</span></th>
+            <th scope="col" ><span jhiTranslate="epmresourcesApp.productCategory.thumbnailUrl">Thumbnail Url</span></th>
             <th scope="col" ><span jhiTranslate="epmresourcesApp.productCategory.parent">Parent</span></th>
             <th scope="col"></th>
             </tr>
@@ -31,12 +31,7 @@
                 <td><a [routerLink]="['/product-category', productCategory.id, 'view' ]">{{productCategory.id}}</a></td>
                 <td>{{productCategory.name}}</td>
                 <td>{{productCategory.shortLabel}}</td>
-                <td>
-                    <a *ngIf="productCategory.photo" (click)="openFile(productCategory.photoContentType, productCategory.photo)">
-                        <img [src]="'data:' + productCategory.photoContentType + ';base64,' + productCategory.photo" style="max-height: 30px;" alt="productCategory image"/>
-                    </a>
-                    <span *ngIf="productCategory.photo">{{productCategory.photoContentType}}, {{byteSize(productCategory.photo)}}</span>
-                </td>
+                <td>{{productCategory.thumbnailUrl}}</td>
                 <td>
                     <div *ngIf="productCategory.parentId">
                         <a [routerLink]="['/product-category', productCategory.parentId , 'view' ]" >{{productCategory.parentName}}</a>

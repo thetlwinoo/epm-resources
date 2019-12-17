@@ -27,7 +27,7 @@ public class BuyingGroupsCriteria implements Serializable, Criteria {
 
     private LongFilter id;
 
-    private StringFilter buyingGroupName;
+    private StringFilter name;
 
     private InstantFilter validFrom;
 
@@ -38,7 +38,7 @@ public class BuyingGroupsCriteria implements Serializable, Criteria {
 
     public BuyingGroupsCriteria(BuyingGroupsCriteria other){
         this.id = other.id == null ? null : other.id.copy();
-        this.buyingGroupName = other.buyingGroupName == null ? null : other.buyingGroupName.copy();
+        this.name = other.name == null ? null : other.name.copy();
         this.validFrom = other.validFrom == null ? null : other.validFrom.copy();
         this.validTo = other.validTo == null ? null : other.validTo.copy();
     }
@@ -56,12 +56,12 @@ public class BuyingGroupsCriteria implements Serializable, Criteria {
         this.id = id;
     }
 
-    public StringFilter getBuyingGroupName() {
-        return buyingGroupName;
+    public StringFilter getName() {
+        return name;
     }
 
-    public void setBuyingGroupName(StringFilter buyingGroupName) {
-        this.buyingGroupName = buyingGroupName;
+    public void setName(StringFilter name) {
+        this.name = name;
     }
 
     public InstantFilter getValidFrom() {
@@ -92,7 +92,7 @@ public class BuyingGroupsCriteria implements Serializable, Criteria {
         final BuyingGroupsCriteria that = (BuyingGroupsCriteria) o;
         return
             Objects.equals(id, that.id) &&
-            Objects.equals(buyingGroupName, that.buyingGroupName) &&
+            Objects.equals(name, that.name) &&
             Objects.equals(validFrom, that.validFrom) &&
             Objects.equals(validTo, that.validTo);
     }
@@ -101,7 +101,7 @@ public class BuyingGroupsCriteria implements Serializable, Criteria {
     public int hashCode() {
         return Objects.hash(
         id,
-        buyingGroupName,
+        name,
         validFrom,
         validTo
         );
@@ -111,7 +111,7 @@ public class BuyingGroupsCriteria implements Serializable, Criteria {
     public String toString() {
         return "BuyingGroupsCriteria{" +
                 (id != null ? "id=" + id + ", " : "") +
-                (buyingGroupName != null ? "buyingGroupName=" + buyingGroupName + ", " : "") +
+                (name != null ? "name=" + name + ", " : "") +
                 (validFrom != null ? "validFrom=" + validFrom + ", " : "") +
                 (validTo != null ? "validTo=" + validTo + ", " : "") +
             "}";

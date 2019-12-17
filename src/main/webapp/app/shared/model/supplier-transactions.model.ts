@@ -12,9 +12,9 @@ export interface ISupplierTransactions {
   isFinalized?: boolean;
   lastEditedBy?: string;
   lastEditedWhen?: Moment;
-  supplierSupplierName?: string;
+  supplierName?: string;
   supplierId?: number;
-  transactionTypeTransactionTypeName?: string;
+  transactionTypeName?: string;
   transactionTypeId?: number;
   purchaseOrderId?: number;
 }
@@ -32,9 +32,9 @@ export class SupplierTransactions implements ISupplierTransactions {
     public isFinalized?: boolean,
     public lastEditedBy?: string,
     public lastEditedWhen?: Moment,
-    public supplierSupplierName?: string,
+    public supplierName?: string,
     public supplierId?: number,
-    public transactionTypeTransactionTypeName?: string,
+    public transactionTypeName?: string,
     public transactionTypeId?: number,
     public purchaseOrderId?: number
   ) {

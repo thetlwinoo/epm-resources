@@ -1,9 +1,9 @@
 export interface IAddressTypes {
   id?: number;
-  addressTypeName?: string;
+  name?: string;
   refer?: string;
 }
 
 export class AddressTypes implements IAddressTypes {
-  constructor(public id?: number, public addressTypeName?: string, public refer?: string) {}
+  constructor(public id?: number, public name?: string, public refer?: string) {}
 }

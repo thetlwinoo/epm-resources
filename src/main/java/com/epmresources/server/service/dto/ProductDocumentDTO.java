@@ -57,11 +57,11 @@ public class ProductDocumentDTO implements Serializable {
 
     private Long warrantyTypeId;
 
-    private String warrantyTypeWarrantyTypeName;
+    private String warrantyTypeName;
 
     private Long cultureId;
 
-    private String cultureCultureName;
+    private String cultureName;
 
     public Long getId() {
         return id;
@@ -223,12 +223,12 @@ public class ProductDocumentDTO implements Serializable {
         this.warrantyTypeId = warrantyTypesId;
     }
 
-    public String getWarrantyTypeWarrantyTypeName() {
-        return warrantyTypeWarrantyTypeName;
+    public String getWarrantyTypeName() {
+        return warrantyTypeName;
     }
 
-    public void setWarrantyTypeWarrantyTypeName(String warrantyTypesWarrantyTypeName) {
-        this.warrantyTypeWarrantyTypeName = warrantyTypesWarrantyTypeName;
+    public void setWarrantyTypeName(String warrantyTypesName) {
+        this.warrantyTypeName = warrantyTypesName;
     }
 
     public Long getCultureId() {
@@ -239,12 +239,12 @@ public class ProductDocumentDTO implements Serializable {
         this.cultureId = cultureId;
     }
 
-    public String getCultureCultureName() {
-        return cultureCultureName;
+    public String getCultureName() {
+        return cultureName;
     }
 
-    public void setCultureCultureName(String cultureCultureName) {
-        this.cultureCultureName = cultureCultureName;
+    public void setCultureName(String cultureName) {
+        this.cultureName = cultureName;
     }
 
     @Override
@@ -291,9 +291,9 @@ public class ProductDocumentDTO implements Serializable {
             ", warrantyPeriod='" + getWarrantyPeriod() + "'" +
             ", warrantyPolicy='" + getWarrantyPolicy() + "'" +
             ", warrantyType=" + getWarrantyTypeId() +
-            ", warrantyType='" + getWarrantyTypeWarrantyTypeName() + "'" +
+            ", warrantyType='" + getWarrantyTypeName() + "'" +
             ", culture=" + getCultureId() +
-            ", culture='" + getCultureCultureName() + "'" +
+            ", culture='" + getCultureName() + "'" +
             "}";
     }
 }

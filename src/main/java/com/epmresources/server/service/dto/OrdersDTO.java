@@ -60,7 +60,7 @@ public class OrdersDTO implements Serializable {
 
     private Long shipMethodId;
 
-    private String shipMethodShipMethodName;
+    private String shipMethodName;
 
     private Long currencyRateId;
 
@@ -250,12 +250,12 @@ public class OrdersDTO implements Serializable {
         this.shipMethodId = shipMethodId;
     }
 
-    public String getShipMethodShipMethodName() {
-        return shipMethodShipMethodName;
+    public String getShipMethodName() {
+        return shipMethodName;
     }
 
-    public void setShipMethodShipMethodName(String shipMethodShipMethodName) {
-        this.shipMethodShipMethodName = shipMethodShipMethodName;
+    public void setShipMethodName(String shipMethodName) {
+        this.shipMethodName = shipMethodName;
     }
 
     public Long getCurrencyRateId() {
@@ -321,7 +321,7 @@ public class OrdersDTO implements Serializable {
             ", shipToAddress=" + getShipToAddressId() +
             ", billToAddress=" + getBillToAddressId() +
             ", shipMethod=" + getShipMethodId() +
-            ", shipMethod='" + getShipMethodShipMethodName() + "'" +
+            ", shipMethod='" + getShipMethodName() + "'" +
             ", currencyRate=" + getCurrencyRateId() +
             ", specialDeals=" + getSpecialDealsId() +
             "}";

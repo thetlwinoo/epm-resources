@@ -63,14 +63,14 @@
             "otherEntityName": "suppliers",
             "otherEntityRelationshipName": "supplierTransactions",
             "relationshipName": "supplier",
-            "otherEntityField": "supplierName"
+            "otherEntityField": "name"
         },
         {
             "relationshipType": "many-to-one",
             "otherEntityName": "transactionTypes",
             "otherEntityRelationshipName": "supplierTransactions",
             "relationshipName": "transactionType",
-            "otherEntityField": "transactionTypeName"
+            "otherEntityField": "name"
         },
         {
             "relationshipType": "many-to-one",

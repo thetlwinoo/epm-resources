@@ -52,12 +52,12 @@
                 <td>{{orderLines.lastEditedWhen | date:'medium'}}</td>
                 <td>
                     <div *ngIf="orderLines.stockItemId">
-                        <a [routerLink]="['/stock-items', orderLines.stockItemId , 'view' ]" >{{orderLines.stockItemStockItemName}}</a>
+                        <a [routerLink]="['/stock-items', orderLines.stockItemId , 'view' ]" >{{orderLines.stockItemName}}</a>
                     </div>
                 </td>
                 <td>
                     <div *ngIf="orderLines.packageTypeId">
-                        <a [routerLink]="['/package-types', orderLines.packageTypeId , 'view' ]" >{{orderLines.packageTypeId}}</a>
+                        <a [routerLink]="['/package-types', orderLines.packageTypeId , 'view' ]" >{{orderLines.packageTypeName}}</a>
                     </div>
                 </td>
                 <td>

@@ -5,9 +5,9 @@
             <hr>
             <jhi-alert-error></jhi-alert-error>
             <dl class="row-md jh-entity-details">
-                <dt><span jhiTranslate="epmresourcesApp.cities.cityName">City Name</span></dt>
+                <dt><span jhiTranslate="epmresourcesApp.cities.name">Name</span></dt>
                 <dd>
-                    <span>{{cities.cityName}}</span>
+                    <span>{{cities.name}}</span>
                 </dd>
                 <dt><span jhiTranslate="epmresourcesApp.cities.location">Location</span></dt>
                 <dd>
@@ -28,7 +28,7 @@
                 <dt><span jhiTranslate="epmresourcesApp.cities.stateProvince">State Province</span></dt>
                 <dd>
                     <div *ngIf="cities.stateProvinceId">
-                        <a [routerLink]="['/state-provinces', cities.stateProvinceId, 'view']">{{cities.stateProvinceStateProvinceName}}</a>
+                        <a [routerLink]="['/state-provinces', cities.stateProvinceId, 'view']">{{cities.stateProvinceName}}</a>
                     </div>
                 </dd>
             </dl>

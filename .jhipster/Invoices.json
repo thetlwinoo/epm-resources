@@ -148,7 +148,7 @@
             "otherEntityName": "deliveryMethods",
             "otherEntityRelationshipName": "invoices",
             "relationshipName": "deliveryMethod",
-            "otherEntityField": "deliveryMethodName"
+            "otherEntityField": "name"
         },
         {
             "relationshipType": "many-to-one",

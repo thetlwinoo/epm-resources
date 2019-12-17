@@ -37,11 +37,12 @@ export class ProductsUpdateComponent implements OnInit {
 
   editForm = this.fb.group({
     id: [],
-    productName: [null, [Validators.required]],
+    name: [null, [Validators.required]],
     handle: [],
     productNumber: [],
     searchDetails: [],
     sellCount: [],
+    thumbnailList: [],
     activeInd: [],
     lastEditedBy: [],
     lastEditedWhen: [],
@@ -119,11 +120,12 @@ export class ProductsUpdateComponent implements OnInit {
   updateForm(products: IProducts) {
     this.editForm.patchValue({
       id: products.id,
-      productName: products.productName,
+      name: products.name,
       handle: products.handle,
       productNumber: products.productNumber,
       searchDetails: products.searchDetails,
       sellCount: products.sellCount,
+      thumbnailList: products.thumbnailList,
       activeInd: products.activeInd,
       lastEditedBy: products.lastEditedBy,
       lastEditedWhen: products.lastEditedWhen != null ? products.lastEditedWhen.format(DATE_TIME_FORMAT) : null,
@@ -185,11 +187,12 @@ export class ProductsUpdateComponent implements OnInit {
     return {
       ...new Products(),
       id: this.editForm.get(['id']).value,
-      productName: this.editForm.get(['productName']).value,
+      name: this.editForm.get(['name']).value,
       handle: this.editForm.get(['handle']).value,
       productNumber: this.editForm.get(['productNumber']).value,
       searchDetails: this.editForm.get(['searchDetails']).value,
       sellCount: this.editForm.get(['sellCount']).value,
+      thumbnailList: this.editForm.get(['thumbnailList']).value,
       activeInd: this.editForm.get(['activeInd']).value,
       lastEditedBy: this.editForm.get(['lastEditedBy']).value,
       lastEditedWhen:

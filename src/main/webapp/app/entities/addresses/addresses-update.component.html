@@ -83,14 +83,14 @@
                     <label class="form-control-label" jhiTranslate="epmresourcesApp.addresses.stateProvince" for="field_stateProvince">State Province</label>
                     <select class="form-control" id="field_stateProvince" name="stateProvince" formControlName="stateProvinceId">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="stateProvincesOption.id" *ngFor="let stateProvincesOption of stateprovinces; trackBy: trackStateProvincesById">{{stateProvincesOption.stateProvinceName}}</option>
+                        <option [ngValue]="stateProvincesOption.id" *ngFor="let stateProvincesOption of stateprovinces; trackBy: trackStateProvincesById">{{stateProvincesOption.name}}</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="epmresourcesApp.addresses.addressType" for="field_addressType">Address Type</label>
                     <select class="form-control" id="field_addressType" name="addressType" formControlName="addressTypeId">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="addressTypesOption.id" *ngFor="let addressTypesOption of addresstypes; trackBy: trackAddressTypesById">{{addressTypesOption.addressTypeName}}</option>
+                        <option [ngValue]="addressTypesOption.id" *ngFor="let addressTypesOption of addresstypes; trackBy: trackAddressTypesById">{{addressTypesOption.name}}</option>
                     </select>
                 </div>
                 <div class="form-group">

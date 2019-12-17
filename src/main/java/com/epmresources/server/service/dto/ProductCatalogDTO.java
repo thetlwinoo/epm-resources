@@ -16,7 +16,7 @@ public class ProductCatalogDTO implements Serializable {
 
     private Long productId;
 
-    private String productProductName;
+    private String productName;
 
     public Long getId() {
         return id;
@@ -50,12 +50,12 @@ public class ProductCatalogDTO implements Serializable {
         this.productId = productsId;
     }
 
-    public String getProductProductName() {
-        return productProductName;
+    public String getProductName() {
+        return productName;
     }
 
-    public void setProductProductName(String productsProductName) {
-        this.productProductName = productsProductName;
+    public void setProductName(String productsName) {
+        this.productName = productsName;
     }
 
     @Override
@@ -86,7 +86,7 @@ public class ProductCatalogDTO implements Serializable {
             ", productCategory=" + getProductCategoryId() +
             ", productCategory='" + getProductCategoryName() + "'" +
             ", product=" + getProductId() +
-            ", product='" + getProductProductName() + "'" +
+            ", product='" + getProductName() + "'" +
             "}";
     }
 }

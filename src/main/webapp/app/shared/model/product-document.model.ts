@@ -18,9 +18,9 @@ export interface IProductDocument {
   safetyWarnning?: any;
   warrantyPeriod?: string;
   warrantyPolicy?: string;
-  warrantyTypeWarrantyTypeName?: string;
+  warrantyTypeName?: string;
   warrantyTypeId?: number;
-  cultureCultureName?: string;
+  cultureName?: string;
   cultureId?: number;
 }
 
@@ -45,9 +45,9 @@ export class ProductDocument implements IProductDocument {
     public safetyWarnning?: any,
     public warrantyPeriod?: string,
     public warrantyPolicy?: string,
-    public warrantyTypeWarrantyTypeName?: string,
+    public warrantyTypeName?: string,
     public warrantyTypeId?: number,
-    public cultureCultureName?: string,
+    public cultureName?: string,
     public cultureId?: number
   ) {
     this.genuineAndLegal = this.genuineAndLegal || false;

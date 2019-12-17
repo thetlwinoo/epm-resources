@@ -2,7 +2,7 @@
     "name": "Cities",
     "fields": [
         {
-            "fieldName": "cityName",
+            "fieldName": "name",
             "fieldType": "String",
             "fieldValidateRules": [
                 "required"
@@ -37,7 +37,7 @@
             "otherEntityName": "stateProvinces",
             "otherEntityRelationshipName": "cities",
             "relationshipName": "stateProvince",
-            "otherEntityField": "stateProvinceName"
+            "otherEntityField": "name"
         }
     ],
     "changelogDate": "20191106102817",

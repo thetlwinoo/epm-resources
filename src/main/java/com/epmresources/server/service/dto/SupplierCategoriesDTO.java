@@ -12,7 +12,7 @@ public class SupplierCategoriesDTO implements Serializable {
     private Long id;
 
     @NotNull
-    private String supplierCategoryName;
+    private String name;
 
     @NotNull
     private Instant validFrom;
@@ -29,12 +29,12 @@ public class SupplierCategoriesDTO implements Serializable {
         this.id = id;
     }
 
-    public String getSupplierCategoryName() {
-        return supplierCategoryName;
+    public String getName() {
+        return name;
     }
 
-    public void setSupplierCategoryName(String supplierCategoryName) {
-        this.supplierCategoryName = supplierCategoryName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Instant getValidFrom() {
@@ -78,7 +78,7 @@ public class SupplierCategoriesDTO implements Serializable {
     public String toString() {
         return "SupplierCategoriesDTO{" +
             "id=" + getId() +
-            ", supplierCategoryName='" + getSupplierCategoryName() + "'" +
+            ", name='" + getName() + "'" +
             ", validFrom='" + getValidFrom() + "'" +
             ", validTo='" + getValidTo() + "'" +
             "}";

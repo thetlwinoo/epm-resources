@@ -92,14 +92,14 @@ public class ProductsExtendServiceImpl implements ProductsExtendService {
             throw new IllegalArgumentException("Page and size parameters are required");
         }
         PageRequest pageRequest = PageRequest.of(page, size);
-        return productsExtendRepository.findAllByProductNameContainingIgnoreCase(keyword, pageRequest).stream()
+        return productsExtendRepository.findAllByNameContainingIgnoreCase(keyword, pageRequest).stream()
             .map(productsMapper::toDto)
             .collect(Collectors.toCollection(LinkedList::new));
     }
 
     @Override
     public List<ProductsDTO> searchProductsAll(String keyword) {
-        return productsExtendRepository.findAllByProductNameContainingIgnoreCase(keyword).stream()
+        return productsExtendRepository.findAllByNameContainingIgnoreCase(keyword).stream()
             .map(productsMapper::toDto)
             .collect(Collectors.toCollection(LinkedList::new));
     }
@@ -171,7 +171,7 @@ public class ProductsExtendServiceImpl implements ProductsExtendService {
                 saveProduct.setProductBrand(products.getProductBrand());
                 saveProduct.setHandle(products.getHandle());
                 saveProduct.setProductCategory(products.getProductCategory());
-                saveProduct.setProductName(products.getProductName());
+                saveProduct.setName(products.getName());
                 saveProduct.setSearchDetails(products.getSearchDetails());
                 saveProduct.setSupplier(products.getSupplier());
                 saveProduct.setProductDocument(products.getProductDocument());
@@ -179,9 +179,9 @@ public class ProductsExtendServiceImpl implements ProductsExtendService {
 
                 for (StockItems _stockItems : products.getStockItemLists()) {
                     StockItems stockItems = new StockItems();
-                    String attributeName = StringUtils.isBlank(_stockItems.getProductAttribute().getProductAttributeValue()) ? "" : " - " + _stockItems.getProductAttribute().getProductAttributeValue();
-                    String optionName = StringUtils.isBlank(_stockItems.getProductOption().getProductOptionValue()) ? "" : "(" + _stockItems.getProductOption().getProductOptionValue() + ")";
-                    stockItems.setStockItemName(products.getProductName() + attributeName + optionName);
+                    String attributeName = StringUtils.isBlank(_stockItems.getProductAttribute().getValue()) ? "" : " - " + _stockItems.getProductAttribute().getValue();
+                    String optionName = StringUtils.isBlank(_stockItems.getProductOption().getValue()) ? "" : "(" + _stockItems.getProductOption().getValue() + ")";
+                    stockItems.setName(products.getName() + attributeName + optionName);
                     stockItems.setVendorCode(_stockItems.getVendorCode());
                     stockItems.setVendorSKU(_stockItems.getVendorSKU());
                     stockItems.setBarcode(_stockItems.getBarcode());
@@ -235,7 +235,7 @@ public class ProductsExtendServiceImpl implements ProductsExtendService {
             for (StockItems _stockItems : saveProduct.getStockItemLists()) {
                 _stockItems.setThumbnailUrl(serverUrl + "/photos-extend/stockitem/" + _stockItems.getId() + "/thumbnail");
             }
-            String _productnumber = saveProduct.getProductName().replaceAll("[^a-zA-Z0-9]", "").toUpperCase();
+            String _productnumber = saveProduct.getName().replaceAll("[^a-zA-Z0-9]", "").toUpperCase();
             _productnumber = _productnumber.length() > 8 ? _productnumber.substring(0, 8) : _productnumber;
             _productnumber = _productnumber + "-" + saveProduct.getId();
             saveProduct.setProductNumber(_productnumber);

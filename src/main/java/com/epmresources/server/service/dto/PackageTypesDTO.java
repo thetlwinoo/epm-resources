@@ -12,7 +12,7 @@ public class PackageTypesDTO implements Serializable {
     private Long id;
 
     @NotNull
-    private String packageTypeName;
+    private String name;
 
     @NotNull
     private Instant validFrom;
@@ -29,12 +29,12 @@ public class PackageTypesDTO implements Serializable {
         this.id = id;
     }
 
-    public String getPackageTypeName() {
-        return packageTypeName;
+    public String getName() {
+        return name;
     }
 
-    public void setPackageTypeName(String packageTypeName) {
-        this.packageTypeName = packageTypeName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Instant getValidFrom() {
@@ -78,7 +78,7 @@ public class PackageTypesDTO implements Serializable {
     public String toString() {
         return "PackageTypesDTO{" +
             "id=" + getId() +
-            ", packageTypeName='" + getPackageTypeName() + "'" +
+            ", name='" + getName() + "'" +
             ", validFrom='" + getValidFrom() + "'" +
             ", validTo='" + getValidTo() + "'" +
             "}";

@@ -5,9 +5,9 @@
             <hr>
             <jhi-alert-error></jhi-alert-error>
             <dl class="row-md jh-entity-details">
-                <dt><span jhiTranslate="epmresourcesApp.stockItemTransactions.transactionOccurredWhen">Transaction Occurred When</span></dt>
+                <dt><span jhiTranslate="epmresourcesApp.stockItemTransactions.transactionOccuredWhen">Transaction Occured When</span></dt>
                 <dd>
-                    <span>{{stockItemTransactions.transactionOccurredWhen}}</span>
+                    <span>{{stockItemTransactions.transactionOccuredWhen}}</span>
                 </dd>
                 <dt><span jhiTranslate="epmresourcesApp.stockItemTransactions.quantity">Quantity</span></dt>
                 <dd>
@@ -24,7 +24,7 @@
                 <dt><span jhiTranslate="epmresourcesApp.stockItemTransactions.stockItem">Stock Item</span></dt>
                 <dd>
                     <div *ngIf="stockItemTransactions.stockItemId">
-                        <a [routerLink]="['/stock-items', stockItemTransactions.stockItemId, 'view']">{{stockItemTransactions.stockItemStockItemName}}</a>
+                        <a [routerLink]="['/stock-items', stockItemTransactions.stockItemId, 'view']">{{stockItemTransactions.stockItemName}}</a>
                     </div>
                 </dd>
                 <dt><span jhiTranslate="epmresourcesApp.stockItemTransactions.customer">Customer</span></dt>
@@ -42,13 +42,13 @@
                 <dt><span jhiTranslate="epmresourcesApp.stockItemTransactions.supplier">Supplier</span></dt>
                 <dd>
                     <div *ngIf="stockItemTransactions.supplierId">
-                        <a [routerLink]="['/suppliers', stockItemTransactions.supplierId, 'view']">{{stockItemTransactions.supplierSupplierName}}</a>
+                        <a [routerLink]="['/suppliers', stockItemTransactions.supplierId, 'view']">{{stockItemTransactions.supplierName}}</a>
                     </div>
                 </dd>
                 <dt><span jhiTranslate="epmresourcesApp.stockItemTransactions.transactionType">Transaction Type</span></dt>
                 <dd>
                     <div *ngIf="stockItemTransactions.transactionTypeId">
-                        <a [routerLink]="['/transaction-types', stockItemTransactions.transactionTypeId, 'view']">{{stockItemTransactions.transactionTypeId}}</a>
+                        <a [routerLink]="['/transaction-types', stockItemTransactions.transactionTypeId, 'view']">{{stockItemTransactions.transactionTypeName}}</a>
                     </div>
                 </dd>
                 <dt><span jhiTranslate="epmresourcesApp.stockItemTransactions.purchaseOrder">Purchase Order</span></dt>

@@ -26,10 +26,8 @@ public class ReviewLinesDTO implements Serializable {
     @Lob
     private String deliveryReview;
 
-    @Lob
-    private byte[] photo;
+    private String thumbnailUrl;
 
-    private String photoContentType;
     private String lastEditedBy;
 
     private Instant lastEditedWhen;
@@ -93,20 +91,12 @@ public class ReviewLinesDTO implements Serializable {
         this.deliveryReview = deliveryReview;
     }
 
-    public byte[] getPhoto() {
-        return photo;
+    public String getThumbnailUrl() {
+        return thumbnailUrl;
     }
 
-    public void setPhoto(byte[] photo) {
-        this.photo = photo;
-    }
-
-    public String getPhotoContentType() {
-        return photoContentType;
-    }
-
-    public void setPhotoContentType(String photoContentType) {
-        this.photoContentType = photoContentType;
+    public void setThumbnailUrl(String thumbnailUrl) {
+        this.thumbnailUrl = thumbnailUrl;
     }
 
     public String getLastEditedBy() {
@@ -164,7 +154,7 @@ public class ReviewLinesDTO implements Serializable {
             ", sellerReview='" + getSellerReview() + "'" +
             ", deliveryRating=" + getDeliveryRating() +
             ", deliveryReview='" + getDeliveryReview() + "'" +
-            ", photo='" + getPhoto() + "'" +
+            ", thumbnailUrl='" + getThumbnailUrl() + "'" +
             ", lastEditedBy='" + getLastEditedBy() + "'" +
             ", lastEditedWhen='" + getLastEditedWhen() + "'" +
             ", review=" + getReviewId() +

@@ -40,8 +40,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = EpmresourcesApp.class)
 public class TransactionTypesResourceIT {
 
-    private static final String DEFAULT_TRANSACTION_TYPE_NAME = "AAAAAAAAAA";
-    private static final String UPDATED_TRANSACTION_TYPE_NAME = "BBBBBBBBBB";
+    private static final String DEFAULT_NAME = "AAAAAAAAAA";
+    private static final String UPDATED_NAME = "BBBBBBBBBB";
 
     private static final Instant DEFAULT_VALID_FROM = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_VALID_FROM = Instant.now().truncatedTo(ChronoUnit.MILLIS);
@@ -100,7 +100,7 @@ public class TransactionTypesResourceIT {
      */
     public static TransactionTypes createEntity(EntityManager em) {
         TransactionTypes transactionTypes = new TransactionTypes()
-            .transactionTypeName(DEFAULT_TRANSACTION_TYPE_NAME)
+            .name(DEFAULT_NAME)
             .validFrom(DEFAULT_VALID_FROM)
             .validTo(DEFAULT_VALID_TO);
         return transactionTypes;
@@ -113,7 +113,7 @@ public class TransactionTypesResourceIT {
      */
     public static TransactionTypes createUpdatedEntity(EntityManager em) {
         TransactionTypes transactionTypes = new TransactionTypes()
-            .transactionTypeName(UPDATED_TRANSACTION_TYPE_NAME)
+            .name(UPDATED_NAME)
             .validFrom(UPDATED_VALID_FROM)
             .validTo(UPDATED_VALID_TO);
         return transactionTypes;
@@ -140,7 +140,7 @@ public class TransactionTypesResourceIT {
         List<TransactionTypes> transactionTypesList = transactionTypesRepository.findAll();
         assertThat(transactionTypesList).hasSize(databaseSizeBeforeCreate + 1);
         TransactionTypes testTransactionTypes = transactionTypesList.get(transactionTypesList.size() - 1);
-        assertThat(testTransactionTypes.getTransactionTypeName()).isEqualTo(DEFAULT_TRANSACTION_TYPE_NAME);
+        assertThat(testTransactionTypes.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testTransactionTypes.getValidFrom()).isEqualTo(DEFAULT_VALID_FROM);
         assertThat(testTransactionTypes.getValidTo()).isEqualTo(DEFAULT_VALID_TO);
     }
@@ -168,10 +168,10 @@ public class TransactionTypesResourceIT {
 
     @Test
     @Transactional
-    public void checkTransactionTypeNameIsRequired() throws Exception {
+    public void checkNameIsRequired() throws Exception {
         int databaseSizeBeforeTest = transactionTypesRepository.findAll().size();
         // set the field null
-        transactionTypes.setTransactionTypeName(null);
+        transactionTypes.setName(null);
 
         // Create the TransactionTypes, which fails.
         TransactionTypesDTO transactionTypesDTO = transactionTypesMapper.toDto(transactionTypes);
@@ -234,7 +234,7 @@ public class TransactionTypesResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(transactionTypes.getId().intValue())))
-            .andExpect(jsonPath("$.[*].transactionTypeName").value(hasItem(DEFAULT_TRANSACTION_TYPE_NAME)))
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].validFrom").value(hasItem(DEFAULT_VALID_FROM.toString())))
             .andExpect(jsonPath("$.[*].validTo").value(hasItem(DEFAULT_VALID_TO.toString())));
     }
@@ -250,86 +250,86 @@ public class TransactionTypesResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(transactionTypes.getId().intValue()))
-            .andExpect(jsonPath("$.transactionTypeName").value(DEFAULT_TRANSACTION_TYPE_NAME))
+            .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
             .andExpect(jsonPath("$.validFrom").value(DEFAULT_VALID_FROM.toString()))
             .andExpect(jsonPath("$.validTo").value(DEFAULT_VALID_TO.toString()));
     }
 
     @Test
     @Transactional
-    public void getAllTransactionTypesByTransactionTypeNameIsEqualToSomething() throws Exception {
+    public void getAllTransactionTypesByNameIsEqualToSomething() throws Exception {
         // Initialize the database
         transactionTypesRepository.saveAndFlush(transactionTypes);
 
-        // Get all the transactionTypesList where transactionTypeName equals to DEFAULT_TRANSACTION_TYPE_NAME
-        defaultTransactionTypesShouldBeFound("transactionTypeName.equals=" + DEFAULT_TRANSACTION_TYPE_NAME);
+        // Get all the transactionTypesList where name equals to DEFAULT_NAME
+        defaultTransactionTypesShouldBeFound("name.equals=" + DEFAULT_NAME);
 
-        // Get all the transactionTypesList where transactionTypeName equals to UPDATED_TRANSACTION_TYPE_NAME
-        defaultTransactionTypesShouldNotBeFound("transactionTypeName.equals=" + UPDATED_TRANSACTION_TYPE_NAME);
+        // Get all the transactionTypesList where name equals to UPDATED_NAME
+        defaultTransactionTypesShouldNotBeFound("name.equals=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllTransactionTypesByTransactionTypeNameIsNotEqualToSomething() throws Exception {
+    public void getAllTransactionTypesByNameIsNotEqualToSomething() throws Exception {
         // Initialize the database
         transactionTypesRepository.saveAndFlush(transactionTypes);
 
-        // Get all the transactionTypesList where transactionTypeName not equals to DEFAULT_TRANSACTION_TYPE_NAME
-        defaultTransactionTypesShouldNotBeFound("transactionTypeName.notEquals=" + DEFAULT_TRANSACTION_TYPE_NAME);
+        // Get all the transactionTypesList where name not equals to DEFAULT_NAME
+        defaultTransactionTypesShouldNotBeFound("name.notEquals=" + DEFAULT_NAME);
 
-        // Get all the transactionTypesList where transactionTypeName not equals to UPDATED_TRANSACTION_TYPE_NAME
-        defaultTransactionTypesShouldBeFound("transactionTypeName.notEquals=" + UPDATED_TRANSACTION_TYPE_NAME);
+        // Get all the transactionTypesList where name not equals to UPDATED_NAME
+        defaultTransactionTypesShouldBeFound("name.notEquals=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllTransactionTypesByTransactionTypeNameIsInShouldWork() throws Exception {
+    public void getAllTransactionTypesByNameIsInShouldWork() throws Exception {
         // Initialize the database
         transactionTypesRepository.saveAndFlush(transactionTypes);
 
-        // Get all the transactionTypesList where transactionTypeName in DEFAULT_TRANSACTION_TYPE_NAME or UPDATED_TRANSACTION_TYPE_NAME
-        defaultTransactionTypesShouldBeFound("transactionTypeName.in=" + DEFAULT_TRANSACTION_TYPE_NAME + "," + UPDATED_TRANSACTION_TYPE_NAME);
+        // Get all the transactionTypesList where name in DEFAULT_NAME or UPDATED_NAME
+        defaultTransactionTypesShouldBeFound("name.in=" + DEFAULT_NAME + "," + UPDATED_NAME);
 
-        // Get all the transactionTypesList where transactionTypeName equals to UPDATED_TRANSACTION_TYPE_NAME
-        defaultTransactionTypesShouldNotBeFound("transactionTypeName.in=" + UPDATED_TRANSACTION_TYPE_NAME);
+        // Get all the transactionTypesList where name equals to UPDATED_NAME
+        defaultTransactionTypesShouldNotBeFound("name.in=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllTransactionTypesByTransactionTypeNameIsNullOrNotNull() throws Exception {
+    public void getAllTransactionTypesByNameIsNullOrNotNull() throws Exception {
         // Initialize the database
         transactionTypesRepository.saveAndFlush(transactionTypes);
 
-        // Get all the transactionTypesList where transactionTypeName is not null
-        defaultTransactionTypesShouldBeFound("transactionTypeName.specified=true");
+        // Get all the transactionTypesList where name is not null
+        defaultTransactionTypesShouldBeFound("name.specified=true");
 
-        // Get all the transactionTypesList where transactionTypeName is null
-        defaultTransactionTypesShouldNotBeFound("transactionTypeName.specified=false");
+        // Get all the transactionTypesList where name is null
+        defaultTransactionTypesShouldNotBeFound("name.specified=false");
     }
                 @Test
     @Transactional
-    public void getAllTransactionTypesByTransactionTypeNameContainsSomething() throws Exception {
+    public void getAllTransactionTypesByNameContainsSomething() throws Exception {
         // Initialize the database
         transactionTypesRepository.saveAndFlush(transactionTypes);
 
-        // Get all the transactionTypesList where transactionTypeName contains DEFAULT_TRANSACTION_TYPE_NAME
-        defaultTransactionTypesShouldBeFound("transactionTypeName.contains=" + DEFAULT_TRANSACTION_TYPE_NAME);
+        // Get all the transactionTypesList where name contains DEFAULT_NAME
+        defaultTransactionTypesShouldBeFound("name.contains=" + DEFAULT_NAME);
 
-        // Get all the transactionTypesList where transactionTypeName contains UPDATED_TRANSACTION_TYPE_NAME
-        defaultTransactionTypesShouldNotBeFound("transactionTypeName.contains=" + UPDATED_TRANSACTION_TYPE_NAME);
+        // Get all the transactionTypesList where name contains UPDATED_NAME
+        defaultTransactionTypesShouldNotBeFound("name.contains=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllTransactionTypesByTransactionTypeNameNotContainsSomething() throws Exception {
+    public void getAllTransactionTypesByNameNotContainsSomething() throws Exception {
         // Initialize the database
         transactionTypesRepository.saveAndFlush(transactionTypes);
 
-        // Get all the transactionTypesList where transactionTypeName does not contain DEFAULT_TRANSACTION_TYPE_NAME
-        defaultTransactionTypesShouldNotBeFound("transactionTypeName.doesNotContain=" + DEFAULT_TRANSACTION_TYPE_NAME);
+        // Get all the transactionTypesList where name does not contain DEFAULT_NAME
+        defaultTransactionTypesShouldNotBeFound("name.doesNotContain=" + DEFAULT_NAME);
 
-        // Get all the transactionTypesList where transactionTypeName does not contain UPDATED_TRANSACTION_TYPE_NAME
-        defaultTransactionTypesShouldBeFound("transactionTypeName.doesNotContain=" + UPDATED_TRANSACTION_TYPE_NAME);
+        // Get all the transactionTypesList where name does not contain UPDATED_NAME
+        defaultTransactionTypesShouldBeFound("name.doesNotContain=" + UPDATED_NAME);
     }
 
 
@@ -444,7 +444,7 @@ public class TransactionTypesResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(transactionTypes.getId().intValue())))
-            .andExpect(jsonPath("$.[*].transactionTypeName").value(hasItem(DEFAULT_TRANSACTION_TYPE_NAME)))
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].validFrom").value(hasItem(DEFAULT_VALID_FROM.toString())))
             .andExpect(jsonPath("$.[*].validTo").value(hasItem(DEFAULT_VALID_TO.toString())));
 
@@ -494,7 +494,7 @@ public class TransactionTypesResourceIT {
         // Disconnect from session so that the updates on updatedTransactionTypes are not directly saved in db
         em.detach(updatedTransactionTypes);
         updatedTransactionTypes
-            .transactionTypeName(UPDATED_TRANSACTION_TYPE_NAME)
+            .name(UPDATED_NAME)
             .validFrom(UPDATED_VALID_FROM)
             .validTo(UPDATED_VALID_TO);
         TransactionTypesDTO transactionTypesDTO = transactionTypesMapper.toDto(updatedTransactionTypes);
@@ -508,7 +508,7 @@ public class TransactionTypesResourceIT {
         List<TransactionTypes> transactionTypesList = transactionTypesRepository.findAll();
         assertThat(transactionTypesList).hasSize(databaseSizeBeforeUpdate);
         TransactionTypes testTransactionTypes = transactionTypesList.get(transactionTypesList.size() - 1);
-        assertThat(testTransactionTypes.getTransactionTypeName()).isEqualTo(UPDATED_TRANSACTION_TYPE_NAME);
+        assertThat(testTransactionTypes.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testTransactionTypes.getValidFrom()).isEqualTo(UPDATED_VALID_FROM);
         assertThat(testTransactionTypes.getValidTo()).isEqualTo(UPDATED_VALID_TO);
     }

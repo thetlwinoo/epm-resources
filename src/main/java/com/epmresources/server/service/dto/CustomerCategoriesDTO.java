@@ -11,7 +11,7 @@ public class CustomerCategoriesDTO implements Serializable {
 
     private Long id;
 
-    private String customerCategoryName;
+    private String name;
 
     @NotNull
     private Instant validFrom;
@@ -28,12 +28,12 @@ public class CustomerCategoriesDTO implements Serializable {
         this.id = id;
     }
 
-    public String getCustomerCategoryName() {
-        return customerCategoryName;
+    public String getName() {
+        return name;
     }
 
-    public void setCustomerCategoryName(String customerCategoryName) {
-        this.customerCategoryName = customerCategoryName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Instant getValidFrom() {
@@ -77,7 +77,7 @@ public class CustomerCategoriesDTO implements Serializable {
     public String toString() {
         return "CustomerCategoriesDTO{" +
             "id=" + getId() +
-            ", customerCategoryName='" + getCustomerCategoryName() + "'" +
+            ", name='" + getName() + "'" +
             ", validFrom='" + getValidFrom() + "'" +
             ", validTo='" + getValidTo() + "'" +
             "}";

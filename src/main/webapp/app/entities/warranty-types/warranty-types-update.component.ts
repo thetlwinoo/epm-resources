@@ -17,7 +17,7 @@ export class WarrantyTypesUpdateComponent implements OnInit {
 
   editForm = this.fb.group({
     id: [],
-    warrantyTypeName: [null, [Validators.required]]
+    name: [null, [Validators.required]]
   });
 
   constructor(protected warrantyTypesService: WarrantyTypesService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
@@ -32,7 +32,7 @@ export class WarrantyTypesUpdateComponent implements OnInit {
   updateForm(warrantyTypes: IWarrantyTypes) {
     this.editForm.patchValue({
       id: warrantyTypes.id,
-      warrantyTypeName: warrantyTypes.warrantyTypeName
+      name: warrantyTypes.name
     });
   }
 
@@ -54,7 +54,7 @@ export class WarrantyTypesUpdateComponent implements OnInit {
     return {
       ...new WarrantyTypes(),
       id: this.editForm.get(['id']).value,
-      warrantyTypeName: this.editForm.get(['warrantyTypeName']).value
+      name: this.editForm.get(['name']).value
     };
   }
 

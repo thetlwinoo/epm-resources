@@ -40,8 +40,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = EpmresourcesApp.class)
 public class ProductOptionResourceIT {
 
-    private static final String DEFAULT_PRODUCT_OPTION_VALUE = "AAAAAAAAAA";
-    private static final String UPDATED_PRODUCT_OPTION_VALUE = "BBBBBBBBBB";
+    private static final String DEFAULT_VALUE = "AAAAAAAAAA";
+    private static final String UPDATED_VALUE = "BBBBBBBBBB";
 
     @Autowired
     private ProductOptionRepository productOptionRepository;
@@ -94,7 +94,7 @@ public class ProductOptionResourceIT {
      */
     public static ProductOption createEntity(EntityManager em) {
         ProductOption productOption = new ProductOption()
-            .productOptionValue(DEFAULT_PRODUCT_OPTION_VALUE);
+            .value(DEFAULT_VALUE);
         return productOption;
     }
     /**
@@ -105,7 +105,7 @@ public class ProductOptionResourceIT {
      */
     public static ProductOption createUpdatedEntity(EntityManager em) {
         ProductOption productOption = new ProductOption()
-            .productOptionValue(UPDATED_PRODUCT_OPTION_VALUE);
+            .value(UPDATED_VALUE);
         return productOption;
     }
 
@@ -130,7 +130,7 @@ public class ProductOptionResourceIT {
         List<ProductOption> productOptionList = productOptionRepository.findAll();
         assertThat(productOptionList).hasSize(databaseSizeBeforeCreate + 1);
         ProductOption testProductOption = productOptionList.get(productOptionList.size() - 1);
-        assertThat(testProductOption.getProductOptionValue()).isEqualTo(DEFAULT_PRODUCT_OPTION_VALUE);
+        assertThat(testProductOption.getValue()).isEqualTo(DEFAULT_VALUE);
     }
 
     @Test
@@ -156,10 +156,10 @@ public class ProductOptionResourceIT {
 
     @Test
     @Transactional
-    public void checkProductOptionValueIsRequired() throws Exception {
+    public void checkValueIsRequired() throws Exception {
         int databaseSizeBeforeTest = productOptionRepository.findAll().size();
         // set the field null
-        productOption.setProductOptionValue(null);
+        productOption.setValue(null);
 
         // Create the ProductOption, which fails.
         ProductOptionDTO productOptionDTO = productOptionMapper.toDto(productOption);
@@ -184,7 +184,7 @@ public class ProductOptionResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(productOption.getId().intValue())))
-            .andExpect(jsonPath("$.[*].productOptionValue").value(hasItem(DEFAULT_PRODUCT_OPTION_VALUE)));
+            .andExpect(jsonPath("$.[*].value").value(hasItem(DEFAULT_VALUE)));
     }
     
     @Test
@@ -198,84 +198,84 @@ public class ProductOptionResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(productOption.getId().intValue()))
-            .andExpect(jsonPath("$.productOptionValue").value(DEFAULT_PRODUCT_OPTION_VALUE));
+            .andExpect(jsonPath("$.value").value(DEFAULT_VALUE));
     }
 
     @Test
     @Transactional
-    public void getAllProductOptionsByProductOptionValueIsEqualToSomething() throws Exception {
+    public void getAllProductOptionsByValueIsEqualToSomething() throws Exception {
         // Initialize the database
         productOptionRepository.saveAndFlush(productOption);
 
-        // Get all the productOptionList where productOptionValue equals to DEFAULT_PRODUCT_OPTION_VALUE
-        defaultProductOptionShouldBeFound("productOptionValue.equals=" + DEFAULT_PRODUCT_OPTION_VALUE);
+        // Get all the productOptionList where value equals to DEFAULT_VALUE
+        defaultProductOptionShouldBeFound("value.equals=" + DEFAULT_VALUE);
 
-        // Get all the productOptionList where productOptionValue equals to UPDATED_PRODUCT_OPTION_VALUE
-        defaultProductOptionShouldNotBeFound("productOptionValue.equals=" + UPDATED_PRODUCT_OPTION_VALUE);
+        // Get all the productOptionList where value equals to UPDATED_VALUE
+        defaultProductOptionShouldNotBeFound("value.equals=" + UPDATED_VALUE);
     }
 
     @Test
     @Transactional
-    public void getAllProductOptionsByProductOptionValueIsNotEqualToSomething() throws Exception {
+    public void getAllProductOptionsByValueIsNotEqualToSomething() throws Exception {
         // Initialize the database
         productOptionRepository.saveAndFlush(productOption);
 
-        // Get all the productOptionList where productOptionValue not equals to DEFAULT_PRODUCT_OPTION_VALUE
-        defaultProductOptionShouldNotBeFound("productOptionValue.notEquals=" + DEFAULT_PRODUCT_OPTION_VALUE);
+        // Get all the productOptionList where value not equals to DEFAULT_VALUE
+        defaultProductOptionShouldNotBeFound("value.notEquals=" + DEFAULT_VALUE);
 
-        // Get all the productOptionList where productOptionValue not equals to UPDATED_PRODUCT_OPTION_VALUE
-        defaultProductOptionShouldBeFound("productOptionValue.notEquals=" + UPDATED_PRODUCT_OPTION_VALUE);
+        // Get all the productOptionList where value not equals to UPDATED_VALUE
+        defaultProductOptionShouldBeFound("value.notEquals=" + UPDATED_VALUE);
     }
 
     @Test
     @Transactional
-    public void getAllProductOptionsByProductOptionValueIsInShouldWork() throws Exception {
+    public void getAllProductOptionsByValueIsInShouldWork() throws Exception {
         // Initialize the database
         productOptionRepository.saveAndFlush(productOption);
 
-        // Get all the productOptionList where productOptionValue in DEFAULT_PRODUCT_OPTION_VALUE or UPDATED_PRODUCT_OPTION_VALUE
-        defaultProductOptionShouldBeFound("productOptionValue.in=" + DEFAULT_PRODUCT_OPTION_VALUE + "," + UPDATED_PRODUCT_OPTION_VALUE);
+        // Get all the productOptionList where value in DEFAULT_VALUE or UPDATED_VALUE
+        defaultProductOptionShouldBeFound("value.in=" + DEFAULT_VALUE + "," + UPDATED_VALUE);
 
-        // Get all the productOptionList where productOptionValue equals to UPDATED_PRODUCT_OPTION_VALUE
-        defaultProductOptionShouldNotBeFound("productOptionValue.in=" + UPDATED_PRODUCT_OPTION_VALUE);
+        // Get all the productOptionList where value equals to UPDATED_VALUE
+        defaultProductOptionShouldNotBeFound("value.in=" + UPDATED_VALUE);
     }
 
     @Test
     @Transactional
-    public void getAllProductOptionsByProductOptionValueIsNullOrNotNull() throws Exception {
+    public void getAllProductOptionsByValueIsNullOrNotNull() throws Exception {
         // Initialize the database
         productOptionRepository.saveAndFlush(productOption);
 
-        // Get all the productOptionList where productOptionValue is not null
-        defaultProductOptionShouldBeFound("productOptionValue.specified=true");
+        // Get all the productOptionList where value is not null
+        defaultProductOptionShouldBeFound("value.specified=true");
 
-        // Get all the productOptionList where productOptionValue is null
-        defaultProductOptionShouldNotBeFound("productOptionValue.specified=false");
+        // Get all the productOptionList where value is null
+        defaultProductOptionShouldNotBeFound("value.specified=false");
     }
                 @Test
     @Transactional
-    public void getAllProductOptionsByProductOptionValueContainsSomething() throws Exception {
+    public void getAllProductOptionsByValueContainsSomething() throws Exception {
         // Initialize the database
         productOptionRepository.saveAndFlush(productOption);
 
-        // Get all the productOptionList where productOptionValue contains DEFAULT_PRODUCT_OPTION_VALUE
-        defaultProductOptionShouldBeFound("productOptionValue.contains=" + DEFAULT_PRODUCT_OPTION_VALUE);
+        // Get all the productOptionList where value contains DEFAULT_VALUE
+        defaultProductOptionShouldBeFound("value.contains=" + DEFAULT_VALUE);
 
-        // Get all the productOptionList where productOptionValue contains UPDATED_PRODUCT_OPTION_VALUE
-        defaultProductOptionShouldNotBeFound("productOptionValue.contains=" + UPDATED_PRODUCT_OPTION_VALUE);
+        // Get all the productOptionList where value contains UPDATED_VALUE
+        defaultProductOptionShouldNotBeFound("value.contains=" + UPDATED_VALUE);
     }
 
     @Test
     @Transactional
-    public void getAllProductOptionsByProductOptionValueNotContainsSomething() throws Exception {
+    public void getAllProductOptionsByValueNotContainsSomething() throws Exception {
         // Initialize the database
         productOptionRepository.saveAndFlush(productOption);
 
-        // Get all the productOptionList where productOptionValue does not contain DEFAULT_PRODUCT_OPTION_VALUE
-        defaultProductOptionShouldNotBeFound("productOptionValue.doesNotContain=" + DEFAULT_PRODUCT_OPTION_VALUE);
+        // Get all the productOptionList where value does not contain DEFAULT_VALUE
+        defaultProductOptionShouldNotBeFound("value.doesNotContain=" + DEFAULT_VALUE);
 
-        // Get all the productOptionList where productOptionValue does not contain UPDATED_PRODUCT_OPTION_VALUE
-        defaultProductOptionShouldBeFound("productOptionValue.doesNotContain=" + UPDATED_PRODUCT_OPTION_VALUE);
+        // Get all the productOptionList where value does not contain UPDATED_VALUE
+        defaultProductOptionShouldBeFound("value.doesNotContain=" + UPDATED_VALUE);
     }
 
 
@@ -326,7 +326,7 @@ public class ProductOptionResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(productOption.getId().intValue())))
-            .andExpect(jsonPath("$.[*].productOptionValue").value(hasItem(DEFAULT_PRODUCT_OPTION_VALUE)));
+            .andExpect(jsonPath("$.[*].value").value(hasItem(DEFAULT_VALUE)));
 
         // Check, that the count call also returns 1
         restProductOptionMockMvc.perform(get("/api/product-options/count?sort=id,desc&" + filter))
@@ -374,7 +374,7 @@ public class ProductOptionResourceIT {
         // Disconnect from session so that the updates on updatedProductOption are not directly saved in db
         em.detach(updatedProductOption);
         updatedProductOption
-            .productOptionValue(UPDATED_PRODUCT_OPTION_VALUE);
+            .value(UPDATED_VALUE);
         ProductOptionDTO productOptionDTO = productOptionMapper.toDto(updatedProductOption);
 
         restProductOptionMockMvc.perform(put("/api/product-options")
@@ -386,7 +386,7 @@ public class ProductOptionResourceIT {
         List<ProductOption> productOptionList = productOptionRepository.findAll();
         assertThat(productOptionList).hasSize(databaseSizeBeforeUpdate);
         ProductOption testProductOption = productOptionList.get(productOptionList.size() - 1);
-        assertThat(testProductOption.getProductOptionValue()).isEqualTo(UPDATED_PRODUCT_OPTION_VALUE);
+        assertThat(testProductOption.getValue()).isEqualTo(UPDATED_VALUE);
     }
 
     @Test

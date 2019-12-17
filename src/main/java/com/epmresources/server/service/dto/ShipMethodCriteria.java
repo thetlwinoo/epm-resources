@@ -26,14 +26,14 @@ public class ShipMethodCriteria implements Serializable, Criteria {
 
     private LongFilter id;
 
-    private StringFilter shipMethodName;
+    private StringFilter name;
 
     public ShipMethodCriteria(){
     }
 
     public ShipMethodCriteria(ShipMethodCriteria other){
         this.id = other.id == null ? null : other.id.copy();
-        this.shipMethodName = other.shipMethodName == null ? null : other.shipMethodName.copy();
+        this.name = other.name == null ? null : other.name.copy();
     }
 
     @Override
@@ -49,12 +49,12 @@ public class ShipMethodCriteria implements Serializable, Criteria {
         this.id = id;
     }
 
-    public StringFilter getShipMethodName() {
-        return shipMethodName;
+    public StringFilter getName() {
+        return name;
     }
 
-    public void setShipMethodName(StringFilter shipMethodName) {
-        this.shipMethodName = shipMethodName;
+    public void setName(StringFilter name) {
+        this.name = name;
     }
 
 
@@ -69,14 +69,14 @@ public class ShipMethodCriteria implements Serializable, Criteria {
         final ShipMethodCriteria that = (ShipMethodCriteria) o;
         return
             Objects.equals(id, that.id) &&
-            Objects.equals(shipMethodName, that.shipMethodName);
+            Objects.equals(name, that.name);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(
         id,
-        shipMethodName
+        name
         );
     }
 
@@ -84,7 +84,7 @@ public class ShipMethodCriteria implements Serializable, Criteria {
     public String toString() {
         return "ShipMethodCriteria{" +
                 (id != null ? "id=" + id + ", " : "") +
-                (shipMethodName != null ? "shipMethodName=" + shipMethodName + ", " : "") +
+                (name != null ? "name=" + name + ", " : "") +
             "}";
     }
 

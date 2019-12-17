@@ -53,8 +53,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = EpmresourcesApp.class)
 public class StockItemsResourceIT {
 
-    private static final String DEFAULT_STOCK_ITEM_NAME = "AAAAAAAAAA";
-    private static final String UPDATED_STOCK_ITEM_NAME = "BBBBBBBBBB";
+    private static final String DEFAULT_NAME = "AAAAAAAAAA";
+    private static final String UPDATED_NAME = "BBBBBBBBBB";
 
     private static final String DEFAULT_VENDOR_CODE = "AAAAAAAAAA";
     private static final String UPDATED_VENDOR_CODE = "BBBBBBBBBB";
@@ -205,7 +205,7 @@ public class StockItemsResourceIT {
      */
     public static StockItems createEntity(EntityManager em) {
         StockItems stockItems = new StockItems()
-            .stockItemName(DEFAULT_STOCK_ITEM_NAME)
+            .name(DEFAULT_NAME)
             .vendorCode(DEFAULT_VENDOR_CODE)
             .vendorSKU(DEFAULT_VENDOR_SKU)
             .generatedSKU(DEFAULT_GENERATED_SKU)
@@ -244,7 +244,7 @@ public class StockItemsResourceIT {
      */
     public static StockItems createUpdatedEntity(EntityManager em) {
         StockItems stockItems = new StockItems()
-            .stockItemName(UPDATED_STOCK_ITEM_NAME)
+            .name(UPDATED_NAME)
             .vendorCode(UPDATED_VENDOR_CODE)
             .vendorSKU(UPDATED_VENDOR_SKU)
             .generatedSKU(UPDATED_GENERATED_SKU)
@@ -297,7 +297,7 @@ public class StockItemsResourceIT {
         List<StockItems> stockItemsList = stockItemsRepository.findAll();
         assertThat(stockItemsList).hasSize(databaseSizeBeforeCreate + 1);
         StockItems testStockItems = stockItemsList.get(stockItemsList.size() - 1);
-        assertThat(testStockItems.getStockItemName()).isEqualTo(DEFAULT_STOCK_ITEM_NAME);
+        assertThat(testStockItems.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testStockItems.getVendorCode()).isEqualTo(DEFAULT_VENDOR_CODE);
         assertThat(testStockItems.getVendorSKU()).isEqualTo(DEFAULT_VENDOR_SKU);
         assertThat(testStockItems.getGeneratedSKU()).isEqualTo(DEFAULT_GENERATED_SKU);
@@ -351,10 +351,10 @@ public class StockItemsResourceIT {
 
     @Test
     @Transactional
-    public void checkStockItemNameIsRequired() throws Exception {
+    public void checkNameIsRequired() throws Exception {
         int databaseSizeBeforeTest = stockItemsRepository.findAll().size();
         // set the field null
-        stockItems.setStockItemName(null);
+        stockItems.setName(null);
 
         // Create the StockItems, which fails.
         StockItemsDTO stockItemsDTO = stockItemsMapper.toDto(stockItems);
@@ -417,7 +417,7 @@ public class StockItemsResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(stockItems.getId().intValue())))
-            .andExpect(jsonPath("$.[*].stockItemName").value(hasItem(DEFAULT_STOCK_ITEM_NAME)))
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].vendorCode").value(hasItem(DEFAULT_VENDOR_CODE)))
             .andExpect(jsonPath("$.[*].vendorSKU").value(hasItem(DEFAULT_VENDOR_SKU)))
             .andExpect(jsonPath("$.[*].generatedSKU").value(hasItem(DEFAULT_GENERATED_SKU)))
@@ -459,7 +459,7 @@ public class StockItemsResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(stockItems.getId().intValue()))
-            .andExpect(jsonPath("$.stockItemName").value(DEFAULT_STOCK_ITEM_NAME))
+            .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
             .andExpect(jsonPath("$.vendorCode").value(DEFAULT_VENDOR_CODE))
             .andExpect(jsonPath("$.vendorSKU").value(DEFAULT_VENDOR_SKU))
             .andExpect(jsonPath("$.generatedSKU").value(DEFAULT_GENERATED_SKU))
@@ -492,79 +492,79 @@ public class StockItemsResourceIT {
 
     @Test
     @Transactional
-    public void getAllStockItemsByStockItemNameIsEqualToSomething() throws Exception {
+    public void getAllStockItemsByNameIsEqualToSomething() throws Exception {
         // Initialize the database
         stockItemsRepository.saveAndFlush(stockItems);
 
-        // Get all the stockItemsList where stockItemName equals to DEFAULT_STOCK_ITEM_NAME
-        defaultStockItemsShouldBeFound("stockItemName.equals=" + DEFAULT_STOCK_ITEM_NAME);
+        // Get all the stockItemsList where name equals to DEFAULT_NAME
+        defaultStockItemsShouldBeFound("name.equals=" + DEFAULT_NAME);
 
-        // Get all the stockItemsList where stockItemName equals to UPDATED_STOCK_ITEM_NAME
-        defaultStockItemsShouldNotBeFound("stockItemName.equals=" + UPDATED_STOCK_ITEM_NAME);
+        // Get all the stockItemsList where name equals to UPDATED_NAME
+        defaultStockItemsShouldNotBeFound("name.equals=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllStockItemsByStockItemNameIsNotEqualToSomething() throws Exception {
+    public void getAllStockItemsByNameIsNotEqualToSomething() throws Exception {
         // Initialize the database
         stockItemsRepository.saveAndFlush(stockItems);
 
-        // Get all the stockItemsList where stockItemName not equals to DEFAULT_STOCK_ITEM_NAME
-        defaultStockItemsShouldNotBeFound("stockItemName.notEquals=" + DEFAULT_STOCK_ITEM_NAME);
+        // Get all the stockItemsList where name not equals to DEFAULT_NAME
+        defaultStockItemsShouldNotBeFound("name.notEquals=" + DEFAULT_NAME);
 
-        // Get all the stockItemsList where stockItemName not equals to UPDATED_STOCK_ITEM_NAME
-        defaultStockItemsShouldBeFound("stockItemName.notEquals=" + UPDATED_STOCK_ITEM_NAME);
+        // Get all the stockItemsList where name not equals to UPDATED_NAME
+        defaultStockItemsShouldBeFound("name.notEquals=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllStockItemsByStockItemNameIsInShouldWork() throws Exception {
+    public void getAllStockItemsByNameIsInShouldWork() throws Exception {
         // Initialize the database
         stockItemsRepository.saveAndFlush(stockItems);
 
-        // Get all the stockItemsList where stockItemName in DEFAULT_STOCK_ITEM_NAME or UPDATED_STOCK_ITEM_NAME
-        defaultStockItemsShouldBeFound("stockItemName.in=" + DEFAULT_STOCK_ITEM_NAME + "," + UPDATED_STOCK_ITEM_NAME);
+        // Get all the stockItemsList where name in DEFAULT_NAME or UPDATED_NAME
+        defaultStockItemsShouldBeFound("name.in=" + DEFAULT_NAME + "," + UPDATED_NAME);
 
-        // Get all the stockItemsList where stockItemName equals to UPDATED_STOCK_ITEM_NAME
-        defaultStockItemsShouldNotBeFound("stockItemName.in=" + UPDATED_STOCK_ITEM_NAME);
+        // Get all the stockItemsList where name equals to UPDATED_NAME
+        defaultStockItemsShouldNotBeFound("name.in=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllStockItemsByStockItemNameIsNullOrNotNull() throws Exception {
+    public void getAllStockItemsByNameIsNullOrNotNull() throws Exception {
         // Initialize the database
         stockItemsRepository.saveAndFlush(stockItems);
 
-        // Get all the stockItemsList where stockItemName is not null
-        defaultStockItemsShouldBeFound("stockItemName.specified=true");
+        // Get all the stockItemsList where name is not null
+        defaultStockItemsShouldBeFound("name.specified=true");
 
-        // Get all the stockItemsList where stockItemName is null
-        defaultStockItemsShouldNotBeFound("stockItemName.specified=false");
+        // Get all the stockItemsList where name is null
+        defaultStockItemsShouldNotBeFound("name.specified=false");
     }
                 @Test
     @Transactional
-    public void getAllStockItemsByStockItemNameContainsSomething() throws Exception {
+    public void getAllStockItemsByNameContainsSomething() throws Exception {
         // Initialize the database
         stockItemsRepository.saveAndFlush(stockItems);
 
-        // Get all the stockItemsList where stockItemName contains DEFAULT_STOCK_ITEM_NAME
-        defaultStockItemsShouldBeFound("stockItemName.contains=" + DEFAULT_STOCK_ITEM_NAME);
+        // Get all the stockItemsList where name contains DEFAULT_NAME
+        defaultStockItemsShouldBeFound("name.contains=" + DEFAULT_NAME);
 
-        // Get all the stockItemsList where stockItemName contains UPDATED_STOCK_ITEM_NAME
-        defaultStockItemsShouldNotBeFound("stockItemName.contains=" + UPDATED_STOCK_ITEM_NAME);
+        // Get all the stockItemsList where name contains UPDATED_NAME
+        defaultStockItemsShouldNotBeFound("name.contains=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllStockItemsByStockItemNameNotContainsSomething() throws Exception {
+    public void getAllStockItemsByNameNotContainsSomething() throws Exception {
         // Initialize the database
         stockItemsRepository.saveAndFlush(stockItems);
 
-        // Get all the stockItemsList where stockItemName does not contain DEFAULT_STOCK_ITEM_NAME
-        defaultStockItemsShouldNotBeFound("stockItemName.doesNotContain=" + DEFAULT_STOCK_ITEM_NAME);
+        // Get all the stockItemsList where name does not contain DEFAULT_NAME
+        defaultStockItemsShouldNotBeFound("name.doesNotContain=" + DEFAULT_NAME);
 
-        // Get all the stockItemsList where stockItemName does not contain UPDATED_STOCK_ITEM_NAME
-        defaultStockItemsShouldBeFound("stockItemName.doesNotContain=" + UPDATED_STOCK_ITEM_NAME);
+        // Get all the stockItemsList where name does not contain UPDATED_NAME
+        defaultStockItemsShouldBeFound("name.doesNotContain=" + UPDATED_NAME);
     }
 
 
@@ -3394,7 +3394,7 @@ public class StockItemsResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(stockItems.getId().intValue())))
-            .andExpect(jsonPath("$.[*].stockItemName").value(hasItem(DEFAULT_STOCK_ITEM_NAME)))
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].vendorCode").value(hasItem(DEFAULT_VENDOR_CODE)))
             .andExpect(jsonPath("$.[*].vendorSKU").value(hasItem(DEFAULT_VENDOR_SKU)))
             .andExpect(jsonPath("$.[*].generatedSKU").value(hasItem(DEFAULT_GENERATED_SKU)))
@@ -3470,7 +3470,7 @@ public class StockItemsResourceIT {
         // Disconnect from session so that the updates on updatedStockItems are not directly saved in db
         em.detach(updatedStockItems);
         updatedStockItems
-            .stockItemName(UPDATED_STOCK_ITEM_NAME)
+            .name(UPDATED_NAME)
             .vendorCode(UPDATED_VENDOR_CODE)
             .vendorSKU(UPDATED_VENDOR_SKU)
             .generatedSKU(UPDATED_GENERATED_SKU)
@@ -3510,7 +3510,7 @@ public class StockItemsResourceIT {
         List<StockItems> stockItemsList = stockItemsRepository.findAll();
         assertThat(stockItemsList).hasSize(databaseSizeBeforeUpdate);
         StockItems testStockItems = stockItemsList.get(stockItemsList.size() - 1);
-        assertThat(testStockItems.getStockItemName()).isEqualTo(UPDATED_STOCK_ITEM_NAME);
+        assertThat(testStockItems.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testStockItems.getVendorCode()).isEqualTo(UPDATED_VENDOR_CODE);
         assertThat(testStockItems.getVendorSKU()).isEqualTo(UPDATED_VENDOR_SKU);
         assertThat(testStockItems.getGeneratedSKU()).isEqualTo(UPDATED_GENERATED_SKU);

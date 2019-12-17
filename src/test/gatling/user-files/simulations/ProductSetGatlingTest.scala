@@ -72,7 +72,7 @@ class ProductSetGatlingTest extends Simulation {
             .headers(headers_http_authenticated)
             .body(StringBody("""{
                 "id":null
-                , "productSetName":"SAMPLE_TEXT"
+                , "name":"SAMPLE_TEXT"
                 , "noOfPerson":"0"
                 , "isExclusive":null
                 }""")).asJson

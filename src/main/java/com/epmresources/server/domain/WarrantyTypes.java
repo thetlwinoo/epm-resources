@@ -23,8 +23,8 @@ public class WarrantyTypes implements Serializable {
     private Long id;
 
     @NotNull
-    @Column(name = "warranty_type_name", nullable = false)
-    private String warrantyTypeName;
+    @Column(name = "name", nullable = false)
+    private String name;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -35,17 +35,17 @@ public class WarrantyTypes implements Serializable {
         this.id = id;
     }
 
-    public String getWarrantyTypeName() {
-        return warrantyTypeName;
+    public String getName() {
+        return name;
     }
 
-    public WarrantyTypes warrantyTypeName(String warrantyTypeName) {
-        this.warrantyTypeName = warrantyTypeName;
+    public WarrantyTypes name(String name) {
+        this.name = name;
         return this;
     }
 
-    public void setWarrantyTypeName(String warrantyTypeName) {
-        this.warrantyTypeName = warrantyTypeName;
+    public void setName(String name) {
+        this.name = name;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -69,7 +69,7 @@ public class WarrantyTypes implements Serializable {
     public String toString() {
         return "WarrantyTypes{" +
             "id=" + getId() +
-            ", warrantyTypeName='" + getWarrantyTypeName() + "'" +
+            ", name='" + getName() + "'" +
             "}";
     }
 }

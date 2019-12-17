@@ -81,7 +81,7 @@ public class SpecialDeals implements Serializable {
     @JsonIgnoreProperties("specialDeals")
     private ProductCategory productCategory;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+    @ManyToOne
     @JsonIgnoreProperties("specialDiscounts")
     private StockItems stockItem;
 

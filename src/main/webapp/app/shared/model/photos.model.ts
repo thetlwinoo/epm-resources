@@ -26,8 +26,8 @@ export interface IPhotos {
   watermarkPhotoBlob?: any;
   priority?: number;
   defaultInd?: boolean;
-  deleteToken?: string;
   stockItemId?: number;
+  productCategoryId?: number;
 }
 
 export class Photos implements IPhotos {
@@ -59,8 +59,8 @@ export class Photos implements IPhotos {
     public watermarkPhotoBlob?: any,
     public priority?: number,
     public defaultInd?: boolean,
-    public deleteToken?: string,
-    public stockItemId?: number
+    public stockItemId?: number,
+    public productCategoryId?: number
   ) {
     this.defaultInd = this.defaultInd || false;
   }

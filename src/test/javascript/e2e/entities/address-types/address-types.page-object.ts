@@ -26,19 +26,19 @@ export class AddressTypesUpdatePage {
   pageTitle = element(by.id('jhi-address-types-heading'));
   saveButton = element(by.id('save-entity'));
   cancelButton = element(by.id('cancel-save'));
-  addressTypeNameInput = element(by.id('field_addressTypeName'));
+  nameInput = element(by.id('field_name'));
   referInput = element(by.id('field_refer'));
 
   async getPageTitle() {
     return this.pageTitle.getAttribute('jhiTranslate');
   }
 
-  async setAddressTypeNameInput(addressTypeName) {
-    await this.addressTypeNameInput.sendKeys(addressTypeName);
+  async setNameInput(name) {
+    await this.nameInput.sendKeys(name);
   }
 
-  async getAddressTypeNameInput() {
-    return await this.addressTypeNameInput.getAttribute('value');
+  async getNameInput() {
+    return await this.nameInput.getAttribute('value');
   }
 
   async setReferInput(refer) {

@@ -14,9 +14,9 @@ public interface ProductChoiceMapper extends EntityMapper<ProductChoiceDTO, Prod
     @Mapping(source = "productCategory.id", target = "productCategoryId")
     @Mapping(source = "productCategory.name", target = "productCategoryName")
     @Mapping(source = "productAttributeSet.id", target = "productAttributeSetId")
-    @Mapping(source = "productAttributeSet.productAttributeSetName", target = "productAttributeSetProductAttributeSetName")
+    @Mapping(source = "productAttributeSet.name", target = "productAttributeSetName")
     @Mapping(source = "productOptionSet.id", target = "productOptionSetId")
-    @Mapping(source = "productOptionSet.productOptionSetValue", target = "productOptionSetProductOptionSetValue")
+    @Mapping(source = "productOptionSet.value", target = "productOptionSetValue")
     ProductChoiceDTO toDto(ProductChoice productChoice);
 
     @Mapping(source = "productCategoryId", target = "productCategory")

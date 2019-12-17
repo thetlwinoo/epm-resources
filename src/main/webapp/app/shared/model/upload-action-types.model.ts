@@ -1,8 +1,8 @@
 export interface IUploadActionTypes {
   id?: number;
-  actionTypeName?: string;
+  name?: string;
 }
 
 export class UploadActionTypes implements IUploadActionTypes {
-  constructor(public id?: number, public actionTypeName?: string) {}
+  constructor(public id?: number, public name?: string) {}
 }

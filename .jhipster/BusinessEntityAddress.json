@@ -21,7 +21,7 @@
             "otherEntityName": "addressTypes",
             "otherEntityRelationshipName": "businessEntityAddress",
             "relationshipName": "addressType",
-            "otherEntityField": "addressTypeName"
+            "otherEntityField": "name"
         }
     ],
     "changelogDate": "20191106102808",

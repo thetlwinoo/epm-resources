@@ -2,7 +2,7 @@
     "name": "ProductAttribute",
     "fields": [
         {
-            "fieldName": "productAttributeValue",
+            "fieldName": "value",
             "fieldType": "String",
             "fieldValidateRules": [
                 "required"
@@ -15,14 +15,14 @@
             "otherEntityName": "productAttributeSet",
             "otherEntityRelationshipName": "productAttribute",
             "relationshipName": "productAttributeSet",
-            "otherEntityField": "productAttributeSetName"
+            "otherEntityField": "name"
         },
         {
             "relationshipType": "many-to-one",
             "otherEntityName": "suppliers",
             "otherEntityRelationshipName": "productAttribute",
             "relationshipName": "supplier",
-            "otherEntityField": "id"
+            "otherEntityField": "name"
         }
     ],
     "changelogDate": "20191106102849",

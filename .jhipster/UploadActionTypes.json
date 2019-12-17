@@ -2,7 +2,7 @@
     "name": "UploadActionTypes",
     "fields": [
         {
-            "fieldName": "actionTypeName",
+            "fieldName": "name",
             "fieldType": "String"
         }
     ],

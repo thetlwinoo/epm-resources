@@ -2,7 +2,7 @@
     "name": "StockItems",
     "fields": [
         {
-            "fieldName": "stockItemName",
+            "fieldName": "name",
             "fieldType": "String",
             "fieldValidateRules": [
                 "required"
@@ -159,84 +159,84 @@
             "otherEntityName": "unitMeasure",
             "otherEntityRelationshipName": "stockItems",
             "relationshipName": "itemLengthUnit",
-            "otherEntityField": "unitMeasureCode"
+            "otherEntityField": "code"
         },
         {
             "relationshipType": "many-to-one",
             "otherEntityName": "unitMeasure",
             "otherEntityRelationshipName": "stockItems",
             "relationshipName": "itemWidthUnit",
-            "otherEntityField": "unitMeasureCode"
+            "otherEntityField": "code"
         },
         {
             "relationshipType": "many-to-one",
             "otherEntityName": "unitMeasure",
             "otherEntityRelationshipName": "stockItems",
             "relationshipName": "itemHeightUnit",
-            "otherEntityField": "unitMeasureCode"
+            "otherEntityField": "code"
         },
         {
             "relationshipType": "many-to-one",
             "otherEntityName": "unitMeasure",
             "otherEntityRelationshipName": "stockItems",
             "relationshipName": "packageLengthUnit",
-            "otherEntityField": "unitMeasureCode"
+            "otherEntityField": "code"
         },
         {
             "relationshipType": "many-to-one",
             "otherEntityName": "unitMeasure",
             "otherEntityRelationshipName": "stockItems",
             "relationshipName": "packageWidthUnit",
-            "otherEntityField": "unitMeasureCode"
+            "otherEntityField": "code"
         },
         {
             "relationshipType": "many-to-one",
             "otherEntityName": "unitMeasure",
             "otherEntityRelationshipName": "stockItems",
             "relationshipName": "packageHeightUnit",
-            "otherEntityField": "unitMeasureCode"
+            "otherEntityField": "code"
         },
         {
             "relationshipType": "many-to-one",
             "otherEntityName": "unitMeasure",
             "otherEntityRelationshipName": "stockItems",
             "relationshipName": "itemPackageWeightUnit",
-            "otherEntityField": "unitMeasureCode"
+            "otherEntityField": "code"
         },
         {
             "relationshipType": "many-to-one",
             "otherEntityName": "productAttribute",
             "otherEntityRelationshipName": "stockItems",
             "relationshipName": "productAttribute",
-            "otherEntityField": "productAttributeValue"
+            "otherEntityField": "value"
         },
         {
             "relationshipType": "many-to-one",
             "otherEntityName": "productOption",
             "otherEntityRelationshipName": "stockItems",
             "relationshipName": "productOption",
-            "otherEntityField": "productOptionValue"
+            "otherEntityField": "value"
         },
         {
             "relationshipType": "many-to-one",
             "otherEntityName": "materials",
             "otherEntityRelationshipName": "stockItems",
             "relationshipName": "material",
-            "otherEntityField": "materialName"
+            "otherEntityField": "name"
         },
         {
             "relationshipType": "many-to-one",
             "otherEntityName": "currency",
             "otherEntityRelationshipName": "stockItems",
             "relationshipName": "currency",
-            "otherEntityField": "currencyCode"
+            "otherEntityField": "code"
         },
         {
             "relationshipType": "many-to-one",
             "otherEntityName": "barcodeTypes",
             "otherEntityRelationshipName": "stockItems",
             "relationshipName": "barcodeType",
-            "otherEntityField": "barcodeTypeName"
+            "otherEntityField": "name"
         },
         {
             "relationshipType": "one-to-one",

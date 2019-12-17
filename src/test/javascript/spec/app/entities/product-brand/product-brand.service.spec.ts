@@ -20,7 +20,7 @@ describe('Service Tests', () => {
       service = injector.get(ProductBrandService);
       httpMock = injector.get(HttpTestingController);
 
-      elemDefault = new ProductBrand(0, 'AAAAAAA', 'image/png', 'AAAAAAA');
+      elemDefault = new ProductBrand(0, 'AAAAAAA', 'AAAAAAA');
     });
 
     describe('Service methods', () => {
@@ -56,8 +56,8 @@ describe('Service Tests', () => {
       it('should update a ProductBrand', () => {
         const returnedFromService = Object.assign(
           {
-            productBrandName: 'BBBBBB',
-            photo: 'BBBBBB'
+            name: 'BBBBBB',
+            thumbnailUrl: 'BBBBBB'
           },
           elemDefault
         );
@@ -75,8 +75,8 @@ describe('Service Tests', () => {
       it('should return a list of ProductBrand', () => {
         const returnedFromService = Object.assign(
           {
-            productBrandName: 'BBBBBB',
-            photo: 'BBBBBB'
+            name: 'BBBBBB',
+            thumbnailUrl: 'BBBBBB'
           },
           elemDefault
         );

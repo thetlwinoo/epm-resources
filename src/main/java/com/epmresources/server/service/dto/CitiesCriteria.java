@@ -27,7 +27,7 @@ public class CitiesCriteria implements Serializable, Criteria {
 
     private LongFilter id;
 
-    private StringFilter cityName;
+    private StringFilter name;
 
     private StringFilter location;
 
@@ -44,7 +44,7 @@ public class CitiesCriteria implements Serializable, Criteria {
 
     public CitiesCriteria(CitiesCriteria other){
         this.id = other.id == null ? null : other.id.copy();
-        this.cityName = other.cityName == null ? null : other.cityName.copy();
+        this.name = other.name == null ? null : other.name.copy();
         this.location = other.location == null ? null : other.location.copy();
         this.latestRecordedPopulation = other.latestRecordedPopulation == null ? null : other.latestRecordedPopulation.copy();
         this.validFrom = other.validFrom == null ? null : other.validFrom.copy();
@@ -65,12 +65,12 @@ public class CitiesCriteria implements Serializable, Criteria {
         this.id = id;
     }
 
-    public StringFilter getCityName() {
-        return cityName;
+    public StringFilter getName() {
+        return name;
     }
 
-    public void setCityName(StringFilter cityName) {
-        this.cityName = cityName;
+    public void setName(StringFilter name) {
+        this.name = name;
     }
 
     public StringFilter getLocation() {
@@ -125,7 +125,7 @@ public class CitiesCriteria implements Serializable, Criteria {
         final CitiesCriteria that = (CitiesCriteria) o;
         return
             Objects.equals(id, that.id) &&
-            Objects.equals(cityName, that.cityName) &&
+            Objects.equals(name, that.name) &&
             Objects.equals(location, that.location) &&
             Objects.equals(latestRecordedPopulation, that.latestRecordedPopulation) &&
             Objects.equals(validFrom, that.validFrom) &&
@@ -137,7 +137,7 @@ public class CitiesCriteria implements Serializable, Criteria {
     public int hashCode() {
         return Objects.hash(
         id,
-        cityName,
+        name,
         location,
         latestRecordedPopulation,
         validFrom,
@@ -150,7 +150,7 @@ public class CitiesCriteria implements Serializable, Criteria {
     public String toString() {
         return "CitiesCriteria{" +
                 (id != null ? "id=" + id + ", " : "") +
-                (cityName != null ? "cityName=" + cityName + ", " : "") +
+                (name != null ? "name=" + name + ", " : "") +
                 (location != null ? "location=" + location + ", " : "") +
                 (latestRecordedPopulation != null ? "latestRecordedPopulation=" + latestRecordedPopulation + ", " : "") +
                 (validFrom != null ? "validFrom=" + validFrom + ", " : "") +

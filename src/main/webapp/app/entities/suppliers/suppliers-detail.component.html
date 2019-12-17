@@ -5,9 +5,9 @@
             <hr>
             <jhi-alert-error></jhi-alert-error>
             <dl class="row-md jh-entity-details">
-                <dt><span jhiTranslate="epmresourcesApp.suppliers.supplierName">Supplier Name</span></dt>
+                <dt><span jhiTranslate="epmresourcesApp.suppliers.name">Name</span></dt>
                 <dd>
-                    <span>{{suppliers.supplierName}}</span>
+                    <span>{{suppliers.name}}</span>
                 </dd>
                 <dt><span jhiTranslate="epmresourcesApp.suppliers.supplierReference">Supplier Reference</span></dt>
                 <dd>
@@ -65,14 +65,9 @@
                 <dd>
                     <span>{{suppliers.activeFlag}}</span>
                 </dd>
-                <dt><span jhiTranslate="epmresourcesApp.suppliers.avatar">Avatar</span></dt>
+                <dt><span jhiTranslate="epmresourcesApp.suppliers.thumbnailUrl">Thumbnail Url</span></dt>
                 <dd>
-                    <div *ngIf="suppliers.avatar">
-                        <a (click)="openFile(suppliers.avatarContentType, suppliers.avatar)">
-                            <img [src]="'data:' + suppliers.avatarContentType + ';base64,' + suppliers.avatar" style="max-width: 100%;" alt="suppliers image"/>
-                        </a>
-                        {{suppliers.avatarContentType}}, {{byteSize(suppliers.avatar)}}
-                    </div>
+                    <span>{{suppliers.thumbnailUrl}}</span>
                 </dd>
                 <dt><span jhiTranslate="epmresourcesApp.suppliers.validFrom">Valid From</span></dt>
                 <dd>
@@ -89,25 +84,25 @@
                 <dt><span jhiTranslate="epmresourcesApp.suppliers.supplierCategory">Supplier Category</span></dt>
                 <dd>
                     <div *ngIf="suppliers.supplierCategoryId">
-                        <a [routerLink]="['/supplier-categories', suppliers.supplierCategoryId, 'view']">{{suppliers.supplierCategorySupplierCategoryName}}</a>
+                        <a [routerLink]="['/supplier-categories', suppliers.supplierCategoryId, 'view']">{{suppliers.supplierCategoryName}}</a>
                     </div>
                 </dd>
                 <dt><span jhiTranslate="epmresourcesApp.suppliers.deliveryMethod">Delivery Method</span></dt>
                 <dd>
                     <div *ngIf="suppliers.deliveryMethodId">
-                        <a [routerLink]="['/delivery-methods', suppliers.deliveryMethodId, 'view']">{{suppliers.deliveryMethodDeliveryMethodName}}</a>
+                        <a [routerLink]="['/delivery-methods', suppliers.deliveryMethodId, 'view']">{{suppliers.deliveryMethodName}}</a>
                     </div>
                 </dd>
                 <dt><span jhiTranslate="epmresourcesApp.suppliers.deliveryCity">Delivery City</span></dt>
                 <dd>
                     <div *ngIf="suppliers.deliveryCityId">
-                        <a [routerLink]="['/cities', suppliers.deliveryCityId, 'view']">{{suppliers.deliveryCityCityName}}</a>
+                        <a [routerLink]="['/cities', suppliers.deliveryCityId, 'view']">{{suppliers.deliveryCityName}}</a>
                     </div>
                 </dd>
                 <dt><span jhiTranslate="epmresourcesApp.suppliers.postalCity">Postal City</span></dt>
                 <dd>
                     <div *ngIf="suppliers.postalCityId">
-                        <a [routerLink]="['/cities', suppliers.postalCityId, 'view']">{{suppliers.postalCityCityName}}</a>
+                        <a [routerLink]="['/cities', suppliers.postalCityId, 'view']">{{suppliers.postalCityName}}</a>
                     </div>
                 </dd>
             </dl>

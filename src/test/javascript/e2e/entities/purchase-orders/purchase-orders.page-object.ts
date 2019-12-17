@@ -66,9 +66,14 @@ export class PurchaseOrdersUpdatePage {
     return await this.supplierReferenceInput.getAttribute('value');
   }
 
-  getIsOrderFinalizedInput(timeout?: number) {
-    return this.isOrderFinalizedInput;
+  async setIsOrderFinalizedInput(isOrderFinalized) {
+    await this.isOrderFinalizedInput.sendKeys(isOrderFinalized);
   }
+
+  async getIsOrderFinalizedInput() {
+    return await this.isOrderFinalizedInput.getAttribute('value');
+  }
+
   async setCommentsInput(comments) {
     await this.commentsInput.sendKeys(comments);
   }

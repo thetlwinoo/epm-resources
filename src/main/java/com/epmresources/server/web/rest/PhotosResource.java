@@ -14,7 +14,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -52,7 +51,7 @@ public class PhotosResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/photos")
-    public ResponseEntity<PhotosDTO> createPhotos(@Valid @RequestBody PhotosDTO photosDTO) throws URISyntaxException {
+    public ResponseEntity<PhotosDTO> createPhotos(@RequestBody PhotosDTO photosDTO) throws URISyntaxException {
         log.debug("REST request to save Photos : {}", photosDTO);
         if (photosDTO.getId() != null) {
             throw new BadRequestAlertException("A new photos cannot already have an ID", ENTITY_NAME, "idexists");
@@ -73,7 +72,7 @@ public class PhotosResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/photos")
-    public ResponseEntity<PhotosDTO> updatePhotos(@Valid @RequestBody PhotosDTO photosDTO) throws URISyntaxException {
+    public ResponseEntity<PhotosDTO> updatePhotos(@RequestBody PhotosDTO photosDTO) throws URISyntaxException {
         log.debug("REST request to update Photos : {}", photosDTO);
         if (photosDTO.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");

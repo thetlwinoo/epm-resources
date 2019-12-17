@@ -19,7 +19,7 @@
             <thead>
             <tr>
             <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
-            <th scope="col" ><span jhiTranslate="epmresourcesApp.productOption.productOptionValue">Product Option Value</span></th>
+            <th scope="col" ><span jhiTranslate="epmresourcesApp.productOption.value">Value</span></th>
             <th scope="col" ><span jhiTranslate="epmresourcesApp.productOption.productOptionSet">Product Option Set</span></th>
             <th scope="col" ><span jhiTranslate="epmresourcesApp.productOption.supplier">Supplier</span></th>
             <th scope="col"></th>
@@ -28,15 +28,15 @@
             <tbody>
             <tr *ngFor="let productOption of productOptions ;trackBy: trackId">
                 <td><a [routerLink]="['/product-option', productOption.id, 'view' ]">{{productOption.id}}</a></td>
-                <td>{{productOption.productOptionValue}}</td>
+                <td>{{productOption.value}}</td>
                 <td>
                     <div *ngIf="productOption.productOptionSetId">
-                        <a [routerLink]="['/product-option-set', productOption.productOptionSetId , 'view' ]" >{{productOption.productOptionSetProductOptionSetValue}}</a>
+                        <a [routerLink]="['/product-option-set', productOption.productOptionSetId , 'view' ]" >{{productOption.productOptionSetValue}}</a>
                     </div>
                 </td>
                 <td>
                     <div *ngIf="productOption.supplierId">
-                        <a [routerLink]="['/suppliers', productOption.supplierId , 'view' ]" >{{productOption.supplierId}}</a>
+                        <a [routerLink]="['/suppliers', productOption.supplierId , 'view' ]" >{{productOption.supplierName}}</a>
                     </div>
                 </td>
                 <td class="text-right">

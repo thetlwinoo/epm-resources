@@ -16,7 +16,7 @@
       "detail": {
         "title": "Upload Action Types"
       },
-      "actionTypeName": "Action Type Name"
+      "name": "Name"
     }
   }
 }

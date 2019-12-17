@@ -75,8 +75,8 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             currencyRateDate: currentDate.format(DATE_TIME_FORMAT),
-            fromCurrencyCode: 'BBBBBB',
-            toCurrencyCode: 'BBBBBB',
+            fromcode: 'BBBBBB',
+            tocode: 'BBBBBB',
             averageRate: 1,
             endOfDayRate: 1,
             lastEditedBy: 'BBBBBB',
@@ -105,8 +105,8 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             currencyRateDate: currentDate.format(DATE_TIME_FORMAT),
-            fromCurrencyCode: 'BBBBBB',
-            toCurrencyCode: 'BBBBBB',
+            fromcode: 'BBBBBB',
+            tocode: 'BBBBBB',
             averageRate: 1,
             endOfDayRate: 1,
             lastEditedBy: 'BBBBBB',

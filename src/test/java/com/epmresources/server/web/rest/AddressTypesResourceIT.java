@@ -38,8 +38,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = EpmresourcesApp.class)
 public class AddressTypesResourceIT {
 
-    private static final String DEFAULT_ADDRESS_TYPE_NAME = "AAAAAAAAAA";
-    private static final String UPDATED_ADDRESS_TYPE_NAME = "BBBBBBBBBB";
+    private static final String DEFAULT_NAME = "AAAAAAAAAA";
+    private static final String UPDATED_NAME = "BBBBBBBBBB";
 
     private static final String DEFAULT_REFER = "AAAAAAAAAA";
     private static final String UPDATED_REFER = "BBBBBBBBBB";
@@ -95,7 +95,7 @@ public class AddressTypesResourceIT {
      */
     public static AddressTypes createEntity(EntityManager em) {
         AddressTypes addressTypes = new AddressTypes()
-            .addressTypeName(DEFAULT_ADDRESS_TYPE_NAME)
+            .name(DEFAULT_NAME)
             .refer(DEFAULT_REFER);
         return addressTypes;
     }
@@ -107,7 +107,7 @@ public class AddressTypesResourceIT {
      */
     public static AddressTypes createUpdatedEntity(EntityManager em) {
         AddressTypes addressTypes = new AddressTypes()
-            .addressTypeName(UPDATED_ADDRESS_TYPE_NAME)
+            .name(UPDATED_NAME)
             .refer(UPDATED_REFER);
         return addressTypes;
     }
@@ -133,7 +133,7 @@ public class AddressTypesResourceIT {
         List<AddressTypes> addressTypesList = addressTypesRepository.findAll();
         assertThat(addressTypesList).hasSize(databaseSizeBeforeCreate + 1);
         AddressTypes testAddressTypes = addressTypesList.get(addressTypesList.size() - 1);
-        assertThat(testAddressTypes.getAddressTypeName()).isEqualTo(DEFAULT_ADDRESS_TYPE_NAME);
+        assertThat(testAddressTypes.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testAddressTypes.getRefer()).isEqualTo(DEFAULT_REFER);
     }
 
@@ -160,10 +160,10 @@ public class AddressTypesResourceIT {
 
     @Test
     @Transactional
-    public void checkAddressTypeNameIsRequired() throws Exception {
+    public void checkNameIsRequired() throws Exception {
         int databaseSizeBeforeTest = addressTypesRepository.findAll().size();
         // set the field null
-        addressTypes.setAddressTypeName(null);
+        addressTypes.setName(null);
 
         // Create the AddressTypes, which fails.
         AddressTypesDTO addressTypesDTO = addressTypesMapper.toDto(addressTypes);
@@ -188,7 +188,7 @@ public class AddressTypesResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(addressTypes.getId().intValue())))
-            .andExpect(jsonPath("$.[*].addressTypeName").value(hasItem(DEFAULT_ADDRESS_TYPE_NAME)))
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].refer").value(hasItem(DEFAULT_REFER)));
     }
     
@@ -203,85 +203,85 @@ public class AddressTypesResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(addressTypes.getId().intValue()))
-            .andExpect(jsonPath("$.addressTypeName").value(DEFAULT_ADDRESS_TYPE_NAME))
+            .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
             .andExpect(jsonPath("$.refer").value(DEFAULT_REFER));
     }
 
     @Test
     @Transactional
-    public void getAllAddressTypesByAddressTypeNameIsEqualToSomething() throws Exception {
+    public void getAllAddressTypesByNameIsEqualToSomething() throws Exception {
         // Initialize the database
         addressTypesRepository.saveAndFlush(addressTypes);
 
-        // Get all the addressTypesList where addressTypeName equals to DEFAULT_ADDRESS_TYPE_NAME
-        defaultAddressTypesShouldBeFound("addressTypeName.equals=" + DEFAULT_ADDRESS_TYPE_NAME);
+        // Get all the addressTypesList where name equals to DEFAULT_NAME
+        defaultAddressTypesShouldBeFound("name.equals=" + DEFAULT_NAME);
 
-        // Get all the addressTypesList where addressTypeName equals to UPDATED_ADDRESS_TYPE_NAME
-        defaultAddressTypesShouldNotBeFound("addressTypeName.equals=" + UPDATED_ADDRESS_TYPE_NAME);
+        // Get all the addressTypesList where name equals to UPDATED_NAME
+        defaultAddressTypesShouldNotBeFound("name.equals=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllAddressTypesByAddressTypeNameIsNotEqualToSomething() throws Exception {
+    public void getAllAddressTypesByNameIsNotEqualToSomething() throws Exception {
         // Initialize the database
         addressTypesRepository.saveAndFlush(addressTypes);
 
-        // Get all the addressTypesList where addressTypeName not equals to DEFAULT_ADDRESS_TYPE_NAME
-        defaultAddressTypesShouldNotBeFound("addressTypeName.notEquals=" + DEFAULT_ADDRESS_TYPE_NAME);
+        // Get all the addressTypesList where name not equals to DEFAULT_NAME
+        defaultAddressTypesShouldNotBeFound("name.notEquals=" + DEFAULT_NAME);
 
-        // Get all the addressTypesList where addressTypeName not equals to UPDATED_ADDRESS_TYPE_NAME
-        defaultAddressTypesShouldBeFound("addressTypeName.notEquals=" + UPDATED_ADDRESS_TYPE_NAME);
+        // Get all the addressTypesList where name not equals to UPDATED_NAME
+        defaultAddressTypesShouldBeFound("name.notEquals=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllAddressTypesByAddressTypeNameIsInShouldWork() throws Exception {
+    public void getAllAddressTypesByNameIsInShouldWork() throws Exception {
         // Initialize the database
         addressTypesRepository.saveAndFlush(addressTypes);
 
-        // Get all the addressTypesList where addressTypeName in DEFAULT_ADDRESS_TYPE_NAME or UPDATED_ADDRESS_TYPE_NAME
-        defaultAddressTypesShouldBeFound("addressTypeName.in=" + DEFAULT_ADDRESS_TYPE_NAME + "," + UPDATED_ADDRESS_TYPE_NAME);
+        // Get all the addressTypesList where name in DEFAULT_NAME or UPDATED_NAME
+        defaultAddressTypesShouldBeFound("name.in=" + DEFAULT_NAME + "," + UPDATED_NAME);
 
-        // Get all the addressTypesList where addressTypeName equals to UPDATED_ADDRESS_TYPE_NAME
-        defaultAddressTypesShouldNotBeFound("addressTypeName.in=" + UPDATED_ADDRESS_TYPE_NAME);
+        // Get all the addressTypesList where name equals to UPDATED_NAME
+        defaultAddressTypesShouldNotBeFound("name.in=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllAddressTypesByAddressTypeNameIsNullOrNotNull() throws Exception {
+    public void getAllAddressTypesByNameIsNullOrNotNull() throws Exception {
         // Initialize the database
         addressTypesRepository.saveAndFlush(addressTypes);
 
-        // Get all the addressTypesList where addressTypeName is not null
-        defaultAddressTypesShouldBeFound("addressTypeName.specified=true");
+        // Get all the addressTypesList where name is not null
+        defaultAddressTypesShouldBeFound("name.specified=true");
 
-        // Get all the addressTypesList where addressTypeName is null
-        defaultAddressTypesShouldNotBeFound("addressTypeName.specified=false");
+        // Get all the addressTypesList where name is null
+        defaultAddressTypesShouldNotBeFound("name.specified=false");
     }
                 @Test
     @Transactional
-    public void getAllAddressTypesByAddressTypeNameContainsSomething() throws Exception {
+    public void getAllAddressTypesByNameContainsSomething() throws Exception {
         // Initialize the database
         addressTypesRepository.saveAndFlush(addressTypes);
 
-        // Get all the addressTypesList where addressTypeName contains DEFAULT_ADDRESS_TYPE_NAME
-        defaultAddressTypesShouldBeFound("addressTypeName.contains=" + DEFAULT_ADDRESS_TYPE_NAME);
+        // Get all the addressTypesList where name contains DEFAULT_NAME
+        defaultAddressTypesShouldBeFound("name.contains=" + DEFAULT_NAME);
 
-        // Get all the addressTypesList where addressTypeName contains UPDATED_ADDRESS_TYPE_NAME
-        defaultAddressTypesShouldNotBeFound("addressTypeName.contains=" + UPDATED_ADDRESS_TYPE_NAME);
+        // Get all the addressTypesList where name contains UPDATED_NAME
+        defaultAddressTypesShouldNotBeFound("name.contains=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllAddressTypesByAddressTypeNameNotContainsSomething() throws Exception {
+    public void getAllAddressTypesByNameNotContainsSomething() throws Exception {
         // Initialize the database
         addressTypesRepository.saveAndFlush(addressTypes);
 
-        // Get all the addressTypesList where addressTypeName does not contain DEFAULT_ADDRESS_TYPE_NAME
-        defaultAddressTypesShouldNotBeFound("addressTypeName.doesNotContain=" + DEFAULT_ADDRESS_TYPE_NAME);
+        // Get all the addressTypesList where name does not contain DEFAULT_NAME
+        defaultAddressTypesShouldNotBeFound("name.doesNotContain=" + DEFAULT_NAME);
 
-        // Get all the addressTypesList where addressTypeName does not contain UPDATED_ADDRESS_TYPE_NAME
-        defaultAddressTypesShouldBeFound("addressTypeName.doesNotContain=" + UPDATED_ADDRESS_TYPE_NAME);
+        // Get all the addressTypesList where name does not contain UPDATED_NAME
+        defaultAddressTypesShouldBeFound("name.doesNotContain=" + UPDATED_NAME);
     }
 
 
@@ -370,7 +370,7 @@ public class AddressTypesResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(addressTypes.getId().intValue())))
-            .andExpect(jsonPath("$.[*].addressTypeName").value(hasItem(DEFAULT_ADDRESS_TYPE_NAME)))
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].refer").value(hasItem(DEFAULT_REFER)));
 
         // Check, that the count call also returns 1
@@ -419,7 +419,7 @@ public class AddressTypesResourceIT {
         // Disconnect from session so that the updates on updatedAddressTypes are not directly saved in db
         em.detach(updatedAddressTypes);
         updatedAddressTypes
-            .addressTypeName(UPDATED_ADDRESS_TYPE_NAME)
+            .name(UPDATED_NAME)
             .refer(UPDATED_REFER);
         AddressTypesDTO addressTypesDTO = addressTypesMapper.toDto(updatedAddressTypes);
 
@@ -432,7 +432,7 @@ public class AddressTypesResourceIT {
         List<AddressTypes> addressTypesList = addressTypesRepository.findAll();
         assertThat(addressTypesList).hasSize(databaseSizeBeforeUpdate);
         AddressTypes testAddressTypes = addressTypesList.get(addressTypesList.size() - 1);
-        assertThat(testAddressTypes.getAddressTypeName()).isEqualTo(UPDATED_ADDRESS_TYPE_NAME);
+        assertThat(testAddressTypes.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testAddressTypes.getRefer()).isEqualTo(UPDATED_REFER);
     }
 

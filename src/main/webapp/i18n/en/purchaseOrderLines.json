@@ -16,7 +16,7 @@
       "detail": {
         "title": "Purchase Order Lines"
       },
-      "ordersOuters": "Orders Outers",
+      "orderedOuters": "Ordered Outers",
       "description": "Description",
       "receivedOuters": "Received Outers",
       "expectedUnitPricePerOuter": "Expected Unit Price Per Outer",

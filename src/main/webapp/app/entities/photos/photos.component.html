@@ -37,8 +37,8 @@
             <th scope="col" ><span jhiTranslate="epmresourcesApp.photos.watermarkPhotoBlob">Watermark Photo Blob</span></th>
             <th scope="col" ><span jhiTranslate="epmresourcesApp.photos.priority">Priority</span></th>
             <th scope="col" ><span jhiTranslate="epmresourcesApp.photos.defaultInd">Default Ind</span></th>
-            <th scope="col" ><span jhiTranslate="epmresourcesApp.photos.deleteToken">Delete Token</span></th>
             <th scope="col" ><span jhiTranslate="epmresourcesApp.photos.stockItem">Stock Item</span></th>
+            <th scope="col" ><span jhiTranslate="epmresourcesApp.photos.productCategory">Product Category</span></th>
             <th scope="col"></th>
             </tr>
             </thead>
@@ -103,10 +103,14 @@
                 </td>
                 <td>{{photos.priority}}</td>
                 <td>{{photos.defaultInd}}</td>
-                <td>{{photos.deleteToken}}</td>
                 <td>
                     <div *ngIf="photos.stockItemId">
                         <a [routerLink]="['/stock-items', photos.stockItemId , 'view' ]" >{{photos.stockItemId}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="photos.productCategoryId">
+                        <a [routerLink]="['/product-category', photos.productCategoryId , 'view' ]" >{{photos.productCategoryId}}</a>
                     </div>
                 </td>
                 <td class="text-right">

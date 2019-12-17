@@ -26,13 +26,15 @@ public class PurchaseOrderLines implements Serializable {
     private Long id;
 
     @NotNull
-    @Column(name = "orders_outers", nullable = false)
-    private Integer ordersOuters;
+    @Column(name = "ordered_outers", nullable = false)
+    private Integer orderedOuters;
 
-    @Column(name = "description")
+    @NotNull
+    @Column(name = "description", nullable = false)
     private String description;
 
-    @Column(name = "received_outers")
+    @NotNull
+    @Column(name = "received_outers", nullable = false)
     private Integer receivedOuters;
 
     @Column(name = "expected_unit_price_per_outer", precision = 21, scale = 2)
@@ -41,7 +43,8 @@ public class PurchaseOrderLines implements Serializable {
     @Column(name = "last_receipt_date")
     private Instant lastReceiptDate;
 
-    @Column(name = "is_order_line_finalized")
+    @NotNull
+    @Column(name = "is_order_line_finalized", nullable = false)
     private Boolean isOrderLineFinalized;
 
     @Column(name = "last_edited_by")
@@ -71,17 +74,17 @@ public class PurchaseOrderLines implements Serializable {
         this.id = id;
     }
 
-    public Integer getOrdersOuters() {
-        return ordersOuters;
+    public Integer getOrderedOuters() {
+        return orderedOuters;
     }
 
-    public PurchaseOrderLines ordersOuters(Integer ordersOuters) {
-        this.ordersOuters = ordersOuters;
+    public PurchaseOrderLines orderedOuters(Integer orderedOuters) {
+        this.orderedOuters = orderedOuters;
         return this;
     }
 
-    public void setOrdersOuters(Integer ordersOuters) {
-        this.ordersOuters = ordersOuters;
+    public void setOrderedOuters(Integer orderedOuters) {
+        this.orderedOuters = orderedOuters;
     }
 
     public String getDescription() {
@@ -235,7 +238,7 @@ public class PurchaseOrderLines implements Serializable {
     public String toString() {
         return "PurchaseOrderLines{" +
             "id=" + getId() +
-            ", ordersOuters=" + getOrdersOuters() +
+            ", orderedOuters=" + getOrderedOuters() +
             ", description='" + getDescription() + "'" +
             ", receivedOuters=" + getReceivedOuters() +
             ", expectedUnitPricePerOuter=" + getExpectedUnitPricePerOuter() +

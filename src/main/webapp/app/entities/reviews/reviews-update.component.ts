@@ -25,7 +25,7 @@ export class ReviewsUpdateComponent implements OnInit {
 
   editForm = this.fb.group({
     id: [],
-    reviewerName: [],
+    name: [],
     emailAddress: [null, [Validators.pattern('^[^@s]+@[^@s]+.[^@s]+$')]],
     reviewDate: [],
     overAllSellerRating: [],
@@ -64,7 +64,7 @@ export class ReviewsUpdateComponent implements OnInit {
   updateForm(reviews: IReviews) {
     this.editForm.patchValue({
       id: reviews.id,
-      reviewerName: reviews.reviewerName,
+      name: reviews.name,
       emailAddress: reviews.emailAddress,
       reviewDate: reviews.reviewDate != null ? reviews.reviewDate.format(DATE_TIME_FORMAT) : null,
       overAllSellerRating: reviews.overAllSellerRating,
@@ -129,7 +129,7 @@ export class ReviewsUpdateComponent implements OnInit {
     return {
       ...new Reviews(),
       id: this.editForm.get(['id']).value,
-      reviewerName: this.editForm.get(['reviewerName']).value,
+      name: this.editForm.get(['name']).value,
       emailAddress: this.editForm.get(['emailAddress']).value,
       reviewDate:
         this.editForm.get(['reviewDate']).value != null ? moment(this.editForm.get(['reviewDate']).value, DATE_TIME_FORMAT) : undefined,

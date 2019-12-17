@@ -2,7 +2,7 @@
     "name": "BarcodeTypes",
     "fields": [
         {
-            "fieldName": "barcodeTypeName",
+            "fieldName": "name",
             "fieldType": "String",
             "fieldValidateRules": [
                 "required"

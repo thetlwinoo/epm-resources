@@ -2,7 +2,7 @@
     "name": "ProductOptionSet",
     "fields": [
         {
-            "fieldName": "productOptionSetValue",
+            "fieldName": "value",
             "fieldType": "String",
             "fieldValidateRules": [
                 "required"

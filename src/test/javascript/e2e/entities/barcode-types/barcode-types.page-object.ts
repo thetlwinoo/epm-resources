@@ -26,18 +26,18 @@ export class BarcodeTypesUpdatePage {
   pageTitle = element(by.id('jhi-barcode-types-heading'));
   saveButton = element(by.id('save-entity'));
   cancelButton = element(by.id('cancel-save'));
-  barcodeTypeNameInput = element(by.id('field_barcodeTypeName'));
+  nameInput = element(by.id('field_name'));
 
   async getPageTitle() {
     return this.pageTitle.getAttribute('jhiTranslate');
   }
 
-  async setBarcodeTypeNameInput(barcodeTypeName) {
-    await this.barcodeTypeNameInput.sendKeys(barcodeTypeName);
+  async setNameInput(name) {
+    await this.nameInput.sendKeys(name);
   }
 
-  async getBarcodeTypeNameInput() {
-    return await this.barcodeTypeNameInput.getAttribute('value');
+  async getNameInput() {
+    return await this.nameInput.getAttribute('value');
   }
 
   async save(timeout?: number) {

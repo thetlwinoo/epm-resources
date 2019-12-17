@@ -13,11 +13,11 @@ public interface ProductsMapper extends EntityMapper<ProductsDTO, Products> {
 
     @Mapping(source = "productDocument.id", target = "productDocumentId")
     @Mapping(source = "supplier.id", target = "supplierId")
-    @Mapping(source = "supplier.supplierName", target = "supplierSupplierName")
+    @Mapping(source = "supplier.name", target = "supplierName")
     @Mapping(source = "productCategory.id", target = "productCategoryId")
     @Mapping(source = "productCategory.name", target = "productCategoryName")
     @Mapping(source = "productBrand.id", target = "productBrandId")
-    @Mapping(source = "productBrand.productBrandName", target = "productBrandProductBrandName")
+    @Mapping(source = "productBrand.name", target = "productBrandName")
     ProductsDTO toDto(Products products);
 
     @Mapping(source = "productDocumentId", target = "productDocument")

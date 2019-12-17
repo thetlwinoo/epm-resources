@@ -26,18 +26,18 @@ export class UploadActionTypesUpdatePage {
   pageTitle = element(by.id('jhi-upload-action-types-heading'));
   saveButton = element(by.id('save-entity'));
   cancelButton = element(by.id('cancel-save'));
-  actionTypeNameInput = element(by.id('field_actionTypeName'));
+  nameInput = element(by.id('field_name'));
 
   async getPageTitle() {
     return this.pageTitle.getAttribute('jhiTranslate');
   }
 
-  async setActionTypeNameInput(actionTypeName) {
-    await this.actionTypeNameInput.sendKeys(actionTypeName);
+  async setNameInput(name) {
+    await this.nameInput.sendKeys(name);
   }
 
-  async getActionTypeNameInput() {
-    return await this.actionTypeNameInput.getAttribute('value');
+  async getNameInput() {
+    return await this.nameInput.getAttribute('value');
   }
 
   async save(timeout?: number) {

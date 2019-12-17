@@ -33,6 +33,8 @@ public class ReviewLinesCriteria implements Serializable, Criteria {
 
     private IntegerFilter deliveryRating;
 
+    private StringFilter thumbnailUrl;
+
     private StringFilter lastEditedBy;
 
     private InstantFilter lastEditedWhen;
@@ -49,6 +51,7 @@ public class ReviewLinesCriteria implements Serializable, Criteria {
         this.productRating = other.productRating == null ? null : other.productRating.copy();
         this.sellerRating = other.sellerRating == null ? null : other.sellerRating.copy();
         this.deliveryRating = other.deliveryRating == null ? null : other.deliveryRating.copy();
+        this.thumbnailUrl = other.thumbnailUrl == null ? null : other.thumbnailUrl.copy();
         this.lastEditedBy = other.lastEditedBy == null ? null : other.lastEditedBy.copy();
         this.lastEditedWhen = other.lastEditedWhen == null ? null : other.lastEditedWhen.copy();
         this.stockItemId = other.stockItemId == null ? null : other.stockItemId.copy();
@@ -90,6 +93,14 @@ public class ReviewLinesCriteria implements Serializable, Criteria {
 
     public void setDeliveryRating(IntegerFilter deliveryRating) {
         this.deliveryRating = deliveryRating;
+    }
+
+    public StringFilter getThumbnailUrl() {
+        return thumbnailUrl;
+    }
+
+    public void setThumbnailUrl(StringFilter thumbnailUrl) {
+        this.thumbnailUrl = thumbnailUrl;
     }
 
     public StringFilter getLastEditedBy() {
@@ -139,6 +150,7 @@ public class ReviewLinesCriteria implements Serializable, Criteria {
             Objects.equals(productRating, that.productRating) &&
             Objects.equals(sellerRating, that.sellerRating) &&
             Objects.equals(deliveryRating, that.deliveryRating) &&
+            Objects.equals(thumbnailUrl, that.thumbnailUrl) &&
             Objects.equals(lastEditedBy, that.lastEditedBy) &&
             Objects.equals(lastEditedWhen, that.lastEditedWhen) &&
             Objects.equals(stockItemId, that.stockItemId) &&
@@ -152,6 +164,7 @@ public class ReviewLinesCriteria implements Serializable, Criteria {
         productRating,
         sellerRating,
         deliveryRating,
+        thumbnailUrl,
         lastEditedBy,
         lastEditedWhen,
         stockItemId,
@@ -166,6 +179,7 @@ public class ReviewLinesCriteria implements Serializable, Criteria {
                 (productRating != null ? "productRating=" + productRating + ", " : "") +
                 (sellerRating != null ? "sellerRating=" + sellerRating + ", " : "") +
                 (deliveryRating != null ? "deliveryRating=" + deliveryRating + ", " : "") +
+                (thumbnailUrl != null ? "thumbnailUrl=" + thumbnailUrl + ", " : "") +
                 (lastEditedBy != null ? "lastEditedBy=" + lastEditedBy + ", " : "") +
                 (lastEditedWhen != null ? "lastEditedWhen=" + lastEditedWhen + ", " : "") +
                 (stockItemId != null ? "stockItemId=" + stockItemId + ", " : "") +

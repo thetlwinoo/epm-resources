@@ -12,7 +12,7 @@ public class CompareProductsDTO implements Serializable {
 
     private Long productId;
 
-    private String productProductName;
+    private String productName;
 
     private Long compareId;
 
@@ -32,12 +32,12 @@ public class CompareProductsDTO implements Serializable {
         this.productId = productsId;
     }
 
-    public String getProductProductName() {
-        return productProductName;
+    public String getProductName() {
+        return productName;
     }
 
-    public void setProductProductName(String productsProductName) {
-        this.productProductName = productsProductName;
+    public void setProductName(String productsName) {
+        this.productName = productsName;
     }
 
     public Long getCompareId() {
@@ -74,7 +74,7 @@ public class CompareProductsDTO implements Serializable {
         return "CompareProductsDTO{" +
             "id=" + getId() +
             ", product=" + getProductId() +
-            ", product='" + getProductProductName() + "'" +
+            ", product='" + getProductName() + "'" +
             ", compare=" + getCompareId() +
             "}";
     }

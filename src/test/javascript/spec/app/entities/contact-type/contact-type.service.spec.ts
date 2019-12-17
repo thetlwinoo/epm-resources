@@ -56,7 +56,7 @@ describe('Service Tests', () => {
       it('should update a ContactType', () => {
         const returnedFromService = Object.assign(
           {
-            contactTypeName: 'BBBBBB'
+            name: 'BBBBBB'
           },
           elemDefault
         );
@@ -74,7 +74,7 @@ describe('Service Tests', () => {
       it('should return a list of ContactType', () => {
         const returnedFromService = Object.assign(
           {
-            contactTypeName: 'BBBBBB'
+            name: 'BBBBBB'
           },
           elemDefault
         );

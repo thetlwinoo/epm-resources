@@ -28,8 +28,8 @@ public class Products implements Serializable {
     private Long id;
 
     @NotNull
-    @Column(name = "product_name", nullable = false)
-    private String productName;
+    @Column(name = "name", nullable = false)
+    private String name;
 
     @Column(name = "handle")
     private String handle;
@@ -45,6 +45,9 @@ public class Products implements Serializable {
     @Column(name = "sell_count")
     private Integer sellCount;
 
+    @Column(name = "thumbnail_list")
+    private String thumbnailList;
+
     @Column(name = "active_ind")
     private Boolean activeInd;
 
@@ -54,7 +57,7 @@ public class Products implements Serializable {
     @Column(name = "last_edited_when")
     private Instant lastEditedWhen;
 
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne
     @JoinColumn(unique = true)
     private ProductDocument productDocument;
 
@@ -83,17 +86,17 @@ public class Products implements Serializable {
         this.id = id;
     }
 
-    public String getProductName() {
-        return productName;
+    public String getName() {
+        return name;
     }
 
-    public Products productName(String productName) {
-        this.productName = productName;
+    public Products name(String name) {
+        this.name = name;
         return this;
     }
 
-    public void setProductName(String productName) {
-        this.productName = productName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getHandle() {
@@ -146,6 +149,19 @@ public class Products implements Serializable {
 
     public void setSellCount(Integer sellCount) {
         this.sellCount = sellCount;
+    }
+
+    public String getThumbnailList() {
+        return thumbnailList;
+    }
+
+    public Products thumbnailList(String thumbnailList) {
+        this.thumbnailList = thumbnailList;
+        return this;
+    }
+
+    public void setThumbnailList(String thumbnailList) {
+        this.thumbnailList = thumbnailList;
     }
 
     public Boolean isActiveInd() {
@@ -285,11 +301,12 @@ public class Products implements Serializable {
     public String toString() {
         return "Products{" +
             "id=" + getId() +
-            ", productName='" + getProductName() + "'" +
+            ", name='" + getName() + "'" +
             ", handle='" + getHandle() + "'" +
             ", productNumber='" + getProductNumber() + "'" +
             ", searchDetails='" + getSearchDetails() + "'" +
             ", sellCount=" + getSellCount() +
+            ", thumbnailList='" + getThumbnailList() + "'" +
             ", activeInd='" + isActiveInd() + "'" +
             ", lastEditedBy='" + getLastEditedBy() + "'" +
             ", lastEditedWhen='" + getLastEditedWhen() + "'" +

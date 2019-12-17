@@ -5,20 +5,20 @@
             <hr>
             <jhi-alert-error></jhi-alert-error>
             <dl class="row-md jh-entity-details">
-                <dt><span jhiTranslate="epmresourcesApp.productOption.productOptionValue">Product Option Value</span></dt>
+                <dt><span jhiTranslate="epmresourcesApp.productOption.value">Value</span></dt>
                 <dd>
-                    <span>{{productOption.productOptionValue}}</span>
+                    <span>{{productOption.value}}</span>
                 </dd>
                 <dt><span jhiTranslate="epmresourcesApp.productOption.productOptionSet">Product Option Set</span></dt>
                 <dd>
                     <div *ngIf="productOption.productOptionSetId">
-                        <a [routerLink]="['/product-option-set', productOption.productOptionSetId, 'view']">{{productOption.productOptionSetProductOptionSetValue}}</a>
+                        <a [routerLink]="['/product-option-set', productOption.productOptionSetId, 'view']">{{productOption.productOptionSetValue}}</a>
                     </div>
                 </dd>
                 <dt><span jhiTranslate="epmresourcesApp.productOption.supplier">Supplier</span></dt>
                 <dd>
                     <div *ngIf="productOption.supplierId">
-                        <a [routerLink]="['/suppliers', productOption.supplierId, 'view']">{{productOption.supplierId}}</a>
+                        <a [routerLink]="['/suppliers', productOption.supplierId, 'view']">{{productOption.supplierName}}</a>
                     </div>
                 </dd>
             </dl>

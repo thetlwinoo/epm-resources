@@ -12,7 +12,7 @@ public class WishlistProductsDTO implements Serializable {
 
     private Long productId;
 
-    private String productProductName;
+    private String productName;
 
     private Long wishlistId;
 
@@ -32,12 +32,12 @@ public class WishlistProductsDTO implements Serializable {
         this.productId = productsId;
     }
 
-    public String getProductProductName() {
-        return productProductName;
+    public String getProductName() {
+        return productName;
     }
 
-    public void setProductProductName(String productsProductName) {
-        this.productProductName = productsProductName;
+    public void setProductName(String productsName) {
+        this.productName = productsName;
     }
 
     public Long getWishlistId() {
@@ -74,7 +74,7 @@ public class WishlistProductsDTO implements Serializable {
         return "WishlistProductsDTO{" +
             "id=" + getId() +
             ", product=" + getProductId() +
-            ", product='" + getProductProductName() + "'" +
+            ", product='" + getProductName() + "'" +
             ", wishlist=" + getWishlistId() +
             "}";
     }

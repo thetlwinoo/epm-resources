@@ -2,7 +2,7 @@
     "name": "Countries",
     "fields": [
         {
-            "fieldName": "countryName",
+            "fieldName": "name",
             "fieldType": "String",
             "fieldValidateRules": [
                 "required"

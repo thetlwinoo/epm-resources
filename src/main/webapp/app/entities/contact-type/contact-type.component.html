@@ -19,14 +19,14 @@
             <thead>
             <tr>
             <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
-            <th scope="col" ><span jhiTranslate="epmresourcesApp.contactType.contactTypeName">Contact Type Name</span></th>
+            <th scope="col" ><span jhiTranslate="epmresourcesApp.contactType.name">Name</span></th>
             <th scope="col"></th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let contactType of contactTypes ;trackBy: trackId">
                 <td><a [routerLink]="['/contact-type', contactType.id, 'view' ]">{{contactType.id}}</a></td>
-                <td>{{contactType.contactTypeName}}</td>
+                <td>{{contactType.name}}</td>
                 <td class="text-right">
                     <div class="btn-group">
                         <button type="submit"

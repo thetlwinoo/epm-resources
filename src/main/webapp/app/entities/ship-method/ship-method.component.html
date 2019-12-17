@@ -19,14 +19,14 @@
             <thead>
             <tr>
             <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
-            <th scope="col" ><span jhiTranslate="epmresourcesApp.shipMethod.shipMethodName">Ship Method Name</span></th>
+            <th scope="col" ><span jhiTranslate="epmresourcesApp.shipMethod.name">Name</span></th>
             <th scope="col"></th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let shipMethod of shipMethods ;trackBy: trackId">
                 <td><a [routerLink]="['/ship-method', shipMethod.id, 'view' ]">{{shipMethod.id}}</a></td>
-                <td>{{shipMethod.shipMethodName}}</td>
+                <td>{{shipMethod.name}}</td>
                 <td class="text-right">
                     <div class="btn-group">
                         <button type="submit"

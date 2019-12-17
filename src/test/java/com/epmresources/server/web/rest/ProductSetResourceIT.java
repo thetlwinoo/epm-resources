@@ -38,8 +38,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = EpmresourcesApp.class)
 public class ProductSetResourceIT {
 
-    private static final String DEFAULT_PRODUCT_SET_NAME = "AAAAAAAAAA";
-    private static final String UPDATED_PRODUCT_SET_NAME = "BBBBBBBBBB";
+    private static final String DEFAULT_NAME = "AAAAAAAAAA";
+    private static final String UPDATED_NAME = "BBBBBBBBBB";
 
     private static final Integer DEFAULT_NO_OF_PERSON = 1;
     private static final Integer UPDATED_NO_OF_PERSON = 2;
@@ -99,7 +99,7 @@ public class ProductSetResourceIT {
      */
     public static ProductSet createEntity(EntityManager em) {
         ProductSet productSet = new ProductSet()
-            .productSetName(DEFAULT_PRODUCT_SET_NAME)
+            .name(DEFAULT_NAME)
             .noOfPerson(DEFAULT_NO_OF_PERSON)
             .isExclusive(DEFAULT_IS_EXCLUSIVE);
         return productSet;
@@ -112,7 +112,7 @@ public class ProductSetResourceIT {
      */
     public static ProductSet createUpdatedEntity(EntityManager em) {
         ProductSet productSet = new ProductSet()
-            .productSetName(UPDATED_PRODUCT_SET_NAME)
+            .name(UPDATED_NAME)
             .noOfPerson(UPDATED_NO_OF_PERSON)
             .isExclusive(UPDATED_IS_EXCLUSIVE);
         return productSet;
@@ -139,7 +139,7 @@ public class ProductSetResourceIT {
         List<ProductSet> productSetList = productSetRepository.findAll();
         assertThat(productSetList).hasSize(databaseSizeBeforeCreate + 1);
         ProductSet testProductSet = productSetList.get(productSetList.size() - 1);
-        assertThat(testProductSet.getProductSetName()).isEqualTo(DEFAULT_PRODUCT_SET_NAME);
+        assertThat(testProductSet.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testProductSet.getNoOfPerson()).isEqualTo(DEFAULT_NO_OF_PERSON);
         assertThat(testProductSet.isIsExclusive()).isEqualTo(DEFAULT_IS_EXCLUSIVE);
     }
@@ -167,10 +167,10 @@ public class ProductSetResourceIT {
 
     @Test
     @Transactional
-    public void checkProductSetNameIsRequired() throws Exception {
+    public void checkNameIsRequired() throws Exception {
         int databaseSizeBeforeTest = productSetRepository.findAll().size();
         // set the field null
-        productSet.setProductSetName(null);
+        productSet.setName(null);
 
         // Create the ProductSet, which fails.
         ProductSetDTO productSetDTO = productSetMapper.toDto(productSet);
@@ -214,7 +214,7 @@ public class ProductSetResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(productSet.getId().intValue())))
-            .andExpect(jsonPath("$.[*].productSetName").value(hasItem(DEFAULT_PRODUCT_SET_NAME)))
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].noOfPerson").value(hasItem(DEFAULT_NO_OF_PERSON)))
             .andExpect(jsonPath("$.[*].isExclusive").value(hasItem(DEFAULT_IS_EXCLUSIVE.booleanValue())));
     }
@@ -230,86 +230,86 @@ public class ProductSetResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(productSet.getId().intValue()))
-            .andExpect(jsonPath("$.productSetName").value(DEFAULT_PRODUCT_SET_NAME))
+            .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
             .andExpect(jsonPath("$.noOfPerson").value(DEFAULT_NO_OF_PERSON))
             .andExpect(jsonPath("$.isExclusive").value(DEFAULT_IS_EXCLUSIVE.booleanValue()));
     }
 
     @Test
     @Transactional
-    public void getAllProductSetsByProductSetNameIsEqualToSomething() throws Exception {
+    public void getAllProductSetsByNameIsEqualToSomething() throws Exception {
         // Initialize the database
         productSetRepository.saveAndFlush(productSet);
 
-        // Get all the productSetList where productSetName equals to DEFAULT_PRODUCT_SET_NAME
-        defaultProductSetShouldBeFound("productSetName.equals=" + DEFAULT_PRODUCT_SET_NAME);
+        // Get all the productSetList where name equals to DEFAULT_NAME
+        defaultProductSetShouldBeFound("name.equals=" + DEFAULT_NAME);
 
-        // Get all the productSetList where productSetName equals to UPDATED_PRODUCT_SET_NAME
-        defaultProductSetShouldNotBeFound("productSetName.equals=" + UPDATED_PRODUCT_SET_NAME);
+        // Get all the productSetList where name equals to UPDATED_NAME
+        defaultProductSetShouldNotBeFound("name.equals=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllProductSetsByProductSetNameIsNotEqualToSomething() throws Exception {
+    public void getAllProductSetsByNameIsNotEqualToSomething() throws Exception {
         // Initialize the database
         productSetRepository.saveAndFlush(productSet);
 
-        // Get all the productSetList where productSetName not equals to DEFAULT_PRODUCT_SET_NAME
-        defaultProductSetShouldNotBeFound("productSetName.notEquals=" + DEFAULT_PRODUCT_SET_NAME);
+        // Get all the productSetList where name not equals to DEFAULT_NAME
+        defaultProductSetShouldNotBeFound("name.notEquals=" + DEFAULT_NAME);
 
-        // Get all the productSetList where productSetName not equals to UPDATED_PRODUCT_SET_NAME
-        defaultProductSetShouldBeFound("productSetName.notEquals=" + UPDATED_PRODUCT_SET_NAME);
+        // Get all the productSetList where name not equals to UPDATED_NAME
+        defaultProductSetShouldBeFound("name.notEquals=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllProductSetsByProductSetNameIsInShouldWork() throws Exception {
+    public void getAllProductSetsByNameIsInShouldWork() throws Exception {
         // Initialize the database
         productSetRepository.saveAndFlush(productSet);
 
-        // Get all the productSetList where productSetName in DEFAULT_PRODUCT_SET_NAME or UPDATED_PRODUCT_SET_NAME
-        defaultProductSetShouldBeFound("productSetName.in=" + DEFAULT_PRODUCT_SET_NAME + "," + UPDATED_PRODUCT_SET_NAME);
+        // Get all the productSetList where name in DEFAULT_NAME or UPDATED_NAME
+        defaultProductSetShouldBeFound("name.in=" + DEFAULT_NAME + "," + UPDATED_NAME);
 
-        // Get all the productSetList where productSetName equals to UPDATED_PRODUCT_SET_NAME
-        defaultProductSetShouldNotBeFound("productSetName.in=" + UPDATED_PRODUCT_SET_NAME);
+        // Get all the productSetList where name equals to UPDATED_NAME
+        defaultProductSetShouldNotBeFound("name.in=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllProductSetsByProductSetNameIsNullOrNotNull() throws Exception {
+    public void getAllProductSetsByNameIsNullOrNotNull() throws Exception {
         // Initialize the database
         productSetRepository.saveAndFlush(productSet);
 
-        // Get all the productSetList where productSetName is not null
-        defaultProductSetShouldBeFound("productSetName.specified=true");
+        // Get all the productSetList where name is not null
+        defaultProductSetShouldBeFound("name.specified=true");
 
-        // Get all the productSetList where productSetName is null
-        defaultProductSetShouldNotBeFound("productSetName.specified=false");
+        // Get all the productSetList where name is null
+        defaultProductSetShouldNotBeFound("name.specified=false");
     }
                 @Test
     @Transactional
-    public void getAllProductSetsByProductSetNameContainsSomething() throws Exception {
+    public void getAllProductSetsByNameContainsSomething() throws Exception {
         // Initialize the database
         productSetRepository.saveAndFlush(productSet);
 
-        // Get all the productSetList where productSetName contains DEFAULT_PRODUCT_SET_NAME
-        defaultProductSetShouldBeFound("productSetName.contains=" + DEFAULT_PRODUCT_SET_NAME);
+        // Get all the productSetList where name contains DEFAULT_NAME
+        defaultProductSetShouldBeFound("name.contains=" + DEFAULT_NAME);
 
-        // Get all the productSetList where productSetName contains UPDATED_PRODUCT_SET_NAME
-        defaultProductSetShouldNotBeFound("productSetName.contains=" + UPDATED_PRODUCT_SET_NAME);
+        // Get all the productSetList where name contains UPDATED_NAME
+        defaultProductSetShouldNotBeFound("name.contains=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllProductSetsByProductSetNameNotContainsSomething() throws Exception {
+    public void getAllProductSetsByNameNotContainsSomething() throws Exception {
         // Initialize the database
         productSetRepository.saveAndFlush(productSet);
 
-        // Get all the productSetList where productSetName does not contain DEFAULT_PRODUCT_SET_NAME
-        defaultProductSetShouldNotBeFound("productSetName.doesNotContain=" + DEFAULT_PRODUCT_SET_NAME);
+        // Get all the productSetList where name does not contain DEFAULT_NAME
+        defaultProductSetShouldNotBeFound("name.doesNotContain=" + DEFAULT_NAME);
 
-        // Get all the productSetList where productSetName does not contain UPDATED_PRODUCT_SET_NAME
-        defaultProductSetShouldBeFound("productSetName.doesNotContain=" + UPDATED_PRODUCT_SET_NAME);
+        // Get all the productSetList where name does not contain UPDATED_NAME
+        defaultProductSetShouldBeFound("name.doesNotContain=" + UPDATED_NAME);
     }
 
 
@@ -477,7 +477,7 @@ public class ProductSetResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(productSet.getId().intValue())))
-            .andExpect(jsonPath("$.[*].productSetName").value(hasItem(DEFAULT_PRODUCT_SET_NAME)))
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].noOfPerson").value(hasItem(DEFAULT_NO_OF_PERSON)))
             .andExpect(jsonPath("$.[*].isExclusive").value(hasItem(DEFAULT_IS_EXCLUSIVE.booleanValue())));
 
@@ -527,7 +527,7 @@ public class ProductSetResourceIT {
         // Disconnect from session so that the updates on updatedProductSet are not directly saved in db
         em.detach(updatedProductSet);
         updatedProductSet
-            .productSetName(UPDATED_PRODUCT_SET_NAME)
+            .name(UPDATED_NAME)
             .noOfPerson(UPDATED_NO_OF_PERSON)
             .isExclusive(UPDATED_IS_EXCLUSIVE);
         ProductSetDTO productSetDTO = productSetMapper.toDto(updatedProductSet);
@@ -541,7 +541,7 @@ public class ProductSetResourceIT {
         List<ProductSet> productSetList = productSetRepository.findAll();
         assertThat(productSetList).hasSize(databaseSizeBeforeUpdate);
         ProductSet testProductSet = productSetList.get(productSetList.size() - 1);
-        assertThat(testProductSet.getProductSetName()).isEqualTo(UPDATED_PRODUCT_SET_NAME);
+        assertThat(testProductSet.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testProductSet.getNoOfPerson()).isEqualTo(UPDATED_NO_OF_PERSON);
         assertThat(testProductSet.isIsExclusive()).isEqualTo(UPDATED_IS_EXCLUSIVE);
     }

@@ -19,7 +19,7 @@ export class BuyingGroupsUpdateComponent implements OnInit {
 
   editForm = this.fb.group({
     id: [],
-    buyingGroupName: [],
+    name: [],
     validFrom: [null, [Validators.required]],
     validTo: [null, [Validators.required]]
   });
@@ -36,7 +36,7 @@ export class BuyingGroupsUpdateComponent implements OnInit {
   updateForm(buyingGroups: IBuyingGroups) {
     this.editForm.patchValue({
       id: buyingGroups.id,
-      buyingGroupName: buyingGroups.buyingGroupName,
+      name: buyingGroups.name,
       validFrom: buyingGroups.validFrom != null ? buyingGroups.validFrom.format(DATE_TIME_FORMAT) : null,
       validTo: buyingGroups.validTo != null ? buyingGroups.validTo.format(DATE_TIME_FORMAT) : null
     });
@@ -60,7 +60,7 @@ export class BuyingGroupsUpdateComponent implements OnInit {
     return {
       ...new BuyingGroups(),
       id: this.editForm.get(['id']).value,
-      buyingGroupName: this.editForm.get(['buyingGroupName']).value,
+      name: this.editForm.get(['name']).value,
       validFrom:
         this.editForm.get(['validFrom']).value != null ? moment(this.editForm.get(['validFrom']).value, DATE_TIME_FORMAT) : undefined,
       validTo: this.editForm.get(['validTo']).value != null ? moment(this.editForm.get(['validTo']).value, DATE_TIME_FORMAT) : undefined

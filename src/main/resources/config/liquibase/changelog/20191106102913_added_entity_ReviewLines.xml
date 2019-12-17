@@ -33,10 +33,7 @@
             <column name="delivery_review" type="${clobType}">
                 <constraints nullable="true" />
             </column>
-            <column name="photo" type="longblob">
-                <constraints nullable="true" />
-            </column>
-            <column name="photo_content_type" type="varchar(255)">
+            <column name="thumbnail_url" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <column name="last_edited_by" type="varchar(255)">
@@ -78,8 +75,7 @@
             <column name="seller_review" type="clob"/>
             <column name="delivery_rating" type="numeric"/>
             <column name="delivery_review" type="clob"/>
-            <column name="photo" type="blob"/>
-            <column name="photo_content_type" type="string"/>
+            <column name="thumbnail_url" type="string"/>
             <column name="last_edited_by" type="string"/>
             <column name="last_edited_when" type="datetime"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here, do not remove-->

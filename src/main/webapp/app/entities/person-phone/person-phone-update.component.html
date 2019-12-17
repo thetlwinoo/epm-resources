@@ -42,7 +42,7 @@
                     <label class="form-control-label" jhiTranslate="epmresourcesApp.personPhone.phoneNumberType" for="field_phoneNumberType">Phone Number Type</label>
                     <select class="form-control" id="field_phoneNumberType" name="phoneNumberType" formControlName="phoneNumberTypeId">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="phoneNumberTypeOption.id" *ngFor="let phoneNumberTypeOption of phonenumbertypes; trackBy: trackPhoneNumberTypeById">{{phoneNumberTypeOption.phoneNumberTypeName}}</option>
+                        <option [ngValue]="phoneNumberTypeOption.id" *ngFor="let phoneNumberTypeOption of phonenumbertypes; trackBy: trackPhoneNumberTypeById">{{phoneNumberTypeOption.name}}</option>
                     </select>
                 </div>
             </div>

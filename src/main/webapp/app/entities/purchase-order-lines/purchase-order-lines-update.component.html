@@ -10,16 +10,16 @@
                         readonly />
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="epmresourcesApp.purchaseOrderLines.ordersOuters" for="field_ordersOuters">Orders Outers</label>
-                    <input type="number" class="form-control" name="ordersOuters" id="field_ordersOuters"
-                           formControlName="ordersOuters"/>
-                    <div *ngIf="editForm.get('ordersOuters').invalid && (editForm.get('ordersOuters').dirty || editForm.get('ordersOuters').touched)">
+                    <label class="form-control-label" jhiTranslate="epmresourcesApp.purchaseOrderLines.orderedOuters" for="field_orderedOuters">Ordered Outers</label>
+                    <input type="number" class="form-control" name="orderedOuters" id="field_orderedOuters"
+                           formControlName="orderedOuters"/>
+                    <div *ngIf="editForm.get('orderedOuters').invalid && (editForm.get('orderedOuters').dirty || editForm.get('orderedOuters').touched)">
                         <small class="form-text text-danger"
-                               *ngIf="editForm.get('ordersOuters').errors.required" jhiTranslate="entity.validation.required">
+                               *ngIf="editForm.get('orderedOuters').errors.required" jhiTranslate="entity.validation.required">
                         This field is required.
                         </small>
                         <small class="form-text text-danger"
-                            [hidden]="!editForm.get('ordersOuters')?.errors?.number" jhiTranslate="entity.validation.number">
+                            [hidden]="!editForm.get('orderedOuters')?.errors?.number" jhiTranslate="entity.validation.number">
                             This field should be a number.
                         </small>
                     </div>
@@ -28,11 +28,27 @@
                     <label class="form-control-label" jhiTranslate="epmresourcesApp.purchaseOrderLines.description" for="field_description">Description</label>
                     <input type="text" class="form-control" name="description" id="field_description"
                            formControlName="description"/>
+                    <div *ngIf="editForm.get('description').invalid && (editForm.get('description').dirty || editForm.get('description').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('description').errors.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="epmresourcesApp.purchaseOrderLines.receivedOuters" for="field_receivedOuters">Received Outers</label>
                     <input type="number" class="form-control" name="receivedOuters" id="field_receivedOuters"
                            formControlName="receivedOuters"/>
+                    <div *ngIf="editForm.get('receivedOuters').invalid && (editForm.get('receivedOuters').dirty || editForm.get('receivedOuters').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('receivedOuters').errors.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('receivedOuters')?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="epmresourcesApp.purchaseOrderLines.expectedUnitPricePerOuter" for="field_expectedUnitPricePerOuter">Expected Unit Price Per Outer</label>
@@ -49,6 +65,12 @@
                     <label class="form-control-label" jhiTranslate="epmresourcesApp.purchaseOrderLines.isOrderLineFinalized" for="field_isOrderLineFinalized">Is Order Line Finalized</label>
                     <input type="checkbox" class="form-control" name="isOrderLineFinalized" id="field_isOrderLineFinalized"
                            formControlName="isOrderLineFinalized"/>
+                    <div *ngIf="editForm.get('isOrderLineFinalized').invalid && (editForm.get('isOrderLineFinalized').dirty || editForm.get('isOrderLineFinalized').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('isOrderLineFinalized').errors.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="epmresourcesApp.purchaseOrderLines.lastEditedBy" for="field_lastEditedBy">Last Edited By</label>
@@ -66,14 +88,14 @@
                     <label class="form-control-label" jhiTranslate="epmresourcesApp.purchaseOrderLines.packageType" for="field_packageType">Package Type</label>
                     <select class="form-control" id="field_packageType" name="packageType" formControlName="packageTypeId">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="packageTypesOption.id" *ngFor="let packageTypesOption of packagetypes; trackBy: trackPackageTypesById">{{packageTypesOption.packageTypeName}}</option>
+                        <option [ngValue]="packageTypesOption.id" *ngFor="let packageTypesOption of packagetypes; trackBy: trackPackageTypesById">{{packageTypesOption.name}}</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="epmresourcesApp.purchaseOrderLines.stockItem" for="field_stockItem">Stock Item</label>
                     <select class="form-control" id="field_stockItem" name="stockItem" formControlName="stockItemId">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="stockItemsOption.id" *ngFor="let stockItemsOption of stockitems; trackBy: trackStockItemsById">{{stockItemsOption.stockItemName}}</option>
+                        <option [ngValue]="stockItemsOption.id" *ngFor="let stockItemsOption of stockitems; trackBy: trackStockItemsById">{{stockItemsOption.name}}</option>
                     </select>
                 </div>
                 <div class="form-group">

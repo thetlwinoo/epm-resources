@@ -11,7 +11,7 @@ public class MaterialsDTO implements Serializable {
     private Long id;
 
     @NotNull
-    private String materialName;
+    private String name;
 
 
     public Long getId() {
@@ -22,12 +22,12 @@ public class MaterialsDTO implements Serializable {
         this.id = id;
     }
 
-    public String getMaterialName() {
-        return materialName;
+    public String getName() {
+        return name;
     }
 
-    public void setMaterialName(String materialName) {
-        this.materialName = materialName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
@@ -55,7 +55,7 @@ public class MaterialsDTO implements Serializable {
     public String toString() {
         return "MaterialsDTO{" +
             "id=" + getId() +
-            ", materialName='" + getMaterialName() + "'" +
+            ", name='" + getName() + "'" +
             "}";
     }
 }

@@ -13,12 +13,17 @@
             "fieldType": "String"
         },
         {
-            "fieldName": "photo",
-            "fieldType": "byte[]",
-            "fieldTypeBlobContent": "image"
+            "fieldName": "thumbnailUrl",
+            "fieldType": "String"
         }
     ],
     "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "photos",
+            "otherEntityRelationshipName": "productCategory",
+            "relationshipName": "photoList"
+        },
         {
             "relationshipType": "many-to-one",
             "otherEntityName": "productCategory",

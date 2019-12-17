@@ -14,8 +14,9 @@ export interface IOrderLines {
   status?: OrderLineStatus;
   lastEditedBy?: string;
   lastEditedWhen?: Moment;
-  stockItemStockItemName?: string;
+  stockItemName?: string;
   stockItemId?: number;
+  packageTypeName?: string;
   packageTypeId?: number;
   orderId?: number;
 }
@@ -34,8 +35,9 @@ export class OrderLines implements IOrderLines {
     public status?: OrderLineStatus,
     public lastEditedBy?: string,
     public lastEditedWhen?: Moment,
-    public stockItemStockItemName?: string,
+    public stockItemName?: string,
     public stockItemId?: number,
+    public packageTypeName?: string,
     public packageTypeId?: number,
     public orderId?: number
   ) {}

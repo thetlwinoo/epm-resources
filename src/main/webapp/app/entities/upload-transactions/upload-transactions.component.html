@@ -41,12 +41,12 @@
                 <td>{{uploadTransactions.lastEditedWhen | date:'medium'}}</td>
                 <td>
                     <div *ngIf="uploadTransactions.supplierId">
-                        <a [routerLink]="['/suppliers', uploadTransactions.supplierId , 'view' ]" >{{uploadTransactions.supplierSupplierName}}</a>
+                        <a [routerLink]="['/suppliers', uploadTransactions.supplierId , 'view' ]" >{{uploadTransactions.supplierName}}</a>
                     </div>
                 </td>
                 <td>
                     <div *ngIf="uploadTransactions.actionTypeId">
-                        <a [routerLink]="['/upload-action-types', uploadTransactions.actionTypeId , 'view' ]" >{{uploadTransactions.actionTypeActionTypeName}}</a>
+                        <a [routerLink]="['/upload-action-types', uploadTransactions.actionTypeId , 'view' ]" >{{uploadTransactions.actionTypeName}}</a>
                     </div>
                 </td>
                 <td class="text-right">

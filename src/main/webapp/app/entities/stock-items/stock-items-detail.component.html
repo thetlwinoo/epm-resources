@@ -5,9 +5,9 @@
             <hr>
             <jhi-alert-error></jhi-alert-error>
             <dl class="row-md jh-entity-details">
-                <dt><span jhiTranslate="epmresourcesApp.stockItems.stockItemName">Stock Item Name</span></dt>
+                <dt><span jhiTranslate="epmresourcesApp.stockItems.name">Name</span></dt>
                 <dd>
-                    <span>{{stockItems.stockItemName}}</span>
+                    <span>{{stockItems.name}}</span>
                 </dd>
                 <dt><span jhiTranslate="epmresourcesApp.stockItems.vendorCode">Vendor Code</span></dt>
                 <dd>
@@ -130,73 +130,73 @@
                 <dt><span jhiTranslate="epmresourcesApp.stockItems.itemLengthUnit">Item Length Unit</span></dt>
                 <dd>
                     <div *ngIf="stockItems.itemLengthUnitId">
-                        <a [routerLink]="['/unit-measure', stockItems.itemLengthUnitId, 'view']">{{stockItems.itemLengthUnitUnitMeasureCode}}</a>
+                        <a [routerLink]="['/unit-measure', stockItems.itemLengthUnitId, 'view']">{{stockItems.itemLengthUnitCode}}</a>
                     </div>
                 </dd>
                 <dt><span jhiTranslate="epmresourcesApp.stockItems.itemWidthUnit">Item Width Unit</span></dt>
                 <dd>
                     <div *ngIf="stockItems.itemWidthUnitId">
-                        <a [routerLink]="['/unit-measure', stockItems.itemWidthUnitId, 'view']">{{stockItems.itemWidthUnitUnitMeasureCode}}</a>
+                        <a [routerLink]="['/unit-measure', stockItems.itemWidthUnitId, 'view']">{{stockItems.itemWidthUnitCode}}</a>
                     </div>
                 </dd>
                 <dt><span jhiTranslate="epmresourcesApp.stockItems.itemHeightUnit">Item Height Unit</span></dt>
                 <dd>
                     <div *ngIf="stockItems.itemHeightUnitId">
-                        <a [routerLink]="['/unit-measure', stockItems.itemHeightUnitId, 'view']">{{stockItems.itemHeightUnitUnitMeasureCode}}</a>
+                        <a [routerLink]="['/unit-measure', stockItems.itemHeightUnitId, 'view']">{{stockItems.itemHeightUnitCode}}</a>
                     </div>
                 </dd>
                 <dt><span jhiTranslate="epmresourcesApp.stockItems.packageLengthUnit">Package Length Unit</span></dt>
                 <dd>
                     <div *ngIf="stockItems.packageLengthUnitId">
-                        <a [routerLink]="['/unit-measure', stockItems.packageLengthUnitId, 'view']">{{stockItems.packageLengthUnitUnitMeasureCode}}</a>
+                        <a [routerLink]="['/unit-measure', stockItems.packageLengthUnitId, 'view']">{{stockItems.packageLengthUnitCode}}</a>
                     </div>
                 </dd>
                 <dt><span jhiTranslate="epmresourcesApp.stockItems.packageWidthUnit">Package Width Unit</span></dt>
                 <dd>
                     <div *ngIf="stockItems.packageWidthUnitId">
-                        <a [routerLink]="['/unit-measure', stockItems.packageWidthUnitId, 'view']">{{stockItems.packageWidthUnitUnitMeasureCode}}</a>
+                        <a [routerLink]="['/unit-measure', stockItems.packageWidthUnitId, 'view']">{{stockItems.packageWidthUnitCode}}</a>
                     </div>
                 </dd>
                 <dt><span jhiTranslate="epmresourcesApp.stockItems.packageHeightUnit">Package Height Unit</span></dt>
                 <dd>
                     <div *ngIf="stockItems.packageHeightUnitId">
-                        <a [routerLink]="['/unit-measure', stockItems.packageHeightUnitId, 'view']">{{stockItems.packageHeightUnitUnitMeasureCode}}</a>
+                        <a [routerLink]="['/unit-measure', stockItems.packageHeightUnitId, 'view']">{{stockItems.packageHeightUnitCode}}</a>
                     </div>
                 </dd>
                 <dt><span jhiTranslate="epmresourcesApp.stockItems.itemPackageWeightUnit">Item Package Weight Unit</span></dt>
                 <dd>
                     <div *ngIf="stockItems.itemPackageWeightUnitId">
-                        <a [routerLink]="['/unit-measure', stockItems.itemPackageWeightUnitId, 'view']">{{stockItems.itemPackageWeightUnitUnitMeasureCode}}</a>
+                        <a [routerLink]="['/unit-measure', stockItems.itemPackageWeightUnitId, 'view']">{{stockItems.itemPackageWeightUnitCode}}</a>
                     </div>
                 </dd>
                 <dt><span jhiTranslate="epmresourcesApp.stockItems.productAttribute">Product Attribute</span></dt>
                 <dd>
                     <div *ngIf="stockItems.productAttributeId">
-                        <a [routerLink]="['/product-attribute', stockItems.productAttributeId, 'view']">{{stockItems.productAttributeProductAttributeValue}}</a>
+                        <a [routerLink]="['/product-attribute', stockItems.productAttributeId, 'view']">{{stockItems.productAttributeValue}}</a>
                     </div>
                 </dd>
                 <dt><span jhiTranslate="epmresourcesApp.stockItems.productOption">Product Option</span></dt>
                 <dd>
                     <div *ngIf="stockItems.productOptionId">
-                        <a [routerLink]="['/product-option', stockItems.productOptionId, 'view']">{{stockItems.productOptionProductOptionValue}}</a>
+                        <a [routerLink]="['/product-option', stockItems.productOptionId, 'view']">{{stockItems.productOptionValue}}</a>
                     </div>
                 </dd>
                 <dt><span jhiTranslate="epmresourcesApp.stockItems.material">Material</span></dt>
                 <dd>
                     <div *ngIf="stockItems.materialId">
-                        <a [routerLink]="['/materials', stockItems.materialId, 'view']">{{stockItems.materialMaterialName}}</a>
+                        <a [routerLink]="['/materials', stockItems.materialId, 'view']">{{stockItems.materialName}}</a>
                     </div>
                 </dd>
                 <dt><span jhiTranslate="epmresourcesApp.stockItems.currency">Currency</span></dt>
                 <dd>
                     <div *ngIf="stockItems.currencyId">
-                        <a [routerLink]="['/currency', stockItems.currencyId, 'view']">{{stockItems.currencyCurrencyCode}}</a>
+                        <a [routerLink]="['/currency', stockItems.currencyId, 'view']">{{stockItems.currencyCode}}</a>
                     </div>
                 </dd>
                 <dt><span jhiTranslate="epmresourcesApp.stockItems.barcodeType">Barcode Type</span></dt>
                 <dd>
                     <div *ngIf="stockItems.barcodeTypeId">
-                        <a [routerLink]="['/barcode-types', stockItems.barcodeTypeId, 'view']">{{stockItems.barcodeTypeBarcodeTypeName}}</a>
+                        <a [routerLink]="['/barcode-types', stockItems.barcodeTypeId, 'view']">{{stockItems.barcodeTypeName}}</a>
                     </div>
                 </dd>
                 <dt><span jhiTranslate="epmresourcesApp.stockItems.product">Product</span></dt>

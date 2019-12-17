@@ -74,7 +74,7 @@ describe('Service Tests', () => {
       it('should update a Cities', () => {
         const returnedFromService = Object.assign(
           {
-            cityName: 'BBBBBB',
+            name: 'BBBBBB',
             location: 'BBBBBB',
             latestRecordedPopulation: 1,
             validFrom: currentDate.format(DATE_TIME_FORMAT),
@@ -102,7 +102,7 @@ describe('Service Tests', () => {
       it('should return a list of Cities', () => {
         const returnedFromService = Object.assign(
           {
-            cityName: 'BBBBBB',
+            name: 'BBBBBB',
             location: 'BBBBBB',
             latestRecordedPopulation: 1,
             validFrom: currentDate.format(DATE_TIME_FORMAT),

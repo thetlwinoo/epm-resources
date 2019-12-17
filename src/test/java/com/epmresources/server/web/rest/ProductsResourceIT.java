@@ -46,8 +46,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = EpmresourcesApp.class)
 public class ProductsResourceIT {
 
-    private static final String DEFAULT_PRODUCT_NAME = "AAAAAAAAAA";
-    private static final String UPDATED_PRODUCT_NAME = "BBBBBBBBBB";
+    private static final String DEFAULT_NAME = "AAAAAAAAAA";
+    private static final String UPDATED_NAME = "BBBBBBBBBB";
 
     private static final String DEFAULT_HANDLE = "AAAAAAAAAA";
     private static final String UPDATED_HANDLE = "BBBBBBBBBB";
@@ -61,6 +61,9 @@ public class ProductsResourceIT {
     private static final Integer DEFAULT_SELL_COUNT = 1;
     private static final Integer UPDATED_SELL_COUNT = 2;
     private static final Integer SMALLER_SELL_COUNT = 1 - 1;
+
+    private static final String DEFAULT_THUMBNAIL_LIST = "AAAAAAAAAA";
+    private static final String UPDATED_THUMBNAIL_LIST = "BBBBBBBBBB";
 
     private static final Boolean DEFAULT_ACTIVE_IND = false;
     private static final Boolean UPDATED_ACTIVE_IND = true;
@@ -122,11 +125,12 @@ public class ProductsResourceIT {
      */
     public static Products createEntity(EntityManager em) {
         Products products = new Products()
-            .productName(DEFAULT_PRODUCT_NAME)
+            .name(DEFAULT_NAME)
             .handle(DEFAULT_HANDLE)
             .productNumber(DEFAULT_PRODUCT_NUMBER)
             .searchDetails(DEFAULT_SEARCH_DETAILS)
             .sellCount(DEFAULT_SELL_COUNT)
+            .thumbnailList(DEFAULT_THUMBNAIL_LIST)
             .activeInd(DEFAULT_ACTIVE_IND)
             .lastEditedBy(DEFAULT_LAST_EDITED_BY)
             .lastEditedWhen(DEFAULT_LAST_EDITED_WHEN);
@@ -140,11 +144,12 @@ public class ProductsResourceIT {
      */
     public static Products createUpdatedEntity(EntityManager em) {
         Products products = new Products()
-            .productName(UPDATED_PRODUCT_NAME)
+            .name(UPDATED_NAME)
             .handle(UPDATED_HANDLE)
             .productNumber(UPDATED_PRODUCT_NUMBER)
             .searchDetails(UPDATED_SEARCH_DETAILS)
             .sellCount(UPDATED_SELL_COUNT)
+            .thumbnailList(UPDATED_THUMBNAIL_LIST)
             .activeInd(UPDATED_ACTIVE_IND)
             .lastEditedBy(UPDATED_LAST_EDITED_BY)
             .lastEditedWhen(UPDATED_LAST_EDITED_WHEN);
@@ -172,11 +177,12 @@ public class ProductsResourceIT {
         List<Products> productsList = productsRepository.findAll();
         assertThat(productsList).hasSize(databaseSizeBeforeCreate + 1);
         Products testProducts = productsList.get(productsList.size() - 1);
-        assertThat(testProducts.getProductName()).isEqualTo(DEFAULT_PRODUCT_NAME);
+        assertThat(testProducts.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testProducts.getHandle()).isEqualTo(DEFAULT_HANDLE);
         assertThat(testProducts.getProductNumber()).isEqualTo(DEFAULT_PRODUCT_NUMBER);
         assertThat(testProducts.getSearchDetails()).isEqualTo(DEFAULT_SEARCH_DETAILS);
         assertThat(testProducts.getSellCount()).isEqualTo(DEFAULT_SELL_COUNT);
+        assertThat(testProducts.getThumbnailList()).isEqualTo(DEFAULT_THUMBNAIL_LIST);
         assertThat(testProducts.isActiveInd()).isEqualTo(DEFAULT_ACTIVE_IND);
         assertThat(testProducts.getLastEditedBy()).isEqualTo(DEFAULT_LAST_EDITED_BY);
         assertThat(testProducts.getLastEditedWhen()).isEqualTo(DEFAULT_LAST_EDITED_WHEN);
@@ -205,10 +211,10 @@ public class ProductsResourceIT {
 
     @Test
     @Transactional
-    public void checkProductNameIsRequired() throws Exception {
+    public void checkNameIsRequired() throws Exception {
         int databaseSizeBeforeTest = productsRepository.findAll().size();
         // set the field null
-        products.setProductName(null);
+        products.setName(null);
 
         // Create the Products, which fails.
         ProductsDTO productsDTO = productsMapper.toDto(products);
@@ -233,11 +239,12 @@ public class ProductsResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(products.getId().intValue())))
-            .andExpect(jsonPath("$.[*].productName").value(hasItem(DEFAULT_PRODUCT_NAME)))
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].handle").value(hasItem(DEFAULT_HANDLE)))
             .andExpect(jsonPath("$.[*].productNumber").value(hasItem(DEFAULT_PRODUCT_NUMBER)))
             .andExpect(jsonPath("$.[*].searchDetails").value(hasItem(DEFAULT_SEARCH_DETAILS.toString())))
             .andExpect(jsonPath("$.[*].sellCount").value(hasItem(DEFAULT_SELL_COUNT)))
+            .andExpect(jsonPath("$.[*].thumbnailList").value(hasItem(DEFAULT_THUMBNAIL_LIST)))
             .andExpect(jsonPath("$.[*].activeInd").value(hasItem(DEFAULT_ACTIVE_IND.booleanValue())))
             .andExpect(jsonPath("$.[*].lastEditedBy").value(hasItem(DEFAULT_LAST_EDITED_BY)))
             .andExpect(jsonPath("$.[*].lastEditedWhen").value(hasItem(DEFAULT_LAST_EDITED_WHEN.toString())));
@@ -254,11 +261,12 @@ public class ProductsResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(products.getId().intValue()))
-            .andExpect(jsonPath("$.productName").value(DEFAULT_PRODUCT_NAME))
+            .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
             .andExpect(jsonPath("$.handle").value(DEFAULT_HANDLE))
             .andExpect(jsonPath("$.productNumber").value(DEFAULT_PRODUCT_NUMBER))
             .andExpect(jsonPath("$.searchDetails").value(DEFAULT_SEARCH_DETAILS.toString()))
             .andExpect(jsonPath("$.sellCount").value(DEFAULT_SELL_COUNT))
+            .andExpect(jsonPath("$.thumbnailList").value(DEFAULT_THUMBNAIL_LIST))
             .andExpect(jsonPath("$.activeInd").value(DEFAULT_ACTIVE_IND.booleanValue()))
             .andExpect(jsonPath("$.lastEditedBy").value(DEFAULT_LAST_EDITED_BY))
             .andExpect(jsonPath("$.lastEditedWhen").value(DEFAULT_LAST_EDITED_WHEN.toString()));
@@ -266,79 +274,79 @@ public class ProductsResourceIT {
 
     @Test
     @Transactional
-    public void getAllProductsByProductNameIsEqualToSomething() throws Exception {
+    public void getAllProductsByNameIsEqualToSomething() throws Exception {
         // Initialize the database
         productsRepository.saveAndFlush(products);
 
-        // Get all the productsList where productName equals to DEFAULT_PRODUCT_NAME
-        defaultProductsShouldBeFound("productName.equals=" + DEFAULT_PRODUCT_NAME);
+        // Get all the productsList where name equals to DEFAULT_NAME
+        defaultProductsShouldBeFound("name.equals=" + DEFAULT_NAME);
 
-        // Get all the productsList where productName equals to UPDATED_PRODUCT_NAME
-        defaultProductsShouldNotBeFound("productName.equals=" + UPDATED_PRODUCT_NAME);
+        // Get all the productsList where name equals to UPDATED_NAME
+        defaultProductsShouldNotBeFound("name.equals=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllProductsByProductNameIsNotEqualToSomething() throws Exception {
+    public void getAllProductsByNameIsNotEqualToSomething() throws Exception {
         // Initialize the database
         productsRepository.saveAndFlush(products);
 
-        // Get all the productsList where productName not equals to DEFAULT_PRODUCT_NAME
-        defaultProductsShouldNotBeFound("productName.notEquals=" + DEFAULT_PRODUCT_NAME);
+        // Get all the productsList where name not equals to DEFAULT_NAME
+        defaultProductsShouldNotBeFound("name.notEquals=" + DEFAULT_NAME);
 
-        // Get all the productsList where productName not equals to UPDATED_PRODUCT_NAME
-        defaultProductsShouldBeFound("productName.notEquals=" + UPDATED_PRODUCT_NAME);
+        // Get all the productsList where name not equals to UPDATED_NAME
+        defaultProductsShouldBeFound("name.notEquals=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllProductsByProductNameIsInShouldWork() throws Exception {
+    public void getAllProductsByNameIsInShouldWork() throws Exception {
         // Initialize the database
         productsRepository.saveAndFlush(products);
 
-        // Get all the productsList where productName in DEFAULT_PRODUCT_NAME or UPDATED_PRODUCT_NAME
-        defaultProductsShouldBeFound("productName.in=" + DEFAULT_PRODUCT_NAME + "," + UPDATED_PRODUCT_NAME);
+        // Get all the productsList where name in DEFAULT_NAME or UPDATED_NAME
+        defaultProductsShouldBeFound("name.in=" + DEFAULT_NAME + "," + UPDATED_NAME);
 
-        // Get all the productsList where productName equals to UPDATED_PRODUCT_NAME
-        defaultProductsShouldNotBeFound("productName.in=" + UPDATED_PRODUCT_NAME);
+        // Get all the productsList where name equals to UPDATED_NAME
+        defaultProductsShouldNotBeFound("name.in=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllProductsByProductNameIsNullOrNotNull() throws Exception {
+    public void getAllProductsByNameIsNullOrNotNull() throws Exception {
         // Initialize the database
         productsRepository.saveAndFlush(products);
 
-        // Get all the productsList where productName is not null
-        defaultProductsShouldBeFound("productName.specified=true");
+        // Get all the productsList where name is not null
+        defaultProductsShouldBeFound("name.specified=true");
 
-        // Get all the productsList where productName is null
-        defaultProductsShouldNotBeFound("productName.specified=false");
+        // Get all the productsList where name is null
+        defaultProductsShouldNotBeFound("name.specified=false");
     }
                 @Test
     @Transactional
-    public void getAllProductsByProductNameContainsSomething() throws Exception {
+    public void getAllProductsByNameContainsSomething() throws Exception {
         // Initialize the database
         productsRepository.saveAndFlush(products);
 
-        // Get all the productsList where productName contains DEFAULT_PRODUCT_NAME
-        defaultProductsShouldBeFound("productName.contains=" + DEFAULT_PRODUCT_NAME);
+        // Get all the productsList where name contains DEFAULT_NAME
+        defaultProductsShouldBeFound("name.contains=" + DEFAULT_NAME);
 
-        // Get all the productsList where productName contains UPDATED_PRODUCT_NAME
-        defaultProductsShouldNotBeFound("productName.contains=" + UPDATED_PRODUCT_NAME);
+        // Get all the productsList where name contains UPDATED_NAME
+        defaultProductsShouldNotBeFound("name.contains=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllProductsByProductNameNotContainsSomething() throws Exception {
+    public void getAllProductsByNameNotContainsSomething() throws Exception {
         // Initialize the database
         productsRepository.saveAndFlush(products);
 
-        // Get all the productsList where productName does not contain DEFAULT_PRODUCT_NAME
-        defaultProductsShouldNotBeFound("productName.doesNotContain=" + DEFAULT_PRODUCT_NAME);
+        // Get all the productsList where name does not contain DEFAULT_NAME
+        defaultProductsShouldNotBeFound("name.doesNotContain=" + DEFAULT_NAME);
 
-        // Get all the productsList where productName does not contain UPDATED_PRODUCT_NAME
-        defaultProductsShouldBeFound("productName.doesNotContain=" + UPDATED_PRODUCT_NAME);
+        // Get all the productsList where name does not contain UPDATED_NAME
+        defaultProductsShouldBeFound("name.doesNotContain=" + UPDATED_NAME);
     }
 
 
@@ -600,6 +608,84 @@ public class ProductsResourceIT {
 
         // Get all the productsList where sellCount is greater than SMALLER_SELL_COUNT
         defaultProductsShouldBeFound("sellCount.greaterThan=" + SMALLER_SELL_COUNT);
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllProductsByThumbnailListIsEqualToSomething() throws Exception {
+        // Initialize the database
+        productsRepository.saveAndFlush(products);
+
+        // Get all the productsList where thumbnailList equals to DEFAULT_THUMBNAIL_LIST
+        defaultProductsShouldBeFound("thumbnailList.equals=" + DEFAULT_THUMBNAIL_LIST);
+
+        // Get all the productsList where thumbnailList equals to UPDATED_THUMBNAIL_LIST
+        defaultProductsShouldNotBeFound("thumbnailList.equals=" + UPDATED_THUMBNAIL_LIST);
+    }
+
+    @Test
+    @Transactional
+    public void getAllProductsByThumbnailListIsNotEqualToSomething() throws Exception {
+        // Initialize the database
+        productsRepository.saveAndFlush(products);
+
+        // Get all the productsList where thumbnailList not equals to DEFAULT_THUMBNAIL_LIST
+        defaultProductsShouldNotBeFound("thumbnailList.notEquals=" + DEFAULT_THUMBNAIL_LIST);
+
+        // Get all the productsList where thumbnailList not equals to UPDATED_THUMBNAIL_LIST
+        defaultProductsShouldBeFound("thumbnailList.notEquals=" + UPDATED_THUMBNAIL_LIST);
+    }
+
+    @Test
+    @Transactional
+    public void getAllProductsByThumbnailListIsInShouldWork() throws Exception {
+        // Initialize the database
+        productsRepository.saveAndFlush(products);
+
+        // Get all the productsList where thumbnailList in DEFAULT_THUMBNAIL_LIST or UPDATED_THUMBNAIL_LIST
+        defaultProductsShouldBeFound("thumbnailList.in=" + DEFAULT_THUMBNAIL_LIST + "," + UPDATED_THUMBNAIL_LIST);
+
+        // Get all the productsList where thumbnailList equals to UPDATED_THUMBNAIL_LIST
+        defaultProductsShouldNotBeFound("thumbnailList.in=" + UPDATED_THUMBNAIL_LIST);
+    }
+
+    @Test
+    @Transactional
+    public void getAllProductsByThumbnailListIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        productsRepository.saveAndFlush(products);
+
+        // Get all the productsList where thumbnailList is not null
+        defaultProductsShouldBeFound("thumbnailList.specified=true");
+
+        // Get all the productsList where thumbnailList is null
+        defaultProductsShouldNotBeFound("thumbnailList.specified=false");
+    }
+                @Test
+    @Transactional
+    public void getAllProductsByThumbnailListContainsSomething() throws Exception {
+        // Initialize the database
+        productsRepository.saveAndFlush(products);
+
+        // Get all the productsList where thumbnailList contains DEFAULT_THUMBNAIL_LIST
+        defaultProductsShouldBeFound("thumbnailList.contains=" + DEFAULT_THUMBNAIL_LIST);
+
+        // Get all the productsList where thumbnailList contains UPDATED_THUMBNAIL_LIST
+        defaultProductsShouldNotBeFound("thumbnailList.contains=" + UPDATED_THUMBNAIL_LIST);
+    }
+
+    @Test
+    @Transactional
+    public void getAllProductsByThumbnailListNotContainsSomething() throws Exception {
+        // Initialize the database
+        productsRepository.saveAndFlush(products);
+
+        // Get all the productsList where thumbnailList does not contain DEFAULT_THUMBNAIL_LIST
+        defaultProductsShouldNotBeFound("thumbnailList.doesNotContain=" + DEFAULT_THUMBNAIL_LIST);
+
+        // Get all the productsList where thumbnailList does not contain UPDATED_THUMBNAIL_LIST
+        defaultProductsShouldBeFound("thumbnailList.doesNotContain=" + UPDATED_THUMBNAIL_LIST);
     }
 
 
@@ -892,11 +978,12 @@ public class ProductsResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(products.getId().intValue())))
-            .andExpect(jsonPath("$.[*].productName").value(hasItem(DEFAULT_PRODUCT_NAME)))
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].handle").value(hasItem(DEFAULT_HANDLE)))
             .andExpect(jsonPath("$.[*].productNumber").value(hasItem(DEFAULT_PRODUCT_NUMBER)))
             .andExpect(jsonPath("$.[*].searchDetails").value(hasItem(DEFAULT_SEARCH_DETAILS.toString())))
             .andExpect(jsonPath("$.[*].sellCount").value(hasItem(DEFAULT_SELL_COUNT)))
+            .andExpect(jsonPath("$.[*].thumbnailList").value(hasItem(DEFAULT_THUMBNAIL_LIST)))
             .andExpect(jsonPath("$.[*].activeInd").value(hasItem(DEFAULT_ACTIVE_IND.booleanValue())))
             .andExpect(jsonPath("$.[*].lastEditedBy").value(hasItem(DEFAULT_LAST_EDITED_BY)))
             .andExpect(jsonPath("$.[*].lastEditedWhen").value(hasItem(DEFAULT_LAST_EDITED_WHEN.toString())));
@@ -947,11 +1034,12 @@ public class ProductsResourceIT {
         // Disconnect from session so that the updates on updatedProducts are not directly saved in db
         em.detach(updatedProducts);
         updatedProducts
-            .productName(UPDATED_PRODUCT_NAME)
+            .name(UPDATED_NAME)
             .handle(UPDATED_HANDLE)
             .productNumber(UPDATED_PRODUCT_NUMBER)
             .searchDetails(UPDATED_SEARCH_DETAILS)
             .sellCount(UPDATED_SELL_COUNT)
+            .thumbnailList(UPDATED_THUMBNAIL_LIST)
             .activeInd(UPDATED_ACTIVE_IND)
             .lastEditedBy(UPDATED_LAST_EDITED_BY)
             .lastEditedWhen(UPDATED_LAST_EDITED_WHEN);
@@ -966,11 +1054,12 @@ public class ProductsResourceIT {
         List<Products> productsList = productsRepository.findAll();
         assertThat(productsList).hasSize(databaseSizeBeforeUpdate);
         Products testProducts = productsList.get(productsList.size() - 1);
-        assertThat(testProducts.getProductName()).isEqualTo(UPDATED_PRODUCT_NAME);
+        assertThat(testProducts.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testProducts.getHandle()).isEqualTo(UPDATED_HANDLE);
         assertThat(testProducts.getProductNumber()).isEqualTo(UPDATED_PRODUCT_NUMBER);
         assertThat(testProducts.getSearchDetails()).isEqualTo(UPDATED_SEARCH_DETAILS);
         assertThat(testProducts.getSellCount()).isEqualTo(UPDATED_SELL_COUNT);
+        assertThat(testProducts.getThumbnailList()).isEqualTo(UPDATED_THUMBNAIL_LIST);
         assertThat(testProducts.isActiveInd()).isEqualTo(UPDATED_ACTIVE_IND);
         assertThat(testProducts.getLastEditedBy()).isEqualTo(UPDATED_LAST_EDITED_BY);
         assertThat(testProducts.getLastEditedWhen()).isEqualTo(UPDATED_LAST_EDITED_WHEN);

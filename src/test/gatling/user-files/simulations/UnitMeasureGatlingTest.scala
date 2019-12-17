@@ -72,8 +72,8 @@ class UnitMeasureGatlingTest extends Simulation {
             .headers(headers_http_authenticated)
             .body(StringBody("""{
                 "id":null
-                , "unitMeasureCode":"SAMPLE_TEXT"
-                , "unitMeasureName":"SAMPLE_TEXT"
+                , "code":"SAMPLE_TEXT"
+                , "name":"SAMPLE_TEXT"
                 }""")).asJson
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_unitMeasure_url"))).exitHereIfFailed

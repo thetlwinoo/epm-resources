@@ -26,7 +26,7 @@ export class PurchaseOrderLinesUpdatePage {
   pageTitle = element(by.id('jhi-purchase-order-lines-heading'));
   saveButton = element(by.id('save-entity'));
   cancelButton = element(by.id('cancel-save'));
-  ordersOutersInput = element(by.id('field_ordersOuters'));
+  orderedOutersInput = element(by.id('field_orderedOuters'));
   descriptionInput = element(by.id('field_description'));
   receivedOutersInput = element(by.id('field_receivedOuters'));
   expectedUnitPricePerOuterInput = element(by.id('field_expectedUnitPricePerOuter'));
@@ -42,12 +42,12 @@ export class PurchaseOrderLinesUpdatePage {
     return this.pageTitle.getAttribute('jhiTranslate');
   }
 
-  async setOrdersOutersInput(ordersOuters) {
-    await this.ordersOutersInput.sendKeys(ordersOuters);
+  async setOrderedOutersInput(orderedOuters) {
+    await this.orderedOutersInput.sendKeys(orderedOuters);
   }
 
-  async getOrdersOutersInput() {
-    return await this.ordersOutersInput.getAttribute('value');
+  async getOrderedOutersInput() {
+    return await this.orderedOutersInput.getAttribute('value');
   }
 
   async setDescriptionInput(description) {

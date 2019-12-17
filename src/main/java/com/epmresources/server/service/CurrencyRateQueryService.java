@@ -94,11 +94,11 @@ public class CurrencyRateQueryService extends QueryService<CurrencyRate> {
             if (criteria.getCurrencyRateDate() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getCurrencyRateDate(), CurrencyRate_.currencyRateDate));
             }
-            if (criteria.getFromCurrencyCode() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getFromCurrencyCode(), CurrencyRate_.fromCurrencyCode));
+            if (criteria.getFromcode() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getFromcode(), CurrencyRate_.fromcode));
             }
-            if (criteria.getToCurrencyCode() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getToCurrencyCode(), CurrencyRate_.toCurrencyCode));
+            if (criteria.getTocode() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getTocode(), CurrencyRate_.tocode));
             }
             if (criteria.getAverageRate() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getAverageRate(), CurrencyRate_.averageRate));

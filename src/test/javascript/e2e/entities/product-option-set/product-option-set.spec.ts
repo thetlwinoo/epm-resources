@@ -40,11 +40,8 @@ describe('ProductOptionSet e2e test', () => {
     const nbButtonsBeforeCreate = await productOptionSetComponentsPage.countDeleteButtons();
 
     await productOptionSetComponentsPage.clickOnCreateButton();
-    await promise.all([productOptionSetUpdatePage.setProductOptionSetValueInput('productOptionSetValue')]);
-    expect(await productOptionSetUpdatePage.getProductOptionSetValueInput()).to.eq(
-      'productOptionSetValue',
-      'Expected ProductOptionSetValue value to be equals to productOptionSetValue'
-    );
+    await promise.all([productOptionSetUpdatePage.setValueInput('value')]);
+    expect(await productOptionSetUpdatePage.getValueInput()).to.eq('value', 'Expected Value value to be equals to value');
     await productOptionSetUpdatePage.save();
     expect(await productOptionSetUpdatePage.getSaveButton().isPresent(), 'Expected save button disappear').to.be.false;
 

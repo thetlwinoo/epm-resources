@@ -72,7 +72,7 @@ class StockItemsGatlingTest extends Simulation {
             .headers(headers_http_authenticated)
             .body(StringBody("""{
                 "id":null
-                , "stockItemName":"SAMPLE_TEXT"
+                , "name":"SAMPLE_TEXT"
                 , "vendorCode":"SAMPLE_TEXT"
                 , "vendorSKU":"SAMPLE_TEXT"
                 , "generatedSKU":"SAMPLE_TEXT"

@@ -3,8 +3,8 @@ import { Moment } from 'moment';
 export interface ICurrencyRate {
   id?: number;
   currencyRateDate?: Moment;
-  fromCurrencyCode?: string;
-  toCurrencyCode?: string;
+  fromcode?: string;
+  tocode?: string;
   averageRate?: number;
   endOfDayRate?: number;
   lastEditedBy?: string;
@@ -15,8 +15,8 @@ export class CurrencyRate implements ICurrencyRate {
   constructor(
     public id?: number,
     public currencyRateDate?: Moment,
-    public fromCurrencyCode?: string,
-    public toCurrencyCode?: string,
+    public fromcode?: string,
+    public tocode?: string,
     public averageRate?: number,
     public endOfDayRate?: number,
     public lastEditedBy?: string,

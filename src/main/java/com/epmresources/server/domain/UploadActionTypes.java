@@ -21,8 +21,8 @@ public class UploadActionTypes implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    @Column(name = "action_type_name")
-    private String actionTypeName;
+    @Column(name = "name")
+    private String name;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -33,17 +33,17 @@ public class UploadActionTypes implements Serializable {
         this.id = id;
     }
 
-    public String getActionTypeName() {
-        return actionTypeName;
+    public String getName() {
+        return name;
     }
 
-    public UploadActionTypes actionTypeName(String actionTypeName) {
-        this.actionTypeName = actionTypeName;
+    public UploadActionTypes name(String name) {
+        this.name = name;
         return this;
     }
 
-    public void setActionTypeName(String actionTypeName) {
-        this.actionTypeName = actionTypeName;
+    public void setName(String name) {
+        this.name = name;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -67,7 +67,7 @@ public class UploadActionTypes implements Serializable {
     public String toString() {
         return "UploadActionTypes{" +
             "id=" + getId() +
-            ", actionTypeName='" + getActionTypeName() + "'" +
+            ", name='" + getName() + "'" +
             "}";
     }
 }

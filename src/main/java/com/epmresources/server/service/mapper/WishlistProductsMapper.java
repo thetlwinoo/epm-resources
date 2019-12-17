@@ -12,7 +12,7 @@ import org.mapstruct.*;
 public interface WishlistProductsMapper extends EntityMapper<WishlistProductsDTO, WishlistProducts> {
 
     @Mapping(source = "product.id", target = "productId")
-    @Mapping(source = "product.productName", target = "productProductName")
+    @Mapping(source = "product.name", target = "productName")
     @Mapping(source = "wishlist.id", target = "wishlistId")
     WishlistProductsDTO toDto(WishlistProducts wishlistProducts);
 

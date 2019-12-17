@@ -16,7 +16,7 @@
       "detail": {
         "title": "Supplier Categories"
       },
-      "supplierCategoryName": "Supplier Category Name",
+      "name": "Name",
       "validFrom": "Valid From",
       "validTo": "Valid To"
     }

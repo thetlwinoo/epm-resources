@@ -26,7 +26,7 @@ public class ProductOptionCriteria implements Serializable, Criteria {
 
     private LongFilter id;
 
-    private StringFilter productOptionValue;
+    private StringFilter value;
 
     private LongFilter productOptionSetId;
 
@@ -37,7 +37,7 @@ public class ProductOptionCriteria implements Serializable, Criteria {
 
     public ProductOptionCriteria(ProductOptionCriteria other){
         this.id = other.id == null ? null : other.id.copy();
-        this.productOptionValue = other.productOptionValue == null ? null : other.productOptionValue.copy();
+        this.value = other.value == null ? null : other.value.copy();
         this.productOptionSetId = other.productOptionSetId == null ? null : other.productOptionSetId.copy();
         this.supplierId = other.supplierId == null ? null : other.supplierId.copy();
     }
@@ -55,12 +55,12 @@ public class ProductOptionCriteria implements Serializable, Criteria {
         this.id = id;
     }
 
-    public StringFilter getProductOptionValue() {
-        return productOptionValue;
+    public StringFilter getValue() {
+        return value;
     }
 
-    public void setProductOptionValue(StringFilter productOptionValue) {
-        this.productOptionValue = productOptionValue;
+    public void setValue(StringFilter value) {
+        this.value = value;
     }
 
     public LongFilter getProductOptionSetId() {
@@ -91,7 +91,7 @@ public class ProductOptionCriteria implements Serializable, Criteria {
         final ProductOptionCriteria that = (ProductOptionCriteria) o;
         return
             Objects.equals(id, that.id) &&
-            Objects.equals(productOptionValue, that.productOptionValue) &&
+            Objects.equals(value, that.value) &&
             Objects.equals(productOptionSetId, that.productOptionSetId) &&
             Objects.equals(supplierId, that.supplierId);
     }
@@ -100,7 +100,7 @@ public class ProductOptionCriteria implements Serializable, Criteria {
     public int hashCode() {
         return Objects.hash(
         id,
-        productOptionValue,
+        value,
         productOptionSetId,
         supplierId
         );
@@ -110,7 +110,7 @@ public class ProductOptionCriteria implements Serializable, Criteria {
     public String toString() {
         return "ProductOptionCriteria{" +
                 (id != null ? "id=" + id + ", " : "") +
-                (productOptionValue != null ? "productOptionValue=" + productOptionValue + ", " : "") +
+                (value != null ? "value=" + value + ", " : "") +
                 (productOptionSetId != null ? "productOptionSetId=" + productOptionSetId + ", " : "") +
                 (supplierId != null ? "supplierId=" + supplierId + ", " : "") +
             "}";

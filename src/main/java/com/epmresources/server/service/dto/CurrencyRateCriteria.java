@@ -30,9 +30,9 @@ public class CurrencyRateCriteria implements Serializable, Criteria {
 
     private InstantFilter currencyRateDate;
 
-    private StringFilter fromCurrencyCode;
+    private StringFilter fromcode;
 
-    private StringFilter toCurrencyCode;
+    private StringFilter tocode;
 
     private BigDecimalFilter averageRate;
 
@@ -48,8 +48,8 @@ public class CurrencyRateCriteria implements Serializable, Criteria {
     public CurrencyRateCriteria(CurrencyRateCriteria other){
         this.id = other.id == null ? null : other.id.copy();
         this.currencyRateDate = other.currencyRateDate == null ? null : other.currencyRateDate.copy();
-        this.fromCurrencyCode = other.fromCurrencyCode == null ? null : other.fromCurrencyCode.copy();
-        this.toCurrencyCode = other.toCurrencyCode == null ? null : other.toCurrencyCode.copy();
+        this.fromcode = other.fromcode == null ? null : other.fromcode.copy();
+        this.tocode = other.tocode == null ? null : other.tocode.copy();
         this.averageRate = other.averageRate == null ? null : other.averageRate.copy();
         this.endOfDayRate = other.endOfDayRate == null ? null : other.endOfDayRate.copy();
         this.lastEditedBy = other.lastEditedBy == null ? null : other.lastEditedBy.copy();
@@ -77,20 +77,20 @@ public class CurrencyRateCriteria implements Serializable, Criteria {
         this.currencyRateDate = currencyRateDate;
     }
 
-    public StringFilter getFromCurrencyCode() {
-        return fromCurrencyCode;
+    public StringFilter getFromcode() {
+        return fromcode;
     }
 
-    public void setFromCurrencyCode(StringFilter fromCurrencyCode) {
-        this.fromCurrencyCode = fromCurrencyCode;
+    public void setFromcode(StringFilter fromcode) {
+        this.fromcode = fromcode;
     }
 
-    public StringFilter getToCurrencyCode() {
-        return toCurrencyCode;
+    public StringFilter getTocode() {
+        return tocode;
     }
 
-    public void setToCurrencyCode(StringFilter toCurrencyCode) {
-        this.toCurrencyCode = toCurrencyCode;
+    public void setTocode(StringFilter tocode) {
+        this.tocode = tocode;
     }
 
     public BigDecimalFilter getAverageRate() {
@@ -138,8 +138,8 @@ public class CurrencyRateCriteria implements Serializable, Criteria {
         return
             Objects.equals(id, that.id) &&
             Objects.equals(currencyRateDate, that.currencyRateDate) &&
-            Objects.equals(fromCurrencyCode, that.fromCurrencyCode) &&
-            Objects.equals(toCurrencyCode, that.toCurrencyCode) &&
+            Objects.equals(fromcode, that.fromcode) &&
+            Objects.equals(tocode, that.tocode) &&
             Objects.equals(averageRate, that.averageRate) &&
             Objects.equals(endOfDayRate, that.endOfDayRate) &&
             Objects.equals(lastEditedBy, that.lastEditedBy) &&
@@ -151,8 +151,8 @@ public class CurrencyRateCriteria implements Serializable, Criteria {
         return Objects.hash(
         id,
         currencyRateDate,
-        fromCurrencyCode,
-        toCurrencyCode,
+        fromcode,
+        tocode,
         averageRate,
         endOfDayRate,
         lastEditedBy,
@@ -165,8 +165,8 @@ public class CurrencyRateCriteria implements Serializable, Criteria {
         return "CurrencyRateCriteria{" +
                 (id != null ? "id=" + id + ", " : "") +
                 (currencyRateDate != null ? "currencyRateDate=" + currencyRateDate + ", " : "") +
-                (fromCurrencyCode != null ? "fromCurrencyCode=" + fromCurrencyCode + ", " : "") +
-                (toCurrencyCode != null ? "toCurrencyCode=" + toCurrencyCode + ", " : "") +
+                (fromcode != null ? "fromcode=" + fromcode + ", " : "") +
+                (tocode != null ? "tocode=" + tocode + ", " : "") +
                 (averageRate != null ? "averageRate=" + averageRate + ", " : "") +
                 (endOfDayRate != null ? "endOfDayRate=" + endOfDayRate + ", " : "") +
                 (lastEditedBy != null ? "lastEditedBy=" + lastEditedBy + ", " : "") +

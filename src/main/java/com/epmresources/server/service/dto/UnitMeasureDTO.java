@@ -11,10 +11,10 @@ public class UnitMeasureDTO implements Serializable {
     private Long id;
 
     @NotNull
-    private String unitMeasureCode;
+    private String code;
 
     @NotNull
-    private String unitMeasureName;
+    private String name;
 
 
     public Long getId() {
@@ -25,20 +25,20 @@ public class UnitMeasureDTO implements Serializable {
         this.id = id;
     }
 
-    public String getUnitMeasureCode() {
-        return unitMeasureCode;
+    public String getCode() {
+        return code;
     }
 
-    public void setUnitMeasureCode(String unitMeasureCode) {
-        this.unitMeasureCode = unitMeasureCode;
+    public void setCode(String code) {
+        this.code = code;
     }
 
-    public String getUnitMeasureName() {
-        return unitMeasureName;
+    public String getName() {
+        return name;
     }
 
-    public void setUnitMeasureName(String unitMeasureName) {
-        this.unitMeasureName = unitMeasureName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
@@ -66,8 +66,8 @@ public class UnitMeasureDTO implements Serializable {
     public String toString() {
         return "UnitMeasureDTO{" +
             "id=" + getId() +
-            ", unitMeasureCode='" + getUnitMeasureCode() + "'" +
-            ", unitMeasureName='" + getUnitMeasureName() + "'" +
+            ", code='" + getCode() + "'" +
+            ", name='" + getName() + "'" +
             "}";
     }
 }

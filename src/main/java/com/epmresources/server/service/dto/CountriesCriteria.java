@@ -27,7 +27,7 @@ public class CountriesCriteria implements Serializable, Criteria {
 
     private LongFilter id;
 
-    private StringFilter countryName;
+    private StringFilter name;
 
     private StringFilter formalName;
 
@@ -56,7 +56,7 @@ public class CountriesCriteria implements Serializable, Criteria {
 
     public CountriesCriteria(CountriesCriteria other){
         this.id = other.id == null ? null : other.id.copy();
-        this.countryName = other.countryName == null ? null : other.countryName.copy();
+        this.name = other.name == null ? null : other.name.copy();
         this.formalName = other.formalName == null ? null : other.formalName.copy();
         this.isoAplha3Code = other.isoAplha3Code == null ? null : other.isoAplha3Code.copy();
         this.isoNumericCode = other.isoNumericCode == null ? null : other.isoNumericCode.copy();
@@ -83,12 +83,12 @@ public class CountriesCriteria implements Serializable, Criteria {
         this.id = id;
     }
 
-    public StringFilter getCountryName() {
-        return countryName;
+    public StringFilter getName() {
+        return name;
     }
 
-    public void setCountryName(StringFilter countryName) {
-        this.countryName = countryName;
+    public void setName(StringFilter name) {
+        this.name = name;
     }
 
     public StringFilter getFormalName() {
@@ -191,7 +191,7 @@ public class CountriesCriteria implements Serializable, Criteria {
         final CountriesCriteria that = (CountriesCriteria) o;
         return
             Objects.equals(id, that.id) &&
-            Objects.equals(countryName, that.countryName) &&
+            Objects.equals(name, that.name) &&
             Objects.equals(formalName, that.formalName) &&
             Objects.equals(isoAplha3Code, that.isoAplha3Code) &&
             Objects.equals(isoNumericCode, that.isoNumericCode) &&
@@ -209,7 +209,7 @@ public class CountriesCriteria implements Serializable, Criteria {
     public int hashCode() {
         return Objects.hash(
         id,
-        countryName,
+        name,
         formalName,
         isoAplha3Code,
         isoNumericCode,
@@ -228,7 +228,7 @@ public class CountriesCriteria implements Serializable, Criteria {
     public String toString() {
         return "CountriesCriteria{" +
                 (id != null ? "id=" + id + ", " : "") +
-                (countryName != null ? "countryName=" + countryName + ", " : "") +
+                (name != null ? "name=" + name + ", " : "") +
                 (formalName != null ? "formalName=" + formalName + ", " : "") +
                 (isoAplha3Code != null ? "isoAplha3Code=" + isoAplha3Code + ", " : "") +
                 (isoNumericCode != null ? "isoNumericCode=" + isoNumericCode + ", " : "") +

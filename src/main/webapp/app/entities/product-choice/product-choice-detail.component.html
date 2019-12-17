@@ -18,13 +18,13 @@
                 <dt><span jhiTranslate="epmresourcesApp.productChoice.productAttributeSet">Product Attribute Set</span></dt>
                 <dd>
                     <div *ngIf="productChoice.productAttributeSetId">
-                        <a [routerLink]="['/product-attribute-set', productChoice.productAttributeSetId, 'view']">{{productChoice.productAttributeSetProductAttributeSetName}}</a>
+                        <a [routerLink]="['/product-attribute-set', productChoice.productAttributeSetId, 'view']">{{productChoice.productAttributeSetName}}</a>
                     </div>
                 </dd>
                 <dt><span jhiTranslate="epmresourcesApp.productChoice.productOptionSet">Product Option Set</span></dt>
                 <dd>
                     <div *ngIf="productChoice.productOptionSetId">
-                        <a [routerLink]="['/product-option-set', productChoice.productOptionSetId, 'view']">{{productChoice.productOptionSetProductOptionSetValue}}</a>
+                        <a [routerLink]="['/product-option-set', productChoice.productOptionSetId, 'view']">{{productChoice.productOptionSetValue}}</a>
                     </div>
                 </dd>
             </dl>

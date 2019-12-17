@@ -20,7 +20,7 @@
                 <dt><span jhiTranslate="epmresourcesApp.shoppingCartItems.stockItem">Stock Item</span></dt>
                 <dd>
                     <div *ngIf="shoppingCartItems.stockItemId">
-                        <a [routerLink]="['/stock-items', shoppingCartItems.stockItemId, 'view']">{{shoppingCartItems.stockItemStockItemName}}</a>
+                        <a [routerLink]="['/stock-items', shoppingCartItems.stockItemId, 'view']">{{shoppingCartItems.stockItemName}}</a>
                     </div>
                 </dd>
                 <dt><span jhiTranslate="epmresourcesApp.shoppingCartItems.cart">Cart</span></dt>

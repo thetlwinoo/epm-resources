@@ -14,6 +14,7 @@ public interface CustomerTransactionsMapper extends EntityMapper<CustomerTransac
     @Mapping(source = "customer.id", target = "customerId")
     @Mapping(source = "paymentTransaction.id", target = "paymentTransactionId")
     @Mapping(source = "transactionType.id", target = "transactionTypeId")
+    @Mapping(source = "transactionType.name", target = "transactionTypeName")
     @Mapping(source = "invoice.id", target = "invoiceId")
     CustomerTransactionsDTO toDto(CustomerTransactions customerTransactions);
 

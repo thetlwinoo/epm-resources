@@ -26,14 +26,17 @@ public class ProductBrandCriteria implements Serializable, Criteria {
 
     private LongFilter id;
 
-    private StringFilter productBrandName;
+    private StringFilter name;
+
+    private StringFilter thumbnailUrl;
 
     public ProductBrandCriteria(){
     }
 
     public ProductBrandCriteria(ProductBrandCriteria other){
         this.id = other.id == null ? null : other.id.copy();
-        this.productBrandName = other.productBrandName == null ? null : other.productBrandName.copy();
+        this.name = other.name == null ? null : other.name.copy();
+        this.thumbnailUrl = other.thumbnailUrl == null ? null : other.thumbnailUrl.copy();
     }
 
     @Override
@@ -49,12 +52,20 @@ public class ProductBrandCriteria implements Serializable, Criteria {
         this.id = id;
     }
 
-    public StringFilter getProductBrandName() {
-        return productBrandName;
+    public StringFilter getName() {
+        return name;
     }
 
-    public void setProductBrandName(StringFilter productBrandName) {
-        this.productBrandName = productBrandName;
+    public void setName(StringFilter name) {
+        this.name = name;
+    }
+
+    public StringFilter getThumbnailUrl() {
+        return thumbnailUrl;
+    }
+
+    public void setThumbnailUrl(StringFilter thumbnailUrl) {
+        this.thumbnailUrl = thumbnailUrl;
     }
 
 
@@ -69,14 +80,16 @@ public class ProductBrandCriteria implements Serializable, Criteria {
         final ProductBrandCriteria that = (ProductBrandCriteria) o;
         return
             Objects.equals(id, that.id) &&
-            Objects.equals(productBrandName, that.productBrandName);
+            Objects.equals(name, that.name) &&
+            Objects.equals(thumbnailUrl, that.thumbnailUrl);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(
         id,
-        productBrandName
+        name,
+        thumbnailUrl
         );
     }
 
@@ -84,7 +97,8 @@ public class ProductBrandCriteria implements Serializable, Criteria {
     public String toString() {
         return "ProductBrandCriteria{" +
                 (id != null ? "id=" + id + ", " : "") +
-                (productBrandName != null ? "productBrandName=" + productBrandName + ", " : "") +
+                (name != null ? "name=" + name + ", " : "") +
+                (thumbnailUrl != null ? "thumbnailUrl=" + thumbnailUrl + ", " : "") +
             "}";
     }
 

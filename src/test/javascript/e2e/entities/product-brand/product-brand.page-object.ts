@@ -26,27 +26,27 @@ export class ProductBrandUpdatePage {
   pageTitle = element(by.id('jhi-product-brand-heading'));
   saveButton = element(by.id('save-entity'));
   cancelButton = element(by.id('cancel-save'));
-  productBrandNameInput = element(by.id('field_productBrandName'));
-  photoInput = element(by.id('file_photo'));
+  nameInput = element(by.id('field_name'));
+  thumbnailUrlInput = element(by.id('field_thumbnailUrl'));
 
   async getPageTitle() {
     return this.pageTitle.getAttribute('jhiTranslate');
   }
 
-  async setProductBrandNameInput(productBrandName) {
-    await this.productBrandNameInput.sendKeys(productBrandName);
+  async setNameInput(name) {
+    await this.nameInput.sendKeys(name);
   }
 
-  async getProductBrandNameInput() {
-    return await this.productBrandNameInput.getAttribute('value');
+  async getNameInput() {
+    return await this.nameInput.getAttribute('value');
   }
 
-  async setPhotoInput(photo) {
-    await this.photoInput.sendKeys(photo);
+  async setThumbnailUrlInput(thumbnailUrl) {
+    await this.thumbnailUrlInput.sendKeys(thumbnailUrl);
   }
 
-  async getPhotoInput() {
-    return await this.photoInput.getAttribute('value');
+  async getThumbnailUrlInput() {
+    return await this.thumbnailUrlInput.getAttribute('value');
   }
 
   async save(timeout?: number) {

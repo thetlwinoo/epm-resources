@@ -17,7 +17,7 @@ export class ShipMethodUpdateComponent implements OnInit {
 
   editForm = this.fb.group({
     id: [],
-    shipMethodName: []
+    name: []
   });
 
   constructor(protected shipMethodService: ShipMethodService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
@@ -32,7 +32,7 @@ export class ShipMethodUpdateComponent implements OnInit {
   updateForm(shipMethod: IShipMethod) {
     this.editForm.patchValue({
       id: shipMethod.id,
-      shipMethodName: shipMethod.shipMethodName
+      name: shipMethod.name
     });
   }
 
@@ -54,7 +54,7 @@ export class ShipMethodUpdateComponent implements OnInit {
     return {
       ...new ShipMethod(),
       id: this.editForm.get(['id']).value,
-      shipMethodName: this.editForm.get(['shipMethodName']).value
+      name: this.editForm.get(['name']).value
     };
   }
 

@@ -25,11 +25,11 @@ public class UploadTransactionsDTO implements Serializable {
 
     private Long supplierId;
 
-    private String supplierSupplierName;
+    private String supplierName;
 
     private Long actionTypeId;
 
-    private String actionTypeActionTypeName;
+    private String actionTypeName;
 
     public Long getId() {
         return id;
@@ -95,12 +95,12 @@ public class UploadTransactionsDTO implements Serializable {
         this.supplierId = suppliersId;
     }
 
-    public String getSupplierSupplierName() {
-        return supplierSupplierName;
+    public String getSupplierName() {
+        return supplierName;
     }
 
-    public void setSupplierSupplierName(String suppliersSupplierName) {
-        this.supplierSupplierName = suppliersSupplierName;
+    public void setSupplierName(String suppliersName) {
+        this.supplierName = suppliersName;
     }
 
     public Long getActionTypeId() {
@@ -111,12 +111,12 @@ public class UploadTransactionsDTO implements Serializable {
         this.actionTypeId = uploadActionTypesId;
     }
 
-    public String getActionTypeActionTypeName() {
-        return actionTypeActionTypeName;
+    public String getActionTypeName() {
+        return actionTypeName;
     }
 
-    public void setActionTypeActionTypeName(String uploadActionTypesActionTypeName) {
-        this.actionTypeActionTypeName = uploadActionTypesActionTypeName;
+    public void setActionTypeName(String uploadActionTypesName) {
+        this.actionTypeName = uploadActionTypesName;
     }
 
     @Override
@@ -151,9 +151,9 @@ public class UploadTransactionsDTO implements Serializable {
             ", lastEditedBy='" + getLastEditedBy() + "'" +
             ", lastEditedWhen='" + getLastEditedWhen() + "'" +
             ", supplier=" + getSupplierId() +
-            ", supplier='" + getSupplierSupplierName() + "'" +
+            ", supplier='" + getSupplierName() + "'" +
             ", actionType=" + getActionTypeId() +
-            ", actionType='" + getActionTypeActionTypeName() + "'" +
+            ", actionType='" + getActionTypeName() + "'" +
             "}";
     }
 }

@@ -26,7 +26,7 @@ export class StockItemTransactionsUpdatePage {
   pageTitle = element(by.id('jhi-stock-item-transactions-heading'));
   saveButton = element(by.id('save-entity'));
   cancelButton = element(by.id('cancel-save'));
-  transactionOccurredWhenInput = element(by.id('field_transactionOccurredWhen'));
+  transactionOccuredWhenInput = element(by.id('field_transactionOccuredWhen'));
   quantityInput = element(by.id('field_quantity'));
   lastEditedByInput = element(by.id('field_lastEditedBy'));
   lastEditedWhenInput = element(by.id('field_lastEditedWhen'));
@@ -41,12 +41,12 @@ export class StockItemTransactionsUpdatePage {
     return this.pageTitle.getAttribute('jhiTranslate');
   }
 
-  async setTransactionOccurredWhenInput(transactionOccurredWhen) {
-    await this.transactionOccurredWhenInput.sendKeys(transactionOccurredWhen);
+  async setTransactionOccuredWhenInput(transactionOccuredWhen) {
+    await this.transactionOccuredWhenInput.sendKeys(transactionOccuredWhen);
   }
 
-  async getTransactionOccurredWhenInput() {
-    return await this.transactionOccurredWhenInput.getAttribute('value');
+  async getTransactionOccuredWhenInput() {
+    return await this.transactionOccuredWhenInput.getAttribute('value');
   }
 
   async setQuantityInput(quantity) {

@@ -20,8 +20,8 @@ export class CurrencyRateUpdateComponent implements OnInit {
   editForm = this.fb.group({
     id: [],
     currencyRateDate: [null, [Validators.required]],
-    fromCurrencyCode: [],
-    toCurrencyCode: [],
+    fromcode: [],
+    tocode: [],
     averageRate: [],
     endOfDayRate: [],
     lastEditedBy: [],
@@ -41,8 +41,8 @@ export class CurrencyRateUpdateComponent implements OnInit {
     this.editForm.patchValue({
       id: currencyRate.id,
       currencyRateDate: currencyRate.currencyRateDate != null ? currencyRate.currencyRateDate.format(DATE_TIME_FORMAT) : null,
-      fromCurrencyCode: currencyRate.fromCurrencyCode,
-      toCurrencyCode: currencyRate.toCurrencyCode,
+      fromcode: currencyRate.fromcode,
+      tocode: currencyRate.tocode,
       averageRate: currencyRate.averageRate,
       endOfDayRate: currencyRate.endOfDayRate,
       lastEditedBy: currencyRate.lastEditedBy,
@@ -72,8 +72,8 @@ export class CurrencyRateUpdateComponent implements OnInit {
         this.editForm.get(['currencyRateDate']).value != null
           ? moment(this.editForm.get(['currencyRateDate']).value, DATE_TIME_FORMAT)
           : undefined,
-      fromCurrencyCode: this.editForm.get(['fromCurrencyCode']).value,
-      toCurrencyCode: this.editForm.get(['toCurrencyCode']).value,
+      fromcode: this.editForm.get(['fromcode']).value,
+      tocode: this.editForm.get(['tocode']).value,
       averageRate: this.editForm.get(['averageRate']).value,
       endOfDayRate: this.editForm.get(['endOfDayRate']).value,
       lastEditedBy: this.editForm.get(['lastEditedBy']).value,

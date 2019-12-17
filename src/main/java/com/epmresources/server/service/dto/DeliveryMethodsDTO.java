@@ -12,7 +12,7 @@ public class DeliveryMethodsDTO implements Serializable {
     private Long id;
 
     @NotNull
-    private String deliveryMethodName;
+    private String name;
 
     @NotNull
     private Instant validFrom;
@@ -29,12 +29,12 @@ public class DeliveryMethodsDTO implements Serializable {
         this.id = id;
     }
 
-    public String getDeliveryMethodName() {
-        return deliveryMethodName;
+    public String getName() {
+        return name;
     }
 
-    public void setDeliveryMethodName(String deliveryMethodName) {
-        this.deliveryMethodName = deliveryMethodName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Instant getValidFrom() {
@@ -78,7 +78,7 @@ public class DeliveryMethodsDTO implements Serializable {
     public String toString() {
         return "DeliveryMethodsDTO{" +
             "id=" + getId() +
-            ", deliveryMethodName='" + getDeliveryMethodName() + "'" +
+            ", name='" + getName() + "'" +
             ", validFrom='" + getValidFrom() + "'" +
             ", validTo='" + getValidTo() + "'" +
             "}";

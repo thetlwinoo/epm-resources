@@ -44,13 +44,13 @@
                 <dt><span jhiTranslate="epmresourcesApp.addresses.stateProvince">State Province</span></dt>
                 <dd>
                     <div *ngIf="addresses.stateProvinceId">
-                        <a [routerLink]="['/state-provinces', addresses.stateProvinceId, 'view']">{{addresses.stateProvinceStateProvinceName}}</a>
+                        <a [routerLink]="['/state-provinces', addresses.stateProvinceId, 'view']">{{addresses.stateProvinceName}}</a>
                     </div>
                 </dd>
                 <dt><span jhiTranslate="epmresourcesApp.addresses.addressType">Address Type</span></dt>
                 <dd>
                     <div *ngIf="addresses.addressTypeId">
-                        <a [routerLink]="['/address-types', addresses.addressTypeId, 'view']">{{addresses.addressTypeAddressTypeName}}</a>
+                        <a [routerLink]="['/address-types', addresses.addressTypeId, 'view']">{{addresses.addressTypeName}}</a>
                     </div>
                 </dd>
                 <dt><span jhiTranslate="epmresourcesApp.addresses.person">Person</span></dt>

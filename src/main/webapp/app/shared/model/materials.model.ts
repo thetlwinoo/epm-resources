@@ -1,8 +1,8 @@
 export interface IMaterials {
   id?: number;
-  materialName?: string;
+  name?: string;
 }
 
 export class Materials implements IMaterials {
-  constructor(public id?: number, public materialName?: string) {}
+  constructor(public id?: number, public name?: string) {}
 }

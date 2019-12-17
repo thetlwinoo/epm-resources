@@ -56,8 +56,8 @@ describe('Service Tests', () => {
       it('should update a UnitMeasure', () => {
         const returnedFromService = Object.assign(
           {
-            unitMeasureCode: 'BBBBBB',
-            unitMeasureName: 'BBBBBB'
+            code: 'BBBBBB',
+            name: 'BBBBBB'
           },
           elemDefault
         );
@@ -75,8 +75,8 @@ describe('Service Tests', () => {
       it('should return a list of UnitMeasure', () => {
         const returnedFromService = Object.assign(
           {
-            unitMeasureCode: 'BBBBBB',
-            unitMeasureName: 'BBBBBB'
+            code: 'BBBBBB',
+            name: 'BBBBBB'
           },
           elemDefault
         );

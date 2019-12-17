@@ -28,7 +28,7 @@
                     <label class="form-control-label" jhiTranslate="epmresourcesApp.businessEntityAddress.addressType" for="field_addressType">Address Type</label>
                     <select class="form-control" id="field_addressType" name="addressType" formControlName="addressTypeId">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="addressTypesOption.id" *ngFor="let addressTypesOption of addresstypes; trackBy: trackAddressTypesById">{{addressTypesOption.addressTypeName}}</option>
+                        <option [ngValue]="addressTypesOption.id" *ngFor="let addressTypesOption of addresstypes; trackBy: trackAddressTypesById">{{addressTypesOption.name}}</option>
                     </select>
                 </div>
             </div>

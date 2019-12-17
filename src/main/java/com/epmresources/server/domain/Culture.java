@@ -23,12 +23,12 @@ public class Culture implements Serializable {
     private Long id;
 
     @NotNull
-    @Column(name = "culture_code", nullable = false)
-    private String cultureCode;
+    @Column(name = "code", nullable = false)
+    private String code;
 
     @NotNull
-    @Column(name = "culture_name", nullable = false)
-    private String cultureName;
+    @Column(name = "name", nullable = false)
+    private String name;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -39,30 +39,30 @@ public class Culture implements Serializable {
         this.id = id;
     }
 
-    public String getCultureCode() {
-        return cultureCode;
+    public String getCode() {
+        return code;
     }
 
-    public Culture cultureCode(String cultureCode) {
-        this.cultureCode = cultureCode;
+    public Culture code(String code) {
+        this.code = code;
         return this;
     }
 
-    public void setCultureCode(String cultureCode) {
-        this.cultureCode = cultureCode;
+    public void setCode(String code) {
+        this.code = code;
     }
 
-    public String getCultureName() {
-        return cultureName;
+    public String getName() {
+        return name;
     }
 
-    public Culture cultureName(String cultureName) {
-        this.cultureName = cultureName;
+    public Culture name(String name) {
+        this.name = name;
         return this;
     }
 
-    public void setCultureName(String cultureName) {
-        this.cultureName = cultureName;
+    public void setName(String name) {
+        this.name = name;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -86,8 +86,8 @@ public class Culture implements Serializable {
     public String toString() {
         return "Culture{" +
             "id=" + getId() +
-            ", cultureCode='" + getCultureCode() + "'" +
-            ", cultureName='" + getCultureName() + "'" +
+            ", code='" + getCode() + "'" +
+            ", name='" + getName() + "'" +
             "}";
     }
 }

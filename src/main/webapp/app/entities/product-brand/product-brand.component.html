@@ -19,21 +19,16 @@
             <thead>
             <tr>
             <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
-            <th scope="col" ><span jhiTranslate="epmresourcesApp.productBrand.productBrandName">Product Brand Name</span></th>
-            <th scope="col" ><span jhiTranslate="epmresourcesApp.productBrand.photo">Photo</span></th>
+            <th scope="col" ><span jhiTranslate="epmresourcesApp.productBrand.name">Name</span></th>
+            <th scope="col" ><span jhiTranslate="epmresourcesApp.productBrand.thumbnailUrl">Thumbnail Url</span></th>
             <th scope="col"></th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let productBrand of productBrands ;trackBy: trackId">
                 <td><a [routerLink]="['/product-brand', productBrand.id, 'view' ]">{{productBrand.id}}</a></td>
-                <td>{{productBrand.productBrandName}}</td>
-                <td>
-                    <a *ngIf="productBrand.photo" (click)="openFile(productBrand.photoContentType, productBrand.photo)">
-                        <img [src]="'data:' + productBrand.photoContentType + ';base64,' + productBrand.photo" style="max-height: 30px;" alt="productBrand image"/>
-                    </a>
-                    <span *ngIf="productBrand.photo">{{productBrand.photoContentType}}, {{byteSize(productBrand.photo)}}</span>
-                </td>
+                <td>{{productBrand.name}}</td>
+                <td>{{productBrand.thumbnailUrl}}</td>
                 <td class="text-right">
                     <div class="btn-group">
                         <button type="submit"

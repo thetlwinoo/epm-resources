@@ -1,9 +1,9 @@
 export interface ICurrency {
   id?: number;
-  currencyCode?: string;
-  currencyName?: string;
+  code?: string;
+  name?: string;
 }
 
 export class Currency implements ICurrency {
-  constructor(public id?: number, public currencyCode?: string, public currencyName?: string) {}
+  constructor(public id?: number, public code?: string, public name?: string) {}
 }

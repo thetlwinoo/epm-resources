@@ -25,12 +25,12 @@ public class StateProvinces implements Serializable {
     private Long id;
 
     @NotNull
-    @Column(name = "state_province_code", nullable = false)
-    private String stateProvinceCode;
+    @Column(name = "code", nullable = false)
+    private String code;
 
     @NotNull
-    @Column(name = "state_province_name", nullable = false)
-    private String stateProvinceName;
+    @Column(name = "name", nullable = false)
+    private String name;
 
     @NotNull
     @Column(name = "sales_territory", nullable = false)
@@ -63,30 +63,30 @@ public class StateProvinces implements Serializable {
         this.id = id;
     }
 
-    public String getStateProvinceCode() {
-        return stateProvinceCode;
+    public String getCode() {
+        return code;
     }
 
-    public StateProvinces stateProvinceCode(String stateProvinceCode) {
-        this.stateProvinceCode = stateProvinceCode;
+    public StateProvinces code(String code) {
+        this.code = code;
         return this;
     }
 
-    public void setStateProvinceCode(String stateProvinceCode) {
-        this.stateProvinceCode = stateProvinceCode;
+    public void setCode(String code) {
+        this.code = code;
     }
 
-    public String getStateProvinceName() {
-        return stateProvinceName;
+    public String getName() {
+        return name;
     }
 
-    public StateProvinces stateProvinceName(String stateProvinceName) {
-        this.stateProvinceName = stateProvinceName;
+    public StateProvinces name(String name) {
+        this.name = name;
         return this;
     }
 
-    public void setStateProvinceName(String stateProvinceName) {
-        this.stateProvinceName = stateProvinceName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getSalesTerritory() {
@@ -188,8 +188,8 @@ public class StateProvinces implements Serializable {
     public String toString() {
         return "StateProvinces{" +
             "id=" + getId() +
-            ", stateProvinceCode='" + getStateProvinceCode() + "'" +
-            ", stateProvinceName='" + getStateProvinceName() + "'" +
+            ", code='" + getCode() + "'" +
+            ", name='" + getName() + "'" +
             ", salesTerritory='" + getSalesTerritory() + "'" +
             ", border='" + getBorder() + "'" +
             ", latestRecordedPopulation=" + getLatestRecordedPopulation() +

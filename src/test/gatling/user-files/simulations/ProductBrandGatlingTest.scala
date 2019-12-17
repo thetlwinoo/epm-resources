@@ -72,8 +72,8 @@ class ProductBrandGatlingTest extends Simulation {
             .headers(headers_http_authenticated)
             .body(StringBody("""{
                 "id":null
-                , "productBrandName":"SAMPLE_TEXT"
-                , "photo":null
+                , "name":"SAMPLE_TEXT"
+                , "thumbnailUrl":"SAMPLE_TEXT"
                 }""")).asJson
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_productBrand_url"))).exitHereIfFailed

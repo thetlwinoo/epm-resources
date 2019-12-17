@@ -72,7 +72,7 @@ class DeliveryMethodsGatlingTest extends Simulation {
             .headers(headers_http_authenticated)
             .body(StringBody("""{
                 "id":null
-                , "deliveryMethodName":"SAMPLE_TEXT"
+                , "name":"SAMPLE_TEXT"
                 , "validFrom":"2020-01-01T00:00:00.000Z"
                 , "validTo":"2020-01-01T00:00:00.000Z"
                 }""")).asJson

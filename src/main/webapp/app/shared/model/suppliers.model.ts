@@ -2,7 +2,7 @@ import { Moment } from 'moment';
 
 export interface ISuppliers {
   id?: number;
-  supplierName?: string;
+  name?: string;
   supplierReference?: string;
   bankAccountName?: string;
   bankAccountBranch?: string;
@@ -17,26 +17,25 @@ export interface ISuppliers {
   webServiceUrl?: string;
   creditRating?: number;
   activeFlag?: boolean;
-  avatarContentType?: string;
-  avatar?: any;
+  thumbnailUrl?: string;
   validFrom?: Moment;
   validTo?: Moment;
   userLogin?: string;
   userId?: number;
-  supplierCategorySupplierCategoryName?: string;
+  supplierCategoryName?: string;
   supplierCategoryId?: number;
-  deliveryMethodDeliveryMethodName?: string;
+  deliveryMethodName?: string;
   deliveryMethodId?: number;
-  deliveryCityCityName?: string;
+  deliveryCityName?: string;
   deliveryCityId?: number;
-  postalCityCityName?: string;
+  postalCityName?: string;
   postalCityId?: number;
 }
 
 export class Suppliers implements ISuppliers {
   constructor(
     public id?: number,
-    public supplierName?: string,
+    public name?: string,
     public supplierReference?: string,
     public bankAccountName?: string,
     public bankAccountBranch?: string,
@@ -51,19 +50,18 @@ export class Suppliers implements ISuppliers {
     public webServiceUrl?: string,
     public creditRating?: number,
     public activeFlag?: boolean,
-    public avatarContentType?: string,
-    public avatar?: any,
+    public thumbnailUrl?: string,
     public validFrom?: Moment,
     public validTo?: Moment,
     public userLogin?: string,
     public userId?: number,
-    public supplierCategorySupplierCategoryName?: string,
+    public supplierCategoryName?: string,
     public supplierCategoryId?: number,
-    public deliveryMethodDeliveryMethodName?: string,
+    public deliveryMethodName?: string,
     public deliveryMethodId?: number,
-    public deliveryCityCityName?: string,
+    public deliveryCityName?: string,
     public deliveryCityId?: number,
-    public postalCityCityName?: string,
+    public postalCityName?: string,
     public postalCityId?: number
   ) {
     this.activeFlag = this.activeFlag || false;

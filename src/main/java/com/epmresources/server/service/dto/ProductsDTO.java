@@ -13,7 +13,7 @@ public class ProductsDTO implements Serializable {
     private Long id;
 
     @NotNull
-    private String productName;
+    private String name;
 
     private String handle;
 
@@ -23,6 +23,8 @@ public class ProductsDTO implements Serializable {
     private String searchDetails;
 
     private Integer sellCount;
+
+    private String thumbnailList;
 
     private Boolean activeInd;
 
@@ -35,7 +37,7 @@ public class ProductsDTO implements Serializable {
 
     private Long supplierId;
 
-    private String supplierSupplierName;
+    private String supplierName;
 
     private Long productCategoryId;
 
@@ -43,7 +45,7 @@ public class ProductsDTO implements Serializable {
 
     private Long productBrandId;
 
-    private String productBrandProductBrandName;
+    private String productBrandName;
 
     public Long getId() {
         return id;
@@ -53,12 +55,12 @@ public class ProductsDTO implements Serializable {
         this.id = id;
     }
 
-    public String getProductName() {
-        return productName;
+    public String getName() {
+        return name;
     }
 
-    public void setProductName(String productName) {
-        this.productName = productName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getHandle() {
@@ -91,6 +93,14 @@ public class ProductsDTO implements Serializable {
 
     public void setSellCount(Integer sellCount) {
         this.sellCount = sellCount;
+    }
+
+    public String getThumbnailList() {
+        return thumbnailList;
+    }
+
+    public void setThumbnailList(String thumbnailList) {
+        this.thumbnailList = thumbnailList;
     }
 
     public Boolean isActiveInd() {
@@ -133,12 +143,12 @@ public class ProductsDTO implements Serializable {
         this.supplierId = suppliersId;
     }
 
-    public String getSupplierSupplierName() {
-        return supplierSupplierName;
+    public String getSupplierName() {
+        return supplierName;
     }
 
-    public void setSupplierSupplierName(String suppliersSupplierName) {
-        this.supplierSupplierName = suppliersSupplierName;
+    public void setSupplierName(String suppliersName) {
+        this.supplierName = suppliersName;
     }
 
     public Long getProductCategoryId() {
@@ -165,12 +175,12 @@ public class ProductsDTO implements Serializable {
         this.productBrandId = productBrandId;
     }
 
-    public String getProductBrandProductBrandName() {
-        return productBrandProductBrandName;
+    public String getProductBrandName() {
+        return productBrandName;
     }
 
-    public void setProductBrandProductBrandName(String productBrandProductBrandName) {
-        this.productBrandProductBrandName = productBrandProductBrandName;
+    public void setProductBrandName(String productBrandName) {
+        this.productBrandName = productBrandName;
     }
 
     @Override
@@ -198,21 +208,22 @@ public class ProductsDTO implements Serializable {
     public String toString() {
         return "ProductsDTO{" +
             "id=" + getId() +
-            ", productName='" + getProductName() + "'" +
+            ", name='" + getName() + "'" +
             ", handle='" + getHandle() + "'" +
             ", productNumber='" + getProductNumber() + "'" +
             ", searchDetails='" + getSearchDetails() + "'" +
             ", sellCount=" + getSellCount() +
+            ", thumbnailList='" + getThumbnailList() + "'" +
             ", activeInd='" + isActiveInd() + "'" +
             ", lastEditedBy='" + getLastEditedBy() + "'" +
             ", lastEditedWhen='" + getLastEditedWhen() + "'" +
             ", productDocument=" + getProductDocumentId() +
             ", supplier=" + getSupplierId() +
-            ", supplier='" + getSupplierSupplierName() + "'" +
+            ", supplier='" + getSupplierName() + "'" +
             ", productCategory=" + getProductCategoryId() +
             ", productCategory='" + getProductCategoryName() + "'" +
             ", productBrand=" + getProductBrandId() +
-            ", productBrand='" + getProductBrandProductBrandName() + "'" +
+            ", productBrand='" + getProductBrandName() + "'" +
             "}";
     }
 }

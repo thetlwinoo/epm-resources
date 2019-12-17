@@ -17,7 +17,7 @@ export class BarcodeTypesUpdateComponent implements OnInit {
 
   editForm = this.fb.group({
     id: [],
-    barcodeTypeName: [null, [Validators.required]]
+    name: [null, [Validators.required]]
   });
 
   constructor(protected barcodeTypesService: BarcodeTypesService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
@@ -32,7 +32,7 @@ export class BarcodeTypesUpdateComponent implements OnInit {
   updateForm(barcodeTypes: IBarcodeTypes) {
     this.editForm.patchValue({
       id: barcodeTypes.id,
-      barcodeTypeName: barcodeTypes.barcodeTypeName
+      name: barcodeTypes.name
     });
   }
 
@@ -54,7 +54,7 @@ export class BarcodeTypesUpdateComponent implements OnInit {
     return {
       ...new BarcodeTypes(),
       id: this.editForm.get(['id']).value,
-      barcodeTypeName: this.editForm.get(['barcodeTypeName']).value
+      name: this.editForm.get(['name']).value
     };
   }
 

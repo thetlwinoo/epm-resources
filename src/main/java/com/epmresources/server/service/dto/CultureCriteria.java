@@ -26,17 +26,17 @@ public class CultureCriteria implements Serializable, Criteria {
 
     private LongFilter id;
 
-    private StringFilter cultureCode;
+    private StringFilter code;
 
-    private StringFilter cultureName;
+    private StringFilter name;
 
     public CultureCriteria(){
     }
 
     public CultureCriteria(CultureCriteria other){
         this.id = other.id == null ? null : other.id.copy();
-        this.cultureCode = other.cultureCode == null ? null : other.cultureCode.copy();
-        this.cultureName = other.cultureName == null ? null : other.cultureName.copy();
+        this.code = other.code == null ? null : other.code.copy();
+        this.name = other.name == null ? null : other.name.copy();
     }
 
     @Override
@@ -52,20 +52,20 @@ public class CultureCriteria implements Serializable, Criteria {
         this.id = id;
     }
 
-    public StringFilter getCultureCode() {
-        return cultureCode;
+    public StringFilter getCode() {
+        return code;
     }
 
-    public void setCultureCode(StringFilter cultureCode) {
-        this.cultureCode = cultureCode;
+    public void setCode(StringFilter code) {
+        this.code = code;
     }
 
-    public StringFilter getCultureName() {
-        return cultureName;
+    public StringFilter getName() {
+        return name;
     }
 
-    public void setCultureName(StringFilter cultureName) {
-        this.cultureName = cultureName;
+    public void setName(StringFilter name) {
+        this.name = name;
     }
 
 
@@ -80,16 +80,16 @@ public class CultureCriteria implements Serializable, Criteria {
         final CultureCriteria that = (CultureCriteria) o;
         return
             Objects.equals(id, that.id) &&
-            Objects.equals(cultureCode, that.cultureCode) &&
-            Objects.equals(cultureName, that.cultureName);
+            Objects.equals(code, that.code) &&
+            Objects.equals(name, that.name);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(
         id,
-        cultureCode,
-        cultureName
+        code,
+        name
         );
     }
 
@@ -97,8 +97,8 @@ public class CultureCriteria implements Serializable, Criteria {
     public String toString() {
         return "CultureCriteria{" +
                 (id != null ? "id=" + id + ", " : "") +
-                (cultureCode != null ? "cultureCode=" + cultureCode + ", " : "") +
-                (cultureName != null ? "cultureName=" + cultureName + ", " : "") +
+                (code != null ? "code=" + code + ", " : "") +
+                (name != null ? "name=" + name + ", " : "") +
             "}";
     }
 

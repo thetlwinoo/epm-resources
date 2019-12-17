@@ -28,7 +28,7 @@ public class StockItemsCriteria implements Serializable, Criteria {
 
     private LongFilter id;
 
-    private StringFilter stockItemName;
+    private StringFilter name;
 
     private StringFilter vendorCode;
 
@@ -127,7 +127,7 @@ public class StockItemsCriteria implements Serializable, Criteria {
 
     public StockItemsCriteria(StockItemsCriteria other){
         this.id = other.id == null ? null : other.id.copy();
-        this.stockItemName = other.stockItemName == null ? null : other.stockItemName.copy();
+        this.name = other.name == null ? null : other.name.copy();
         this.vendorCode = other.vendorCode == null ? null : other.vendorCode.copy();
         this.vendorSKU = other.vendorSKU == null ? null : other.vendorSKU.copy();
         this.generatedSKU = other.generatedSKU == null ? null : other.generatedSKU.copy();
@@ -189,12 +189,12 @@ public class StockItemsCriteria implements Serializable, Criteria {
         this.id = id;
     }
 
-    public StringFilter getStockItemName() {
-        return stockItemName;
+    public StringFilter getName() {
+        return name;
     }
 
-    public void setStockItemName(StringFilter stockItemName) {
-        this.stockItemName = stockItemName;
+    public void setName(StringFilter name) {
+        this.name = name;
     }
 
     public StringFilter getVendorCode() {
@@ -577,7 +577,7 @@ public class StockItemsCriteria implements Serializable, Criteria {
         final StockItemsCriteria that = (StockItemsCriteria) o;
         return
             Objects.equals(id, that.id) &&
-            Objects.equals(stockItemName, that.stockItemName) &&
+            Objects.equals(name, that.name) &&
             Objects.equals(vendorCode, that.vendorCode) &&
             Objects.equals(vendorSKU, that.vendorSKU) &&
             Objects.equals(generatedSKU, that.generatedSKU) &&
@@ -630,7 +630,7 @@ public class StockItemsCriteria implements Serializable, Criteria {
     public int hashCode() {
         return Objects.hash(
         id,
-        stockItemName,
+        name,
         vendorCode,
         vendorSKU,
         generatedSKU,
@@ -684,7 +684,7 @@ public class StockItemsCriteria implements Serializable, Criteria {
     public String toString() {
         return "StockItemsCriteria{" +
                 (id != null ? "id=" + id + ", " : "") +
-                (stockItemName != null ? "stockItemName=" + stockItemName + ", " : "") +
+                (name != null ? "name=" + name + ", " : "") +
                 (vendorCode != null ? "vendorCode=" + vendorCode + ", " : "") +
                 (vendorSKU != null ? "vendorSKU=" + vendorSKU + ", " : "") +
                 (generatedSKU != null ? "generatedSKU=" + generatedSKU + ", " : "") +

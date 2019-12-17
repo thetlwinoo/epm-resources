@@ -16,7 +16,7 @@ public class BusinessEntityAddressDTO implements Serializable {
 
     private Long addressTypeId;
 
-    private String addressTypeAddressTypeName;
+    private String addressTypeName;
 
     public Long getId() {
         return id;
@@ -50,12 +50,12 @@ public class BusinessEntityAddressDTO implements Serializable {
         this.addressTypeId = addressTypesId;
     }
 
-    public String getAddressTypeAddressTypeName() {
-        return addressTypeAddressTypeName;
+    public String getAddressTypeName() {
+        return addressTypeName;
     }
 
-    public void setAddressTypeAddressTypeName(String addressTypesAddressTypeName) {
-        this.addressTypeAddressTypeName = addressTypesAddressTypeName;
+    public void setAddressTypeName(String addressTypesName) {
+        this.addressTypeName = addressTypesName;
     }
 
     @Override
@@ -86,7 +86,7 @@ public class BusinessEntityAddressDTO implements Serializable {
             ", address=" + getAddressId() +
             ", person=" + getPersonId() +
             ", addressType=" + getAddressTypeId() +
-            ", addressType='" + getAddressTypeAddressTypeName() + "'" +
+            ", addressType='" + getAddressTypeName() + "'" +
             "}";
     }
 }

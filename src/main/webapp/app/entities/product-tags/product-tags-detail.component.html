@@ -5,14 +5,14 @@
             <hr>
             <jhi-alert-error></jhi-alert-error>
             <dl class="row-md jh-entity-details">
-                <dt><span jhiTranslate="epmresourcesApp.productTags.tagName">Tag Name</span></dt>
+                <dt><span jhiTranslate="epmresourcesApp.productTags.name">Name</span></dt>
                 <dd>
-                    <span>{{productTags.tagName}}</span>
+                    <span>{{productTags.name}}</span>
                 </dd>
                 <dt><span jhiTranslate="epmresourcesApp.productTags.product">Product</span></dt>
                 <dd>
                     <div *ngIf="productTags.productId">
-                        <a [routerLink]="['/products', productTags.productId, 'view']">{{productTags.productProductName}}</a>
+                        <a [routerLink]="['/products', productTags.productId, 'view']">{{productTags.productName}}</a>
                     </div>
                 </dd>
             </dl>

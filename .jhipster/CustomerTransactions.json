@@ -73,7 +73,7 @@
             "otherEntityName": "transactionTypes",
             "otherEntityRelationshipName": "customerTransactions",
             "relationshipName": "transactionType",
-            "otherEntityField": "id"
+            "otherEntityField": "name"
         },
         {
             "relationshipType": "many-to-one",

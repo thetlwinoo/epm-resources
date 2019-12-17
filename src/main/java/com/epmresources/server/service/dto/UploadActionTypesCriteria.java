@@ -26,14 +26,14 @@ public class UploadActionTypesCriteria implements Serializable, Criteria {
 
     private LongFilter id;
 
-    private StringFilter actionTypeName;
+    private StringFilter name;
 
     public UploadActionTypesCriteria(){
     }
 
     public UploadActionTypesCriteria(UploadActionTypesCriteria other){
         this.id = other.id == null ? null : other.id.copy();
-        this.actionTypeName = other.actionTypeName == null ? null : other.actionTypeName.copy();
+        this.name = other.name == null ? null : other.name.copy();
     }
 
     @Override
@@ -49,12 +49,12 @@ public class UploadActionTypesCriteria implements Serializable, Criteria {
         this.id = id;
     }
 
-    public StringFilter getActionTypeName() {
-        return actionTypeName;
+    public StringFilter getName() {
+        return name;
     }
 
-    public void setActionTypeName(StringFilter actionTypeName) {
-        this.actionTypeName = actionTypeName;
+    public void setName(StringFilter name) {
+        this.name = name;
     }
 
 
@@ -69,14 +69,14 @@ public class UploadActionTypesCriteria implements Serializable, Criteria {
         final UploadActionTypesCriteria that = (UploadActionTypesCriteria) o;
         return
             Objects.equals(id, that.id) &&
-            Objects.equals(actionTypeName, that.actionTypeName);
+            Objects.equals(name, that.name);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(
         id,
-        actionTypeName
+        name
         );
     }
 
@@ -84,7 +84,7 @@ public class UploadActionTypesCriteria implements Serializable, Criteria {
     public String toString() {
         return "UploadActionTypesCriteria{" +
                 (id != null ? "id=" + id + ", " : "") +
-                (actionTypeName != null ? "actionTypeName=" + actionTypeName + ", " : "") +
+                (name != null ? "name=" + name + ", " : "") +
             "}";
     }
 

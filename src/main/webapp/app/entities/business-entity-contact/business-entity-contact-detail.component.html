@@ -14,7 +14,7 @@
                 <dt><span jhiTranslate="epmresourcesApp.businessEntityContact.contactType">Contact Type</span></dt>
                 <dd>
                     <div *ngIf="businessEntityContact.contactTypeId">
-                        <a [routerLink]="['/contact-type', businessEntityContact.contactTypeId, 'view']">{{businessEntityContact.contactTypeContactTypeName}}</a>
+                        <a [routerLink]="['/contact-type', businessEntityContact.contactTypeId, 'view']">{{businessEntityContact.contactTypeName}}</a>
                     </div>
                 </dd>
             </dl>

@@ -56,7 +56,7 @@ describe('Service Tests', () => {
       it('should update a ProductTags', () => {
         const returnedFromService = Object.assign(
           {
-            tagName: 'BBBBBB'
+            name: 'BBBBBB'
           },
           elemDefault
         );
@@ -74,7 +74,7 @@ describe('Service Tests', () => {
       it('should return a list of ProductTags', () => {
         const returnedFromService = Object.assign(
           {
-            tagName: 'BBBBBB'
+            name: 'BBBBBB'
           },
           elemDefault
         );

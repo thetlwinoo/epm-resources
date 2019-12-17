@@ -72,7 +72,7 @@ class PurchaseOrderLinesGatlingTest extends Simulation {
             .headers(headers_http_authenticated)
             .body(StringBody("""{
                 "id":null
-                , "ordersOuters":"0"
+                , "orderedOuters":"0"
                 , "description":"SAMPLE_TEXT"
                 , "receivedOuters":"0"
                 , "expectedUnitPricePerOuter":"0"

@@ -80,16 +80,6 @@
         {
             "fieldName": "defaultInd",
             "fieldType": "Boolean"
-        },
-        {
-            "fieldName": "deleteToken",
-            "fieldType": "String",
-            "fieldValidateRules": [
-                "minlength",
-                "maxlength"
-            ],
-            "fieldValidateRulesMinlength": 1,
-            "fieldValidateRulesMaxlength": 1024
         }
     ],
     "relationships": [
@@ -98,6 +88,13 @@
             "otherEntityName": "stockItems",
             "otherEntityRelationshipName": "photoList",
             "relationshipName": "stockItem",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "productCategory",
+            "otherEntityRelationshipName": "photoList",
+            "relationshipName": "productCategory",
             "otherEntityField": "id"
         }
     ],

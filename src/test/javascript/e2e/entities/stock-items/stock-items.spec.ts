@@ -41,7 +41,7 @@ describe('StockItems e2e test', () => {
 
     await stockItemsComponentsPage.clickOnCreateButton();
     await promise.all([
-      stockItemsUpdatePage.setStockItemNameInput('stockItemName'),
+      stockItemsUpdatePage.setNameInput('name'),
       stockItemsUpdatePage.setVendorCodeInput('vendorCode'),
       stockItemsUpdatePage.setVendorSKUInput('vendorSKU'),
       stockItemsUpdatePage.setGeneratedSKUInput('generatedSKU'),
@@ -84,10 +84,7 @@ describe('StockItems e2e test', () => {
       stockItemsUpdatePage.barcodeTypeSelectLastOption(),
       stockItemsUpdatePage.productSelectLastOption()
     ]);
-    expect(await stockItemsUpdatePage.getStockItemNameInput()).to.eq(
-      'stockItemName',
-      'Expected StockItemName value to be equals to stockItemName'
-    );
+    expect(await stockItemsUpdatePage.getNameInput()).to.eq('name', 'Expected Name value to be equals to name');
     expect(await stockItemsUpdatePage.getVendorCodeInput()).to.eq('vendorCode', 'Expected VendorCode value to be equals to vendorCode');
     expect(await stockItemsUpdatePage.getVendorSKUInput()).to.eq('vendorSKU', 'Expected VendorSKU value to be equals to vendorSKU');
     expect(await stockItemsUpdatePage.getGeneratedSKUInput()).to.eq(

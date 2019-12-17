@@ -15,14 +15,14 @@
             "otherEntityName": "cities",
             "otherEntityRelationshipName": "systemParameters",
             "relationshipName": "deliveryCity",
-            "otherEntityField": "cityName"
+            "otherEntityField": "name"
         },
         {
             "relationshipType": "many-to-one",
             "otherEntityName": "cities",
             "otherEntityRelationshipName": "systemParameters",
             "relationshipName": "postalCity",
-            "otherEntityField": "cityName"
+            "otherEntityField": "name"
         }
     ],
     "changelogDate": "20191106102818",

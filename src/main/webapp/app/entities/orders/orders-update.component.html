@@ -151,7 +151,7 @@
                     <label class="form-control-label" jhiTranslate="epmresourcesApp.orders.shipMethod" for="field_shipMethod">Ship Method</label>
                     <select class="form-control" id="field_shipMethod" name="shipMethod" formControlName="shipMethodId">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="shipMethodOption.id" *ngFor="let shipMethodOption of shipmethods; trackBy: trackShipMethodById">{{shipMethodOption.shipMethodName}}</option>
+                        <option [ngValue]="shipMethodOption.id" *ngFor="let shipMethodOption of shipmethods; trackBy: trackShipMethodById">{{shipMethodOption.name}}</option>
                     </select>
                 </div>
                 <div class="form-group">

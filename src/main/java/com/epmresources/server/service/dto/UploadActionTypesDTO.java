@@ -9,7 +9,7 @@ public class UploadActionTypesDTO implements Serializable {
 
     private Long id;
 
-    private String actionTypeName;
+    private String name;
 
 
     public Long getId() {
@@ -20,12 +20,12 @@ public class UploadActionTypesDTO implements Serializable {
         this.id = id;
     }
 
-    public String getActionTypeName() {
-        return actionTypeName;
+    public String getName() {
+        return name;
     }
 
-    public void setActionTypeName(String actionTypeName) {
-        this.actionTypeName = actionTypeName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
@@ -53,7 +53,7 @@ public class UploadActionTypesDTO implements Serializable {
     public String toString() {
         return "UploadActionTypesDTO{" +
             "id=" + getId() +
-            ", actionTypeName='" + getActionTypeName() + "'" +
+            ", name='" + getName() + "'" +
             "}";
     }
 }

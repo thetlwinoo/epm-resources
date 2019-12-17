@@ -40,11 +40,8 @@ describe('AddressTypes e2e test', () => {
     const nbButtonsBeforeCreate = await addressTypesComponentsPage.countDeleteButtons();
 
     await addressTypesComponentsPage.clickOnCreateButton();
-    await promise.all([addressTypesUpdatePage.setAddressTypeNameInput('addressTypeName'), addressTypesUpdatePage.setReferInput('refer')]);
-    expect(await addressTypesUpdatePage.getAddressTypeNameInput()).to.eq(
-      'addressTypeName',
-      'Expected AddressTypeName value to be equals to addressTypeName'
-    );
+    await promise.all([addressTypesUpdatePage.setNameInput('name'), addressTypesUpdatePage.setReferInput('refer')]);
+    expect(await addressTypesUpdatePage.getNameInput()).to.eq('name', 'Expected Name value to be equals to name');
     expect(await addressTypesUpdatePage.getReferInput()).to.eq('refer', 'Expected Refer value to be equals to refer');
     await addressTypesUpdatePage.save();
     expect(await addressTypesUpdatePage.getSaveButton().isPresent(), 'Expected save button disappear').to.be.false;

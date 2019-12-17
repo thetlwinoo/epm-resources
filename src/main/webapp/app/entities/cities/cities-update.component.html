@@ -10,12 +10,12 @@
                         readonly />
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="epmresourcesApp.cities.cityName" for="field_cityName">City Name</label>
-                    <input type="text" class="form-control" name="cityName" id="field_cityName"
-                           formControlName="cityName"/>
-                    <div *ngIf="editForm.get('cityName').invalid && (editForm.get('cityName').dirty || editForm.get('cityName').touched)">
+                    <label class="form-control-label" jhiTranslate="epmresourcesApp.cities.name" for="field_name">Name</label>
+                    <input type="text" class="form-control" name="name" id="field_name"
+                           formControlName="name"/>
+                    <div *ngIf="editForm.get('name').invalid && (editForm.get('name').dirty || editForm.get('name').touched)">
                         <small class="form-text text-danger"
-                               *ngIf="editForm.get('cityName').errors.required" jhiTranslate="entity.validation.required">
+                               *ngIf="editForm.get('name').errors.required" jhiTranslate="entity.validation.required">
                         This field is required.
                         </small>
                     </div>
@@ -67,7 +67,7 @@
                     <label class="form-control-label" jhiTranslate="epmresourcesApp.cities.stateProvince" for="field_stateProvince">State Province</label>
                     <select class="form-control" id="field_stateProvince" name="stateProvince" formControlName="stateProvinceId">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="stateProvincesOption.id" *ngFor="let stateProvincesOption of stateprovinces; trackBy: trackStateProvincesById">{{stateProvincesOption.stateProvinceName}}</option>
+                        <option [ngValue]="stateProvincesOption.id" *ngFor="let stateProvincesOption of stateprovinces; trackBy: trackStateProvincesById">{{stateProvincesOption.name}}</option>
                     </select>
                 </div>
             </div>

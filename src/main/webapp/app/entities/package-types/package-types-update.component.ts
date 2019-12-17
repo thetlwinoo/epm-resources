@@ -19,7 +19,7 @@ export class PackageTypesUpdateComponent implements OnInit {
 
   editForm = this.fb.group({
     id: [],
-    packageTypeName: [null, [Validators.required]],
+    name: [null, [Validators.required]],
     validFrom: [null, [Validators.required]],
     validTo: [null, [Validators.required]]
   });
@@ -36,7 +36,7 @@ export class PackageTypesUpdateComponent implements OnInit {
   updateForm(packageTypes: IPackageTypes) {
     this.editForm.patchValue({
       id: packageTypes.id,
-      packageTypeName: packageTypes.packageTypeName,
+      name: packageTypes.name,
       validFrom: packageTypes.validFrom != null ? packageTypes.validFrom.format(DATE_TIME_FORMAT) : null,
       validTo: packageTypes.validTo != null ? packageTypes.validTo.format(DATE_TIME_FORMAT) : null
     });
@@ -60,7 +60,7 @@ export class PackageTypesUpdateComponent implements OnInit {
     return {
       ...new PackageTypes(),
       id: this.editForm.get(['id']).value,
-      packageTypeName: this.editForm.get(['packageTypeName']).value,
+      name: this.editForm.get(['name']).value,
       validFrom:
         this.editForm.get(['validFrom']).value != null ? moment(this.editForm.get(['validFrom']).value, DATE_TIME_FORMAT) : undefined,
       validTo: this.editForm.get(['validTo']).value != null ? moment(this.editForm.get(['validTo']).value, DATE_TIME_FORMAT) : undefined

@@ -2,14 +2,14 @@
     "name": "UnitMeasure",
     "fields": [
         {
-            "fieldName": "unitMeasureCode",
+            "fieldName": "code",
             "fieldType": "String",
             "fieldValidateRules": [
                 "required"
             ]
         },
         {
-            "fieldName": "unitMeasureName",
+            "fieldName": "name",
             "fieldType": "String",
             "fieldValidateRules": [
                 "required"

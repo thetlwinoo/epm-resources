@@ -26,7 +26,7 @@ export class ReviewsUpdatePage {
   pageTitle = element(by.id('jhi-reviews-heading'));
   saveButton = element(by.id('save-entity'));
   cancelButton = element(by.id('cancel-save'));
-  reviewerNameInput = element(by.id('field_reviewerName'));
+  nameInput = element(by.id('field_name'));
   emailAddressInput = element(by.id('field_emailAddress'));
   reviewDateInput = element(by.id('field_reviewDate'));
   overAllSellerRatingInput = element(by.id('field_overAllSellerRating'));
@@ -42,12 +42,12 @@ export class ReviewsUpdatePage {
     return this.pageTitle.getAttribute('jhiTranslate');
   }
 
-  async setReviewerNameInput(reviewerName) {
-    await this.reviewerNameInput.sendKeys(reviewerName);
+  async setNameInput(name) {
+    await this.nameInput.sendKeys(name);
   }
 
-  async getReviewerNameInput() {
-    return await this.reviewerNameInput.getAttribute('value');
+  async getNameInput() {
+    return await this.nameInput.getAttribute('value');
   }
 
   async setEmailAddressInput(emailAddress) {

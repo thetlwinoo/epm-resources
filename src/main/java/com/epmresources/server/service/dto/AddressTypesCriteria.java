@@ -26,7 +26,7 @@ public class AddressTypesCriteria implements Serializable, Criteria {
 
     private LongFilter id;
 
-    private StringFilter addressTypeName;
+    private StringFilter name;
 
     private StringFilter refer;
 
@@ -35,7 +35,7 @@ public class AddressTypesCriteria implements Serializable, Criteria {
 
     public AddressTypesCriteria(AddressTypesCriteria other){
         this.id = other.id == null ? null : other.id.copy();
-        this.addressTypeName = other.addressTypeName == null ? null : other.addressTypeName.copy();
+        this.name = other.name == null ? null : other.name.copy();
         this.refer = other.refer == null ? null : other.refer.copy();
     }
 
@@ -52,12 +52,12 @@ public class AddressTypesCriteria implements Serializable, Criteria {
         this.id = id;
     }
 
-    public StringFilter getAddressTypeName() {
-        return addressTypeName;
+    public StringFilter getName() {
+        return name;
     }
 
-    public void setAddressTypeName(StringFilter addressTypeName) {
-        this.addressTypeName = addressTypeName;
+    public void setName(StringFilter name) {
+        this.name = name;
     }
 
     public StringFilter getRefer() {
@@ -80,7 +80,7 @@ public class AddressTypesCriteria implements Serializable, Criteria {
         final AddressTypesCriteria that = (AddressTypesCriteria) o;
         return
             Objects.equals(id, that.id) &&
-            Objects.equals(addressTypeName, that.addressTypeName) &&
+            Objects.equals(name, that.name) &&
             Objects.equals(refer, that.refer);
     }
 
@@ -88,7 +88,7 @@ public class AddressTypesCriteria implements Serializable, Criteria {
     public int hashCode() {
         return Objects.hash(
         id,
-        addressTypeName,
+        name,
         refer
         );
     }
@@ -97,7 +97,7 @@ public class AddressTypesCriteria implements Serializable, Criteria {
     public String toString() {
         return "AddressTypesCriteria{" +
                 (id != null ? "id=" + id + ", " : "") +
-                (addressTypeName != null ? "addressTypeName=" + addressTypeName + ", " : "") +
+                (name != null ? "name=" + name + ", " : "") +
                 (refer != null ? "refer=" + refer + ", " : "") +
             "}";
     }

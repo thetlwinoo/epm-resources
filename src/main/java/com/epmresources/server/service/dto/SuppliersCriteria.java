@@ -27,7 +27,7 @@ public class SuppliersCriteria implements Serializable, Criteria {
 
     private LongFilter id;
 
-    private StringFilter supplierName;
+    private StringFilter name;
 
     private StringFilter supplierReference;
 
@@ -57,6 +57,8 @@ public class SuppliersCriteria implements Serializable, Criteria {
 
     private BooleanFilter activeFlag;
 
+    private StringFilter thumbnailUrl;
+
     private InstantFilter validFrom;
 
     private InstantFilter validTo;
@@ -76,7 +78,7 @@ public class SuppliersCriteria implements Serializable, Criteria {
 
     public SuppliersCriteria(SuppliersCriteria other){
         this.id = other.id == null ? null : other.id.copy();
-        this.supplierName = other.supplierName == null ? null : other.supplierName.copy();
+        this.name = other.name == null ? null : other.name.copy();
         this.supplierReference = other.supplierReference == null ? null : other.supplierReference.copy();
         this.bankAccountName = other.bankAccountName == null ? null : other.bankAccountName.copy();
         this.bankAccountBranch = other.bankAccountBranch == null ? null : other.bankAccountBranch.copy();
@@ -91,6 +93,7 @@ public class SuppliersCriteria implements Serializable, Criteria {
         this.webServiceUrl = other.webServiceUrl == null ? null : other.webServiceUrl.copy();
         this.creditRating = other.creditRating == null ? null : other.creditRating.copy();
         this.activeFlag = other.activeFlag == null ? null : other.activeFlag.copy();
+        this.thumbnailUrl = other.thumbnailUrl == null ? null : other.thumbnailUrl.copy();
         this.validFrom = other.validFrom == null ? null : other.validFrom.copy();
         this.validTo = other.validTo == null ? null : other.validTo.copy();
         this.userId = other.userId == null ? null : other.userId.copy();
@@ -113,12 +116,12 @@ public class SuppliersCriteria implements Serializable, Criteria {
         this.id = id;
     }
 
-    public StringFilter getSupplierName() {
-        return supplierName;
+    public StringFilter getName() {
+        return name;
     }
 
-    public void setSupplierName(StringFilter supplierName) {
-        this.supplierName = supplierName;
+    public void setName(StringFilter name) {
+        this.name = name;
     }
 
     public StringFilter getSupplierReference() {
@@ -233,6 +236,14 @@ public class SuppliersCriteria implements Serializable, Criteria {
         this.activeFlag = activeFlag;
     }
 
+    public StringFilter getThumbnailUrl() {
+        return thumbnailUrl;
+    }
+
+    public void setThumbnailUrl(StringFilter thumbnailUrl) {
+        this.thumbnailUrl = thumbnailUrl;
+    }
+
     public InstantFilter getValidFrom() {
         return validFrom;
     }
@@ -301,7 +312,7 @@ public class SuppliersCriteria implements Serializable, Criteria {
         final SuppliersCriteria that = (SuppliersCriteria) o;
         return
             Objects.equals(id, that.id) &&
-            Objects.equals(supplierName, that.supplierName) &&
+            Objects.equals(name, that.name) &&
             Objects.equals(supplierReference, that.supplierReference) &&
             Objects.equals(bankAccountName, that.bankAccountName) &&
             Objects.equals(bankAccountBranch, that.bankAccountBranch) &&
@@ -316,6 +327,7 @@ public class SuppliersCriteria implements Serializable, Criteria {
             Objects.equals(webServiceUrl, that.webServiceUrl) &&
             Objects.equals(creditRating, that.creditRating) &&
             Objects.equals(activeFlag, that.activeFlag) &&
+            Objects.equals(thumbnailUrl, that.thumbnailUrl) &&
             Objects.equals(validFrom, that.validFrom) &&
             Objects.equals(validTo, that.validTo) &&
             Objects.equals(userId, that.userId) &&
@@ -329,7 +341,7 @@ public class SuppliersCriteria implements Serializable, Criteria {
     public int hashCode() {
         return Objects.hash(
         id,
-        supplierName,
+        name,
         supplierReference,
         bankAccountName,
         bankAccountBranch,
@@ -344,6 +356,7 @@ public class SuppliersCriteria implements Serializable, Criteria {
         webServiceUrl,
         creditRating,
         activeFlag,
+        thumbnailUrl,
         validFrom,
         validTo,
         userId,
@@ -358,7 +371,7 @@ public class SuppliersCriteria implements Serializable, Criteria {
     public String toString() {
         return "SuppliersCriteria{" +
                 (id != null ? "id=" + id + ", " : "") +
-                (supplierName != null ? "supplierName=" + supplierName + ", " : "") +
+                (name != null ? "name=" + name + ", " : "") +
                 (supplierReference != null ? "supplierReference=" + supplierReference + ", " : "") +
                 (bankAccountName != null ? "bankAccountName=" + bankAccountName + ", " : "") +
                 (bankAccountBranch != null ? "bankAccountBranch=" + bankAccountBranch + ", " : "") +
@@ -373,6 +386,7 @@ public class SuppliersCriteria implements Serializable, Criteria {
                 (webServiceUrl != null ? "webServiceUrl=" + webServiceUrl + ", " : "") +
                 (creditRating != null ? "creditRating=" + creditRating + ", " : "") +
                 (activeFlag != null ? "activeFlag=" + activeFlag + ", " : "") +
+                (thumbnailUrl != null ? "thumbnailUrl=" + thumbnailUrl + ", " : "") +
                 (validFrom != null ? "validFrom=" + validFrom + ", " : "") +
                 (validTo != null ? "validTo=" + validTo + ", " : "") +
                 (userId != null ? "userId=" + userId + ", " : "") +

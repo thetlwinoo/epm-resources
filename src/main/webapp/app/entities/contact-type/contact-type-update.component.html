@@ -10,12 +10,12 @@
                         readonly />
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="epmresourcesApp.contactType.contactTypeName" for="field_contactTypeName">Contact Type Name</label>
-                    <input type="text" class="form-control" name="contactTypeName" id="field_contactTypeName"
-                           formControlName="contactTypeName"/>
-                    <div *ngIf="editForm.get('contactTypeName').invalid && (editForm.get('contactTypeName').dirty || editForm.get('contactTypeName').touched)">
+                    <label class="form-control-label" jhiTranslate="epmresourcesApp.contactType.name" for="field_name">Name</label>
+                    <input type="text" class="form-control" name="name" id="field_name"
+                           formControlName="name"/>
+                    <div *ngIf="editForm.get('name').invalid && (editForm.get('name').dirty || editForm.get('name').touched)">
                         <small class="form-text text-danger"
-                               *ngIf="editForm.get('contactTypeName').errors.required" jhiTranslate="entity.validation.required">
+                               *ngIf="editForm.get('name').errors.required" jhiTranslate="entity.validation.required">
                         This field is required.
                         </small>
                     </div>

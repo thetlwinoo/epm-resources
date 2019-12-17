@@ -44,14 +44,14 @@
             "otherEntityName": "suppliers",
             "otherEntityRelationshipName": "uploadTransactions",
             "relationshipName": "supplier",
-            "otherEntityField": "supplierName"
+            "otherEntityField": "name"
         },
         {
             "relationshipType": "many-to-one",
             "otherEntityName": "uploadActionTypes",
             "otherEntityRelationshipName": "uploadTransactions",
             "relationshipName": "actionType",
-            "otherEntityField": "actionTypeName"
+            "otherEntityField": "name"
         }
     ],
     "changelogDate": "20191106102844",

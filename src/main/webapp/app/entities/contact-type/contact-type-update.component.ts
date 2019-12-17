@@ -17,7 +17,7 @@ export class ContactTypeUpdateComponent implements OnInit {
 
   editForm = this.fb.group({
     id: [],
-    contactTypeName: [null, [Validators.required]]
+    name: [null, [Validators.required]]
   });
 
   constructor(protected contactTypeService: ContactTypeService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
@@ -32,7 +32,7 @@ export class ContactTypeUpdateComponent implements OnInit {
   updateForm(contactType: IContactType) {
     this.editForm.patchValue({
       id: contactType.id,
-      contactTypeName: contactType.contactTypeName
+      name: contactType.name
     });
   }
 
@@ -54,7 +54,7 @@ export class ContactTypeUpdateComponent implements OnInit {
     return {
       ...new ContactType(),
       id: this.editForm.get(['id']).value,
-      contactTypeName: this.editForm.get(['contactTypeName']).value
+      name: this.editForm.get(['name']).value
     };
   }
 

@@ -26,7 +26,7 @@ export class StockItemsUpdatePage {
   pageTitle = element(by.id('jhi-stock-items-heading'));
   saveButton = element(by.id('save-entity'));
   cancelButton = element(by.id('cancel-save'));
-  stockItemNameInput = element(by.id('field_stockItemName'));
+  nameInput = element(by.id('field_name'));
   vendorCodeInput = element(by.id('field_vendorCode'));
   vendorSKUInput = element(by.id('field_vendorSKU'));
   generatedSKUInput = element(by.id('field_generatedSKU'));
@@ -74,12 +74,12 @@ export class StockItemsUpdatePage {
     return this.pageTitle.getAttribute('jhiTranslate');
   }
 
-  async setStockItemNameInput(stockItemName) {
-    await this.stockItemNameInput.sendKeys(stockItemName);
+  async setNameInput(name) {
+    await this.nameInput.sendKeys(name);
   }
 
-  async getStockItemNameInput() {
-    return await this.stockItemNameInput.getAttribute('value');
+  async getNameInput() {
+    return await this.nameInput.getAttribute('value');
   }
 
   async setVendorCodeInput(vendorCode) {

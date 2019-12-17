@@ -12,9 +12,9 @@ import org.mapstruct.*;
 public interface PurchaseOrderLinesMapper extends EntityMapper<PurchaseOrderLinesDTO, PurchaseOrderLines> {
 
     @Mapping(source = "packageType.id", target = "packageTypeId")
-    @Mapping(source = "packageType.packageTypeName", target = "packageTypePackageTypeName")
+    @Mapping(source = "packageType.name", target = "packageTypeName")
     @Mapping(source = "stockItem.id", target = "stockItemId")
-    @Mapping(source = "stockItem.stockItemName", target = "stockItemStockItemName")
+    @Mapping(source = "stockItem.name", target = "stockItemName")
     @Mapping(source = "purchaseOrder.id", target = "purchaseOrderId")
     PurchaseOrderLinesDTO toDto(PurchaseOrderLines purchaseOrderLines);
 

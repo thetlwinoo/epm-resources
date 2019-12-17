@@ -12,7 +12,7 @@ public class CountriesDTO implements Serializable {
     private Long id;
 
     @NotNull
-    private String countryName;
+    private String name;
 
     @NotNull
     private String formalName;
@@ -51,12 +51,12 @@ public class CountriesDTO implements Serializable {
         this.id = id;
     }
 
-    public String getCountryName() {
-        return countryName;
+    public String getName() {
+        return name;
     }
 
-    public void setCountryName(String countryName) {
-        this.countryName = countryName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getFormalName() {
@@ -172,7 +172,7 @@ public class CountriesDTO implements Serializable {
     public String toString() {
         return "CountriesDTO{" +
             "id=" + getId() +
-            ", countryName='" + getCountryName() + "'" +
+            ", name='" + getName() + "'" +
             ", formalName='" + getFormalName() + "'" +
             ", isoAplha3Code='" + getIsoAplha3Code() + "'" +
             ", isoNumericCode=" + getIsoNumericCode() +

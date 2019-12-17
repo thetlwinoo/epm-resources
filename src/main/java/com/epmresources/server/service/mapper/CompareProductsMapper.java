@@ -12,7 +12,7 @@ import org.mapstruct.*;
 public interface CompareProductsMapper extends EntityMapper<CompareProductsDTO, CompareProducts> {
 
     @Mapping(source = "product.id", target = "productId")
-    @Mapping(source = "product.productName", target = "productProductName")
+    @Mapping(source = "product.name", target = "productName")
     @Mapping(source = "compare.id", target = "compareId")
     CompareProductsDTO toDto(CompareProducts compareProducts);
 

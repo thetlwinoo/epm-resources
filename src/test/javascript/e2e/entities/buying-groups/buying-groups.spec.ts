@@ -41,14 +41,11 @@ describe('BuyingGroups e2e test', () => {
 
     await buyingGroupsComponentsPage.clickOnCreateButton();
     await promise.all([
-      buyingGroupsUpdatePage.setBuyingGroupNameInput('buyingGroupName'),
+      buyingGroupsUpdatePage.setNameInput('name'),
       buyingGroupsUpdatePage.setValidFromInput('01/01/2001' + protractor.Key.TAB + '02:30AM'),
       buyingGroupsUpdatePage.setValidToInput('01/01/2001' + protractor.Key.TAB + '02:30AM')
     ]);
-    expect(await buyingGroupsUpdatePage.getBuyingGroupNameInput()).to.eq(
-      'buyingGroupName',
-      'Expected BuyingGroupName value to be equals to buyingGroupName'
-    );
+    expect(await buyingGroupsUpdatePage.getNameInput()).to.eq('name', 'Expected Name value to be equals to name');
     expect(await buyingGroupsUpdatePage.getValidFromInput()).to.contain(
       '2001-01-01T02:30',
       'Expected validFrom value to be equals to 2000-12-31'

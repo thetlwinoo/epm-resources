@@ -91,8 +91,8 @@ public class MaterialsQueryService extends QueryService<Materials> {
             if (criteria.getId() != null) {
                 specification = specification.and(buildSpecification(criteria.getId(), Materials_.id));
             }
-            if (criteria.getMaterialName() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getMaterialName(), Materials_.materialName));
+            if (criteria.getName() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getName(), Materials_.name));
             }
         }
         return specification;

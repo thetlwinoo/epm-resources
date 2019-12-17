@@ -47,8 +47,7 @@ describe('Service Tests', () => {
         'image/png',
         'AAAAAAA',
         0,
-        false,
-        'AAAAAAA'
+        false
       );
     });
 
@@ -102,8 +101,7 @@ describe('Service Tests', () => {
             squarePhotoBlob: 'BBBBBB',
             watermarkPhotoBlob: 'BBBBBB',
             priority: 1,
-            defaultInd: true,
-            deleteToken: 'BBBBBB'
+            defaultInd: true
           },
           elemDefault
         );
@@ -138,8 +136,7 @@ describe('Service Tests', () => {
             squarePhotoBlob: 'BBBBBB',
             watermarkPhotoBlob: 'BBBBBB',
             priority: 1,
-            defaultInd: true,
-            deleteToken: 'BBBBBB'
+            defaultInd: true
           },
           elemDefault
         );

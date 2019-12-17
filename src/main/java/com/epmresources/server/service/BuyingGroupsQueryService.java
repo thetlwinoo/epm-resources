@@ -91,8 +91,8 @@ public class BuyingGroupsQueryService extends QueryService<BuyingGroups> {
             if (criteria.getId() != null) {
                 specification = specification.and(buildSpecification(criteria.getId(), BuyingGroups_.id));
             }
-            if (criteria.getBuyingGroupName() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getBuyingGroupName(), BuyingGroups_.buyingGroupName));
+            if (criteria.getName() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getName(), BuyingGroups_.name));
             }
             if (criteria.getValidFrom() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getValidFrom(), BuyingGroups_.validFrom));

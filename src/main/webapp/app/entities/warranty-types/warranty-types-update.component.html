@@ -10,12 +10,12 @@
                         readonly />
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="epmresourcesApp.warrantyTypes.warrantyTypeName" for="field_warrantyTypeName">Warranty Type Name</label>
-                    <input type="text" class="form-control" name="warrantyTypeName" id="field_warrantyTypeName"
-                           formControlName="warrantyTypeName"/>
-                    <div *ngIf="editForm.get('warrantyTypeName').invalid && (editForm.get('warrantyTypeName').dirty || editForm.get('warrantyTypeName').touched)">
+                    <label class="form-control-label" jhiTranslate="epmresourcesApp.warrantyTypes.name" for="field_name">Name</label>
+                    <input type="text" class="form-control" name="name" id="field_name"
+                           formControlName="name"/>
+                    <div *ngIf="editForm.get('name').invalid && (editForm.get('name').dirty || editForm.get('name').touched)">
                         <small class="form-text text-danger"
-                               *ngIf="editForm.get('warrantyTypeName').errors.required" jhiTranslate="entity.validation.required">
+                               *ngIf="editForm.get('name').errors.required" jhiTranslate="entity.validation.required">
                         This field is required.
                         </small>
                     </div>

@@ -19,14 +19,14 @@
             <thead>
             <tr>
             <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
-            <th scope="col" ><span jhiTranslate="epmresourcesApp.productOptionSet.productOptionSetValue">Product Option Set Value</span></th>
+            <th scope="col" ><span jhiTranslate="epmresourcesApp.productOptionSet.value">Value</span></th>
             <th scope="col"></th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let productOptionSet of productOptionSets ;trackBy: trackId">
                 <td><a [routerLink]="['/product-option-set', productOptionSet.id, 'view' ]">{{productOptionSet.id}}</a></td>
-                <td>{{productOptionSet.productOptionSetValue}}</td>
+                <td>{{productOptionSet.value}}</td>
                 <td class="text-right">
                     <div class="btn-group">
                         <button type="submit"

@@ -72,7 +72,7 @@ class StockItemTransactionsGatlingTest extends Simulation {
             .headers(headers_http_authenticated)
             .body(StringBody("""{
                 "id":null
-                , "transactionOccurredWhen":"2020-01-01T00:00:00.000Z"
+                , "transactionOccuredWhen":"2020-01-01T00:00:00.000Z"
                 , "quantity":"0"
                 , "lastEditedBy":"SAMPLE_TEXT"
                 , "lastEditedWhen":"2020-01-01T00:00:00.000Z"

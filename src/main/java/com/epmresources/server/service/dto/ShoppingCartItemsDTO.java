@@ -19,7 +19,7 @@ public class ShoppingCartItemsDTO implements Serializable {
 
     private Long stockItemId;
 
-    private String stockItemStockItemName;
+    private String stockItemName;
 
     private Long cartId;
 
@@ -63,12 +63,12 @@ public class ShoppingCartItemsDTO implements Serializable {
         this.stockItemId = stockItemsId;
     }
 
-    public String getStockItemStockItemName() {
-        return stockItemStockItemName;
+    public String getStockItemName() {
+        return stockItemName;
     }
 
-    public void setStockItemStockItemName(String stockItemsStockItemName) {
-        this.stockItemStockItemName = stockItemsStockItemName;
+    public void setStockItemName(String stockItemsName) {
+        this.stockItemName = stockItemsName;
     }
 
     public Long getCartId() {
@@ -108,7 +108,7 @@ public class ShoppingCartItemsDTO implements Serializable {
             ", lastEditedBy='" + getLastEditedBy() + "'" +
             ", lastEditedWhen='" + getLastEditedWhen() + "'" +
             ", stockItem=" + getStockItemId() +
-            ", stockItem='" + getStockItemStockItemName() + "'" +
+            ", stockItem='" + getStockItemName() + "'" +
             ", cart=" + getCartId() +
             "}";
     }

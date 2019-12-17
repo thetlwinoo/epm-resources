@@ -118,7 +118,7 @@
             "otherEntityName": "shipMethod",
             "otherEntityRelationshipName": "orders",
             "relationshipName": "shipMethod",
-            "otherEntityField": "shipMethodName"
+            "otherEntityField": "name"
         },
         {
             "relationshipType": "many-to-one",

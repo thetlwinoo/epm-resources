@@ -24,7 +24,7 @@ describe('Service Tests', () => {
       httpMock = injector.get(HttpTestingController);
       currentDate = moment();
 
-      elemDefault = new ReviewLines(0, 0, 'AAAAAAA', 0, 'AAAAAAA', 0, 'AAAAAAA', 'image/png', 'AAAAAAA', 'AAAAAAA', currentDate);
+      elemDefault = new ReviewLines(0, 0, 'AAAAAAA', 0, 'AAAAAAA', 0, 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', currentDate);
     });
 
     describe('Service methods', () => {
@@ -77,7 +77,7 @@ describe('Service Tests', () => {
             sellerReview: 'BBBBBB',
             deliveryRating: 1,
             deliveryReview: 'BBBBBB',
-            photo: 'BBBBBB',
+            thumbnailUrl: 'BBBBBB',
             lastEditedBy: 'BBBBBB',
             lastEditedWhen: currentDate.format(DATE_TIME_FORMAT)
           },
@@ -108,7 +108,7 @@ describe('Service Tests', () => {
             sellerReview: 'BBBBBB',
             deliveryRating: 1,
             deliveryReview: 'BBBBBB',
-            photo: 'BBBBBB',
+            thumbnailUrl: 'BBBBBB',
             lastEditedBy: 'BBBBBB',
             lastEditedWhen: currentDate.format(DATE_TIME_FORMAT)
           },

@@ -6,7 +6,7 @@ export interface IPurchaseOrders {
   orderDate?: Moment;
   expectedDeliveryDate?: Moment;
   supplierReference?: string;
-  isOrderFinalized?: boolean;
+  isOrderFinalized?: number;
   comments?: string;
   internalComments?: string;
   lastEditedBy?: string;
@@ -14,9 +14,9 @@ export interface IPurchaseOrders {
   purchaseOrderLineLists?: IPurchaseOrderLines[];
   contactPersonFullName?: string;
   contactPersonId?: number;
-  supplierSupplierName?: string;
+  supplierName?: string;
   supplierId?: number;
-  deliveryMethodDeliveryMethodName?: string;
+  deliveryMethodName?: string;
   deliveryMethodId?: number;
 }
 
@@ -26,7 +26,7 @@ export class PurchaseOrders implements IPurchaseOrders {
     public orderDate?: Moment,
     public expectedDeliveryDate?: Moment,
     public supplierReference?: string,
-    public isOrderFinalized?: boolean,
+    public isOrderFinalized?: number,
     public comments?: string,
     public internalComments?: string,
     public lastEditedBy?: string,
@@ -34,11 +34,9 @@ export class PurchaseOrders implements IPurchaseOrders {
     public purchaseOrderLineLists?: IPurchaseOrderLines[],
     public contactPersonFullName?: string,
     public contactPersonId?: number,
-    public supplierSupplierName?: string,
+    public supplierName?: string,
     public supplierId?: number,
-    public deliveryMethodDeliveryMethodName?: string,
+    public deliveryMethodName?: string,
     public deliveryMethodId?: number
-  ) {
-    this.isOrderFinalized = this.isOrderFinalized || false;
-  }
+  ) {}
 }

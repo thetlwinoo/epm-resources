@@ -9,11 +9,11 @@
             ]
         },
         {
-            "fieldName": "fromCurrencyCode",
+            "fieldName": "fromcode",
             "fieldType": "String"
         },
         {
-            "fieldName": "toCurrencyCode",
+            "fieldName": "tocode",
             "fieldType": "String"
         },
         {

@@ -30,7 +30,7 @@
             "otherEntityName": "phoneNumberType",
             "otherEntityRelationshipName": "personPhone",
             "relationshipName": "phoneNumberType",
-            "otherEntityField": "phoneNumberTypeName"
+            "otherEntityField": "name"
         }
     ],
     "changelogDate": "20191106102811",

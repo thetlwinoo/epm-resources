@@ -93,10 +93,10 @@
             <column name="default_ind" type="boolean">
                 <constraints nullable="true" />
             </column>
-            <column name="delete_token" type="varchar(1024)">
+            <column name="stock_item_id" type="bigint">
                 <constraints nullable="true" />
             </column>
-            <column name="stock_item_id" type="bigint">
+            <column name="product_category_id" type="bigint">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
@@ -148,7 +148,6 @@
             <column name="watermark_photo_blob_content_type" type="string"/>
             <column name="priority" type="numeric"/>
             <column name="default_ind" type="boolean"/>
-            <column name="delete_token" type="string"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here, do not remove-->
         </loadData>
     </changeSet>

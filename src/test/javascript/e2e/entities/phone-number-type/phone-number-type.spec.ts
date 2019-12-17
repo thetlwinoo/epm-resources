@@ -40,11 +40,8 @@ describe('PhoneNumberType e2e test', () => {
     const nbButtonsBeforeCreate = await phoneNumberTypeComponentsPage.countDeleteButtons();
 
     await phoneNumberTypeComponentsPage.clickOnCreateButton();
-    await promise.all([phoneNumberTypeUpdatePage.setPhoneNumberTypeNameInput('phoneNumberTypeName')]);
-    expect(await phoneNumberTypeUpdatePage.getPhoneNumberTypeNameInput()).to.eq(
-      'phoneNumberTypeName',
-      'Expected PhoneNumberTypeName value to be equals to phoneNumberTypeName'
-    );
+    await promise.all([phoneNumberTypeUpdatePage.setNameInput('name')]);
+    expect(await phoneNumberTypeUpdatePage.getNameInput()).to.eq('name', 'Expected Name value to be equals to name');
     await phoneNumberTypeUpdatePage.save();
     expect(await phoneNumberTypeUpdatePage.getSaveButton().isPresent(), 'Expected save button disappear').to.be.false;
 

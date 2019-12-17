@@ -25,8 +25,8 @@ public class Cities implements Serializable {
     private Long id;
 
     @NotNull
-    @Column(name = "city_name", nullable = false)
-    private String cityName;
+    @Column(name = "name", nullable = false)
+    private String name;
 
     @Column(name = "location")
     private String location;
@@ -55,17 +55,17 @@ public class Cities implements Serializable {
         this.id = id;
     }
 
-    public String getCityName() {
-        return cityName;
+    public String getName() {
+        return name;
     }
 
-    public Cities cityName(String cityName) {
-        this.cityName = cityName;
+    public Cities name(String name) {
+        this.name = name;
         return this;
     }
 
-    public void setCityName(String cityName) {
-        this.cityName = cityName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getLocation() {
@@ -154,7 +154,7 @@ public class Cities implements Serializable {
     public String toString() {
         return "Cities{" +
             "id=" + getId() +
-            ", cityName='" + getCityName() + "'" +
+            ", name='" + getName() + "'" +
             ", location='" + getLocation() + "'" +
             ", latestRecordedPopulation=" + getLatestRecordedPopulation() +
             ", validFrom='" + getValidFrom() + "'" +

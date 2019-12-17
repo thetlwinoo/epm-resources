@@ -12,9 +12,9 @@ export interface IUploadTransactions {
   lastEditedWhen?: Moment;
   importDocumentLists?: ISupplierImportedDocument[];
   stockItemTempLists?: IStockItemTemp[];
-  supplierSupplierName?: string;
+  supplierName?: string;
   supplierId?: number;
-  actionTypeActionTypeName?: string;
+  actionTypeName?: string;
   actionTypeId?: number;
 }
 
@@ -29,9 +29,9 @@ export class UploadTransactions implements IUploadTransactions {
     public lastEditedWhen?: Moment,
     public importDocumentLists?: ISupplierImportedDocument[],
     public stockItemTempLists?: IStockItemTemp[],
-    public supplierSupplierName?: string,
+    public supplierName?: string,
     public supplierId?: number,
-    public actionTypeActionTypeName?: string,
+    public actionTypeName?: string,
     public actionTypeId?: number
   ) {}
 }

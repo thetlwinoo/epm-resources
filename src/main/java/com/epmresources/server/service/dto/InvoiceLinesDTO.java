@@ -39,11 +39,11 @@ public class InvoiceLinesDTO implements Serializable {
 
     private Long packageTypeId;
 
-    private String packageTypePackageTypeName;
+    private String packageTypeName;
 
     private Long stockItemId;
 
-    private String stockItemStockItemName;
+    private String stockItemName;
 
     private Long invoiceId;
 
@@ -135,12 +135,12 @@ public class InvoiceLinesDTO implements Serializable {
         this.packageTypeId = packageTypesId;
     }
 
-    public String getPackageTypePackageTypeName() {
-        return packageTypePackageTypeName;
+    public String getPackageTypeName() {
+        return packageTypeName;
     }
 
-    public void setPackageTypePackageTypeName(String packageTypesPackageTypeName) {
-        this.packageTypePackageTypeName = packageTypesPackageTypeName;
+    public void setPackageTypeName(String packageTypesName) {
+        this.packageTypeName = packageTypesName;
     }
 
     public Long getStockItemId() {
@@ -151,12 +151,12 @@ public class InvoiceLinesDTO implements Serializable {
         this.stockItemId = stockItemsId;
     }
 
-    public String getStockItemStockItemName() {
-        return stockItemStockItemName;
+    public String getStockItemName() {
+        return stockItemName;
     }
 
-    public void setStockItemStockItemName(String stockItemsStockItemName) {
-        this.stockItemStockItemName = stockItemsStockItemName;
+    public void setStockItemName(String stockItemsName) {
+        this.stockItemName = stockItemsName;
     }
 
     public Long getInvoiceId() {
@@ -202,9 +202,9 @@ public class InvoiceLinesDTO implements Serializable {
             ", lastEditedBy='" + getLastEditedBy() + "'" +
             ", lastEditedWhen='" + getLastEditedWhen() + "'" +
             ", packageType=" + getPackageTypeId() +
-            ", packageType='" + getPackageTypePackageTypeName() + "'" +
+            ", packageType='" + getPackageTypeName() + "'" +
             ", stockItem=" + getStockItemId() +
-            ", stockItem='" + getStockItemStockItemName() + "'" +
+            ", stockItem='" + getStockItemName() + "'" +
             ", invoice=" + getInvoiceId() +
             "}";
     }

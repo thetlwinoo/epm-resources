@@ -72,7 +72,7 @@ class CountriesGatlingTest extends Simulation {
             .headers(headers_http_authenticated)
             .body(StringBody("""{
                 "id":null
-                , "countryName":"SAMPLE_TEXT"
+                , "name":"SAMPLE_TEXT"
                 , "formalName":"SAMPLE_TEXT"
                 , "isoAplha3Code":"SAMPLE_TEXT"
                 , "isoNumericCode":"0"

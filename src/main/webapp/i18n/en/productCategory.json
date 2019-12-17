@@ -18,7 +18,8 @@
       },
       "name": "Name",
       "shortLabel": "Short Label",
-      "photo": "Photo",
+      "thumbnailUrl": "Thumbnail Url",
+      "photoList": "Photo List",
       "parent": "Parent"
     }
   }

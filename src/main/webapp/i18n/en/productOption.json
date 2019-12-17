@@ -16,7 +16,7 @@
       "detail": {
         "title": "Product Option"
       },
-      "productOptionValue": "Product Option Value",
+      "value": "Value",
       "productOptionSet": "Product Option Set",
       "supplier": "Supplier"
     }

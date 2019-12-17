@@ -2,7 +2,7 @@
     "name": "ProductTags",
     "fields": [
         {
-            "fieldName": "tagName",
+            "fieldName": "name",
             "fieldType": "String",
             "fieldValidateRules": [
                 "required"
@@ -15,7 +15,7 @@
             "otherEntityName": "products",
             "otherEntityRelationshipName": "productTags",
             "relationshipName": "product",
-            "otherEntityField": "productName"
+            "otherEntityField": "name"
         }
     ],
     "changelogDate": "20191106102914",

@@ -4,7 +4,6 @@ import { NavBarPage, SignInPage } from '../../page-objects/jhi-page-objects';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { SuppliersComponentsPage, SuppliersDeleteDialog, SuppliersUpdatePage } from './suppliers.page-object';
-import * as path from 'path';
 
 const expect = chai.expect;
 
@@ -14,9 +13,6 @@ describe('Suppliers e2e test', () => {
   let suppliersComponentsPage: SuppliersComponentsPage;
   let suppliersUpdatePage: SuppliersUpdatePage;
   let suppliersDeleteDialog: SuppliersDeleteDialog;
-  const fileNameToUpload = 'logo-jhipster.png';
-  const fileToUpload = '../../../../../../src/main/webapp/content/images/' + fileNameToUpload;
-  const absolutePath = path.resolve(__dirname, fileToUpload);
 
   before(async () => {
     await browser.get('/');
@@ -45,7 +41,7 @@ describe('Suppliers e2e test', () => {
 
     await suppliersComponentsPage.clickOnCreateButton();
     await promise.all([
-      suppliersUpdatePage.setSupplierNameInput('supplierName'),
+      suppliersUpdatePage.setNameInput('name'),
       suppliersUpdatePage.setSupplierReferenceInput('supplierReference'),
       suppliersUpdatePage.setBankAccountNameInput('bankAccountName'),
       suppliersUpdatePage.setBankAccountBranchInput('bankAccountBranch'),
@@ -59,7 +55,7 @@ describe('Suppliers e2e test', () => {
       suppliersUpdatePage.setWebsiteURLInput('websiteURL'),
       suppliersUpdatePage.setWebServiceUrlInput('webServiceUrl'),
       suppliersUpdatePage.setCreditRatingInput('5'),
-      suppliersUpdatePage.setAvatarInput(absolutePath),
+      suppliersUpdatePage.setThumbnailUrlInput('thumbnailUrl'),
       suppliersUpdatePage.setValidFromInput('01/01/2001' + protractor.Key.TAB + '02:30AM'),
       suppliersUpdatePage.setValidToInput('01/01/2001' + protractor.Key.TAB + '02:30AM'),
       suppliersUpdatePage.userSelectLastOption(),
@@ -68,10 +64,7 @@ describe('Suppliers e2e test', () => {
       suppliersUpdatePage.deliveryCitySelectLastOption(),
       suppliersUpdatePage.postalCitySelectLastOption()
     ]);
-    expect(await suppliersUpdatePage.getSupplierNameInput()).to.eq(
-      'supplierName',
-      'Expected SupplierName value to be equals to supplierName'
-    );
+    expect(await suppliersUpdatePage.getNameInput()).to.eq('name', 'Expected Name value to be equals to name');
     expect(await suppliersUpdatePage.getSupplierReferenceInput()).to.eq(
       'supplierReference',
       'Expected SupplierReference value to be equals to supplierReference'
@@ -117,9 +110,9 @@ describe('Suppliers e2e test', () => {
       await suppliersUpdatePage.getActiveFlagInput().click();
       expect(await suppliersUpdatePage.getActiveFlagInput().isSelected(), 'Expected activeFlag to be selected').to.be.true;
     }
-    expect(await suppliersUpdatePage.getAvatarInput()).to.endsWith(
-      fileNameToUpload,
-      'Expected Avatar value to be end with ' + fileNameToUpload
+    expect(await suppliersUpdatePage.getThumbnailUrlInput()).to.eq(
+      'thumbnailUrl',
+      'Expected ThumbnailUrl value to be equals to thumbnailUrl'
     );
     expect(await suppliersUpdatePage.getValidFromInput()).to.contain(
       '2001-01-01T02:30',

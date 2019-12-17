@@ -10,20 +10,20 @@
                         readonly />
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="epmresourcesApp.currency.currencyCode" for="field_currencyCode">Currency Code</label>
-                    <input type="text" class="form-control" name="currencyCode" id="field_currencyCode"
-                           formControlName="currencyCode"/>
-                    <div *ngIf="editForm.get('currencyCode').invalid && (editForm.get('currencyCode').dirty || editForm.get('currencyCode').touched)">
+                    <label class="form-control-label" jhiTranslate="epmresourcesApp.currency.code" for="field_code">Code</label>
+                    <input type="text" class="form-control" name="code" id="field_code"
+                           formControlName="code"/>
+                    <div *ngIf="editForm.get('code').invalid && (editForm.get('code').dirty || editForm.get('code').touched)">
                         <small class="form-text text-danger"
-                               *ngIf="editForm.get('currencyCode').errors.required" jhiTranslate="entity.validation.required">
+                               *ngIf="editForm.get('code').errors.required" jhiTranslate="entity.validation.required">
                         This field is required.
                         </small>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="epmresourcesApp.currency.currencyName" for="field_currencyName">Currency Name</label>
-                    <input type="text" class="form-control" name="currencyName" id="field_currencyName"
-                           formControlName="currencyName"/>
+                    <label class="form-control-label" jhiTranslate="epmresourcesApp.currency.name" for="field_name">Name</label>
+                    <input type="text" class="form-control" name="name" id="field_name"
+                           formControlName="name"/>
                 </div>
 
             </div>

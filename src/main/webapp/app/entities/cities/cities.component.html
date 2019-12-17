@@ -19,7 +19,7 @@
             <thead>
             <tr>
             <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
-            <th scope="col" ><span jhiTranslate="epmresourcesApp.cities.cityName">City Name</span></th>
+            <th scope="col" ><span jhiTranslate="epmresourcesApp.cities.name">Name</span></th>
             <th scope="col" ><span jhiTranslate="epmresourcesApp.cities.location">Location</span></th>
             <th scope="col" ><span jhiTranslate="epmresourcesApp.cities.latestRecordedPopulation">Latest Recorded Population</span></th>
             <th scope="col" ><span jhiTranslate="epmresourcesApp.cities.validFrom">Valid From</span></th>
@@ -31,14 +31,14 @@
             <tbody>
             <tr *ngFor="let cities of cities ;trackBy: trackId">
                 <td><a [routerLink]="['/cities', cities.id, 'view' ]">{{cities.id}}</a></td>
-                <td>{{cities.cityName}}</td>
+                <td>{{cities.name}}</td>
                 <td>{{cities.location}}</td>
                 <td>{{cities.latestRecordedPopulation}}</td>
                 <td>{{cities.validFrom | date:'medium'}}</td>
                 <td>{{cities.validTo | date:'medium'}}</td>
                 <td>
                     <div *ngIf="cities.stateProvinceId">
-                        <a [routerLink]="['/state-provinces', cities.stateProvinceId , 'view' ]" >{{cities.stateProvinceStateProvinceName}}</a>
+                        <a [routerLink]="['/state-provinces', cities.stateProvinceId , 'view' ]" >{{cities.stateProvinceName}}</a>
                     </div>
                 </td>
                 <td class="text-right">

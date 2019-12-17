@@ -2,16 +2,17 @@ import { Moment } from 'moment';
 
 export interface IStockItemTransactions {
   id?: number;
-  transactionOccurredWhen?: Moment;
+  transactionOccuredWhen?: Moment;
   quantity?: number;
   lastEditedBy?: string;
   lastEditedWhen?: Moment;
-  stockItemStockItemName?: string;
+  stockItemName?: string;
   stockItemId?: number;
   customerId?: number;
   invoiceId?: number;
-  supplierSupplierName?: string;
+  supplierName?: string;
   supplierId?: number;
+  transactionTypeName?: string;
   transactionTypeId?: number;
   purchaseOrderId?: number;
 }
@@ -19,16 +20,17 @@ export interface IStockItemTransactions {
 export class StockItemTransactions implements IStockItemTransactions {
   constructor(
     public id?: number,
-    public transactionOccurredWhen?: Moment,
+    public transactionOccuredWhen?: Moment,
     public quantity?: number,
     public lastEditedBy?: string,
     public lastEditedWhen?: Moment,
-    public stockItemStockItemName?: string,
+    public stockItemName?: string,
     public stockItemId?: number,
     public customerId?: number,
     public invoiceId?: number,
-    public supplierSupplierName?: string,
+    public supplierName?: string,
     public supplierId?: number,
+    public transactionTypeName?: string,
     public transactionTypeId?: number,
     public purchaseOrderId?: number
   ) {}

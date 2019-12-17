@@ -26,18 +26,18 @@ export class ContactTypeUpdatePage {
   pageTitle = element(by.id('jhi-contact-type-heading'));
   saveButton = element(by.id('save-entity'));
   cancelButton = element(by.id('cancel-save'));
-  contactTypeNameInput = element(by.id('field_contactTypeName'));
+  nameInput = element(by.id('field_name'));
 
   async getPageTitle() {
     return this.pageTitle.getAttribute('jhiTranslate');
   }
 
-  async setContactTypeNameInput(contactTypeName) {
-    await this.contactTypeNameInput.sendKeys(contactTypeName);
+  async setNameInput(name) {
+    await this.nameInput.sendKeys(name);
   }
 
-  async getContactTypeNameInput() {
-    return await this.contactTypeNameInput.getAttribute('value');
+  async getNameInput() {
+    return await this.nameInput.getAttribute('value');
   }
 
   async save(timeout?: number) {

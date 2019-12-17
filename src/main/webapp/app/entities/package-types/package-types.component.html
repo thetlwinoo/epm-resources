@@ -19,7 +19,7 @@
             <thead>
             <tr>
             <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
-            <th scope="col" ><span jhiTranslate="epmresourcesApp.packageTypes.packageTypeName">Package Type Name</span></th>
+            <th scope="col" ><span jhiTranslate="epmresourcesApp.packageTypes.name">Name</span></th>
             <th scope="col" ><span jhiTranslate="epmresourcesApp.packageTypes.validFrom">Valid From</span></th>
             <th scope="col" ><span jhiTranslate="epmresourcesApp.packageTypes.validTo">Valid To</span></th>
             <th scope="col"></th>
@@ -28,7 +28,7 @@
             <tbody>
             <tr *ngFor="let packageTypes of packageTypes ;trackBy: trackId">
                 <td><a [routerLink]="['/package-types', packageTypes.id, 'view' ]">{{packageTypes.id}}</a></td>
-                <td>{{packageTypes.packageTypeName}}</td>
+                <td>{{packageTypes.name}}</td>
                 <td>{{packageTypes.validFrom | date:'medium'}}</td>
                 <td>{{packageTypes.validTo | date:'medium'}}</td>
                 <td class="text-right">

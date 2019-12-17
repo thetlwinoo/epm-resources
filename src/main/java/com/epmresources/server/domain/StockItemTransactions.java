@@ -26,11 +26,10 @@ public class StockItemTransactions implements Serializable {
     private Long id;
 
     @NotNull
-    @Column(name = "transaction_occurred_when", nullable = false)
-    private Instant transactionOccurredWhen;
+    @Column(name = "transaction_occured_when", nullable = false)
+    private Instant transactionOccuredWhen;
 
-    @NotNull
-    @Column(name = "quantity", precision = 21, scale = 2, nullable = false)
+    @Column(name = "quantity", precision = 21, scale = 2)
     private BigDecimal quantity;
 
     @Column(name = "last_edited_by")
@@ -72,17 +71,17 @@ public class StockItemTransactions implements Serializable {
         this.id = id;
     }
 
-    public Instant getTransactionOccurredWhen() {
-        return transactionOccurredWhen;
+    public Instant getTransactionOccuredWhen() {
+        return transactionOccuredWhen;
     }
 
-    public StockItemTransactions transactionOccurredWhen(Instant transactionOccurredWhen) {
-        this.transactionOccurredWhen = transactionOccurredWhen;
+    public StockItemTransactions transactionOccuredWhen(Instant transactionOccuredWhen) {
+        this.transactionOccuredWhen = transactionOccuredWhen;
         return this;
     }
 
-    public void setTransactionOccurredWhen(Instant transactionOccurredWhen) {
-        this.transactionOccurredWhen = transactionOccurredWhen;
+    public void setTransactionOccuredWhen(Instant transactionOccuredWhen) {
+        this.transactionOccuredWhen = transactionOccuredWhen;
     }
 
     public BigDecimal getQuantity() {
@@ -223,7 +222,7 @@ public class StockItemTransactions implements Serializable {
     public String toString() {
         return "StockItemTransactions{" +
             "id=" + getId() +
-            ", transactionOccurredWhen='" + getTransactionOccurredWhen() + "'" +
+            ", transactionOccuredWhen='" + getTransactionOccuredWhen() + "'" +
             ", quantity=" + getQuantity() +
             ", lastEditedBy='" + getLastEditedBy() + "'" +
             ", lastEditedWhen='" + getLastEditedWhen() + "'" +

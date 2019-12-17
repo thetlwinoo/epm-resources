@@ -40,8 +40,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = EpmresourcesApp.class)
 public class BuyingGroupsResourceIT {
 
-    private static final String DEFAULT_BUYING_GROUP_NAME = "AAAAAAAAAA";
-    private static final String UPDATED_BUYING_GROUP_NAME = "BBBBBBBBBB";
+    private static final String DEFAULT_NAME = "AAAAAAAAAA";
+    private static final String UPDATED_NAME = "BBBBBBBBBB";
 
     private static final Instant DEFAULT_VALID_FROM = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_VALID_FROM = Instant.now().truncatedTo(ChronoUnit.MILLIS);
@@ -100,7 +100,7 @@ public class BuyingGroupsResourceIT {
      */
     public static BuyingGroups createEntity(EntityManager em) {
         BuyingGroups buyingGroups = new BuyingGroups()
-            .buyingGroupName(DEFAULT_BUYING_GROUP_NAME)
+            .name(DEFAULT_NAME)
             .validFrom(DEFAULT_VALID_FROM)
             .validTo(DEFAULT_VALID_TO);
         return buyingGroups;
@@ -113,7 +113,7 @@ public class BuyingGroupsResourceIT {
      */
     public static BuyingGroups createUpdatedEntity(EntityManager em) {
         BuyingGroups buyingGroups = new BuyingGroups()
-            .buyingGroupName(UPDATED_BUYING_GROUP_NAME)
+            .name(UPDATED_NAME)
             .validFrom(UPDATED_VALID_FROM)
             .validTo(UPDATED_VALID_TO);
         return buyingGroups;
@@ -140,7 +140,7 @@ public class BuyingGroupsResourceIT {
         List<BuyingGroups> buyingGroupsList = buyingGroupsRepository.findAll();
         assertThat(buyingGroupsList).hasSize(databaseSizeBeforeCreate + 1);
         BuyingGroups testBuyingGroups = buyingGroupsList.get(buyingGroupsList.size() - 1);
-        assertThat(testBuyingGroups.getBuyingGroupName()).isEqualTo(DEFAULT_BUYING_GROUP_NAME);
+        assertThat(testBuyingGroups.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testBuyingGroups.getValidFrom()).isEqualTo(DEFAULT_VALID_FROM);
         assertThat(testBuyingGroups.getValidTo()).isEqualTo(DEFAULT_VALID_TO);
     }
@@ -215,7 +215,7 @@ public class BuyingGroupsResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(buyingGroups.getId().intValue())))
-            .andExpect(jsonPath("$.[*].buyingGroupName").value(hasItem(DEFAULT_BUYING_GROUP_NAME)))
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].validFrom").value(hasItem(DEFAULT_VALID_FROM.toString())))
             .andExpect(jsonPath("$.[*].validTo").value(hasItem(DEFAULT_VALID_TO.toString())));
     }
@@ -231,86 +231,86 @@ public class BuyingGroupsResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(buyingGroups.getId().intValue()))
-            .andExpect(jsonPath("$.buyingGroupName").value(DEFAULT_BUYING_GROUP_NAME))
+            .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
             .andExpect(jsonPath("$.validFrom").value(DEFAULT_VALID_FROM.toString()))
             .andExpect(jsonPath("$.validTo").value(DEFAULT_VALID_TO.toString()));
     }
 
     @Test
     @Transactional
-    public void getAllBuyingGroupsByBuyingGroupNameIsEqualToSomething() throws Exception {
+    public void getAllBuyingGroupsByNameIsEqualToSomething() throws Exception {
         // Initialize the database
         buyingGroupsRepository.saveAndFlush(buyingGroups);
 
-        // Get all the buyingGroupsList where buyingGroupName equals to DEFAULT_BUYING_GROUP_NAME
-        defaultBuyingGroupsShouldBeFound("buyingGroupName.equals=" + DEFAULT_BUYING_GROUP_NAME);
+        // Get all the buyingGroupsList where name equals to DEFAULT_NAME
+        defaultBuyingGroupsShouldBeFound("name.equals=" + DEFAULT_NAME);
 
-        // Get all the buyingGroupsList where buyingGroupName equals to UPDATED_BUYING_GROUP_NAME
-        defaultBuyingGroupsShouldNotBeFound("buyingGroupName.equals=" + UPDATED_BUYING_GROUP_NAME);
+        // Get all the buyingGroupsList where name equals to UPDATED_NAME
+        defaultBuyingGroupsShouldNotBeFound("name.equals=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllBuyingGroupsByBuyingGroupNameIsNotEqualToSomething() throws Exception {
+    public void getAllBuyingGroupsByNameIsNotEqualToSomething() throws Exception {
         // Initialize the database
         buyingGroupsRepository.saveAndFlush(buyingGroups);
 
-        // Get all the buyingGroupsList where buyingGroupName not equals to DEFAULT_BUYING_GROUP_NAME
-        defaultBuyingGroupsShouldNotBeFound("buyingGroupName.notEquals=" + DEFAULT_BUYING_GROUP_NAME);
+        // Get all the buyingGroupsList where name not equals to DEFAULT_NAME
+        defaultBuyingGroupsShouldNotBeFound("name.notEquals=" + DEFAULT_NAME);
 
-        // Get all the buyingGroupsList where buyingGroupName not equals to UPDATED_BUYING_GROUP_NAME
-        defaultBuyingGroupsShouldBeFound("buyingGroupName.notEquals=" + UPDATED_BUYING_GROUP_NAME);
+        // Get all the buyingGroupsList where name not equals to UPDATED_NAME
+        defaultBuyingGroupsShouldBeFound("name.notEquals=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllBuyingGroupsByBuyingGroupNameIsInShouldWork() throws Exception {
+    public void getAllBuyingGroupsByNameIsInShouldWork() throws Exception {
         // Initialize the database
         buyingGroupsRepository.saveAndFlush(buyingGroups);
 
-        // Get all the buyingGroupsList where buyingGroupName in DEFAULT_BUYING_GROUP_NAME or UPDATED_BUYING_GROUP_NAME
-        defaultBuyingGroupsShouldBeFound("buyingGroupName.in=" + DEFAULT_BUYING_GROUP_NAME + "," + UPDATED_BUYING_GROUP_NAME);
+        // Get all the buyingGroupsList where name in DEFAULT_NAME or UPDATED_NAME
+        defaultBuyingGroupsShouldBeFound("name.in=" + DEFAULT_NAME + "," + UPDATED_NAME);
 
-        // Get all the buyingGroupsList where buyingGroupName equals to UPDATED_BUYING_GROUP_NAME
-        defaultBuyingGroupsShouldNotBeFound("buyingGroupName.in=" + UPDATED_BUYING_GROUP_NAME);
+        // Get all the buyingGroupsList where name equals to UPDATED_NAME
+        defaultBuyingGroupsShouldNotBeFound("name.in=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllBuyingGroupsByBuyingGroupNameIsNullOrNotNull() throws Exception {
+    public void getAllBuyingGroupsByNameIsNullOrNotNull() throws Exception {
         // Initialize the database
         buyingGroupsRepository.saveAndFlush(buyingGroups);
 
-        // Get all the buyingGroupsList where buyingGroupName is not null
-        defaultBuyingGroupsShouldBeFound("buyingGroupName.specified=true");
+        // Get all the buyingGroupsList where name is not null
+        defaultBuyingGroupsShouldBeFound("name.specified=true");
 
-        // Get all the buyingGroupsList where buyingGroupName is null
-        defaultBuyingGroupsShouldNotBeFound("buyingGroupName.specified=false");
+        // Get all the buyingGroupsList where name is null
+        defaultBuyingGroupsShouldNotBeFound("name.specified=false");
     }
                 @Test
     @Transactional
-    public void getAllBuyingGroupsByBuyingGroupNameContainsSomething() throws Exception {
+    public void getAllBuyingGroupsByNameContainsSomething() throws Exception {
         // Initialize the database
         buyingGroupsRepository.saveAndFlush(buyingGroups);
 
-        // Get all the buyingGroupsList where buyingGroupName contains DEFAULT_BUYING_GROUP_NAME
-        defaultBuyingGroupsShouldBeFound("buyingGroupName.contains=" + DEFAULT_BUYING_GROUP_NAME);
+        // Get all the buyingGroupsList where name contains DEFAULT_NAME
+        defaultBuyingGroupsShouldBeFound("name.contains=" + DEFAULT_NAME);
 
-        // Get all the buyingGroupsList where buyingGroupName contains UPDATED_BUYING_GROUP_NAME
-        defaultBuyingGroupsShouldNotBeFound("buyingGroupName.contains=" + UPDATED_BUYING_GROUP_NAME);
+        // Get all the buyingGroupsList where name contains UPDATED_NAME
+        defaultBuyingGroupsShouldNotBeFound("name.contains=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllBuyingGroupsByBuyingGroupNameNotContainsSomething() throws Exception {
+    public void getAllBuyingGroupsByNameNotContainsSomething() throws Exception {
         // Initialize the database
         buyingGroupsRepository.saveAndFlush(buyingGroups);
 
-        // Get all the buyingGroupsList where buyingGroupName does not contain DEFAULT_BUYING_GROUP_NAME
-        defaultBuyingGroupsShouldNotBeFound("buyingGroupName.doesNotContain=" + DEFAULT_BUYING_GROUP_NAME);
+        // Get all the buyingGroupsList where name does not contain DEFAULT_NAME
+        defaultBuyingGroupsShouldNotBeFound("name.doesNotContain=" + DEFAULT_NAME);
 
-        // Get all the buyingGroupsList where buyingGroupName does not contain UPDATED_BUYING_GROUP_NAME
-        defaultBuyingGroupsShouldBeFound("buyingGroupName.doesNotContain=" + UPDATED_BUYING_GROUP_NAME);
+        // Get all the buyingGroupsList where name does not contain UPDATED_NAME
+        defaultBuyingGroupsShouldBeFound("name.doesNotContain=" + UPDATED_NAME);
     }
 
 
@@ -425,7 +425,7 @@ public class BuyingGroupsResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(buyingGroups.getId().intValue())))
-            .andExpect(jsonPath("$.[*].buyingGroupName").value(hasItem(DEFAULT_BUYING_GROUP_NAME)))
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].validFrom").value(hasItem(DEFAULT_VALID_FROM.toString())))
             .andExpect(jsonPath("$.[*].validTo").value(hasItem(DEFAULT_VALID_TO.toString())));
 
@@ -475,7 +475,7 @@ public class BuyingGroupsResourceIT {
         // Disconnect from session so that the updates on updatedBuyingGroups are not directly saved in db
         em.detach(updatedBuyingGroups);
         updatedBuyingGroups
-            .buyingGroupName(UPDATED_BUYING_GROUP_NAME)
+            .name(UPDATED_NAME)
             .validFrom(UPDATED_VALID_FROM)
             .validTo(UPDATED_VALID_TO);
         BuyingGroupsDTO buyingGroupsDTO = buyingGroupsMapper.toDto(updatedBuyingGroups);
@@ -489,7 +489,7 @@ public class BuyingGroupsResourceIT {
         List<BuyingGroups> buyingGroupsList = buyingGroupsRepository.findAll();
         assertThat(buyingGroupsList).hasSize(databaseSizeBeforeUpdate);
         BuyingGroups testBuyingGroups = buyingGroupsList.get(buyingGroupsList.size() - 1);
-        assertThat(testBuyingGroups.getBuyingGroupName()).isEqualTo(UPDATED_BUYING_GROUP_NAME);
+        assertThat(testBuyingGroups.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testBuyingGroups.getValidFrom()).isEqualTo(UPDATED_VALID_FROM);
         assertThat(testBuyingGroups.getValidTo()).isEqualTo(UPDATED_VALID_TO);
     }

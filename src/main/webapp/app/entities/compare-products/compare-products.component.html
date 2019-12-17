@@ -29,7 +29,7 @@
                 <td><a [routerLink]="['/compare-products', compareProducts.id, 'view' ]">{{compareProducts.id}}</a></td>
                 <td>
                     <div *ngIf="compareProducts.productId">
-                        <a [routerLink]="['/products', compareProducts.productId , 'view' ]" >{{compareProducts.productProductName}}</a>
+                        <a [routerLink]="['/products', compareProducts.productId , 'view' ]" >{{compareProducts.productName}}</a>
                     </div>
                 </td>
                 <td>

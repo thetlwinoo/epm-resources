@@ -14,7 +14,7 @@ public interface ProductCatalogMapper extends EntityMapper<ProductCatalogDTO, Pr
     @Mapping(source = "productCategory.id", target = "productCategoryId")
     @Mapping(source = "productCategory.name", target = "productCategoryName")
     @Mapping(source = "product.id", target = "productId")
-    @Mapping(source = "product.productName", target = "productProductName")
+    @Mapping(source = "product.name", target = "productName")
     ProductCatalogDTO toDto(ProductCatalog productCatalog);
 
     @Mapping(source = "productCategoryId", target = "productCategory")

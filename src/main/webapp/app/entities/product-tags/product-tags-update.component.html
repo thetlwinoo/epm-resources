@@ -10,12 +10,12 @@
                         readonly />
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="epmresourcesApp.productTags.tagName" for="field_tagName">Tag Name</label>
-                    <input type="text" class="form-control" name="tagName" id="field_tagName"
-                           formControlName="tagName"/>
-                    <div *ngIf="editForm.get('tagName').invalid && (editForm.get('tagName').dirty || editForm.get('tagName').touched)">
+                    <label class="form-control-label" jhiTranslate="epmresourcesApp.productTags.name" for="field_name">Name</label>
+                    <input type="text" class="form-control" name="name" id="field_name"
+                           formControlName="name"/>
+                    <div *ngIf="editForm.get('name').invalid && (editForm.get('name').dirty || editForm.get('name').touched)">
                         <small class="form-text text-danger"
-                               *ngIf="editForm.get('tagName').errors.required" jhiTranslate="entity.validation.required">
+                               *ngIf="editForm.get('name').errors.required" jhiTranslate="entity.validation.required">
                         This field is required.
                         </small>
                     </div>
@@ -25,7 +25,7 @@
                     <label class="form-control-label" jhiTranslate="epmresourcesApp.productTags.product" for="field_product">Product</label>
                     <select class="form-control" id="field_product" name="product" formControlName="productId">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="productsOption.id" *ngFor="let productsOption of products; trackBy: trackProductsById">{{productsOption.productName}}</option>
+                        <option [ngValue]="productsOption.id" *ngFor="let productsOption of products; trackBy: trackProductsById">{{productsOption.name}}</option>
                     </select>
                 </div>
             </div>

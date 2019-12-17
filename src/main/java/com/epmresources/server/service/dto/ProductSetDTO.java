@@ -11,7 +11,7 @@ public class ProductSetDTO implements Serializable {
     private Long id;
 
     @NotNull
-    private String productSetName;
+    private String name;
 
     @NotNull
     private Integer noOfPerson;
@@ -27,12 +27,12 @@ public class ProductSetDTO implements Serializable {
         this.id = id;
     }
 
-    public String getProductSetName() {
-        return productSetName;
+    public String getName() {
+        return name;
     }
 
-    public void setProductSetName(String productSetName) {
-        this.productSetName = productSetName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Integer getNoOfPerson() {
@@ -76,7 +76,7 @@ public class ProductSetDTO implements Serializable {
     public String toString() {
         return "ProductSetDTO{" +
             "id=" + getId() +
-            ", productSetName='" + getProductSetName() + "'" +
+            ", name='" + getName() + "'" +
             ", noOfPerson=" + getNoOfPerson() +
             ", isExclusive='" + isIsExclusive() + "'" +
             "}";

@@ -12,7 +12,7 @@ public class CitiesDTO implements Serializable {
     private Long id;
 
     @NotNull
-    private String cityName;
+    private String name;
 
     private String location;
 
@@ -27,7 +27,7 @@ public class CitiesDTO implements Serializable {
 
     private Long stateProvinceId;
 
-    private String stateProvinceStateProvinceName;
+    private String stateProvinceName;
 
     public Long getId() {
         return id;
@@ -37,12 +37,12 @@ public class CitiesDTO implements Serializable {
         this.id = id;
     }
 
-    public String getCityName() {
-        return cityName;
+    public String getName() {
+        return name;
     }
 
-    public void setCityName(String cityName) {
-        this.cityName = cityName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getLocation() {
@@ -85,12 +85,12 @@ public class CitiesDTO implements Serializable {
         this.stateProvinceId = stateProvincesId;
     }
 
-    public String getStateProvinceStateProvinceName() {
-        return stateProvinceStateProvinceName;
+    public String getStateProvinceName() {
+        return stateProvinceName;
     }
 
-    public void setStateProvinceStateProvinceName(String stateProvincesStateProvinceName) {
-        this.stateProvinceStateProvinceName = stateProvincesStateProvinceName;
+    public void setStateProvinceName(String stateProvincesName) {
+        this.stateProvinceName = stateProvincesName;
     }
 
     @Override
@@ -118,13 +118,13 @@ public class CitiesDTO implements Serializable {
     public String toString() {
         return "CitiesDTO{" +
             "id=" + getId() +
-            ", cityName='" + getCityName() + "'" +
+            ", name='" + getName() + "'" +
             ", location='" + getLocation() + "'" +
             ", latestRecordedPopulation=" + getLatestRecordedPopulation() +
             ", validFrom='" + getValidFrom() + "'" +
             ", validTo='" + getValidTo() + "'" +
             ", stateProvince=" + getStateProvinceId() +
-            ", stateProvince='" + getStateProvinceStateProvinceName() + "'" +
+            ", stateProvince='" + getStateProvinceName() + "'" +
             "}";
     }
 }

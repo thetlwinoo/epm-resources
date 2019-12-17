@@ -20,11 +20,11 @@ public class ProductChoiceDTO implements Serializable {
 
     private Long productAttributeSetId;
 
-    private String productAttributeSetProductAttributeSetName;
+    private String productAttributeSetName;
 
     private Long productOptionSetId;
 
-    private String productOptionSetProductOptionSetValue;
+    private String productOptionSetValue;
 
     public Long getId() {
         return id;
@@ -66,12 +66,12 @@ public class ProductChoiceDTO implements Serializable {
         this.productAttributeSetId = productAttributeSetId;
     }
 
-    public String getProductAttributeSetProductAttributeSetName() {
-        return productAttributeSetProductAttributeSetName;
+    public String getProductAttributeSetName() {
+        return productAttributeSetName;
     }
 
-    public void setProductAttributeSetProductAttributeSetName(String productAttributeSetProductAttributeSetName) {
-        this.productAttributeSetProductAttributeSetName = productAttributeSetProductAttributeSetName;
+    public void setProductAttributeSetName(String productAttributeSetName) {
+        this.productAttributeSetName = productAttributeSetName;
     }
 
     public Long getProductOptionSetId() {
@@ -82,12 +82,12 @@ public class ProductChoiceDTO implements Serializable {
         this.productOptionSetId = productOptionSetId;
     }
 
-    public String getProductOptionSetProductOptionSetValue() {
-        return productOptionSetProductOptionSetValue;
+    public String getProductOptionSetValue() {
+        return productOptionSetValue;
     }
 
-    public void setProductOptionSetProductOptionSetValue(String productOptionSetProductOptionSetValue) {
-        this.productOptionSetProductOptionSetValue = productOptionSetProductOptionSetValue;
+    public void setProductOptionSetValue(String productOptionSetValue) {
+        this.productOptionSetValue = productOptionSetValue;
     }
 
     @Override
@@ -119,9 +119,9 @@ public class ProductChoiceDTO implements Serializable {
             ", productCategory=" + getProductCategoryId() +
             ", productCategory='" + getProductCategoryName() + "'" +
             ", productAttributeSet=" + getProductAttributeSetId() +
-            ", productAttributeSet='" + getProductAttributeSetProductAttributeSetName() + "'" +
+            ", productAttributeSet='" + getProductAttributeSetName() + "'" +
             ", productOptionSet=" + getProductOptionSetId() +
-            ", productOptionSet='" + getProductOptionSetProductOptionSetValue() + "'" +
+            ", productOptionSet='" + getProductOptionSetValue() + "'" +
             "}";
     }
 }

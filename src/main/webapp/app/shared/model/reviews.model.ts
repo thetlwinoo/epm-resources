@@ -3,7 +3,7 @@ import { IReviewLines } from 'app/shared/model/review-lines.model';
 
 export interface IReviews {
   id?: number;
-  reviewerName?: string;
+  name?: string;
   emailAddress?: string;
   reviewDate?: Moment;
   overAllSellerRating?: number;
@@ -21,7 +21,7 @@ export interface IReviews {
 export class Reviews implements IReviews {
   constructor(
     public id?: number,
-    public reviewerName?: string,
+    public name?: string,
     public emailAddress?: string,
     public reviewDate?: Moment,
     public overAllSellerRating?: number,

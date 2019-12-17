@@ -40,8 +40,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = EpmresourcesApp.class)
 public class CustomerCategoriesResourceIT {
 
-    private static final String DEFAULT_CUSTOMER_CATEGORY_NAME = "AAAAAAAAAA";
-    private static final String UPDATED_CUSTOMER_CATEGORY_NAME = "BBBBBBBBBB";
+    private static final String DEFAULT_NAME = "AAAAAAAAAA";
+    private static final String UPDATED_NAME = "BBBBBBBBBB";
 
     private static final Instant DEFAULT_VALID_FROM = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_VALID_FROM = Instant.now().truncatedTo(ChronoUnit.MILLIS);
@@ -100,7 +100,7 @@ public class CustomerCategoriesResourceIT {
      */
     public static CustomerCategories createEntity(EntityManager em) {
         CustomerCategories customerCategories = new CustomerCategories()
-            .customerCategoryName(DEFAULT_CUSTOMER_CATEGORY_NAME)
+            .name(DEFAULT_NAME)
             .validFrom(DEFAULT_VALID_FROM)
             .validTo(DEFAULT_VALID_TO);
         return customerCategories;
@@ -113,7 +113,7 @@ public class CustomerCategoriesResourceIT {
      */
     public static CustomerCategories createUpdatedEntity(EntityManager em) {
         CustomerCategories customerCategories = new CustomerCategories()
-            .customerCategoryName(UPDATED_CUSTOMER_CATEGORY_NAME)
+            .name(UPDATED_NAME)
             .validFrom(UPDATED_VALID_FROM)
             .validTo(UPDATED_VALID_TO);
         return customerCategories;
@@ -140,7 +140,7 @@ public class CustomerCategoriesResourceIT {
         List<CustomerCategories> customerCategoriesList = customerCategoriesRepository.findAll();
         assertThat(customerCategoriesList).hasSize(databaseSizeBeforeCreate + 1);
         CustomerCategories testCustomerCategories = customerCategoriesList.get(customerCategoriesList.size() - 1);
-        assertThat(testCustomerCategories.getCustomerCategoryName()).isEqualTo(DEFAULT_CUSTOMER_CATEGORY_NAME);
+        assertThat(testCustomerCategories.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testCustomerCategories.getValidFrom()).isEqualTo(DEFAULT_VALID_FROM);
         assertThat(testCustomerCategories.getValidTo()).isEqualTo(DEFAULT_VALID_TO);
     }
@@ -215,7 +215,7 @@ public class CustomerCategoriesResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(customerCategories.getId().intValue())))
-            .andExpect(jsonPath("$.[*].customerCategoryName").value(hasItem(DEFAULT_CUSTOMER_CATEGORY_NAME)))
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].validFrom").value(hasItem(DEFAULT_VALID_FROM.toString())))
             .andExpect(jsonPath("$.[*].validTo").value(hasItem(DEFAULT_VALID_TO.toString())));
     }
@@ -231,86 +231,86 @@ public class CustomerCategoriesResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(customerCategories.getId().intValue()))
-            .andExpect(jsonPath("$.customerCategoryName").value(DEFAULT_CUSTOMER_CATEGORY_NAME))
+            .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
             .andExpect(jsonPath("$.validFrom").value(DEFAULT_VALID_FROM.toString()))
             .andExpect(jsonPath("$.validTo").value(DEFAULT_VALID_TO.toString()));
     }
 
     @Test
     @Transactional
-    public void getAllCustomerCategoriesByCustomerCategoryNameIsEqualToSomething() throws Exception {
+    public void getAllCustomerCategoriesByNameIsEqualToSomething() throws Exception {
         // Initialize the database
         customerCategoriesRepository.saveAndFlush(customerCategories);
 
-        // Get all the customerCategoriesList where customerCategoryName equals to DEFAULT_CUSTOMER_CATEGORY_NAME
-        defaultCustomerCategoriesShouldBeFound("customerCategoryName.equals=" + DEFAULT_CUSTOMER_CATEGORY_NAME);
+        // Get all the customerCategoriesList where name equals to DEFAULT_NAME
+        defaultCustomerCategoriesShouldBeFound("name.equals=" + DEFAULT_NAME);
 
-        // Get all the customerCategoriesList where customerCategoryName equals to UPDATED_CUSTOMER_CATEGORY_NAME
-        defaultCustomerCategoriesShouldNotBeFound("customerCategoryName.equals=" + UPDATED_CUSTOMER_CATEGORY_NAME);
+        // Get all the customerCategoriesList where name equals to UPDATED_NAME
+        defaultCustomerCategoriesShouldNotBeFound("name.equals=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllCustomerCategoriesByCustomerCategoryNameIsNotEqualToSomething() throws Exception {
+    public void getAllCustomerCategoriesByNameIsNotEqualToSomething() throws Exception {
         // Initialize the database
         customerCategoriesRepository.saveAndFlush(customerCategories);
 
-        // Get all the customerCategoriesList where customerCategoryName not equals to DEFAULT_CUSTOMER_CATEGORY_NAME
-        defaultCustomerCategoriesShouldNotBeFound("customerCategoryName.notEquals=" + DEFAULT_CUSTOMER_CATEGORY_NAME);
+        // Get all the customerCategoriesList where name not equals to DEFAULT_NAME
+        defaultCustomerCategoriesShouldNotBeFound("name.notEquals=" + DEFAULT_NAME);
 
-        // Get all the customerCategoriesList where customerCategoryName not equals to UPDATED_CUSTOMER_CATEGORY_NAME
-        defaultCustomerCategoriesShouldBeFound("customerCategoryName.notEquals=" + UPDATED_CUSTOMER_CATEGORY_NAME);
+        // Get all the customerCategoriesList where name not equals to UPDATED_NAME
+        defaultCustomerCategoriesShouldBeFound("name.notEquals=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllCustomerCategoriesByCustomerCategoryNameIsInShouldWork() throws Exception {
+    public void getAllCustomerCategoriesByNameIsInShouldWork() throws Exception {
         // Initialize the database
         customerCategoriesRepository.saveAndFlush(customerCategories);
 
-        // Get all the customerCategoriesList where customerCategoryName in DEFAULT_CUSTOMER_CATEGORY_NAME or UPDATED_CUSTOMER_CATEGORY_NAME
-        defaultCustomerCategoriesShouldBeFound("customerCategoryName.in=" + DEFAULT_CUSTOMER_CATEGORY_NAME + "," + UPDATED_CUSTOMER_CATEGORY_NAME);
+        // Get all the customerCategoriesList where name in DEFAULT_NAME or UPDATED_NAME
+        defaultCustomerCategoriesShouldBeFound("name.in=" + DEFAULT_NAME + "," + UPDATED_NAME);
 
-        // Get all the customerCategoriesList where customerCategoryName equals to UPDATED_CUSTOMER_CATEGORY_NAME
-        defaultCustomerCategoriesShouldNotBeFound("customerCategoryName.in=" + UPDATED_CUSTOMER_CATEGORY_NAME);
+        // Get all the customerCategoriesList where name equals to UPDATED_NAME
+        defaultCustomerCategoriesShouldNotBeFound("name.in=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllCustomerCategoriesByCustomerCategoryNameIsNullOrNotNull() throws Exception {
+    public void getAllCustomerCategoriesByNameIsNullOrNotNull() throws Exception {
         // Initialize the database
         customerCategoriesRepository.saveAndFlush(customerCategories);
 
-        // Get all the customerCategoriesList where customerCategoryName is not null
-        defaultCustomerCategoriesShouldBeFound("customerCategoryName.specified=true");
+        // Get all the customerCategoriesList where name is not null
+        defaultCustomerCategoriesShouldBeFound("name.specified=true");
 
-        // Get all the customerCategoriesList where customerCategoryName is null
-        defaultCustomerCategoriesShouldNotBeFound("customerCategoryName.specified=false");
+        // Get all the customerCategoriesList where name is null
+        defaultCustomerCategoriesShouldNotBeFound("name.specified=false");
     }
                 @Test
     @Transactional
-    public void getAllCustomerCategoriesByCustomerCategoryNameContainsSomething() throws Exception {
+    public void getAllCustomerCategoriesByNameContainsSomething() throws Exception {
         // Initialize the database
         customerCategoriesRepository.saveAndFlush(customerCategories);
 
-        // Get all the customerCategoriesList where customerCategoryName contains DEFAULT_CUSTOMER_CATEGORY_NAME
-        defaultCustomerCategoriesShouldBeFound("customerCategoryName.contains=" + DEFAULT_CUSTOMER_CATEGORY_NAME);
+        // Get all the customerCategoriesList where name contains DEFAULT_NAME
+        defaultCustomerCategoriesShouldBeFound("name.contains=" + DEFAULT_NAME);
 
-        // Get all the customerCategoriesList where customerCategoryName contains UPDATED_CUSTOMER_CATEGORY_NAME
-        defaultCustomerCategoriesShouldNotBeFound("customerCategoryName.contains=" + UPDATED_CUSTOMER_CATEGORY_NAME);
+        // Get all the customerCategoriesList where name contains UPDATED_NAME
+        defaultCustomerCategoriesShouldNotBeFound("name.contains=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllCustomerCategoriesByCustomerCategoryNameNotContainsSomething() throws Exception {
+    public void getAllCustomerCategoriesByNameNotContainsSomething() throws Exception {
         // Initialize the database
         customerCategoriesRepository.saveAndFlush(customerCategories);
 
-        // Get all the customerCategoriesList where customerCategoryName does not contain DEFAULT_CUSTOMER_CATEGORY_NAME
-        defaultCustomerCategoriesShouldNotBeFound("customerCategoryName.doesNotContain=" + DEFAULT_CUSTOMER_CATEGORY_NAME);
+        // Get all the customerCategoriesList where name does not contain DEFAULT_NAME
+        defaultCustomerCategoriesShouldNotBeFound("name.doesNotContain=" + DEFAULT_NAME);
 
-        // Get all the customerCategoriesList where customerCategoryName does not contain UPDATED_CUSTOMER_CATEGORY_NAME
-        defaultCustomerCategoriesShouldBeFound("customerCategoryName.doesNotContain=" + UPDATED_CUSTOMER_CATEGORY_NAME);
+        // Get all the customerCategoriesList where name does not contain UPDATED_NAME
+        defaultCustomerCategoriesShouldBeFound("name.doesNotContain=" + UPDATED_NAME);
     }
 
 
@@ -425,7 +425,7 @@ public class CustomerCategoriesResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(customerCategories.getId().intValue())))
-            .andExpect(jsonPath("$.[*].customerCategoryName").value(hasItem(DEFAULT_CUSTOMER_CATEGORY_NAME)))
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].validFrom").value(hasItem(DEFAULT_VALID_FROM.toString())))
             .andExpect(jsonPath("$.[*].validTo").value(hasItem(DEFAULT_VALID_TO.toString())));
 
@@ -475,7 +475,7 @@ public class CustomerCategoriesResourceIT {
         // Disconnect from session so that the updates on updatedCustomerCategories are not directly saved in db
         em.detach(updatedCustomerCategories);
         updatedCustomerCategories
-            .customerCategoryName(UPDATED_CUSTOMER_CATEGORY_NAME)
+            .name(UPDATED_NAME)
             .validFrom(UPDATED_VALID_FROM)
             .validTo(UPDATED_VALID_TO);
         CustomerCategoriesDTO customerCategoriesDTO = customerCategoriesMapper.toDto(updatedCustomerCategories);
@@ -489,7 +489,7 @@ public class CustomerCategoriesResourceIT {
         List<CustomerCategories> customerCategoriesList = customerCategoriesRepository.findAll();
         assertThat(customerCategoriesList).hasSize(databaseSizeBeforeUpdate);
         CustomerCategories testCustomerCategories = customerCategoriesList.get(customerCategoriesList.size() - 1);
-        assertThat(testCustomerCategories.getCustomerCategoryName()).isEqualTo(UPDATED_CUSTOMER_CATEGORY_NAME);
+        assertThat(testCustomerCategories.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testCustomerCategories.getValidFrom()).isEqualTo(UPDATED_VALID_FROM);
         assertThat(testCustomerCategories.getValidTo()).isEqualTo(UPDATED_VALID_TO);
     }

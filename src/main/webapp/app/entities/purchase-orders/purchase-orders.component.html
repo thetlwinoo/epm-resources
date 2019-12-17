@@ -51,12 +51,12 @@
                 </td>
                 <td>
                     <div *ngIf="purchaseOrders.supplierId">
-                        <a [routerLink]="['/suppliers', purchaseOrders.supplierId , 'view' ]" >{{purchaseOrders.supplierSupplierName}}</a>
+                        <a [routerLink]="['/suppliers', purchaseOrders.supplierId , 'view' ]" >{{purchaseOrders.supplierName}}</a>
                     </div>
                 </td>
                 <td>
                     <div *ngIf="purchaseOrders.deliveryMethodId">
-                        <a [routerLink]="['/delivery-methods', purchaseOrders.deliveryMethodId , 'view' ]" >{{purchaseOrders.deliveryMethodDeliveryMethodName}}</a>
+                        <a [routerLink]="['/delivery-methods', purchaseOrders.deliveryMethodId , 'view' ]" >{{purchaseOrders.deliveryMethodName}}</a>
                     </div>
                 </td>
                 <td class="text-right">

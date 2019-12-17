@@ -19,7 +19,7 @@ export class TransactionTypesUpdateComponent implements OnInit {
 
   editForm = this.fb.group({
     id: [],
-    transactionTypeName: [null, [Validators.required]],
+    name: [null, [Validators.required]],
     validFrom: [null, [Validators.required]],
     validTo: [null, [Validators.required]]
   });
@@ -40,7 +40,7 @@ export class TransactionTypesUpdateComponent implements OnInit {
   updateForm(transactionTypes: ITransactionTypes) {
     this.editForm.patchValue({
       id: transactionTypes.id,
-      transactionTypeName: transactionTypes.transactionTypeName,
+      name: transactionTypes.name,
       validFrom: transactionTypes.validFrom != null ? transactionTypes.validFrom.format(DATE_TIME_FORMAT) : null,
       validTo: transactionTypes.validTo != null ? transactionTypes.validTo.format(DATE_TIME_FORMAT) : null
     });
@@ -64,7 +64,7 @@ export class TransactionTypesUpdateComponent implements OnInit {
     return {
       ...new TransactionTypes(),
       id: this.editForm.get(['id']).value,
-      transactionTypeName: this.editForm.get(['transactionTypeName']).value,
+      name: this.editForm.get(['name']).value,
       validFrom:
         this.editForm.get(['validFrom']).value != null ? moment(this.editForm.get(['validFrom']).value, DATE_TIME_FORMAT) : undefined,
       validTo: this.editForm.get(['validTo']).value != null ? moment(this.editForm.get(['validTo']).value, DATE_TIME_FORMAT) : undefined

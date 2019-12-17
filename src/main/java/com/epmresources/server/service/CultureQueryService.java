@@ -91,11 +91,11 @@ public class CultureQueryService extends QueryService<Culture> {
             if (criteria.getId() != null) {
                 specification = specification.and(buildSpecification(criteria.getId(), Culture_.id));
             }
-            if (criteria.getCultureCode() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getCultureCode(), Culture_.cultureCode));
+            if (criteria.getCode() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getCode(), Culture_.code));
             }
-            if (criteria.getCultureName() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getCultureName(), Culture_.cultureName));
+            if (criteria.getName() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getName(), Culture_.name));
             }
         }
         return specification;

@@ -2,24 +2,24 @@ import { Moment } from 'moment';
 
 export interface ICities {
   id?: number;
-  cityName?: string;
+  name?: string;
   location?: string;
   latestRecordedPopulation?: number;
   validFrom?: Moment;
   validTo?: Moment;
-  stateProvinceStateProvinceName?: string;
+  stateProvinceName?: string;
   stateProvinceId?: number;
 }
 
 export class Cities implements ICities {
   constructor(
     public id?: number,
-    public cityName?: string,
+    public name?: string,
     public location?: string,
     public latestRecordedPopulation?: number,
     public validFrom?: Moment,
     public validTo?: Moment,
-    public stateProvinceStateProvinceName?: string,
+    public stateProvinceName?: string,
     public stateProvinceId?: number
   ) {}
 }

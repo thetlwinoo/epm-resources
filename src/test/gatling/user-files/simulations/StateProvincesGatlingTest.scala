@@ -72,8 +72,8 @@ class StateProvincesGatlingTest extends Simulation {
             .headers(headers_http_authenticated)
             .body(StringBody("""{
                 "id":null
-                , "stateProvinceCode":"SAMPLE_TEXT"
-                , "stateProvinceName":"SAMPLE_TEXT"
+                , "code":"SAMPLE_TEXT"
+                , "name":"SAMPLE_TEXT"
                 , "salesTerritory":"SAMPLE_TEXT"
                 , "border":"SAMPLE_TEXT"
                 , "latestRecordedPopulation":null

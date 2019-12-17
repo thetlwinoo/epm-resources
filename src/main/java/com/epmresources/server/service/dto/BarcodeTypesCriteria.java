@@ -26,14 +26,14 @@ public class BarcodeTypesCriteria implements Serializable, Criteria {
 
     private LongFilter id;
 
-    private StringFilter barcodeTypeName;
+    private StringFilter name;
 
     public BarcodeTypesCriteria(){
     }
 
     public BarcodeTypesCriteria(BarcodeTypesCriteria other){
         this.id = other.id == null ? null : other.id.copy();
-        this.barcodeTypeName = other.barcodeTypeName == null ? null : other.barcodeTypeName.copy();
+        this.name = other.name == null ? null : other.name.copy();
     }
 
     @Override
@@ -49,12 +49,12 @@ public class BarcodeTypesCriteria implements Serializable, Criteria {
         this.id = id;
     }
 
-    public StringFilter getBarcodeTypeName() {
-        return barcodeTypeName;
+    public StringFilter getName() {
+        return name;
     }
 
-    public void setBarcodeTypeName(StringFilter barcodeTypeName) {
-        this.barcodeTypeName = barcodeTypeName;
+    public void setName(StringFilter name) {
+        this.name = name;
     }
 
 
@@ -69,14 +69,14 @@ public class BarcodeTypesCriteria implements Serializable, Criteria {
         final BarcodeTypesCriteria that = (BarcodeTypesCriteria) o;
         return
             Objects.equals(id, that.id) &&
-            Objects.equals(barcodeTypeName, that.barcodeTypeName);
+            Objects.equals(name, that.name);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(
         id,
-        barcodeTypeName
+        name
         );
     }
 
@@ -84,7 +84,7 @@ public class BarcodeTypesCriteria implements Serializable, Criteria {
     public String toString() {
         return "BarcodeTypesCriteria{" +
                 (id != null ? "id=" + id + ", " : "") +
-                (barcodeTypeName != null ? "barcodeTypeName=" + barcodeTypeName + ", " : "") +
+                (name != null ? "name=" + name + ", " : "") +
             "}";
     }
 

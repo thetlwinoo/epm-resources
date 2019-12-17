@@ -12,9 +12,9 @@ import org.mapstruct.*;
 public interface SystemParametersMapper extends EntityMapper<SystemParametersDTO, SystemParameters> {
 
     @Mapping(source = "deliveryCity.id", target = "deliveryCityId")
-    @Mapping(source = "deliveryCity.cityName", target = "deliveryCityCityName")
+    @Mapping(source = "deliveryCity.name", target = "deliveryCityName")
     @Mapping(source = "postalCity.id", target = "postalCityId")
-    @Mapping(source = "postalCity.cityName", target = "postalCityCityName")
+    @Mapping(source = "postalCity.name", target = "postalCityName")
     SystemParametersDTO toDto(SystemParameters systemParameters);
 
     @Mapping(source = "deliveryCityId", target = "deliveryCity")

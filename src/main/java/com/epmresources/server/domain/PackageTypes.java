@@ -24,8 +24,8 @@ public class PackageTypes implements Serializable {
     private Long id;
 
     @NotNull
-    @Column(name = "package_type_name", nullable = false)
-    private String packageTypeName;
+    @Column(name = "name", nullable = false)
+    private String name;
 
     @NotNull
     @Column(name = "valid_from", nullable = false)
@@ -44,17 +44,17 @@ public class PackageTypes implements Serializable {
         this.id = id;
     }
 
-    public String getPackageTypeName() {
-        return packageTypeName;
+    public String getName() {
+        return name;
     }
 
-    public PackageTypes packageTypeName(String packageTypeName) {
-        this.packageTypeName = packageTypeName;
+    public PackageTypes name(String name) {
+        this.name = name;
         return this;
     }
 
-    public void setPackageTypeName(String packageTypeName) {
-        this.packageTypeName = packageTypeName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Instant getValidFrom() {
@@ -104,7 +104,7 @@ public class PackageTypes implements Serializable {
     public String toString() {
         return "PackageTypes{" +
             "id=" + getId() +
-            ", packageTypeName='" + getPackageTypeName() + "'" +
+            ", name='" + getName() + "'" +
             ", validFrom='" + getValidFrom() + "'" +
             ", validTo='" + getValidTo() + "'" +
             "}";

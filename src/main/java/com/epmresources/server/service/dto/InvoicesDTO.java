@@ -78,7 +78,7 @@ public class InvoicesDTO implements Serializable {
 
     private Long deliveryMethodId;
 
-    private String deliveryMethodDeliveryMethodName;
+    private String deliveryMethodName;
 
     private Long orderId;
 
@@ -322,12 +322,12 @@ public class InvoicesDTO implements Serializable {
         this.deliveryMethodId = deliveryMethodsId;
     }
 
-    public String getDeliveryMethodDeliveryMethodName() {
-        return deliveryMethodDeliveryMethodName;
+    public String getDeliveryMethodName() {
+        return deliveryMethodName;
     }
 
-    public void setDeliveryMethodDeliveryMethodName(String deliveryMethodsDeliveryMethodName) {
-        this.deliveryMethodDeliveryMethodName = deliveryMethodsDeliveryMethodName;
+    public void setDeliveryMethodName(String deliveryMethodsName) {
+        this.deliveryMethodName = deliveryMethodsName;
     }
 
     public Long getOrderId() {
@@ -392,7 +392,7 @@ public class InvoicesDTO implements Serializable {
             ", customer=" + getCustomerId() +
             ", billToCustomer=" + getBillToCustomerId() +
             ", deliveryMethod=" + getDeliveryMethodId() +
-            ", deliveryMethod='" + getDeliveryMethodDeliveryMethodName() + "'" +
+            ", deliveryMethod='" + getDeliveryMethodName() + "'" +
             ", order=" + getOrderId() +
             "}";
     }

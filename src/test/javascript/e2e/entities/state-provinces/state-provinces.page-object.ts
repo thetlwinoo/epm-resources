@@ -26,8 +26,8 @@ export class StateProvincesUpdatePage {
   pageTitle = element(by.id('jhi-state-provinces-heading'));
   saveButton = element(by.id('save-entity'));
   cancelButton = element(by.id('cancel-save'));
-  stateProvinceCodeInput = element(by.id('field_stateProvinceCode'));
-  stateProvinceNameInput = element(by.id('field_stateProvinceName'));
+  codeInput = element(by.id('field_code'));
+  nameInput = element(by.id('field_name'));
   salesTerritoryInput = element(by.id('field_salesTerritory'));
   borderInput = element(by.id('field_border'));
   latestRecordedPopulationInput = element(by.id('field_latestRecordedPopulation'));
@@ -39,20 +39,20 @@ export class StateProvincesUpdatePage {
     return this.pageTitle.getAttribute('jhiTranslate');
   }
 
-  async setStateProvinceCodeInput(stateProvinceCode) {
-    await this.stateProvinceCodeInput.sendKeys(stateProvinceCode);
+  async setCodeInput(code) {
+    await this.codeInput.sendKeys(code);
   }
 
-  async getStateProvinceCodeInput() {
-    return await this.stateProvinceCodeInput.getAttribute('value');
+  async getCodeInput() {
+    return await this.codeInput.getAttribute('value');
   }
 
-  async setStateProvinceNameInput(stateProvinceName) {
-    await this.stateProvinceNameInput.sendKeys(stateProvinceName);
+  async setNameInput(name) {
+    await this.nameInput.sendKeys(name);
   }
 
-  async getStateProvinceNameInput() {
-    return await this.stateProvinceNameInput.getAttribute('value');
+  async getNameInput() {
+    return await this.nameInput.getAttribute('value');
   }
 
   async setSalesTerritoryInput(salesTerritory) {

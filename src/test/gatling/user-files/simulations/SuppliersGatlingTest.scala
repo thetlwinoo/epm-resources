@@ -72,7 +72,7 @@ class SuppliersGatlingTest extends Simulation {
             .headers(headers_http_authenticated)
             .body(StringBody("""{
                 "id":null
-                , "supplierName":"SAMPLE_TEXT"
+                , "name":"SAMPLE_TEXT"
                 , "supplierReference":"SAMPLE_TEXT"
                 , "bankAccountName":"SAMPLE_TEXT"
                 , "bankAccountBranch":"SAMPLE_TEXT"
@@ -87,7 +87,7 @@ class SuppliersGatlingTest extends Simulation {
                 , "webServiceUrl":"SAMPLE_TEXT"
                 , "creditRating":"0"
                 , "activeFlag":null
-                , "avatar":null
+                , "thumbnailUrl":"SAMPLE_TEXT"
                 , "validFrom":"2020-01-01T00:00:00.000Z"
                 , "validTo":"2020-01-01T00:00:00.000Z"
                 }""")).asJson

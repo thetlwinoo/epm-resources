@@ -40,8 +40,8 @@ describe('ProductTags e2e test', () => {
     const nbButtonsBeforeCreate = await productTagsComponentsPage.countDeleteButtons();
 
     await productTagsComponentsPage.clickOnCreateButton();
-    await promise.all([productTagsUpdatePage.setTagNameInput('tagName'), productTagsUpdatePage.productSelectLastOption()]);
-    expect(await productTagsUpdatePage.getTagNameInput()).to.eq('tagName', 'Expected TagName value to be equals to tagName');
+    await promise.all([productTagsUpdatePage.setNameInput('name'), productTagsUpdatePage.productSelectLastOption()]);
+    expect(await productTagsUpdatePage.getNameInput()).to.eq('name', 'Expected Name value to be equals to name');
     await productTagsUpdatePage.save();
     expect(await productTagsUpdatePage.getSaveButton().isPresent(), 'Expected save button disappear').to.be.false;
 

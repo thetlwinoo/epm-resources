@@ -17,8 +17,8 @@ export class CurrencyUpdateComponent implements OnInit {
 
   editForm = this.fb.group({
     id: [],
-    currencyCode: [null, [Validators.required]],
-    currencyName: []
+    code: [null, [Validators.required]],
+    name: []
   });
 
   constructor(protected currencyService: CurrencyService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
@@ -33,8 +33,8 @@ export class CurrencyUpdateComponent implements OnInit {
   updateForm(currency: ICurrency) {
     this.editForm.patchValue({
       id: currency.id,
-      currencyCode: currency.currencyCode,
-      currencyName: currency.currencyName
+      code: currency.code,
+      name: currency.name
     });
   }
 
@@ -56,8 +56,8 @@ export class CurrencyUpdateComponent implements OnInit {
     return {
       ...new Currency(),
       id: this.editForm.get(['id']).value,
-      currencyCode: this.editForm.get(['currencyCode']).value,
-      currencyName: this.editForm.get(['currencyName']).value
+      code: this.editForm.get(['code']).value,
+      name: this.editForm.get(['name']).value
     };
   }
 

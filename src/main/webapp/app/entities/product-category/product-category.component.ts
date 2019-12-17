@@ -3,7 +3,7 @@ import { HttpResponse } from '@angular/common/http';
 import { Subscription } from 'rxjs';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { filter, map } from 'rxjs/operators';
-import { JhiEventManager, JhiDataUtils } from 'ng-jhipster';
+import { JhiEventManager } from 'ng-jhipster';
 
 import { IProductCategory } from 'app/shared/model/product-category.model';
 import { AccountService } from 'app/core/auth/account.service';
@@ -20,7 +20,6 @@ export class ProductCategoryComponent implements OnInit, OnDestroy {
 
   constructor(
     protected productCategoryService: ProductCategoryService,
-    protected dataUtils: JhiDataUtils,
     protected eventManager: JhiEventManager,
     protected accountService: AccountService
   ) {}
@@ -51,14 +50,6 @@ export class ProductCategoryComponent implements OnInit, OnDestroy {
 
   trackId(index: number, item: IProductCategory) {
     return item.id;
-  }
-
-  byteSize(field) {
-    return this.dataUtils.byteSize(field);
-  }
-
-  openFile(contentType, field) {
-    return this.dataUtils.openFile(contentType, field);
   }
 
   registerChangeInProductCategories() {

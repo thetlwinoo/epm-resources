@@ -2,7 +2,7 @@
     "name": "PurchaseOrderLines",
     "fields": [
         {
-            "fieldName": "ordersOuters",
+            "fieldName": "orderedOuters",
             "fieldType": "Integer",
             "fieldValidateRules": [
                 "required"
@@ -10,11 +10,17 @@
         },
         {
             "fieldName": "description",
-            "fieldType": "String"
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
         },
         {
             "fieldName": "receivedOuters",
-            "fieldType": "Integer"
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required"
+            ]
         },
         {
             "fieldName": "expectedUnitPricePerOuter",
@@ -26,7 +32,10 @@
         },
         {
             "fieldName": "isOrderLineFinalized",
-            "fieldType": "Boolean"
+            "fieldType": "Boolean",
+            "fieldValidateRules": [
+                "required"
+            ]
         },
         {
             "fieldName": "lastEditedBy",
@@ -43,14 +52,14 @@
             "otherEntityName": "packageTypes",
             "otherEntityRelationshipName": "purchaseOrderLines",
             "relationshipName": "packageType",
-            "otherEntityField": "packageTypeName"
+            "otherEntityField": "name"
         },
         {
             "relationshipType": "many-to-one",
             "otherEntityName": "stockItems",
             "otherEntityRelationshipName": "purchaseOrderLines",
             "relationshipName": "stockItem",
-            "otherEntityField": "stockItemName"
+            "otherEntityField": "name"
         },
         {
             "relationshipType": "many-to-one",

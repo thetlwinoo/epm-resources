@@ -36,11 +36,11 @@ public class SpecialDealsDTO implements Serializable {
 
     private Long buyingGroupId;
 
-    private String buyingGroupBuyingGroupName;
+    private String buyingGroupName;
 
     private Long customerCategoryId;
 
-    private String customerCategoryCustomerCategoryName;
+    private String customerCategoryName;
 
     private Long customerId;
 
@@ -138,12 +138,12 @@ public class SpecialDealsDTO implements Serializable {
         this.buyingGroupId = buyingGroupsId;
     }
 
-    public String getBuyingGroupBuyingGroupName() {
-        return buyingGroupBuyingGroupName;
+    public String getBuyingGroupName() {
+        return buyingGroupName;
     }
 
-    public void setBuyingGroupBuyingGroupName(String buyingGroupsBuyingGroupName) {
-        this.buyingGroupBuyingGroupName = buyingGroupsBuyingGroupName;
+    public void setBuyingGroupName(String buyingGroupsName) {
+        this.buyingGroupName = buyingGroupsName;
     }
 
     public Long getCustomerCategoryId() {
@@ -154,12 +154,12 @@ public class SpecialDealsDTO implements Serializable {
         this.customerCategoryId = customerCategoriesId;
     }
 
-    public String getCustomerCategoryCustomerCategoryName() {
-        return customerCategoryCustomerCategoryName;
+    public String getCustomerCategoryName() {
+        return customerCategoryName;
     }
 
-    public void setCustomerCategoryCustomerCategoryName(String customerCategoriesCustomerCategoryName) {
-        this.customerCategoryCustomerCategoryName = customerCategoriesCustomerCategoryName;
+    public void setCustomerCategoryName(String customerCategoriesName) {
+        this.customerCategoryName = customerCategoriesName;
     }
 
     public Long getCustomerId() {
@@ -229,9 +229,9 @@ public class SpecialDealsDTO implements Serializable {
             ", lastEditedBy='" + getLastEditedBy() + "'" +
             ", lastEditedWhen='" + getLastEditedWhen() + "'" +
             ", buyingGroup=" + getBuyingGroupId() +
-            ", buyingGroup='" + getBuyingGroupBuyingGroupName() + "'" +
+            ", buyingGroup='" + getBuyingGroupName() + "'" +
             ", customerCategory=" + getCustomerCategoryId() +
-            ", customerCategory='" + getCustomerCategoryCustomerCategoryName() + "'" +
+            ", customerCategory='" + getCustomerCategoryName() + "'" +
             ", customer=" + getCustomerId() +
             ", productCategory=" + getProductCategoryId() +
             ", productCategory='" + getProductCategoryName() + "'" +

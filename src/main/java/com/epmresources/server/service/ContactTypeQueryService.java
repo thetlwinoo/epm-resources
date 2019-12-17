@@ -91,8 +91,8 @@ public class ContactTypeQueryService extends QueryService<ContactType> {
             if (criteria.getId() != null) {
                 specification = specification.and(buildSpecification(criteria.getId(), ContactType_.id));
             }
-            if (criteria.getContactTypeName() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getContactTypeName(), ContactType_.contactTypeName));
+            if (criteria.getName() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getName(), ContactType_.name));
             }
         }
         return specification;

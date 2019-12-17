@@ -41,14 +41,11 @@ describe('DeliveryMethods e2e test', () => {
 
     await deliveryMethodsComponentsPage.clickOnCreateButton();
     await promise.all([
-      deliveryMethodsUpdatePage.setDeliveryMethodNameInput('deliveryMethodName'),
+      deliveryMethodsUpdatePage.setNameInput('name'),
       deliveryMethodsUpdatePage.setValidFromInput('01/01/2001' + protractor.Key.TAB + '02:30AM'),
       deliveryMethodsUpdatePage.setValidToInput('01/01/2001' + protractor.Key.TAB + '02:30AM')
     ]);
-    expect(await deliveryMethodsUpdatePage.getDeliveryMethodNameInput()).to.eq(
-      'deliveryMethodName',
-      'Expected DeliveryMethodName value to be equals to deliveryMethodName'
-    );
+    expect(await deliveryMethodsUpdatePage.getNameInput()).to.eq('name', 'Expected Name value to be equals to name');
     expect(await deliveryMethodsUpdatePage.getValidFromInput()).to.contain(
       '2001-01-01T02:30',
       'Expected validFrom value to be equals to 2000-12-31'

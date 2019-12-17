@@ -38,8 +38,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = EpmresourcesApp.class)
 public class ContactTypeResourceIT {
 
-    private static final String DEFAULT_CONTACT_TYPE_NAME = "AAAAAAAAAA";
-    private static final String UPDATED_CONTACT_TYPE_NAME = "BBBBBBBBBB";
+    private static final String DEFAULT_NAME = "AAAAAAAAAA";
+    private static final String UPDATED_NAME = "BBBBBBBBBB";
 
     @Autowired
     private ContactTypeRepository contactTypeRepository;
@@ -92,7 +92,7 @@ public class ContactTypeResourceIT {
      */
     public static ContactType createEntity(EntityManager em) {
         ContactType contactType = new ContactType()
-            .contactTypeName(DEFAULT_CONTACT_TYPE_NAME);
+            .name(DEFAULT_NAME);
         return contactType;
     }
     /**
@@ -103,7 +103,7 @@ public class ContactTypeResourceIT {
      */
     public static ContactType createUpdatedEntity(EntityManager em) {
         ContactType contactType = new ContactType()
-            .contactTypeName(UPDATED_CONTACT_TYPE_NAME);
+            .name(UPDATED_NAME);
         return contactType;
     }
 
@@ -128,7 +128,7 @@ public class ContactTypeResourceIT {
         List<ContactType> contactTypeList = contactTypeRepository.findAll();
         assertThat(contactTypeList).hasSize(databaseSizeBeforeCreate + 1);
         ContactType testContactType = contactTypeList.get(contactTypeList.size() - 1);
-        assertThat(testContactType.getContactTypeName()).isEqualTo(DEFAULT_CONTACT_TYPE_NAME);
+        assertThat(testContactType.getName()).isEqualTo(DEFAULT_NAME);
     }
 
     @Test
@@ -154,10 +154,10 @@ public class ContactTypeResourceIT {
 
     @Test
     @Transactional
-    public void checkContactTypeNameIsRequired() throws Exception {
+    public void checkNameIsRequired() throws Exception {
         int databaseSizeBeforeTest = contactTypeRepository.findAll().size();
         // set the field null
-        contactType.setContactTypeName(null);
+        contactType.setName(null);
 
         // Create the ContactType, which fails.
         ContactTypeDTO contactTypeDTO = contactTypeMapper.toDto(contactType);
@@ -182,7 +182,7 @@ public class ContactTypeResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(contactType.getId().intValue())))
-            .andExpect(jsonPath("$.[*].contactTypeName").value(hasItem(DEFAULT_CONTACT_TYPE_NAME)));
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)));
     }
     
     @Test
@@ -196,84 +196,84 @@ public class ContactTypeResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(contactType.getId().intValue()))
-            .andExpect(jsonPath("$.contactTypeName").value(DEFAULT_CONTACT_TYPE_NAME));
+            .andExpect(jsonPath("$.name").value(DEFAULT_NAME));
     }
 
     @Test
     @Transactional
-    public void getAllContactTypesByContactTypeNameIsEqualToSomething() throws Exception {
+    public void getAllContactTypesByNameIsEqualToSomething() throws Exception {
         // Initialize the database
         contactTypeRepository.saveAndFlush(contactType);
 
-        // Get all the contactTypeList where contactTypeName equals to DEFAULT_CONTACT_TYPE_NAME
-        defaultContactTypeShouldBeFound("contactTypeName.equals=" + DEFAULT_CONTACT_TYPE_NAME);
+        // Get all the contactTypeList where name equals to DEFAULT_NAME
+        defaultContactTypeShouldBeFound("name.equals=" + DEFAULT_NAME);
 
-        // Get all the contactTypeList where contactTypeName equals to UPDATED_CONTACT_TYPE_NAME
-        defaultContactTypeShouldNotBeFound("contactTypeName.equals=" + UPDATED_CONTACT_TYPE_NAME);
+        // Get all the contactTypeList where name equals to UPDATED_NAME
+        defaultContactTypeShouldNotBeFound("name.equals=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllContactTypesByContactTypeNameIsNotEqualToSomething() throws Exception {
+    public void getAllContactTypesByNameIsNotEqualToSomething() throws Exception {
         // Initialize the database
         contactTypeRepository.saveAndFlush(contactType);
 
-        // Get all the contactTypeList where contactTypeName not equals to DEFAULT_CONTACT_TYPE_NAME
-        defaultContactTypeShouldNotBeFound("contactTypeName.notEquals=" + DEFAULT_CONTACT_TYPE_NAME);
+        // Get all the contactTypeList where name not equals to DEFAULT_NAME
+        defaultContactTypeShouldNotBeFound("name.notEquals=" + DEFAULT_NAME);
 
-        // Get all the contactTypeList where contactTypeName not equals to UPDATED_CONTACT_TYPE_NAME
-        defaultContactTypeShouldBeFound("contactTypeName.notEquals=" + UPDATED_CONTACT_TYPE_NAME);
+        // Get all the contactTypeList where name not equals to UPDATED_NAME
+        defaultContactTypeShouldBeFound("name.notEquals=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllContactTypesByContactTypeNameIsInShouldWork() throws Exception {
+    public void getAllContactTypesByNameIsInShouldWork() throws Exception {
         // Initialize the database
         contactTypeRepository.saveAndFlush(contactType);
 
-        // Get all the contactTypeList where contactTypeName in DEFAULT_CONTACT_TYPE_NAME or UPDATED_CONTACT_TYPE_NAME
-        defaultContactTypeShouldBeFound("contactTypeName.in=" + DEFAULT_CONTACT_TYPE_NAME + "," + UPDATED_CONTACT_TYPE_NAME);
+        // Get all the contactTypeList where name in DEFAULT_NAME or UPDATED_NAME
+        defaultContactTypeShouldBeFound("name.in=" + DEFAULT_NAME + "," + UPDATED_NAME);
 
-        // Get all the contactTypeList where contactTypeName equals to UPDATED_CONTACT_TYPE_NAME
-        defaultContactTypeShouldNotBeFound("contactTypeName.in=" + UPDATED_CONTACT_TYPE_NAME);
+        // Get all the contactTypeList where name equals to UPDATED_NAME
+        defaultContactTypeShouldNotBeFound("name.in=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllContactTypesByContactTypeNameIsNullOrNotNull() throws Exception {
+    public void getAllContactTypesByNameIsNullOrNotNull() throws Exception {
         // Initialize the database
         contactTypeRepository.saveAndFlush(contactType);
 
-        // Get all the contactTypeList where contactTypeName is not null
-        defaultContactTypeShouldBeFound("contactTypeName.specified=true");
+        // Get all the contactTypeList where name is not null
+        defaultContactTypeShouldBeFound("name.specified=true");
 
-        // Get all the contactTypeList where contactTypeName is null
-        defaultContactTypeShouldNotBeFound("contactTypeName.specified=false");
+        // Get all the contactTypeList where name is null
+        defaultContactTypeShouldNotBeFound("name.specified=false");
     }
                 @Test
     @Transactional
-    public void getAllContactTypesByContactTypeNameContainsSomething() throws Exception {
+    public void getAllContactTypesByNameContainsSomething() throws Exception {
         // Initialize the database
         contactTypeRepository.saveAndFlush(contactType);
 
-        // Get all the contactTypeList where contactTypeName contains DEFAULT_CONTACT_TYPE_NAME
-        defaultContactTypeShouldBeFound("contactTypeName.contains=" + DEFAULT_CONTACT_TYPE_NAME);
+        // Get all the contactTypeList where name contains DEFAULT_NAME
+        defaultContactTypeShouldBeFound("name.contains=" + DEFAULT_NAME);
 
-        // Get all the contactTypeList where contactTypeName contains UPDATED_CONTACT_TYPE_NAME
-        defaultContactTypeShouldNotBeFound("contactTypeName.contains=" + UPDATED_CONTACT_TYPE_NAME);
+        // Get all the contactTypeList where name contains UPDATED_NAME
+        defaultContactTypeShouldNotBeFound("name.contains=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllContactTypesByContactTypeNameNotContainsSomething() throws Exception {
+    public void getAllContactTypesByNameNotContainsSomething() throws Exception {
         // Initialize the database
         contactTypeRepository.saveAndFlush(contactType);
 
-        // Get all the contactTypeList where contactTypeName does not contain DEFAULT_CONTACT_TYPE_NAME
-        defaultContactTypeShouldNotBeFound("contactTypeName.doesNotContain=" + DEFAULT_CONTACT_TYPE_NAME);
+        // Get all the contactTypeList where name does not contain DEFAULT_NAME
+        defaultContactTypeShouldNotBeFound("name.doesNotContain=" + DEFAULT_NAME);
 
-        // Get all the contactTypeList where contactTypeName does not contain UPDATED_CONTACT_TYPE_NAME
-        defaultContactTypeShouldBeFound("contactTypeName.doesNotContain=" + UPDATED_CONTACT_TYPE_NAME);
+        // Get all the contactTypeList where name does not contain UPDATED_NAME
+        defaultContactTypeShouldBeFound("name.doesNotContain=" + UPDATED_NAME);
     }
 
     /**
@@ -284,7 +284,7 @@ public class ContactTypeResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(contactType.getId().intValue())))
-            .andExpect(jsonPath("$.[*].contactTypeName").value(hasItem(DEFAULT_CONTACT_TYPE_NAME)));
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)));
 
         // Check, that the count call also returns 1
         restContactTypeMockMvc.perform(get("/api/contact-types/count?sort=id,desc&" + filter))
@@ -332,7 +332,7 @@ public class ContactTypeResourceIT {
         // Disconnect from session so that the updates on updatedContactType are not directly saved in db
         em.detach(updatedContactType);
         updatedContactType
-            .contactTypeName(UPDATED_CONTACT_TYPE_NAME);
+            .name(UPDATED_NAME);
         ContactTypeDTO contactTypeDTO = contactTypeMapper.toDto(updatedContactType);
 
         restContactTypeMockMvc.perform(put("/api/contact-types")
@@ -344,7 +344,7 @@ public class ContactTypeResourceIT {
         List<ContactType> contactTypeList = contactTypeRepository.findAll();
         assertThat(contactTypeList).hasSize(databaseSizeBeforeUpdate);
         ContactType testContactType = contactTypeList.get(contactTypeList.size() - 1);
-        assertThat(testContactType.getContactTypeName()).isEqualTo(UPDATED_CONTACT_TYPE_NAME);
+        assertThat(testContactType.getName()).isEqualTo(UPDATED_NAME);
     }
 
     @Test

@@ -5,9 +5,9 @@
             <hr>
             <jhi-alert-error></jhi-alert-error>
             <dl class="row-md jh-entity-details">
-                <dt><span jhiTranslate="epmresourcesApp.purchaseOrderLines.ordersOuters">Orders Outers</span></dt>
+                <dt><span jhiTranslate="epmresourcesApp.purchaseOrderLines.orderedOuters">Ordered Outers</span></dt>
                 <dd>
-                    <span>{{purchaseOrderLines.ordersOuters}}</span>
+                    <span>{{purchaseOrderLines.orderedOuters}}</span>
                 </dd>
                 <dt><span jhiTranslate="epmresourcesApp.purchaseOrderLines.description">Description</span></dt>
                 <dd>
@@ -40,13 +40,13 @@
                 <dt><span jhiTranslate="epmresourcesApp.purchaseOrderLines.packageType">Package Type</span></dt>
                 <dd>
                     <div *ngIf="purchaseOrderLines.packageTypeId">
-                        <a [routerLink]="['/package-types', purchaseOrderLines.packageTypeId, 'view']">{{purchaseOrderLines.packageTypePackageTypeName}}</a>
+                        <a [routerLink]="['/package-types', purchaseOrderLines.packageTypeId, 'view']">{{purchaseOrderLines.packageTypeName}}</a>
                     </div>
                 </dd>
                 <dt><span jhiTranslate="epmresourcesApp.purchaseOrderLines.stockItem">Stock Item</span></dt>
                 <dd>
                     <div *ngIf="purchaseOrderLines.stockItemId">
-                        <a [routerLink]="['/stock-items', purchaseOrderLines.stockItemId, 'view']">{{purchaseOrderLines.stockItemStockItemName}}</a>
+                        <a [routerLink]="['/stock-items', purchaseOrderLines.stockItemId, 'view']">{{purchaseOrderLines.stockItemName}}</a>
                     </div>
                 </dd>
                 <dt><span jhiTranslate="epmresourcesApp.purchaseOrderLines.purchaseOrder">Purchase Order</span></dt>

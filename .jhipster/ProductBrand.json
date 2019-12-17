@@ -2,16 +2,15 @@
     "name": "ProductBrand",
     "fields": [
         {
-            "fieldName": "productBrandName",
+            "fieldName": "name",
             "fieldType": "String",
             "fieldValidateRules": [
                 "required"
             ]
         },
         {
-            "fieldName": "photo",
-            "fieldType": "byte[]",
-            "fieldTypeBlobContent": "image"
+            "fieldName": "thumbnailUrl",
+            "fieldType": "String"
         }
     ],
     "relationships": [],

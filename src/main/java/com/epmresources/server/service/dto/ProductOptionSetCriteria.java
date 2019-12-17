@@ -26,14 +26,14 @@ public class ProductOptionSetCriteria implements Serializable, Criteria {
 
     private LongFilter id;
 
-    private StringFilter productOptionSetValue;
+    private StringFilter value;
 
     public ProductOptionSetCriteria(){
     }
 
     public ProductOptionSetCriteria(ProductOptionSetCriteria other){
         this.id = other.id == null ? null : other.id.copy();
-        this.productOptionSetValue = other.productOptionSetValue == null ? null : other.productOptionSetValue.copy();
+        this.value = other.value == null ? null : other.value.copy();
     }
 
     @Override
@@ -49,12 +49,12 @@ public class ProductOptionSetCriteria implements Serializable, Criteria {
         this.id = id;
     }
 
-    public StringFilter getProductOptionSetValue() {
-        return productOptionSetValue;
+    public StringFilter getValue() {
+        return value;
     }
 
-    public void setProductOptionSetValue(StringFilter productOptionSetValue) {
-        this.productOptionSetValue = productOptionSetValue;
+    public void setValue(StringFilter value) {
+        this.value = value;
     }
 
 
@@ -69,14 +69,14 @@ public class ProductOptionSetCriteria implements Serializable, Criteria {
         final ProductOptionSetCriteria that = (ProductOptionSetCriteria) o;
         return
             Objects.equals(id, that.id) &&
-            Objects.equals(productOptionSetValue, that.productOptionSetValue);
+            Objects.equals(value, that.value);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(
         id,
-        productOptionSetValue
+        value
         );
     }
 
@@ -84,7 +84,7 @@ public class ProductOptionSetCriteria implements Serializable, Criteria {
     public String toString() {
         return "ProductOptionSetCriteria{" +
                 (id != null ? "id=" + id + ", " : "") +
-                (productOptionSetValue != null ? "productOptionSetValue=" + productOptionSetValue + ", " : "") +
+                (value != null ? "value=" + value + ", " : "") +
             "}";
     }
 

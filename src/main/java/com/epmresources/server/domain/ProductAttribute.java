@@ -24,8 +24,8 @@ public class ProductAttribute implements Serializable {
     private Long id;
 
     @NotNull
-    @Column(name = "product_attribute_value", nullable = false)
-    private String productAttributeValue;
+    @Column(name = "value", nullable = false)
+    private String value;
 
     @ManyToOne
     @JsonIgnoreProperties("productAttributes")
@@ -44,17 +44,17 @@ public class ProductAttribute implements Serializable {
         this.id = id;
     }
 
-    public String getProductAttributeValue() {
-        return productAttributeValue;
+    public String getValue() {
+        return value;
     }
 
-    public ProductAttribute productAttributeValue(String productAttributeValue) {
-        this.productAttributeValue = productAttributeValue;
+    public ProductAttribute value(String value) {
+        this.value = value;
         return this;
     }
 
-    public void setProductAttributeValue(String productAttributeValue) {
-        this.productAttributeValue = productAttributeValue;
+    public void setValue(String value) {
+        this.value = value;
     }
 
     public ProductAttributeSet getProductAttributeSet() {
@@ -104,7 +104,7 @@ public class ProductAttribute implements Serializable {
     public String toString() {
         return "ProductAttribute{" +
             "id=" + getId() +
-            ", productAttributeValue='" + getProductAttributeValue() + "'" +
+            ", value='" + getValue() + "'" +
             "}";
     }
 }

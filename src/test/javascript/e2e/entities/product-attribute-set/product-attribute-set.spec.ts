@@ -45,13 +45,10 @@ describe('ProductAttributeSet e2e test', () => {
 
     await productAttributeSetComponentsPage.clickOnCreateButton();
     await promise.all([
-      productAttributeSetUpdatePage.setProductAttributeSetNameInput('productAttributeSetName'),
+      productAttributeSetUpdatePage.setNameInput('name'),
       productAttributeSetUpdatePage.productOptionSetSelectLastOption()
     ]);
-    expect(await productAttributeSetUpdatePage.getProductAttributeSetNameInput()).to.eq(
-      'productAttributeSetName',
-      'Expected ProductAttributeSetName value to be equals to productAttributeSetName'
-    );
+    expect(await productAttributeSetUpdatePage.getNameInput()).to.eq('name', 'Expected Name value to be equals to name');
     await productAttributeSetUpdatePage.save();
     expect(await productAttributeSetUpdatePage.getSaveButton().isPresent(), 'Expected save button disappear').to.be.false;
 

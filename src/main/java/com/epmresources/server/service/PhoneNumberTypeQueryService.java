@@ -91,8 +91,8 @@ public class PhoneNumberTypeQueryService extends QueryService<PhoneNumberType> {
             if (criteria.getId() != null) {
                 specification = specification.and(buildSpecification(criteria.getId(), PhoneNumberType_.id));
             }
-            if (criteria.getPhoneNumberTypeName() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getPhoneNumberTypeName(), PhoneNumberType_.phoneNumberTypeName));
+            if (criteria.getName() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getName(), PhoneNumberType_.name));
             }
         }
         return specification;

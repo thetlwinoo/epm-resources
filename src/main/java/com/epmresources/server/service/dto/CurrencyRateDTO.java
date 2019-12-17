@@ -15,9 +15,9 @@ public class CurrencyRateDTO implements Serializable {
     @NotNull
     private Instant currencyRateDate;
 
-    private String fromCurrencyCode;
+    private String fromcode;
 
-    private String toCurrencyCode;
+    private String tocode;
 
     private BigDecimal averageRate;
 
@@ -44,20 +44,20 @@ public class CurrencyRateDTO implements Serializable {
         this.currencyRateDate = currencyRateDate;
     }
 
-    public String getFromCurrencyCode() {
-        return fromCurrencyCode;
+    public String getFromcode() {
+        return fromcode;
     }
 
-    public void setFromCurrencyCode(String fromCurrencyCode) {
-        this.fromCurrencyCode = fromCurrencyCode;
+    public void setFromcode(String fromcode) {
+        this.fromcode = fromcode;
     }
 
-    public String getToCurrencyCode() {
-        return toCurrencyCode;
+    public String getTocode() {
+        return tocode;
     }
 
-    public void setToCurrencyCode(String toCurrencyCode) {
-        this.toCurrencyCode = toCurrencyCode;
+    public void setTocode(String tocode) {
+        this.tocode = tocode;
     }
 
     public BigDecimal getAverageRate() {
@@ -118,8 +118,8 @@ public class CurrencyRateDTO implements Serializable {
         return "CurrencyRateDTO{" +
             "id=" + getId() +
             ", currencyRateDate='" + getCurrencyRateDate() + "'" +
-            ", fromCurrencyCode='" + getFromCurrencyCode() + "'" +
-            ", toCurrencyCode='" + getToCurrencyCode() + "'" +
+            ", fromcode='" + getFromcode() + "'" +
+            ", tocode='" + getTocode() + "'" +
             ", averageRate=" + getAverageRate() +
             ", endOfDayRate=" + getEndOfDayRate() +
             ", lastEditedBy='" + getLastEditedBy() + "'" +

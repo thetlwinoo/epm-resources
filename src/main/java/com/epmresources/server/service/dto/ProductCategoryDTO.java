@@ -2,7 +2,6 @@ package com.epmresources.server.service.dto;
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.Objects;
-import javax.persistence.Lob;
 
 /**
  * A DTO for the {@link com.epmresources.server.domain.ProductCategory} entity.
@@ -16,10 +15,8 @@ public class ProductCategoryDTO implements Serializable {
 
     private String shortLabel;
 
-    @Lob
-    private byte[] photo;
+    private String thumbnailUrl;
 
-    private String photoContentType;
 
     private Long parentId;
 
@@ -49,20 +46,12 @@ public class ProductCategoryDTO implements Serializable {
         this.shortLabel = shortLabel;
     }
 
-    public byte[] getPhoto() {
-        return photo;
+    public String getThumbnailUrl() {
+        return thumbnailUrl;
     }
 
-    public void setPhoto(byte[] photo) {
-        this.photo = photo;
-    }
-
-    public String getPhotoContentType() {
-        return photoContentType;
-    }
-
-    public void setPhotoContentType(String photoContentType) {
-        this.photoContentType = photoContentType;
+    public void setThumbnailUrl(String thumbnailUrl) {
+        this.thumbnailUrl = thumbnailUrl;
     }
 
     public Long getParentId() {
@@ -108,7 +97,7 @@ public class ProductCategoryDTO implements Serializable {
             "id=" + getId() +
             ", name='" + getName() + "'" +
             ", shortLabel='" + getShortLabel() + "'" +
-            ", photo='" + getPhoto() + "'" +
+            ", thumbnailUrl='" + getThumbnailUrl() + "'" +
             ", parent=" + getParentId() +
             ", parent='" + getParentName() + "'" +
             "}";

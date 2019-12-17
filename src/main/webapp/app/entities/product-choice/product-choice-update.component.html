@@ -32,14 +32,14 @@
                     <label class="form-control-label" jhiTranslate="epmresourcesApp.productChoice.productAttributeSet" for="field_productAttributeSet">Product Attribute Set</label>
                     <select class="form-control" id="field_productAttributeSet" name="productAttributeSet" formControlName="productAttributeSetId">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="productAttributeSetOption.id" *ngFor="let productAttributeSetOption of productattributesets; trackBy: trackProductAttributeSetById">{{productAttributeSetOption.productAttributeSetName}}</option>
+                        <option [ngValue]="productAttributeSetOption.id" *ngFor="let productAttributeSetOption of productattributesets; trackBy: trackProductAttributeSetById">{{productAttributeSetOption.name}}</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="epmresourcesApp.productChoice.productOptionSet" for="field_productOptionSet">Product Option Set</label>
                     <select class="form-control" id="field_productOptionSet" name="productOptionSet" formControlName="productOptionSetId">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="productOptionSetOption.id" *ngFor="let productOptionSetOption of productoptionsets; trackBy: trackProductOptionSetById">{{productOptionSetOption.productOptionSetValue}}</option>
+                        <option [ngValue]="productOptionSetOption.id" *ngFor="let productOptionSetOption of productoptionsets; trackBy: trackProductOptionSetById">{{productOptionSetOption.value}}</option>
                     </select>
                 </div>
             </div>

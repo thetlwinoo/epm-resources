@@ -16,8 +16,8 @@
       "detail": {
         "title": "Unit Measure"
       },
-      "unitMeasureCode": "Unit Measure Code",
-      "unitMeasureName": "Unit Measure Name"
+      "code": "Code",
+      "name": "Name"
     }
   }
 }

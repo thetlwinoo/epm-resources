@@ -35,7 +35,7 @@
                 <td>{{shoppingCartItems.lastEditedWhen | date:'medium'}}</td>
                 <td>
                     <div *ngIf="shoppingCartItems.stockItemId">
-                        <a [routerLink]="['/stock-items', shoppingCartItems.stockItemId , 'view' ]" >{{shoppingCartItems.stockItemStockItemName}}</a>
+                        <a [routerLink]="['/stock-items', shoppingCartItems.stockItemId , 'view' ]" >{{shoppingCartItems.stockItemName}}</a>
                     </div>
                 </td>
                 <td>

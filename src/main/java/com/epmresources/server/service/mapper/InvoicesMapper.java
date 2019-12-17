@@ -22,7 +22,7 @@ public interface InvoicesMapper extends EntityMapper<InvoicesDTO, Invoices> {
     @Mapping(source = "customer.id", target = "customerId")
     @Mapping(source = "billToCustomer.id", target = "billToCustomerId")
     @Mapping(source = "deliveryMethod.id", target = "deliveryMethodId")
-    @Mapping(source = "deliveryMethod.deliveryMethodName", target = "deliveryMethodDeliveryMethodName")
+    @Mapping(source = "deliveryMethod.name", target = "deliveryMethodName")
     @Mapping(source = "order.id", target = "orderId")
     InvoicesDTO toDto(Invoices invoices);
 

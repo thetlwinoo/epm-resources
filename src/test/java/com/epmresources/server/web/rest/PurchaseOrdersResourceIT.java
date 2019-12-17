@@ -53,8 +53,9 @@ public class PurchaseOrdersResourceIT {
     private static final String DEFAULT_SUPPLIER_REFERENCE = "AAAAAAAAAA";
     private static final String UPDATED_SUPPLIER_REFERENCE = "BBBBBBBBBB";
 
-    private static final Boolean DEFAULT_IS_ORDER_FINALIZED = false;
-    private static final Boolean UPDATED_IS_ORDER_FINALIZED = true;
+    private static final Integer DEFAULT_IS_ORDER_FINALIZED = 1;
+    private static final Integer UPDATED_IS_ORDER_FINALIZED = 2;
+    private static final Integer SMALLER_IS_ORDER_FINALIZED = 1 - 1;
 
     private static final String DEFAULT_COMMENTS = "AAAAAAAAAA";
     private static final String UPDATED_COMMENTS = "BBBBBBBBBB";
@@ -172,7 +173,7 @@ public class PurchaseOrdersResourceIT {
         assertThat(testPurchaseOrders.getOrderDate()).isEqualTo(DEFAULT_ORDER_DATE);
         assertThat(testPurchaseOrders.getExpectedDeliveryDate()).isEqualTo(DEFAULT_EXPECTED_DELIVERY_DATE);
         assertThat(testPurchaseOrders.getSupplierReference()).isEqualTo(DEFAULT_SUPPLIER_REFERENCE);
-        assertThat(testPurchaseOrders.isIsOrderFinalized()).isEqualTo(DEFAULT_IS_ORDER_FINALIZED);
+        assertThat(testPurchaseOrders.getIsOrderFinalized()).isEqualTo(DEFAULT_IS_ORDER_FINALIZED);
         assertThat(testPurchaseOrders.getComments()).isEqualTo(DEFAULT_COMMENTS);
         assertThat(testPurchaseOrders.getInternalComments()).isEqualTo(DEFAULT_INTERNAL_COMMENTS);
         assertThat(testPurchaseOrders.getLastEditedBy()).isEqualTo(DEFAULT_LAST_EDITED_BY);
@@ -221,6 +222,25 @@ public class PurchaseOrdersResourceIT {
 
     @Test
     @Transactional
+    public void checkIsOrderFinalizedIsRequired() throws Exception {
+        int databaseSizeBeforeTest = purchaseOrdersRepository.findAll().size();
+        // set the field null
+        purchaseOrders.setIsOrderFinalized(null);
+
+        // Create the PurchaseOrders, which fails.
+        PurchaseOrdersDTO purchaseOrdersDTO = purchaseOrdersMapper.toDto(purchaseOrders);
+
+        restPurchaseOrdersMockMvc.perform(post("/api/purchase-orders")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(purchaseOrdersDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<PurchaseOrders> purchaseOrdersList = purchaseOrdersRepository.findAll();
+        assertThat(purchaseOrdersList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllPurchaseOrders() throws Exception {
         // Initialize the database
         purchaseOrdersRepository.saveAndFlush(purchaseOrders);
@@ -233,7 +253,7 @@ public class PurchaseOrdersResourceIT {
             .andExpect(jsonPath("$.[*].orderDate").value(hasItem(DEFAULT_ORDER_DATE.toString())))
             .andExpect(jsonPath("$.[*].expectedDeliveryDate").value(hasItem(DEFAULT_EXPECTED_DELIVERY_DATE.toString())))
             .andExpect(jsonPath("$.[*].supplierReference").value(hasItem(DEFAULT_SUPPLIER_REFERENCE)))
-            .andExpect(jsonPath("$.[*].isOrderFinalized").value(hasItem(DEFAULT_IS_ORDER_FINALIZED.booleanValue())))
+            .andExpect(jsonPath("$.[*].isOrderFinalized").value(hasItem(DEFAULT_IS_ORDER_FINALIZED)))
             .andExpect(jsonPath("$.[*].comments").value(hasItem(DEFAULT_COMMENTS)))
             .andExpect(jsonPath("$.[*].internalComments").value(hasItem(DEFAULT_INTERNAL_COMMENTS)))
             .andExpect(jsonPath("$.[*].lastEditedBy").value(hasItem(DEFAULT_LAST_EDITED_BY)))
@@ -254,7 +274,7 @@ public class PurchaseOrdersResourceIT {
             .andExpect(jsonPath("$.orderDate").value(DEFAULT_ORDER_DATE.toString()))
             .andExpect(jsonPath("$.expectedDeliveryDate").value(DEFAULT_EXPECTED_DELIVERY_DATE.toString()))
             .andExpect(jsonPath("$.supplierReference").value(DEFAULT_SUPPLIER_REFERENCE))
-            .andExpect(jsonPath("$.isOrderFinalized").value(DEFAULT_IS_ORDER_FINALIZED.booleanValue()))
+            .andExpect(jsonPath("$.isOrderFinalized").value(DEFAULT_IS_ORDER_FINALIZED))
             .andExpect(jsonPath("$.comments").value(DEFAULT_COMMENTS))
             .andExpect(jsonPath("$.internalComments").value(DEFAULT_INTERNAL_COMMENTS))
             .andExpect(jsonPath("$.lastEditedBy").value(DEFAULT_LAST_EDITED_BY))
@@ -494,6 +514,59 @@ public class PurchaseOrdersResourceIT {
         // Get all the purchaseOrdersList where isOrderFinalized is null
         defaultPurchaseOrdersShouldNotBeFound("isOrderFinalized.specified=false");
     }
+
+    @Test
+    @Transactional
+    public void getAllPurchaseOrdersByIsOrderFinalizedIsGreaterThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        purchaseOrdersRepository.saveAndFlush(purchaseOrders);
+
+        // Get all the purchaseOrdersList where isOrderFinalized is greater than or equal to DEFAULT_IS_ORDER_FINALIZED
+        defaultPurchaseOrdersShouldBeFound("isOrderFinalized.greaterThanOrEqual=" + DEFAULT_IS_ORDER_FINALIZED);
+
+        // Get all the purchaseOrdersList where isOrderFinalized is greater than or equal to UPDATED_IS_ORDER_FINALIZED
+        defaultPurchaseOrdersShouldNotBeFound("isOrderFinalized.greaterThanOrEqual=" + UPDATED_IS_ORDER_FINALIZED);
+    }
+
+    @Test
+    @Transactional
+    public void getAllPurchaseOrdersByIsOrderFinalizedIsLessThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        purchaseOrdersRepository.saveAndFlush(purchaseOrders);
+
+        // Get all the purchaseOrdersList where isOrderFinalized is less than or equal to DEFAULT_IS_ORDER_FINALIZED
+        defaultPurchaseOrdersShouldBeFound("isOrderFinalized.lessThanOrEqual=" + DEFAULT_IS_ORDER_FINALIZED);
+
+        // Get all the purchaseOrdersList where isOrderFinalized is less than or equal to SMALLER_IS_ORDER_FINALIZED
+        defaultPurchaseOrdersShouldNotBeFound("isOrderFinalized.lessThanOrEqual=" + SMALLER_IS_ORDER_FINALIZED);
+    }
+
+    @Test
+    @Transactional
+    public void getAllPurchaseOrdersByIsOrderFinalizedIsLessThanSomething() throws Exception {
+        // Initialize the database
+        purchaseOrdersRepository.saveAndFlush(purchaseOrders);
+
+        // Get all the purchaseOrdersList where isOrderFinalized is less than DEFAULT_IS_ORDER_FINALIZED
+        defaultPurchaseOrdersShouldNotBeFound("isOrderFinalized.lessThan=" + DEFAULT_IS_ORDER_FINALIZED);
+
+        // Get all the purchaseOrdersList where isOrderFinalized is less than UPDATED_IS_ORDER_FINALIZED
+        defaultPurchaseOrdersShouldBeFound("isOrderFinalized.lessThan=" + UPDATED_IS_ORDER_FINALIZED);
+    }
+
+    @Test
+    @Transactional
+    public void getAllPurchaseOrdersByIsOrderFinalizedIsGreaterThanSomething() throws Exception {
+        // Initialize the database
+        purchaseOrdersRepository.saveAndFlush(purchaseOrders);
+
+        // Get all the purchaseOrdersList where isOrderFinalized is greater than DEFAULT_IS_ORDER_FINALIZED
+        defaultPurchaseOrdersShouldNotBeFound("isOrderFinalized.greaterThan=" + DEFAULT_IS_ORDER_FINALIZED);
+
+        // Get all the purchaseOrdersList where isOrderFinalized is greater than SMALLER_IS_ORDER_FINALIZED
+        defaultPurchaseOrdersShouldBeFound("isOrderFinalized.greaterThan=" + SMALLER_IS_ORDER_FINALIZED);
+    }
+
 
     @Test
     @Transactional
@@ -871,7 +944,7 @@ public class PurchaseOrdersResourceIT {
             .andExpect(jsonPath("$.[*].orderDate").value(hasItem(DEFAULT_ORDER_DATE.toString())))
             .andExpect(jsonPath("$.[*].expectedDeliveryDate").value(hasItem(DEFAULT_EXPECTED_DELIVERY_DATE.toString())))
             .andExpect(jsonPath("$.[*].supplierReference").value(hasItem(DEFAULT_SUPPLIER_REFERENCE)))
-            .andExpect(jsonPath("$.[*].isOrderFinalized").value(hasItem(DEFAULT_IS_ORDER_FINALIZED.booleanValue())))
+            .andExpect(jsonPath("$.[*].isOrderFinalized").value(hasItem(DEFAULT_IS_ORDER_FINALIZED)))
             .andExpect(jsonPath("$.[*].comments").value(hasItem(DEFAULT_COMMENTS)))
             .andExpect(jsonPath("$.[*].internalComments").value(hasItem(DEFAULT_INTERNAL_COMMENTS)))
             .andExpect(jsonPath("$.[*].lastEditedBy").value(hasItem(DEFAULT_LAST_EDITED_BY)))
@@ -945,7 +1018,7 @@ public class PurchaseOrdersResourceIT {
         assertThat(testPurchaseOrders.getOrderDate()).isEqualTo(UPDATED_ORDER_DATE);
         assertThat(testPurchaseOrders.getExpectedDeliveryDate()).isEqualTo(UPDATED_EXPECTED_DELIVERY_DATE);
         assertThat(testPurchaseOrders.getSupplierReference()).isEqualTo(UPDATED_SUPPLIER_REFERENCE);
-        assertThat(testPurchaseOrders.isIsOrderFinalized()).isEqualTo(UPDATED_IS_ORDER_FINALIZED);
+        assertThat(testPurchaseOrders.getIsOrderFinalized()).isEqualTo(UPDATED_IS_ORDER_FINALIZED);
         assertThat(testPurchaseOrders.getComments()).isEqualTo(UPDATED_COMMENTS);
         assertThat(testPurchaseOrders.getInternalComments()).isEqualTo(UPDATED_INTERNAL_COMMENTS);
         assertThat(testPurchaseOrders.getLastEditedBy()).isEqualTo(UPDATED_LAST_EDITED_BY);

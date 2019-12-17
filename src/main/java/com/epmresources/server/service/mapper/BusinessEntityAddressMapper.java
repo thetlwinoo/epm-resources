@@ -14,7 +14,7 @@ public interface BusinessEntityAddressMapper extends EntityMapper<BusinessEntity
     @Mapping(source = "address.id", target = "addressId")
     @Mapping(source = "person.id", target = "personId")
     @Mapping(source = "addressType.id", target = "addressTypeId")
-    @Mapping(source = "addressType.addressTypeName", target = "addressTypeAddressTypeName")
+    @Mapping(source = "addressType.name", target = "addressTypeName")
     BusinessEntityAddressDTO toDto(BusinessEntityAddress businessEntityAddress);
 
     @Mapping(source = "addressId", target = "address")

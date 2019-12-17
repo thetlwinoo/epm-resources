@@ -36,8 +36,9 @@ public class PurchaseOrders implements Serializable {
     @Column(name = "supplier_reference")
     private String supplierReference;
 
-    @Column(name = "is_order_finalized")
-    private Boolean isOrderFinalized;
+    @NotNull
+    @Column(name = "is_order_finalized", nullable = false)
+    private Integer isOrderFinalized;
 
     @Column(name = "comments")
     private String comments;
@@ -115,16 +116,16 @@ public class PurchaseOrders implements Serializable {
         this.supplierReference = supplierReference;
     }
 
-    public Boolean isIsOrderFinalized() {
+    public Integer getIsOrderFinalized() {
         return isOrderFinalized;
     }
 
-    public PurchaseOrders isOrderFinalized(Boolean isOrderFinalized) {
+    public PurchaseOrders isOrderFinalized(Integer isOrderFinalized) {
         this.isOrderFinalized = isOrderFinalized;
         return this;
     }
 
-    public void setIsOrderFinalized(Boolean isOrderFinalized) {
+    public void setIsOrderFinalized(Integer isOrderFinalized) {
         this.isOrderFinalized = isOrderFinalized;
     }
 
@@ -268,7 +269,7 @@ public class PurchaseOrders implements Serializable {
             ", orderDate='" + getOrderDate() + "'" +
             ", expectedDeliveryDate='" + getExpectedDeliveryDate() + "'" +
             ", supplierReference='" + getSupplierReference() + "'" +
-            ", isOrderFinalized='" + isIsOrderFinalized() + "'" +
+            ", isOrderFinalized=" + getIsOrderFinalized() +
             ", comments='" + getComments() + "'" +
             ", internalComments='" + getInternalComments() + "'" +
             ", lastEditedBy='" + getLastEditedBy() + "'" +

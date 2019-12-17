@@ -26,14 +26,14 @@ public class PhoneNumberTypeCriteria implements Serializable, Criteria {
 
     private LongFilter id;
 
-    private StringFilter phoneNumberTypeName;
+    private StringFilter name;
 
     public PhoneNumberTypeCriteria(){
     }
 
     public PhoneNumberTypeCriteria(PhoneNumberTypeCriteria other){
         this.id = other.id == null ? null : other.id.copy();
-        this.phoneNumberTypeName = other.phoneNumberTypeName == null ? null : other.phoneNumberTypeName.copy();
+        this.name = other.name == null ? null : other.name.copy();
     }
 
     @Override
@@ -49,12 +49,12 @@ public class PhoneNumberTypeCriteria implements Serializable, Criteria {
         this.id = id;
     }
 
-    public StringFilter getPhoneNumberTypeName() {
-        return phoneNumberTypeName;
+    public StringFilter getName() {
+        return name;
     }
 
-    public void setPhoneNumberTypeName(StringFilter phoneNumberTypeName) {
-        this.phoneNumberTypeName = phoneNumberTypeName;
+    public void setName(StringFilter name) {
+        this.name = name;
     }
 
 
@@ -69,14 +69,14 @@ public class PhoneNumberTypeCriteria implements Serializable, Criteria {
         final PhoneNumberTypeCriteria that = (PhoneNumberTypeCriteria) o;
         return
             Objects.equals(id, that.id) &&
-            Objects.equals(phoneNumberTypeName, that.phoneNumberTypeName);
+            Objects.equals(name, that.name);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(
         id,
-        phoneNumberTypeName
+        name
         );
     }
 
@@ -84,7 +84,7 @@ public class PhoneNumberTypeCriteria implements Serializable, Criteria {
     public String toString() {
         return "PhoneNumberTypeCriteria{" +
                 (id != null ? "id=" + id + ", " : "") +
-                (phoneNumberTypeName != null ? "phoneNumberTypeName=" + phoneNumberTypeName + ", " : "") +
+                (name != null ? "name=" + name + ", " : "") +
             "}";
     }
 

@@ -9,9 +9,9 @@ export interface IAddresses {
   postalCode?: string;
   defaultInd?: boolean;
   activeInd?: boolean;
-  stateProvinceStateProvinceName?: string;
+  stateProvinceName?: string;
   stateProvinceId?: number;
-  addressTypeAddressTypeName?: string;
+  addressTypeName?: string;
   addressTypeId?: number;
   personId?: number;
 }
@@ -28,9 +28,9 @@ export class Addresses implements IAddresses {
     public postalCode?: string,
     public defaultInd?: boolean,
     public activeInd?: boolean,
-    public stateProvinceStateProvinceName?: string,
+    public stateProvinceName?: string,
     public stateProvinceId?: number,
-    public addressTypeAddressTypeName?: string,
+    public addressTypeName?: string,
     public addressTypeId?: number,
     public personId?: number
   ) {

@@ -62,8 +62,8 @@ describe('Photos e2e test', () => {
       photosUpdatePage.setSquarePhotoBlobInput(absolutePath),
       photosUpdatePage.setWatermarkPhotoBlobInput(absolutePath),
       photosUpdatePage.setPriorityInput('5'),
-      photosUpdatePage.setDeleteTokenInput('deleteToken'),
-      photosUpdatePage.stockItemSelectLastOption()
+      photosUpdatePage.stockItemSelectLastOption(),
+      photosUpdatePage.productCategorySelectLastOption()
     ]);
     expect(await photosUpdatePage.getThumbnailPhotoInput()).to.eq(
       'thumbnailPhoto',
@@ -132,7 +132,6 @@ describe('Photos e2e test', () => {
       await photosUpdatePage.getDefaultIndInput().click();
       expect(await photosUpdatePage.getDefaultIndInput().isSelected(), 'Expected defaultInd to be selected').to.be.true;
     }
-    expect(await photosUpdatePage.getDeleteTokenInput()).to.eq('deleteToken', 'Expected DeleteToken value to be equals to deleteToken');
     await photosUpdatePage.save();
     expect(await photosUpdatePage.getSaveButton().isPresent(), 'Expected save button disappear').to.be.false;
 

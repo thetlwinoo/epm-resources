@@ -16,7 +16,7 @@
       "detail": {
         "title": "Suppliers"
       },
-      "supplierName": "Supplier Name",
+      "name": "Name",
       "supplierReference": "Supplier Reference",
       "bankAccountName": "Bank Account Name",
       "bankAccountBranch": "Bank Account Branch",
@@ -31,7 +31,7 @@
       "webServiceUrl": "Web Service Url",
       "creditRating": "Credit Rating",
       "activeFlag": "Active Flag",
-      "avatar": "Avatar",
+      "thumbnailUrl": "Thumbnail Url",
       "validFrom": "Valid From",
       "validTo": "Valid To",
       "user": "User",

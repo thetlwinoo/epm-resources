@@ -91,8 +91,8 @@ public class ProductAttributeSetQueryService extends QueryService<ProductAttribu
             if (criteria.getId() != null) {
                 specification = specification.and(buildSpecification(criteria.getId(), ProductAttributeSet_.id));
             }
-            if (criteria.getProductAttributeSetName() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getProductAttributeSetName(), ProductAttributeSet_.productAttributeSetName));
+            if (criteria.getName() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getName(), ProductAttributeSet_.name));
             }
             if (criteria.getProductOptionSetId() != null) {
                 specification = specification.and(buildSpecification(criteria.getProductOptionSetId(),

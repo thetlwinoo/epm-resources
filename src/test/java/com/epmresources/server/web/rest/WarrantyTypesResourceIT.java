@@ -38,8 +38,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = EpmresourcesApp.class)
 public class WarrantyTypesResourceIT {
 
-    private static final String DEFAULT_WARRANTY_TYPE_NAME = "AAAAAAAAAA";
-    private static final String UPDATED_WARRANTY_TYPE_NAME = "BBBBBBBBBB";
+    private static final String DEFAULT_NAME = "AAAAAAAAAA";
+    private static final String UPDATED_NAME = "BBBBBBBBBB";
 
     @Autowired
     private WarrantyTypesRepository warrantyTypesRepository;
@@ -92,7 +92,7 @@ public class WarrantyTypesResourceIT {
      */
     public static WarrantyTypes createEntity(EntityManager em) {
         WarrantyTypes warrantyTypes = new WarrantyTypes()
-            .warrantyTypeName(DEFAULT_WARRANTY_TYPE_NAME);
+            .name(DEFAULT_NAME);
         return warrantyTypes;
     }
     /**
@@ -103,7 +103,7 @@ public class WarrantyTypesResourceIT {
      */
     public static WarrantyTypes createUpdatedEntity(EntityManager em) {
         WarrantyTypes warrantyTypes = new WarrantyTypes()
-            .warrantyTypeName(UPDATED_WARRANTY_TYPE_NAME);
+            .name(UPDATED_NAME);
         return warrantyTypes;
     }
 
@@ -128,7 +128,7 @@ public class WarrantyTypesResourceIT {
         List<WarrantyTypes> warrantyTypesList = warrantyTypesRepository.findAll();
         assertThat(warrantyTypesList).hasSize(databaseSizeBeforeCreate + 1);
         WarrantyTypes testWarrantyTypes = warrantyTypesList.get(warrantyTypesList.size() - 1);
-        assertThat(testWarrantyTypes.getWarrantyTypeName()).isEqualTo(DEFAULT_WARRANTY_TYPE_NAME);
+        assertThat(testWarrantyTypes.getName()).isEqualTo(DEFAULT_NAME);
     }
 
     @Test
@@ -154,10 +154,10 @@ public class WarrantyTypesResourceIT {
 
     @Test
     @Transactional
-    public void checkWarrantyTypeNameIsRequired() throws Exception {
+    public void checkNameIsRequired() throws Exception {
         int databaseSizeBeforeTest = warrantyTypesRepository.findAll().size();
         // set the field null
-        warrantyTypes.setWarrantyTypeName(null);
+        warrantyTypes.setName(null);
 
         // Create the WarrantyTypes, which fails.
         WarrantyTypesDTO warrantyTypesDTO = warrantyTypesMapper.toDto(warrantyTypes);
@@ -182,7 +182,7 @@ public class WarrantyTypesResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(warrantyTypes.getId().intValue())))
-            .andExpect(jsonPath("$.[*].warrantyTypeName").value(hasItem(DEFAULT_WARRANTY_TYPE_NAME)));
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)));
     }
     
     @Test
@@ -196,84 +196,84 @@ public class WarrantyTypesResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(warrantyTypes.getId().intValue()))
-            .andExpect(jsonPath("$.warrantyTypeName").value(DEFAULT_WARRANTY_TYPE_NAME));
+            .andExpect(jsonPath("$.name").value(DEFAULT_NAME));
     }
 
     @Test
     @Transactional
-    public void getAllWarrantyTypesByWarrantyTypeNameIsEqualToSomething() throws Exception {
+    public void getAllWarrantyTypesByNameIsEqualToSomething() throws Exception {
         // Initialize the database
         warrantyTypesRepository.saveAndFlush(warrantyTypes);
 
-        // Get all the warrantyTypesList where warrantyTypeName equals to DEFAULT_WARRANTY_TYPE_NAME
-        defaultWarrantyTypesShouldBeFound("warrantyTypeName.equals=" + DEFAULT_WARRANTY_TYPE_NAME);
+        // Get all the warrantyTypesList where name equals to DEFAULT_NAME
+        defaultWarrantyTypesShouldBeFound("name.equals=" + DEFAULT_NAME);
 
-        // Get all the warrantyTypesList where warrantyTypeName equals to UPDATED_WARRANTY_TYPE_NAME
-        defaultWarrantyTypesShouldNotBeFound("warrantyTypeName.equals=" + UPDATED_WARRANTY_TYPE_NAME);
+        // Get all the warrantyTypesList where name equals to UPDATED_NAME
+        defaultWarrantyTypesShouldNotBeFound("name.equals=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllWarrantyTypesByWarrantyTypeNameIsNotEqualToSomething() throws Exception {
+    public void getAllWarrantyTypesByNameIsNotEqualToSomething() throws Exception {
         // Initialize the database
         warrantyTypesRepository.saveAndFlush(warrantyTypes);
 
-        // Get all the warrantyTypesList where warrantyTypeName not equals to DEFAULT_WARRANTY_TYPE_NAME
-        defaultWarrantyTypesShouldNotBeFound("warrantyTypeName.notEquals=" + DEFAULT_WARRANTY_TYPE_NAME);
+        // Get all the warrantyTypesList where name not equals to DEFAULT_NAME
+        defaultWarrantyTypesShouldNotBeFound("name.notEquals=" + DEFAULT_NAME);
 
-        // Get all the warrantyTypesList where warrantyTypeName not equals to UPDATED_WARRANTY_TYPE_NAME
-        defaultWarrantyTypesShouldBeFound("warrantyTypeName.notEquals=" + UPDATED_WARRANTY_TYPE_NAME);
+        // Get all the warrantyTypesList where name not equals to UPDATED_NAME
+        defaultWarrantyTypesShouldBeFound("name.notEquals=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllWarrantyTypesByWarrantyTypeNameIsInShouldWork() throws Exception {
+    public void getAllWarrantyTypesByNameIsInShouldWork() throws Exception {
         // Initialize the database
         warrantyTypesRepository.saveAndFlush(warrantyTypes);
 
-        // Get all the warrantyTypesList where warrantyTypeName in DEFAULT_WARRANTY_TYPE_NAME or UPDATED_WARRANTY_TYPE_NAME
-        defaultWarrantyTypesShouldBeFound("warrantyTypeName.in=" + DEFAULT_WARRANTY_TYPE_NAME + "," + UPDATED_WARRANTY_TYPE_NAME);
+        // Get all the warrantyTypesList where name in DEFAULT_NAME or UPDATED_NAME
+        defaultWarrantyTypesShouldBeFound("name.in=" + DEFAULT_NAME + "," + UPDATED_NAME);
 
-        // Get all the warrantyTypesList where warrantyTypeName equals to UPDATED_WARRANTY_TYPE_NAME
-        defaultWarrantyTypesShouldNotBeFound("warrantyTypeName.in=" + UPDATED_WARRANTY_TYPE_NAME);
+        // Get all the warrantyTypesList where name equals to UPDATED_NAME
+        defaultWarrantyTypesShouldNotBeFound("name.in=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllWarrantyTypesByWarrantyTypeNameIsNullOrNotNull() throws Exception {
+    public void getAllWarrantyTypesByNameIsNullOrNotNull() throws Exception {
         // Initialize the database
         warrantyTypesRepository.saveAndFlush(warrantyTypes);
 
-        // Get all the warrantyTypesList where warrantyTypeName is not null
-        defaultWarrantyTypesShouldBeFound("warrantyTypeName.specified=true");
+        // Get all the warrantyTypesList where name is not null
+        defaultWarrantyTypesShouldBeFound("name.specified=true");
 
-        // Get all the warrantyTypesList where warrantyTypeName is null
-        defaultWarrantyTypesShouldNotBeFound("warrantyTypeName.specified=false");
+        // Get all the warrantyTypesList where name is null
+        defaultWarrantyTypesShouldNotBeFound("name.specified=false");
     }
                 @Test
     @Transactional
-    public void getAllWarrantyTypesByWarrantyTypeNameContainsSomething() throws Exception {
+    public void getAllWarrantyTypesByNameContainsSomething() throws Exception {
         // Initialize the database
         warrantyTypesRepository.saveAndFlush(warrantyTypes);
 
-        // Get all the warrantyTypesList where warrantyTypeName contains DEFAULT_WARRANTY_TYPE_NAME
-        defaultWarrantyTypesShouldBeFound("warrantyTypeName.contains=" + DEFAULT_WARRANTY_TYPE_NAME);
+        // Get all the warrantyTypesList where name contains DEFAULT_NAME
+        defaultWarrantyTypesShouldBeFound("name.contains=" + DEFAULT_NAME);
 
-        // Get all the warrantyTypesList where warrantyTypeName contains UPDATED_WARRANTY_TYPE_NAME
-        defaultWarrantyTypesShouldNotBeFound("warrantyTypeName.contains=" + UPDATED_WARRANTY_TYPE_NAME);
+        // Get all the warrantyTypesList where name contains UPDATED_NAME
+        defaultWarrantyTypesShouldNotBeFound("name.contains=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllWarrantyTypesByWarrantyTypeNameNotContainsSomething() throws Exception {
+    public void getAllWarrantyTypesByNameNotContainsSomething() throws Exception {
         // Initialize the database
         warrantyTypesRepository.saveAndFlush(warrantyTypes);
 
-        // Get all the warrantyTypesList where warrantyTypeName does not contain DEFAULT_WARRANTY_TYPE_NAME
-        defaultWarrantyTypesShouldNotBeFound("warrantyTypeName.doesNotContain=" + DEFAULT_WARRANTY_TYPE_NAME);
+        // Get all the warrantyTypesList where name does not contain DEFAULT_NAME
+        defaultWarrantyTypesShouldNotBeFound("name.doesNotContain=" + DEFAULT_NAME);
 
-        // Get all the warrantyTypesList where warrantyTypeName does not contain UPDATED_WARRANTY_TYPE_NAME
-        defaultWarrantyTypesShouldBeFound("warrantyTypeName.doesNotContain=" + UPDATED_WARRANTY_TYPE_NAME);
+        // Get all the warrantyTypesList where name does not contain UPDATED_NAME
+        defaultWarrantyTypesShouldBeFound("name.doesNotContain=" + UPDATED_NAME);
     }
 
     /**
@@ -284,7 +284,7 @@ public class WarrantyTypesResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(warrantyTypes.getId().intValue())))
-            .andExpect(jsonPath("$.[*].warrantyTypeName").value(hasItem(DEFAULT_WARRANTY_TYPE_NAME)));
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)));
 
         // Check, that the count call also returns 1
         restWarrantyTypesMockMvc.perform(get("/api/warranty-types/count?sort=id,desc&" + filter))
@@ -332,7 +332,7 @@ public class WarrantyTypesResourceIT {
         // Disconnect from session so that the updates on updatedWarrantyTypes are not directly saved in db
         em.detach(updatedWarrantyTypes);
         updatedWarrantyTypes
-            .warrantyTypeName(UPDATED_WARRANTY_TYPE_NAME);
+            .name(UPDATED_NAME);
         WarrantyTypesDTO warrantyTypesDTO = warrantyTypesMapper.toDto(updatedWarrantyTypes);
 
         restWarrantyTypesMockMvc.perform(put("/api/warranty-types")
@@ -344,7 +344,7 @@ public class WarrantyTypesResourceIT {
         List<WarrantyTypes> warrantyTypesList = warrantyTypesRepository.findAll();
         assertThat(warrantyTypesList).hasSize(databaseSizeBeforeUpdate);
         WarrantyTypes testWarrantyTypes = warrantyTypesList.get(warrantyTypesList.size() - 1);
-        assertThat(testWarrantyTypes.getWarrantyTypeName()).isEqualTo(UPDATED_WARRANTY_TYPE_NAME);
+        assertThat(testWarrantyTypes.getName()).isEqualTo(UPDATED_NAME);
     }
 
     @Test

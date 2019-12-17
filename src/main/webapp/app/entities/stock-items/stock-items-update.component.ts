@@ -57,7 +57,7 @@ export class StockItemsUpdateComponent implements OnInit {
 
   editForm = this.fb.group({
     id: [],
-    stockItemName: [null, [Validators.required]],
+    name: [null, [Validators.required]],
     vendorCode: [],
     vendorSKU: [],
     generatedSKU: [],
@@ -209,7 +209,7 @@ export class StockItemsUpdateComponent implements OnInit {
   updateForm(stockItems: IStockItems) {
     this.editForm.patchValue({
       id: stockItems.id,
-      stockItemName: stockItems.stockItemName,
+      name: stockItems.name,
       vendorCode: stockItems.vendorCode,
       vendorSKU: stockItems.vendorSKU,
       generatedSKU: stockItems.generatedSKU,
@@ -273,7 +273,7 @@ export class StockItemsUpdateComponent implements OnInit {
     return {
       ...new StockItems(),
       id: this.editForm.get(['id']).value,
-      stockItemName: this.editForm.get(['stockItemName']).value,
+      name: this.editForm.get(['name']).value,
       vendorCode: this.editForm.get(['vendorCode']).value,
       vendorSKU: this.editForm.get(['vendorSKU']).value,
       generatedSKU: this.editForm.get(['generatedSKU']).value,

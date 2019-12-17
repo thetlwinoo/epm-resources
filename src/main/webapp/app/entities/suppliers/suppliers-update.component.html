@@ -10,12 +10,12 @@
                         readonly />
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="epmresourcesApp.suppliers.supplierName" for="field_supplierName">Supplier Name</label>
-                    <input type="text" class="form-control" name="supplierName" id="field_supplierName"
-                           formControlName="supplierName"/>
-                    <div *ngIf="editForm.get('supplierName').invalid && (editForm.get('supplierName').dirty || editForm.get('supplierName').touched)">
+                    <label class="form-control-label" jhiTranslate="epmresourcesApp.suppliers.name" for="field_name">Name</label>
+                    <input type="text" class="form-control" name="name" id="field_name"
+                           formControlName="name"/>
+                    <div *ngIf="editForm.get('name').invalid && (editForm.get('name').dirty || editForm.get('name').touched)">
                         <small class="form-text text-danger"
-                               *ngIf="editForm.get('supplierName').errors.required" jhiTranslate="entity.validation.required">
+                               *ngIf="editForm.get('name').errors.required" jhiTranslate="entity.validation.required">
                         This field is required.
                         </small>
                     </div>
@@ -107,21 +107,9 @@
                            formControlName="activeFlag"/>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="epmresourcesApp.suppliers.avatar" for="field_avatar">Avatar</label>
-                    <div>
-                        <img [src]="'data:' + editForm.get('avatarContentType').value + ';base64,' + editForm.get('avatar').value" style="max-height: 100px;" *ngIf="editForm.get('avatar').value" alt="suppliers image"/>
-                        <div *ngIf="editForm.get('avatar').value" class="form-text text-danger clearfix">
-                            <span class="pull-left">{{editForm.get('avatarContentType').value}}, {{byteSize(editForm.get('avatar').value)}}</span>
-                            <button type="button" (click)="clearInputImage('avatar', 'avatarContentType', 'fileImage')" class="btn btn-secondary btn-xs pull-right">
-                                <fa-icon [icon]="'times'"></fa-icon>
-                            </button>
-                        </div>
-                        <input type="file" id="file_avatar" (change)="setFileData($event, 'avatar', true)" accept="image/*" jhiTranslate="entity.action.addimage"/>
-                    </div>
-                    <input type="hidden" class="form-control" name="avatar" id="field_avatar"
-                           formControlName="avatar"/>
-                    <input type="hidden" class="form-control" name="avatarContentType" id="field_avatarContentType"
-                           formControlName="avatarContentType" />
+                    <label class="form-control-label" jhiTranslate="epmresourcesApp.suppliers.thumbnailUrl" for="field_thumbnailUrl">Thumbnail Url</label>
+                    <input type="text" class="form-control" name="thumbnailUrl" id="field_thumbnailUrl"
+                           formControlName="thumbnailUrl"/>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="epmresourcesApp.suppliers.validFrom" for="field_validFrom">Valid From</label>
@@ -167,28 +155,28 @@
                     <label class="form-control-label" jhiTranslate="epmresourcesApp.suppliers.supplierCategory" for="field_supplierCategory">Supplier Category</label>
                     <select class="form-control" id="field_supplierCategory" name="supplierCategory" formControlName="supplierCategoryId">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="supplierCategoriesOption.id" *ngFor="let supplierCategoriesOption of suppliercategories; trackBy: trackSupplierCategoriesById">{{supplierCategoriesOption.supplierCategoryName}}</option>
+                        <option [ngValue]="supplierCategoriesOption.id" *ngFor="let supplierCategoriesOption of suppliercategories; trackBy: trackSupplierCategoriesById">{{supplierCategoriesOption.name}}</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="epmresourcesApp.suppliers.deliveryMethod" for="field_deliveryMethod">Delivery Method</label>
                     <select class="form-control" id="field_deliveryMethod" name="deliveryMethod" formControlName="deliveryMethodId">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="deliveryMethodsOption.id" *ngFor="let deliveryMethodsOption of deliverymethods; trackBy: trackDeliveryMethodsById">{{deliveryMethodsOption.deliveryMethodName}}</option>
+                        <option [ngValue]="deliveryMethodsOption.id" *ngFor="let deliveryMethodsOption of deliverymethods; trackBy: trackDeliveryMethodsById">{{deliveryMethodsOption.name}}</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="epmresourcesApp.suppliers.deliveryCity" for="field_deliveryCity">Delivery City</label>
                     <select class="form-control" id="field_deliveryCity" name="deliveryCity" formControlName="deliveryCityId">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="citiesOption.id" *ngFor="let citiesOption of cities; trackBy: trackCitiesById">{{citiesOption.cityName}}</option>
+                        <option [ngValue]="citiesOption.id" *ngFor="let citiesOption of cities; trackBy: trackCitiesById">{{citiesOption.name}}</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="epmresourcesApp.suppliers.postalCity" for="field_postalCity">Postal City</label>
                     <select class="form-control" id="field_postalCity" name="postalCity" formControlName="postalCityId">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="citiesOption.id" *ngFor="let citiesOption of cities; trackBy: trackCitiesById">{{citiesOption.cityName}}</option>
+                        <option [ngValue]="citiesOption.id" *ngFor="let citiesOption of cities; trackBy: trackCitiesById">{{citiesOption.name}}</option>
                     </select>
                 </div>
             </div>

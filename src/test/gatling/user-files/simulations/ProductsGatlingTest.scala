@@ -72,11 +72,12 @@ class ProductsGatlingTest extends Simulation {
             .headers(headers_http_authenticated)
             .body(StringBody("""{
                 "id":null
-                , "productName":"SAMPLE_TEXT"
+                , "name":"SAMPLE_TEXT"
                 , "handle":"SAMPLE_TEXT"
                 , "productNumber":"SAMPLE_TEXT"
                 , "searchDetails":null
                 , "sellCount":"0"
+                , "thumbnailList":"SAMPLE_TEXT"
                 , "activeInd":null
                 , "lastEditedBy":"SAMPLE_TEXT"
                 , "lastEditedWhen":"2020-01-01T00:00:00.000Z"

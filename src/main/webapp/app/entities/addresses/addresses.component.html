@@ -48,12 +48,12 @@
                 <td>{{addresses.activeInd}}</td>
                 <td>
                     <div *ngIf="addresses.stateProvinceId">
-                        <a [routerLink]="['/state-provinces', addresses.stateProvinceId , 'view' ]" >{{addresses.stateProvinceStateProvinceName}}</a>
+                        <a [routerLink]="['/state-provinces', addresses.stateProvinceId , 'view' ]" >{{addresses.stateProvinceName}}</a>
                     </div>
                 </td>
                 <td>
                     <div *ngIf="addresses.addressTypeId">
-                        <a [routerLink]="['/address-types', addresses.addressTypeId , 'view' ]" >{{addresses.addressTypeAddressTypeName}}</a>
+                        <a [routerLink]="['/address-types', addresses.addressTypeId , 'view' ]" >{{addresses.addressTypeName}}</a>
                     </div>
                 </td>
                 <td>

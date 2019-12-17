@@ -15,6 +15,8 @@ public interface ProductCategoryMapper extends EntityMapper<ProductCategoryDTO, 
     @Mapping(source = "parent.name", target = "parentName")
     ProductCategoryDTO toDto(ProductCategory productCategory);
 
+    @Mapping(target = "photoLists", ignore = true)
+    @Mapping(target = "removePhotoList", ignore = true)
     @Mapping(source = "parentId", target = "parent")
     ProductCategory toEntity(ProductCategoryDTO productCategoryDTO);
 

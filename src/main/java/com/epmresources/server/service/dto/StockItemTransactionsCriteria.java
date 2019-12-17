@@ -28,7 +28,7 @@ public class StockItemTransactionsCriteria implements Serializable, Criteria {
 
     private LongFilter id;
 
-    private InstantFilter transactionOccurredWhen;
+    private InstantFilter transactionOccuredWhen;
 
     private BigDecimalFilter quantity;
 
@@ -53,7 +53,7 @@ public class StockItemTransactionsCriteria implements Serializable, Criteria {
 
     public StockItemTransactionsCriteria(StockItemTransactionsCriteria other){
         this.id = other.id == null ? null : other.id.copy();
-        this.transactionOccurredWhen = other.transactionOccurredWhen == null ? null : other.transactionOccurredWhen.copy();
+        this.transactionOccuredWhen = other.transactionOccuredWhen == null ? null : other.transactionOccuredWhen.copy();
         this.quantity = other.quantity == null ? null : other.quantity.copy();
         this.lastEditedBy = other.lastEditedBy == null ? null : other.lastEditedBy.copy();
         this.lastEditedWhen = other.lastEditedWhen == null ? null : other.lastEditedWhen.copy();
@@ -78,12 +78,12 @@ public class StockItemTransactionsCriteria implements Serializable, Criteria {
         this.id = id;
     }
 
-    public InstantFilter getTransactionOccurredWhen() {
-        return transactionOccurredWhen;
+    public InstantFilter getTransactionOccuredWhen() {
+        return transactionOccuredWhen;
     }
 
-    public void setTransactionOccurredWhen(InstantFilter transactionOccurredWhen) {
-        this.transactionOccurredWhen = transactionOccurredWhen;
+    public void setTransactionOccuredWhen(InstantFilter transactionOccuredWhen) {
+        this.transactionOccuredWhen = transactionOccuredWhen;
     }
 
     public BigDecimalFilter getQuantity() {
@@ -170,7 +170,7 @@ public class StockItemTransactionsCriteria implements Serializable, Criteria {
         final StockItemTransactionsCriteria that = (StockItemTransactionsCriteria) o;
         return
             Objects.equals(id, that.id) &&
-            Objects.equals(transactionOccurredWhen, that.transactionOccurredWhen) &&
+            Objects.equals(transactionOccuredWhen, that.transactionOccuredWhen) &&
             Objects.equals(quantity, that.quantity) &&
             Objects.equals(lastEditedBy, that.lastEditedBy) &&
             Objects.equals(lastEditedWhen, that.lastEditedWhen) &&
@@ -186,7 +186,7 @@ public class StockItemTransactionsCriteria implements Serializable, Criteria {
     public int hashCode() {
         return Objects.hash(
         id,
-        transactionOccurredWhen,
+        transactionOccuredWhen,
         quantity,
         lastEditedBy,
         lastEditedWhen,
@@ -203,7 +203,7 @@ public class StockItemTransactionsCriteria implements Serializable, Criteria {
     public String toString() {
         return "StockItemTransactionsCriteria{" +
                 (id != null ? "id=" + id + ", " : "") +
-                (transactionOccurredWhen != null ? "transactionOccurredWhen=" + transactionOccurredWhen + ", " : "") +
+                (transactionOccuredWhen != null ? "transactionOccuredWhen=" + transactionOccuredWhen + ", " : "") +
                 (quantity != null ? "quantity=" + quantity + ", " : "") +
                 (lastEditedBy != null ? "lastEditedBy=" + lastEditedBy + ", " : "") +
                 (lastEditedWhen != null ? "lastEditedWhen=" + lastEditedWhen + ", " : "") +

@@ -24,8 +24,8 @@ public class SupplierCategories implements Serializable {
     private Long id;
 
     @NotNull
-    @Column(name = "supplier_category_name", nullable = false)
-    private String supplierCategoryName;
+    @Column(name = "name", nullable = false)
+    private String name;
 
     @NotNull
     @Column(name = "valid_from", nullable = false)
@@ -44,17 +44,17 @@ public class SupplierCategories implements Serializable {
         this.id = id;
     }
 
-    public String getSupplierCategoryName() {
-        return supplierCategoryName;
+    public String getName() {
+        return name;
     }
 
-    public SupplierCategories supplierCategoryName(String supplierCategoryName) {
-        this.supplierCategoryName = supplierCategoryName;
+    public SupplierCategories name(String name) {
+        this.name = name;
         return this;
     }
 
-    public void setSupplierCategoryName(String supplierCategoryName) {
-        this.supplierCategoryName = supplierCategoryName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Instant getValidFrom() {
@@ -104,7 +104,7 @@ public class SupplierCategories implements Serializable {
     public String toString() {
         return "SupplierCategories{" +
             "id=" + getId() +
-            ", supplierCategoryName='" + getSupplierCategoryName() + "'" +
+            ", name='" + getName() + "'" +
             ", validFrom='" + getValidFrom() + "'" +
             ", validTo='" + getValidTo() + "'" +
             "}";

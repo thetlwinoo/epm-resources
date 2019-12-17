@@ -46,9 +46,9 @@ public class PhotosCriteria implements Serializable, Criteria {
 
     private BooleanFilter defaultInd;
 
-    private StringFilter deleteToken;
-
     private LongFilter stockItemId;
+
+    private LongFilter productCategoryId;
 
     public PhotosCriteria(){
     }
@@ -65,8 +65,8 @@ public class PhotosCriteria implements Serializable, Criteria {
         this.watermarkPhoto = other.watermarkPhoto == null ? null : other.watermarkPhoto.copy();
         this.priority = other.priority == null ? null : other.priority.copy();
         this.defaultInd = other.defaultInd == null ? null : other.defaultInd.copy();
-        this.deleteToken = other.deleteToken == null ? null : other.deleteToken.copy();
         this.stockItemId = other.stockItemId == null ? null : other.stockItemId.copy();
+        this.productCategoryId = other.productCategoryId == null ? null : other.productCategoryId.copy();
     }
 
     @Override
@@ -162,20 +162,20 @@ public class PhotosCriteria implements Serializable, Criteria {
         this.defaultInd = defaultInd;
     }
 
-    public StringFilter getDeleteToken() {
-        return deleteToken;
-    }
-
-    public void setDeleteToken(StringFilter deleteToken) {
-        this.deleteToken = deleteToken;
-    }
-
     public LongFilter getStockItemId() {
         return stockItemId;
     }
 
     public void setStockItemId(LongFilter stockItemId) {
         this.stockItemId = stockItemId;
+    }
+
+    public LongFilter getProductCategoryId() {
+        return productCategoryId;
+    }
+
+    public void setProductCategoryId(LongFilter productCategoryId) {
+        this.productCategoryId = productCategoryId;
     }
 
 
@@ -200,8 +200,8 @@ public class PhotosCriteria implements Serializable, Criteria {
             Objects.equals(watermarkPhoto, that.watermarkPhoto) &&
             Objects.equals(priority, that.priority) &&
             Objects.equals(defaultInd, that.defaultInd) &&
-            Objects.equals(deleteToken, that.deleteToken) &&
-            Objects.equals(stockItemId, that.stockItemId);
+            Objects.equals(stockItemId, that.stockItemId) &&
+            Objects.equals(productCategoryId, that.productCategoryId);
     }
 
     @Override
@@ -218,8 +218,8 @@ public class PhotosCriteria implements Serializable, Criteria {
         watermarkPhoto,
         priority,
         defaultInd,
-        deleteToken,
-        stockItemId
+        stockItemId,
+        productCategoryId
         );
     }
 
@@ -237,8 +237,8 @@ public class PhotosCriteria implements Serializable, Criteria {
                 (watermarkPhoto != null ? "watermarkPhoto=" + watermarkPhoto + ", " : "") +
                 (priority != null ? "priority=" + priority + ", " : "") +
                 (defaultInd != null ? "defaultInd=" + defaultInd + ", " : "") +
-                (deleteToken != null ? "deleteToken=" + deleteToken + ", " : "") +
                 (stockItemId != null ? "stockItemId=" + stockItemId + ", " : "") +
+                (productCategoryId != null ? "productCategoryId=" + productCategoryId + ", " : "") +
             "}";
     }
 

@@ -12,7 +12,7 @@ public class ReviewsDTO implements Serializable {
 
     private Long id;
 
-    private String reviewerName;
+    private String name;
 
     @Pattern(regexp = "^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$")
     private String emailAddress;
@@ -46,12 +46,12 @@ public class ReviewsDTO implements Serializable {
         this.id = id;
     }
 
-    public String getReviewerName() {
-        return reviewerName;
+    public String getName() {
+        return name;
     }
 
-    public void setReviewerName(String reviewerName) {
-        this.reviewerName = reviewerName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getEmailAddress() {
@@ -159,7 +159,7 @@ public class ReviewsDTO implements Serializable {
     public String toString() {
         return "ReviewsDTO{" +
             "id=" + getId() +
-            ", reviewerName='" + getReviewerName() + "'" +
+            ", name='" + getName() + "'" +
             ", emailAddress='" + getEmailAddress() + "'" +
             ", reviewDate='" + getReviewDate() + "'" +
             ", overAllSellerRating=" + getOverAllSellerRating() +

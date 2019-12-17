@@ -116,7 +116,7 @@
                 <dt><span jhiTranslate="epmresourcesApp.invoices.deliveryMethod">Delivery Method</span></dt>
                 <dd>
                     <div *ngIf="invoices.deliveryMethodId">
-                        <a [routerLink]="['/delivery-methods', invoices.deliveryMethodId, 'view']">{{invoices.deliveryMethodDeliveryMethodName}}</a>
+                        <a [routerLink]="['/delivery-methods', invoices.deliveryMethodId, 'view']">{{invoices.deliveryMethodName}}</a>
                     </div>
                 </dd>
                 <dt><span jhiTranslate="epmresourcesApp.invoices.order">Order</span></dt>

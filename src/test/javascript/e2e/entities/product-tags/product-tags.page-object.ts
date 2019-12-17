@@ -26,19 +26,19 @@ export class ProductTagsUpdatePage {
   pageTitle = element(by.id('jhi-product-tags-heading'));
   saveButton = element(by.id('save-entity'));
   cancelButton = element(by.id('cancel-save'));
-  tagNameInput = element(by.id('field_tagName'));
+  nameInput = element(by.id('field_name'));
   productSelect = element(by.id('field_product'));
 
   async getPageTitle() {
     return this.pageTitle.getAttribute('jhiTranslate');
   }
 
-  async setTagNameInput(tagName) {
-    await this.tagNameInput.sendKeys(tagName);
+  async setNameInput(name) {
+    await this.nameInput.sendKeys(name);
   }
 
-  async getTagNameInput() {
-    return await this.tagNameInput.getAttribute('value');
+  async getNameInput() {
+    return await this.nameInput.getAttribute('value');
   }
 
   async productSelectLastOption(timeout?: number) {

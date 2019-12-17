@@ -26,11 +26,12 @@ export class ProductsUpdatePage {
   pageTitle = element(by.id('jhi-products-heading'));
   saveButton = element(by.id('save-entity'));
   cancelButton = element(by.id('cancel-save'));
-  productNameInput = element(by.id('field_productName'));
+  nameInput = element(by.id('field_name'));
   handleInput = element(by.id('field_handle'));
   productNumberInput = element(by.id('field_productNumber'));
   searchDetailsInput = element(by.id('field_searchDetails'));
   sellCountInput = element(by.id('field_sellCount'));
+  thumbnailListInput = element(by.id('field_thumbnailList'));
   activeIndInput = element(by.id('field_activeInd'));
   lastEditedByInput = element(by.id('field_lastEditedBy'));
   lastEditedWhenInput = element(by.id('field_lastEditedWhen'));
@@ -43,12 +44,12 @@ export class ProductsUpdatePage {
     return this.pageTitle.getAttribute('jhiTranslate');
   }
 
-  async setProductNameInput(productName) {
-    await this.productNameInput.sendKeys(productName);
+  async setNameInput(name) {
+    await this.nameInput.sendKeys(name);
   }
 
-  async getProductNameInput() {
-    return await this.productNameInput.getAttribute('value');
+  async getNameInput() {
+    return await this.nameInput.getAttribute('value');
   }
 
   async setHandleInput(handle) {
@@ -81,6 +82,14 @@ export class ProductsUpdatePage {
 
   async getSellCountInput() {
     return await this.sellCountInput.getAttribute('value');
+  }
+
+  async setThumbnailListInput(thumbnailList) {
+    await this.thumbnailListInput.sendKeys(thumbnailList);
+  }
+
+  async getThumbnailListInput() {
+    return await this.thumbnailListInput.getAttribute('value');
   }
 
   getActiveIndInput(timeout?: number) {

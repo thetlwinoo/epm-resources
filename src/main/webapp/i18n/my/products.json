@@ -16,11 +16,12 @@
       "detail": {
         "title": "Products"
       },
-      "productName": "Product Name",
+      "name": "Name",
       "handle": "Handle",
       "productNumber": "Product Number",
       "searchDetails": "Search Details",
       "sellCount": "Sell Count",
+      "thumbnailList": "Thumbnail List",
       "activeInd": "Active Ind",
       "lastEditedBy": "Last Edited By",
       "lastEditedWhen": "Last Edited When",

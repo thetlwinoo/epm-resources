@@ -38,8 +38,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = EpmresourcesApp.class)
 public class ProductOptionSetResourceIT {
 
-    private static final String DEFAULT_PRODUCT_OPTION_SET_VALUE = "AAAAAAAAAA";
-    private static final String UPDATED_PRODUCT_OPTION_SET_VALUE = "BBBBBBBBBB";
+    private static final String DEFAULT_VALUE = "AAAAAAAAAA";
+    private static final String UPDATED_VALUE = "BBBBBBBBBB";
 
     @Autowired
     private ProductOptionSetRepository productOptionSetRepository;
@@ -92,7 +92,7 @@ public class ProductOptionSetResourceIT {
      */
     public static ProductOptionSet createEntity(EntityManager em) {
         ProductOptionSet productOptionSet = new ProductOptionSet()
-            .productOptionSetValue(DEFAULT_PRODUCT_OPTION_SET_VALUE);
+            .value(DEFAULT_VALUE);
         return productOptionSet;
     }
     /**
@@ -103,7 +103,7 @@ public class ProductOptionSetResourceIT {
      */
     public static ProductOptionSet createUpdatedEntity(EntityManager em) {
         ProductOptionSet productOptionSet = new ProductOptionSet()
-            .productOptionSetValue(UPDATED_PRODUCT_OPTION_SET_VALUE);
+            .value(UPDATED_VALUE);
         return productOptionSet;
     }
 
@@ -128,7 +128,7 @@ public class ProductOptionSetResourceIT {
         List<ProductOptionSet> productOptionSetList = productOptionSetRepository.findAll();
         assertThat(productOptionSetList).hasSize(databaseSizeBeforeCreate + 1);
         ProductOptionSet testProductOptionSet = productOptionSetList.get(productOptionSetList.size() - 1);
-        assertThat(testProductOptionSet.getProductOptionSetValue()).isEqualTo(DEFAULT_PRODUCT_OPTION_SET_VALUE);
+        assertThat(testProductOptionSet.getValue()).isEqualTo(DEFAULT_VALUE);
     }
 
     @Test
@@ -154,10 +154,10 @@ public class ProductOptionSetResourceIT {
 
     @Test
     @Transactional
-    public void checkProductOptionSetValueIsRequired() throws Exception {
+    public void checkValueIsRequired() throws Exception {
         int databaseSizeBeforeTest = productOptionSetRepository.findAll().size();
         // set the field null
-        productOptionSet.setProductOptionSetValue(null);
+        productOptionSet.setValue(null);
 
         // Create the ProductOptionSet, which fails.
         ProductOptionSetDTO productOptionSetDTO = productOptionSetMapper.toDto(productOptionSet);
@@ -182,7 +182,7 @@ public class ProductOptionSetResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(productOptionSet.getId().intValue())))
-            .andExpect(jsonPath("$.[*].productOptionSetValue").value(hasItem(DEFAULT_PRODUCT_OPTION_SET_VALUE)));
+            .andExpect(jsonPath("$.[*].value").value(hasItem(DEFAULT_VALUE)));
     }
     
     @Test
@@ -196,84 +196,84 @@ public class ProductOptionSetResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(productOptionSet.getId().intValue()))
-            .andExpect(jsonPath("$.productOptionSetValue").value(DEFAULT_PRODUCT_OPTION_SET_VALUE));
+            .andExpect(jsonPath("$.value").value(DEFAULT_VALUE));
     }
 
     @Test
     @Transactional
-    public void getAllProductOptionSetsByProductOptionSetValueIsEqualToSomething() throws Exception {
+    public void getAllProductOptionSetsByValueIsEqualToSomething() throws Exception {
         // Initialize the database
         productOptionSetRepository.saveAndFlush(productOptionSet);
 
-        // Get all the productOptionSetList where productOptionSetValue equals to DEFAULT_PRODUCT_OPTION_SET_VALUE
-        defaultProductOptionSetShouldBeFound("productOptionSetValue.equals=" + DEFAULT_PRODUCT_OPTION_SET_VALUE);
+        // Get all the productOptionSetList where value equals to DEFAULT_VALUE
+        defaultProductOptionSetShouldBeFound("value.equals=" + DEFAULT_VALUE);
 
-        // Get all the productOptionSetList where productOptionSetValue equals to UPDATED_PRODUCT_OPTION_SET_VALUE
-        defaultProductOptionSetShouldNotBeFound("productOptionSetValue.equals=" + UPDATED_PRODUCT_OPTION_SET_VALUE);
+        // Get all the productOptionSetList where value equals to UPDATED_VALUE
+        defaultProductOptionSetShouldNotBeFound("value.equals=" + UPDATED_VALUE);
     }
 
     @Test
     @Transactional
-    public void getAllProductOptionSetsByProductOptionSetValueIsNotEqualToSomething() throws Exception {
+    public void getAllProductOptionSetsByValueIsNotEqualToSomething() throws Exception {
         // Initialize the database
         productOptionSetRepository.saveAndFlush(productOptionSet);
 
-        // Get all the productOptionSetList where productOptionSetValue not equals to DEFAULT_PRODUCT_OPTION_SET_VALUE
-        defaultProductOptionSetShouldNotBeFound("productOptionSetValue.notEquals=" + DEFAULT_PRODUCT_OPTION_SET_VALUE);
+        // Get all the productOptionSetList where value not equals to DEFAULT_VALUE
+        defaultProductOptionSetShouldNotBeFound("value.notEquals=" + DEFAULT_VALUE);
 
-        // Get all the productOptionSetList where productOptionSetValue not equals to UPDATED_PRODUCT_OPTION_SET_VALUE
-        defaultProductOptionSetShouldBeFound("productOptionSetValue.notEquals=" + UPDATED_PRODUCT_OPTION_SET_VALUE);
+        // Get all the productOptionSetList where value not equals to UPDATED_VALUE
+        defaultProductOptionSetShouldBeFound("value.notEquals=" + UPDATED_VALUE);
     }
 
     @Test
     @Transactional
-    public void getAllProductOptionSetsByProductOptionSetValueIsInShouldWork() throws Exception {
+    public void getAllProductOptionSetsByValueIsInShouldWork() throws Exception {
         // Initialize the database
         productOptionSetRepository.saveAndFlush(productOptionSet);
 
-        // Get all the productOptionSetList where productOptionSetValue in DEFAULT_PRODUCT_OPTION_SET_VALUE or UPDATED_PRODUCT_OPTION_SET_VALUE
-        defaultProductOptionSetShouldBeFound("productOptionSetValue.in=" + DEFAULT_PRODUCT_OPTION_SET_VALUE + "," + UPDATED_PRODUCT_OPTION_SET_VALUE);
+        // Get all the productOptionSetList where value in DEFAULT_VALUE or UPDATED_VALUE
+        defaultProductOptionSetShouldBeFound("value.in=" + DEFAULT_VALUE + "," + UPDATED_VALUE);
 
-        // Get all the productOptionSetList where productOptionSetValue equals to UPDATED_PRODUCT_OPTION_SET_VALUE
-        defaultProductOptionSetShouldNotBeFound("productOptionSetValue.in=" + UPDATED_PRODUCT_OPTION_SET_VALUE);
+        // Get all the productOptionSetList where value equals to UPDATED_VALUE
+        defaultProductOptionSetShouldNotBeFound("value.in=" + UPDATED_VALUE);
     }
 
     @Test
     @Transactional
-    public void getAllProductOptionSetsByProductOptionSetValueIsNullOrNotNull() throws Exception {
+    public void getAllProductOptionSetsByValueIsNullOrNotNull() throws Exception {
         // Initialize the database
         productOptionSetRepository.saveAndFlush(productOptionSet);
 
-        // Get all the productOptionSetList where productOptionSetValue is not null
-        defaultProductOptionSetShouldBeFound("productOptionSetValue.specified=true");
+        // Get all the productOptionSetList where value is not null
+        defaultProductOptionSetShouldBeFound("value.specified=true");
 
-        // Get all the productOptionSetList where productOptionSetValue is null
-        defaultProductOptionSetShouldNotBeFound("productOptionSetValue.specified=false");
+        // Get all the productOptionSetList where value is null
+        defaultProductOptionSetShouldNotBeFound("value.specified=false");
     }
                 @Test
     @Transactional
-    public void getAllProductOptionSetsByProductOptionSetValueContainsSomething() throws Exception {
+    public void getAllProductOptionSetsByValueContainsSomething() throws Exception {
         // Initialize the database
         productOptionSetRepository.saveAndFlush(productOptionSet);
 
-        // Get all the productOptionSetList where productOptionSetValue contains DEFAULT_PRODUCT_OPTION_SET_VALUE
-        defaultProductOptionSetShouldBeFound("productOptionSetValue.contains=" + DEFAULT_PRODUCT_OPTION_SET_VALUE);
+        // Get all the productOptionSetList where value contains DEFAULT_VALUE
+        defaultProductOptionSetShouldBeFound("value.contains=" + DEFAULT_VALUE);
 
-        // Get all the productOptionSetList where productOptionSetValue contains UPDATED_PRODUCT_OPTION_SET_VALUE
-        defaultProductOptionSetShouldNotBeFound("productOptionSetValue.contains=" + UPDATED_PRODUCT_OPTION_SET_VALUE);
+        // Get all the productOptionSetList where value contains UPDATED_VALUE
+        defaultProductOptionSetShouldNotBeFound("value.contains=" + UPDATED_VALUE);
     }
 
     @Test
     @Transactional
-    public void getAllProductOptionSetsByProductOptionSetValueNotContainsSomething() throws Exception {
+    public void getAllProductOptionSetsByValueNotContainsSomething() throws Exception {
         // Initialize the database
         productOptionSetRepository.saveAndFlush(productOptionSet);
 
-        // Get all the productOptionSetList where productOptionSetValue does not contain DEFAULT_PRODUCT_OPTION_SET_VALUE
-        defaultProductOptionSetShouldNotBeFound("productOptionSetValue.doesNotContain=" + DEFAULT_PRODUCT_OPTION_SET_VALUE);
+        // Get all the productOptionSetList where value does not contain DEFAULT_VALUE
+        defaultProductOptionSetShouldNotBeFound("value.doesNotContain=" + DEFAULT_VALUE);
 
-        // Get all the productOptionSetList where productOptionSetValue does not contain UPDATED_PRODUCT_OPTION_SET_VALUE
-        defaultProductOptionSetShouldBeFound("productOptionSetValue.doesNotContain=" + UPDATED_PRODUCT_OPTION_SET_VALUE);
+        // Get all the productOptionSetList where value does not contain UPDATED_VALUE
+        defaultProductOptionSetShouldBeFound("value.doesNotContain=" + UPDATED_VALUE);
     }
 
     /**
@@ -284,7 +284,7 @@ public class ProductOptionSetResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(productOptionSet.getId().intValue())))
-            .andExpect(jsonPath("$.[*].productOptionSetValue").value(hasItem(DEFAULT_PRODUCT_OPTION_SET_VALUE)));
+            .andExpect(jsonPath("$.[*].value").value(hasItem(DEFAULT_VALUE)));
 
         // Check, that the count call also returns 1
         restProductOptionSetMockMvc.perform(get("/api/product-option-sets/count?sort=id,desc&" + filter))
@@ -332,7 +332,7 @@ public class ProductOptionSetResourceIT {
         // Disconnect from session so that the updates on updatedProductOptionSet are not directly saved in db
         em.detach(updatedProductOptionSet);
         updatedProductOptionSet
-            .productOptionSetValue(UPDATED_PRODUCT_OPTION_SET_VALUE);
+            .value(UPDATED_VALUE);
         ProductOptionSetDTO productOptionSetDTO = productOptionSetMapper.toDto(updatedProductOptionSet);
 
         restProductOptionSetMockMvc.perform(put("/api/product-option-sets")
@@ -344,7 +344,7 @@ public class ProductOptionSetResourceIT {
         List<ProductOptionSet> productOptionSetList = productOptionSetRepository.findAll();
         assertThat(productOptionSetList).hasSize(databaseSizeBeforeUpdate);
         ProductOptionSet testProductOptionSet = productOptionSetList.get(productOptionSetList.size() - 1);
-        assertThat(testProductOptionSet.getProductOptionSetValue()).isEqualTo(UPDATED_PRODUCT_OPTION_SET_VALUE);
+        assertThat(testProductOptionSet.getValue()).isEqualTo(UPDATED_VALUE);
     }
 
     @Test

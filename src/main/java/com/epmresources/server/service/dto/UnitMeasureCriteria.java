@@ -26,17 +26,17 @@ public class UnitMeasureCriteria implements Serializable, Criteria {
 
     private LongFilter id;
 
-    private StringFilter unitMeasureCode;
+    private StringFilter code;
 
-    private StringFilter unitMeasureName;
+    private StringFilter name;
 
     public UnitMeasureCriteria(){
     }
 
     public UnitMeasureCriteria(UnitMeasureCriteria other){
         this.id = other.id == null ? null : other.id.copy();
-        this.unitMeasureCode = other.unitMeasureCode == null ? null : other.unitMeasureCode.copy();
-        this.unitMeasureName = other.unitMeasureName == null ? null : other.unitMeasureName.copy();
+        this.code = other.code == null ? null : other.code.copy();
+        this.name = other.name == null ? null : other.name.copy();
     }
 
     @Override
@@ -52,20 +52,20 @@ public class UnitMeasureCriteria implements Serializable, Criteria {
         this.id = id;
     }
 
-    public StringFilter getUnitMeasureCode() {
-        return unitMeasureCode;
+    public StringFilter getCode() {
+        return code;
     }
 
-    public void setUnitMeasureCode(StringFilter unitMeasureCode) {
-        this.unitMeasureCode = unitMeasureCode;
+    public void setCode(StringFilter code) {
+        this.code = code;
     }
 
-    public StringFilter getUnitMeasureName() {
-        return unitMeasureName;
+    public StringFilter getName() {
+        return name;
     }
 
-    public void setUnitMeasureName(StringFilter unitMeasureName) {
-        this.unitMeasureName = unitMeasureName;
+    public void setName(StringFilter name) {
+        this.name = name;
     }
 
 
@@ -80,16 +80,16 @@ public class UnitMeasureCriteria implements Serializable, Criteria {
         final UnitMeasureCriteria that = (UnitMeasureCriteria) o;
         return
             Objects.equals(id, that.id) &&
-            Objects.equals(unitMeasureCode, that.unitMeasureCode) &&
-            Objects.equals(unitMeasureName, that.unitMeasureName);
+            Objects.equals(code, that.code) &&
+            Objects.equals(name, that.name);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(
         id,
-        unitMeasureCode,
-        unitMeasureName
+        code,
+        name
         );
     }
 
@@ -97,8 +97,8 @@ public class UnitMeasureCriteria implements Serializable, Criteria {
     public String toString() {
         return "UnitMeasureCriteria{" +
                 (id != null ? "id=" + id + ", " : "") +
-                (unitMeasureCode != null ? "unitMeasureCode=" + unitMeasureCode + ", " : "") +
-                (unitMeasureName != null ? "unitMeasureName=" + unitMeasureName + ", " : "") +
+                (code != null ? "code=" + code + ", " : "") +
+                (name != null ? "name=" + name + ", " : "") +
             "}";
     }
 

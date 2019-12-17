@@ -136,13 +136,13 @@ public class BatchUploadResource {
 
 
             if (row.getCell(0).getCellType() == Cell.CELL_TYPE_STRING) {
-                product.setProductName(row.getCell(0).getStringCellValue());
+                product.setName(row.getCell(0).getStringCellValue());
             }
             if (row.getCell(1).getCellType() == Cell.CELL_TYPE_STRING) {
-                product.setProductName(row.getCell(0).getStringCellValue());
+                product.setName(row.getCell(0).getStringCellValue());
             }
             if (row.getCell(2).getCellType() == Cell.CELL_TYPE_STRING) {
-                product.setProductName(row.getCell(0).getStringCellValue());
+                product.setName(row.getCell(0).getStringCellValue());
             }
 
 //            this.productsService.save(product);
@@ -179,7 +179,7 @@ public class BatchUploadResource {
 
             for (String[] row : rows) {
                 ProductsDTO product = new ProductsDTO();
-                product.setProductName(row[0]);
+                product.setName(row[0]);
                 product.setProductNumber(row[1]);
 //                product.setMakeFlag(Boolean.getBoolean(row[2]));
 //                product.setFinishedGoodsFlag(Boolean.getBoolean(row[3]));

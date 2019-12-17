@@ -19,7 +19,7 @@
             <thead>
             <tr>
             <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
-            <th scope="col" ><span jhiTranslate="epmresourcesApp.reviews.reviewerName">Reviewer Name</span></th>
+            <th scope="col" ><span jhiTranslate="epmresourcesApp.reviews.name">Name</span></th>
             <th scope="col" ><span jhiTranslate="epmresourcesApp.reviews.emailAddress">Email Address</span></th>
             <th scope="col" ><span jhiTranslate="epmresourcesApp.reviews.reviewDate">Review Date</span></th>
             <th scope="col" ><span jhiTranslate="epmresourcesApp.reviews.overAllSellerRating">Over All Seller Rating</span></th>
@@ -36,7 +36,7 @@
             <tbody>
             <tr *ngFor="let reviews of reviews ;trackBy: trackId">
                 <td><a [routerLink]="['/reviews', reviews.id, 'view' ]">{{reviews.id}}</a></td>
-                <td>{{reviews.reviewerName}}</td>
+                <td>{{reviews.name}}</td>
                 <td>{{reviews.emailAddress}}</td>
                 <td>{{reviews.reviewDate | date:'medium'}}</td>
                 <td>{{reviews.overAllSellerRating}}</td>

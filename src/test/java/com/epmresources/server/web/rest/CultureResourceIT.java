@@ -38,11 +38,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = EpmresourcesApp.class)
 public class CultureResourceIT {
 
-    private static final String DEFAULT_CULTURE_CODE = "AAAAAAAAAA";
-    private static final String UPDATED_CULTURE_CODE = "BBBBBBBBBB";
+    private static final String DEFAULT_CODE = "AAAAAAAAAA";
+    private static final String UPDATED_CODE = "BBBBBBBBBB";
 
-    private static final String DEFAULT_CULTURE_NAME = "AAAAAAAAAA";
-    private static final String UPDATED_CULTURE_NAME = "BBBBBBBBBB";
+    private static final String DEFAULT_NAME = "AAAAAAAAAA";
+    private static final String UPDATED_NAME = "BBBBBBBBBB";
 
     @Autowired
     private CultureRepository cultureRepository;
@@ -95,8 +95,8 @@ public class CultureResourceIT {
      */
     public static Culture createEntity(EntityManager em) {
         Culture culture = new Culture()
-            .cultureCode(DEFAULT_CULTURE_CODE)
-            .cultureName(DEFAULT_CULTURE_NAME);
+            .code(DEFAULT_CODE)
+            .name(DEFAULT_NAME);
         return culture;
     }
     /**
@@ -107,8 +107,8 @@ public class CultureResourceIT {
      */
     public static Culture createUpdatedEntity(EntityManager em) {
         Culture culture = new Culture()
-            .cultureCode(UPDATED_CULTURE_CODE)
-            .cultureName(UPDATED_CULTURE_NAME);
+            .code(UPDATED_CODE)
+            .name(UPDATED_NAME);
         return culture;
     }
 
@@ -133,8 +133,8 @@ public class CultureResourceIT {
         List<Culture> cultureList = cultureRepository.findAll();
         assertThat(cultureList).hasSize(databaseSizeBeforeCreate + 1);
         Culture testCulture = cultureList.get(cultureList.size() - 1);
-        assertThat(testCulture.getCultureCode()).isEqualTo(DEFAULT_CULTURE_CODE);
-        assertThat(testCulture.getCultureName()).isEqualTo(DEFAULT_CULTURE_NAME);
+        assertThat(testCulture.getCode()).isEqualTo(DEFAULT_CODE);
+        assertThat(testCulture.getName()).isEqualTo(DEFAULT_NAME);
     }
 
     @Test
@@ -160,10 +160,10 @@ public class CultureResourceIT {
 
     @Test
     @Transactional
-    public void checkCultureCodeIsRequired() throws Exception {
+    public void checkCodeIsRequired() throws Exception {
         int databaseSizeBeforeTest = cultureRepository.findAll().size();
         // set the field null
-        culture.setCultureCode(null);
+        culture.setCode(null);
 
         // Create the Culture, which fails.
         CultureDTO cultureDTO = cultureMapper.toDto(culture);
@@ -179,10 +179,10 @@ public class CultureResourceIT {
 
     @Test
     @Transactional
-    public void checkCultureNameIsRequired() throws Exception {
+    public void checkNameIsRequired() throws Exception {
         int databaseSizeBeforeTest = cultureRepository.findAll().size();
         // set the field null
-        culture.setCultureName(null);
+        culture.setName(null);
 
         // Create the Culture, which fails.
         CultureDTO cultureDTO = cultureMapper.toDto(culture);
@@ -207,8 +207,8 @@ public class CultureResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(culture.getId().intValue())))
-            .andExpect(jsonPath("$.[*].cultureCode").value(hasItem(DEFAULT_CULTURE_CODE)))
-            .andExpect(jsonPath("$.[*].cultureName").value(hasItem(DEFAULT_CULTURE_NAME)));
+            .andExpect(jsonPath("$.[*].code").value(hasItem(DEFAULT_CODE)))
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)));
     }
     
     @Test
@@ -222,163 +222,163 @@ public class CultureResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(culture.getId().intValue()))
-            .andExpect(jsonPath("$.cultureCode").value(DEFAULT_CULTURE_CODE))
-            .andExpect(jsonPath("$.cultureName").value(DEFAULT_CULTURE_NAME));
+            .andExpect(jsonPath("$.code").value(DEFAULT_CODE))
+            .andExpect(jsonPath("$.name").value(DEFAULT_NAME));
     }
 
     @Test
     @Transactional
-    public void getAllCulturesByCultureCodeIsEqualToSomething() throws Exception {
+    public void getAllCulturesByCodeIsEqualToSomething() throws Exception {
         // Initialize the database
         cultureRepository.saveAndFlush(culture);
 
-        // Get all the cultureList where cultureCode equals to DEFAULT_CULTURE_CODE
-        defaultCultureShouldBeFound("cultureCode.equals=" + DEFAULT_CULTURE_CODE);
+        // Get all the cultureList where code equals to DEFAULT_CODE
+        defaultCultureShouldBeFound("code.equals=" + DEFAULT_CODE);
 
-        // Get all the cultureList where cultureCode equals to UPDATED_CULTURE_CODE
-        defaultCultureShouldNotBeFound("cultureCode.equals=" + UPDATED_CULTURE_CODE);
+        // Get all the cultureList where code equals to UPDATED_CODE
+        defaultCultureShouldNotBeFound("code.equals=" + UPDATED_CODE);
     }
 
     @Test
     @Transactional
-    public void getAllCulturesByCultureCodeIsNotEqualToSomething() throws Exception {
+    public void getAllCulturesByCodeIsNotEqualToSomething() throws Exception {
         // Initialize the database
         cultureRepository.saveAndFlush(culture);
 
-        // Get all the cultureList where cultureCode not equals to DEFAULT_CULTURE_CODE
-        defaultCultureShouldNotBeFound("cultureCode.notEquals=" + DEFAULT_CULTURE_CODE);
+        // Get all the cultureList where code not equals to DEFAULT_CODE
+        defaultCultureShouldNotBeFound("code.notEquals=" + DEFAULT_CODE);
 
-        // Get all the cultureList where cultureCode not equals to UPDATED_CULTURE_CODE
-        defaultCultureShouldBeFound("cultureCode.notEquals=" + UPDATED_CULTURE_CODE);
+        // Get all the cultureList where code not equals to UPDATED_CODE
+        defaultCultureShouldBeFound("code.notEquals=" + UPDATED_CODE);
     }
 
     @Test
     @Transactional
-    public void getAllCulturesByCultureCodeIsInShouldWork() throws Exception {
+    public void getAllCulturesByCodeIsInShouldWork() throws Exception {
         // Initialize the database
         cultureRepository.saveAndFlush(culture);
 
-        // Get all the cultureList where cultureCode in DEFAULT_CULTURE_CODE or UPDATED_CULTURE_CODE
-        defaultCultureShouldBeFound("cultureCode.in=" + DEFAULT_CULTURE_CODE + "," + UPDATED_CULTURE_CODE);
+        // Get all the cultureList where code in DEFAULT_CODE or UPDATED_CODE
+        defaultCultureShouldBeFound("code.in=" + DEFAULT_CODE + "," + UPDATED_CODE);
 
-        // Get all the cultureList where cultureCode equals to UPDATED_CULTURE_CODE
-        defaultCultureShouldNotBeFound("cultureCode.in=" + UPDATED_CULTURE_CODE);
+        // Get all the cultureList where code equals to UPDATED_CODE
+        defaultCultureShouldNotBeFound("code.in=" + UPDATED_CODE);
     }
 
     @Test
     @Transactional
-    public void getAllCulturesByCultureCodeIsNullOrNotNull() throws Exception {
+    public void getAllCulturesByCodeIsNullOrNotNull() throws Exception {
         // Initialize the database
         cultureRepository.saveAndFlush(culture);
 
-        // Get all the cultureList where cultureCode is not null
-        defaultCultureShouldBeFound("cultureCode.specified=true");
+        // Get all the cultureList where code is not null
+        defaultCultureShouldBeFound("code.specified=true");
 
-        // Get all the cultureList where cultureCode is null
-        defaultCultureShouldNotBeFound("cultureCode.specified=false");
+        // Get all the cultureList where code is null
+        defaultCultureShouldNotBeFound("code.specified=false");
     }
                 @Test
     @Transactional
-    public void getAllCulturesByCultureCodeContainsSomething() throws Exception {
+    public void getAllCulturesByCodeContainsSomething() throws Exception {
         // Initialize the database
         cultureRepository.saveAndFlush(culture);
 
-        // Get all the cultureList where cultureCode contains DEFAULT_CULTURE_CODE
-        defaultCultureShouldBeFound("cultureCode.contains=" + DEFAULT_CULTURE_CODE);
+        // Get all the cultureList where code contains DEFAULT_CODE
+        defaultCultureShouldBeFound("code.contains=" + DEFAULT_CODE);
 
-        // Get all the cultureList where cultureCode contains UPDATED_CULTURE_CODE
-        defaultCultureShouldNotBeFound("cultureCode.contains=" + UPDATED_CULTURE_CODE);
+        // Get all the cultureList where code contains UPDATED_CODE
+        defaultCultureShouldNotBeFound("code.contains=" + UPDATED_CODE);
     }
 
     @Test
     @Transactional
-    public void getAllCulturesByCultureCodeNotContainsSomething() throws Exception {
+    public void getAllCulturesByCodeNotContainsSomething() throws Exception {
         // Initialize the database
         cultureRepository.saveAndFlush(culture);
 
-        // Get all the cultureList where cultureCode does not contain DEFAULT_CULTURE_CODE
-        defaultCultureShouldNotBeFound("cultureCode.doesNotContain=" + DEFAULT_CULTURE_CODE);
+        // Get all the cultureList where code does not contain DEFAULT_CODE
+        defaultCultureShouldNotBeFound("code.doesNotContain=" + DEFAULT_CODE);
 
-        // Get all the cultureList where cultureCode does not contain UPDATED_CULTURE_CODE
-        defaultCultureShouldBeFound("cultureCode.doesNotContain=" + UPDATED_CULTURE_CODE);
+        // Get all the cultureList where code does not contain UPDATED_CODE
+        defaultCultureShouldBeFound("code.doesNotContain=" + UPDATED_CODE);
     }
 
 
     @Test
     @Transactional
-    public void getAllCulturesByCultureNameIsEqualToSomething() throws Exception {
+    public void getAllCulturesByNameIsEqualToSomething() throws Exception {
         // Initialize the database
         cultureRepository.saveAndFlush(culture);
 
-        // Get all the cultureList where cultureName equals to DEFAULT_CULTURE_NAME
-        defaultCultureShouldBeFound("cultureName.equals=" + DEFAULT_CULTURE_NAME);
+        // Get all the cultureList where name equals to DEFAULT_NAME
+        defaultCultureShouldBeFound("name.equals=" + DEFAULT_NAME);
 
-        // Get all the cultureList where cultureName equals to UPDATED_CULTURE_NAME
-        defaultCultureShouldNotBeFound("cultureName.equals=" + UPDATED_CULTURE_NAME);
+        // Get all the cultureList where name equals to UPDATED_NAME
+        defaultCultureShouldNotBeFound("name.equals=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllCulturesByCultureNameIsNotEqualToSomething() throws Exception {
+    public void getAllCulturesByNameIsNotEqualToSomething() throws Exception {
         // Initialize the database
         cultureRepository.saveAndFlush(culture);
 
-        // Get all the cultureList where cultureName not equals to DEFAULT_CULTURE_NAME
-        defaultCultureShouldNotBeFound("cultureName.notEquals=" + DEFAULT_CULTURE_NAME);
+        // Get all the cultureList where name not equals to DEFAULT_NAME
+        defaultCultureShouldNotBeFound("name.notEquals=" + DEFAULT_NAME);
 
-        // Get all the cultureList where cultureName not equals to UPDATED_CULTURE_NAME
-        defaultCultureShouldBeFound("cultureName.notEquals=" + UPDATED_CULTURE_NAME);
+        // Get all the cultureList where name not equals to UPDATED_NAME
+        defaultCultureShouldBeFound("name.notEquals=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllCulturesByCultureNameIsInShouldWork() throws Exception {
+    public void getAllCulturesByNameIsInShouldWork() throws Exception {
         // Initialize the database
         cultureRepository.saveAndFlush(culture);
 
-        // Get all the cultureList where cultureName in DEFAULT_CULTURE_NAME or UPDATED_CULTURE_NAME
-        defaultCultureShouldBeFound("cultureName.in=" + DEFAULT_CULTURE_NAME + "," + UPDATED_CULTURE_NAME);
+        // Get all the cultureList where name in DEFAULT_NAME or UPDATED_NAME
+        defaultCultureShouldBeFound("name.in=" + DEFAULT_NAME + "," + UPDATED_NAME);
 
-        // Get all the cultureList where cultureName equals to UPDATED_CULTURE_NAME
-        defaultCultureShouldNotBeFound("cultureName.in=" + UPDATED_CULTURE_NAME);
+        // Get all the cultureList where name equals to UPDATED_NAME
+        defaultCultureShouldNotBeFound("name.in=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllCulturesByCultureNameIsNullOrNotNull() throws Exception {
+    public void getAllCulturesByNameIsNullOrNotNull() throws Exception {
         // Initialize the database
         cultureRepository.saveAndFlush(culture);
 
-        // Get all the cultureList where cultureName is not null
-        defaultCultureShouldBeFound("cultureName.specified=true");
+        // Get all the cultureList where name is not null
+        defaultCultureShouldBeFound("name.specified=true");
 
-        // Get all the cultureList where cultureName is null
-        defaultCultureShouldNotBeFound("cultureName.specified=false");
+        // Get all the cultureList where name is null
+        defaultCultureShouldNotBeFound("name.specified=false");
     }
                 @Test
     @Transactional
-    public void getAllCulturesByCultureNameContainsSomething() throws Exception {
+    public void getAllCulturesByNameContainsSomething() throws Exception {
         // Initialize the database
         cultureRepository.saveAndFlush(culture);
 
-        // Get all the cultureList where cultureName contains DEFAULT_CULTURE_NAME
-        defaultCultureShouldBeFound("cultureName.contains=" + DEFAULT_CULTURE_NAME);
+        // Get all the cultureList where name contains DEFAULT_NAME
+        defaultCultureShouldBeFound("name.contains=" + DEFAULT_NAME);
 
-        // Get all the cultureList where cultureName contains UPDATED_CULTURE_NAME
-        defaultCultureShouldNotBeFound("cultureName.contains=" + UPDATED_CULTURE_NAME);
+        // Get all the cultureList where name contains UPDATED_NAME
+        defaultCultureShouldNotBeFound("name.contains=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllCulturesByCultureNameNotContainsSomething() throws Exception {
+    public void getAllCulturesByNameNotContainsSomething() throws Exception {
         // Initialize the database
         cultureRepository.saveAndFlush(culture);
 
-        // Get all the cultureList where cultureName does not contain DEFAULT_CULTURE_NAME
-        defaultCultureShouldNotBeFound("cultureName.doesNotContain=" + DEFAULT_CULTURE_NAME);
+        // Get all the cultureList where name does not contain DEFAULT_NAME
+        defaultCultureShouldNotBeFound("name.doesNotContain=" + DEFAULT_NAME);
 
-        // Get all the cultureList where cultureName does not contain UPDATED_CULTURE_NAME
-        defaultCultureShouldBeFound("cultureName.doesNotContain=" + UPDATED_CULTURE_NAME);
+        // Get all the cultureList where name does not contain UPDATED_NAME
+        defaultCultureShouldBeFound("name.doesNotContain=" + UPDATED_NAME);
     }
 
     /**
@@ -389,8 +389,8 @@ public class CultureResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(culture.getId().intValue())))
-            .andExpect(jsonPath("$.[*].cultureCode").value(hasItem(DEFAULT_CULTURE_CODE)))
-            .andExpect(jsonPath("$.[*].cultureName").value(hasItem(DEFAULT_CULTURE_NAME)));
+            .andExpect(jsonPath("$.[*].code").value(hasItem(DEFAULT_CODE)))
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)));
 
         // Check, that the count call also returns 1
         restCultureMockMvc.perform(get("/api/cultures/count?sort=id,desc&" + filter))
@@ -438,8 +438,8 @@ public class CultureResourceIT {
         // Disconnect from session so that the updates on updatedCulture are not directly saved in db
         em.detach(updatedCulture);
         updatedCulture
-            .cultureCode(UPDATED_CULTURE_CODE)
-            .cultureName(UPDATED_CULTURE_NAME);
+            .code(UPDATED_CODE)
+            .name(UPDATED_NAME);
         CultureDTO cultureDTO = cultureMapper.toDto(updatedCulture);
 
         restCultureMockMvc.perform(put("/api/cultures")
@@ -451,8 +451,8 @@ public class CultureResourceIT {
         List<Culture> cultureList = cultureRepository.findAll();
         assertThat(cultureList).hasSize(databaseSizeBeforeUpdate);
         Culture testCulture = cultureList.get(cultureList.size() - 1);
-        assertThat(testCulture.getCultureCode()).isEqualTo(UPDATED_CULTURE_CODE);
-        assertThat(testCulture.getCultureName()).isEqualTo(UPDATED_CULTURE_NAME);
+        assertThat(testCulture.getCode()).isEqualTo(UPDATED_CODE);
+        assertThat(testCulture.getName()).isEqualTo(UPDATED_NAME);
     }
 
     @Test

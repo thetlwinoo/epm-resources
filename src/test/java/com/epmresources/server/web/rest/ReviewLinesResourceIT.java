@@ -64,10 +64,8 @@ public class ReviewLinesResourceIT {
     private static final String DEFAULT_DELIVERY_REVIEW = "AAAAAAAAAA";
     private static final String UPDATED_DELIVERY_REVIEW = "BBBBBBBBBB";
 
-    private static final byte[] DEFAULT_PHOTO = TestUtil.createByteArray(1, "0");
-    private static final byte[] UPDATED_PHOTO = TestUtil.createByteArray(1, "1");
-    private static final String DEFAULT_PHOTO_CONTENT_TYPE = "image/jpg";
-    private static final String UPDATED_PHOTO_CONTENT_TYPE = "image/png";
+    private static final String DEFAULT_THUMBNAIL_URL = "AAAAAAAAAA";
+    private static final String UPDATED_THUMBNAIL_URL = "BBBBBBBBBB";
 
     private static final String DEFAULT_LAST_EDITED_BY = "AAAAAAAAAA";
     private static final String UPDATED_LAST_EDITED_BY = "BBBBBBBBBB";
@@ -132,8 +130,7 @@ public class ReviewLinesResourceIT {
             .sellerReview(DEFAULT_SELLER_REVIEW)
             .deliveryRating(DEFAULT_DELIVERY_RATING)
             .deliveryReview(DEFAULT_DELIVERY_REVIEW)
-            .photo(DEFAULT_PHOTO)
-            .photoContentType(DEFAULT_PHOTO_CONTENT_TYPE)
+            .thumbnailUrl(DEFAULT_THUMBNAIL_URL)
             .lastEditedBy(DEFAULT_LAST_EDITED_BY)
             .lastEditedWhen(DEFAULT_LAST_EDITED_WHEN);
         return reviewLines;
@@ -152,8 +149,7 @@ public class ReviewLinesResourceIT {
             .sellerReview(UPDATED_SELLER_REVIEW)
             .deliveryRating(UPDATED_DELIVERY_RATING)
             .deliveryReview(UPDATED_DELIVERY_REVIEW)
-            .photo(UPDATED_PHOTO)
-            .photoContentType(UPDATED_PHOTO_CONTENT_TYPE)
+            .thumbnailUrl(UPDATED_THUMBNAIL_URL)
             .lastEditedBy(UPDATED_LAST_EDITED_BY)
             .lastEditedWhen(UPDATED_LAST_EDITED_WHEN);
         return reviewLines;
@@ -186,8 +182,7 @@ public class ReviewLinesResourceIT {
         assertThat(testReviewLines.getSellerReview()).isEqualTo(DEFAULT_SELLER_REVIEW);
         assertThat(testReviewLines.getDeliveryRating()).isEqualTo(DEFAULT_DELIVERY_RATING);
         assertThat(testReviewLines.getDeliveryReview()).isEqualTo(DEFAULT_DELIVERY_REVIEW);
-        assertThat(testReviewLines.getPhoto()).isEqualTo(DEFAULT_PHOTO);
-        assertThat(testReviewLines.getPhotoContentType()).isEqualTo(DEFAULT_PHOTO_CONTENT_TYPE);
+        assertThat(testReviewLines.getThumbnailUrl()).isEqualTo(DEFAULT_THUMBNAIL_URL);
         assertThat(testReviewLines.getLastEditedBy()).isEqualTo(DEFAULT_LAST_EDITED_BY);
         assertThat(testReviewLines.getLastEditedWhen()).isEqualTo(DEFAULT_LAST_EDITED_WHEN);
     }
@@ -230,8 +225,7 @@ public class ReviewLinesResourceIT {
             .andExpect(jsonPath("$.[*].sellerReview").value(hasItem(DEFAULT_SELLER_REVIEW.toString())))
             .andExpect(jsonPath("$.[*].deliveryRating").value(hasItem(DEFAULT_DELIVERY_RATING)))
             .andExpect(jsonPath("$.[*].deliveryReview").value(hasItem(DEFAULT_DELIVERY_REVIEW.toString())))
-            .andExpect(jsonPath("$.[*].photoContentType").value(hasItem(DEFAULT_PHOTO_CONTENT_TYPE)))
-            .andExpect(jsonPath("$.[*].photo").value(hasItem(Base64Utils.encodeToString(DEFAULT_PHOTO))))
+            .andExpect(jsonPath("$.[*].thumbnailUrl").value(hasItem(DEFAULT_THUMBNAIL_URL)))
             .andExpect(jsonPath("$.[*].lastEditedBy").value(hasItem(DEFAULT_LAST_EDITED_BY)))
             .andExpect(jsonPath("$.[*].lastEditedWhen").value(hasItem(DEFAULT_LAST_EDITED_WHEN.toString())));
     }
@@ -253,8 +247,7 @@ public class ReviewLinesResourceIT {
             .andExpect(jsonPath("$.sellerReview").value(DEFAULT_SELLER_REVIEW.toString()))
             .andExpect(jsonPath("$.deliveryRating").value(DEFAULT_DELIVERY_RATING))
             .andExpect(jsonPath("$.deliveryReview").value(DEFAULT_DELIVERY_REVIEW.toString()))
-            .andExpect(jsonPath("$.photoContentType").value(DEFAULT_PHOTO_CONTENT_TYPE))
-            .andExpect(jsonPath("$.photo").value(Base64Utils.encodeToString(DEFAULT_PHOTO)))
+            .andExpect(jsonPath("$.thumbnailUrl").value(DEFAULT_THUMBNAIL_URL))
             .andExpect(jsonPath("$.lastEditedBy").value(DEFAULT_LAST_EDITED_BY))
             .andExpect(jsonPath("$.lastEditedWhen").value(DEFAULT_LAST_EDITED_WHEN.toString()));
     }
@@ -576,6 +569,84 @@ public class ReviewLinesResourceIT {
 
     @Test
     @Transactional
+    public void getAllReviewLinesByThumbnailUrlIsEqualToSomething() throws Exception {
+        // Initialize the database
+        reviewLinesRepository.saveAndFlush(reviewLines);
+
+        // Get all the reviewLinesList where thumbnailUrl equals to DEFAULT_THUMBNAIL_URL
+        defaultReviewLinesShouldBeFound("thumbnailUrl.equals=" + DEFAULT_THUMBNAIL_URL);
+
+        // Get all the reviewLinesList where thumbnailUrl equals to UPDATED_THUMBNAIL_URL
+        defaultReviewLinesShouldNotBeFound("thumbnailUrl.equals=" + UPDATED_THUMBNAIL_URL);
+    }
+
+    @Test
+    @Transactional
+    public void getAllReviewLinesByThumbnailUrlIsNotEqualToSomething() throws Exception {
+        // Initialize the database
+        reviewLinesRepository.saveAndFlush(reviewLines);
+
+        // Get all the reviewLinesList where thumbnailUrl not equals to DEFAULT_THUMBNAIL_URL
+        defaultReviewLinesShouldNotBeFound("thumbnailUrl.notEquals=" + DEFAULT_THUMBNAIL_URL);
+
+        // Get all the reviewLinesList where thumbnailUrl not equals to UPDATED_THUMBNAIL_URL
+        defaultReviewLinesShouldBeFound("thumbnailUrl.notEquals=" + UPDATED_THUMBNAIL_URL);
+    }
+
+    @Test
+    @Transactional
+    public void getAllReviewLinesByThumbnailUrlIsInShouldWork() throws Exception {
+        // Initialize the database
+        reviewLinesRepository.saveAndFlush(reviewLines);
+
+        // Get all the reviewLinesList where thumbnailUrl in DEFAULT_THUMBNAIL_URL or UPDATED_THUMBNAIL_URL
+        defaultReviewLinesShouldBeFound("thumbnailUrl.in=" + DEFAULT_THUMBNAIL_URL + "," + UPDATED_THUMBNAIL_URL);
+
+        // Get all the reviewLinesList where thumbnailUrl equals to UPDATED_THUMBNAIL_URL
+        defaultReviewLinesShouldNotBeFound("thumbnailUrl.in=" + UPDATED_THUMBNAIL_URL);
+    }
+
+    @Test
+    @Transactional
+    public void getAllReviewLinesByThumbnailUrlIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        reviewLinesRepository.saveAndFlush(reviewLines);
+
+        // Get all the reviewLinesList where thumbnailUrl is not null
+        defaultReviewLinesShouldBeFound("thumbnailUrl.specified=true");
+
+        // Get all the reviewLinesList where thumbnailUrl is null
+        defaultReviewLinesShouldNotBeFound("thumbnailUrl.specified=false");
+    }
+                @Test
+    @Transactional
+    public void getAllReviewLinesByThumbnailUrlContainsSomething() throws Exception {
+        // Initialize the database
+        reviewLinesRepository.saveAndFlush(reviewLines);
+
+        // Get all the reviewLinesList where thumbnailUrl contains DEFAULT_THUMBNAIL_URL
+        defaultReviewLinesShouldBeFound("thumbnailUrl.contains=" + DEFAULT_THUMBNAIL_URL);
+
+        // Get all the reviewLinesList where thumbnailUrl contains UPDATED_THUMBNAIL_URL
+        defaultReviewLinesShouldNotBeFound("thumbnailUrl.contains=" + UPDATED_THUMBNAIL_URL);
+    }
+
+    @Test
+    @Transactional
+    public void getAllReviewLinesByThumbnailUrlNotContainsSomething() throws Exception {
+        // Initialize the database
+        reviewLinesRepository.saveAndFlush(reviewLines);
+
+        // Get all the reviewLinesList where thumbnailUrl does not contain DEFAULT_THUMBNAIL_URL
+        defaultReviewLinesShouldNotBeFound("thumbnailUrl.doesNotContain=" + DEFAULT_THUMBNAIL_URL);
+
+        // Get all the reviewLinesList where thumbnailUrl does not contain UPDATED_THUMBNAIL_URL
+        defaultReviewLinesShouldBeFound("thumbnailUrl.doesNotContain=" + UPDATED_THUMBNAIL_URL);
+    }
+
+
+    @Test
+    @Transactional
     public void getAllReviewLinesByLastEditedByIsEqualToSomething() throws Exception {
         // Initialize the database
         reviewLinesRepository.saveAndFlush(reviewLines);
@@ -758,8 +829,7 @@ public class ReviewLinesResourceIT {
             .andExpect(jsonPath("$.[*].sellerReview").value(hasItem(DEFAULT_SELLER_REVIEW.toString())))
             .andExpect(jsonPath("$.[*].deliveryRating").value(hasItem(DEFAULT_DELIVERY_RATING)))
             .andExpect(jsonPath("$.[*].deliveryReview").value(hasItem(DEFAULT_DELIVERY_REVIEW.toString())))
-            .andExpect(jsonPath("$.[*].photoContentType").value(hasItem(DEFAULT_PHOTO_CONTENT_TYPE)))
-            .andExpect(jsonPath("$.[*].photo").value(hasItem(Base64Utils.encodeToString(DEFAULT_PHOTO))))
+            .andExpect(jsonPath("$.[*].thumbnailUrl").value(hasItem(DEFAULT_THUMBNAIL_URL)))
             .andExpect(jsonPath("$.[*].lastEditedBy").value(hasItem(DEFAULT_LAST_EDITED_BY)))
             .andExpect(jsonPath("$.[*].lastEditedWhen").value(hasItem(DEFAULT_LAST_EDITED_WHEN.toString())));
 
@@ -815,8 +885,7 @@ public class ReviewLinesResourceIT {
             .sellerReview(UPDATED_SELLER_REVIEW)
             .deliveryRating(UPDATED_DELIVERY_RATING)
             .deliveryReview(UPDATED_DELIVERY_REVIEW)
-            .photo(UPDATED_PHOTO)
-            .photoContentType(UPDATED_PHOTO_CONTENT_TYPE)
+            .thumbnailUrl(UPDATED_THUMBNAIL_URL)
             .lastEditedBy(UPDATED_LAST_EDITED_BY)
             .lastEditedWhen(UPDATED_LAST_EDITED_WHEN);
         ReviewLinesDTO reviewLinesDTO = reviewLinesMapper.toDto(updatedReviewLines);
@@ -836,8 +905,7 @@ public class ReviewLinesResourceIT {
         assertThat(testReviewLines.getSellerReview()).isEqualTo(UPDATED_SELLER_REVIEW);
         assertThat(testReviewLines.getDeliveryRating()).isEqualTo(UPDATED_DELIVERY_RATING);
         assertThat(testReviewLines.getDeliveryReview()).isEqualTo(UPDATED_DELIVERY_REVIEW);
-        assertThat(testReviewLines.getPhoto()).isEqualTo(UPDATED_PHOTO);
-        assertThat(testReviewLines.getPhotoContentType()).isEqualTo(UPDATED_PHOTO_CONTENT_TYPE);
+        assertThat(testReviewLines.getThumbnailUrl()).isEqualTo(UPDATED_THUMBNAIL_URL);
         assertThat(testReviewLines.getLastEditedBy()).isEqualTo(UPDATED_LAST_EDITED_BY);
         assertThat(testReviewLines.getLastEditedWhen()).isEqualTo(UPDATED_LAST_EDITED_WHEN);
     }

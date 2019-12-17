@@ -1,9 +1,9 @@
 export interface ICulture {
   id?: number;
-  cultureCode?: string;
-  cultureName?: string;
+  code?: string;
+  name?: string;
 }
 
 export class Culture implements ICulture {
-  constructor(public id?: number, public cultureCode?: string, public cultureName?: string) {}
+  constructor(public id?: number, public code?: string, public name?: string) {}
 }

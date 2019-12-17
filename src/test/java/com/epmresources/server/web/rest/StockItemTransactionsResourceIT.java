@@ -47,8 +47,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = EpmresourcesApp.class)
 public class StockItemTransactionsResourceIT {
 
-    private static final Instant DEFAULT_TRANSACTION_OCCURRED_WHEN = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_TRANSACTION_OCCURRED_WHEN = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+    private static final Instant DEFAULT_TRANSACTION_OCCURED_WHEN = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_TRANSACTION_OCCURED_WHEN = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
     private static final BigDecimal DEFAULT_QUANTITY = new BigDecimal(1);
     private static final BigDecimal UPDATED_QUANTITY = new BigDecimal(2);
@@ -111,7 +111,7 @@ public class StockItemTransactionsResourceIT {
      */
     public static StockItemTransactions createEntity(EntityManager em) {
         StockItemTransactions stockItemTransactions = new StockItemTransactions()
-            .transactionOccurredWhen(DEFAULT_TRANSACTION_OCCURRED_WHEN)
+            .transactionOccuredWhen(DEFAULT_TRANSACTION_OCCURED_WHEN)
             .quantity(DEFAULT_QUANTITY)
             .lastEditedBy(DEFAULT_LAST_EDITED_BY)
             .lastEditedWhen(DEFAULT_LAST_EDITED_WHEN);
@@ -125,7 +125,7 @@ public class StockItemTransactionsResourceIT {
      */
     public static StockItemTransactions createUpdatedEntity(EntityManager em) {
         StockItemTransactions stockItemTransactions = new StockItemTransactions()
-            .transactionOccurredWhen(UPDATED_TRANSACTION_OCCURRED_WHEN)
+            .transactionOccuredWhen(UPDATED_TRANSACTION_OCCURED_WHEN)
             .quantity(UPDATED_QUANTITY)
             .lastEditedBy(UPDATED_LAST_EDITED_BY)
             .lastEditedWhen(UPDATED_LAST_EDITED_WHEN);
@@ -153,7 +153,7 @@ public class StockItemTransactionsResourceIT {
         List<StockItemTransactions> stockItemTransactionsList = stockItemTransactionsRepository.findAll();
         assertThat(stockItemTransactionsList).hasSize(databaseSizeBeforeCreate + 1);
         StockItemTransactions testStockItemTransactions = stockItemTransactionsList.get(stockItemTransactionsList.size() - 1);
-        assertThat(testStockItemTransactions.getTransactionOccurredWhen()).isEqualTo(DEFAULT_TRANSACTION_OCCURRED_WHEN);
+        assertThat(testStockItemTransactions.getTransactionOccuredWhen()).isEqualTo(DEFAULT_TRANSACTION_OCCURED_WHEN);
         assertThat(testStockItemTransactions.getQuantity()).isEqualTo(DEFAULT_QUANTITY);
         assertThat(testStockItemTransactions.getLastEditedBy()).isEqualTo(DEFAULT_LAST_EDITED_BY);
         assertThat(testStockItemTransactions.getLastEditedWhen()).isEqualTo(DEFAULT_LAST_EDITED_WHEN);
@@ -182,29 +182,10 @@ public class StockItemTransactionsResourceIT {
 
     @Test
     @Transactional
-    public void checkTransactionOccurredWhenIsRequired() throws Exception {
+    public void checkTransactionOccuredWhenIsRequired() throws Exception {
         int databaseSizeBeforeTest = stockItemTransactionsRepository.findAll().size();
         // set the field null
-        stockItemTransactions.setTransactionOccurredWhen(null);
-
-        // Create the StockItemTransactions, which fails.
-        StockItemTransactionsDTO stockItemTransactionsDTO = stockItemTransactionsMapper.toDto(stockItemTransactions);
-
-        restStockItemTransactionsMockMvc.perform(post("/api/stock-item-transactions")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(stockItemTransactionsDTO)))
-            .andExpect(status().isBadRequest());
-
-        List<StockItemTransactions> stockItemTransactionsList = stockItemTransactionsRepository.findAll();
-        assertThat(stockItemTransactionsList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
-    public void checkQuantityIsRequired() throws Exception {
-        int databaseSizeBeforeTest = stockItemTransactionsRepository.findAll().size();
-        // set the field null
-        stockItemTransactions.setQuantity(null);
+        stockItemTransactions.setTransactionOccuredWhen(null);
 
         // Create the StockItemTransactions, which fails.
         StockItemTransactionsDTO stockItemTransactionsDTO = stockItemTransactionsMapper.toDto(stockItemTransactions);
@@ -229,7 +210,7 @@ public class StockItemTransactionsResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(stockItemTransactions.getId().intValue())))
-            .andExpect(jsonPath("$.[*].transactionOccurredWhen").value(hasItem(DEFAULT_TRANSACTION_OCCURRED_WHEN.toString())))
+            .andExpect(jsonPath("$.[*].transactionOccuredWhen").value(hasItem(DEFAULT_TRANSACTION_OCCURED_WHEN.toString())))
             .andExpect(jsonPath("$.[*].quantity").value(hasItem(DEFAULT_QUANTITY.intValue())))
             .andExpect(jsonPath("$.[*].lastEditedBy").value(hasItem(DEFAULT_LAST_EDITED_BY)))
             .andExpect(jsonPath("$.[*].lastEditedWhen").value(hasItem(DEFAULT_LAST_EDITED_WHEN.toString())));
@@ -246,7 +227,7 @@ public class StockItemTransactionsResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(stockItemTransactions.getId().intValue()))
-            .andExpect(jsonPath("$.transactionOccurredWhen").value(DEFAULT_TRANSACTION_OCCURRED_WHEN.toString()))
+            .andExpect(jsonPath("$.transactionOccuredWhen").value(DEFAULT_TRANSACTION_OCCURED_WHEN.toString()))
             .andExpect(jsonPath("$.quantity").value(DEFAULT_QUANTITY.intValue()))
             .andExpect(jsonPath("$.lastEditedBy").value(DEFAULT_LAST_EDITED_BY))
             .andExpect(jsonPath("$.lastEditedWhen").value(DEFAULT_LAST_EDITED_WHEN.toString()));
@@ -254,54 +235,54 @@ public class StockItemTransactionsResourceIT {
 
     @Test
     @Transactional
-    public void getAllStockItemTransactionsByTransactionOccurredWhenIsEqualToSomething() throws Exception {
+    public void getAllStockItemTransactionsByTransactionOccuredWhenIsEqualToSomething() throws Exception {
         // Initialize the database
         stockItemTransactionsRepository.saveAndFlush(stockItemTransactions);
 
-        // Get all the stockItemTransactionsList where transactionOccurredWhen equals to DEFAULT_TRANSACTION_OCCURRED_WHEN
-        defaultStockItemTransactionsShouldBeFound("transactionOccurredWhen.equals=" + DEFAULT_TRANSACTION_OCCURRED_WHEN);
+        // Get all the stockItemTransactionsList where transactionOccuredWhen equals to DEFAULT_TRANSACTION_OCCURED_WHEN
+        defaultStockItemTransactionsShouldBeFound("transactionOccuredWhen.equals=" + DEFAULT_TRANSACTION_OCCURED_WHEN);
 
-        // Get all the stockItemTransactionsList where transactionOccurredWhen equals to UPDATED_TRANSACTION_OCCURRED_WHEN
-        defaultStockItemTransactionsShouldNotBeFound("transactionOccurredWhen.equals=" + UPDATED_TRANSACTION_OCCURRED_WHEN);
+        // Get all the stockItemTransactionsList where transactionOccuredWhen equals to UPDATED_TRANSACTION_OCCURED_WHEN
+        defaultStockItemTransactionsShouldNotBeFound("transactionOccuredWhen.equals=" + UPDATED_TRANSACTION_OCCURED_WHEN);
     }
 
     @Test
     @Transactional
-    public void getAllStockItemTransactionsByTransactionOccurredWhenIsNotEqualToSomething() throws Exception {
+    public void getAllStockItemTransactionsByTransactionOccuredWhenIsNotEqualToSomething() throws Exception {
         // Initialize the database
         stockItemTransactionsRepository.saveAndFlush(stockItemTransactions);
 
-        // Get all the stockItemTransactionsList where transactionOccurredWhen not equals to DEFAULT_TRANSACTION_OCCURRED_WHEN
-        defaultStockItemTransactionsShouldNotBeFound("transactionOccurredWhen.notEquals=" + DEFAULT_TRANSACTION_OCCURRED_WHEN);
+        // Get all the stockItemTransactionsList where transactionOccuredWhen not equals to DEFAULT_TRANSACTION_OCCURED_WHEN
+        defaultStockItemTransactionsShouldNotBeFound("transactionOccuredWhen.notEquals=" + DEFAULT_TRANSACTION_OCCURED_WHEN);
 
-        // Get all the stockItemTransactionsList where transactionOccurredWhen not equals to UPDATED_TRANSACTION_OCCURRED_WHEN
-        defaultStockItemTransactionsShouldBeFound("transactionOccurredWhen.notEquals=" + UPDATED_TRANSACTION_OCCURRED_WHEN);
+        // Get all the stockItemTransactionsList where transactionOccuredWhen not equals to UPDATED_TRANSACTION_OCCURED_WHEN
+        defaultStockItemTransactionsShouldBeFound("transactionOccuredWhen.notEquals=" + UPDATED_TRANSACTION_OCCURED_WHEN);
     }
 
     @Test
     @Transactional
-    public void getAllStockItemTransactionsByTransactionOccurredWhenIsInShouldWork() throws Exception {
+    public void getAllStockItemTransactionsByTransactionOccuredWhenIsInShouldWork() throws Exception {
         // Initialize the database
         stockItemTransactionsRepository.saveAndFlush(stockItemTransactions);
 
-        // Get all the stockItemTransactionsList where transactionOccurredWhen in DEFAULT_TRANSACTION_OCCURRED_WHEN or UPDATED_TRANSACTION_OCCURRED_WHEN
-        defaultStockItemTransactionsShouldBeFound("transactionOccurredWhen.in=" + DEFAULT_TRANSACTION_OCCURRED_WHEN + "," + UPDATED_TRANSACTION_OCCURRED_WHEN);
+        // Get all the stockItemTransactionsList where transactionOccuredWhen in DEFAULT_TRANSACTION_OCCURED_WHEN or UPDATED_TRANSACTION_OCCURED_WHEN
+        defaultStockItemTransactionsShouldBeFound("transactionOccuredWhen.in=" + DEFAULT_TRANSACTION_OCCURED_WHEN + "," + UPDATED_TRANSACTION_OCCURED_WHEN);
 
-        // Get all the stockItemTransactionsList where transactionOccurredWhen equals to UPDATED_TRANSACTION_OCCURRED_WHEN
-        defaultStockItemTransactionsShouldNotBeFound("transactionOccurredWhen.in=" + UPDATED_TRANSACTION_OCCURRED_WHEN);
+        // Get all the stockItemTransactionsList where transactionOccuredWhen equals to UPDATED_TRANSACTION_OCCURED_WHEN
+        defaultStockItemTransactionsShouldNotBeFound("transactionOccuredWhen.in=" + UPDATED_TRANSACTION_OCCURED_WHEN);
     }
 
     @Test
     @Transactional
-    public void getAllStockItemTransactionsByTransactionOccurredWhenIsNullOrNotNull() throws Exception {
+    public void getAllStockItemTransactionsByTransactionOccuredWhenIsNullOrNotNull() throws Exception {
         // Initialize the database
         stockItemTransactionsRepository.saveAndFlush(stockItemTransactions);
 
-        // Get all the stockItemTransactionsList where transactionOccurredWhen is not null
-        defaultStockItemTransactionsShouldBeFound("transactionOccurredWhen.specified=true");
+        // Get all the stockItemTransactionsList where transactionOccuredWhen is not null
+        defaultStockItemTransactionsShouldBeFound("transactionOccuredWhen.specified=true");
 
-        // Get all the stockItemTransactionsList where transactionOccurredWhen is null
-        defaultStockItemTransactionsShouldNotBeFound("transactionOccurredWhen.specified=false");
+        // Get all the stockItemTransactionsList where transactionOccuredWhen is null
+        defaultStockItemTransactionsShouldNotBeFound("transactionOccuredWhen.specified=false");
     }
 
     @Test
@@ -666,7 +647,7 @@ public class StockItemTransactionsResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(stockItemTransactions.getId().intValue())))
-            .andExpect(jsonPath("$.[*].transactionOccurredWhen").value(hasItem(DEFAULT_TRANSACTION_OCCURRED_WHEN.toString())))
+            .andExpect(jsonPath("$.[*].transactionOccuredWhen").value(hasItem(DEFAULT_TRANSACTION_OCCURED_WHEN.toString())))
             .andExpect(jsonPath("$.[*].quantity").value(hasItem(DEFAULT_QUANTITY.intValue())))
             .andExpect(jsonPath("$.[*].lastEditedBy").value(hasItem(DEFAULT_LAST_EDITED_BY)))
             .andExpect(jsonPath("$.[*].lastEditedWhen").value(hasItem(DEFAULT_LAST_EDITED_WHEN.toString())));
@@ -717,7 +698,7 @@ public class StockItemTransactionsResourceIT {
         // Disconnect from session so that the updates on updatedStockItemTransactions are not directly saved in db
         em.detach(updatedStockItemTransactions);
         updatedStockItemTransactions
-            .transactionOccurredWhen(UPDATED_TRANSACTION_OCCURRED_WHEN)
+            .transactionOccuredWhen(UPDATED_TRANSACTION_OCCURED_WHEN)
             .quantity(UPDATED_QUANTITY)
             .lastEditedBy(UPDATED_LAST_EDITED_BY)
             .lastEditedWhen(UPDATED_LAST_EDITED_WHEN);
@@ -732,7 +713,7 @@ public class StockItemTransactionsResourceIT {
         List<StockItemTransactions> stockItemTransactionsList = stockItemTransactionsRepository.findAll();
         assertThat(stockItemTransactionsList).hasSize(databaseSizeBeforeUpdate);
         StockItemTransactions testStockItemTransactions = stockItemTransactionsList.get(stockItemTransactionsList.size() - 1);
-        assertThat(testStockItemTransactions.getTransactionOccurredWhen()).isEqualTo(UPDATED_TRANSACTION_OCCURRED_WHEN);
+        assertThat(testStockItemTransactions.getTransactionOccuredWhen()).isEqualTo(UPDATED_TRANSACTION_OCCURED_WHEN);
         assertThat(testStockItemTransactions.getQuantity()).isEqualTo(UPDATED_QUANTITY);
         assertThat(testStockItemTransactions.getLastEditedBy()).isEqualTo(UPDATED_LAST_EDITED_BY);
         assertThat(testStockItemTransactions.getLastEditedWhen()).isEqualTo(UPDATED_LAST_EDITED_WHEN);

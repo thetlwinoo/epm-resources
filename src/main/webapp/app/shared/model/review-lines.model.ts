@@ -8,8 +8,7 @@ export interface IReviewLines {
   sellerReview?: any;
   deliveryRating?: number;
   deliveryReview?: any;
-  photoContentType?: string;
-  photo?: any;
+  thumbnailUrl?: string;
   lastEditedBy?: string;
   lastEditedWhen?: Moment;
   stockItemId?: number;
@@ -25,8 +24,7 @@ export class ReviewLines implements IReviewLines {
     public sellerReview?: any,
     public deliveryRating?: number,
     public deliveryReview?: any,
-    public photoContentType?: string,
-    public photo?: any,
+    public thumbnailUrl?: string,
     public lastEditedBy?: string,
     public lastEditedWhen?: Moment,
     public stockItemId?: number,

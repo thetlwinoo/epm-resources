@@ -44,11 +44,8 @@ describe('UploadActionTypes e2e test', () => {
     const nbButtonsBeforeCreate = await uploadActionTypesComponentsPage.countDeleteButtons();
 
     await uploadActionTypesComponentsPage.clickOnCreateButton();
-    await promise.all([uploadActionTypesUpdatePage.setActionTypeNameInput('actionTypeName')]);
-    expect(await uploadActionTypesUpdatePage.getActionTypeNameInput()).to.eq(
-      'actionTypeName',
-      'Expected ActionTypeName value to be equals to actionTypeName'
-    );
+    await promise.all([uploadActionTypesUpdatePage.setNameInput('name')]);
+    expect(await uploadActionTypesUpdatePage.getNameInput()).to.eq('name', 'Expected Name value to be equals to name');
     await uploadActionTypesUpdatePage.save();
     expect(await uploadActionTypesUpdatePage.getSaveButton().isPresent(), 'Expected save button disappear').to.be.false;
 

@@ -16,7 +16,7 @@
       "detail": {
         "title": "Stock Items"
       },
-      "stockItemName": "Stock Item Name",
+      "name": "Name",
       "vendorCode": "Vendor Code",
       "vendorSKU": "Vendor SKU",
       "generatedSKU": "Generated SKU",

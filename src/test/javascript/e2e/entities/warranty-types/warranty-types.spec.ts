@@ -40,11 +40,8 @@ describe('WarrantyTypes e2e test', () => {
     const nbButtonsBeforeCreate = await warrantyTypesComponentsPage.countDeleteButtons();
 
     await warrantyTypesComponentsPage.clickOnCreateButton();
-    await promise.all([warrantyTypesUpdatePage.setWarrantyTypeNameInput('warrantyTypeName')]);
-    expect(await warrantyTypesUpdatePage.getWarrantyTypeNameInput()).to.eq(
-      'warrantyTypeName',
-      'Expected WarrantyTypeName value to be equals to warrantyTypeName'
-    );
+    await promise.all([warrantyTypesUpdatePage.setNameInput('name')]);
+    expect(await warrantyTypesUpdatePage.getNameInput()).to.eq('name', 'Expected Name value to be equals to name');
     await warrantyTypesUpdatePage.save();
     expect(await warrantyTypesUpdatePage.getSaveButton().isPresent(), 'Expected save button disappear').to.be.false;
 

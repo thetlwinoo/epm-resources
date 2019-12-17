@@ -56,7 +56,7 @@ describe('Service Tests', () => {
       it('should update a PhoneNumberType', () => {
         const returnedFromService = Object.assign(
           {
-            phoneNumberTypeName: 'BBBBBB'
+            name: 'BBBBBB'
           },
           elemDefault
         );
@@ -74,7 +74,7 @@ describe('Service Tests', () => {
       it('should return a list of PhoneNumberType', () => {
         const returnedFromService = Object.assign(
           {
-            phoneNumberTypeName: 'BBBBBB'
+            name: 'BBBBBB'
           },
           elemDefault
         );

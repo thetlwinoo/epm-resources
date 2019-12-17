@@ -41,14 +41,14 @@ describe('Cities e2e test', () => {
 
     await citiesComponentsPage.clickOnCreateButton();
     await promise.all([
-      citiesUpdatePage.setCityNameInput('cityName'),
+      citiesUpdatePage.setNameInput('name'),
       citiesUpdatePage.setLocationInput('location'),
       citiesUpdatePage.setLatestRecordedPopulationInput('5'),
       citiesUpdatePage.setValidFromInput('01/01/2001' + protractor.Key.TAB + '02:30AM'),
       citiesUpdatePage.setValidToInput('01/01/2001' + protractor.Key.TAB + '02:30AM'),
       citiesUpdatePage.stateProvinceSelectLastOption()
     ]);
-    expect(await citiesUpdatePage.getCityNameInput()).to.eq('cityName', 'Expected CityName value to be equals to cityName');
+    expect(await citiesUpdatePage.getNameInput()).to.eq('name', 'Expected Name value to be equals to name');
     expect(await citiesUpdatePage.getLocationInput()).to.eq('location', 'Expected Location value to be equals to location');
     expect(await citiesUpdatePage.getLatestRecordedPopulationInput()).to.eq(
       '5',

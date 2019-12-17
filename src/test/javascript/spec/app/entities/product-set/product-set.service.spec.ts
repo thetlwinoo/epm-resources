@@ -56,7 +56,7 @@ describe('Service Tests', () => {
       it('should update a ProductSet', () => {
         const returnedFromService = Object.assign(
           {
-            productSetName: 'BBBBBB',
+            name: 'BBBBBB',
             noOfPerson: 1,
             isExclusive: true
           },
@@ -76,7 +76,7 @@ describe('Service Tests', () => {
       it('should return a list of ProductSet', () => {
         const returnedFromService = Object.assign(
           {
-            productSetName: 'BBBBBB',
+            name: 'BBBBBB',
             noOfPerson: 1,
             isExclusive: true
           },

@@ -11,7 +11,7 @@ public class BarcodeTypesDTO implements Serializable {
     private Long id;
 
     @NotNull
-    private String barcodeTypeName;
+    private String name;
 
 
     public Long getId() {
@@ -22,12 +22,12 @@ public class BarcodeTypesDTO implements Serializable {
         this.id = id;
     }
 
-    public String getBarcodeTypeName() {
-        return barcodeTypeName;
+    public String getName() {
+        return name;
     }
 
-    public void setBarcodeTypeName(String barcodeTypeName) {
-        this.barcodeTypeName = barcodeTypeName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
@@ -55,7 +55,7 @@ public class BarcodeTypesDTO implements Serializable {
     public String toString() {
         return "BarcodeTypesDTO{" +
             "id=" + getId() +
-            ", barcodeTypeName='" + getBarcodeTypeName() + "'" +
+            ", name='" + getName() + "'" +
             "}";
     }
 }

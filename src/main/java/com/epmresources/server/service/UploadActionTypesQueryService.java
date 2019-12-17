@@ -91,8 +91,8 @@ public class UploadActionTypesQueryService extends QueryService<UploadActionType
             if (criteria.getId() != null) {
                 specification = specification.and(buildSpecification(criteria.getId(), UploadActionTypes_.id));
             }
-            if (criteria.getActionTypeName() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getActionTypeName(), UploadActionTypes_.actionTypeName));
+            if (criteria.getName() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getName(), UploadActionTypes_.name));
             }
         }
         return specification;

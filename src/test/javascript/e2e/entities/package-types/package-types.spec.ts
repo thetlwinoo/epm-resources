@@ -41,14 +41,11 @@ describe('PackageTypes e2e test', () => {
 
     await packageTypesComponentsPage.clickOnCreateButton();
     await promise.all([
-      packageTypesUpdatePage.setPackageTypeNameInput('packageTypeName'),
+      packageTypesUpdatePage.setNameInput('name'),
       packageTypesUpdatePage.setValidFromInput('01/01/2001' + protractor.Key.TAB + '02:30AM'),
       packageTypesUpdatePage.setValidToInput('01/01/2001' + protractor.Key.TAB + '02:30AM')
     ]);
-    expect(await packageTypesUpdatePage.getPackageTypeNameInput()).to.eq(
-      'packageTypeName',
-      'Expected PackageTypeName value to be equals to packageTypeName'
-    );
+    expect(await packageTypesUpdatePage.getNameInput()).to.eq('name', 'Expected Name value to be equals to name');
     expect(await packageTypesUpdatePage.getValidFromInput()).to.contain(
       '2001-01-01T02:30',
       'Expected validFrom value to be equals to 2000-12-31'

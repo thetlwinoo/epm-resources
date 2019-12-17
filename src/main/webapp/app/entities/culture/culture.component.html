@@ -19,16 +19,16 @@
             <thead>
             <tr>
             <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
-            <th scope="col" ><span jhiTranslate="epmresourcesApp.culture.cultureCode">Culture Code</span></th>
-            <th scope="col" ><span jhiTranslate="epmresourcesApp.culture.cultureName">Culture Name</span></th>
+            <th scope="col" ><span jhiTranslate="epmresourcesApp.culture.code">Code</span></th>
+            <th scope="col" ><span jhiTranslate="epmresourcesApp.culture.name">Name</span></th>
             <th scope="col"></th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let culture of cultures ;trackBy: trackId">
                 <td><a [routerLink]="['/culture', culture.id, 'view' ]">{{culture.id}}</a></td>
-                <td>{{culture.cultureCode}}</td>
-                <td>{{culture.cultureName}}</td>
+                <td>{{culture.code}}</td>
+                <td>{{culture.name}}</td>
                 <td class="text-right">
                     <div class="btn-group">
                         <button type="submit"

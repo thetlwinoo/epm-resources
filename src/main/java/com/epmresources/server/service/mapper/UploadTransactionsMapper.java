@@ -12,9 +12,9 @@ import org.mapstruct.*;
 public interface UploadTransactionsMapper extends EntityMapper<UploadTransactionsDTO, UploadTransactions> {
 
     @Mapping(source = "supplier.id", target = "supplierId")
-    @Mapping(source = "supplier.supplierName", target = "supplierSupplierName")
+    @Mapping(source = "supplier.name", target = "supplierName")
     @Mapping(source = "actionType.id", target = "actionTypeId")
-    @Mapping(source = "actionType.actionTypeName", target = "actionTypeActionTypeName")
+    @Mapping(source = "actionType.name", target = "actionTypeName")
     UploadTransactionsDTO toDto(UploadTransactions uploadTransactions);
 
     @Mapping(target = "importDocumentLists", ignore = true)

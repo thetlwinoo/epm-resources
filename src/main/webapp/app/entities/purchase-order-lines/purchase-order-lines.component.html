@@ -19,7 +19,7 @@
             <thead>
             <tr>
             <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
-            <th scope="col" ><span jhiTranslate="epmresourcesApp.purchaseOrderLines.ordersOuters">Orders Outers</span></th>
+            <th scope="col" ><span jhiTranslate="epmresourcesApp.purchaseOrderLines.orderedOuters">Ordered Outers</span></th>
             <th scope="col" ><span jhiTranslate="epmresourcesApp.purchaseOrderLines.description">Description</span></th>
             <th scope="col" ><span jhiTranslate="epmresourcesApp.purchaseOrderLines.receivedOuters">Received Outers</span></th>
             <th scope="col" ><span jhiTranslate="epmresourcesApp.purchaseOrderLines.expectedUnitPricePerOuter">Expected Unit Price Per Outer</span></th>
@@ -36,7 +36,7 @@
             <tbody>
             <tr *ngFor="let purchaseOrderLines of purchaseOrderLines ;trackBy: trackId">
                 <td><a [routerLink]="['/purchase-order-lines', purchaseOrderLines.id, 'view' ]">{{purchaseOrderLines.id}}</a></td>
-                <td>{{purchaseOrderLines.ordersOuters}}</td>
+                <td>{{purchaseOrderLines.orderedOuters}}</td>
                 <td>{{purchaseOrderLines.description}}</td>
                 <td>{{purchaseOrderLines.receivedOuters}}</td>
                 <td>{{purchaseOrderLines.expectedUnitPricePerOuter}}</td>
@@ -46,12 +46,12 @@
                 <td>{{purchaseOrderLines.lastEditedWhen | date:'medium'}}</td>
                 <td>
                     <div *ngIf="purchaseOrderLines.packageTypeId">
-                        <a [routerLink]="['/package-types', purchaseOrderLines.packageTypeId , 'view' ]" >{{purchaseOrderLines.packageTypePackageTypeName}}</a>
+                        <a [routerLink]="['/package-types', purchaseOrderLines.packageTypeId , 'view' ]" >{{purchaseOrderLines.packageTypeName}}</a>
                     </div>
                 </td>
                 <td>
                     <div *ngIf="purchaseOrderLines.stockItemId">
-                        <a [routerLink]="['/stock-items', purchaseOrderLines.stockItemId , 'view' ]" >{{purchaseOrderLines.stockItemStockItemName}}</a>
+                        <a [routerLink]="['/stock-items', purchaseOrderLines.stockItemId , 'view' ]" >{{purchaseOrderLines.stockItemName}}</a>
                     </div>
                 </td>
                 <td>

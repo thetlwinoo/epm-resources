@@ -44,11 +44,11 @@ public class CurrencyRateResourceIT {
     private static final Instant DEFAULT_CURRENCY_RATE_DATE = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_CURRENCY_RATE_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
-    private static final String DEFAULT_FROM_CURRENCY_CODE = "AAAAAAAAAA";
-    private static final String UPDATED_FROM_CURRENCY_CODE = "BBBBBBBBBB";
+    private static final String DEFAULT_FROMCODE = "AAAAAAAAAA";
+    private static final String UPDATED_FROMCODE = "BBBBBBBBBB";
 
-    private static final String DEFAULT_TO_CURRENCY_CODE = "AAAAAAAAAA";
-    private static final String UPDATED_TO_CURRENCY_CODE = "BBBBBBBBBB";
+    private static final String DEFAULT_TOCODE = "AAAAAAAAAA";
+    private static final String UPDATED_TOCODE = "BBBBBBBBBB";
 
     private static final BigDecimal DEFAULT_AVERAGE_RATE = new BigDecimal(1);
     private static final BigDecimal UPDATED_AVERAGE_RATE = new BigDecimal(2);
@@ -116,8 +116,8 @@ public class CurrencyRateResourceIT {
     public static CurrencyRate createEntity(EntityManager em) {
         CurrencyRate currencyRate = new CurrencyRate()
             .currencyRateDate(DEFAULT_CURRENCY_RATE_DATE)
-            .fromCurrencyCode(DEFAULT_FROM_CURRENCY_CODE)
-            .toCurrencyCode(DEFAULT_TO_CURRENCY_CODE)
+            .fromcode(DEFAULT_FROMCODE)
+            .tocode(DEFAULT_TOCODE)
             .averageRate(DEFAULT_AVERAGE_RATE)
             .endOfDayRate(DEFAULT_END_OF_DAY_RATE)
             .lastEditedBy(DEFAULT_LAST_EDITED_BY)
@@ -133,8 +133,8 @@ public class CurrencyRateResourceIT {
     public static CurrencyRate createUpdatedEntity(EntityManager em) {
         CurrencyRate currencyRate = new CurrencyRate()
             .currencyRateDate(UPDATED_CURRENCY_RATE_DATE)
-            .fromCurrencyCode(UPDATED_FROM_CURRENCY_CODE)
-            .toCurrencyCode(UPDATED_TO_CURRENCY_CODE)
+            .fromcode(UPDATED_FROMCODE)
+            .tocode(UPDATED_TOCODE)
             .averageRate(UPDATED_AVERAGE_RATE)
             .endOfDayRate(UPDATED_END_OF_DAY_RATE)
             .lastEditedBy(UPDATED_LAST_EDITED_BY)
@@ -164,8 +164,8 @@ public class CurrencyRateResourceIT {
         assertThat(currencyRateList).hasSize(databaseSizeBeforeCreate + 1);
         CurrencyRate testCurrencyRate = currencyRateList.get(currencyRateList.size() - 1);
         assertThat(testCurrencyRate.getCurrencyRateDate()).isEqualTo(DEFAULT_CURRENCY_RATE_DATE);
-        assertThat(testCurrencyRate.getFromCurrencyCode()).isEqualTo(DEFAULT_FROM_CURRENCY_CODE);
-        assertThat(testCurrencyRate.getToCurrencyCode()).isEqualTo(DEFAULT_TO_CURRENCY_CODE);
+        assertThat(testCurrencyRate.getFromcode()).isEqualTo(DEFAULT_FROMCODE);
+        assertThat(testCurrencyRate.getTocode()).isEqualTo(DEFAULT_TOCODE);
         assertThat(testCurrencyRate.getAverageRate()).isEqualTo(DEFAULT_AVERAGE_RATE);
         assertThat(testCurrencyRate.getEndOfDayRate()).isEqualTo(DEFAULT_END_OF_DAY_RATE);
         assertThat(testCurrencyRate.getLastEditedBy()).isEqualTo(DEFAULT_LAST_EDITED_BY);
@@ -224,8 +224,8 @@ public class CurrencyRateResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(currencyRate.getId().intValue())))
             .andExpect(jsonPath("$.[*].currencyRateDate").value(hasItem(DEFAULT_CURRENCY_RATE_DATE.toString())))
-            .andExpect(jsonPath("$.[*].fromCurrencyCode").value(hasItem(DEFAULT_FROM_CURRENCY_CODE)))
-            .andExpect(jsonPath("$.[*].toCurrencyCode").value(hasItem(DEFAULT_TO_CURRENCY_CODE)))
+            .andExpect(jsonPath("$.[*].fromcode").value(hasItem(DEFAULT_FROMCODE)))
+            .andExpect(jsonPath("$.[*].tocode").value(hasItem(DEFAULT_TOCODE)))
             .andExpect(jsonPath("$.[*].averageRate").value(hasItem(DEFAULT_AVERAGE_RATE.intValue())))
             .andExpect(jsonPath("$.[*].endOfDayRate").value(hasItem(DEFAULT_END_OF_DAY_RATE.intValue())))
             .andExpect(jsonPath("$.[*].lastEditedBy").value(hasItem(DEFAULT_LAST_EDITED_BY)))
@@ -244,8 +244,8 @@ public class CurrencyRateResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(currencyRate.getId().intValue()))
             .andExpect(jsonPath("$.currencyRateDate").value(DEFAULT_CURRENCY_RATE_DATE.toString()))
-            .andExpect(jsonPath("$.fromCurrencyCode").value(DEFAULT_FROM_CURRENCY_CODE))
-            .andExpect(jsonPath("$.toCurrencyCode").value(DEFAULT_TO_CURRENCY_CODE))
+            .andExpect(jsonPath("$.fromcode").value(DEFAULT_FROMCODE))
+            .andExpect(jsonPath("$.tocode").value(DEFAULT_TOCODE))
             .andExpect(jsonPath("$.averageRate").value(DEFAULT_AVERAGE_RATE.intValue()))
             .andExpect(jsonPath("$.endOfDayRate").value(DEFAULT_END_OF_DAY_RATE.intValue()))
             .andExpect(jsonPath("$.lastEditedBy").value(DEFAULT_LAST_EDITED_BY))
@@ -306,157 +306,157 @@ public class CurrencyRateResourceIT {
 
     @Test
     @Transactional
-    public void getAllCurrencyRatesByFromCurrencyCodeIsEqualToSomething() throws Exception {
+    public void getAllCurrencyRatesByFromcodeIsEqualToSomething() throws Exception {
         // Initialize the database
         currencyRateRepository.saveAndFlush(currencyRate);
 
-        // Get all the currencyRateList where fromCurrencyCode equals to DEFAULT_FROM_CURRENCY_CODE
-        defaultCurrencyRateShouldBeFound("fromCurrencyCode.equals=" + DEFAULT_FROM_CURRENCY_CODE);
+        // Get all the currencyRateList where fromcode equals to DEFAULT_FROMCODE
+        defaultCurrencyRateShouldBeFound("fromcode.equals=" + DEFAULT_FROMCODE);
 
-        // Get all the currencyRateList where fromCurrencyCode equals to UPDATED_FROM_CURRENCY_CODE
-        defaultCurrencyRateShouldNotBeFound("fromCurrencyCode.equals=" + UPDATED_FROM_CURRENCY_CODE);
+        // Get all the currencyRateList where fromcode equals to UPDATED_FROMCODE
+        defaultCurrencyRateShouldNotBeFound("fromcode.equals=" + UPDATED_FROMCODE);
     }
 
     @Test
     @Transactional
-    public void getAllCurrencyRatesByFromCurrencyCodeIsNotEqualToSomething() throws Exception {
+    public void getAllCurrencyRatesByFromcodeIsNotEqualToSomething() throws Exception {
         // Initialize the database
         currencyRateRepository.saveAndFlush(currencyRate);
 
-        // Get all the currencyRateList where fromCurrencyCode not equals to DEFAULT_FROM_CURRENCY_CODE
-        defaultCurrencyRateShouldNotBeFound("fromCurrencyCode.notEquals=" + DEFAULT_FROM_CURRENCY_CODE);
+        // Get all the currencyRateList where fromcode not equals to DEFAULT_FROMCODE
+        defaultCurrencyRateShouldNotBeFound("fromcode.notEquals=" + DEFAULT_FROMCODE);
 
-        // Get all the currencyRateList where fromCurrencyCode not equals to UPDATED_FROM_CURRENCY_CODE
-        defaultCurrencyRateShouldBeFound("fromCurrencyCode.notEquals=" + UPDATED_FROM_CURRENCY_CODE);
+        // Get all the currencyRateList where fromcode not equals to UPDATED_FROMCODE
+        defaultCurrencyRateShouldBeFound("fromcode.notEquals=" + UPDATED_FROMCODE);
     }
 
     @Test
     @Transactional
-    public void getAllCurrencyRatesByFromCurrencyCodeIsInShouldWork() throws Exception {
+    public void getAllCurrencyRatesByFromcodeIsInShouldWork() throws Exception {
         // Initialize the database
         currencyRateRepository.saveAndFlush(currencyRate);
 
-        // Get all the currencyRateList where fromCurrencyCode in DEFAULT_FROM_CURRENCY_CODE or UPDATED_FROM_CURRENCY_CODE
-        defaultCurrencyRateShouldBeFound("fromCurrencyCode.in=" + DEFAULT_FROM_CURRENCY_CODE + "," + UPDATED_FROM_CURRENCY_CODE);
+        // Get all the currencyRateList where fromcode in DEFAULT_FROMCODE or UPDATED_FROMCODE
+        defaultCurrencyRateShouldBeFound("fromcode.in=" + DEFAULT_FROMCODE + "," + UPDATED_FROMCODE);
 
-        // Get all the currencyRateList where fromCurrencyCode equals to UPDATED_FROM_CURRENCY_CODE
-        defaultCurrencyRateShouldNotBeFound("fromCurrencyCode.in=" + UPDATED_FROM_CURRENCY_CODE);
+        // Get all the currencyRateList where fromcode equals to UPDATED_FROMCODE
+        defaultCurrencyRateShouldNotBeFound("fromcode.in=" + UPDATED_FROMCODE);
     }
 
     @Test
     @Transactional
-    public void getAllCurrencyRatesByFromCurrencyCodeIsNullOrNotNull() throws Exception {
+    public void getAllCurrencyRatesByFromcodeIsNullOrNotNull() throws Exception {
         // Initialize the database
         currencyRateRepository.saveAndFlush(currencyRate);
 
-        // Get all the currencyRateList where fromCurrencyCode is not null
-        defaultCurrencyRateShouldBeFound("fromCurrencyCode.specified=true");
+        // Get all the currencyRateList where fromcode is not null
+        defaultCurrencyRateShouldBeFound("fromcode.specified=true");
 
-        // Get all the currencyRateList where fromCurrencyCode is null
-        defaultCurrencyRateShouldNotBeFound("fromCurrencyCode.specified=false");
+        // Get all the currencyRateList where fromcode is null
+        defaultCurrencyRateShouldNotBeFound("fromcode.specified=false");
     }
                 @Test
     @Transactional
-    public void getAllCurrencyRatesByFromCurrencyCodeContainsSomething() throws Exception {
+    public void getAllCurrencyRatesByFromcodeContainsSomething() throws Exception {
         // Initialize the database
         currencyRateRepository.saveAndFlush(currencyRate);
 
-        // Get all the currencyRateList where fromCurrencyCode contains DEFAULT_FROM_CURRENCY_CODE
-        defaultCurrencyRateShouldBeFound("fromCurrencyCode.contains=" + DEFAULT_FROM_CURRENCY_CODE);
+        // Get all the currencyRateList where fromcode contains DEFAULT_FROMCODE
+        defaultCurrencyRateShouldBeFound("fromcode.contains=" + DEFAULT_FROMCODE);
 
-        // Get all the currencyRateList where fromCurrencyCode contains UPDATED_FROM_CURRENCY_CODE
-        defaultCurrencyRateShouldNotBeFound("fromCurrencyCode.contains=" + UPDATED_FROM_CURRENCY_CODE);
+        // Get all the currencyRateList where fromcode contains UPDATED_FROMCODE
+        defaultCurrencyRateShouldNotBeFound("fromcode.contains=" + UPDATED_FROMCODE);
     }
 
     @Test
     @Transactional
-    public void getAllCurrencyRatesByFromCurrencyCodeNotContainsSomething() throws Exception {
+    public void getAllCurrencyRatesByFromcodeNotContainsSomething() throws Exception {
         // Initialize the database
         currencyRateRepository.saveAndFlush(currencyRate);
 
-        // Get all the currencyRateList where fromCurrencyCode does not contain DEFAULT_FROM_CURRENCY_CODE
-        defaultCurrencyRateShouldNotBeFound("fromCurrencyCode.doesNotContain=" + DEFAULT_FROM_CURRENCY_CODE);
+        // Get all the currencyRateList where fromcode does not contain DEFAULT_FROMCODE
+        defaultCurrencyRateShouldNotBeFound("fromcode.doesNotContain=" + DEFAULT_FROMCODE);
 
-        // Get all the currencyRateList where fromCurrencyCode does not contain UPDATED_FROM_CURRENCY_CODE
-        defaultCurrencyRateShouldBeFound("fromCurrencyCode.doesNotContain=" + UPDATED_FROM_CURRENCY_CODE);
+        // Get all the currencyRateList where fromcode does not contain UPDATED_FROMCODE
+        defaultCurrencyRateShouldBeFound("fromcode.doesNotContain=" + UPDATED_FROMCODE);
     }
 
 
     @Test
     @Transactional
-    public void getAllCurrencyRatesByToCurrencyCodeIsEqualToSomething() throws Exception {
+    public void getAllCurrencyRatesByTocodeIsEqualToSomething() throws Exception {
         // Initialize the database
         currencyRateRepository.saveAndFlush(currencyRate);
 
-        // Get all the currencyRateList where toCurrencyCode equals to DEFAULT_TO_CURRENCY_CODE
-        defaultCurrencyRateShouldBeFound("toCurrencyCode.equals=" + DEFAULT_TO_CURRENCY_CODE);
+        // Get all the currencyRateList where tocode equals to DEFAULT_TOCODE
+        defaultCurrencyRateShouldBeFound("tocode.equals=" + DEFAULT_TOCODE);
 
-        // Get all the currencyRateList where toCurrencyCode equals to UPDATED_TO_CURRENCY_CODE
-        defaultCurrencyRateShouldNotBeFound("toCurrencyCode.equals=" + UPDATED_TO_CURRENCY_CODE);
+        // Get all the currencyRateList where tocode equals to UPDATED_TOCODE
+        defaultCurrencyRateShouldNotBeFound("tocode.equals=" + UPDATED_TOCODE);
     }
 
     @Test
     @Transactional
-    public void getAllCurrencyRatesByToCurrencyCodeIsNotEqualToSomething() throws Exception {
+    public void getAllCurrencyRatesByTocodeIsNotEqualToSomething() throws Exception {
         // Initialize the database
         currencyRateRepository.saveAndFlush(currencyRate);
 
-        // Get all the currencyRateList where toCurrencyCode not equals to DEFAULT_TO_CURRENCY_CODE
-        defaultCurrencyRateShouldNotBeFound("toCurrencyCode.notEquals=" + DEFAULT_TO_CURRENCY_CODE);
+        // Get all the currencyRateList where tocode not equals to DEFAULT_TOCODE
+        defaultCurrencyRateShouldNotBeFound("tocode.notEquals=" + DEFAULT_TOCODE);
 
-        // Get all the currencyRateList where toCurrencyCode not equals to UPDATED_TO_CURRENCY_CODE
-        defaultCurrencyRateShouldBeFound("toCurrencyCode.notEquals=" + UPDATED_TO_CURRENCY_CODE);
+        // Get all the currencyRateList where tocode not equals to UPDATED_TOCODE
+        defaultCurrencyRateShouldBeFound("tocode.notEquals=" + UPDATED_TOCODE);
     }
 
     @Test
     @Transactional
-    public void getAllCurrencyRatesByToCurrencyCodeIsInShouldWork() throws Exception {
+    public void getAllCurrencyRatesByTocodeIsInShouldWork() throws Exception {
         // Initialize the database
         currencyRateRepository.saveAndFlush(currencyRate);
 
-        // Get all the currencyRateList where toCurrencyCode in DEFAULT_TO_CURRENCY_CODE or UPDATED_TO_CURRENCY_CODE
-        defaultCurrencyRateShouldBeFound("toCurrencyCode.in=" + DEFAULT_TO_CURRENCY_CODE + "," + UPDATED_TO_CURRENCY_CODE);
+        // Get all the currencyRateList where tocode in DEFAULT_TOCODE or UPDATED_TOCODE
+        defaultCurrencyRateShouldBeFound("tocode.in=" + DEFAULT_TOCODE + "," + UPDATED_TOCODE);
 
-        // Get all the currencyRateList where toCurrencyCode equals to UPDATED_TO_CURRENCY_CODE
-        defaultCurrencyRateShouldNotBeFound("toCurrencyCode.in=" + UPDATED_TO_CURRENCY_CODE);
+        // Get all the currencyRateList where tocode equals to UPDATED_TOCODE
+        defaultCurrencyRateShouldNotBeFound("tocode.in=" + UPDATED_TOCODE);
     }
 
     @Test
     @Transactional
-    public void getAllCurrencyRatesByToCurrencyCodeIsNullOrNotNull() throws Exception {
+    public void getAllCurrencyRatesByTocodeIsNullOrNotNull() throws Exception {
         // Initialize the database
         currencyRateRepository.saveAndFlush(currencyRate);
 
-        // Get all the currencyRateList where toCurrencyCode is not null
-        defaultCurrencyRateShouldBeFound("toCurrencyCode.specified=true");
+        // Get all the currencyRateList where tocode is not null
+        defaultCurrencyRateShouldBeFound("tocode.specified=true");
 
-        // Get all the currencyRateList where toCurrencyCode is null
-        defaultCurrencyRateShouldNotBeFound("toCurrencyCode.specified=false");
+        // Get all the currencyRateList where tocode is null
+        defaultCurrencyRateShouldNotBeFound("tocode.specified=false");
     }
                 @Test
     @Transactional
-    public void getAllCurrencyRatesByToCurrencyCodeContainsSomething() throws Exception {
+    public void getAllCurrencyRatesByTocodeContainsSomething() throws Exception {
         // Initialize the database
         currencyRateRepository.saveAndFlush(currencyRate);
 
-        // Get all the currencyRateList where toCurrencyCode contains DEFAULT_TO_CURRENCY_CODE
-        defaultCurrencyRateShouldBeFound("toCurrencyCode.contains=" + DEFAULT_TO_CURRENCY_CODE);
+        // Get all the currencyRateList where tocode contains DEFAULT_TOCODE
+        defaultCurrencyRateShouldBeFound("tocode.contains=" + DEFAULT_TOCODE);
 
-        // Get all the currencyRateList where toCurrencyCode contains UPDATED_TO_CURRENCY_CODE
-        defaultCurrencyRateShouldNotBeFound("toCurrencyCode.contains=" + UPDATED_TO_CURRENCY_CODE);
+        // Get all the currencyRateList where tocode contains UPDATED_TOCODE
+        defaultCurrencyRateShouldNotBeFound("tocode.contains=" + UPDATED_TOCODE);
     }
 
     @Test
     @Transactional
-    public void getAllCurrencyRatesByToCurrencyCodeNotContainsSomething() throws Exception {
+    public void getAllCurrencyRatesByTocodeNotContainsSomething() throws Exception {
         // Initialize the database
         currencyRateRepository.saveAndFlush(currencyRate);
 
-        // Get all the currencyRateList where toCurrencyCode does not contain DEFAULT_TO_CURRENCY_CODE
-        defaultCurrencyRateShouldNotBeFound("toCurrencyCode.doesNotContain=" + DEFAULT_TO_CURRENCY_CODE);
+        // Get all the currencyRateList where tocode does not contain DEFAULT_TOCODE
+        defaultCurrencyRateShouldNotBeFound("tocode.doesNotContain=" + DEFAULT_TOCODE);
 
-        // Get all the currencyRateList where toCurrencyCode does not contain UPDATED_TO_CURRENCY_CODE
-        defaultCurrencyRateShouldBeFound("toCurrencyCode.doesNotContain=" + UPDATED_TO_CURRENCY_CODE);
+        // Get all the currencyRateList where tocode does not contain UPDATED_TOCODE
+        defaultCurrencyRateShouldBeFound("tocode.doesNotContain=" + UPDATED_TOCODE);
     }
 
 
@@ -808,8 +808,8 @@ public class CurrencyRateResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(currencyRate.getId().intValue())))
             .andExpect(jsonPath("$.[*].currencyRateDate").value(hasItem(DEFAULT_CURRENCY_RATE_DATE.toString())))
-            .andExpect(jsonPath("$.[*].fromCurrencyCode").value(hasItem(DEFAULT_FROM_CURRENCY_CODE)))
-            .andExpect(jsonPath("$.[*].toCurrencyCode").value(hasItem(DEFAULT_TO_CURRENCY_CODE)))
+            .andExpect(jsonPath("$.[*].fromcode").value(hasItem(DEFAULT_FROMCODE)))
+            .andExpect(jsonPath("$.[*].tocode").value(hasItem(DEFAULT_TOCODE)))
             .andExpect(jsonPath("$.[*].averageRate").value(hasItem(DEFAULT_AVERAGE_RATE.intValue())))
             .andExpect(jsonPath("$.[*].endOfDayRate").value(hasItem(DEFAULT_END_OF_DAY_RATE.intValue())))
             .andExpect(jsonPath("$.[*].lastEditedBy").value(hasItem(DEFAULT_LAST_EDITED_BY)))
@@ -862,8 +862,8 @@ public class CurrencyRateResourceIT {
         em.detach(updatedCurrencyRate);
         updatedCurrencyRate
             .currencyRateDate(UPDATED_CURRENCY_RATE_DATE)
-            .fromCurrencyCode(UPDATED_FROM_CURRENCY_CODE)
-            .toCurrencyCode(UPDATED_TO_CURRENCY_CODE)
+            .fromcode(UPDATED_FROMCODE)
+            .tocode(UPDATED_TOCODE)
             .averageRate(UPDATED_AVERAGE_RATE)
             .endOfDayRate(UPDATED_END_OF_DAY_RATE)
             .lastEditedBy(UPDATED_LAST_EDITED_BY)
@@ -880,8 +880,8 @@ public class CurrencyRateResourceIT {
         assertThat(currencyRateList).hasSize(databaseSizeBeforeUpdate);
         CurrencyRate testCurrencyRate = currencyRateList.get(currencyRateList.size() - 1);
         assertThat(testCurrencyRate.getCurrencyRateDate()).isEqualTo(UPDATED_CURRENCY_RATE_DATE);
-        assertThat(testCurrencyRate.getFromCurrencyCode()).isEqualTo(UPDATED_FROM_CURRENCY_CODE);
-        assertThat(testCurrencyRate.getToCurrencyCode()).isEqualTo(UPDATED_TO_CURRENCY_CODE);
+        assertThat(testCurrencyRate.getFromcode()).isEqualTo(UPDATED_FROMCODE);
+        assertThat(testCurrencyRate.getTocode()).isEqualTo(UPDATED_TOCODE);
         assertThat(testCurrencyRate.getAverageRate()).isEqualTo(UPDATED_AVERAGE_RATE);
         assertThat(testCurrencyRate.getEndOfDayRate()).isEqualTo(UPDATED_END_OF_DAY_RATE);
         assertThat(testCurrencyRate.getLastEditedBy()).isEqualTo(UPDATED_LAST_EDITED_BY);

@@ -91,8 +91,8 @@ public class ProductTagsQueryService extends QueryService<ProductTags> {
             if (criteria.getId() != null) {
                 specification = specification.and(buildSpecification(criteria.getId(), ProductTags_.id));
             }
-            if (criteria.getTagName() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getTagName(), ProductTags_.tagName));
+            if (criteria.getName() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getName(), ProductTags_.name));
             }
             if (criteria.getProductId() != null) {
                 specification = specification.and(buildSpecification(criteria.getProductId(),

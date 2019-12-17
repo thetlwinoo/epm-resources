@@ -40,7 +40,7 @@
             <th scope="col"  jhiSortBy="customerId"><span jhiTranslate="epmresourcesApp.orders.customer">Customer</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="shipToAddressId"><span jhiTranslate="epmresourcesApp.orders.shipToAddress">Ship To Address</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="billToAddressId"><span jhiTranslate="epmresourcesApp.orders.billToAddress">Bill To Address</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th scope="col"  jhiSortBy="shipMethodShipMethodName"><span jhiTranslate="epmresourcesApp.orders.shipMethod">Ship Method</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="shipMethodName"><span jhiTranslate="epmresourcesApp.orders.shipMethod">Ship Method</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="currencyRateId"><span jhiTranslate="epmresourcesApp.orders.currencyRate">Currency Rate</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="specialDealsId"><span jhiTranslate="epmresourcesApp.orders.specialDeals">Special Deals</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"></th>
@@ -88,7 +88,7 @@
                 </td>
                 <td>
                     <div *ngIf="orders.shipMethodId">
-                        <a [routerLink]="['/ship-method', orders.shipMethodId , 'view' ]" >{{orders.shipMethodShipMethodName}}</a>
+                        <a [routerLink]="['/ship-method', orders.shipMethodId , 'view' ]" >{{orders.shipMethodName}}</a>
                     </div>
                 </td>
                 <td>

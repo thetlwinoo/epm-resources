@@ -45,7 +45,7 @@ describe('PurchaseOrderLines e2e test', () => {
 
     await purchaseOrderLinesComponentsPage.clickOnCreateButton();
     await promise.all([
-      purchaseOrderLinesUpdatePage.setOrdersOutersInput('5'),
+      purchaseOrderLinesUpdatePage.setOrderedOutersInput('5'),
       purchaseOrderLinesUpdatePage.setDescriptionInput('description'),
       purchaseOrderLinesUpdatePage.setReceivedOutersInput('5'),
       purchaseOrderLinesUpdatePage.setExpectedUnitPricePerOuterInput('5'),
@@ -56,7 +56,7 @@ describe('PurchaseOrderLines e2e test', () => {
       purchaseOrderLinesUpdatePage.stockItemSelectLastOption(),
       purchaseOrderLinesUpdatePage.purchaseOrderSelectLastOption()
     ]);
-    expect(await purchaseOrderLinesUpdatePage.getOrdersOutersInput()).to.eq('5', 'Expected ordersOuters value to be equals to 5');
+    expect(await purchaseOrderLinesUpdatePage.getOrderedOutersInput()).to.eq('5', 'Expected orderedOuters value to be equals to 5');
     expect(await purchaseOrderLinesUpdatePage.getDescriptionInput()).to.eq(
       'description',
       'Expected Description value to be equals to description'

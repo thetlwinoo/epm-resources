@@ -57,14 +57,14 @@
             "otherEntityName": "stateProvinces",
             "otherEntityRelationshipName": "addresses",
             "relationshipName": "stateProvince",
-            "otherEntityField": "stateProvinceName"
+            "otherEntityField": "name"
         },
         {
             "relationshipType": "many-to-one",
             "otherEntityName": "addressTypes",
             "otherEntityRelationshipName": "addresses",
             "relationshipName": "addressType",
-            "otherEntityField": "addressTypeName"
+            "otherEntityField": "name"
         },
         {
             "relationshipType": "many-to-one",

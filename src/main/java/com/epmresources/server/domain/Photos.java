@@ -4,7 +4,6 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
 
 import java.io.Serializable;
 
@@ -109,13 +108,13 @@ public class Photos implements Serializable {
     @Column(name = "default_ind")
     private Boolean defaultInd;
 
-    @Size(min = 1, max = 1024)
-    @Column(name = "delete_token", length = 1024)
-    private String deleteToken;
-
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
     @JsonIgnoreProperties("photoLists")
     private StockItems stockItem;
+
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+    @JsonIgnoreProperties("photoLists")
+    private ProductCategory productCategory;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -464,19 +463,6 @@ public class Photos implements Serializable {
         this.defaultInd = defaultInd;
     }
 
-    public String getDeleteToken() {
-        return deleteToken;
-    }
-
-    public Photos deleteToken(String deleteToken) {
-        this.deleteToken = deleteToken;
-        return this;
-    }
-
-    public void setDeleteToken(String deleteToken) {
-        this.deleteToken = deleteToken;
-    }
-
     public StockItems getStockItem() {
         return stockItem;
     }
@@ -488,6 +474,19 @@ public class Photos implements Serializable {
 
     public void setStockItem(StockItems stockItems) {
         this.stockItem = stockItems;
+    }
+
+    public ProductCategory getProductCategory() {
+        return productCategory;
+    }
+
+    public Photos productCategory(ProductCategory productCategory) {
+        this.productCategory = productCategory;
+        return this;
+    }
+
+    public void setProductCategory(ProductCategory productCategory) {
+        this.productCategory = productCategory;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -537,7 +536,6 @@ public class Photos implements Serializable {
             ", watermarkPhotoBlobContentType='" + getWatermarkPhotoBlobContentType() + "'" +
             ", priority=" + getPriority() +
             ", defaultInd='" + isDefaultInd() + "'" +
-            ", deleteToken='" + getDeleteToken() + "'" +
             "}";
     }
 }

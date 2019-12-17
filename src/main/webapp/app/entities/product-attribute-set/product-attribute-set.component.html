@@ -19,7 +19,7 @@
             <thead>
             <tr>
             <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
-            <th scope="col" ><span jhiTranslate="epmresourcesApp.productAttributeSet.productAttributeSetName">Product Attribute Set Name</span></th>
+            <th scope="col" ><span jhiTranslate="epmresourcesApp.productAttributeSet.name">Name</span></th>
             <th scope="col" ><span jhiTranslate="epmresourcesApp.productAttributeSet.productOptionSet">Product Option Set</span></th>
             <th scope="col"></th>
             </tr>
@@ -27,10 +27,10 @@
             <tbody>
             <tr *ngFor="let productAttributeSet of productAttributeSets ;trackBy: trackId">
                 <td><a [routerLink]="['/product-attribute-set', productAttributeSet.id, 'view' ]">{{productAttributeSet.id}}</a></td>
-                <td>{{productAttributeSet.productAttributeSetName}}</td>
+                <td>{{productAttributeSet.name}}</td>
                 <td>
                     <div *ngIf="productAttributeSet.productOptionSetId">
-                        <a [routerLink]="['/product-option-set', productAttributeSet.productOptionSetId , 'view' ]" >{{productAttributeSet.productOptionSetProductOptionSetValue}}</a>
+                        <a [routerLink]="['/product-option-set', productAttributeSet.productOptionSetId , 'view' ]" >{{productAttributeSet.productOptionSetValue}}</a>
                     </div>
                 </td>
                 <td class="text-right">

@@ -26,14 +26,14 @@ public class ContactTypeCriteria implements Serializable, Criteria {
 
     private LongFilter id;
 
-    private StringFilter contactTypeName;
+    private StringFilter name;
 
     public ContactTypeCriteria(){
     }
 
     public ContactTypeCriteria(ContactTypeCriteria other){
         this.id = other.id == null ? null : other.id.copy();
-        this.contactTypeName = other.contactTypeName == null ? null : other.contactTypeName.copy();
+        this.name = other.name == null ? null : other.name.copy();
     }
 
     @Override
@@ -49,12 +49,12 @@ public class ContactTypeCriteria implements Serializable, Criteria {
         this.id = id;
     }
 
-    public StringFilter getContactTypeName() {
-        return contactTypeName;
+    public StringFilter getName() {
+        return name;
     }
 
-    public void setContactTypeName(StringFilter contactTypeName) {
-        this.contactTypeName = contactTypeName;
+    public void setName(StringFilter name) {
+        this.name = name;
     }
 
 
@@ -69,14 +69,14 @@ public class ContactTypeCriteria implements Serializable, Criteria {
         final ContactTypeCriteria that = (ContactTypeCriteria) o;
         return
             Objects.equals(id, that.id) &&
-            Objects.equals(contactTypeName, that.contactTypeName);
+            Objects.equals(name, that.name);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(
         id,
-        contactTypeName
+        name
         );
     }
 
@@ -84,7 +84,7 @@ public class ContactTypeCriteria implements Serializable, Criteria {
     public String toString() {
         return "ContactTypeCriteria{" +
                 (id != null ? "id=" + id + ", " : "") +
-                (contactTypeName != null ? "contactTypeName=" + contactTypeName + ", " : "") +
+                (name != null ? "name=" + name + ", " : "") +
             "}";
     }
 

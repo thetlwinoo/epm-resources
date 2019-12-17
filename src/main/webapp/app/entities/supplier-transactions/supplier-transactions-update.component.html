@@ -117,14 +117,14 @@
                     <label class="form-control-label" jhiTranslate="epmresourcesApp.supplierTransactions.supplier" for="field_supplier">Supplier</label>
                     <select class="form-control" id="field_supplier" name="supplier" formControlName="supplierId">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="suppliersOption.id" *ngFor="let suppliersOption of suppliers; trackBy: trackSuppliersById">{{suppliersOption.supplierName}}</option>
+                        <option [ngValue]="suppliersOption.id" *ngFor="let suppliersOption of suppliers; trackBy: trackSuppliersById">{{suppliersOption.name}}</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="epmresourcesApp.supplierTransactions.transactionType" for="field_transactionType">Transaction Type</label>
                     <select class="form-control" id="field_transactionType" name="transactionType" formControlName="transactionTypeId">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="transactionTypesOption.id" *ngFor="let transactionTypesOption of transactiontypes; trackBy: trackTransactionTypesById">{{transactionTypesOption.transactionTypeName}}</option>
+                        <option [ngValue]="transactionTypesOption.id" *ngFor="let transactionTypesOption of transactiontypes; trackBy: trackTransactionTypesById">{{transactionTypesOption.name}}</option>
                     </select>
                 </div>
                 <div class="form-group">

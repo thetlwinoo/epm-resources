@@ -56,7 +56,7 @@ describe('Service Tests', () => {
       it('should update a AddressTypes', () => {
         const returnedFromService = Object.assign(
           {
-            addressTypeName: 'BBBBBB',
+            name: 'BBBBBB',
             refer: 'BBBBBB'
           },
           elemDefault
@@ -75,7 +75,7 @@ describe('Service Tests', () => {
       it('should return a list of AddressTypes', () => {
         const returnedFromService = Object.assign(
           {
-            addressTypeName: 'BBBBBB',
+            name: 'BBBBBB',
             refer: 'BBBBBB'
           },
           elemDefault

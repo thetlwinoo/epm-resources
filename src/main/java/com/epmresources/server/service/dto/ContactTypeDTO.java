@@ -11,7 +11,7 @@ public class ContactTypeDTO implements Serializable {
     private Long id;
 
     @NotNull
-    private String contactTypeName;
+    private String name;
 
 
     public Long getId() {
@@ -22,12 +22,12 @@ public class ContactTypeDTO implements Serializable {
         this.id = id;
     }
 
-    public String getContactTypeName() {
-        return contactTypeName;
+    public String getName() {
+        return name;
     }
 
-    public void setContactTypeName(String contactTypeName) {
-        this.contactTypeName = contactTypeName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
@@ -55,7 +55,7 @@ public class ContactTypeDTO implements Serializable {
     public String toString() {
         return "ContactTypeDTO{" +
             "id=" + getId() +
-            ", contactTypeName='" + getContactTypeName() + "'" +
+            ", name='" + getName() + "'" +
             "}";
     }
 }

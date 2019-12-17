@@ -19,14 +19,14 @@
             <thead>
             <tr>
             <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
-            <th scope="col" ><span jhiTranslate="epmresourcesApp.materials.materialName">Material Name</span></th>
+            <th scope="col" ><span jhiTranslate="epmresourcesApp.materials.name">Name</span></th>
             <th scope="col"></th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let materials of materials ;trackBy: trackId">
                 <td><a [routerLink]="['/materials', materials.id, 'view' ]">{{materials.id}}</a></td>
-                <td>{{materials.materialName}}</td>
+                <td>{{materials.name}}</td>
                 <td class="text-right">
                     <div class="btn-group">
                         <button type="submit"

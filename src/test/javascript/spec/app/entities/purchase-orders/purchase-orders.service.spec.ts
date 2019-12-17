@@ -24,7 +24,7 @@ describe('Service Tests', () => {
       httpMock = injector.get(HttpTestingController);
       currentDate = moment();
 
-      elemDefault = new PurchaseOrders(0, currentDate, currentDate, 'AAAAAAA', false, 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', currentDate);
+      elemDefault = new PurchaseOrders(0, currentDate, currentDate, 'AAAAAAA', 0, 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', currentDate);
     });
 
     describe('Service methods', () => {
@@ -80,7 +80,7 @@ describe('Service Tests', () => {
             orderDate: currentDate.format(DATE_TIME_FORMAT),
             expectedDeliveryDate: currentDate.format(DATE_TIME_FORMAT),
             supplierReference: 'BBBBBB',
-            isOrderFinalized: true,
+            isOrderFinalized: 1,
             comments: 'BBBBBB',
             internalComments: 'BBBBBB',
             lastEditedBy: 'BBBBBB',
@@ -112,7 +112,7 @@ describe('Service Tests', () => {
             orderDate: currentDate.format(DATE_TIME_FORMAT),
             expectedDeliveryDate: currentDate.format(DATE_TIME_FORMAT),
             supplierReference: 'BBBBBB',
-            isOrderFinalized: true,
+            isOrderFinalized: 1,
             comments: 'BBBBBB',
             internalComments: 'BBBBBB',
             lastEditedBy: 'BBBBBB',

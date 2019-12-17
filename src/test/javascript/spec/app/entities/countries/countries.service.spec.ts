@@ -88,7 +88,7 @@ describe('Service Tests', () => {
       it('should update a Countries', () => {
         const returnedFromService = Object.assign(
           {
-            countryName: 'BBBBBB',
+            name: 'BBBBBB',
             formalName: 'BBBBBB',
             isoAplha3Code: 'BBBBBB',
             isoNumericCode: 1,
@@ -123,7 +123,7 @@ describe('Service Tests', () => {
       it('should return a list of Countries', () => {
         const returnedFromService = Object.assign(
           {
-            countryName: 'BBBBBB',
+            name: 'BBBBBB',
             formalName: 'BBBBBB',
             isoAplha3Code: 'BBBBBB',
             isoNumericCode: 1,

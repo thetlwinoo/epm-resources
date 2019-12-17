@@ -117,14 +117,16 @@
                 <dd>
                     <span>{{photos.defaultInd}}</span>
                 </dd>
-                <dt><span jhiTranslate="epmresourcesApp.photos.deleteToken">Delete Token</span></dt>
-                <dd>
-                    <span>{{photos.deleteToken}}</span>
-                </dd>
                 <dt><span jhiTranslate="epmresourcesApp.photos.stockItem">Stock Item</span></dt>
                 <dd>
                     <div *ngIf="photos.stockItemId">
                         <a [routerLink]="['/stock-items', photos.stockItemId, 'view']">{{photos.stockItemId}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="epmresourcesApp.photos.productCategory">Product Category</span></dt>
+                <dd>
+                    <div *ngIf="photos.productCategoryId">
+                        <a [routerLink]="['/product-category', photos.productCategoryId, 'view']">{{photos.productCategoryId}}</a>
                     </div>
                 </dd>
             </dl>

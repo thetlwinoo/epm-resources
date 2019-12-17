@@ -91,8 +91,8 @@ public class PackageTypesQueryService extends QueryService<PackageTypes> {
             if (criteria.getId() != null) {
                 specification = specification.and(buildSpecification(criteria.getId(), PackageTypes_.id));
             }
-            if (criteria.getPackageTypeName() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getPackageTypeName(), PackageTypes_.packageTypeName));
+            if (criteria.getName() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getName(), PackageTypes_.name));
             }
             if (criteria.getValidFrom() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getValidFrom(), PackageTypes_.validFrom));

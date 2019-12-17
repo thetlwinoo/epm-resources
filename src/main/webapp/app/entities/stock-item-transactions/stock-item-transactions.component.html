@@ -19,7 +19,7 @@
             <thead>
             <tr>
             <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
-            <th scope="col" ><span jhiTranslate="epmresourcesApp.stockItemTransactions.transactionOccurredWhen">Transaction Occurred When</span></th>
+            <th scope="col" ><span jhiTranslate="epmresourcesApp.stockItemTransactions.transactionOccuredWhen">Transaction Occured When</span></th>
             <th scope="col" ><span jhiTranslate="epmresourcesApp.stockItemTransactions.quantity">Quantity</span></th>
             <th scope="col" ><span jhiTranslate="epmresourcesApp.stockItemTransactions.lastEditedBy">Last Edited By</span></th>
             <th scope="col" ><span jhiTranslate="epmresourcesApp.stockItemTransactions.lastEditedWhen">Last Edited When</span></th>
@@ -35,13 +35,13 @@
             <tbody>
             <tr *ngFor="let stockItemTransactions of stockItemTransactions ;trackBy: trackId">
                 <td><a [routerLink]="['/stock-item-transactions', stockItemTransactions.id, 'view' ]">{{stockItemTransactions.id}}</a></td>
-                <td>{{stockItemTransactions.transactionOccurredWhen | date:'medium'}}</td>
+                <td>{{stockItemTransactions.transactionOccuredWhen | date:'medium'}}</td>
                 <td>{{stockItemTransactions.quantity}}</td>
                 <td>{{stockItemTransactions.lastEditedBy}}</td>
                 <td>{{stockItemTransactions.lastEditedWhen | date:'medium'}}</td>
                 <td>
                     <div *ngIf="stockItemTransactions.stockItemId">
-                        <a [routerLink]="['/stock-items', stockItemTransactions.stockItemId , 'view' ]" >{{stockItemTransactions.stockItemStockItemName}}</a>
+                        <a [routerLink]="['/stock-items', stockItemTransactions.stockItemId , 'view' ]" >{{stockItemTransactions.stockItemName}}</a>
                     </div>
                 </td>
                 <td>
@@ -56,12 +56,12 @@
                 </td>
                 <td>
                     <div *ngIf="stockItemTransactions.supplierId">
-                        <a [routerLink]="['/suppliers', stockItemTransactions.supplierId , 'view' ]" >{{stockItemTransactions.supplierSupplierName}}</a>
+                        <a [routerLink]="['/suppliers', stockItemTransactions.supplierId , 'view' ]" >{{stockItemTransactions.supplierName}}</a>
                     </div>
                 </td>
                 <td>
                     <div *ngIf="stockItemTransactions.transactionTypeId">
-                        <a [routerLink]="['/transaction-types', stockItemTransactions.transactionTypeId , 'view' ]" >{{stockItemTransactions.transactionTypeId}}</a>
+                        <a [routerLink]="['/transaction-types', stockItemTransactions.transactionTypeId , 'view' ]" >{{stockItemTransactions.transactionTypeName}}</a>
                     </div>
                 </td>
                 <td>

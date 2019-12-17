@@ -19,16 +19,16 @@
             <thead>
             <tr>
             <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
-            <th scope="col" ><span jhiTranslate="epmresourcesApp.unitMeasure.unitMeasureCode">Unit Measure Code</span></th>
-            <th scope="col" ><span jhiTranslate="epmresourcesApp.unitMeasure.unitMeasureName">Unit Measure Name</span></th>
+            <th scope="col" ><span jhiTranslate="epmresourcesApp.unitMeasure.code">Code</span></th>
+            <th scope="col" ><span jhiTranslate="epmresourcesApp.unitMeasure.name">Name</span></th>
             <th scope="col"></th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let unitMeasure of unitMeasures ;trackBy: trackId">
                 <td><a [routerLink]="['/unit-measure', unitMeasure.id, 'view' ]">{{unitMeasure.id}}</a></td>
-                <td>{{unitMeasure.unitMeasureCode}}</td>
-                <td>{{unitMeasure.unitMeasureName}}</td>
+                <td>{{unitMeasure.code}}</td>
+                <td>{{unitMeasure.name}}</td>
                 <td class="text-right">
                     <div class="btn-group">
                         <button type="submit"

@@ -2,14 +2,14 @@
     "name": "StateProvinces",
     "fields": [
         {
-            "fieldName": "stateProvinceCode",
+            "fieldName": "code",
             "fieldType": "String",
             "fieldValidateRules": [
                 "required"
             ]
         },
         {
-            "fieldName": "stateProvinceName",
+            "fieldName": "name",
             "fieldType": "String",
             "fieldValidateRules": [
                 "required"
@@ -51,7 +51,7 @@
             "otherEntityName": "countries",
             "otherEntityRelationshipName": "stateProvinces",
             "relationshipName": "country",
-            "otherEntityField": "countryName"
+            "otherEntityField": "name"
         }
     ],
     "changelogDate": "20191106102816",

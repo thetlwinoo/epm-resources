@@ -19,7 +19,7 @@
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
             <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th scope="col"  jhiSortBy="stockItemName"><span jhiTranslate="epmresourcesApp.stockItems.stockItemName">Stock Item Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="name"><span jhiTranslate="epmresourcesApp.stockItems.name">Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="vendorCode"><span jhiTranslate="epmresourcesApp.stockItems.vendorCode">Vendor Code</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="vendorSKU"><span jhiTranslate="epmresourcesApp.stockItems.vendorSKU">Vendor SKU</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="generatedSKU"><span jhiTranslate="epmresourcesApp.stockItems.generatedSKU">Generated SKU</span> <fa-icon [icon]="'sort'"></fa-icon></th>
@@ -49,18 +49,18 @@
             <th scope="col"  jhiSortBy="lastEditedBy"><span jhiTranslate="epmresourcesApp.stockItems.lastEditedBy">Last Edited By</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="lastEditedWhen"><span jhiTranslate="epmresourcesApp.stockItems.lastEditedWhen">Last Edited When</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="stockItemOnReviewLineId"><span jhiTranslate="epmresourcesApp.stockItems.stockItemOnReviewLine">Stock Item On Review Line</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th scope="col"  jhiSortBy="itemLengthUnitUnitMeasureCode"><span jhiTranslate="epmresourcesApp.stockItems.itemLengthUnit">Item Length Unit</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th scope="col"  jhiSortBy="itemWidthUnitUnitMeasureCode"><span jhiTranslate="epmresourcesApp.stockItems.itemWidthUnit">Item Width Unit</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th scope="col"  jhiSortBy="itemHeightUnitUnitMeasureCode"><span jhiTranslate="epmresourcesApp.stockItems.itemHeightUnit">Item Height Unit</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th scope="col"  jhiSortBy="packageLengthUnitUnitMeasureCode"><span jhiTranslate="epmresourcesApp.stockItems.packageLengthUnit">Package Length Unit</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th scope="col"  jhiSortBy="packageWidthUnitUnitMeasureCode"><span jhiTranslate="epmresourcesApp.stockItems.packageWidthUnit">Package Width Unit</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th scope="col"  jhiSortBy="packageHeightUnitUnitMeasureCode"><span jhiTranslate="epmresourcesApp.stockItems.packageHeightUnit">Package Height Unit</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th scope="col"  jhiSortBy="itemPackageWeightUnitUnitMeasureCode"><span jhiTranslate="epmresourcesApp.stockItems.itemPackageWeightUnit">Item Package Weight Unit</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th scope="col"  jhiSortBy="productAttributeProductAttributeValue"><span jhiTranslate="epmresourcesApp.stockItems.productAttribute">Product Attribute</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th scope="col"  jhiSortBy="productOptionProductOptionValue"><span jhiTranslate="epmresourcesApp.stockItems.productOption">Product Option</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th scope="col"  jhiSortBy="materialMaterialName"><span jhiTranslate="epmresourcesApp.stockItems.material">Material</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th scope="col"  jhiSortBy="currencyCurrencyCode"><span jhiTranslate="epmresourcesApp.stockItems.currency">Currency</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th scope="col"  jhiSortBy="barcodeTypeBarcodeTypeName"><span jhiTranslate="epmresourcesApp.stockItems.barcodeType">Barcode Type</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="itemLengthUnitCode"><span jhiTranslate="epmresourcesApp.stockItems.itemLengthUnit">Item Length Unit</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="itemWidthUnitCode"><span jhiTranslate="epmresourcesApp.stockItems.itemWidthUnit">Item Width Unit</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="itemHeightUnitCode"><span jhiTranslate="epmresourcesApp.stockItems.itemHeightUnit">Item Height Unit</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="packageLengthUnitCode"><span jhiTranslate="epmresourcesApp.stockItems.packageLengthUnit">Package Length Unit</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="packageWidthUnitCode"><span jhiTranslate="epmresourcesApp.stockItems.packageWidthUnit">Package Width Unit</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="packageHeightUnitCode"><span jhiTranslate="epmresourcesApp.stockItems.packageHeightUnit">Package Height Unit</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="itemPackageWeightUnitCode"><span jhiTranslate="epmresourcesApp.stockItems.itemPackageWeightUnit">Item Package Weight Unit</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="productAttributeValue"><span jhiTranslate="epmresourcesApp.stockItems.productAttribute">Product Attribute</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="productOptionValue"><span jhiTranslate="epmresourcesApp.stockItems.productOption">Product Option</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="materialName"><span jhiTranslate="epmresourcesApp.stockItems.material">Material</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="currencyCode"><span jhiTranslate="epmresourcesApp.stockItems.currency">Currency</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="barcodeTypeName"><span jhiTranslate="epmresourcesApp.stockItems.barcodeType">Barcode Type</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="productId"><span jhiTranslate="epmresourcesApp.stockItems.product">Product</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"></th>
             </tr>
@@ -68,7 +68,7 @@
             <tbody>
             <tr *ngFor="let stockItems of stockItems ;trackBy: trackId">
                 <td><a [routerLink]="['/stock-items', stockItems.id, 'view' ]">{{stockItems.id}}</a></td>
-                <td>{{stockItems.stockItemName}}</td>
+                <td>{{stockItems.name}}</td>
                 <td>{{stockItems.vendorCode}}</td>
                 <td>{{stockItems.vendorSKU}}</td>
                 <td>{{stockItems.generatedSKU}}</td>
@@ -104,62 +104,62 @@
                 </td>
                 <td>
                     <div *ngIf="stockItems.itemLengthUnitId">
-                        <a [routerLink]="['/unit-measure', stockItems.itemLengthUnitId , 'view' ]" >{{stockItems.itemLengthUnitUnitMeasureCode}}</a>
+                        <a [routerLink]="['/unit-measure', stockItems.itemLengthUnitId , 'view' ]" >{{stockItems.itemLengthUnitCode}}</a>
                     </div>
                 </td>
                 <td>
                     <div *ngIf="stockItems.itemWidthUnitId">
-                        <a [routerLink]="['/unit-measure', stockItems.itemWidthUnitId , 'view' ]" >{{stockItems.itemWidthUnitUnitMeasureCode}}</a>
+                        <a [routerLink]="['/unit-measure', stockItems.itemWidthUnitId , 'view' ]" >{{stockItems.itemWidthUnitCode}}</a>
                     </div>
                 </td>
                 <td>
                     <div *ngIf="stockItems.itemHeightUnitId">
-                        <a [routerLink]="['/unit-measure', stockItems.itemHeightUnitId , 'view' ]" >{{stockItems.itemHeightUnitUnitMeasureCode}}</a>
+                        <a [routerLink]="['/unit-measure', stockItems.itemHeightUnitId , 'view' ]" >{{stockItems.itemHeightUnitCode}}</a>
                     </div>
                 </td>
                 <td>
                     <div *ngIf="stockItems.packageLengthUnitId">
-                        <a [routerLink]="['/unit-measure', stockItems.packageLengthUnitId , 'view' ]" >{{stockItems.packageLengthUnitUnitMeasureCode}}</a>
+                        <a [routerLink]="['/unit-measure', stockItems.packageLengthUnitId , 'view' ]" >{{stockItems.packageLengthUnitCode}}</a>
                     </div>
                 </td>
                 <td>
                     <div *ngIf="stockItems.packageWidthUnitId">
-                        <a [routerLink]="['/unit-measure', stockItems.packageWidthUnitId , 'view' ]" >{{stockItems.packageWidthUnitUnitMeasureCode}}</a>
+                        <a [routerLink]="['/unit-measure', stockItems.packageWidthUnitId , 'view' ]" >{{stockItems.packageWidthUnitCode}}</a>
                     </div>
                 </td>
                 <td>
                     <div *ngIf="stockItems.packageHeightUnitId">
-                        <a [routerLink]="['/unit-measure', stockItems.packageHeightUnitId , 'view' ]" >{{stockItems.packageHeightUnitUnitMeasureCode}}</a>
+                        <a [routerLink]="['/unit-measure', stockItems.packageHeightUnitId , 'view' ]" >{{stockItems.packageHeightUnitCode}}</a>
                     </div>
                 </td>
                 <td>
                     <div *ngIf="stockItems.itemPackageWeightUnitId">
-                        <a [routerLink]="['/unit-measure', stockItems.itemPackageWeightUnitId , 'view' ]" >{{stockItems.itemPackageWeightUnitUnitMeasureCode}}</a>
+                        <a [routerLink]="['/unit-measure', stockItems.itemPackageWeightUnitId , 'view' ]" >{{stockItems.itemPackageWeightUnitCode}}</a>
                     </div>
                 </td>
                 <td>
                     <div *ngIf="stockItems.productAttributeId">
-                        <a [routerLink]="['/product-attribute', stockItems.productAttributeId , 'view' ]" >{{stockItems.productAttributeProductAttributeValue}}</a>
+                        <a [routerLink]="['/product-attribute', stockItems.productAttributeId , 'view' ]" >{{stockItems.productAttributeValue}}</a>
                     </div>
                 </td>
                 <td>
                     <div *ngIf="stockItems.productOptionId">
-                        <a [routerLink]="['/product-option', stockItems.productOptionId , 'view' ]" >{{stockItems.productOptionProductOptionValue}}</a>
+                        <a [routerLink]="['/product-option', stockItems.productOptionId , 'view' ]" >{{stockItems.productOptionValue}}</a>
                     </div>
                 </td>
                 <td>
                     <div *ngIf="stockItems.materialId">
-                        <a [routerLink]="['/materials', stockItems.materialId , 'view' ]" >{{stockItems.materialMaterialName}}</a>
+                        <a [routerLink]="['/materials', stockItems.materialId , 'view' ]" >{{stockItems.materialName}}</a>
                     </div>
                 </td>
                 <td>
                     <div *ngIf="stockItems.currencyId">
-                        <a [routerLink]="['/currency', stockItems.currencyId , 'view' ]" >{{stockItems.currencyCurrencyCode}}</a>
+                        <a [routerLink]="['/currency', stockItems.currencyId , 'view' ]" >{{stockItems.currencyCode}}</a>
                     </div>
                 </td>
                 <td>
                     <div *ngIf="stockItems.barcodeTypeId">
-                        <a [routerLink]="['/barcode-types', stockItems.barcodeTypeId , 'view' ]" >{{stockItems.barcodeTypeBarcodeTypeName}}</a>
+                        <a [routerLink]="['/barcode-types', stockItems.barcodeTypeId , 'view' ]" >{{stockItems.barcodeTypeName}}</a>
                     </div>
                 </td>
                 <td>

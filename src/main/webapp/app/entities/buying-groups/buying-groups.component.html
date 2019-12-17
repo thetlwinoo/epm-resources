@@ -19,7 +19,7 @@
             <thead>
             <tr>
             <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
-            <th scope="col" ><span jhiTranslate="epmresourcesApp.buyingGroups.buyingGroupName">Buying Group Name</span></th>
+            <th scope="col" ><span jhiTranslate="epmresourcesApp.buyingGroups.name">Name</span></th>
             <th scope="col" ><span jhiTranslate="epmresourcesApp.buyingGroups.validFrom">Valid From</span></th>
             <th scope="col" ><span jhiTranslate="epmresourcesApp.buyingGroups.validTo">Valid To</span></th>
             <th scope="col"></th>
@@ -28,7 +28,7 @@
             <tbody>
             <tr *ngFor="let buyingGroups of buyingGroups ;trackBy: trackId">
                 <td><a [routerLink]="['/buying-groups', buyingGroups.id, 'view' ]">{{buyingGroups.id}}</a></td>
-                <td>{{buyingGroups.buyingGroupName}}</td>
+                <td>{{buyingGroups.name}}</td>
                 <td>{{buyingGroups.validFrom | date:'medium'}}</td>
                 <td>{{buyingGroups.validTo | date:'medium'}}</td>
                 <td class="text-right">

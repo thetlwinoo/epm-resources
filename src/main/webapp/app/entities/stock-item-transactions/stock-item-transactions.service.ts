@@ -52,9 +52,9 @@ export class StockItemTransactionsService {
 
   protected convertDateFromClient(stockItemTransactions: IStockItemTransactions): IStockItemTransactions {
     const copy: IStockItemTransactions = Object.assign({}, stockItemTransactions, {
-      transactionOccurredWhen:
-        stockItemTransactions.transactionOccurredWhen != null && stockItemTransactions.transactionOccurredWhen.isValid()
-          ? stockItemTransactions.transactionOccurredWhen.toJSON()
+      transactionOccuredWhen:
+        stockItemTransactions.transactionOccuredWhen != null && stockItemTransactions.transactionOccuredWhen.isValid()
+          ? stockItemTransactions.transactionOccuredWhen.toJSON()
           : null,
       lastEditedWhen:
         stockItemTransactions.lastEditedWhen != null && stockItemTransactions.lastEditedWhen.isValid()
@@ -66,7 +66,7 @@ export class StockItemTransactionsService {
 
   protected convertDateFromServer(res: EntityResponseType): EntityResponseType {
     if (res.body) {
-      res.body.transactionOccurredWhen = res.body.transactionOccurredWhen != null ? moment(res.body.transactionOccurredWhen) : null;
+      res.body.transactionOccuredWhen = res.body.transactionOccuredWhen != null ? moment(res.body.transactionOccuredWhen) : null;
       res.body.lastEditedWhen = res.body.lastEditedWhen != null ? moment(res.body.lastEditedWhen) : null;
     }
     return res;
@@ -75,8 +75,8 @@ export class StockItemTransactionsService {
   protected convertDateArrayFromServer(res: EntityArrayResponseType): EntityArrayResponseType {
     if (res.body) {
       res.body.forEach((stockItemTransactions: IStockItemTransactions) => {
-        stockItemTransactions.transactionOccurredWhen =
-          stockItemTransactions.transactionOccurredWhen != null ? moment(stockItemTransactions.transactionOccurredWhen) : null;
+        stockItemTransactions.transactionOccuredWhen =
+          stockItemTransactions.transactionOccuredWhen != null ? moment(stockItemTransactions.transactionOccuredWhen) : null;
         stockItemTransactions.lastEditedWhen =
           stockItemTransactions.lastEditedWhen != null ? moment(stockItemTransactions.lastEditedWhen) : null;
       });

@@ -16,8 +16,8 @@
       "detail": {
         "title": "State Provinces"
       },
-      "stateProvinceCode": "State Province Code",
-      "stateProvinceName": "State Province Name",
+      "code": "Code",
+      "name": "Name",
       "salesTerritory": "Sales Territory",
       "border": "Border",
       "latestRecordedPopulation": "Latest Recorded Population",

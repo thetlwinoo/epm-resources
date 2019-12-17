@@ -27,7 +27,7 @@ public class ReviewsCriteria implements Serializable, Criteria {
 
     private LongFilter id;
 
-    private StringFilter reviewerName;
+    private StringFilter name;
 
     private StringFilter emailAddress;
 
@@ -54,7 +54,7 @@ public class ReviewsCriteria implements Serializable, Criteria {
 
     public ReviewsCriteria(ReviewsCriteria other){
         this.id = other.id == null ? null : other.id.copy();
-        this.reviewerName = other.reviewerName == null ? null : other.reviewerName.copy();
+        this.name = other.name == null ? null : other.name.copy();
         this.emailAddress = other.emailAddress == null ? null : other.emailAddress.copy();
         this.reviewDate = other.reviewDate == null ? null : other.reviewDate.copy();
         this.overAllSellerRating = other.overAllSellerRating == null ? null : other.overAllSellerRating.copy();
@@ -80,12 +80,12 @@ public class ReviewsCriteria implements Serializable, Criteria {
         this.id = id;
     }
 
-    public StringFilter getReviewerName() {
-        return reviewerName;
+    public StringFilter getName() {
+        return name;
     }
 
-    public void setReviewerName(StringFilter reviewerName) {
-        this.reviewerName = reviewerName;
+    public void setName(StringFilter name) {
+        this.name = name;
     }
 
     public StringFilter getEmailAddress() {
@@ -180,7 +180,7 @@ public class ReviewsCriteria implements Serializable, Criteria {
         final ReviewsCriteria that = (ReviewsCriteria) o;
         return
             Objects.equals(id, that.id) &&
-            Objects.equals(reviewerName, that.reviewerName) &&
+            Objects.equals(name, that.name) &&
             Objects.equals(emailAddress, that.emailAddress) &&
             Objects.equals(reviewDate, that.reviewDate) &&
             Objects.equals(overAllSellerRating, that.overAllSellerRating) &&
@@ -197,7 +197,7 @@ public class ReviewsCriteria implements Serializable, Criteria {
     public int hashCode() {
         return Objects.hash(
         id,
-        reviewerName,
+        name,
         emailAddress,
         reviewDate,
         overAllSellerRating,
@@ -215,7 +215,7 @@ public class ReviewsCriteria implements Serializable, Criteria {
     public String toString() {
         return "ReviewsCriteria{" +
                 (id != null ? "id=" + id + ", " : "") +
-                (reviewerName != null ? "reviewerName=" + reviewerName + ", " : "") +
+                (name != null ? "name=" + name + ", " : "") +
                 (emailAddress != null ? "emailAddress=" + emailAddress + ", " : "") +
                 (reviewDate != null ? "reviewDate=" + reviewDate + ", " : "") +
                 (overAllSellerRating != null ? "overAllSellerRating=" + overAllSellerRating + ", " : "") +

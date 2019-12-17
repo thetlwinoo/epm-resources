@@ -28,11 +28,11 @@ public class CurrencyRate implements Serializable {
     @Column(name = "currency_rate_date", nullable = false)
     private Instant currencyRateDate;
 
-    @Column(name = "from_currency_code")
-    private String fromCurrencyCode;
+    @Column(name = "fromcode")
+    private String fromcode;
 
-    @Column(name = "to_currency_code")
-    private String toCurrencyCode;
+    @Column(name = "tocode")
+    private String tocode;
 
     @Column(name = "average_rate", precision = 21, scale = 2)
     private BigDecimal averageRate;
@@ -68,30 +68,30 @@ public class CurrencyRate implements Serializable {
         this.currencyRateDate = currencyRateDate;
     }
 
-    public String getFromCurrencyCode() {
-        return fromCurrencyCode;
+    public String getFromcode() {
+        return fromcode;
     }
 
-    public CurrencyRate fromCurrencyCode(String fromCurrencyCode) {
-        this.fromCurrencyCode = fromCurrencyCode;
+    public CurrencyRate fromcode(String fromcode) {
+        this.fromcode = fromcode;
         return this;
     }
 
-    public void setFromCurrencyCode(String fromCurrencyCode) {
-        this.fromCurrencyCode = fromCurrencyCode;
+    public void setFromcode(String fromcode) {
+        this.fromcode = fromcode;
     }
 
-    public String getToCurrencyCode() {
-        return toCurrencyCode;
+    public String getTocode() {
+        return tocode;
     }
 
-    public CurrencyRate toCurrencyCode(String toCurrencyCode) {
-        this.toCurrencyCode = toCurrencyCode;
+    public CurrencyRate tocode(String tocode) {
+        this.tocode = tocode;
         return this;
     }
 
-    public void setToCurrencyCode(String toCurrencyCode) {
-        this.toCurrencyCode = toCurrencyCode;
+    public void setTocode(String tocode) {
+        this.tocode = tocode;
     }
 
     public BigDecimal getAverageRate() {
@@ -168,8 +168,8 @@ public class CurrencyRate implements Serializable {
         return "CurrencyRate{" +
             "id=" + getId() +
             ", currencyRateDate='" + getCurrencyRateDate() + "'" +
-            ", fromCurrencyCode='" + getFromCurrencyCode() + "'" +
-            ", toCurrencyCode='" + getToCurrencyCode() + "'" +
+            ", fromcode='" + getFromcode() + "'" +
+            ", tocode='" + getTocode() + "'" +
             ", averageRate=" + getAverageRate() +
             ", endOfDayRate=" + getEndOfDayRate() +
             ", lastEditedBy='" + getLastEditedBy() + "'" +

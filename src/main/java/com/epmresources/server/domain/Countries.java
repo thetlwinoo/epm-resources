@@ -24,8 +24,8 @@ public class Countries implements Serializable {
     private Long id;
 
     @NotNull
-    @Column(name = "country_name", nullable = false)
-    private String countryName;
+    @Column(name = "name", nullable = false)
+    private String name;
 
     @NotNull
     @Column(name = "formal_name", nullable = false)
@@ -75,17 +75,17 @@ public class Countries implements Serializable {
         this.id = id;
     }
 
-    public String getCountryName() {
-        return countryName;
+    public String getName() {
+        return name;
     }
 
-    public Countries countryName(String countryName) {
-        this.countryName = countryName;
+    public Countries name(String name) {
+        this.name = name;
         return this;
     }
 
-    public void setCountryName(String countryName) {
-        this.countryName = countryName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getFormalName() {
@@ -252,7 +252,7 @@ public class Countries implements Serializable {
     public String toString() {
         return "Countries{" +
             "id=" + getId() +
-            ", countryName='" + getCountryName() + "'" +
+            ", name='" + getName() + "'" +
             ", formalName='" + getFormalName() + "'" +
             ", isoAplha3Code='" + getIsoAplha3Code() + "'" +
             ", isoNumericCode=" + getIsoNumericCode() +

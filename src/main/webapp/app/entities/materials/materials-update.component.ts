@@ -17,7 +17,7 @@ export class MaterialsUpdateComponent implements OnInit {
 
   editForm = this.fb.group({
     id: [],
-    materialName: [null, [Validators.required]]
+    name: [null, [Validators.required]]
   });
 
   constructor(protected materialsService: MaterialsService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
@@ -32,7 +32,7 @@ export class MaterialsUpdateComponent implements OnInit {
   updateForm(materials: IMaterials) {
     this.editForm.patchValue({
       id: materials.id,
-      materialName: materials.materialName
+      name: materials.name
     });
   }
 
@@ -54,7 +54,7 @@ export class MaterialsUpdateComponent implements OnInit {
     return {
       ...new Materials(),
       id: this.editForm.get(['id']).value,
-      materialName: this.editForm.get(['materialName']).value
+      name: this.editForm.get(['name']).value
     };
   }
 

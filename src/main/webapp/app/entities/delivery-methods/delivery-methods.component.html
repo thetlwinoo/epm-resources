@@ -19,7 +19,7 @@
             <thead>
             <tr>
             <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
-            <th scope="col" ><span jhiTranslate="epmresourcesApp.deliveryMethods.deliveryMethodName">Delivery Method Name</span></th>
+            <th scope="col" ><span jhiTranslate="epmresourcesApp.deliveryMethods.name">Name</span></th>
             <th scope="col" ><span jhiTranslate="epmresourcesApp.deliveryMethods.validFrom">Valid From</span></th>
             <th scope="col" ><span jhiTranslate="epmresourcesApp.deliveryMethods.validTo">Valid To</span></th>
             <th scope="col"></th>
@@ -28,7 +28,7 @@
             <tbody>
             <tr *ngFor="let deliveryMethods of deliveryMethods ;trackBy: trackId">
                 <td><a [routerLink]="['/delivery-methods', deliveryMethods.id, 'view' ]">{{deliveryMethods.id}}</a></td>
-                <td>{{deliveryMethods.deliveryMethodName}}</td>
+                <td>{{deliveryMethods.name}}</td>
                 <td>{{deliveryMethods.validFrom | date:'medium'}}</td>
                 <td>{{deliveryMethods.validTo | date:'medium'}}</td>
                 <td class="text-right">

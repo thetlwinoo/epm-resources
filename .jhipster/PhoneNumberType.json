@@ -2,7 +2,7 @@
     "name": "PhoneNumberType",
     "fields": [
         {
-            "fieldName": "phoneNumberTypeName",
+            "fieldName": "name",
             "fieldType": "String",
             "fieldValidateRules": [
                 "required"

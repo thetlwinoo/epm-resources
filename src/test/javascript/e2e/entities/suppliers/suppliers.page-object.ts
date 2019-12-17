@@ -26,7 +26,7 @@ export class SuppliersUpdatePage {
   pageTitle = element(by.id('jhi-suppliers-heading'));
   saveButton = element(by.id('save-entity'));
   cancelButton = element(by.id('cancel-save'));
-  supplierNameInput = element(by.id('field_supplierName'));
+  nameInput = element(by.id('field_name'));
   supplierReferenceInput = element(by.id('field_supplierReference'));
   bankAccountNameInput = element(by.id('field_bankAccountName'));
   bankAccountBranchInput = element(by.id('field_bankAccountBranch'));
@@ -41,7 +41,7 @@ export class SuppliersUpdatePage {
   webServiceUrlInput = element(by.id('field_webServiceUrl'));
   creditRatingInput = element(by.id('field_creditRating'));
   activeFlagInput = element(by.id('field_activeFlag'));
-  avatarInput = element(by.id('file_avatar'));
+  thumbnailUrlInput = element(by.id('field_thumbnailUrl'));
   validFromInput = element(by.id('field_validFrom'));
   validToInput = element(by.id('field_validTo'));
   userSelect = element(by.id('field_user'));
@@ -54,12 +54,12 @@ export class SuppliersUpdatePage {
     return this.pageTitle.getAttribute('jhiTranslate');
   }
 
-  async setSupplierNameInput(supplierName) {
-    await this.supplierNameInput.sendKeys(supplierName);
+  async setNameInput(name) {
+    await this.nameInput.sendKeys(name);
   }
 
-  async getSupplierNameInput() {
-    return await this.supplierNameInput.getAttribute('value');
+  async getNameInput() {
+    return await this.nameInput.getAttribute('value');
   }
 
   async setSupplierReferenceInput(supplierReference) {
@@ -169,12 +169,12 @@ export class SuppliersUpdatePage {
   getActiveFlagInput(timeout?: number) {
     return this.activeFlagInput;
   }
-  async setAvatarInput(avatar) {
-    await this.avatarInput.sendKeys(avatar);
+  async setThumbnailUrlInput(thumbnailUrl) {
+    await this.thumbnailUrlInput.sendKeys(thumbnailUrl);
   }
 
-  async getAvatarInput() {
-    return await this.avatarInput.getAttribute('value');
+  async getThumbnailUrlInput() {
+    return await this.thumbnailUrlInput.getAttribute('value');
   }
 
   async setValidFromInput(validFrom) {

@@ -16,7 +16,7 @@
       "detail": {
         "title": "Delivery Methods"
       },
-      "deliveryMethodName": "Delivery Method Name",
+      "name": "Name",
       "validFrom": "Valid From",
       "validTo": "Valid To"
     }

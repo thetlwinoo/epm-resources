@@ -38,8 +38,18 @@
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="epmresourcesApp.purchaseOrders.isOrderFinalized" for="field_isOrderFinalized">Is Order Finalized</label>
-                    <input type="checkbox" class="form-control" name="isOrderFinalized" id="field_isOrderFinalized"
+                    <input type="number" class="form-control" name="isOrderFinalized" id="field_isOrderFinalized"
                            formControlName="isOrderFinalized"/>
+                    <div *ngIf="editForm.get('isOrderFinalized').invalid && (editForm.get('isOrderFinalized').dirty || editForm.get('isOrderFinalized').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('isOrderFinalized').errors.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('isOrderFinalized')?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="epmresourcesApp.purchaseOrders.comments" for="field_comments">Comments</label>
@@ -74,14 +84,14 @@
                     <label class="form-control-label" jhiTranslate="epmresourcesApp.purchaseOrders.supplier" for="field_supplier">Supplier</label>
                     <select class="form-control" id="field_supplier" name="supplier" formControlName="supplierId">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="suppliersOption.id" *ngFor="let suppliersOption of suppliers; trackBy: trackSuppliersById">{{suppliersOption.supplierName}}</option>
+                        <option [ngValue]="suppliersOption.id" *ngFor="let suppliersOption of suppliers; trackBy: trackSuppliersById">{{suppliersOption.name}}</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="epmresourcesApp.purchaseOrders.deliveryMethod" for="field_deliveryMethod">Delivery Method</label>
                     <select class="form-control" id="field_deliveryMethod" name="deliveryMethod" formControlName="deliveryMethodId">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="deliveryMethodsOption.id" *ngFor="let deliveryMethodsOption of deliverymethods; trackBy: trackDeliveryMethodsById">{{deliveryMethodsOption.deliveryMethodName}}</option>
+                        <option [ngValue]="deliveryMethodsOption.id" *ngFor="let deliveryMethodsOption of deliverymethods; trackBy: trackDeliveryMethodsById">{{deliveryMethodsOption.name}}</option>
                     </select>
                 </div>
             </div>

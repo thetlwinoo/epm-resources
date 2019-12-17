@@ -72,7 +72,7 @@ class ProductOptionSetGatlingTest extends Simulation {
             .headers(headers_http_authenticated)
             .body(StringBody("""{
                 "id":null
-                , "productOptionSetValue":"SAMPLE_TEXT"
+                , "value":"SAMPLE_TEXT"
                 }""")).asJson
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_productOptionSet_url"))).exitHereIfFailed

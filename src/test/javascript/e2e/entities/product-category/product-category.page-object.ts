@@ -28,7 +28,7 @@ export class ProductCategoryUpdatePage {
   cancelButton = element(by.id('cancel-save'));
   nameInput = element(by.id('field_name'));
   shortLabelInput = element(by.id('field_shortLabel'));
-  photoInput = element(by.id('file_photo'));
+  thumbnailUrlInput = element(by.id('field_thumbnailUrl'));
   parentSelect = element(by.id('field_parent'));
 
   async getPageTitle() {
@@ -51,12 +51,12 @@ export class ProductCategoryUpdatePage {
     return await this.shortLabelInput.getAttribute('value');
   }
 
-  async setPhotoInput(photo) {
-    await this.photoInput.sendKeys(photo);
+  async setThumbnailUrlInput(thumbnailUrl) {
+    await this.thumbnailUrlInput.sendKeys(thumbnailUrl);
   }
 
-  async getPhotoInput() {
-    return await this.photoInput.getAttribute('value');
+  async getThumbnailUrlInput() {
+    return await this.thumbnailUrlInput.getAttribute('value');
   }
 
   async parentSelectLastOption(timeout?: number) {

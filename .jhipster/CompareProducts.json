@@ -7,7 +7,7 @@
             "otherEntityName": "products",
             "otherEntityRelationshipName": "compareProducts",
             "relationshipName": "product",
-            "otherEntityField": "productName"
+            "otherEntityField": "name"
         },
         {
             "relationshipType": "many-to-one",

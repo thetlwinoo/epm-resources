@@ -27,7 +27,7 @@ public class SupplierCategoriesCriteria implements Serializable, Criteria {
 
     private LongFilter id;
 
-    private StringFilter supplierCategoryName;
+    private StringFilter name;
 
     private InstantFilter validFrom;
 
@@ -38,7 +38,7 @@ public class SupplierCategoriesCriteria implements Serializable, Criteria {
 
     public SupplierCategoriesCriteria(SupplierCategoriesCriteria other){
         this.id = other.id == null ? null : other.id.copy();
-        this.supplierCategoryName = other.supplierCategoryName == null ? null : other.supplierCategoryName.copy();
+        this.name = other.name == null ? null : other.name.copy();
         this.validFrom = other.validFrom == null ? null : other.validFrom.copy();
         this.validTo = other.validTo == null ? null : other.validTo.copy();
     }
@@ -56,12 +56,12 @@ public class SupplierCategoriesCriteria implements Serializable, Criteria {
         this.id = id;
     }
 
-    public StringFilter getSupplierCategoryName() {
-        return supplierCategoryName;
+    public StringFilter getName() {
+        return name;
     }
 
-    public void setSupplierCategoryName(StringFilter supplierCategoryName) {
-        this.supplierCategoryName = supplierCategoryName;
+    public void setName(StringFilter name) {
+        this.name = name;
     }
 
     public InstantFilter getValidFrom() {
@@ -92,7 +92,7 @@ public class SupplierCategoriesCriteria implements Serializable, Criteria {
         final SupplierCategoriesCriteria that = (SupplierCategoriesCriteria) o;
         return
             Objects.equals(id, that.id) &&
-            Objects.equals(supplierCategoryName, that.supplierCategoryName) &&
+            Objects.equals(name, that.name) &&
             Objects.equals(validFrom, that.validFrom) &&
             Objects.equals(validTo, that.validTo);
     }
@@ -101,7 +101,7 @@ public class SupplierCategoriesCriteria implements Serializable, Criteria {
     public int hashCode() {
         return Objects.hash(
         id,
-        supplierCategoryName,
+        name,
         validFrom,
         validTo
         );
@@ -111,7 +111,7 @@ public class SupplierCategoriesCriteria implements Serializable, Criteria {
     public String toString() {
         return "SupplierCategoriesCriteria{" +
                 (id != null ? "id=" + id + ", " : "") +
-                (supplierCategoryName != null ? "supplierCategoryName=" + supplierCategoryName + ", " : "") +
+                (name != null ? "name=" + name + ", " : "") +
                 (validFrom != null ? "validFrom=" + validFrom + ", " : "") +
                 (validTo != null ? "validTo=" + validTo + ", " : "") +
             "}";

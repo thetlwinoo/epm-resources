@@ -65,12 +65,12 @@
                 <td>{{productDocument.warrantyPolicy}}</td>
                 <td>
                     <div *ngIf="productDocument.warrantyTypeId">
-                        <a [routerLink]="['/warranty-types', productDocument.warrantyTypeId , 'view' ]" >{{productDocument.warrantyTypeWarrantyTypeName}}</a>
+                        <a [routerLink]="['/warranty-types', productDocument.warrantyTypeId , 'view' ]" >{{productDocument.warrantyTypeName}}</a>
                     </div>
                 </td>
                 <td>
                     <div *ngIf="productDocument.cultureId">
-                        <a [routerLink]="['/culture', productDocument.cultureId , 'view' ]" >{{productDocument.cultureCultureName}}</a>
+                        <a [routerLink]="['/culture', productDocument.cultureId , 'view' ]" >{{productDocument.cultureName}}</a>
                     </div>
                 </td>
                 <td class="text-right">

@@ -56,8 +56,8 @@ describe('Service Tests', () => {
       it('should update a Currency', () => {
         const returnedFromService = Object.assign(
           {
-            currencyCode: 'BBBBBB',
-            currencyName: 'BBBBBB'
+            code: 'BBBBBB',
+            name: 'BBBBBB'
           },
           elemDefault
         );
@@ -75,8 +75,8 @@ describe('Service Tests', () => {
       it('should return a list of Currency', () => {
         const returnedFromService = Object.assign(
           {
-            currencyCode: 'BBBBBB',
-            currencyName: 'BBBBBB'
+            code: 'BBBBBB',
+            name: 'BBBBBB'
           },
           elemDefault
         );

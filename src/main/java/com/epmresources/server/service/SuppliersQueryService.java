@@ -91,8 +91,8 @@ public class SuppliersQueryService extends QueryService<Suppliers> {
             if (criteria.getId() != null) {
                 specification = specification.and(buildSpecification(criteria.getId(), Suppliers_.id));
             }
-            if (criteria.getSupplierName() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getSupplierName(), Suppliers_.supplierName));
+            if (criteria.getName() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getName(), Suppliers_.name));
             }
             if (criteria.getSupplierReference() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getSupplierReference(), Suppliers_.supplierReference));
@@ -135,6 +135,9 @@ public class SuppliersQueryService extends QueryService<Suppliers> {
             }
             if (criteria.getActiveFlag() != null) {
                 specification = specification.and(buildSpecification(criteria.getActiveFlag(), Suppliers_.activeFlag));
+            }
+            if (criteria.getThumbnailUrl() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getThumbnailUrl(), Suppliers_.thumbnailUrl));
             }
             if (criteria.getValidFrom() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getValidFrom(), Suppliers_.validFrom));

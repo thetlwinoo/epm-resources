@@ -26,18 +26,18 @@ export class ShipMethodUpdatePage {
   pageTitle = element(by.id('jhi-ship-method-heading'));
   saveButton = element(by.id('save-entity'));
   cancelButton = element(by.id('cancel-save'));
-  shipMethodNameInput = element(by.id('field_shipMethodName'));
+  nameInput = element(by.id('field_name'));
 
   async getPageTitle() {
     return this.pageTitle.getAttribute('jhiTranslate');
   }
 
-  async setShipMethodNameInput(shipMethodName) {
-    await this.shipMethodNameInput.sendKeys(shipMethodName);
+  async setNameInput(name) {
+    await this.nameInput.sendKeys(name);
   }
 
-  async getShipMethodNameInput() {
-    return await this.shipMethodNameInput.getAttribute('value');
+  async getNameInput() {
+    return await this.nameInput.getAttribute('value');
   }
 
   async save(timeout?: number) {

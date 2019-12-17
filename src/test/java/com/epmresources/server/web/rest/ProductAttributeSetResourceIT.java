@@ -39,8 +39,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = EpmresourcesApp.class)
 public class ProductAttributeSetResourceIT {
 
-    private static final String DEFAULT_PRODUCT_ATTRIBUTE_SET_NAME = "AAAAAAAAAA";
-    private static final String UPDATED_PRODUCT_ATTRIBUTE_SET_NAME = "BBBBBBBBBB";
+    private static final String DEFAULT_NAME = "AAAAAAAAAA";
+    private static final String UPDATED_NAME = "BBBBBBBBBB";
 
     @Autowired
     private ProductAttributeSetRepository productAttributeSetRepository;
@@ -93,7 +93,7 @@ public class ProductAttributeSetResourceIT {
      */
     public static ProductAttributeSet createEntity(EntityManager em) {
         ProductAttributeSet productAttributeSet = new ProductAttributeSet()
-            .productAttributeSetName(DEFAULT_PRODUCT_ATTRIBUTE_SET_NAME);
+            .name(DEFAULT_NAME);
         return productAttributeSet;
     }
     /**
@@ -104,7 +104,7 @@ public class ProductAttributeSetResourceIT {
      */
     public static ProductAttributeSet createUpdatedEntity(EntityManager em) {
         ProductAttributeSet productAttributeSet = new ProductAttributeSet()
-            .productAttributeSetName(UPDATED_PRODUCT_ATTRIBUTE_SET_NAME);
+            .name(UPDATED_NAME);
         return productAttributeSet;
     }
 
@@ -129,7 +129,7 @@ public class ProductAttributeSetResourceIT {
         List<ProductAttributeSet> productAttributeSetList = productAttributeSetRepository.findAll();
         assertThat(productAttributeSetList).hasSize(databaseSizeBeforeCreate + 1);
         ProductAttributeSet testProductAttributeSet = productAttributeSetList.get(productAttributeSetList.size() - 1);
-        assertThat(testProductAttributeSet.getProductAttributeSetName()).isEqualTo(DEFAULT_PRODUCT_ATTRIBUTE_SET_NAME);
+        assertThat(testProductAttributeSet.getName()).isEqualTo(DEFAULT_NAME);
     }
 
     @Test
@@ -155,10 +155,10 @@ public class ProductAttributeSetResourceIT {
 
     @Test
     @Transactional
-    public void checkProductAttributeSetNameIsRequired() throws Exception {
+    public void checkNameIsRequired() throws Exception {
         int databaseSizeBeforeTest = productAttributeSetRepository.findAll().size();
         // set the field null
-        productAttributeSet.setProductAttributeSetName(null);
+        productAttributeSet.setName(null);
 
         // Create the ProductAttributeSet, which fails.
         ProductAttributeSetDTO productAttributeSetDTO = productAttributeSetMapper.toDto(productAttributeSet);
@@ -183,7 +183,7 @@ public class ProductAttributeSetResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(productAttributeSet.getId().intValue())))
-            .andExpect(jsonPath("$.[*].productAttributeSetName").value(hasItem(DEFAULT_PRODUCT_ATTRIBUTE_SET_NAME)));
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)));
     }
     
     @Test
@@ -197,84 +197,84 @@ public class ProductAttributeSetResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(productAttributeSet.getId().intValue()))
-            .andExpect(jsonPath("$.productAttributeSetName").value(DEFAULT_PRODUCT_ATTRIBUTE_SET_NAME));
+            .andExpect(jsonPath("$.name").value(DEFAULT_NAME));
     }
 
     @Test
     @Transactional
-    public void getAllProductAttributeSetsByProductAttributeSetNameIsEqualToSomething() throws Exception {
+    public void getAllProductAttributeSetsByNameIsEqualToSomething() throws Exception {
         // Initialize the database
         productAttributeSetRepository.saveAndFlush(productAttributeSet);
 
-        // Get all the productAttributeSetList where productAttributeSetName equals to DEFAULT_PRODUCT_ATTRIBUTE_SET_NAME
-        defaultProductAttributeSetShouldBeFound("productAttributeSetName.equals=" + DEFAULT_PRODUCT_ATTRIBUTE_SET_NAME);
+        // Get all the productAttributeSetList where name equals to DEFAULT_NAME
+        defaultProductAttributeSetShouldBeFound("name.equals=" + DEFAULT_NAME);
 
-        // Get all the productAttributeSetList where productAttributeSetName equals to UPDATED_PRODUCT_ATTRIBUTE_SET_NAME
-        defaultProductAttributeSetShouldNotBeFound("productAttributeSetName.equals=" + UPDATED_PRODUCT_ATTRIBUTE_SET_NAME);
+        // Get all the productAttributeSetList where name equals to UPDATED_NAME
+        defaultProductAttributeSetShouldNotBeFound("name.equals=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllProductAttributeSetsByProductAttributeSetNameIsNotEqualToSomething() throws Exception {
+    public void getAllProductAttributeSetsByNameIsNotEqualToSomething() throws Exception {
         // Initialize the database
         productAttributeSetRepository.saveAndFlush(productAttributeSet);
 
-        // Get all the productAttributeSetList where productAttributeSetName not equals to DEFAULT_PRODUCT_ATTRIBUTE_SET_NAME
-        defaultProductAttributeSetShouldNotBeFound("productAttributeSetName.notEquals=" + DEFAULT_PRODUCT_ATTRIBUTE_SET_NAME);
+        // Get all the productAttributeSetList where name not equals to DEFAULT_NAME
+        defaultProductAttributeSetShouldNotBeFound("name.notEquals=" + DEFAULT_NAME);
 
-        // Get all the productAttributeSetList where productAttributeSetName not equals to UPDATED_PRODUCT_ATTRIBUTE_SET_NAME
-        defaultProductAttributeSetShouldBeFound("productAttributeSetName.notEquals=" + UPDATED_PRODUCT_ATTRIBUTE_SET_NAME);
+        // Get all the productAttributeSetList where name not equals to UPDATED_NAME
+        defaultProductAttributeSetShouldBeFound("name.notEquals=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllProductAttributeSetsByProductAttributeSetNameIsInShouldWork() throws Exception {
+    public void getAllProductAttributeSetsByNameIsInShouldWork() throws Exception {
         // Initialize the database
         productAttributeSetRepository.saveAndFlush(productAttributeSet);
 
-        // Get all the productAttributeSetList where productAttributeSetName in DEFAULT_PRODUCT_ATTRIBUTE_SET_NAME or UPDATED_PRODUCT_ATTRIBUTE_SET_NAME
-        defaultProductAttributeSetShouldBeFound("productAttributeSetName.in=" + DEFAULT_PRODUCT_ATTRIBUTE_SET_NAME + "," + UPDATED_PRODUCT_ATTRIBUTE_SET_NAME);
+        // Get all the productAttributeSetList where name in DEFAULT_NAME or UPDATED_NAME
+        defaultProductAttributeSetShouldBeFound("name.in=" + DEFAULT_NAME + "," + UPDATED_NAME);
 
-        // Get all the productAttributeSetList where productAttributeSetName equals to UPDATED_PRODUCT_ATTRIBUTE_SET_NAME
-        defaultProductAttributeSetShouldNotBeFound("productAttributeSetName.in=" + UPDATED_PRODUCT_ATTRIBUTE_SET_NAME);
+        // Get all the productAttributeSetList where name equals to UPDATED_NAME
+        defaultProductAttributeSetShouldNotBeFound("name.in=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllProductAttributeSetsByProductAttributeSetNameIsNullOrNotNull() throws Exception {
+    public void getAllProductAttributeSetsByNameIsNullOrNotNull() throws Exception {
         // Initialize the database
         productAttributeSetRepository.saveAndFlush(productAttributeSet);
 
-        // Get all the productAttributeSetList where productAttributeSetName is not null
-        defaultProductAttributeSetShouldBeFound("productAttributeSetName.specified=true");
+        // Get all the productAttributeSetList where name is not null
+        defaultProductAttributeSetShouldBeFound("name.specified=true");
 
-        // Get all the productAttributeSetList where productAttributeSetName is null
-        defaultProductAttributeSetShouldNotBeFound("productAttributeSetName.specified=false");
+        // Get all the productAttributeSetList where name is null
+        defaultProductAttributeSetShouldNotBeFound("name.specified=false");
     }
                 @Test
     @Transactional
-    public void getAllProductAttributeSetsByProductAttributeSetNameContainsSomething() throws Exception {
+    public void getAllProductAttributeSetsByNameContainsSomething() throws Exception {
         // Initialize the database
         productAttributeSetRepository.saveAndFlush(productAttributeSet);
 
-        // Get all the productAttributeSetList where productAttributeSetName contains DEFAULT_PRODUCT_ATTRIBUTE_SET_NAME
-        defaultProductAttributeSetShouldBeFound("productAttributeSetName.contains=" + DEFAULT_PRODUCT_ATTRIBUTE_SET_NAME);
+        // Get all the productAttributeSetList where name contains DEFAULT_NAME
+        defaultProductAttributeSetShouldBeFound("name.contains=" + DEFAULT_NAME);
 
-        // Get all the productAttributeSetList where productAttributeSetName contains UPDATED_PRODUCT_ATTRIBUTE_SET_NAME
-        defaultProductAttributeSetShouldNotBeFound("productAttributeSetName.contains=" + UPDATED_PRODUCT_ATTRIBUTE_SET_NAME);
+        // Get all the productAttributeSetList where name contains UPDATED_NAME
+        defaultProductAttributeSetShouldNotBeFound("name.contains=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllProductAttributeSetsByProductAttributeSetNameNotContainsSomething() throws Exception {
+    public void getAllProductAttributeSetsByNameNotContainsSomething() throws Exception {
         // Initialize the database
         productAttributeSetRepository.saveAndFlush(productAttributeSet);
 
-        // Get all the productAttributeSetList where productAttributeSetName does not contain DEFAULT_PRODUCT_ATTRIBUTE_SET_NAME
-        defaultProductAttributeSetShouldNotBeFound("productAttributeSetName.doesNotContain=" + DEFAULT_PRODUCT_ATTRIBUTE_SET_NAME);
+        // Get all the productAttributeSetList where name does not contain DEFAULT_NAME
+        defaultProductAttributeSetShouldNotBeFound("name.doesNotContain=" + DEFAULT_NAME);
 
-        // Get all the productAttributeSetList where productAttributeSetName does not contain UPDATED_PRODUCT_ATTRIBUTE_SET_NAME
-        defaultProductAttributeSetShouldBeFound("productAttributeSetName.doesNotContain=" + UPDATED_PRODUCT_ATTRIBUTE_SET_NAME);
+        // Get all the productAttributeSetList where name does not contain UPDATED_NAME
+        defaultProductAttributeSetShouldBeFound("name.doesNotContain=" + UPDATED_NAME);
     }
 
 
@@ -305,7 +305,7 @@ public class ProductAttributeSetResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(productAttributeSet.getId().intValue())))
-            .andExpect(jsonPath("$.[*].productAttributeSetName").value(hasItem(DEFAULT_PRODUCT_ATTRIBUTE_SET_NAME)));
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)));
 
         // Check, that the count call also returns 1
         restProductAttributeSetMockMvc.perform(get("/api/product-attribute-sets/count?sort=id,desc&" + filter))
@@ -353,7 +353,7 @@ public class ProductAttributeSetResourceIT {
         // Disconnect from session so that the updates on updatedProductAttributeSet are not directly saved in db
         em.detach(updatedProductAttributeSet);
         updatedProductAttributeSet
-            .productAttributeSetName(UPDATED_PRODUCT_ATTRIBUTE_SET_NAME);
+            .name(UPDATED_NAME);
         ProductAttributeSetDTO productAttributeSetDTO = productAttributeSetMapper.toDto(updatedProductAttributeSet);
 
         restProductAttributeSetMockMvc.perform(put("/api/product-attribute-sets")
@@ -365,7 +365,7 @@ public class ProductAttributeSetResourceIT {
         List<ProductAttributeSet> productAttributeSetList = productAttributeSetRepository.findAll();
         assertThat(productAttributeSetList).hasSize(databaseSizeBeforeUpdate);
         ProductAttributeSet testProductAttributeSet = productAttributeSetList.get(productAttributeSetList.size() - 1);
-        assertThat(testProductAttributeSet.getProductAttributeSetName()).isEqualTo(UPDATED_PRODUCT_ATTRIBUTE_SET_NAME);
+        assertThat(testProductAttributeSet.getName()).isEqualTo(UPDATED_NAME);
     }
 
     @Test

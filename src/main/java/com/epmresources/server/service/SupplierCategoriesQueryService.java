@@ -91,8 +91,8 @@ public class SupplierCategoriesQueryService extends QueryService<SupplierCategor
             if (criteria.getId() != null) {
                 specification = specification.and(buildSpecification(criteria.getId(), SupplierCategories_.id));
             }
-            if (criteria.getSupplierCategoryName() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getSupplierCategoryName(), SupplierCategories_.supplierCategoryName));
+            if (criteria.getName() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getName(), SupplierCategories_.name));
             }
             if (criteria.getValidFrom() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getValidFrom(), SupplierCategories_.validFrom));

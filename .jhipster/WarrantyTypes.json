@@ -2,7 +2,7 @@
     "name": "WarrantyTypes",
     "fields": [
         {
-            "fieldName": "warrantyTypeName",
+            "fieldName": "name",
             "fieldType": "String",
             "fieldValidateRules": [
                 "required"

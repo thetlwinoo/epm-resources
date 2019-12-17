@@ -16,7 +16,7 @@
       "detail": {
         "title": "Transaction Types"
       },
-      "transactionTypeName": "Transaction Type Name",
+      "name": "Name",
       "validFrom": "Valid From",
       "validTo": "Valid To"
     }

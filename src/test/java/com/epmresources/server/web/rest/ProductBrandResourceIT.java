@@ -21,7 +21,6 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.Base64Utils;
 import org.springframework.validation.Validator;
 
 import javax.persistence.EntityManager;
@@ -39,13 +38,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = EpmresourcesApp.class)
 public class ProductBrandResourceIT {
 
-    private static final String DEFAULT_PRODUCT_BRAND_NAME = "AAAAAAAAAA";
-    private static final String UPDATED_PRODUCT_BRAND_NAME = "BBBBBBBBBB";
+    private static final String DEFAULT_NAME = "AAAAAAAAAA";
+    private static final String UPDATED_NAME = "BBBBBBBBBB";
 
-    private static final byte[] DEFAULT_PHOTO = TestUtil.createByteArray(1, "0");
-    private static final byte[] UPDATED_PHOTO = TestUtil.createByteArray(1, "1");
-    private static final String DEFAULT_PHOTO_CONTENT_TYPE = "image/jpg";
-    private static final String UPDATED_PHOTO_CONTENT_TYPE = "image/png";
+    private static final String DEFAULT_THUMBNAIL_URL = "AAAAAAAAAA";
+    private static final String UPDATED_THUMBNAIL_URL = "BBBBBBBBBB";
 
     @Autowired
     private ProductBrandRepository productBrandRepository;
@@ -98,9 +95,8 @@ public class ProductBrandResourceIT {
      */
     public static ProductBrand createEntity(EntityManager em) {
         ProductBrand productBrand = new ProductBrand()
-            .productBrandName(DEFAULT_PRODUCT_BRAND_NAME)
-            .photo(DEFAULT_PHOTO)
-            .photoContentType(DEFAULT_PHOTO_CONTENT_TYPE);
+            .name(DEFAULT_NAME)
+            .thumbnailUrl(DEFAULT_THUMBNAIL_URL);
         return productBrand;
     }
     /**
@@ -111,9 +107,8 @@ public class ProductBrandResourceIT {
      */
     public static ProductBrand createUpdatedEntity(EntityManager em) {
         ProductBrand productBrand = new ProductBrand()
-            .productBrandName(UPDATED_PRODUCT_BRAND_NAME)
-            .photo(UPDATED_PHOTO)
-            .photoContentType(UPDATED_PHOTO_CONTENT_TYPE);
+            .name(UPDATED_NAME)
+            .thumbnailUrl(UPDATED_THUMBNAIL_URL);
         return productBrand;
     }
 
@@ -138,9 +133,8 @@ public class ProductBrandResourceIT {
         List<ProductBrand> productBrandList = productBrandRepository.findAll();
         assertThat(productBrandList).hasSize(databaseSizeBeforeCreate + 1);
         ProductBrand testProductBrand = productBrandList.get(productBrandList.size() - 1);
-        assertThat(testProductBrand.getProductBrandName()).isEqualTo(DEFAULT_PRODUCT_BRAND_NAME);
-        assertThat(testProductBrand.getPhoto()).isEqualTo(DEFAULT_PHOTO);
-        assertThat(testProductBrand.getPhotoContentType()).isEqualTo(DEFAULT_PHOTO_CONTENT_TYPE);
+        assertThat(testProductBrand.getName()).isEqualTo(DEFAULT_NAME);
+        assertThat(testProductBrand.getThumbnailUrl()).isEqualTo(DEFAULT_THUMBNAIL_URL);
     }
 
     @Test
@@ -166,10 +160,10 @@ public class ProductBrandResourceIT {
 
     @Test
     @Transactional
-    public void checkProductBrandNameIsRequired() throws Exception {
+    public void checkNameIsRequired() throws Exception {
         int databaseSizeBeforeTest = productBrandRepository.findAll().size();
         // set the field null
-        productBrand.setProductBrandName(null);
+        productBrand.setName(null);
 
         // Create the ProductBrand, which fails.
         ProductBrandDTO productBrandDTO = productBrandMapper.toDto(productBrand);
@@ -194,9 +188,8 @@ public class ProductBrandResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(productBrand.getId().intValue())))
-            .andExpect(jsonPath("$.[*].productBrandName").value(hasItem(DEFAULT_PRODUCT_BRAND_NAME)))
-            .andExpect(jsonPath("$.[*].photoContentType").value(hasItem(DEFAULT_PHOTO_CONTENT_TYPE)))
-            .andExpect(jsonPath("$.[*].photo").value(hasItem(Base64Utils.encodeToString(DEFAULT_PHOTO))));
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
+            .andExpect(jsonPath("$.[*].thumbnailUrl").value(hasItem(DEFAULT_THUMBNAIL_URL)));
     }
     
     @Test
@@ -210,86 +203,163 @@ public class ProductBrandResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(productBrand.getId().intValue()))
-            .andExpect(jsonPath("$.productBrandName").value(DEFAULT_PRODUCT_BRAND_NAME))
-            .andExpect(jsonPath("$.photoContentType").value(DEFAULT_PHOTO_CONTENT_TYPE))
-            .andExpect(jsonPath("$.photo").value(Base64Utils.encodeToString(DEFAULT_PHOTO)));
+            .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
+            .andExpect(jsonPath("$.thumbnailUrl").value(DEFAULT_THUMBNAIL_URL));
     }
 
     @Test
     @Transactional
-    public void getAllProductBrandsByProductBrandNameIsEqualToSomething() throws Exception {
+    public void getAllProductBrandsByNameIsEqualToSomething() throws Exception {
         // Initialize the database
         productBrandRepository.saveAndFlush(productBrand);
 
-        // Get all the productBrandList where productBrandName equals to DEFAULT_PRODUCT_BRAND_NAME
-        defaultProductBrandShouldBeFound("productBrandName.equals=" + DEFAULT_PRODUCT_BRAND_NAME);
+        // Get all the productBrandList where name equals to DEFAULT_NAME
+        defaultProductBrandShouldBeFound("name.equals=" + DEFAULT_NAME);
 
-        // Get all the productBrandList where productBrandName equals to UPDATED_PRODUCT_BRAND_NAME
-        defaultProductBrandShouldNotBeFound("productBrandName.equals=" + UPDATED_PRODUCT_BRAND_NAME);
+        // Get all the productBrandList where name equals to UPDATED_NAME
+        defaultProductBrandShouldNotBeFound("name.equals=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllProductBrandsByProductBrandNameIsNotEqualToSomething() throws Exception {
+    public void getAllProductBrandsByNameIsNotEqualToSomething() throws Exception {
         // Initialize the database
         productBrandRepository.saveAndFlush(productBrand);
 
-        // Get all the productBrandList where productBrandName not equals to DEFAULT_PRODUCT_BRAND_NAME
-        defaultProductBrandShouldNotBeFound("productBrandName.notEquals=" + DEFAULT_PRODUCT_BRAND_NAME);
+        // Get all the productBrandList where name not equals to DEFAULT_NAME
+        defaultProductBrandShouldNotBeFound("name.notEquals=" + DEFAULT_NAME);
 
-        // Get all the productBrandList where productBrandName not equals to UPDATED_PRODUCT_BRAND_NAME
-        defaultProductBrandShouldBeFound("productBrandName.notEquals=" + UPDATED_PRODUCT_BRAND_NAME);
+        // Get all the productBrandList where name not equals to UPDATED_NAME
+        defaultProductBrandShouldBeFound("name.notEquals=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllProductBrandsByProductBrandNameIsInShouldWork() throws Exception {
+    public void getAllProductBrandsByNameIsInShouldWork() throws Exception {
         // Initialize the database
         productBrandRepository.saveAndFlush(productBrand);
 
-        // Get all the productBrandList where productBrandName in DEFAULT_PRODUCT_BRAND_NAME or UPDATED_PRODUCT_BRAND_NAME
-        defaultProductBrandShouldBeFound("productBrandName.in=" + DEFAULT_PRODUCT_BRAND_NAME + "," + UPDATED_PRODUCT_BRAND_NAME);
+        // Get all the productBrandList where name in DEFAULT_NAME or UPDATED_NAME
+        defaultProductBrandShouldBeFound("name.in=" + DEFAULT_NAME + "," + UPDATED_NAME);
 
-        // Get all the productBrandList where productBrandName equals to UPDATED_PRODUCT_BRAND_NAME
-        defaultProductBrandShouldNotBeFound("productBrandName.in=" + UPDATED_PRODUCT_BRAND_NAME);
+        // Get all the productBrandList where name equals to UPDATED_NAME
+        defaultProductBrandShouldNotBeFound("name.in=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllProductBrandsByProductBrandNameIsNullOrNotNull() throws Exception {
+    public void getAllProductBrandsByNameIsNullOrNotNull() throws Exception {
         // Initialize the database
         productBrandRepository.saveAndFlush(productBrand);
 
-        // Get all the productBrandList where productBrandName is not null
-        defaultProductBrandShouldBeFound("productBrandName.specified=true");
+        // Get all the productBrandList where name is not null
+        defaultProductBrandShouldBeFound("name.specified=true");
 
-        // Get all the productBrandList where productBrandName is null
-        defaultProductBrandShouldNotBeFound("productBrandName.specified=false");
+        // Get all the productBrandList where name is null
+        defaultProductBrandShouldNotBeFound("name.specified=false");
     }
                 @Test
     @Transactional
-    public void getAllProductBrandsByProductBrandNameContainsSomething() throws Exception {
+    public void getAllProductBrandsByNameContainsSomething() throws Exception {
         // Initialize the database
         productBrandRepository.saveAndFlush(productBrand);
 
-        // Get all the productBrandList where productBrandName contains DEFAULT_PRODUCT_BRAND_NAME
-        defaultProductBrandShouldBeFound("productBrandName.contains=" + DEFAULT_PRODUCT_BRAND_NAME);
+        // Get all the productBrandList where name contains DEFAULT_NAME
+        defaultProductBrandShouldBeFound("name.contains=" + DEFAULT_NAME);
 
-        // Get all the productBrandList where productBrandName contains UPDATED_PRODUCT_BRAND_NAME
-        defaultProductBrandShouldNotBeFound("productBrandName.contains=" + UPDATED_PRODUCT_BRAND_NAME);
+        // Get all the productBrandList where name contains UPDATED_NAME
+        defaultProductBrandShouldNotBeFound("name.contains=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllProductBrandsByProductBrandNameNotContainsSomething() throws Exception {
+    public void getAllProductBrandsByNameNotContainsSomething() throws Exception {
         // Initialize the database
         productBrandRepository.saveAndFlush(productBrand);
 
-        // Get all the productBrandList where productBrandName does not contain DEFAULT_PRODUCT_BRAND_NAME
-        defaultProductBrandShouldNotBeFound("productBrandName.doesNotContain=" + DEFAULT_PRODUCT_BRAND_NAME);
+        // Get all the productBrandList where name does not contain DEFAULT_NAME
+        defaultProductBrandShouldNotBeFound("name.doesNotContain=" + DEFAULT_NAME);
 
-        // Get all the productBrandList where productBrandName does not contain UPDATED_PRODUCT_BRAND_NAME
-        defaultProductBrandShouldBeFound("productBrandName.doesNotContain=" + UPDATED_PRODUCT_BRAND_NAME);
+        // Get all the productBrandList where name does not contain UPDATED_NAME
+        defaultProductBrandShouldBeFound("name.doesNotContain=" + UPDATED_NAME);
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllProductBrandsByThumbnailUrlIsEqualToSomething() throws Exception {
+        // Initialize the database
+        productBrandRepository.saveAndFlush(productBrand);
+
+        // Get all the productBrandList where thumbnailUrl equals to DEFAULT_THUMBNAIL_URL
+        defaultProductBrandShouldBeFound("thumbnailUrl.equals=" + DEFAULT_THUMBNAIL_URL);
+
+        // Get all the productBrandList where thumbnailUrl equals to UPDATED_THUMBNAIL_URL
+        defaultProductBrandShouldNotBeFound("thumbnailUrl.equals=" + UPDATED_THUMBNAIL_URL);
+    }
+
+    @Test
+    @Transactional
+    public void getAllProductBrandsByThumbnailUrlIsNotEqualToSomething() throws Exception {
+        // Initialize the database
+        productBrandRepository.saveAndFlush(productBrand);
+
+        // Get all the productBrandList where thumbnailUrl not equals to DEFAULT_THUMBNAIL_URL
+        defaultProductBrandShouldNotBeFound("thumbnailUrl.notEquals=" + DEFAULT_THUMBNAIL_URL);
+
+        // Get all the productBrandList where thumbnailUrl not equals to UPDATED_THUMBNAIL_URL
+        defaultProductBrandShouldBeFound("thumbnailUrl.notEquals=" + UPDATED_THUMBNAIL_URL);
+    }
+
+    @Test
+    @Transactional
+    public void getAllProductBrandsByThumbnailUrlIsInShouldWork() throws Exception {
+        // Initialize the database
+        productBrandRepository.saveAndFlush(productBrand);
+
+        // Get all the productBrandList where thumbnailUrl in DEFAULT_THUMBNAIL_URL or UPDATED_THUMBNAIL_URL
+        defaultProductBrandShouldBeFound("thumbnailUrl.in=" + DEFAULT_THUMBNAIL_URL + "," + UPDATED_THUMBNAIL_URL);
+
+        // Get all the productBrandList where thumbnailUrl equals to UPDATED_THUMBNAIL_URL
+        defaultProductBrandShouldNotBeFound("thumbnailUrl.in=" + UPDATED_THUMBNAIL_URL);
+    }
+
+    @Test
+    @Transactional
+    public void getAllProductBrandsByThumbnailUrlIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        productBrandRepository.saveAndFlush(productBrand);
+
+        // Get all the productBrandList where thumbnailUrl is not null
+        defaultProductBrandShouldBeFound("thumbnailUrl.specified=true");
+
+        // Get all the productBrandList where thumbnailUrl is null
+        defaultProductBrandShouldNotBeFound("thumbnailUrl.specified=false");
+    }
+                @Test
+    @Transactional
+    public void getAllProductBrandsByThumbnailUrlContainsSomething() throws Exception {
+        // Initialize the database
+        productBrandRepository.saveAndFlush(productBrand);
+
+        // Get all the productBrandList where thumbnailUrl contains DEFAULT_THUMBNAIL_URL
+        defaultProductBrandShouldBeFound("thumbnailUrl.contains=" + DEFAULT_THUMBNAIL_URL);
+
+        // Get all the productBrandList where thumbnailUrl contains UPDATED_THUMBNAIL_URL
+        defaultProductBrandShouldNotBeFound("thumbnailUrl.contains=" + UPDATED_THUMBNAIL_URL);
+    }
+
+    @Test
+    @Transactional
+    public void getAllProductBrandsByThumbnailUrlNotContainsSomething() throws Exception {
+        // Initialize the database
+        productBrandRepository.saveAndFlush(productBrand);
+
+        // Get all the productBrandList where thumbnailUrl does not contain DEFAULT_THUMBNAIL_URL
+        defaultProductBrandShouldNotBeFound("thumbnailUrl.doesNotContain=" + DEFAULT_THUMBNAIL_URL);
+
+        // Get all the productBrandList where thumbnailUrl does not contain UPDATED_THUMBNAIL_URL
+        defaultProductBrandShouldBeFound("thumbnailUrl.doesNotContain=" + UPDATED_THUMBNAIL_URL);
     }
 
     /**
@@ -300,9 +370,8 @@ public class ProductBrandResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(productBrand.getId().intValue())))
-            .andExpect(jsonPath("$.[*].productBrandName").value(hasItem(DEFAULT_PRODUCT_BRAND_NAME)))
-            .andExpect(jsonPath("$.[*].photoContentType").value(hasItem(DEFAULT_PHOTO_CONTENT_TYPE)))
-            .andExpect(jsonPath("$.[*].photo").value(hasItem(Base64Utils.encodeToString(DEFAULT_PHOTO))));
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
+            .andExpect(jsonPath("$.[*].thumbnailUrl").value(hasItem(DEFAULT_THUMBNAIL_URL)));
 
         // Check, that the count call also returns 1
         restProductBrandMockMvc.perform(get("/api/product-brands/count?sort=id,desc&" + filter))
@@ -350,9 +419,8 @@ public class ProductBrandResourceIT {
         // Disconnect from session so that the updates on updatedProductBrand are not directly saved in db
         em.detach(updatedProductBrand);
         updatedProductBrand
-            .productBrandName(UPDATED_PRODUCT_BRAND_NAME)
-            .photo(UPDATED_PHOTO)
-            .photoContentType(UPDATED_PHOTO_CONTENT_TYPE);
+            .name(UPDATED_NAME)
+            .thumbnailUrl(UPDATED_THUMBNAIL_URL);
         ProductBrandDTO productBrandDTO = productBrandMapper.toDto(updatedProductBrand);
 
         restProductBrandMockMvc.perform(put("/api/product-brands")
@@ -364,9 +432,8 @@ public class ProductBrandResourceIT {
         List<ProductBrand> productBrandList = productBrandRepository.findAll();
         assertThat(productBrandList).hasSize(databaseSizeBeforeUpdate);
         ProductBrand testProductBrand = productBrandList.get(productBrandList.size() - 1);
-        assertThat(testProductBrand.getProductBrandName()).isEqualTo(UPDATED_PRODUCT_BRAND_NAME);
-        assertThat(testProductBrand.getPhoto()).isEqualTo(UPDATED_PHOTO);
-        assertThat(testProductBrand.getPhotoContentType()).isEqualTo(UPDATED_PHOTO_CONTENT_TYPE);
+        assertThat(testProductBrand.getName()).isEqualTo(UPDATED_NAME);
+        assertThat(testProductBrand.getThumbnailUrl()).isEqualTo(UPDATED_THUMBNAIL_URL);
     }
 
     @Test

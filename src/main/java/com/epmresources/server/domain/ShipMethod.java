@@ -21,8 +21,8 @@ public class ShipMethod implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    @Column(name = "ship_method_name")
-    private String shipMethodName;
+    @Column(name = "name")
+    private String name;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -33,17 +33,17 @@ public class ShipMethod implements Serializable {
         this.id = id;
     }
 
-    public String getShipMethodName() {
-        return shipMethodName;
+    public String getName() {
+        return name;
     }
 
-    public ShipMethod shipMethodName(String shipMethodName) {
-        this.shipMethodName = shipMethodName;
+    public ShipMethod name(String name) {
+        this.name = name;
         return this;
     }
 
-    public void setShipMethodName(String shipMethodName) {
-        this.shipMethodName = shipMethodName;
+    public void setName(String name) {
+        this.name = name;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -67,7 +67,7 @@ public class ShipMethod implements Serializable {
     public String toString() {
         return "ShipMethod{" +
             "id=" + getId() +
-            ", shipMethodName='" + getShipMethodName() + "'" +
+            ", name='" + getName() + "'" +
             "}";
     }
 }

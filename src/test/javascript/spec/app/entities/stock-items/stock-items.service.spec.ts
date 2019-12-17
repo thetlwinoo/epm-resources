@@ -108,7 +108,7 @@ describe('Service Tests', () => {
       it('should update a StockItems', () => {
         const returnedFromService = Object.assign(
           {
-            stockItemName: 'BBBBBB',
+            name: 'BBBBBB',
             vendorCode: 'BBBBBB',
             vendorSKU: 'BBBBBB',
             generatedSKU: 'BBBBBB',
@@ -161,7 +161,7 @@ describe('Service Tests', () => {
       it('should return a list of StockItems', () => {
         const returnedFromService = Object.assign(
           {
-            stockItemName: 'BBBBBB',
+            name: 'BBBBBB',
             vendorCode: 'BBBBBB',
             vendorSKU: 'BBBBBB',
             generatedSKU: 'BBBBBB',

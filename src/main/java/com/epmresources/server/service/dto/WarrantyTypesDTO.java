@@ -11,7 +11,7 @@ public class WarrantyTypesDTO implements Serializable {
     private Long id;
 
     @NotNull
-    private String warrantyTypeName;
+    private String name;
 
 
     public Long getId() {
@@ -22,12 +22,12 @@ public class WarrantyTypesDTO implements Serializable {
         this.id = id;
     }
 
-    public String getWarrantyTypeName() {
-        return warrantyTypeName;
+    public String getName() {
+        return name;
     }
 
-    public void setWarrantyTypeName(String warrantyTypeName) {
-        this.warrantyTypeName = warrantyTypeName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
@@ -55,7 +55,7 @@ public class WarrantyTypesDTO implements Serializable {
     public String toString() {
         return "WarrantyTypesDTO{" +
             "id=" + getId() +
-            ", warrantyTypeName='" + getWarrantyTypeName() + "'" +
+            ", name='" + getName() + "'" +
             "}";
     }
 }

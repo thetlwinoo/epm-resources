@@ -38,8 +38,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = EpmresourcesApp.class)
 public class BarcodeTypesResourceIT {
 
-    private static final String DEFAULT_BARCODE_TYPE_NAME = "AAAAAAAAAA";
-    private static final String UPDATED_BARCODE_TYPE_NAME = "BBBBBBBBBB";
+    private static final String DEFAULT_NAME = "AAAAAAAAAA";
+    private static final String UPDATED_NAME = "BBBBBBBBBB";
 
     @Autowired
     private BarcodeTypesRepository barcodeTypesRepository;
@@ -92,7 +92,7 @@ public class BarcodeTypesResourceIT {
      */
     public static BarcodeTypes createEntity(EntityManager em) {
         BarcodeTypes barcodeTypes = new BarcodeTypes()
-            .barcodeTypeName(DEFAULT_BARCODE_TYPE_NAME);
+            .name(DEFAULT_NAME);
         return barcodeTypes;
     }
     /**
@@ -103,7 +103,7 @@ public class BarcodeTypesResourceIT {
      */
     public static BarcodeTypes createUpdatedEntity(EntityManager em) {
         BarcodeTypes barcodeTypes = new BarcodeTypes()
-            .barcodeTypeName(UPDATED_BARCODE_TYPE_NAME);
+            .name(UPDATED_NAME);
         return barcodeTypes;
     }
 
@@ -128,7 +128,7 @@ public class BarcodeTypesResourceIT {
         List<BarcodeTypes> barcodeTypesList = barcodeTypesRepository.findAll();
         assertThat(barcodeTypesList).hasSize(databaseSizeBeforeCreate + 1);
         BarcodeTypes testBarcodeTypes = barcodeTypesList.get(barcodeTypesList.size() - 1);
-        assertThat(testBarcodeTypes.getBarcodeTypeName()).isEqualTo(DEFAULT_BARCODE_TYPE_NAME);
+        assertThat(testBarcodeTypes.getName()).isEqualTo(DEFAULT_NAME);
     }
 
     @Test
@@ -154,10 +154,10 @@ public class BarcodeTypesResourceIT {
 
     @Test
     @Transactional
-    public void checkBarcodeTypeNameIsRequired() throws Exception {
+    public void checkNameIsRequired() throws Exception {
         int databaseSizeBeforeTest = barcodeTypesRepository.findAll().size();
         // set the field null
-        barcodeTypes.setBarcodeTypeName(null);
+        barcodeTypes.setName(null);
 
         // Create the BarcodeTypes, which fails.
         BarcodeTypesDTO barcodeTypesDTO = barcodeTypesMapper.toDto(barcodeTypes);
@@ -182,7 +182,7 @@ public class BarcodeTypesResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(barcodeTypes.getId().intValue())))
-            .andExpect(jsonPath("$.[*].barcodeTypeName").value(hasItem(DEFAULT_BARCODE_TYPE_NAME)));
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)));
     }
     
     @Test
@@ -196,84 +196,84 @@ public class BarcodeTypesResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(barcodeTypes.getId().intValue()))
-            .andExpect(jsonPath("$.barcodeTypeName").value(DEFAULT_BARCODE_TYPE_NAME));
+            .andExpect(jsonPath("$.name").value(DEFAULT_NAME));
     }
 
     @Test
     @Transactional
-    public void getAllBarcodeTypesByBarcodeTypeNameIsEqualToSomething() throws Exception {
+    public void getAllBarcodeTypesByNameIsEqualToSomething() throws Exception {
         // Initialize the database
         barcodeTypesRepository.saveAndFlush(barcodeTypes);
 
-        // Get all the barcodeTypesList where barcodeTypeName equals to DEFAULT_BARCODE_TYPE_NAME
-        defaultBarcodeTypesShouldBeFound("barcodeTypeName.equals=" + DEFAULT_BARCODE_TYPE_NAME);
+        // Get all the barcodeTypesList where name equals to DEFAULT_NAME
+        defaultBarcodeTypesShouldBeFound("name.equals=" + DEFAULT_NAME);
 
-        // Get all the barcodeTypesList where barcodeTypeName equals to UPDATED_BARCODE_TYPE_NAME
-        defaultBarcodeTypesShouldNotBeFound("barcodeTypeName.equals=" + UPDATED_BARCODE_TYPE_NAME);
+        // Get all the barcodeTypesList where name equals to UPDATED_NAME
+        defaultBarcodeTypesShouldNotBeFound("name.equals=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllBarcodeTypesByBarcodeTypeNameIsNotEqualToSomething() throws Exception {
+    public void getAllBarcodeTypesByNameIsNotEqualToSomething() throws Exception {
         // Initialize the database
         barcodeTypesRepository.saveAndFlush(barcodeTypes);
 
-        // Get all the barcodeTypesList where barcodeTypeName not equals to DEFAULT_BARCODE_TYPE_NAME
-        defaultBarcodeTypesShouldNotBeFound("barcodeTypeName.notEquals=" + DEFAULT_BARCODE_TYPE_NAME);
+        // Get all the barcodeTypesList where name not equals to DEFAULT_NAME
+        defaultBarcodeTypesShouldNotBeFound("name.notEquals=" + DEFAULT_NAME);
 
-        // Get all the barcodeTypesList where barcodeTypeName not equals to UPDATED_BARCODE_TYPE_NAME
-        defaultBarcodeTypesShouldBeFound("barcodeTypeName.notEquals=" + UPDATED_BARCODE_TYPE_NAME);
+        // Get all the barcodeTypesList where name not equals to UPDATED_NAME
+        defaultBarcodeTypesShouldBeFound("name.notEquals=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllBarcodeTypesByBarcodeTypeNameIsInShouldWork() throws Exception {
+    public void getAllBarcodeTypesByNameIsInShouldWork() throws Exception {
         // Initialize the database
         barcodeTypesRepository.saveAndFlush(barcodeTypes);
 
-        // Get all the barcodeTypesList where barcodeTypeName in DEFAULT_BARCODE_TYPE_NAME or UPDATED_BARCODE_TYPE_NAME
-        defaultBarcodeTypesShouldBeFound("barcodeTypeName.in=" + DEFAULT_BARCODE_TYPE_NAME + "," + UPDATED_BARCODE_TYPE_NAME);
+        // Get all the barcodeTypesList where name in DEFAULT_NAME or UPDATED_NAME
+        defaultBarcodeTypesShouldBeFound("name.in=" + DEFAULT_NAME + "," + UPDATED_NAME);
 
-        // Get all the barcodeTypesList where barcodeTypeName equals to UPDATED_BARCODE_TYPE_NAME
-        defaultBarcodeTypesShouldNotBeFound("barcodeTypeName.in=" + UPDATED_BARCODE_TYPE_NAME);
+        // Get all the barcodeTypesList where name equals to UPDATED_NAME
+        defaultBarcodeTypesShouldNotBeFound("name.in=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllBarcodeTypesByBarcodeTypeNameIsNullOrNotNull() throws Exception {
+    public void getAllBarcodeTypesByNameIsNullOrNotNull() throws Exception {
         // Initialize the database
         barcodeTypesRepository.saveAndFlush(barcodeTypes);
 
-        // Get all the barcodeTypesList where barcodeTypeName is not null
-        defaultBarcodeTypesShouldBeFound("barcodeTypeName.specified=true");
+        // Get all the barcodeTypesList where name is not null
+        defaultBarcodeTypesShouldBeFound("name.specified=true");
 
-        // Get all the barcodeTypesList where barcodeTypeName is null
-        defaultBarcodeTypesShouldNotBeFound("barcodeTypeName.specified=false");
+        // Get all the barcodeTypesList where name is null
+        defaultBarcodeTypesShouldNotBeFound("name.specified=false");
     }
                 @Test
     @Transactional
-    public void getAllBarcodeTypesByBarcodeTypeNameContainsSomething() throws Exception {
+    public void getAllBarcodeTypesByNameContainsSomething() throws Exception {
         // Initialize the database
         barcodeTypesRepository.saveAndFlush(barcodeTypes);
 
-        // Get all the barcodeTypesList where barcodeTypeName contains DEFAULT_BARCODE_TYPE_NAME
-        defaultBarcodeTypesShouldBeFound("barcodeTypeName.contains=" + DEFAULT_BARCODE_TYPE_NAME);
+        // Get all the barcodeTypesList where name contains DEFAULT_NAME
+        defaultBarcodeTypesShouldBeFound("name.contains=" + DEFAULT_NAME);
 
-        // Get all the barcodeTypesList where barcodeTypeName contains UPDATED_BARCODE_TYPE_NAME
-        defaultBarcodeTypesShouldNotBeFound("barcodeTypeName.contains=" + UPDATED_BARCODE_TYPE_NAME);
+        // Get all the barcodeTypesList where name contains UPDATED_NAME
+        defaultBarcodeTypesShouldNotBeFound("name.contains=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllBarcodeTypesByBarcodeTypeNameNotContainsSomething() throws Exception {
+    public void getAllBarcodeTypesByNameNotContainsSomething() throws Exception {
         // Initialize the database
         barcodeTypesRepository.saveAndFlush(barcodeTypes);
 
-        // Get all the barcodeTypesList where barcodeTypeName does not contain DEFAULT_BARCODE_TYPE_NAME
-        defaultBarcodeTypesShouldNotBeFound("barcodeTypeName.doesNotContain=" + DEFAULT_BARCODE_TYPE_NAME);
+        // Get all the barcodeTypesList where name does not contain DEFAULT_NAME
+        defaultBarcodeTypesShouldNotBeFound("name.doesNotContain=" + DEFAULT_NAME);
 
-        // Get all the barcodeTypesList where barcodeTypeName does not contain UPDATED_BARCODE_TYPE_NAME
-        defaultBarcodeTypesShouldBeFound("barcodeTypeName.doesNotContain=" + UPDATED_BARCODE_TYPE_NAME);
+        // Get all the barcodeTypesList where name does not contain UPDATED_NAME
+        defaultBarcodeTypesShouldBeFound("name.doesNotContain=" + UPDATED_NAME);
     }
 
     /**
@@ -284,7 +284,7 @@ public class BarcodeTypesResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(barcodeTypes.getId().intValue())))
-            .andExpect(jsonPath("$.[*].barcodeTypeName").value(hasItem(DEFAULT_BARCODE_TYPE_NAME)));
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)));
 
         // Check, that the count call also returns 1
         restBarcodeTypesMockMvc.perform(get("/api/barcode-types/count?sort=id,desc&" + filter))
@@ -332,7 +332,7 @@ public class BarcodeTypesResourceIT {
         // Disconnect from session so that the updates on updatedBarcodeTypes are not directly saved in db
         em.detach(updatedBarcodeTypes);
         updatedBarcodeTypes
-            .barcodeTypeName(UPDATED_BARCODE_TYPE_NAME);
+            .name(UPDATED_NAME);
         BarcodeTypesDTO barcodeTypesDTO = barcodeTypesMapper.toDto(updatedBarcodeTypes);
 
         restBarcodeTypesMockMvc.perform(put("/api/barcode-types")
@@ -344,7 +344,7 @@ public class BarcodeTypesResourceIT {
         List<BarcodeTypes> barcodeTypesList = barcodeTypesRepository.findAll();
         assertThat(barcodeTypesList).hasSize(databaseSizeBeforeUpdate);
         BarcodeTypes testBarcodeTypes = barcodeTypesList.get(barcodeTypesList.size() - 1);
-        assertThat(testBarcodeTypes.getBarcodeTypeName()).isEqualTo(UPDATED_BARCODE_TYPE_NAME);
+        assertThat(testBarcodeTypes.getName()).isEqualTo(UPDATED_NAME);
     }
 
     @Test

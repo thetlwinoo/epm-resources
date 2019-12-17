@@ -97,6 +97,13 @@ public class ProductCategoryQueryService extends QueryService<ProductCategory> {
             if (criteria.getShortLabel() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getShortLabel(), ProductCategory_.shortLabel));
             }
+            if (criteria.getThumbnailUrl() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getThumbnailUrl(), ProductCategory_.thumbnailUrl));
+            }
+            if (criteria.getPhotoListId() != null) {
+                specification = specification.and(buildSpecification(criteria.getPhotoListId(),
+                    root -> root.join(ProductCategory_.photoLists, JoinType.LEFT).get(Photos_.id)));
+            }
             if (criteria.getParentId() != null) {
                 specification = specification.and(buildSpecification(criteria.getParentId(),
                     root -> root.join(ProductCategory_.parent, JoinType.LEFT).get(ProductCategory_.id)));

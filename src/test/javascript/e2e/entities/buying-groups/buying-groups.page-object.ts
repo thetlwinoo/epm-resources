@@ -26,7 +26,7 @@ export class BuyingGroupsUpdatePage {
   pageTitle = element(by.id('jhi-buying-groups-heading'));
   saveButton = element(by.id('save-entity'));
   cancelButton = element(by.id('cancel-save'));
-  buyingGroupNameInput = element(by.id('field_buyingGroupName'));
+  nameInput = element(by.id('field_name'));
   validFromInput = element(by.id('field_validFrom'));
   validToInput = element(by.id('field_validTo'));
 
@@ -34,12 +34,12 @@ export class BuyingGroupsUpdatePage {
     return this.pageTitle.getAttribute('jhiTranslate');
   }
 
-  async setBuyingGroupNameInput(buyingGroupName) {
-    await this.buyingGroupNameInput.sendKeys(buyingGroupName);
+  async setNameInput(name) {
+    await this.nameInput.sendKeys(name);
   }
 
-  async getBuyingGroupNameInput() {
-    return await this.buyingGroupNameInput.getAttribute('value');
+  async getNameInput() {
+    return await this.nameInput.getAttribute('value');
   }
 
   async setValidFromInput(validFrom) {

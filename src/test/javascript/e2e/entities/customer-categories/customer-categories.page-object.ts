@@ -26,7 +26,7 @@ export class CustomerCategoriesUpdatePage {
   pageTitle = element(by.id('jhi-customer-categories-heading'));
   saveButton = element(by.id('save-entity'));
   cancelButton = element(by.id('cancel-save'));
-  customerCategoryNameInput = element(by.id('field_customerCategoryName'));
+  nameInput = element(by.id('field_name'));
   validFromInput = element(by.id('field_validFrom'));
   validToInput = element(by.id('field_validTo'));
 
@@ -34,12 +34,12 @@ export class CustomerCategoriesUpdatePage {
     return this.pageTitle.getAttribute('jhiTranslate');
   }
 
-  async setCustomerCategoryNameInput(customerCategoryName) {
-    await this.customerCategoryNameInput.sendKeys(customerCategoryName);
+  async setNameInput(name) {
+    await this.nameInput.sendKeys(name);
   }
 
-  async getCustomerCategoryNameInput() {
-    return await this.customerCategoryNameInput.getAttribute('value');
+  async getNameInput() {
+    return await this.nameInput.getAttribute('value');
   }
 
   async setValidFromInput(validFrom) {

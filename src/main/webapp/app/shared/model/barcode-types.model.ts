@@ -1,8 +1,8 @@
 export interface IBarcodeTypes {
   id?: number;
-  barcodeTypeName?: string;
+  name?: string;
 }
 
 export class BarcodeTypes implements IBarcodeTypes {
-  constructor(public id?: number, public barcodeTypeName?: string) {}
+  constructor(public id?: number, public name?: string) {}
 }

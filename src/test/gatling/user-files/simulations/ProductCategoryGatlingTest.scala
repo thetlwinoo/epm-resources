@@ -74,7 +74,7 @@ class ProductCategoryGatlingTest extends Simulation {
                 "id":null
                 , "name":"SAMPLE_TEXT"
                 , "shortLabel":"SAMPLE_TEXT"
-                , "photo":null
+                , "thumbnailUrl":"SAMPLE_TEXT"
                 }""")).asJson
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_productCategory_url"))).exitHereIfFailed

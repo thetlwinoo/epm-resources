@@ -13,6 +13,7 @@ export interface ICustomerTransactions {
   lastEditedWhen?: Moment;
   customerId?: number;
   paymentTransactionId?: number;
+  transactionTypeName?: string;
   transactionTypeId?: number;
   invoiceId?: number;
 }
@@ -31,6 +32,7 @@ export class CustomerTransactions implements ICustomerTransactions {
     public lastEditedWhen?: Moment,
     public customerId?: number,
     public paymentTransactionId?: number,
+    public transactionTypeName?: string,
     public transactionTypeId?: number,
     public invoiceId?: number
   ) {

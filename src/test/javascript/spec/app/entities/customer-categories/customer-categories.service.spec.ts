@@ -74,7 +74,7 @@ describe('Service Tests', () => {
       it('should update a CustomerCategories', () => {
         const returnedFromService = Object.assign(
           {
-            customerCategoryName: 'BBBBBB',
+            name: 'BBBBBB',
             validFrom: currentDate.format(DATE_TIME_FORMAT),
             validTo: currentDate.format(DATE_TIME_FORMAT)
           },
@@ -100,7 +100,7 @@ describe('Service Tests', () => {
       it('should return a list of CustomerCategories', () => {
         const returnedFromService = Object.assign(
           {
-            customerCategoryName: 'BBBBBB',
+            name: 'BBBBBB',
             validFrom: currentDate.format(DATE_TIME_FORMAT),
             validTo: currentDate.format(DATE_TIME_FORMAT)
           },

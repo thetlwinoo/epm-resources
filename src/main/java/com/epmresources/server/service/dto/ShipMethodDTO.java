@@ -9,7 +9,7 @@ public class ShipMethodDTO implements Serializable {
 
     private Long id;
 
-    private String shipMethodName;
+    private String name;
 
 
     public Long getId() {
@@ -20,12 +20,12 @@ public class ShipMethodDTO implements Serializable {
         this.id = id;
     }
 
-    public String getShipMethodName() {
-        return shipMethodName;
+    public String getName() {
+        return name;
     }
 
-    public void setShipMethodName(String shipMethodName) {
-        this.shipMethodName = shipMethodName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
@@ -53,7 +53,7 @@ public class ShipMethodDTO implements Serializable {
     public String toString() {
         return "ShipMethodDTO{" +
             "id=" + getId() +
-            ", shipMethodName='" + getShipMethodName() + "'" +
+            ", name='" + getName() + "'" +
             "}";
     }
 }

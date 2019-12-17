@@ -41,11 +41,12 @@ describe('Products e2e test', () => {
 
     await productsComponentsPage.clickOnCreateButton();
     await promise.all([
-      productsUpdatePage.setProductNameInput('productName'),
+      productsUpdatePage.setNameInput('name'),
       productsUpdatePage.setHandleInput('handle'),
       productsUpdatePage.setProductNumberInput('productNumber'),
       productsUpdatePage.setSearchDetailsInput('searchDetails'),
       productsUpdatePage.setSellCountInput('5'),
+      productsUpdatePage.setThumbnailListInput('thumbnailList'),
       productsUpdatePage.setLastEditedByInput('lastEditedBy'),
       productsUpdatePage.setLastEditedWhenInput('01/01/2001' + protractor.Key.TAB + '02:30AM'),
       productsUpdatePage.productDocumentSelectLastOption(),
@@ -53,7 +54,7 @@ describe('Products e2e test', () => {
       productsUpdatePage.productCategorySelectLastOption(),
       productsUpdatePage.productBrandSelectLastOption()
     ]);
-    expect(await productsUpdatePage.getProductNameInput()).to.eq('productName', 'Expected ProductName value to be equals to productName');
+    expect(await productsUpdatePage.getNameInput()).to.eq('name', 'Expected Name value to be equals to name');
     expect(await productsUpdatePage.getHandleInput()).to.eq('handle', 'Expected Handle value to be equals to handle');
     expect(await productsUpdatePage.getProductNumberInput()).to.eq(
       'productNumber',
@@ -64,6 +65,10 @@ describe('Products e2e test', () => {
       'Expected SearchDetails value to be equals to searchDetails'
     );
     expect(await productsUpdatePage.getSellCountInput()).to.eq('5', 'Expected sellCount value to be equals to 5');
+    expect(await productsUpdatePage.getThumbnailListInput()).to.eq(
+      'thumbnailList',
+      'Expected ThumbnailList value to be equals to thumbnailList'
+    );
     const selectedActiveInd = productsUpdatePage.getActiveIndInput();
     if (await selectedActiveInd.isSelected()) {
       await productsUpdatePage.getActiveIndInput().click();

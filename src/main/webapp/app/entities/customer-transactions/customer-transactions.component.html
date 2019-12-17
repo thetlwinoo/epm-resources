@@ -59,7 +59,7 @@
                 </td>
                 <td>
                     <div *ngIf="customerTransactions.transactionTypeId">
-                        <a [routerLink]="['/transaction-types', customerTransactions.transactionTypeId , 'view' ]" >{{customerTransactions.transactionTypeId}}</a>
+                        <a [routerLink]="['/transaction-types', customerTransactions.transactionTypeId , 'view' ]" >{{customerTransactions.transactionTypeName}}</a>
                     </div>
                 </td>
                 <td>

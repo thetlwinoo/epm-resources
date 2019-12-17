@@ -90,14 +90,14 @@
                     <label class="form-control-label" jhiTranslate="epmresourcesApp.orderLines.stockItem" for="field_stockItem">Stock Item</label>
                     <select class="form-control" id="field_stockItem" name="stockItem" formControlName="stockItemId">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="stockItemsOption.id" *ngFor="let stockItemsOption of stockitems; trackBy: trackStockItemsById">{{stockItemsOption.stockItemName}}</option>
+                        <option [ngValue]="stockItemsOption.id" *ngFor="let stockItemsOption of stockitems; trackBy: trackStockItemsById">{{stockItemsOption.name}}</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="epmresourcesApp.orderLines.packageType" for="field_packageType">Package Type</label>
                     <select class="form-control" id="field_packageType" name="packageType" formControlName="packageTypeId">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="packageTypesOption.id" *ngFor="let packageTypesOption of packagetypes; trackBy: trackPackageTypesById">{{packageTypesOption.id}}</option>
+                        <option [ngValue]="packageTypesOption.id" *ngFor="let packageTypesOption of packagetypes; trackBy: trackPackageTypesById">{{packageTypesOption.name}}</option>
                     </select>
                 </div>
                 <div class="form-group">

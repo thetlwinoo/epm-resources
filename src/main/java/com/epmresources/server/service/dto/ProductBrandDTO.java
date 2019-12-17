@@ -2,7 +2,6 @@ package com.epmresources.server.service.dto;
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.Objects;
-import javax.persistence.Lob;
 
 /**
  * A DTO for the {@link com.epmresources.server.domain.ProductBrand} entity.
@@ -12,12 +11,10 @@ public class ProductBrandDTO implements Serializable {
     private Long id;
 
     @NotNull
-    private String productBrandName;
+    private String name;
 
-    @Lob
-    private byte[] photo;
+    private String thumbnailUrl;
 
-    private String photoContentType;
 
     public Long getId() {
         return id;
@@ -27,28 +24,20 @@ public class ProductBrandDTO implements Serializable {
         this.id = id;
     }
 
-    public String getProductBrandName() {
-        return productBrandName;
+    public String getName() {
+        return name;
     }
 
-    public void setProductBrandName(String productBrandName) {
-        this.productBrandName = productBrandName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public byte[] getPhoto() {
-        return photo;
+    public String getThumbnailUrl() {
+        return thumbnailUrl;
     }
 
-    public void setPhoto(byte[] photo) {
-        this.photo = photo;
-    }
-
-    public String getPhotoContentType() {
-        return photoContentType;
-    }
-
-    public void setPhotoContentType(String photoContentType) {
-        this.photoContentType = photoContentType;
+    public void setThumbnailUrl(String thumbnailUrl) {
+        this.thumbnailUrl = thumbnailUrl;
     }
 
     @Override
@@ -76,8 +65,8 @@ public class ProductBrandDTO implements Serializable {
     public String toString() {
         return "ProductBrandDTO{" +
             "id=" + getId() +
-            ", productBrandName='" + getProductBrandName() + "'" +
-            ", photo='" + getPhoto() + "'" +
+            ", name='" + getName() + "'" +
+            ", thumbnailUrl='" + getThumbnailUrl() + "'" +
             "}";
     }
 }

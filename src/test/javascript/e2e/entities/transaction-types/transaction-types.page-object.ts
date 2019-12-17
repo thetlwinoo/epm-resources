@@ -26,7 +26,7 @@ export class TransactionTypesUpdatePage {
   pageTitle = element(by.id('jhi-transaction-types-heading'));
   saveButton = element(by.id('save-entity'));
   cancelButton = element(by.id('cancel-save'));
-  transactionTypeNameInput = element(by.id('field_transactionTypeName'));
+  nameInput = element(by.id('field_name'));
   validFromInput = element(by.id('field_validFrom'));
   validToInput = element(by.id('field_validTo'));
 
@@ -34,12 +34,12 @@ export class TransactionTypesUpdatePage {
     return this.pageTitle.getAttribute('jhiTranslate');
   }
 
-  async setTransactionTypeNameInput(transactionTypeName) {
-    await this.transactionTypeNameInput.sendKeys(transactionTypeName);
+  async setNameInput(name) {
+    await this.nameInput.sendKeys(name);
   }
 
-  async getTransactionTypeNameInput() {
-    return await this.transactionTypeNameInput.getAttribute('value');
+  async getNameInput() {
+    return await this.nameInput.getAttribute('value');
   }
 
   async setValidFromInput(validFrom) {

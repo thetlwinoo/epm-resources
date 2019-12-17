@@ -23,8 +23,8 @@ public class CustomerCategories implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    @Column(name = "customer_category_name")
-    private String customerCategoryName;
+    @Column(name = "name")
+    private String name;
 
     @NotNull
     @Column(name = "valid_from", nullable = false)
@@ -43,17 +43,17 @@ public class CustomerCategories implements Serializable {
         this.id = id;
     }
 
-    public String getCustomerCategoryName() {
-        return customerCategoryName;
+    public String getName() {
+        return name;
     }
 
-    public CustomerCategories customerCategoryName(String customerCategoryName) {
-        this.customerCategoryName = customerCategoryName;
+    public CustomerCategories name(String name) {
+        this.name = name;
         return this;
     }
 
-    public void setCustomerCategoryName(String customerCategoryName) {
-        this.customerCategoryName = customerCategoryName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Instant getValidFrom() {
@@ -103,7 +103,7 @@ public class CustomerCategories implements Serializable {
     public String toString() {
         return "CustomerCategories{" +
             "id=" + getId() +
-            ", customerCategoryName='" + getCustomerCategoryName() + "'" +
+            ", name='" + getName() + "'" +
             ", validFrom='" + getValidFrom() + "'" +
             ", validTo='" + getValidTo() + "'" +
             "}";

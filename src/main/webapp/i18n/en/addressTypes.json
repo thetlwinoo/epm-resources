@@ -16,7 +16,7 @@
       "detail": {
         "title": "Address Types"
       },
-      "addressTypeName": "Address Type Name",
+      "name": "Name",
       "refer": "Refer"
     }
   }

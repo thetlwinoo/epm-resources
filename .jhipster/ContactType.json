@@ -2,7 +2,7 @@
     "name": "ContactType",
     "fields": [
         {
-            "fieldName": "contactTypeName",
+            "fieldName": "name",
             "fieldType": "String",
             "fieldValidateRules": [
                 "required"

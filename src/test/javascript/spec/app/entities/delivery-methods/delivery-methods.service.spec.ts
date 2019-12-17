@@ -74,7 +74,7 @@ describe('Service Tests', () => {
       it('should update a DeliveryMethods', () => {
         const returnedFromService = Object.assign(
           {
-            deliveryMethodName: 'BBBBBB',
+            name: 'BBBBBB',
             validFrom: currentDate.format(DATE_TIME_FORMAT),
             validTo: currentDate.format(DATE_TIME_FORMAT)
           },
@@ -100,7 +100,7 @@ describe('Service Tests', () => {
       it('should return a list of DeliveryMethods', () => {
         const returnedFromService = Object.assign(
           {
-            deliveryMethodName: 'BBBBBB',
+            name: 'BBBBBB',
             validFrom: currentDate.format(DATE_TIME_FORMAT),
             validTo: currentDate.format(DATE_TIME_FORMAT)
           },

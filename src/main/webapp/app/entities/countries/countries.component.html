@@ -19,7 +19,7 @@
             <thead>
             <tr>
             <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
-            <th scope="col" ><span jhiTranslate="epmresourcesApp.countries.countryName">Country Name</span></th>
+            <th scope="col" ><span jhiTranslate="epmresourcesApp.countries.name">Name</span></th>
             <th scope="col" ><span jhiTranslate="epmresourcesApp.countries.formalName">Formal Name</span></th>
             <th scope="col" ><span jhiTranslate="epmresourcesApp.countries.isoAplha3Code">Iso Aplha 3 Code</span></th>
             <th scope="col" ><span jhiTranslate="epmresourcesApp.countries.isoNumericCode">Iso Numeric Code</span></th>
@@ -37,7 +37,7 @@
             <tbody>
             <tr *ngFor="let countries of countries ;trackBy: trackId">
                 <td><a [routerLink]="['/countries', countries.id, 'view' ]">{{countries.id}}</a></td>
-                <td>{{countries.countryName}}</td>
+                <td>{{countries.name}}</td>
                 <td>{{countries.formalName}}</td>
                 <td>{{countries.isoAplha3Code}}</td>
                 <td>{{countries.isoNumericCode}}</td>

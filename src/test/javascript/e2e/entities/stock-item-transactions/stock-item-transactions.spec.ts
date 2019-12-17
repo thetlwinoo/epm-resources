@@ -45,7 +45,7 @@ describe('StockItemTransactions e2e test', () => {
 
     await stockItemTransactionsComponentsPage.clickOnCreateButton();
     await promise.all([
-      stockItemTransactionsUpdatePage.setTransactionOccurredWhenInput('01/01/2001' + protractor.Key.TAB + '02:30AM'),
+      stockItemTransactionsUpdatePage.setTransactionOccuredWhenInput('01/01/2001' + protractor.Key.TAB + '02:30AM'),
       stockItemTransactionsUpdatePage.setQuantityInput('5'),
       stockItemTransactionsUpdatePage.setLastEditedByInput('lastEditedBy'),
       stockItemTransactionsUpdatePage.setLastEditedWhenInput('01/01/2001' + protractor.Key.TAB + '02:30AM'),
@@ -56,9 +56,9 @@ describe('StockItemTransactions e2e test', () => {
       stockItemTransactionsUpdatePage.transactionTypeSelectLastOption(),
       stockItemTransactionsUpdatePage.purchaseOrderSelectLastOption()
     ]);
-    expect(await stockItemTransactionsUpdatePage.getTransactionOccurredWhenInput()).to.contain(
+    expect(await stockItemTransactionsUpdatePage.getTransactionOccuredWhenInput()).to.contain(
       '2001-01-01T02:30',
-      'Expected transactionOccurredWhen value to be equals to 2000-12-31'
+      'Expected transactionOccuredWhen value to be equals to 2000-12-31'
     );
     expect(await stockItemTransactionsUpdatePage.getQuantityInput()).to.eq('5', 'Expected quantity value to be equals to 5');
     expect(await stockItemTransactionsUpdatePage.getLastEditedByInput()).to.eq(

@@ -91,8 +91,8 @@ public class WarrantyTypesQueryService extends QueryService<WarrantyTypes> {
             if (criteria.getId() != null) {
                 specification = specification.and(buildSpecification(criteria.getId(), WarrantyTypes_.id));
             }
-            if (criteria.getWarrantyTypeName() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getWarrantyTypeName(), WarrantyTypes_.warrantyTypeName));
+            if (criteria.getName() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getName(), WarrantyTypes_.name));
             }
         }
         return specification;

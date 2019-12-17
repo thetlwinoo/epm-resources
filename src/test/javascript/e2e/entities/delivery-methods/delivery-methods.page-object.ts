@@ -26,7 +26,7 @@ export class DeliveryMethodsUpdatePage {
   pageTitle = element(by.id('jhi-delivery-methods-heading'));
   saveButton = element(by.id('save-entity'));
   cancelButton = element(by.id('cancel-save'));
-  deliveryMethodNameInput = element(by.id('field_deliveryMethodName'));
+  nameInput = element(by.id('field_name'));
   validFromInput = element(by.id('field_validFrom'));
   validToInput = element(by.id('field_validTo'));
 
@@ -34,12 +34,12 @@ export class DeliveryMethodsUpdatePage {
     return this.pageTitle.getAttribute('jhiTranslate');
   }
 
-  async setDeliveryMethodNameInput(deliveryMethodName) {
-    await this.deliveryMethodNameInput.sendKeys(deliveryMethodName);
+  async setNameInput(name) {
+    await this.nameInput.sendKeys(name);
   }
 
-  async getDeliveryMethodNameInput() {
-    return await this.deliveryMethodNameInput.getAttribute('value');
+  async getNameInput() {
+    return await this.nameInput.getAttribute('value');
   }
 
   async setValidFromInput(validFrom) {

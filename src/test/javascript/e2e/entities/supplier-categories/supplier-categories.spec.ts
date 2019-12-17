@@ -45,14 +45,11 @@ describe('SupplierCategories e2e test', () => {
 
     await supplierCategoriesComponentsPage.clickOnCreateButton();
     await promise.all([
-      supplierCategoriesUpdatePage.setSupplierCategoryNameInput('supplierCategoryName'),
+      supplierCategoriesUpdatePage.setNameInput('name'),
       supplierCategoriesUpdatePage.setValidFromInput('01/01/2001' + protractor.Key.TAB + '02:30AM'),
       supplierCategoriesUpdatePage.setValidToInput('01/01/2001' + protractor.Key.TAB + '02:30AM')
     ]);
-    expect(await supplierCategoriesUpdatePage.getSupplierCategoryNameInput()).to.eq(
-      'supplierCategoryName',
-      'Expected SupplierCategoryName value to be equals to supplierCategoryName'
-    );
+    expect(await supplierCategoriesUpdatePage.getNameInput()).to.eq('name', 'Expected Name value to be equals to name');
     expect(await supplierCategoriesUpdatePage.getValidFromInput()).to.contain(
       '2001-01-01T02:30',
       'Expected validFrom value to be equals to 2000-12-31'

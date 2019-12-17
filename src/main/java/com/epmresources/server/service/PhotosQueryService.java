@@ -121,12 +121,13 @@ public class PhotosQueryService extends QueryService<Photos> {
             if (criteria.getDefaultInd() != null) {
                 specification = specification.and(buildSpecification(criteria.getDefaultInd(), Photos_.defaultInd));
             }
-            if (criteria.getDeleteToken() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getDeleteToken(), Photos_.deleteToken));
-            }
             if (criteria.getStockItemId() != null) {
                 specification = specification.and(buildSpecification(criteria.getStockItemId(),
                     root -> root.join(Photos_.stockItem, JoinType.LEFT).get(StockItems_.id)));
+            }
+            if (criteria.getProductCategoryId() != null) {
+                specification = specification.and(buildSpecification(criteria.getProductCategoryId(),
+                    root -> root.join(Photos_.productCategory, JoinType.LEFT).get(ProductCategory_.id)));
             }
         }
         return specification;

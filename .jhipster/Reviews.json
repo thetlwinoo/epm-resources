@@ -2,7 +2,7 @@
     "name": "Reviews",
     "fields": [
         {
-            "fieldName": "reviewerName",
+            "fieldName": "name",
             "fieldType": "String"
         },
         {

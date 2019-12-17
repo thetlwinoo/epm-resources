@@ -13,9 +13,8 @@ public class StockItemTransactionsDTO implements Serializable {
     private Long id;
 
     @NotNull
-    private Instant transactionOccurredWhen;
+    private Instant transactionOccuredWhen;
 
-    @NotNull
     private BigDecimal quantity;
 
     private String lastEditedBy;
@@ -25,7 +24,7 @@ public class StockItemTransactionsDTO implements Serializable {
 
     private Long stockItemId;
 
-    private String stockItemStockItemName;
+    private String stockItemName;
 
     private Long customerId;
 
@@ -33,9 +32,11 @@ public class StockItemTransactionsDTO implements Serializable {
 
     private Long supplierId;
 
-    private String supplierSupplierName;
+    private String supplierName;
 
     private Long transactionTypeId;
+
+    private String transactionTypeName;
 
     private Long purchaseOrderId;
 
@@ -47,12 +48,12 @@ public class StockItemTransactionsDTO implements Serializable {
         this.id = id;
     }
 
-    public Instant getTransactionOccurredWhen() {
-        return transactionOccurredWhen;
+    public Instant getTransactionOccuredWhen() {
+        return transactionOccuredWhen;
     }
 
-    public void setTransactionOccurredWhen(Instant transactionOccurredWhen) {
-        this.transactionOccurredWhen = transactionOccurredWhen;
+    public void setTransactionOccuredWhen(Instant transactionOccuredWhen) {
+        this.transactionOccuredWhen = transactionOccuredWhen;
     }
 
     public BigDecimal getQuantity() {
@@ -87,12 +88,12 @@ public class StockItemTransactionsDTO implements Serializable {
         this.stockItemId = stockItemsId;
     }
 
-    public String getStockItemStockItemName() {
-        return stockItemStockItemName;
+    public String getStockItemName() {
+        return stockItemName;
     }
 
-    public void setStockItemStockItemName(String stockItemsStockItemName) {
-        this.stockItemStockItemName = stockItemsStockItemName;
+    public void setStockItemName(String stockItemsName) {
+        this.stockItemName = stockItemsName;
     }
 
     public Long getCustomerId() {
@@ -119,12 +120,12 @@ public class StockItemTransactionsDTO implements Serializable {
         this.supplierId = suppliersId;
     }
 
-    public String getSupplierSupplierName() {
-        return supplierSupplierName;
+    public String getSupplierName() {
+        return supplierName;
     }
 
-    public void setSupplierSupplierName(String suppliersSupplierName) {
-        this.supplierSupplierName = suppliersSupplierName;
+    public void setSupplierName(String suppliersName) {
+        this.supplierName = suppliersName;
     }
 
     public Long getTransactionTypeId() {
@@ -133,6 +134,14 @@ public class StockItemTransactionsDTO implements Serializable {
 
     public void setTransactionTypeId(Long transactionTypesId) {
         this.transactionTypeId = transactionTypesId;
+    }
+
+    public String getTransactionTypeName() {
+        return transactionTypeName;
+    }
+
+    public void setTransactionTypeName(String transactionTypesName) {
+        this.transactionTypeName = transactionTypesName;
     }
 
     public Long getPurchaseOrderId() {
@@ -168,17 +177,18 @@ public class StockItemTransactionsDTO implements Serializable {
     public String toString() {
         return "StockItemTransactionsDTO{" +
             "id=" + getId() +
-            ", transactionOccurredWhen='" + getTransactionOccurredWhen() + "'" +
+            ", transactionOccuredWhen='" + getTransactionOccuredWhen() + "'" +
             ", quantity=" + getQuantity() +
             ", lastEditedBy='" + getLastEditedBy() + "'" +
             ", lastEditedWhen='" + getLastEditedWhen() + "'" +
             ", stockItem=" + getStockItemId() +
-            ", stockItem='" + getStockItemStockItemName() + "'" +
+            ", stockItem='" + getStockItemName() + "'" +
             ", customer=" + getCustomerId() +
             ", invoice=" + getInvoiceId() +
             ", supplier=" + getSupplierId() +
-            ", supplier='" + getSupplierSupplierName() + "'" +
+            ", supplier='" + getSupplierName() + "'" +
             ", transactionType=" + getTransactionTypeId() +
+            ", transactionType='" + getTransactionTypeName() + "'" +
             ", purchaseOrder=" + getPurchaseOrderId() +
             "}";
     }

@@ -41,8 +41,8 @@ describe('StateProvinces e2e test', () => {
 
     await stateProvincesComponentsPage.clickOnCreateButton();
     await promise.all([
-      stateProvincesUpdatePage.setStateProvinceCodeInput('stateProvinceCode'),
-      stateProvincesUpdatePage.setStateProvinceNameInput('stateProvinceName'),
+      stateProvincesUpdatePage.setCodeInput('code'),
+      stateProvincesUpdatePage.setNameInput('name'),
       stateProvincesUpdatePage.setSalesTerritoryInput('salesTerritory'),
       stateProvincesUpdatePage.setBorderInput('border'),
       stateProvincesUpdatePage.setLatestRecordedPopulationInput('5'),
@@ -50,14 +50,8 @@ describe('StateProvinces e2e test', () => {
       stateProvincesUpdatePage.setValidToInput('01/01/2001' + protractor.Key.TAB + '02:30AM'),
       stateProvincesUpdatePage.countrySelectLastOption()
     ]);
-    expect(await stateProvincesUpdatePage.getStateProvinceCodeInput()).to.eq(
-      'stateProvinceCode',
-      'Expected StateProvinceCode value to be equals to stateProvinceCode'
-    );
-    expect(await stateProvincesUpdatePage.getStateProvinceNameInput()).to.eq(
-      'stateProvinceName',
-      'Expected StateProvinceName value to be equals to stateProvinceName'
-    );
+    expect(await stateProvincesUpdatePage.getCodeInput()).to.eq('code', 'Expected Code value to be equals to code');
+    expect(await stateProvincesUpdatePage.getNameInput()).to.eq('name', 'Expected Name value to be equals to name');
     expect(await stateProvincesUpdatePage.getSalesTerritoryInput()).to.eq(
       'salesTerritory',
       'Expected SalesTerritory value to be equals to salesTerritory'

@@ -91,8 +91,8 @@ public class BarcodeTypesQueryService extends QueryService<BarcodeTypes> {
             if (criteria.getId() != null) {
                 specification = specification.and(buildSpecification(criteria.getId(), BarcodeTypes_.id));
             }
-            if (criteria.getBarcodeTypeName() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getBarcodeTypeName(), BarcodeTypes_.barcodeTypeName));
+            if (criteria.getName() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getName(), BarcodeTypes_.name));
             }
         }
         return specification;

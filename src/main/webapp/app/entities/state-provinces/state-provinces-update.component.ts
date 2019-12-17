@@ -25,8 +25,8 @@ export class StateProvincesUpdateComponent implements OnInit {
 
   editForm = this.fb.group({
     id: [],
-    stateProvinceCode: [null, [Validators.required]],
-    stateProvinceName: [null, [Validators.required]],
+    code: [null, [Validators.required]],
+    name: [null, [Validators.required]],
     salesTerritory: [null, [Validators.required]],
     border: [],
     latestRecordedPopulation: [],
@@ -60,8 +60,8 @@ export class StateProvincesUpdateComponent implements OnInit {
   updateForm(stateProvinces: IStateProvinces) {
     this.editForm.patchValue({
       id: stateProvinces.id,
-      stateProvinceCode: stateProvinces.stateProvinceCode,
-      stateProvinceName: stateProvinces.stateProvinceName,
+      code: stateProvinces.code,
+      name: stateProvinces.name,
       salesTerritory: stateProvinces.salesTerritory,
       border: stateProvinces.border,
       latestRecordedPopulation: stateProvinces.latestRecordedPopulation,
@@ -89,8 +89,8 @@ export class StateProvincesUpdateComponent implements OnInit {
     return {
       ...new StateProvinces(),
       id: this.editForm.get(['id']).value,
-      stateProvinceCode: this.editForm.get(['stateProvinceCode']).value,
-      stateProvinceName: this.editForm.get(['stateProvinceName']).value,
+      code: this.editForm.get(['code']).value,
+      name: this.editForm.get(['name']).value,
       salesTerritory: this.editForm.get(['salesTerritory']).value,
       border: this.editForm.get(['border']).value,
       latestRecordedPopulation: this.editForm.get(['latestRecordedPopulation']).value,

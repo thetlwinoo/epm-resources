@@ -44,9 +44,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = EpmresourcesApp.class)
 public class PurchaseOrderLinesResourceIT {
 
-    private static final Integer DEFAULT_ORDERS_OUTERS = 1;
-    private static final Integer UPDATED_ORDERS_OUTERS = 2;
-    private static final Integer SMALLER_ORDERS_OUTERS = 1 - 1;
+    private static final Integer DEFAULT_ORDERED_OUTERS = 1;
+    private static final Integer UPDATED_ORDERED_OUTERS = 2;
+    private static final Integer SMALLER_ORDERED_OUTERS = 1 - 1;
 
     private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
     private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";
@@ -122,7 +122,7 @@ public class PurchaseOrderLinesResourceIT {
      */
     public static PurchaseOrderLines createEntity(EntityManager em) {
         PurchaseOrderLines purchaseOrderLines = new PurchaseOrderLines()
-            .ordersOuters(DEFAULT_ORDERS_OUTERS)
+            .orderedOuters(DEFAULT_ORDERED_OUTERS)
             .description(DEFAULT_DESCRIPTION)
             .receivedOuters(DEFAULT_RECEIVED_OUTERS)
             .expectedUnitPricePerOuter(DEFAULT_EXPECTED_UNIT_PRICE_PER_OUTER)
@@ -140,7 +140,7 @@ public class PurchaseOrderLinesResourceIT {
      */
     public static PurchaseOrderLines createUpdatedEntity(EntityManager em) {
         PurchaseOrderLines purchaseOrderLines = new PurchaseOrderLines()
-            .ordersOuters(UPDATED_ORDERS_OUTERS)
+            .orderedOuters(UPDATED_ORDERED_OUTERS)
             .description(UPDATED_DESCRIPTION)
             .receivedOuters(UPDATED_RECEIVED_OUTERS)
             .expectedUnitPricePerOuter(UPDATED_EXPECTED_UNIT_PRICE_PER_OUTER)
@@ -172,7 +172,7 @@ public class PurchaseOrderLinesResourceIT {
         List<PurchaseOrderLines> purchaseOrderLinesList = purchaseOrderLinesRepository.findAll();
         assertThat(purchaseOrderLinesList).hasSize(databaseSizeBeforeCreate + 1);
         PurchaseOrderLines testPurchaseOrderLines = purchaseOrderLinesList.get(purchaseOrderLinesList.size() - 1);
-        assertThat(testPurchaseOrderLines.getOrdersOuters()).isEqualTo(DEFAULT_ORDERS_OUTERS);
+        assertThat(testPurchaseOrderLines.getOrderedOuters()).isEqualTo(DEFAULT_ORDERED_OUTERS);
         assertThat(testPurchaseOrderLines.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
         assertThat(testPurchaseOrderLines.getReceivedOuters()).isEqualTo(DEFAULT_RECEIVED_OUTERS);
         assertThat(testPurchaseOrderLines.getExpectedUnitPricePerOuter()).isEqualTo(DEFAULT_EXPECTED_UNIT_PRICE_PER_OUTER);
@@ -205,10 +205,67 @@ public class PurchaseOrderLinesResourceIT {
 
     @Test
     @Transactional
-    public void checkOrdersOutersIsRequired() throws Exception {
+    public void checkOrderedOutersIsRequired() throws Exception {
         int databaseSizeBeforeTest = purchaseOrderLinesRepository.findAll().size();
         // set the field null
-        purchaseOrderLines.setOrdersOuters(null);
+        purchaseOrderLines.setOrderedOuters(null);
+
+        // Create the PurchaseOrderLines, which fails.
+        PurchaseOrderLinesDTO purchaseOrderLinesDTO = purchaseOrderLinesMapper.toDto(purchaseOrderLines);
+
+        restPurchaseOrderLinesMockMvc.perform(post("/api/purchase-order-lines")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(purchaseOrderLinesDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<PurchaseOrderLines> purchaseOrderLinesList = purchaseOrderLinesRepository.findAll();
+        assertThat(purchaseOrderLinesList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkDescriptionIsRequired() throws Exception {
+        int databaseSizeBeforeTest = purchaseOrderLinesRepository.findAll().size();
+        // set the field null
+        purchaseOrderLines.setDescription(null);
+
+        // Create the PurchaseOrderLines, which fails.
+        PurchaseOrderLinesDTO purchaseOrderLinesDTO = purchaseOrderLinesMapper.toDto(purchaseOrderLines);
+
+        restPurchaseOrderLinesMockMvc.perform(post("/api/purchase-order-lines")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(purchaseOrderLinesDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<PurchaseOrderLines> purchaseOrderLinesList = purchaseOrderLinesRepository.findAll();
+        assertThat(purchaseOrderLinesList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkReceivedOutersIsRequired() throws Exception {
+        int databaseSizeBeforeTest = purchaseOrderLinesRepository.findAll().size();
+        // set the field null
+        purchaseOrderLines.setReceivedOuters(null);
+
+        // Create the PurchaseOrderLines, which fails.
+        PurchaseOrderLinesDTO purchaseOrderLinesDTO = purchaseOrderLinesMapper.toDto(purchaseOrderLines);
+
+        restPurchaseOrderLinesMockMvc.perform(post("/api/purchase-order-lines")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(purchaseOrderLinesDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<PurchaseOrderLines> purchaseOrderLinesList = purchaseOrderLinesRepository.findAll();
+        assertThat(purchaseOrderLinesList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkIsOrderLineFinalizedIsRequired() throws Exception {
+        int databaseSizeBeforeTest = purchaseOrderLinesRepository.findAll().size();
+        // set the field null
+        purchaseOrderLines.setIsOrderLineFinalized(null);
 
         // Create the PurchaseOrderLines, which fails.
         PurchaseOrderLinesDTO purchaseOrderLinesDTO = purchaseOrderLinesMapper.toDto(purchaseOrderLines);
@@ -233,7 +290,7 @@ public class PurchaseOrderLinesResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(purchaseOrderLines.getId().intValue())))
-            .andExpect(jsonPath("$.[*].ordersOuters").value(hasItem(DEFAULT_ORDERS_OUTERS)))
+            .andExpect(jsonPath("$.[*].orderedOuters").value(hasItem(DEFAULT_ORDERED_OUTERS)))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
             .andExpect(jsonPath("$.[*].receivedOuters").value(hasItem(DEFAULT_RECEIVED_OUTERS)))
             .andExpect(jsonPath("$.[*].expectedUnitPricePerOuter").value(hasItem(DEFAULT_EXPECTED_UNIT_PRICE_PER_OUTER.intValue())))
@@ -254,7 +311,7 @@ public class PurchaseOrderLinesResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(purchaseOrderLines.getId().intValue()))
-            .andExpect(jsonPath("$.ordersOuters").value(DEFAULT_ORDERS_OUTERS))
+            .andExpect(jsonPath("$.orderedOuters").value(DEFAULT_ORDERED_OUTERS))
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION))
             .andExpect(jsonPath("$.receivedOuters").value(DEFAULT_RECEIVED_OUTERS))
             .andExpect(jsonPath("$.expectedUnitPricePerOuter").value(DEFAULT_EXPECTED_UNIT_PRICE_PER_OUTER.intValue()))
@@ -266,106 +323,106 @@ public class PurchaseOrderLinesResourceIT {
 
     @Test
     @Transactional
-    public void getAllPurchaseOrderLinesByOrdersOutersIsEqualToSomething() throws Exception {
+    public void getAllPurchaseOrderLinesByOrderedOutersIsEqualToSomething() throws Exception {
         // Initialize the database
         purchaseOrderLinesRepository.saveAndFlush(purchaseOrderLines);
 
-        // Get all the purchaseOrderLinesList where ordersOuters equals to DEFAULT_ORDERS_OUTERS
-        defaultPurchaseOrderLinesShouldBeFound("ordersOuters.equals=" + DEFAULT_ORDERS_OUTERS);
+        // Get all the purchaseOrderLinesList where orderedOuters equals to DEFAULT_ORDERED_OUTERS
+        defaultPurchaseOrderLinesShouldBeFound("orderedOuters.equals=" + DEFAULT_ORDERED_OUTERS);
 
-        // Get all the purchaseOrderLinesList where ordersOuters equals to UPDATED_ORDERS_OUTERS
-        defaultPurchaseOrderLinesShouldNotBeFound("ordersOuters.equals=" + UPDATED_ORDERS_OUTERS);
+        // Get all the purchaseOrderLinesList where orderedOuters equals to UPDATED_ORDERED_OUTERS
+        defaultPurchaseOrderLinesShouldNotBeFound("orderedOuters.equals=" + UPDATED_ORDERED_OUTERS);
     }
 
     @Test
     @Transactional
-    public void getAllPurchaseOrderLinesByOrdersOutersIsNotEqualToSomething() throws Exception {
+    public void getAllPurchaseOrderLinesByOrderedOutersIsNotEqualToSomething() throws Exception {
         // Initialize the database
         purchaseOrderLinesRepository.saveAndFlush(purchaseOrderLines);
 
-        // Get all the purchaseOrderLinesList where ordersOuters not equals to DEFAULT_ORDERS_OUTERS
-        defaultPurchaseOrderLinesShouldNotBeFound("ordersOuters.notEquals=" + DEFAULT_ORDERS_OUTERS);
+        // Get all the purchaseOrderLinesList where orderedOuters not equals to DEFAULT_ORDERED_OUTERS
+        defaultPurchaseOrderLinesShouldNotBeFound("orderedOuters.notEquals=" + DEFAULT_ORDERED_OUTERS);
 
-        // Get all the purchaseOrderLinesList where ordersOuters not equals to UPDATED_ORDERS_OUTERS
-        defaultPurchaseOrderLinesShouldBeFound("ordersOuters.notEquals=" + UPDATED_ORDERS_OUTERS);
+        // Get all the purchaseOrderLinesList where orderedOuters not equals to UPDATED_ORDERED_OUTERS
+        defaultPurchaseOrderLinesShouldBeFound("orderedOuters.notEquals=" + UPDATED_ORDERED_OUTERS);
     }
 
     @Test
     @Transactional
-    public void getAllPurchaseOrderLinesByOrdersOutersIsInShouldWork() throws Exception {
+    public void getAllPurchaseOrderLinesByOrderedOutersIsInShouldWork() throws Exception {
         // Initialize the database
         purchaseOrderLinesRepository.saveAndFlush(purchaseOrderLines);
 
-        // Get all the purchaseOrderLinesList where ordersOuters in DEFAULT_ORDERS_OUTERS or UPDATED_ORDERS_OUTERS
-        defaultPurchaseOrderLinesShouldBeFound("ordersOuters.in=" + DEFAULT_ORDERS_OUTERS + "," + UPDATED_ORDERS_OUTERS);
+        // Get all the purchaseOrderLinesList where orderedOuters in DEFAULT_ORDERED_OUTERS or UPDATED_ORDERED_OUTERS
+        defaultPurchaseOrderLinesShouldBeFound("orderedOuters.in=" + DEFAULT_ORDERED_OUTERS + "," + UPDATED_ORDERED_OUTERS);
 
-        // Get all the purchaseOrderLinesList where ordersOuters equals to UPDATED_ORDERS_OUTERS
-        defaultPurchaseOrderLinesShouldNotBeFound("ordersOuters.in=" + UPDATED_ORDERS_OUTERS);
+        // Get all the purchaseOrderLinesList where orderedOuters equals to UPDATED_ORDERED_OUTERS
+        defaultPurchaseOrderLinesShouldNotBeFound("orderedOuters.in=" + UPDATED_ORDERED_OUTERS);
     }
 
     @Test
     @Transactional
-    public void getAllPurchaseOrderLinesByOrdersOutersIsNullOrNotNull() throws Exception {
+    public void getAllPurchaseOrderLinesByOrderedOutersIsNullOrNotNull() throws Exception {
         // Initialize the database
         purchaseOrderLinesRepository.saveAndFlush(purchaseOrderLines);
 
-        // Get all the purchaseOrderLinesList where ordersOuters is not null
-        defaultPurchaseOrderLinesShouldBeFound("ordersOuters.specified=true");
+        // Get all the purchaseOrderLinesList where orderedOuters is not null
+        defaultPurchaseOrderLinesShouldBeFound("orderedOuters.specified=true");
 
-        // Get all the purchaseOrderLinesList where ordersOuters is null
-        defaultPurchaseOrderLinesShouldNotBeFound("ordersOuters.specified=false");
+        // Get all the purchaseOrderLinesList where orderedOuters is null
+        defaultPurchaseOrderLinesShouldNotBeFound("orderedOuters.specified=false");
     }
 
     @Test
     @Transactional
-    public void getAllPurchaseOrderLinesByOrdersOutersIsGreaterThanOrEqualToSomething() throws Exception {
+    public void getAllPurchaseOrderLinesByOrderedOutersIsGreaterThanOrEqualToSomething() throws Exception {
         // Initialize the database
         purchaseOrderLinesRepository.saveAndFlush(purchaseOrderLines);
 
-        // Get all the purchaseOrderLinesList where ordersOuters is greater than or equal to DEFAULT_ORDERS_OUTERS
-        defaultPurchaseOrderLinesShouldBeFound("ordersOuters.greaterThanOrEqual=" + DEFAULT_ORDERS_OUTERS);
+        // Get all the purchaseOrderLinesList where orderedOuters is greater than or equal to DEFAULT_ORDERED_OUTERS
+        defaultPurchaseOrderLinesShouldBeFound("orderedOuters.greaterThanOrEqual=" + DEFAULT_ORDERED_OUTERS);
 
-        // Get all the purchaseOrderLinesList where ordersOuters is greater than or equal to UPDATED_ORDERS_OUTERS
-        defaultPurchaseOrderLinesShouldNotBeFound("ordersOuters.greaterThanOrEqual=" + UPDATED_ORDERS_OUTERS);
+        // Get all the purchaseOrderLinesList where orderedOuters is greater than or equal to UPDATED_ORDERED_OUTERS
+        defaultPurchaseOrderLinesShouldNotBeFound("orderedOuters.greaterThanOrEqual=" + UPDATED_ORDERED_OUTERS);
     }
 
     @Test
     @Transactional
-    public void getAllPurchaseOrderLinesByOrdersOutersIsLessThanOrEqualToSomething() throws Exception {
+    public void getAllPurchaseOrderLinesByOrderedOutersIsLessThanOrEqualToSomething() throws Exception {
         // Initialize the database
         purchaseOrderLinesRepository.saveAndFlush(purchaseOrderLines);
 
-        // Get all the purchaseOrderLinesList where ordersOuters is less than or equal to DEFAULT_ORDERS_OUTERS
-        defaultPurchaseOrderLinesShouldBeFound("ordersOuters.lessThanOrEqual=" + DEFAULT_ORDERS_OUTERS);
+        // Get all the purchaseOrderLinesList where orderedOuters is less than or equal to DEFAULT_ORDERED_OUTERS
+        defaultPurchaseOrderLinesShouldBeFound("orderedOuters.lessThanOrEqual=" + DEFAULT_ORDERED_OUTERS);
 
-        // Get all the purchaseOrderLinesList where ordersOuters is less than or equal to SMALLER_ORDERS_OUTERS
-        defaultPurchaseOrderLinesShouldNotBeFound("ordersOuters.lessThanOrEqual=" + SMALLER_ORDERS_OUTERS);
+        // Get all the purchaseOrderLinesList where orderedOuters is less than or equal to SMALLER_ORDERED_OUTERS
+        defaultPurchaseOrderLinesShouldNotBeFound("orderedOuters.lessThanOrEqual=" + SMALLER_ORDERED_OUTERS);
     }
 
     @Test
     @Transactional
-    public void getAllPurchaseOrderLinesByOrdersOutersIsLessThanSomething() throws Exception {
+    public void getAllPurchaseOrderLinesByOrderedOutersIsLessThanSomething() throws Exception {
         // Initialize the database
         purchaseOrderLinesRepository.saveAndFlush(purchaseOrderLines);
 
-        // Get all the purchaseOrderLinesList where ordersOuters is less than DEFAULT_ORDERS_OUTERS
-        defaultPurchaseOrderLinesShouldNotBeFound("ordersOuters.lessThan=" + DEFAULT_ORDERS_OUTERS);
+        // Get all the purchaseOrderLinesList where orderedOuters is less than DEFAULT_ORDERED_OUTERS
+        defaultPurchaseOrderLinesShouldNotBeFound("orderedOuters.lessThan=" + DEFAULT_ORDERED_OUTERS);
 
-        // Get all the purchaseOrderLinesList where ordersOuters is less than UPDATED_ORDERS_OUTERS
-        defaultPurchaseOrderLinesShouldBeFound("ordersOuters.lessThan=" + UPDATED_ORDERS_OUTERS);
+        // Get all the purchaseOrderLinesList where orderedOuters is less than UPDATED_ORDERED_OUTERS
+        defaultPurchaseOrderLinesShouldBeFound("orderedOuters.lessThan=" + UPDATED_ORDERED_OUTERS);
     }
 
     @Test
     @Transactional
-    public void getAllPurchaseOrderLinesByOrdersOutersIsGreaterThanSomething() throws Exception {
+    public void getAllPurchaseOrderLinesByOrderedOutersIsGreaterThanSomething() throws Exception {
         // Initialize the database
         purchaseOrderLinesRepository.saveAndFlush(purchaseOrderLines);
 
-        // Get all the purchaseOrderLinesList where ordersOuters is greater than DEFAULT_ORDERS_OUTERS
-        defaultPurchaseOrderLinesShouldNotBeFound("ordersOuters.greaterThan=" + DEFAULT_ORDERS_OUTERS);
+        // Get all the purchaseOrderLinesList where orderedOuters is greater than DEFAULT_ORDERED_OUTERS
+        defaultPurchaseOrderLinesShouldNotBeFound("orderedOuters.greaterThan=" + DEFAULT_ORDERED_OUTERS);
 
-        // Get all the purchaseOrderLinesList where ordersOuters is greater than SMALLER_ORDERS_OUTERS
-        defaultPurchaseOrderLinesShouldBeFound("ordersOuters.greaterThan=" + SMALLER_ORDERS_OUTERS);
+        // Get all the purchaseOrderLinesList where orderedOuters is greater than SMALLER_ORDERED_OUTERS
+        defaultPurchaseOrderLinesShouldBeFound("orderedOuters.greaterThan=" + SMALLER_ORDERED_OUTERS);
     }
 
 
@@ -958,7 +1015,7 @@ public class PurchaseOrderLinesResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(purchaseOrderLines.getId().intValue())))
-            .andExpect(jsonPath("$.[*].ordersOuters").value(hasItem(DEFAULT_ORDERS_OUTERS)))
+            .andExpect(jsonPath("$.[*].orderedOuters").value(hasItem(DEFAULT_ORDERED_OUTERS)))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
             .andExpect(jsonPath("$.[*].receivedOuters").value(hasItem(DEFAULT_RECEIVED_OUTERS)))
             .andExpect(jsonPath("$.[*].expectedUnitPricePerOuter").value(hasItem(DEFAULT_EXPECTED_UNIT_PRICE_PER_OUTER.intValue())))
@@ -1013,7 +1070,7 @@ public class PurchaseOrderLinesResourceIT {
         // Disconnect from session so that the updates on updatedPurchaseOrderLines are not directly saved in db
         em.detach(updatedPurchaseOrderLines);
         updatedPurchaseOrderLines
-            .ordersOuters(UPDATED_ORDERS_OUTERS)
+            .orderedOuters(UPDATED_ORDERED_OUTERS)
             .description(UPDATED_DESCRIPTION)
             .receivedOuters(UPDATED_RECEIVED_OUTERS)
             .expectedUnitPricePerOuter(UPDATED_EXPECTED_UNIT_PRICE_PER_OUTER)
@@ -1032,7 +1089,7 @@ public class PurchaseOrderLinesResourceIT {
         List<PurchaseOrderLines> purchaseOrderLinesList = purchaseOrderLinesRepository.findAll();
         assertThat(purchaseOrderLinesList).hasSize(databaseSizeBeforeUpdate);
         PurchaseOrderLines testPurchaseOrderLines = purchaseOrderLinesList.get(purchaseOrderLinesList.size() - 1);
-        assertThat(testPurchaseOrderLines.getOrdersOuters()).isEqualTo(UPDATED_ORDERS_OUTERS);
+        assertThat(testPurchaseOrderLines.getOrderedOuters()).isEqualTo(UPDATED_ORDERED_OUTERS);
         assertThat(testPurchaseOrderLines.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
         assertThat(testPurchaseOrderLines.getReceivedOuters()).isEqualTo(UPDATED_RECEIVED_OUTERS);
         assertThat(testPurchaseOrderLines.getExpectedUnitPricePerOuter()).isEqualTo(UPDATED_EXPECTED_UNIT_PRICE_PER_OUTER);

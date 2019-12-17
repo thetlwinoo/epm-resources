@@ -25,7 +25,6 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.Base64Utils;
 import org.springframework.validation.Validator;
 
 import javax.persistence.EntityManager;
@@ -45,8 +44,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = EpmresourcesApp.class)
 public class SuppliersResourceIT {
 
-    private static final String DEFAULT_SUPPLIER_NAME = "AAAAAAAAAA";
-    private static final String UPDATED_SUPPLIER_NAME = "BBBBBBBBBB";
+    private static final String DEFAULT_NAME = "AAAAAAAAAA";
+    private static final String UPDATED_NAME = "BBBBBBBBBB";
 
     private static final String DEFAULT_SUPPLIER_REFERENCE = "AAAAAAAAAA";
     private static final String UPDATED_SUPPLIER_REFERENCE = "BBBBBBBBBB";
@@ -92,10 +91,8 @@ public class SuppliersResourceIT {
     private static final Boolean DEFAULT_ACTIVE_FLAG = false;
     private static final Boolean UPDATED_ACTIVE_FLAG = true;
 
-    private static final byte[] DEFAULT_AVATAR = TestUtil.createByteArray(1, "0");
-    private static final byte[] UPDATED_AVATAR = TestUtil.createByteArray(1, "1");
-    private static final String DEFAULT_AVATAR_CONTENT_TYPE = "image/jpg";
-    private static final String UPDATED_AVATAR_CONTENT_TYPE = "image/png";
+    private static final String DEFAULT_THUMBNAIL_URL = "AAAAAAAAAA";
+    private static final String UPDATED_THUMBNAIL_URL = "BBBBBBBBBB";
 
     private static final Instant DEFAULT_VALID_FROM = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_VALID_FROM = Instant.now().truncatedTo(ChronoUnit.MILLIS);
@@ -154,7 +151,7 @@ public class SuppliersResourceIT {
      */
     public static Suppliers createEntity(EntityManager em) {
         Suppliers suppliers = new Suppliers()
-            .supplierName(DEFAULT_SUPPLIER_NAME)
+            .name(DEFAULT_NAME)
             .supplierReference(DEFAULT_SUPPLIER_REFERENCE)
             .bankAccountName(DEFAULT_BANK_ACCOUNT_NAME)
             .bankAccountBranch(DEFAULT_BANK_ACCOUNT_BRANCH)
@@ -169,8 +166,7 @@ public class SuppliersResourceIT {
             .webServiceUrl(DEFAULT_WEB_SERVICE_URL)
             .creditRating(DEFAULT_CREDIT_RATING)
             .activeFlag(DEFAULT_ACTIVE_FLAG)
-            .avatar(DEFAULT_AVATAR)
-            .avatarContentType(DEFAULT_AVATAR_CONTENT_TYPE)
+            .thumbnailUrl(DEFAULT_THUMBNAIL_URL)
             .validFrom(DEFAULT_VALID_FROM)
             .validTo(DEFAULT_VALID_TO);
         return suppliers;
@@ -183,7 +179,7 @@ public class SuppliersResourceIT {
      */
     public static Suppliers createUpdatedEntity(EntityManager em) {
         Suppliers suppliers = new Suppliers()
-            .supplierName(UPDATED_SUPPLIER_NAME)
+            .name(UPDATED_NAME)
             .supplierReference(UPDATED_SUPPLIER_REFERENCE)
             .bankAccountName(UPDATED_BANK_ACCOUNT_NAME)
             .bankAccountBranch(UPDATED_BANK_ACCOUNT_BRANCH)
@@ -198,8 +194,7 @@ public class SuppliersResourceIT {
             .webServiceUrl(UPDATED_WEB_SERVICE_URL)
             .creditRating(UPDATED_CREDIT_RATING)
             .activeFlag(UPDATED_ACTIVE_FLAG)
-            .avatar(UPDATED_AVATAR)
-            .avatarContentType(UPDATED_AVATAR_CONTENT_TYPE)
+            .thumbnailUrl(UPDATED_THUMBNAIL_URL)
             .validFrom(UPDATED_VALID_FROM)
             .validTo(UPDATED_VALID_TO);
         return suppliers;
@@ -226,7 +221,7 @@ public class SuppliersResourceIT {
         List<Suppliers> suppliersList = suppliersRepository.findAll();
         assertThat(suppliersList).hasSize(databaseSizeBeforeCreate + 1);
         Suppliers testSuppliers = suppliersList.get(suppliersList.size() - 1);
-        assertThat(testSuppliers.getSupplierName()).isEqualTo(DEFAULT_SUPPLIER_NAME);
+        assertThat(testSuppliers.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testSuppliers.getSupplierReference()).isEqualTo(DEFAULT_SUPPLIER_REFERENCE);
         assertThat(testSuppliers.getBankAccountName()).isEqualTo(DEFAULT_BANK_ACCOUNT_NAME);
         assertThat(testSuppliers.getBankAccountBranch()).isEqualTo(DEFAULT_BANK_ACCOUNT_BRANCH);
@@ -241,8 +236,7 @@ public class SuppliersResourceIT {
         assertThat(testSuppliers.getWebServiceUrl()).isEqualTo(DEFAULT_WEB_SERVICE_URL);
         assertThat(testSuppliers.getCreditRating()).isEqualTo(DEFAULT_CREDIT_RATING);
         assertThat(testSuppliers.isActiveFlag()).isEqualTo(DEFAULT_ACTIVE_FLAG);
-        assertThat(testSuppliers.getAvatar()).isEqualTo(DEFAULT_AVATAR);
-        assertThat(testSuppliers.getAvatarContentType()).isEqualTo(DEFAULT_AVATAR_CONTENT_TYPE);
+        assertThat(testSuppliers.getThumbnailUrl()).isEqualTo(DEFAULT_THUMBNAIL_URL);
         assertThat(testSuppliers.getValidFrom()).isEqualTo(DEFAULT_VALID_FROM);
         assertThat(testSuppliers.getValidTo()).isEqualTo(DEFAULT_VALID_TO);
     }
@@ -270,10 +264,10 @@ public class SuppliersResourceIT {
 
     @Test
     @Transactional
-    public void checkSupplierNameIsRequired() throws Exception {
+    public void checkNameIsRequired() throws Exception {
         int databaseSizeBeforeTest = suppliersRepository.findAll().size();
         // set the field null
-        suppliers.setSupplierName(null);
+        suppliers.setName(null);
 
         // Create the Suppliers, which fails.
         SuppliersDTO suppliersDTO = suppliersMapper.toDto(suppliers);
@@ -374,7 +368,7 @@ public class SuppliersResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(suppliers.getId().intValue())))
-            .andExpect(jsonPath("$.[*].supplierName").value(hasItem(DEFAULT_SUPPLIER_NAME)))
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].supplierReference").value(hasItem(DEFAULT_SUPPLIER_REFERENCE)))
             .andExpect(jsonPath("$.[*].bankAccountName").value(hasItem(DEFAULT_BANK_ACCOUNT_NAME)))
             .andExpect(jsonPath("$.[*].bankAccountBranch").value(hasItem(DEFAULT_BANK_ACCOUNT_BRANCH)))
@@ -389,8 +383,7 @@ public class SuppliersResourceIT {
             .andExpect(jsonPath("$.[*].webServiceUrl").value(hasItem(DEFAULT_WEB_SERVICE_URL)))
             .andExpect(jsonPath("$.[*].creditRating").value(hasItem(DEFAULT_CREDIT_RATING)))
             .andExpect(jsonPath("$.[*].activeFlag").value(hasItem(DEFAULT_ACTIVE_FLAG.booleanValue())))
-            .andExpect(jsonPath("$.[*].avatarContentType").value(hasItem(DEFAULT_AVATAR_CONTENT_TYPE)))
-            .andExpect(jsonPath("$.[*].avatar").value(hasItem(Base64Utils.encodeToString(DEFAULT_AVATAR))))
+            .andExpect(jsonPath("$.[*].thumbnailUrl").value(hasItem(DEFAULT_THUMBNAIL_URL)))
             .andExpect(jsonPath("$.[*].validFrom").value(hasItem(DEFAULT_VALID_FROM.toString())))
             .andExpect(jsonPath("$.[*].validTo").value(hasItem(DEFAULT_VALID_TO.toString())));
     }
@@ -406,7 +399,7 @@ public class SuppliersResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(suppliers.getId().intValue()))
-            .andExpect(jsonPath("$.supplierName").value(DEFAULT_SUPPLIER_NAME))
+            .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
             .andExpect(jsonPath("$.supplierReference").value(DEFAULT_SUPPLIER_REFERENCE))
             .andExpect(jsonPath("$.bankAccountName").value(DEFAULT_BANK_ACCOUNT_NAME))
             .andExpect(jsonPath("$.bankAccountBranch").value(DEFAULT_BANK_ACCOUNT_BRANCH))
@@ -421,87 +414,86 @@ public class SuppliersResourceIT {
             .andExpect(jsonPath("$.webServiceUrl").value(DEFAULT_WEB_SERVICE_URL))
             .andExpect(jsonPath("$.creditRating").value(DEFAULT_CREDIT_RATING))
             .andExpect(jsonPath("$.activeFlag").value(DEFAULT_ACTIVE_FLAG.booleanValue()))
-            .andExpect(jsonPath("$.avatarContentType").value(DEFAULT_AVATAR_CONTENT_TYPE))
-            .andExpect(jsonPath("$.avatar").value(Base64Utils.encodeToString(DEFAULT_AVATAR)))
+            .andExpect(jsonPath("$.thumbnailUrl").value(DEFAULT_THUMBNAIL_URL))
             .andExpect(jsonPath("$.validFrom").value(DEFAULT_VALID_FROM.toString()))
             .andExpect(jsonPath("$.validTo").value(DEFAULT_VALID_TO.toString()));
     }
 
     @Test
     @Transactional
-    public void getAllSuppliersBySupplierNameIsEqualToSomething() throws Exception {
+    public void getAllSuppliersByNameIsEqualToSomething() throws Exception {
         // Initialize the database
         suppliersRepository.saveAndFlush(suppliers);
 
-        // Get all the suppliersList where supplierName equals to DEFAULT_SUPPLIER_NAME
-        defaultSuppliersShouldBeFound("supplierName.equals=" + DEFAULT_SUPPLIER_NAME);
+        // Get all the suppliersList where name equals to DEFAULT_NAME
+        defaultSuppliersShouldBeFound("name.equals=" + DEFAULT_NAME);
 
-        // Get all the suppliersList where supplierName equals to UPDATED_SUPPLIER_NAME
-        defaultSuppliersShouldNotBeFound("supplierName.equals=" + UPDATED_SUPPLIER_NAME);
+        // Get all the suppliersList where name equals to UPDATED_NAME
+        defaultSuppliersShouldNotBeFound("name.equals=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllSuppliersBySupplierNameIsNotEqualToSomething() throws Exception {
+    public void getAllSuppliersByNameIsNotEqualToSomething() throws Exception {
         // Initialize the database
         suppliersRepository.saveAndFlush(suppliers);
 
-        // Get all the suppliersList where supplierName not equals to DEFAULT_SUPPLIER_NAME
-        defaultSuppliersShouldNotBeFound("supplierName.notEquals=" + DEFAULT_SUPPLIER_NAME);
+        // Get all the suppliersList where name not equals to DEFAULT_NAME
+        defaultSuppliersShouldNotBeFound("name.notEquals=" + DEFAULT_NAME);
 
-        // Get all the suppliersList where supplierName not equals to UPDATED_SUPPLIER_NAME
-        defaultSuppliersShouldBeFound("supplierName.notEquals=" + UPDATED_SUPPLIER_NAME);
+        // Get all the suppliersList where name not equals to UPDATED_NAME
+        defaultSuppliersShouldBeFound("name.notEquals=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllSuppliersBySupplierNameIsInShouldWork() throws Exception {
+    public void getAllSuppliersByNameIsInShouldWork() throws Exception {
         // Initialize the database
         suppliersRepository.saveAndFlush(suppliers);
 
-        // Get all the suppliersList where supplierName in DEFAULT_SUPPLIER_NAME or UPDATED_SUPPLIER_NAME
-        defaultSuppliersShouldBeFound("supplierName.in=" + DEFAULT_SUPPLIER_NAME + "," + UPDATED_SUPPLIER_NAME);
+        // Get all the suppliersList where name in DEFAULT_NAME or UPDATED_NAME
+        defaultSuppliersShouldBeFound("name.in=" + DEFAULT_NAME + "," + UPDATED_NAME);
 
-        // Get all the suppliersList where supplierName equals to UPDATED_SUPPLIER_NAME
-        defaultSuppliersShouldNotBeFound("supplierName.in=" + UPDATED_SUPPLIER_NAME);
+        // Get all the suppliersList where name equals to UPDATED_NAME
+        defaultSuppliersShouldNotBeFound("name.in=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllSuppliersBySupplierNameIsNullOrNotNull() throws Exception {
+    public void getAllSuppliersByNameIsNullOrNotNull() throws Exception {
         // Initialize the database
         suppliersRepository.saveAndFlush(suppliers);
 
-        // Get all the suppliersList where supplierName is not null
-        defaultSuppliersShouldBeFound("supplierName.specified=true");
+        // Get all the suppliersList where name is not null
+        defaultSuppliersShouldBeFound("name.specified=true");
 
-        // Get all the suppliersList where supplierName is null
-        defaultSuppliersShouldNotBeFound("supplierName.specified=false");
+        // Get all the suppliersList where name is null
+        defaultSuppliersShouldNotBeFound("name.specified=false");
     }
                 @Test
     @Transactional
-    public void getAllSuppliersBySupplierNameContainsSomething() throws Exception {
+    public void getAllSuppliersByNameContainsSomething() throws Exception {
         // Initialize the database
         suppliersRepository.saveAndFlush(suppliers);
 
-        // Get all the suppliersList where supplierName contains DEFAULT_SUPPLIER_NAME
-        defaultSuppliersShouldBeFound("supplierName.contains=" + DEFAULT_SUPPLIER_NAME);
+        // Get all the suppliersList where name contains DEFAULT_NAME
+        defaultSuppliersShouldBeFound("name.contains=" + DEFAULT_NAME);
 
-        // Get all the suppliersList where supplierName contains UPDATED_SUPPLIER_NAME
-        defaultSuppliersShouldNotBeFound("supplierName.contains=" + UPDATED_SUPPLIER_NAME);
+        // Get all the suppliersList where name contains UPDATED_NAME
+        defaultSuppliersShouldNotBeFound("name.contains=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllSuppliersBySupplierNameNotContainsSomething() throws Exception {
+    public void getAllSuppliersByNameNotContainsSomething() throws Exception {
         // Initialize the database
         suppliersRepository.saveAndFlush(suppliers);
 
-        // Get all the suppliersList where supplierName does not contain DEFAULT_SUPPLIER_NAME
-        defaultSuppliersShouldNotBeFound("supplierName.doesNotContain=" + DEFAULT_SUPPLIER_NAME);
+        // Get all the suppliersList where name does not contain DEFAULT_NAME
+        defaultSuppliersShouldNotBeFound("name.doesNotContain=" + DEFAULT_NAME);
 
-        // Get all the suppliersList where supplierName does not contain UPDATED_SUPPLIER_NAME
-        defaultSuppliersShouldBeFound("supplierName.doesNotContain=" + UPDATED_SUPPLIER_NAME);
+        // Get all the suppliersList where name does not contain UPDATED_NAME
+        defaultSuppliersShouldBeFound("name.doesNotContain=" + UPDATED_NAME);
     }
 
 
@@ -1627,6 +1619,84 @@ public class SuppliersResourceIT {
 
     @Test
     @Transactional
+    public void getAllSuppliersByThumbnailUrlIsEqualToSomething() throws Exception {
+        // Initialize the database
+        suppliersRepository.saveAndFlush(suppliers);
+
+        // Get all the suppliersList where thumbnailUrl equals to DEFAULT_THUMBNAIL_URL
+        defaultSuppliersShouldBeFound("thumbnailUrl.equals=" + DEFAULT_THUMBNAIL_URL);
+
+        // Get all the suppliersList where thumbnailUrl equals to UPDATED_THUMBNAIL_URL
+        defaultSuppliersShouldNotBeFound("thumbnailUrl.equals=" + UPDATED_THUMBNAIL_URL);
+    }
+
+    @Test
+    @Transactional
+    public void getAllSuppliersByThumbnailUrlIsNotEqualToSomething() throws Exception {
+        // Initialize the database
+        suppliersRepository.saveAndFlush(suppliers);
+
+        // Get all the suppliersList where thumbnailUrl not equals to DEFAULT_THUMBNAIL_URL
+        defaultSuppliersShouldNotBeFound("thumbnailUrl.notEquals=" + DEFAULT_THUMBNAIL_URL);
+
+        // Get all the suppliersList where thumbnailUrl not equals to UPDATED_THUMBNAIL_URL
+        defaultSuppliersShouldBeFound("thumbnailUrl.notEquals=" + UPDATED_THUMBNAIL_URL);
+    }
+
+    @Test
+    @Transactional
+    public void getAllSuppliersByThumbnailUrlIsInShouldWork() throws Exception {
+        // Initialize the database
+        suppliersRepository.saveAndFlush(suppliers);
+
+        // Get all the suppliersList where thumbnailUrl in DEFAULT_THUMBNAIL_URL or UPDATED_THUMBNAIL_URL
+        defaultSuppliersShouldBeFound("thumbnailUrl.in=" + DEFAULT_THUMBNAIL_URL + "," + UPDATED_THUMBNAIL_URL);
+
+        // Get all the suppliersList where thumbnailUrl equals to UPDATED_THUMBNAIL_URL
+        defaultSuppliersShouldNotBeFound("thumbnailUrl.in=" + UPDATED_THUMBNAIL_URL);
+    }
+
+    @Test
+    @Transactional
+    public void getAllSuppliersByThumbnailUrlIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        suppliersRepository.saveAndFlush(suppliers);
+
+        // Get all the suppliersList where thumbnailUrl is not null
+        defaultSuppliersShouldBeFound("thumbnailUrl.specified=true");
+
+        // Get all the suppliersList where thumbnailUrl is null
+        defaultSuppliersShouldNotBeFound("thumbnailUrl.specified=false");
+    }
+                @Test
+    @Transactional
+    public void getAllSuppliersByThumbnailUrlContainsSomething() throws Exception {
+        // Initialize the database
+        suppliersRepository.saveAndFlush(suppliers);
+
+        // Get all the suppliersList where thumbnailUrl contains DEFAULT_THUMBNAIL_URL
+        defaultSuppliersShouldBeFound("thumbnailUrl.contains=" + DEFAULT_THUMBNAIL_URL);
+
+        // Get all the suppliersList where thumbnailUrl contains UPDATED_THUMBNAIL_URL
+        defaultSuppliersShouldNotBeFound("thumbnailUrl.contains=" + UPDATED_THUMBNAIL_URL);
+    }
+
+    @Test
+    @Transactional
+    public void getAllSuppliersByThumbnailUrlNotContainsSomething() throws Exception {
+        // Initialize the database
+        suppliersRepository.saveAndFlush(suppliers);
+
+        // Get all the suppliersList where thumbnailUrl does not contain DEFAULT_THUMBNAIL_URL
+        defaultSuppliersShouldNotBeFound("thumbnailUrl.doesNotContain=" + DEFAULT_THUMBNAIL_URL);
+
+        // Get all the suppliersList where thumbnailUrl does not contain UPDATED_THUMBNAIL_URL
+        defaultSuppliersShouldBeFound("thumbnailUrl.doesNotContain=" + UPDATED_THUMBNAIL_URL);
+    }
+
+
+    @Test
+    @Transactional
     public void getAllSuppliersByValidFromIsEqualToSomething() throws Exception {
         // Initialize the database
         suppliersRepository.saveAndFlush(suppliers);
@@ -1836,7 +1906,7 @@ public class SuppliersResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(suppliers.getId().intValue())))
-            .andExpect(jsonPath("$.[*].supplierName").value(hasItem(DEFAULT_SUPPLIER_NAME)))
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].supplierReference").value(hasItem(DEFAULT_SUPPLIER_REFERENCE)))
             .andExpect(jsonPath("$.[*].bankAccountName").value(hasItem(DEFAULT_BANK_ACCOUNT_NAME)))
             .andExpect(jsonPath("$.[*].bankAccountBranch").value(hasItem(DEFAULT_BANK_ACCOUNT_BRANCH)))
@@ -1851,8 +1921,7 @@ public class SuppliersResourceIT {
             .andExpect(jsonPath("$.[*].webServiceUrl").value(hasItem(DEFAULT_WEB_SERVICE_URL)))
             .andExpect(jsonPath("$.[*].creditRating").value(hasItem(DEFAULT_CREDIT_RATING)))
             .andExpect(jsonPath("$.[*].activeFlag").value(hasItem(DEFAULT_ACTIVE_FLAG.booleanValue())))
-            .andExpect(jsonPath("$.[*].avatarContentType").value(hasItem(DEFAULT_AVATAR_CONTENT_TYPE)))
-            .andExpect(jsonPath("$.[*].avatar").value(hasItem(Base64Utils.encodeToString(DEFAULT_AVATAR))))
+            .andExpect(jsonPath("$.[*].thumbnailUrl").value(hasItem(DEFAULT_THUMBNAIL_URL)))
             .andExpect(jsonPath("$.[*].validFrom").value(hasItem(DEFAULT_VALID_FROM.toString())))
             .andExpect(jsonPath("$.[*].validTo").value(hasItem(DEFAULT_VALID_TO.toString())));
 
@@ -1902,7 +1971,7 @@ public class SuppliersResourceIT {
         // Disconnect from session so that the updates on updatedSuppliers are not directly saved in db
         em.detach(updatedSuppliers);
         updatedSuppliers
-            .supplierName(UPDATED_SUPPLIER_NAME)
+            .name(UPDATED_NAME)
             .supplierReference(UPDATED_SUPPLIER_REFERENCE)
             .bankAccountName(UPDATED_BANK_ACCOUNT_NAME)
             .bankAccountBranch(UPDATED_BANK_ACCOUNT_BRANCH)
@@ -1917,8 +1986,7 @@ public class SuppliersResourceIT {
             .webServiceUrl(UPDATED_WEB_SERVICE_URL)
             .creditRating(UPDATED_CREDIT_RATING)
             .activeFlag(UPDATED_ACTIVE_FLAG)
-            .avatar(UPDATED_AVATAR)
-            .avatarContentType(UPDATED_AVATAR_CONTENT_TYPE)
+            .thumbnailUrl(UPDATED_THUMBNAIL_URL)
             .validFrom(UPDATED_VALID_FROM)
             .validTo(UPDATED_VALID_TO);
         SuppliersDTO suppliersDTO = suppliersMapper.toDto(updatedSuppliers);
@@ -1932,7 +2000,7 @@ public class SuppliersResourceIT {
         List<Suppliers> suppliersList = suppliersRepository.findAll();
         assertThat(suppliersList).hasSize(databaseSizeBeforeUpdate);
         Suppliers testSuppliers = suppliersList.get(suppliersList.size() - 1);
-        assertThat(testSuppliers.getSupplierName()).isEqualTo(UPDATED_SUPPLIER_NAME);
+        assertThat(testSuppliers.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testSuppliers.getSupplierReference()).isEqualTo(UPDATED_SUPPLIER_REFERENCE);
         assertThat(testSuppliers.getBankAccountName()).isEqualTo(UPDATED_BANK_ACCOUNT_NAME);
         assertThat(testSuppliers.getBankAccountBranch()).isEqualTo(UPDATED_BANK_ACCOUNT_BRANCH);
@@ -1947,8 +2015,7 @@ public class SuppliersResourceIT {
         assertThat(testSuppliers.getWebServiceUrl()).isEqualTo(UPDATED_WEB_SERVICE_URL);
         assertThat(testSuppliers.getCreditRating()).isEqualTo(UPDATED_CREDIT_RATING);
         assertThat(testSuppliers.isActiveFlag()).isEqualTo(UPDATED_ACTIVE_FLAG);
-        assertThat(testSuppliers.getAvatar()).isEqualTo(UPDATED_AVATAR);
-        assertThat(testSuppliers.getAvatarContentType()).isEqualTo(UPDATED_AVATAR_CONTENT_TYPE);
+        assertThat(testSuppliers.getThumbnailUrl()).isEqualTo(UPDATED_THUMBNAIL_URL);
         assertThat(testSuppliers.getValidFrom()).isEqualTo(UPDATED_VALID_FROM);
         assertThat(testSuppliers.getValidTo()).isEqualTo(UPDATED_VALID_TO);
     }

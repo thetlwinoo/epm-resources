@@ -29,9 +29,8 @@
             "fieldTypeBlobContent": "text"
         },
         {
-            "fieldName": "photo",
-            "fieldType": "byte[]",
-            "fieldTypeBlobContent": "image"
+            "fieldName": "thumbnailUrl",
+            "fieldType": "String"
         },
         {
             "fieldName": "lastEditedBy",

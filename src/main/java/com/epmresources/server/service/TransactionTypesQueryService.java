@@ -91,8 +91,8 @@ public class TransactionTypesQueryService extends QueryService<TransactionTypes>
             if (criteria.getId() != null) {
                 specification = specification.and(buildSpecification(criteria.getId(), TransactionTypes_.id));
             }
-            if (criteria.getTransactionTypeName() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getTransactionTypeName(), TransactionTypes_.transactionTypeName));
+            if (criteria.getName() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getName(), TransactionTypes_.name));
             }
             if (criteria.getValidFrom() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getValidFrom(), TransactionTypes_.validFrom));

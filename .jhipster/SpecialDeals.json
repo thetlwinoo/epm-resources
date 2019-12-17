@@ -65,14 +65,14 @@
             "otherEntityName": "buyingGroups",
             "otherEntityRelationshipName": "specialDeals",
             "relationshipName": "buyingGroup",
-            "otherEntityField": "buyingGroupName"
+            "otherEntityField": "name"
         },
         {
             "relationshipType": "many-to-one",
             "otherEntityName": "customerCategories",
             "otherEntityRelationshipName": "specialDeals",
             "relationshipName": "customerCategory",
-            "otherEntityField": "customerCategoryName"
+            "otherEntityField": "name"
         },
         {
             "relationshipType": "many-to-one",

@@ -27,8 +27,8 @@ public class Reviews implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    @Column(name = "reviewer_name")
-    private String reviewerName;
+    @Column(name = "name")
+    private String name;
 
     @Pattern(regexp = "^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$")
     @Column(name = "email_address")
@@ -65,7 +65,7 @@ public class Reviews implements Serializable {
     @Column(name = "last_edited_when")
     private Instant lastEditedWhen;
 
-    @OneToMany(mappedBy = "review", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "review",cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<ReviewLines> reviewLineLists = new HashSet<>();
 
@@ -82,17 +82,17 @@ public class Reviews implements Serializable {
         this.id = id;
     }
 
-    public String getReviewerName() {
-        return reviewerName;
+    public String getName() {
+        return name;
     }
 
-    public Reviews reviewerName(String reviewerName) {
-        this.reviewerName = reviewerName;
+    public Reviews name(String name) {
+        this.name = name;
         return this;
     }
 
-    public void setReviewerName(String reviewerName) {
-        this.reviewerName = reviewerName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getEmailAddress() {
@@ -284,7 +284,7 @@ public class Reviews implements Serializable {
     public String toString() {
         return "Reviews{" +
             "id=" + getId() +
-            ", reviewerName='" + getReviewerName() + "'" +
+            ", name='" + getName() + "'" +
             ", emailAddress='" + getEmailAddress() + "'" +
             ", reviewDate='" + getReviewDate() + "'" +
             ", overAllSellerRating=" + getOverAllSellerRating() +

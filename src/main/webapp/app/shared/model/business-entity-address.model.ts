@@ -2,7 +2,7 @@ export interface IBusinessEntityAddress {
   id?: number;
   addressId?: number;
   personId?: number;
-  addressTypeAddressTypeName?: string;
+  addressTypeName?: string;
   addressTypeId?: number;
 }
 
@@ -11,7 +11,7 @@ export class BusinessEntityAddress implements IBusinessEntityAddress {
     public id?: number,
     public addressId?: number,
     public personId?: number,
-    public addressTypeAddressTypeName?: string,
+    public addressTypeName?: string,
     public addressTypeId?: number
   ) {}
 }

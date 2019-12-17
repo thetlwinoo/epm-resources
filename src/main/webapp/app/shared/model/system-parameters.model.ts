@@ -1,9 +1,9 @@
 export interface ISystemParameters {
   id?: number;
   applicationSettings?: string;
-  deliveryCityCityName?: string;
+  deliveryCityName?: string;
   deliveryCityId?: number;
-  postalCityCityName?: string;
+  postalCityName?: string;
   postalCityId?: number;
 }
 
@@ -11,9 +11,9 @@ export class SystemParameters implements ISystemParameters {
   constructor(
     public id?: number,
     public applicationSettings?: string,
-    public deliveryCityCityName?: string,
+    public deliveryCityName?: string,
     public deliveryCityId?: number,
-    public postalCityCityName?: string,
+    public postalCityName?: string,
     public postalCityId?: number
   ) {}
 }

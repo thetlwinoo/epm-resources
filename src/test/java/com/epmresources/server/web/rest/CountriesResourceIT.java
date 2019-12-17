@@ -40,8 +40,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = EpmresourcesApp.class)
 public class CountriesResourceIT {
 
-    private static final String DEFAULT_COUNTRY_NAME = "AAAAAAAAAA";
-    private static final String UPDATED_COUNTRY_NAME = "BBBBBBBBBB";
+    private static final String DEFAULT_NAME = "AAAAAAAAAA";
+    private static final String UPDATED_NAME = "BBBBBBBBBB";
 
     private static final String DEFAULT_FORMAL_NAME = "AAAAAAAAAA";
     private static final String UPDATED_FORMAL_NAME = "BBBBBBBBBB";
@@ -129,7 +129,7 @@ public class CountriesResourceIT {
      */
     public static Countries createEntity(EntityManager em) {
         Countries countries = new Countries()
-            .countryName(DEFAULT_COUNTRY_NAME)
+            .name(DEFAULT_NAME)
             .formalName(DEFAULT_FORMAL_NAME)
             .isoAplha3Code(DEFAULT_ISO_APLHA_3_CODE)
             .isoNumericCode(DEFAULT_ISO_NUMERIC_CODE)
@@ -151,7 +151,7 @@ public class CountriesResourceIT {
      */
     public static Countries createUpdatedEntity(EntityManager em) {
         Countries countries = new Countries()
-            .countryName(UPDATED_COUNTRY_NAME)
+            .name(UPDATED_NAME)
             .formalName(UPDATED_FORMAL_NAME)
             .isoAplha3Code(UPDATED_ISO_APLHA_3_CODE)
             .isoNumericCode(UPDATED_ISO_NUMERIC_CODE)
@@ -187,7 +187,7 @@ public class CountriesResourceIT {
         List<Countries> countriesList = countriesRepository.findAll();
         assertThat(countriesList).hasSize(databaseSizeBeforeCreate + 1);
         Countries testCountries = countriesList.get(countriesList.size() - 1);
-        assertThat(testCountries.getCountryName()).isEqualTo(DEFAULT_COUNTRY_NAME);
+        assertThat(testCountries.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testCountries.getFormalName()).isEqualTo(DEFAULT_FORMAL_NAME);
         assertThat(testCountries.getIsoAplha3Code()).isEqualTo(DEFAULT_ISO_APLHA_3_CODE);
         assertThat(testCountries.getIsoNumericCode()).isEqualTo(DEFAULT_ISO_NUMERIC_CODE);
@@ -224,10 +224,10 @@ public class CountriesResourceIT {
 
     @Test
     @Transactional
-    public void checkCountryNameIsRequired() throws Exception {
+    public void checkNameIsRequired() throws Exception {
         int databaseSizeBeforeTest = countriesRepository.findAll().size();
         // set the field null
-        countries.setCountryName(null);
+        countries.setName(null);
 
         // Create the Countries, which fails.
         CountriesDTO countriesDTO = countriesMapper.toDto(countries);
@@ -366,7 +366,7 @@ public class CountriesResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(countries.getId().intValue())))
-            .andExpect(jsonPath("$.[*].countryName").value(hasItem(DEFAULT_COUNTRY_NAME)))
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].formalName").value(hasItem(DEFAULT_FORMAL_NAME)))
             .andExpect(jsonPath("$.[*].isoAplha3Code").value(hasItem(DEFAULT_ISO_APLHA_3_CODE)))
             .andExpect(jsonPath("$.[*].isoNumericCode").value(hasItem(DEFAULT_ISO_NUMERIC_CODE)))
@@ -391,7 +391,7 @@ public class CountriesResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(countries.getId().intValue()))
-            .andExpect(jsonPath("$.countryName").value(DEFAULT_COUNTRY_NAME))
+            .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
             .andExpect(jsonPath("$.formalName").value(DEFAULT_FORMAL_NAME))
             .andExpect(jsonPath("$.isoAplha3Code").value(DEFAULT_ISO_APLHA_3_CODE))
             .andExpect(jsonPath("$.isoNumericCode").value(DEFAULT_ISO_NUMERIC_CODE))
@@ -407,79 +407,79 @@ public class CountriesResourceIT {
 
     @Test
     @Transactional
-    public void getAllCountriesByCountryNameIsEqualToSomething() throws Exception {
+    public void getAllCountriesByNameIsEqualToSomething() throws Exception {
         // Initialize the database
         countriesRepository.saveAndFlush(countries);
 
-        // Get all the countriesList where countryName equals to DEFAULT_COUNTRY_NAME
-        defaultCountriesShouldBeFound("countryName.equals=" + DEFAULT_COUNTRY_NAME);
+        // Get all the countriesList where name equals to DEFAULT_NAME
+        defaultCountriesShouldBeFound("name.equals=" + DEFAULT_NAME);
 
-        // Get all the countriesList where countryName equals to UPDATED_COUNTRY_NAME
-        defaultCountriesShouldNotBeFound("countryName.equals=" + UPDATED_COUNTRY_NAME);
+        // Get all the countriesList where name equals to UPDATED_NAME
+        defaultCountriesShouldNotBeFound("name.equals=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllCountriesByCountryNameIsNotEqualToSomething() throws Exception {
+    public void getAllCountriesByNameIsNotEqualToSomething() throws Exception {
         // Initialize the database
         countriesRepository.saveAndFlush(countries);
 
-        // Get all the countriesList where countryName not equals to DEFAULT_COUNTRY_NAME
-        defaultCountriesShouldNotBeFound("countryName.notEquals=" + DEFAULT_COUNTRY_NAME);
+        // Get all the countriesList where name not equals to DEFAULT_NAME
+        defaultCountriesShouldNotBeFound("name.notEquals=" + DEFAULT_NAME);
 
-        // Get all the countriesList where countryName not equals to UPDATED_COUNTRY_NAME
-        defaultCountriesShouldBeFound("countryName.notEquals=" + UPDATED_COUNTRY_NAME);
+        // Get all the countriesList where name not equals to UPDATED_NAME
+        defaultCountriesShouldBeFound("name.notEquals=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllCountriesByCountryNameIsInShouldWork() throws Exception {
+    public void getAllCountriesByNameIsInShouldWork() throws Exception {
         // Initialize the database
         countriesRepository.saveAndFlush(countries);
 
-        // Get all the countriesList where countryName in DEFAULT_COUNTRY_NAME or UPDATED_COUNTRY_NAME
-        defaultCountriesShouldBeFound("countryName.in=" + DEFAULT_COUNTRY_NAME + "," + UPDATED_COUNTRY_NAME);
+        // Get all the countriesList where name in DEFAULT_NAME or UPDATED_NAME
+        defaultCountriesShouldBeFound("name.in=" + DEFAULT_NAME + "," + UPDATED_NAME);
 
-        // Get all the countriesList where countryName equals to UPDATED_COUNTRY_NAME
-        defaultCountriesShouldNotBeFound("countryName.in=" + UPDATED_COUNTRY_NAME);
+        // Get all the countriesList where name equals to UPDATED_NAME
+        defaultCountriesShouldNotBeFound("name.in=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllCountriesByCountryNameIsNullOrNotNull() throws Exception {
+    public void getAllCountriesByNameIsNullOrNotNull() throws Exception {
         // Initialize the database
         countriesRepository.saveAndFlush(countries);
 
-        // Get all the countriesList where countryName is not null
-        defaultCountriesShouldBeFound("countryName.specified=true");
+        // Get all the countriesList where name is not null
+        defaultCountriesShouldBeFound("name.specified=true");
 
-        // Get all the countriesList where countryName is null
-        defaultCountriesShouldNotBeFound("countryName.specified=false");
+        // Get all the countriesList where name is null
+        defaultCountriesShouldNotBeFound("name.specified=false");
     }
                 @Test
     @Transactional
-    public void getAllCountriesByCountryNameContainsSomething() throws Exception {
+    public void getAllCountriesByNameContainsSomething() throws Exception {
         // Initialize the database
         countriesRepository.saveAndFlush(countries);
 
-        // Get all the countriesList where countryName contains DEFAULT_COUNTRY_NAME
-        defaultCountriesShouldBeFound("countryName.contains=" + DEFAULT_COUNTRY_NAME);
+        // Get all the countriesList where name contains DEFAULT_NAME
+        defaultCountriesShouldBeFound("name.contains=" + DEFAULT_NAME);
 
-        // Get all the countriesList where countryName contains UPDATED_COUNTRY_NAME
-        defaultCountriesShouldNotBeFound("countryName.contains=" + UPDATED_COUNTRY_NAME);
+        // Get all the countriesList where name contains UPDATED_NAME
+        defaultCountriesShouldNotBeFound("name.contains=" + UPDATED_NAME);
     }
 
     @Test
     @Transactional
-    public void getAllCountriesByCountryNameNotContainsSomething() throws Exception {
+    public void getAllCountriesByNameNotContainsSomething() throws Exception {
         // Initialize the database
         countriesRepository.saveAndFlush(countries);
 
-        // Get all the countriesList where countryName does not contain DEFAULT_COUNTRY_NAME
-        defaultCountriesShouldNotBeFound("countryName.doesNotContain=" + DEFAULT_COUNTRY_NAME);
+        // Get all the countriesList where name does not contain DEFAULT_NAME
+        defaultCountriesShouldNotBeFound("name.doesNotContain=" + DEFAULT_NAME);
 
-        // Get all the countriesList where countryName does not contain UPDATED_COUNTRY_NAME
-        defaultCountriesShouldBeFound("countryName.doesNotContain=" + UPDATED_COUNTRY_NAME);
+        // Get all the countriesList where name does not contain UPDATED_NAME
+        defaultCountriesShouldBeFound("name.doesNotContain=" + UPDATED_NAME);
     }
 
 
@@ -1350,7 +1350,7 @@ public class CountriesResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(countries.getId().intValue())))
-            .andExpect(jsonPath("$.[*].countryName").value(hasItem(DEFAULT_COUNTRY_NAME)))
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].formalName").value(hasItem(DEFAULT_FORMAL_NAME)))
             .andExpect(jsonPath("$.[*].isoAplha3Code").value(hasItem(DEFAULT_ISO_APLHA_3_CODE)))
             .andExpect(jsonPath("$.[*].isoNumericCode").value(hasItem(DEFAULT_ISO_NUMERIC_CODE)))
@@ -1409,7 +1409,7 @@ public class CountriesResourceIT {
         // Disconnect from session so that the updates on updatedCountries are not directly saved in db
         em.detach(updatedCountries);
         updatedCountries
-            .countryName(UPDATED_COUNTRY_NAME)
+            .name(UPDATED_NAME)
             .formalName(UPDATED_FORMAL_NAME)
             .isoAplha3Code(UPDATED_ISO_APLHA_3_CODE)
             .isoNumericCode(UPDATED_ISO_NUMERIC_CODE)
@@ -1432,7 +1432,7 @@ public class CountriesResourceIT {
         List<Countries> countriesList = countriesRepository.findAll();
         assertThat(countriesList).hasSize(databaseSizeBeforeUpdate);
         Countries testCountries = countriesList.get(countriesList.size() - 1);
-        assertThat(testCountries.getCountryName()).isEqualTo(UPDATED_COUNTRY_NAME);
+        assertThat(testCountries.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testCountries.getFormalName()).isEqualTo(UPDATED_FORMAL_NAME);
         assertThat(testCountries.getIsoAplha3Code()).isEqualTo(UPDATED_ISO_APLHA_3_CODE);
         assertThat(testCountries.getIsoNumericCode()).isEqualTo(UPDATED_ISO_NUMERIC_CODE);

@@ -11,7 +11,7 @@ public class ProductOptionSetDTO implements Serializable {
     private Long id;
 
     @NotNull
-    private String productOptionSetValue;
+    private String value;
 
 
     public Long getId() {
@@ -22,12 +22,12 @@ public class ProductOptionSetDTO implements Serializable {
         this.id = id;
     }
 
-    public String getProductOptionSetValue() {
-        return productOptionSetValue;
+    public String getValue() {
+        return value;
     }
 
-    public void setProductOptionSetValue(String productOptionSetValue) {
-        this.productOptionSetValue = productOptionSetValue;
+    public void setValue(String value) {
+        this.value = value;
     }
 
     @Override
@@ -55,7 +55,7 @@ public class ProductOptionSetDTO implements Serializable {
     public String toString() {
         return "ProductOptionSetDTO{" +
             "id=" + getId() +
-            ", productOptionSetValue='" + getProductOptionSetValue() + "'" +
+            ", value='" + getValue() + "'" +
             "}";
     }
 }

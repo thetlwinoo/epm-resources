@@ -74,8 +74,8 @@ describe('Service Tests', () => {
       it('should update a StateProvinces', () => {
         const returnedFromService = Object.assign(
           {
-            stateProvinceCode: 'BBBBBB',
-            stateProvinceName: 'BBBBBB',
+            code: 'BBBBBB',
+            name: 'BBBBBB',
             salesTerritory: 'BBBBBB',
             border: 'BBBBBB',
             latestRecordedPopulation: 1,
@@ -104,8 +104,8 @@ describe('Service Tests', () => {
       it('should return a list of StateProvinces', () => {
         const returnedFromService = Object.assign(
           {
-            stateProvinceCode: 'BBBBBB',
-            stateProvinceName: 'BBBBBB',
+            code: 'BBBBBB',
+            name: 'BBBBBB',
             salesTerritory: 'BBBBBB',
             border: 'BBBBBB',
             latestRecordedPopulation: 1,

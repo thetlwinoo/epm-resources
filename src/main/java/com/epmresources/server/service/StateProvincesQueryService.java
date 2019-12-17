@@ -91,11 +91,11 @@ public class StateProvincesQueryService extends QueryService<StateProvinces> {
             if (criteria.getId() != null) {
                 specification = specification.and(buildSpecification(criteria.getId(), StateProvinces_.id));
             }
-            if (criteria.getStateProvinceCode() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getStateProvinceCode(), StateProvinces_.stateProvinceCode));
+            if (criteria.getCode() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getCode(), StateProvinces_.code));
             }
-            if (criteria.getStateProvinceName() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getStateProvinceName(), StateProvinces_.stateProvinceName));
+            if (criteria.getName() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getName(), StateProvinces_.name));
             }
             if (criteria.getSalesTerritory() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getSalesTerritory(), StateProvinces_.salesTerritory));

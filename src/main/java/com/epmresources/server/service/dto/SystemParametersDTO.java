@@ -16,11 +16,11 @@ public class SystemParametersDTO implements Serializable {
 
     private Long deliveryCityId;
 
-    private String deliveryCityCityName;
+    private String deliveryCityName;
 
     private Long postalCityId;
 
-    private String postalCityCityName;
+    private String postalCityName;
 
     public Long getId() {
         return id;
@@ -46,12 +46,12 @@ public class SystemParametersDTO implements Serializable {
         this.deliveryCityId = citiesId;
     }
 
-    public String getDeliveryCityCityName() {
-        return deliveryCityCityName;
+    public String getDeliveryCityName() {
+        return deliveryCityName;
     }
 
-    public void setDeliveryCityCityName(String citiesCityName) {
-        this.deliveryCityCityName = citiesCityName;
+    public void setDeliveryCityName(String citiesName) {
+        this.deliveryCityName = citiesName;
     }
 
     public Long getPostalCityId() {
@@ -62,12 +62,12 @@ public class SystemParametersDTO implements Serializable {
         this.postalCityId = citiesId;
     }
 
-    public String getPostalCityCityName() {
-        return postalCityCityName;
+    public String getPostalCityName() {
+        return postalCityName;
     }
 
-    public void setPostalCityCityName(String citiesCityName) {
-        this.postalCityCityName = citiesCityName;
+    public void setPostalCityName(String citiesName) {
+        this.postalCityName = citiesName;
     }
 
     @Override
@@ -97,9 +97,9 @@ public class SystemParametersDTO implements Serializable {
             "id=" + getId() +
             ", applicationSettings='" + getApplicationSettings() + "'" +
             ", deliveryCity=" + getDeliveryCityId() +
-            ", deliveryCity='" + getDeliveryCityCityName() + "'" +
+            ", deliveryCity='" + getDeliveryCityName() + "'" +
             ", postalCity=" + getPostalCityId() +
-            ", postalCity='" + getPostalCityCityName() + "'" +
+            ", postalCity='" + getPostalCityName() + "'" +
             "}";
     }
 }
