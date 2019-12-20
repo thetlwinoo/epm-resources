@@ -5,11 +5,11 @@ export class ProductsComponentsPage {
   deleteButtons = element.all(by.css('jhi-products div table .btn-danger'));
   title = element.all(by.css('jhi-products div h2#page-heading span')).first();
 
-  async clickOnCreateButton(timeout?: number) {
+  async clickOnCreateButton() {
     await this.createButton.click();
   }
 
-  async clickOnLastDeleteButton(timeout?: number) {
+  async clickOnLastDeleteButton() {
     await this.deleteButtons.last().click();
   }
 
@@ -92,7 +92,7 @@ export class ProductsUpdatePage {
     return await this.thumbnailListInput.getAttribute('value');
   }
 
-  getActiveIndInput(timeout?: number) {
+  getActiveIndInput() {
     return this.activeIndInput;
   }
   async setLastEditedByInput(lastEditedBy) {
@@ -111,7 +111,7 @@ export class ProductsUpdatePage {
     return await this.lastEditedWhenInput.getAttribute('value');
   }
 
-  async productDocumentSelectLastOption(timeout?: number) {
+  async productDocumentSelectLastOption() {
     await this.productDocumentSelect
       .all(by.tagName('option'))
       .last()
@@ -130,7 +130,7 @@ export class ProductsUpdatePage {
     return await this.productDocumentSelect.element(by.css('option:checked')).getText();
   }
 
-  async supplierSelectLastOption(timeout?: number) {
+  async supplierSelectLastOption() {
     await this.supplierSelect
       .all(by.tagName('option'))
       .last()
@@ -149,7 +149,7 @@ export class ProductsUpdatePage {
     return await this.supplierSelect.element(by.css('option:checked')).getText();
   }
 
-  async productCategorySelectLastOption(timeout?: number) {
+  async productCategorySelectLastOption() {
     await this.productCategorySelect
       .all(by.tagName('option'))
       .last()
@@ -168,7 +168,7 @@ export class ProductsUpdatePage {
     return await this.productCategorySelect.element(by.css('option:checked')).getText();
   }
 
-  async productBrandSelectLastOption(timeout?: number) {
+  async productBrandSelectLastOption() {
     await this.productBrandSelect
       .all(by.tagName('option'))
       .last()
@@ -187,11 +187,11 @@ export class ProductsUpdatePage {
     return await this.productBrandSelect.element(by.css('option:checked')).getText();
   }
 
-  async save(timeout?: number) {
+  async save() {
     await this.saveButton.click();
   }
 
-  async cancel(timeout?: number) {
+  async cancel() {
     await this.cancelButton.click();
   }
 
@@ -208,7 +208,7 @@ export class ProductsDeleteDialog {
     return this.dialogTitle.getAttribute('jhiTranslate');
   }
 
-  async clickOnConfirmButton(timeout?: number) {
+  async clickOnConfirmButton() {
     await this.confirmButton.click();
   }
 }

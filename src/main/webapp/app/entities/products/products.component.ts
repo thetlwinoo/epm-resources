@@ -2,22 +2,20 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpHeaders, HttpResponse } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { filter, map } from 'rxjs/operators';
 import { JhiEventManager, JhiParseLinks, JhiDataUtils } from 'ng-jhipster';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { IProducts } from 'app/shared/model/products.model';
-import { AccountService } from 'app/core/auth/account.service';
 
 import { ITEMS_PER_PAGE } from 'app/shared/constants/pagination.constants';
 import { ProductsService } from './products.service';
+import { ProductsDeleteDialogComponent } from './products-delete-dialog.component';
 
 @Component({
   selector: 'jhi-products',
   templateUrl: './products.component.html'
 })
 export class ProductsComponent implements OnInit, OnDestroy {
-  currentAccount: any;
   products: IProducts[];
   error: any;
   success: any;
@@ -34,11 +32,11 @@ export class ProductsComponent implements OnInit, OnDestroy {
   constructor(
     protected productsService: ProductsService,
     protected parseLinks: JhiParseLinks,
-    protected accountService: AccountService,
     protected activatedRoute: ActivatedRoute,
     protected dataUtils: JhiDataUtils,
     protected router: Router,
-    protected eventManager: JhiEventManager
+    protected eventManager: JhiEventManager,
+    protected modalService: NgbModal
   ) {
     this.itemsPerPage = ITEMS_PER_PAGE;
     this.routeData = this.activatedRoute.data.subscribe(data => {
@@ -91,9 +89,6 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.loadAll();
-    this.accountService.identity().subscribe(account => {
-      this.currentAccount = account;
-    });
     this.registerChangeInProducts();
   }
 
@@ -114,7 +109,12 @@ export class ProductsComponent implements OnInit, OnDestroy {
   }
 
   registerChangeInProducts() {
-    this.eventSubscriber = this.eventManager.subscribe('productsListModification', response => this.loadAll());
+    this.eventSubscriber = this.eventManager.subscribe('productsListModification', () => this.loadAll());
+  }
+
+  delete(products: IProducts) {
+    const modalRef = this.modalService.open(ProductsDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
+    modalRef.componentInstance.products = products;
   }
 
   sort() {

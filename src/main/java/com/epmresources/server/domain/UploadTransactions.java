@@ -47,7 +47,7 @@ public class UploadTransactions implements Serializable {
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<SupplierImportedDocument> importDocumentLists = new HashSet<>();
 
-    @OneToMany(mappedBy = "uploadTransaction")
+    @OneToMany(mappedBy = "uploadTransaction",cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<StockItemTemp> stockItemTempLists = new HashSet<>();
 

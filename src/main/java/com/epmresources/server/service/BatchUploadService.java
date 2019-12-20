@@ -7,5 +7,5 @@ import java.security.Principal;
 
 public interface BatchUploadService {
     UploadTransactionsDTO readDataFromExcel(MultipartFile file, String serverUrl, Principal principal);
-    void importToSystem(Long transactionId, Principal principal);
+    void importToSystem(Long transactionId, String baseUrl, Principal principal);
 }

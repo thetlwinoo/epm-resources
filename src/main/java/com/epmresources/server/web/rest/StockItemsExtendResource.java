@@ -17,10 +17,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.net.URISyntaxException;
 import java.security.Principal;
@@ -53,22 +55,26 @@ public class StockItemsExtendResource {
     }
 
     @PostMapping("/photos")
-    public ResponseEntity<PhotosDTO> addPhotos(@Valid @RequestBody PhotosDTO photosDTO) throws URISyntaxException {
+    public ResponseEntity<PhotosDTO> addPhotos(@Valid @RequestBody PhotosDTO photosDTO, HttpServletRequest request) throws URISyntaxException {
         log.debug("REST request to save Photos : {}", photosDTO);
         if (photosDTO.getId() != null) {
             throw new BadRequestAlertException("A new stockItems cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        PhotosDTO result = stockItemsExtendService.addPhotos(photosDTO);
+//        String baseUrl = String.format("%s://%s:%d/products-extend/products",request.getScheme(),  request.getServerName(), request.getServerPort());
+        String baseUrl = request.getRequestURL().toString().replace("/products-extend/products", "");
+        PhotosDTO result = stockItemsExtendService.addPhotos(photosDTO,baseUrl);
         return ResponseEntity.ok().body(result);
     }
 
     @PutMapping("/photos")
-    public ResponseEntity<PhotosDTO> updatePhotos(@Valid @RequestBody PhotosDTO photosDTO) throws URISyntaxException {
+    public ResponseEntity<PhotosDTO> updatePhotos(@Valid @RequestBody PhotosDTO photosDTO, HttpServletRequest request) throws URISyntaxException {
         log.debug("REST request to update photos : {}", photosDTO);
         if (photosDTO.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
-        PhotosDTO result = stockItemsExtendService.updatePhotos(photosDTO);
+//        String baseUrl = String.format("%s://%s:%d/products-extend/products",request.getScheme(),  request.getServerName(), request.getServerPort());
+        String baseUrl = request.getRequestURL().toString().replace("/products-extend/products", "");
+        PhotosDTO result = stockItemsExtendService.updatePhotos(photosDTO,baseUrl);
         return ResponseEntity.ok().body(result);
     }
 
@@ -119,5 +125,11 @@ public class StockItemsExtendResource {
         Long count = stockItemsExtendRepository.findAllCountByActive(suppliersDTOOptional.get().getId(), activeInd);
 
         return count;
+    }
+
+    @GetMapping("/products/{id}")
+    public ResponseEntity getStockItemsByProductId(@PathVariable Long id) {
+        List<StockItemsDTO> stockItemsDTOList = stockItemsExtendService.findAllByProductId(id);
+        return new ResponseEntity<List>(stockItemsDTOList, HttpStatus.OK);
     }
 }

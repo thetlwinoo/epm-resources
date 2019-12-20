@@ -273,7 +273,7 @@ public class StockItemTemp implements Serializable {
     @Column(name = "last_edited_when")
     private Instant lastEditedWhen;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
     @JsonIgnoreProperties("stockItemTempLists")
     private UploadTransactions uploadTransaction;
 

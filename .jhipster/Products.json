@@ -27,7 +27,8 @@
         },
         {
             "fieldName": "thumbnailList",
-            "fieldType": "String"
+          "fieldType": "byte[]",
+          "fieldTypeBlobContent": "text"
         },
         {
             "fieldName": "activeInd",

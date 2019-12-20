@@ -7,10 +7,7 @@ import com.epmresources.server.service.ProductsExtendService;
 import com.epmresources.server.service.ProductsQueryService;
 import com.epmresources.server.service.ProductsService;
 import com.epmresources.server.service.StockItemsService;
-import com.epmresources.server.service.dto.ProductCategoryDTO;
-import com.epmresources.server.service.dto.ProductsCriteria;
-import com.epmresources.server.service.dto.ProductsDTO;
-import com.epmresources.server.service.dto.StockItemsDTO;
+import com.epmresources.server.service.dto.*;
 import com.epmresources.server.web.rest.errors.BadRequestAlertException;
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.PaginationUtil;
@@ -32,6 +29,7 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -87,9 +85,10 @@ public class ProductsExtendResource {
         if (products.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
-        String _serverUrl = request.getRequestURL().toString().replace("/products-extend/products", "");
+        String baseUrl = request.getRequestURL().toString().replace("/products-extend/products", "");
+//        String baseUrl = String.format("%s://%s:%d/products-extend/products",request.getScheme(),  request.getServerName(), request.getServerPort());
         try {
-            ProductsDTO result = productExtendService.save(products, _serverUrl);
+            ProductsDTO result = productExtendService.save(products, baseUrl);
 
             return ResponseEntity.ok()
                 .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
@@ -189,25 +188,26 @@ public class ProductsExtendResource {
 
     @RequestMapping(value = "/recent", method = RequestMethod.GET)
     public ResponseEntity getByNewlyAdded() {
-        List returnList = productExtendService.findTop18ByOrderByLastEditedWhenDesc();
-        return new ResponseEntity<List>(returnList, HttpStatus.OK);
+        List<ProductsExtendDTO> returnList = productExtendService.findTop18ByOrderByLastEditedWhenDesc();
+
+        return new ResponseEntity(returnList, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/dailydiscover", method = RequestMethod.GET)
     public ResponseEntity getByDailyDiscover() {
-        List returnList = productExtendService.findTop18ByOrderByLastEditedWhenDesc();
-        return new ResponseEntity<List>(returnList, HttpStatus.OK);
+        List<ProductsExtendDTO> returnList = productExtendService.findTop18ByOrderByLastEditedWhenDesc();
+        return new ResponseEntity(returnList, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/mostselling", method = RequestMethod.GET)
     public ResponseEntity getByMostSelling() {
-        List returnList = productExtendService.findTop12ByOrderBySellCountDesc();
+        List<ProductsExtendDTO> returnList = productExtendService.findTop12ByOrderBySellCountDesc();
         return new ResponseEntity<List>(returnList, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/interested", method = RequestMethod.GET)
     public ResponseEntity getByInterested() {
-        List returnList = productExtendService.findTop12ByOrderBySellCountDesc();
+        List<ProductsExtendDTO> returnList = productExtendService.findTop12ByOrderBySellCountDesc();
         return new ResponseEntity<List>(returnList, HttpStatus.OK);
     }
 

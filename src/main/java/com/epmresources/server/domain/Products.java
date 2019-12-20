@@ -45,6 +45,8 @@ public class Products implements Serializable {
     @Column(name = "sell_count")
     private Integer sellCount;
 
+    @Lob
+    @Type(type = "org.hibernate.type.TextType")
     @Column(name = "thumbnail_list")
     private String thumbnailList;
 

@@ -6,10 +6,14 @@ import com.epmresources.server.domain.StockItems;
 import com.epmresources.server.repository.ProductsExtendFilterRepository;
 import com.epmresources.server.repository.ProductsExtendRepository;
 import com.epmresources.server.service.ProductsExtendService;
+import com.epmresources.server.service.StockItemsExtendService;
 import com.epmresources.server.service.dto.ProductCategoryDTO;
 import com.epmresources.server.service.dto.ProductsDTO;
+import com.epmresources.server.service.dto.ProductsExtendDTO;
+import com.epmresources.server.service.dto.StockItemsDTO;
 import com.epmresources.server.service.mapper.ProductCategoryMapper;
 import com.epmresources.server.service.mapper.ProductsMapper;
+import com.epmresources.server.service.mapper.StockItemsMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.Cacheable;
@@ -19,10 +23,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -33,75 +34,213 @@ public class ProductsExtendServiceImpl implements ProductsExtendService {
     private final ProductsExtendRepository productsExtendRepository;
     private final ProductsExtendFilterRepository productsExtendFilterRepository;
     private final ProductCategoryMapper productCategoryMapper;
+    private final StockItemsExtendService stockItemsExtendService;
+    private final StockItemsMapper stockItemsMapper;
     private final ProductsMapper productsMapper;
 
-    public ProductsExtendServiceImpl(ProductsExtendRepository productsExtendRepository, ProductsExtendFilterRepository productsExtendFilterRepository, ProductCategoryMapper productCategoryMapper, ProductsMapper productsMapper) {
+    public ProductsExtendServiceImpl(ProductsExtendRepository productsExtendRepository, ProductsExtendFilterRepository productsExtendFilterRepository, ProductCategoryMapper productCategoryMapper, StockItemsExtendService stockItemsExtendService, StockItemsMapper stockItemsMapper, ProductsMapper productsMapper) {
         this.productsExtendRepository = productsExtendRepository;
         this.productsExtendFilterRepository = productsExtendFilterRepository;
         this.productCategoryMapper = productCategoryMapper;
+        this.stockItemsExtendService = stockItemsExtendService;
+        this.stockItemsMapper = stockItemsMapper;
         this.productsMapper = productsMapper;
     }
 
     @Override
     @Cacheable(key = "{#pageable,#productCategoryId}")
-    public List<ProductsDTO> findAllByProductCategory(Pageable pageable, Long productCategoryId) {
-        return productsExtendRepository.findAllByProductCategoryId(pageable, productCategoryId).stream()
-            .map(productsMapper::toDto)
-            .collect(Collectors.toCollection(LinkedList::new));
+    public List<ProductsExtendDTO> findAllByProductCategory(Pageable pageable, Long productCategoryId) {
+//        return productsExtendRepository.findAllByProductCategoryId(pageable, productCategoryId).stream()
+//            .map(productsMapper::toDto)
+//            .collect(Collectors.toCollection(LinkedList::new));
+        List<ProductsExtendDTO> productsExtendDTOList = new ArrayList<>();
+
+        for(Products products: productsExtendRepository.findAllByProductCategoryId(pageable, productCategoryId)){
+            ProductsDTO productsDTO = productsMapper.toDto(products);
+            List<StockItemsDTO> stockItemsDTOList= new ArrayList<>();
+
+            for(StockItems stockItems:products.getStockItemLists()) {
+                StockItemsDTO stockItemsDTO = stockItemsMapper.toDto(stockItems);
+                stockItemsDTOList.add(stockItemsDTO);
+            }
+
+            ProductsExtendDTO productsExtendDTO = new ProductsExtendDTO();
+            convertObject(productsExtendDTO,productsDTO);
+            productsExtendDTO.setStockItemsDTOList(stockItemsDTOList);
+
+            productsExtendDTOList.add(productsExtendDTO);
+        }
+
+        return productsExtendDTOList;
     }
 
     @Override
 //    @Cacheable(key = "#root.methodName")
-    public List<ProductsDTO> findTop18ByOrderByLastEditedWhenDesc() {
-        return productsExtendRepository.findTop18ByOrderByLastEditedWhenDesc().stream()
-            .map(productsMapper::toDto)
-            .collect(Collectors.toCollection(LinkedList::new));
+    public List<ProductsExtendDTO> findTop18ByOrderByLastEditedWhenDesc() {
+        List<ProductsExtendDTO> productsExtendDTOList = new ArrayList<>();
+
+        for(Products products: productsExtendRepository.findTop18ByOrderByLastEditedWhenDesc()){
+            ProductsDTO productsDTO = productsMapper.toDto(products);
+            List<StockItemsDTO> stockItemsDTOList= new ArrayList<>();
+
+           for(StockItems stockItems:products.getStockItemLists()) {
+               StockItemsDTO stockItemsDTO = stockItemsMapper.toDto(stockItems);
+               stockItemsDTOList.add(stockItemsDTO);
+           }
+
+            ProductsExtendDTO productsExtendDTO = new ProductsExtendDTO();
+            convertObject(productsExtendDTO,productsDTO);
+            productsExtendDTO.setStockItemsDTOList(stockItemsDTOList);
+
+            productsExtendDTOList.add(productsExtendDTO);
+        }
+
+        return productsExtendDTOList;
+//         return  productsExtendRepository.findTop18ByOrderByLastEditedWhenDesc().stream()
+//            .map(productsMapper::toDto)
+//            .collect(Collectors.toCollection(LinkedList::new));
     }
 
     @Override
 //    @Cacheable(key = "#root.methodName")
-    public List<ProductsDTO> findTop12ByOrderBySellCountDesc() {
-        return productsExtendRepository.findTop12ByOrderBySellCountDesc().stream()
-            .map(productsMapper::toDto)
-            .collect(Collectors.toCollection(LinkedList::new));
+    public List<ProductsExtendDTO> findTop12ByOrderBySellCountDesc() {
+//        return productsExtendRepository.findTop12ByOrderBySellCountDesc().stream()
+//            .map(productsMapper::toDto)
+//            .collect(Collectors.toCollection(LinkedList::new));
+        List<ProductsExtendDTO> productsExtendDTOList = new ArrayList<>();
+
+        for(Products products: productsExtendRepository.findTop12ByOrderBySellCountDesc()){
+            ProductsDTO productsDTO = productsMapper.toDto(products);
+            List<StockItemsDTO> stockItemsDTOList= new ArrayList<>();
+
+            for(StockItems stockItems:products.getStockItemLists()) {
+                StockItemsDTO stockItemsDTO = stockItemsMapper.toDto(stockItems);
+                stockItemsDTOList.add(stockItemsDTO);
+            }
+
+            ProductsExtendDTO productsExtendDTO = new ProductsExtendDTO();
+            convertObject(productsExtendDTO,productsDTO);
+            productsExtendDTO.setStockItemsDTOList(stockItemsDTOList);
+
+            productsExtendDTOList.add(productsExtendDTO);
+        }
+
+        return productsExtendDTOList;
     }
 
     @Override
 //    @CachePut(key = "'findTop12ByOrderBySellCountDesc'")
-    public List<ProductsDTO> findTop12ByOrderBySellCountDescCacheRefresh() {
-        return productsExtendRepository.findTop12ByOrderBySellCountDesc().stream()
-            .map(productsMapper::toDto)
-            .collect(Collectors.toCollection(LinkedList::new));
+    public List<ProductsExtendDTO> findTop12ByOrderBySellCountDescCacheRefresh() {
+//        return productsExtendRepository.findTop12ByOrderBySellCountDesc().stream()
+//            .map(productsMapper::toDto)
+//            .collect(Collectors.toCollection(LinkedList::new));
+        List<ProductsExtendDTO> productsExtendDTOList = new ArrayList<>();
+
+        for(Products products: productsExtendRepository.findTop12ByOrderBySellCountDesc()){
+            ProductsDTO productsDTO = productsMapper.toDto(products);
+            List<StockItemsDTO> stockItemsDTOList= new ArrayList<>();
+
+            for(StockItems stockItems:products.getStockItemLists()) {
+                StockItemsDTO stockItemsDTO = stockItemsMapper.toDto(stockItems);
+                stockItemsDTOList.add(stockItemsDTO);
+            }
+
+            ProductsExtendDTO productsExtendDTO = new ProductsExtendDTO();
+            convertObject(productsExtendDTO,productsDTO);
+            productsExtendDTO.setStockItemsDTOList(stockItemsDTOList);
+
+            productsExtendDTOList.add(productsExtendDTO);
+        }
+
+        return productsExtendDTOList;
+
     }
 
     @Override
 //    @Cacheable(key = "#root.methodName")
-    public List<ProductsDTO> getRelatedProducts(Long productCategoryId, Long id) {
+    public List<ProductsExtendDTO> getRelatedProducts(Long productCategoryId, Long id) {
         List<Products> returnList = productsExtendRepository.findTop12ByProductCategoryIdAndIdIsNotOrderBySellCountDesc(productCategoryId, id);
         if (returnList.size() < 8) {
             returnList.addAll(productsExtendRepository.findAllByProductCategoryIdIsNotOrderBySellCountDesc(productCategoryId, PageRequest.of(0, 8 - returnList.size())));
         }
-        return returnList.stream()
-            .map(productsMapper::toDto)
-            .collect(Collectors.toCollection(LinkedList::new));
+//        return returnList.stream()
+//            .map(productsMapper::toDto)
+//            .collect(Collectors.toCollection(LinkedList::new));
+        List<ProductsExtendDTO> productsExtendDTOList = new ArrayList<>();
+
+        for(Products products: returnList){
+            ProductsDTO productsDTO = productsMapper.toDto(products);
+            List<StockItemsDTO> stockItemsDTOList= new ArrayList<>();
+
+            for(StockItems stockItems:products.getStockItemLists()) {
+                StockItemsDTO stockItemsDTO = stockItemsMapper.toDto(stockItems);
+                stockItemsDTOList.add(stockItemsDTO);
+            }
+
+            ProductsExtendDTO productsExtendDTO = new ProductsExtendDTO();
+            convertObject(productsExtendDTO,productsDTO);
+            productsExtendDTO.setStockItemsDTOList(stockItemsDTOList);
+
+            productsExtendDTOList.add(productsExtendDTO);
+        }
+
+        return productsExtendDTOList;
     }
 
     @Override
-    public List<ProductsDTO> searchProducts(String keyword, Integer page, Integer size) {
+    public List<ProductsExtendDTO> searchProducts(String keyword, Integer page, Integer size) {
         if (page == null || size == null) {
             throw new IllegalArgumentException("Page and size parameters are required");
         }
         PageRequest pageRequest = PageRequest.of(page, size);
-        return productsExtendRepository.findAllByNameContainingIgnoreCase(keyword, pageRequest).stream()
-            .map(productsMapper::toDto)
-            .collect(Collectors.toCollection(LinkedList::new));
+//        return productsExtendRepository.findAllByNameContainingIgnoreCase(keyword, pageRequest).stream()
+//            .map(productsMapper::toDto)
+//            .collect(Collectors.toCollection(LinkedList::new));
+        List<ProductsExtendDTO> productsExtendDTOList = new ArrayList<>();
+
+        for(Products products: productsExtendRepository.findAllByNameContainingIgnoreCase(keyword, pageRequest)){
+            ProductsDTO productsDTO = productsMapper.toDto(products);
+            List<StockItemsDTO> stockItemsDTOList= new ArrayList<>();
+
+            for(StockItems stockItems:products.getStockItemLists()) {
+                StockItemsDTO stockItemsDTO = stockItemsMapper.toDto(stockItems);
+                stockItemsDTOList.add(stockItemsDTO);
+            }
+
+            ProductsExtendDTO productsExtendDTO = new ProductsExtendDTO();
+            convertObject(productsExtendDTO,productsDTO);
+            productsExtendDTO.setStockItemsDTOList(stockItemsDTOList);
+
+            productsExtendDTOList.add(productsExtendDTO);
+        }
+
+        return productsExtendDTOList;
     }
 
     @Override
-    public List<ProductsDTO> searchProductsAll(String keyword) {
-        return productsExtendRepository.findAllByNameContainingIgnoreCase(keyword).stream()
-            .map(productsMapper::toDto)
-            .collect(Collectors.toCollection(LinkedList::new));
+    public List<ProductsExtendDTO> searchProductsAll(String keyword) {
+//        return productsExtendRepository.findAllByNameContainingIgnoreCase(keyword).stream()
+//            .map(productsMapper::toDto)
+//            .collect(Collectors.toCollection(LinkedList::new));
+        List<ProductsExtendDTO> productsExtendDTOList = new ArrayList<>();
+
+        for(Products products: productsExtendRepository.findAllByNameContainingIgnoreCase(keyword)){
+            ProductsDTO productsDTO = productsMapper.toDto(products);
+            List<StockItemsDTO> stockItemsDTOList= new ArrayList<>();
+
+            for(StockItems stockItems:products.getStockItemLists()) {
+                StockItemsDTO stockItemsDTO = stockItemsMapper.toDto(stockItems);
+                stockItemsDTOList.add(stockItemsDTO);
+            }
+
+            ProductsExtendDTO productsExtendDTO = new ProductsExtendDTO();
+            convertObject(productsExtendDTO,productsDTO);
+            productsExtendDTO.setStockItemsDTOList(stockItemsDTOList);
+
+            productsExtendDTOList.add(productsExtendDTO);
+        }
+
+        return productsExtendDTOList;
     }
 
     @Override
@@ -232,13 +371,18 @@ public class ProductsExtendServiceImpl implements ProductsExtendService {
 
             saveProduct = productsExtendRepository.save(saveProduct);
             int index = 0;
+            ArrayList thumbnailUrlList = new ArrayList();
             for (StockItems _stockItems : saveProduct.getStockItemLists()) {
                 _stockItems.setThumbnailUrl(serverUrl + "/photos-extend/stockitem/" + _stockItems.getId() + "/thumbnail");
+                thumbnailUrlList.add(_stockItems.getThumbnailUrl());
             }
             String _productnumber = saveProduct.getName().replaceAll("[^a-zA-Z0-9]", "").toUpperCase();
             _productnumber = _productnumber.length() > 8 ? _productnumber.substring(0, 8) : _productnumber;
             _productnumber = _productnumber + "-" + saveProduct.getId();
             saveProduct.setProductNumber(_productnumber);
+            String thumbnailUrls = StringUtils.join(thumbnailUrlList,";");
+            saveProduct.setThumbnailList(thumbnailUrls);
+
             productsExtendRepository.save(saveProduct);
         } catch (Exception ex) {
             System.err.println(ex.getMessage());
@@ -248,5 +392,25 @@ public class ProductsExtendServiceImpl implements ProductsExtendService {
 
     public List<Long> getProductIdsBySupplier(Long supplierId) {
         return productsExtendFilterRepository.findIdsBySupplier(supplierId);
+    }
+
+    private void convertObject(ProductsExtendDTO productsExtendDTO,ProductsDTO productsDTO){
+        productsExtendDTO.setId(productsDTO.getId());
+        productsExtendDTO.setName(productsDTO.getName());
+        productsExtendDTO.setHandle(productsDTO.getHandle());
+        productsExtendDTO.setProductNumber(productsDTO.getProductNumber());
+        productsExtendDTO.setSearchDetails(productsDTO.getSearchDetails());
+        productsExtendDTO.setSellCount(productsDTO.getSellCount());
+        productsExtendDTO.setThumbnailList(productsDTO.getThumbnailList());
+        productsExtendDTO.setActiveInd(productsDTO.isActiveInd());
+        productsExtendDTO.setLastEditedBy(productsDTO.getLastEditedBy());
+        productsExtendDTO.setLastEditedWhen(productsDTO.getLastEditedWhen());
+        productsExtendDTO.setProductDocumentId(productsDTO.getProductDocumentId());
+        productsExtendDTO.setSupplierId(productsDTO.getSupplierId());
+        productsExtendDTO.setSupplierName(productsDTO.getSupplierName());
+        productsExtendDTO.setProductCategoryId(productsDTO.getProductCategoryId());
+        productsExtendDTO.setProductCategoryName(productsDTO.getProductCategoryName());
+        productsExtendDTO.setProductBrandId(productsDTO.getProductBrandId());
+        productsExtendDTO.setProductBrandName(productsDTO.getProductBrandName());
     }
 }

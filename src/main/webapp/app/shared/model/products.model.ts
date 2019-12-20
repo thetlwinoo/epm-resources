@@ -8,7 +8,7 @@ export interface IProducts {
   productNumber?: string;
   searchDetails?: any;
   sellCount?: number;
-  thumbnailList?: string;
+  thumbnailList?: any;
   activeInd?: boolean;
   lastEditedBy?: string;
   lastEditedWhen?: Moment;
@@ -30,7 +30,7 @@ export class Products implements IProducts {
     public productNumber?: string,
     public searchDetails?: any,
     public sellCount?: number,
-    public thumbnailList?: string,
+    public thumbnailList?: any,
     public activeInd?: boolean,
     public lastEditedBy?: string,
     public lastEditedWhen?: Moment,

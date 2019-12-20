@@ -77,7 +77,7 @@ class ProductsGatlingTest extends Simulation {
                 , "productNumber":"SAMPLE_TEXT"
                 , "searchDetails":null
                 , "sellCount":"0"
-                , "thumbnailList":"SAMPLE_TEXT"
+                , "thumbnailList":null
                 , "activeInd":null
                 , "lastEditedBy":"SAMPLE_TEXT"
                 , "lastEditedWhen":"2020-01-01T00:00:00.000Z"

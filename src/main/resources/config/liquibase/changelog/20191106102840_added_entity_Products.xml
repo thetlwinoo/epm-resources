@@ -30,7 +30,7 @@
             <column name="sell_count" type="integer">
                 <constraints nullable="true" />
             </column>
-            <column name="thumbnail_list" type="varchar(255)">
+            <column name="thumbnail_list" type="${clobType}">
                 <constraints nullable="true" />
             </column>
             <column name="active_ind" type="boolean">
@@ -67,7 +67,7 @@
     <!--
         Load sample data generated with Faker.js
         - This data can be easily edited using a CSV editor (or even MS Excel) and
-          is located in the 'src/main/resources/config/liquibase/data' directory
+          is located in the 'src/main/resources/config/liquibase/fake-data' directory
         - By default this data is applied when running with the JHipster 'dev' profile.
           This can be customized by adding or removing 'faker' in the 'spring.liquibase.contexts'
           Spring Boot configuration key.
@@ -83,7 +83,7 @@
             <column name="product_number" type="string"/>
             <column name="search_details" type="clob"/>
             <column name="sell_count" type="numeric"/>
-            <column name="thumbnail_list" type="string"/>
+            <column name="thumbnail_list" type="clob"/>
             <column name="active_ind" type="boolean"/>
             <column name="last_edited_by" type="string"/>
             <column name="last_edited_when" type="datetime"/>

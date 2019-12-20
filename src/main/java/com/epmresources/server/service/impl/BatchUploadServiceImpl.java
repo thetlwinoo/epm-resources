@@ -9,6 +9,7 @@ import com.epmresources.server.service.mapper.UploadTransactionsMapper;
 import com.epmresources.server.service.util.CommonUtil;
 import io.github.jhipster.service.filter.StringFilter;
 import liquibase.util.file.FilenameUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.CellRangeAddress;
@@ -299,7 +300,7 @@ public class BatchUploadServiceImpl implements BatchUploadService {
 
     @Override
     @Transactional
-    public void importToSystem(Long transactionId, Principal principal) {
+    public void importToSystem(Long transactionId, String baseUrl, Principal principal) {
         try {
             List<Object[]> productsList = batchUploadRepository.getProductsFromTemp(transactionId);
             Optional<SuppliersDTO> suppliersDTOOptional = suppliersExtendService.getSupplierByPrincipal(principal);
@@ -309,65 +310,78 @@ public class BatchUploadServiceImpl implements BatchUploadService {
             }
 
             for (Object[] productObj : productsList) {
-                Products products = new Products();
-                products.setName(productObj[0].toString());
-                ProductBrand productBrand = productBrandRepository.getOne(Long.parseLong(productObj[2].toString()));
-                products.setProductBrand(productBrand);
-                products.setHandle(CommonUtil.handleize(productObj[0].toString()));
-                ProductCategory productCategory = productCategoryExtendRepository.getOne(Long.parseLong(productObj[1].toString()));
-                products.setProductCategory(productCategory);
-                products.setSupplier(suppliers);
-                products.setLastEditedBy(principal.getName());
-                products.setLastEditedWhen(Instant.now());
-                products.setActiveInd(false);
-                List<StockItemTemp> stockItemTempList = batchUploadRepository.getStockItemTemp(productObj[0].toString());
+                String keyword = productObj[0].toString();
+                if(keyword.length()>0){
+                    Products products = new Products();
+                    products.setName(keyword);
+                    ProductBrand productBrand = productBrandRepository.getOne(Long.parseLong(productObj[2].toString()));
+                    products.setProductBrand(productBrand);
+                    products.setHandle(CommonUtil.handleize(keyword));
+                    ProductCategory productCategory = productCategoryExtendRepository.getOne(Long.parseLong(productObj[1].toString()));
+                    products.setProductCategory(productCategory);
+                    products.setSupplier(suppliers);
+                    products.setLastEditedBy(principal.getName());
+                    products.setLastEditedWhen(Instant.now());
+                    products.setActiveInd(false);
 
-                for (StockItemTemp stockItemTemp : stockItemTempList) {
-                    StockItems stockItems = new StockItems();
-                    stockItems.setName(stockItemTemp.getStockItemName());
-                    stockItems.setVendorCode(stockItemTemp.getVendorCode());
-                    stockItems.setVendorSKU(stockItemTemp.getVendorSKU());
-                    stockItems.setBarcode(stockItemTemp.getBarcode());
-                    stockItems.setUnitPrice(stockItemTemp.getUnitPrice());
-                    stockItems.setRecommendedRetailPrice(stockItemTemp.getRemommendedRetailPrice());
-                    stockItems.setQuantityOnHand(stockItemTemp.getQuantityOnHand());
-                    stockItems.setItemLength(stockItemTemp.getItemLength());
-                    stockItems.setItemWidth(stockItemTemp.getItemWidth());
-                    stockItems.setItemHeight(stockItemTemp.getItemHeight());
-                    stockItems.setItemWeight(stockItemTemp.getItemWeight());
-                    stockItems.setItemPackageLength(stockItemTemp.getItemPackageLength());
-                    stockItems.setItemPackageWidth(stockItemTemp.getItemPackageWidth());
-                    stockItems.setItemPackageHeight(stockItemTemp.getItemPackageHeight());
-                    stockItems.setItemPackageWeight(stockItemTemp.getItemPackageWeight());
-                    stockItems.setNoOfPieces(stockItemTemp.getNoOfPieces());
-                    stockItems.setNoOfItems(stockItemTemp.getNoOfItems());
-                    stockItems.setManufacture(stockItemTemp.getManufacture());
-                    stockItems.setLastEditedBy(principal.getName());
-                    stockItems.setLastEditedWhen(Instant.now());
-                    stockItems.setActiveInd(false);
+                    List<StockItemTemp> stockItemTempList = batchUploadRepository.getStockItemTemp(keyword);
 
-                    BarcodeTypes barcodeTypes = barcodeTypesRepository.getOne(stockItemTemp.getBarcodeTypeId());
-                    stockItems.setBarcodeType(barcodeTypes);
+                    for (StockItemTemp stockItemTemp : stockItemTempList) {
+                        StockItems stockItems = new StockItems();
+                        stockItems.setName(stockItemTemp.getStockItemName());
+                        stockItems.setVendorCode(stockItemTemp.getVendorCode());
+                        stockItems.setVendorSKU(stockItemTemp.getVendorSKU());
+                        stockItems.setBarcode(stockItemTemp.getBarcode());
+                        stockItems.setUnitPrice(stockItemTemp.getUnitPrice());
+                        stockItems.setRecommendedRetailPrice(stockItemTemp.getRemommendedRetailPrice());
+                        stockItems.setQuantityOnHand(stockItemTemp.getQuantityOnHand());
+                        stockItems.setItemLength(stockItemTemp.getItemLength());
+                        stockItems.setItemWidth(stockItemTemp.getItemWidth());
+                        stockItems.setItemHeight(stockItemTemp.getItemHeight());
+                        stockItems.setItemWeight(stockItemTemp.getItemWeight());
+                        stockItems.setItemPackageLength(stockItemTemp.getItemPackageLength());
+                        stockItems.setItemPackageWidth(stockItemTemp.getItemPackageWidth());
+                        stockItems.setItemPackageHeight(stockItemTemp.getItemPackageHeight());
+                        stockItems.setItemPackageWeight(stockItemTemp.getItemPackageWeight());
+                        stockItems.setNoOfPieces(stockItemTemp.getNoOfPieces());
+                        stockItems.setNoOfItems(stockItemTemp.getNoOfItems());
+                        stockItems.setManufacture(stockItemTemp.getManufacture());
+                        stockItems.setLastEditedBy(principal.getName());
+                        stockItems.setLastEditedWhen(Instant.now());
+                        stockItems.setActiveInd(false);
 
-                    Materials materials = materialsRepository.getOne(stockItemTemp.getMaterialId());
-                    stockItems.setMaterial(materials);
+                        BarcodeTypes barcodeTypes = barcodeTypesRepository.getOne(stockItemTemp.getBarcodeTypeId());
+                        stockItems.setBarcodeType(barcodeTypes);
 
-                    ProductAttribute productAttribute = productAttributeRepository.getOne(stockItemTemp.getProductAttributeId());
-                    stockItems.setProductAttribute(productAttribute);
+                        Materials materials = materialsRepository.getOne(stockItemTemp.getMaterialId());
+                        stockItems.setMaterial(materials);
 
-                    ProductOption productOption = productOptionRepository.getOne(stockItemTemp.getProductOptionId());
-                    stockItems.setProductOption(productOption);
+                        ProductAttribute productAttribute = productAttributeRepository.getOne(stockItemTemp.getProductAttributeId());
+                        stockItems.setProductAttribute(productAttribute);
 
-                    stockItems.setProduct(products);
-                    products.getStockItemLists().add(stockItems);
+                        ProductOption productOption = productOptionRepository.getOne(stockItemTemp.getProductOptionId());
+                        stockItems.setProductOption(productOption);
+
+                        stockItems.setProduct(products);
+                        products.getStockItemLists().add(stockItems);
+                    }
+
+                    products = productsRepository.save(products);
+                    String _productnumber = products.getName().replaceAll("[^a-zA-Z0-9]", "").toUpperCase();
+                    _productnumber = _productnumber.length() > 8 ? _productnumber.substring(0, 8) : _productnumber;
+                    _productnumber = _productnumber + "-" + products.getId();
+                    products.setProductNumber(_productnumber);
+
+                    ArrayList thumbnailUrlList = new ArrayList();
+                    for (StockItems stockItems : products.getStockItemLists()) {
+                        String thumbnailUrl = baseUrl + "/photos-extend/stockitem/" + stockItems.getId() + "/thumbnail";
+                        stockItems.setThumbnailUrl(thumbnailUrl);
+                        thumbnailUrlList.add(thumbnailUrl);
+                    }
+                    products.setThumbnailList(StringUtils.join(thumbnailUrlList,";"));
+                    productsRepository.save(products);
                 }
 
-                products = productsRepository.save(products);
-                String _productnumber = products.getName().replaceAll("[^a-zA-Z0-9]", "").toUpperCase();
-                _productnumber = _productnumber.length() > 8 ? _productnumber.substring(0, 8) : _productnumber;
-                _productnumber = _productnumber + "-" + products.getId();
-                products.setProductNumber(_productnumber);
-                productsRepository.save(products);
             }
 
             batchUploadRepository.clearStockItemTemps(transactionId);
@@ -376,7 +390,6 @@ public class BatchUploadServiceImpl implements BatchUploadService {
             ex.printStackTrace();
             throw new IllegalArgumentException(ex.getMessage());
         }
-
     }
 
     private ProductAttributeDTO getProductAttribute(String filter) {

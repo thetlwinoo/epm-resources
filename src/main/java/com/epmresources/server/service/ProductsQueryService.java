@@ -89,7 +89,7 @@ public class ProductsQueryService extends QueryService<Products> {
         Specification<Products> specification = Specification.where(null);
         if (criteria != null) {
             if (criteria.getId() != null) {
-                specification = specification.and(buildSpecification(criteria.getId(), Products_.id));
+                specification = specification.and(buildRangeSpecification(criteria.getId(), Products_.id));
             }
             if (criteria.getName() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getName(), Products_.name));
@@ -102,9 +102,6 @@ public class ProductsQueryService extends QueryService<Products> {
             }
             if (criteria.getSellCount() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getSellCount(), Products_.sellCount));
-            }
-            if (criteria.getThumbnailList() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getThumbnailList(), Products_.thumbnailList));
             }
             if (criteria.getActiveInd() != null) {
                 specification = specification.and(buildSpecification(criteria.getActiveInd(), Products_.activeInd));

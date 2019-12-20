@@ -24,6 +24,7 @@ public class ProductsDTO implements Serializable {
 
     private Integer sellCount;
 
+    @Lob
     private String thumbnailList;
 
     private Boolean activeInd;

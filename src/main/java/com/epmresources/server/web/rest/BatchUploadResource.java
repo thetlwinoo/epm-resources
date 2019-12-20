@@ -98,13 +98,15 @@ public class BatchUploadResource {
     }
 
     @PostMapping("/importtosystem")
-    public ResponseEntity importToSystem(@RequestParam("id") Long id, Principal principal) throws URISyntaxException {
+    public ResponseEntity importToSystem(@RequestParam("id") Long id, HttpServletRequest request, Principal principal) throws URISyntaxException {
 
 //        List<StockItemsDTO> result = null;
 //        return ResponseEntity.created(new URI("/api/upload-transactions/" + result.getId()))
 //            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
 //            .body(result);
-        batchUploadService.importToSystem(id, principal);
+//        String baseUrl = String.format("%s://%s:%d/importtosystem",request.getScheme(),  request.getServerName(), request.getServerPort());
+        String baseUrl = request.getRequestURL().toString().replace("/importtosystem", "");
+        batchUploadService.importToSystem(id, baseUrl,principal);
         return ResponseEntity.ok().body(null);
     }
 

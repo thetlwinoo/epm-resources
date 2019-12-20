@@ -3,6 +3,7 @@ package com.epmresources.server.web.rest;
 import com.epmresources.server.EpmresourcesApp;
 import com.epmresources.server.repository.PhotosExtendRepository;
 import com.epmresources.server.service.PhotosExtendService;
+import com.epmresources.server.service.PhotosService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockitoAnnotations;
@@ -23,17 +24,19 @@ public class PhotosExtendResourceIT {
     private MockMvc restMockMvc;
     private final PhotosExtendService photosExtendService;
     private final PhotosExtendRepository photosExtendRepository;
+    private final PhotosService photosService;
 
-    public PhotosExtendResourceIT(PhotosExtendService photosExtendService, PhotosExtendRepository photosExtendRepository) {
+    public PhotosExtendResourceIT(PhotosExtendService photosExtendService, PhotosExtendRepository photosExtendRepository, PhotosService photosService) {
         this.photosExtendService = photosExtendService;
         this.photosExtendRepository = photosExtendRepository;
+        this.photosService = photosService;
     }
 
     @BeforeEach
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        PhotosExtendResource photosExtendResource = new PhotosExtendResource(photosExtendService, photosExtendRepository);
+        PhotosExtendResource photosExtendResource = new PhotosExtendResource(photosExtendService, photosService, photosExtendRepository);
         restMockMvc = MockMvcBuilders
             .standaloneSetup(photosExtendResource)
             .build();

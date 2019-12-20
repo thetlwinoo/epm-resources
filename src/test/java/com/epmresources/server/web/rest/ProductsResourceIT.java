@@ -244,7 +244,7 @@ public class ProductsResourceIT {
             .andExpect(jsonPath("$.[*].productNumber").value(hasItem(DEFAULT_PRODUCT_NUMBER)))
             .andExpect(jsonPath("$.[*].searchDetails").value(hasItem(DEFAULT_SEARCH_DETAILS.toString())))
             .andExpect(jsonPath("$.[*].sellCount").value(hasItem(DEFAULT_SELL_COUNT)))
-            .andExpect(jsonPath("$.[*].thumbnailList").value(hasItem(DEFAULT_THUMBNAIL_LIST)))
+            .andExpect(jsonPath("$.[*].thumbnailList").value(hasItem(DEFAULT_THUMBNAIL_LIST.toString())))
             .andExpect(jsonPath("$.[*].activeInd").value(hasItem(DEFAULT_ACTIVE_IND.booleanValue())))
             .andExpect(jsonPath("$.[*].lastEditedBy").value(hasItem(DEFAULT_LAST_EDITED_BY)))
             .andExpect(jsonPath("$.[*].lastEditedWhen").value(hasItem(DEFAULT_LAST_EDITED_WHEN.toString())));
@@ -266,11 +266,31 @@ public class ProductsResourceIT {
             .andExpect(jsonPath("$.productNumber").value(DEFAULT_PRODUCT_NUMBER))
             .andExpect(jsonPath("$.searchDetails").value(DEFAULT_SEARCH_DETAILS.toString()))
             .andExpect(jsonPath("$.sellCount").value(DEFAULT_SELL_COUNT))
-            .andExpect(jsonPath("$.thumbnailList").value(DEFAULT_THUMBNAIL_LIST))
+            .andExpect(jsonPath("$.thumbnailList").value(DEFAULT_THUMBNAIL_LIST.toString()))
             .andExpect(jsonPath("$.activeInd").value(DEFAULT_ACTIVE_IND.booleanValue()))
             .andExpect(jsonPath("$.lastEditedBy").value(DEFAULT_LAST_EDITED_BY))
             .andExpect(jsonPath("$.lastEditedWhen").value(DEFAULT_LAST_EDITED_WHEN.toString()));
     }
+
+
+    @Test
+    @Transactional
+    public void getProductsByIdFiltering() throws Exception {
+        // Initialize the database
+        productsRepository.saveAndFlush(products);
+
+        Long id = products.getId();
+
+        defaultProductsShouldBeFound("id.equals=" + id);
+        defaultProductsShouldNotBeFound("id.notEquals=" + id);
+
+        defaultProductsShouldBeFound("id.greaterThanOrEqual=" + id);
+        defaultProductsShouldNotBeFound("id.greaterThan=" + id);
+
+        defaultProductsShouldBeFound("id.lessThanOrEqual=" + id);
+        defaultProductsShouldNotBeFound("id.lessThan=" + id);
+    }
+
 
     @Test
     @Transactional
@@ -613,84 +633,6 @@ public class ProductsResourceIT {
 
     @Test
     @Transactional
-    public void getAllProductsByThumbnailListIsEqualToSomething() throws Exception {
-        // Initialize the database
-        productsRepository.saveAndFlush(products);
-
-        // Get all the productsList where thumbnailList equals to DEFAULT_THUMBNAIL_LIST
-        defaultProductsShouldBeFound("thumbnailList.equals=" + DEFAULT_THUMBNAIL_LIST);
-
-        // Get all the productsList where thumbnailList equals to UPDATED_THUMBNAIL_LIST
-        defaultProductsShouldNotBeFound("thumbnailList.equals=" + UPDATED_THUMBNAIL_LIST);
-    }
-
-    @Test
-    @Transactional
-    public void getAllProductsByThumbnailListIsNotEqualToSomething() throws Exception {
-        // Initialize the database
-        productsRepository.saveAndFlush(products);
-
-        // Get all the productsList where thumbnailList not equals to DEFAULT_THUMBNAIL_LIST
-        defaultProductsShouldNotBeFound("thumbnailList.notEquals=" + DEFAULT_THUMBNAIL_LIST);
-
-        // Get all the productsList where thumbnailList not equals to UPDATED_THUMBNAIL_LIST
-        defaultProductsShouldBeFound("thumbnailList.notEquals=" + UPDATED_THUMBNAIL_LIST);
-    }
-
-    @Test
-    @Transactional
-    public void getAllProductsByThumbnailListIsInShouldWork() throws Exception {
-        // Initialize the database
-        productsRepository.saveAndFlush(products);
-
-        // Get all the productsList where thumbnailList in DEFAULT_THUMBNAIL_LIST or UPDATED_THUMBNAIL_LIST
-        defaultProductsShouldBeFound("thumbnailList.in=" + DEFAULT_THUMBNAIL_LIST + "," + UPDATED_THUMBNAIL_LIST);
-
-        // Get all the productsList where thumbnailList equals to UPDATED_THUMBNAIL_LIST
-        defaultProductsShouldNotBeFound("thumbnailList.in=" + UPDATED_THUMBNAIL_LIST);
-    }
-
-    @Test
-    @Transactional
-    public void getAllProductsByThumbnailListIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        productsRepository.saveAndFlush(products);
-
-        // Get all the productsList where thumbnailList is not null
-        defaultProductsShouldBeFound("thumbnailList.specified=true");
-
-        // Get all the productsList where thumbnailList is null
-        defaultProductsShouldNotBeFound("thumbnailList.specified=false");
-    }
-                @Test
-    @Transactional
-    public void getAllProductsByThumbnailListContainsSomething() throws Exception {
-        // Initialize the database
-        productsRepository.saveAndFlush(products);
-
-        // Get all the productsList where thumbnailList contains DEFAULT_THUMBNAIL_LIST
-        defaultProductsShouldBeFound("thumbnailList.contains=" + DEFAULT_THUMBNAIL_LIST);
-
-        // Get all the productsList where thumbnailList contains UPDATED_THUMBNAIL_LIST
-        defaultProductsShouldNotBeFound("thumbnailList.contains=" + UPDATED_THUMBNAIL_LIST);
-    }
-
-    @Test
-    @Transactional
-    public void getAllProductsByThumbnailListNotContainsSomething() throws Exception {
-        // Initialize the database
-        productsRepository.saveAndFlush(products);
-
-        // Get all the productsList where thumbnailList does not contain DEFAULT_THUMBNAIL_LIST
-        defaultProductsShouldNotBeFound("thumbnailList.doesNotContain=" + DEFAULT_THUMBNAIL_LIST);
-
-        // Get all the productsList where thumbnailList does not contain UPDATED_THUMBNAIL_LIST
-        defaultProductsShouldBeFound("thumbnailList.doesNotContain=" + UPDATED_THUMBNAIL_LIST);
-    }
-
-
-    @Test
-    @Transactional
     public void getAllProductsByActiveIndIsEqualToSomething() throws Exception {
         // Initialize the database
         productsRepository.saveAndFlush(products);
@@ -983,7 +925,7 @@ public class ProductsResourceIT {
             .andExpect(jsonPath("$.[*].productNumber").value(hasItem(DEFAULT_PRODUCT_NUMBER)))
             .andExpect(jsonPath("$.[*].searchDetails").value(hasItem(DEFAULT_SEARCH_DETAILS.toString())))
             .andExpect(jsonPath("$.[*].sellCount").value(hasItem(DEFAULT_SELL_COUNT)))
-            .andExpect(jsonPath("$.[*].thumbnailList").value(hasItem(DEFAULT_THUMBNAIL_LIST)))
+            .andExpect(jsonPath("$.[*].thumbnailList").value(hasItem(DEFAULT_THUMBNAIL_LIST.toString())))
             .andExpect(jsonPath("$.[*].activeInd").value(hasItem(DEFAULT_ACTIVE_IND.booleanValue())))
             .andExpect(jsonPath("$.[*].lastEditedBy").value(hasItem(DEFAULT_LAST_EDITED_BY)))
             .andExpect(jsonPath("$.[*].lastEditedWhen").value(hasItem(DEFAULT_LAST_EDITED_WHEN.toString())));
@@ -1100,43 +1042,5 @@ public class ProductsResourceIT {
         // Validate the database contains one less item
         List<Products> productsList = productsRepository.findAll();
         assertThat(productsList).hasSize(databaseSizeBeforeDelete - 1);
-    }
-
-    @Test
-    @Transactional
-    public void equalsVerifier() throws Exception {
-        TestUtil.equalsVerifier(Products.class);
-        Products products1 = new Products();
-        products1.setId(1L);
-        Products products2 = new Products();
-        products2.setId(products1.getId());
-        assertThat(products1).isEqualTo(products2);
-        products2.setId(2L);
-        assertThat(products1).isNotEqualTo(products2);
-        products1.setId(null);
-        assertThat(products1).isNotEqualTo(products2);
-    }
-
-    @Test
-    @Transactional
-    public void dtoEqualsVerifier() throws Exception {
-        TestUtil.equalsVerifier(ProductsDTO.class);
-        ProductsDTO productsDTO1 = new ProductsDTO();
-        productsDTO1.setId(1L);
-        ProductsDTO productsDTO2 = new ProductsDTO();
-        assertThat(productsDTO1).isNotEqualTo(productsDTO2);
-        productsDTO2.setId(productsDTO1.getId());
-        assertThat(productsDTO1).isEqualTo(productsDTO2);
-        productsDTO2.setId(2L);
-        assertThat(productsDTO1).isNotEqualTo(productsDTO2);
-        productsDTO1.setId(null);
-        assertThat(productsDTO1).isNotEqualTo(productsDTO2);
-    }
-
-    @Test
-    @Transactional
-    public void testEntityFromId() {
-        assertThat(productsMapper.fromId(42L).getId()).isEqualTo(42);
-        assertThat(productsMapper.fromId(null)).isNull();
     }
 }

@@ -5,7 +5,6 @@ import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { filter, map } from 'rxjs/operators';
 import * as moment from 'moment';
 import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 import { JhiAlertService, JhiDataUtils } from 'ng-jhipster';
@@ -69,52 +68,36 @@ export class ProductsUpdateComponent implements OnInit {
     this.activatedRoute.data.subscribe(({ products }) => {
       this.updateForm(products);
     });
-    this.productDocumentService
-      .query({ 'productsId.specified': 'false' })
-      .pipe(
-        filter((mayBeOk: HttpResponse<IProductDocument[]>) => mayBeOk.ok),
-        map((response: HttpResponse<IProductDocument[]>) => response.body)
-      )
-      .subscribe(
-        (res: IProductDocument[]) => {
-          if (!this.editForm.get('productDocumentId').value) {
-            this.productdocuments = res;
-          } else {
-            this.productDocumentService
-              .find(this.editForm.get('productDocumentId').value)
-              .pipe(
-                filter((subResMayBeOk: HttpResponse<IProductDocument>) => subResMayBeOk.ok),
-                map((subResponse: HttpResponse<IProductDocument>) => subResponse.body)
-              )
-              .subscribe(
-                (subRes: IProductDocument) => (this.productdocuments = [subRes].concat(res)),
-                (subRes: HttpErrorResponse) => this.onError(subRes.message)
-              );
-          }
-        },
-        (res: HttpErrorResponse) => this.onError(res.message)
-      );
+    this.productDocumentService.query({ 'productsId.specified': 'false' }).subscribe(
+      (res: HttpResponse<IProductDocument[]>) => {
+        if (!this.editForm.get('productDocumentId').value) {
+          this.productdocuments = res.body;
+        } else {
+          this.productDocumentService
+            .find(this.editForm.get('productDocumentId').value)
+            .subscribe(
+              (subRes: HttpResponse<IProductDocument>) => (this.productdocuments = [subRes.body].concat(res.body)),
+              (subRes: HttpErrorResponse) => this.onError(subRes.message)
+            );
+        }
+      },
+      (res: HttpErrorResponse) => this.onError(res.message)
+    );
     this.suppliersService
       .query()
-      .pipe(
-        filter((mayBeOk: HttpResponse<ISuppliers[]>) => mayBeOk.ok),
-        map((response: HttpResponse<ISuppliers[]>) => response.body)
-      )
-      .subscribe((res: ISuppliers[]) => (this.suppliers = res), (res: HttpErrorResponse) => this.onError(res.message));
+      .subscribe((res: HttpResponse<ISuppliers[]>) => (this.suppliers = res.body), (res: HttpErrorResponse) => this.onError(res.message));
     this.productCategoryService
       .query()
-      .pipe(
-        filter((mayBeOk: HttpResponse<IProductCategory[]>) => mayBeOk.ok),
-        map((response: HttpResponse<IProductCategory[]>) => response.body)
-      )
-      .subscribe((res: IProductCategory[]) => (this.productcategories = res), (res: HttpErrorResponse) => this.onError(res.message));
+      .subscribe(
+        (res: HttpResponse<IProductCategory[]>) => (this.productcategories = res.body),
+        (res: HttpErrorResponse) => this.onError(res.message)
+      );
     this.productBrandService
       .query()
-      .pipe(
-        filter((mayBeOk: HttpResponse<IProductBrand[]>) => mayBeOk.ok),
-        map((response: HttpResponse<IProductBrand[]>) => response.body)
-      )
-      .subscribe((res: IProductBrand[]) => (this.productbrands = res), (res: HttpErrorResponse) => this.onError(res.message));
+      .subscribe(
+        (res: HttpResponse<IProductBrand[]>) => (this.productbrands = res.body),
+        (res: HttpErrorResponse) => this.onError(res.message)
+      );
   }
 
   updateForm(products: IProducts) {

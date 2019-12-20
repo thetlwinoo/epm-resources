@@ -35,8 +35,6 @@ public class ProductsCriteria implements Serializable, Criteria {
 
     private IntegerFilter sellCount;
 
-    private StringFilter thumbnailList;
-
     private BooleanFilter activeInd;
 
     private StringFilter lastEditedBy;
@@ -62,7 +60,6 @@ public class ProductsCriteria implements Serializable, Criteria {
         this.handle = other.handle == null ? null : other.handle.copy();
         this.productNumber = other.productNumber == null ? null : other.productNumber.copy();
         this.sellCount = other.sellCount == null ? null : other.sellCount.copy();
-        this.thumbnailList = other.thumbnailList == null ? null : other.thumbnailList.copy();
         this.activeInd = other.activeInd == null ? null : other.activeInd.copy();
         this.lastEditedBy = other.lastEditedBy == null ? null : other.lastEditedBy.copy();
         this.lastEditedWhen = other.lastEditedWhen == null ? null : other.lastEditedWhen.copy();
@@ -116,14 +113,6 @@ public class ProductsCriteria implements Serializable, Criteria {
 
     public void setSellCount(IntegerFilter sellCount) {
         this.sellCount = sellCount;
-    }
-
-    public StringFilter getThumbnailList() {
-        return thumbnailList;
-    }
-
-    public void setThumbnailList(StringFilter thumbnailList) {
-        this.thumbnailList = thumbnailList;
     }
 
     public BooleanFilter getActiveInd() {
@@ -206,7 +195,6 @@ public class ProductsCriteria implements Serializable, Criteria {
             Objects.equals(handle, that.handle) &&
             Objects.equals(productNumber, that.productNumber) &&
             Objects.equals(sellCount, that.sellCount) &&
-            Objects.equals(thumbnailList, that.thumbnailList) &&
             Objects.equals(activeInd, that.activeInd) &&
             Objects.equals(lastEditedBy, that.lastEditedBy) &&
             Objects.equals(lastEditedWhen, that.lastEditedWhen) &&
@@ -225,7 +213,6 @@ public class ProductsCriteria implements Serializable, Criteria {
         handle,
         productNumber,
         sellCount,
-        thumbnailList,
         activeInd,
         lastEditedBy,
         lastEditedWhen,
@@ -245,7 +232,6 @@ public class ProductsCriteria implements Serializable, Criteria {
                 (handle != null ? "handle=" + handle + ", " : "") +
                 (productNumber != null ? "productNumber=" + productNumber + ", " : "") +
                 (sellCount != null ? "sellCount=" + sellCount + ", " : "") +
-                (thumbnailList != null ? "thumbnailList=" + thumbnailList + ", " : "") +
                 (activeInd != null ? "activeInd=" + activeInd + ", " : "") +
                 (lastEditedBy != null ? "lastEditedBy=" + lastEditedBy + ", " : "") +
                 (lastEditedWhen != null ? "lastEditedWhen=" + lastEditedWhen + ", " : "") +
